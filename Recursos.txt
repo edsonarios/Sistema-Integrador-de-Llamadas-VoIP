@@ -1,0 +1,92 @@
+[GIT Y GITHUB]
+Hard [GIT Y GITHUB]
+    Tips{
+
+        [inicio]
+                "git --version"	verifica la version de git
+                
+                [superlog] git config --global alias.superlog "log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white) - %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+
+                "git config --global user.name 'TU NOMBRE'" inserta tu nombre
+                "git config --global user.email 'TU CORREO DE GITHUB'" inserta tu correo
+                "git config --global --list" verifica si se añadieron correctamente
+                "git clone https://github.com/edsonarios/Sistema-Integrador-de-Llamadas-VoIP.git" te trae todo el proyecto con sus respectivo .git, listo para que puedas modificar y hacer el push 
+
+                "git pull origin master" fetch y merge en master al mismo tiempo
+                "git add -A" añade todos los archivos para commit, solo la primera vez que se crea un archivo
+                "git commit -am 'mensaje comit'" añade archivos y realiza un comit al mismo tiempo, solo aplica si los archivos no son nuevos
+                "git push origin master" sube al servidor github todos los cambios
+                
+                [SI SE UTILIZA GIT REMOTE]
+                "git remote add origin https://github.com/edsonarios/Sistema-Integrador-de-Llamadas-VoIP.git"
+                "git pull origin master --allow-unrelated-histories" fusionar, traendo archivos de github, forzando merge, esto en caso dq se haga el push por primera vez
+
+        [archivos nuevos]
+                "git add -A" añade todos los archivos para commit, solo la primera vez que se crea un archivo
+                "git commit -m 'mensaje para el comit'" crea un comit con su respectivo mensaje
+
+        [ramas]
+                "git checkout -b NOMBRE" Crea una nueva Rama de git y se ubica en esa rama
+                "git checkout master || experimental" se ubica en la rama deseada
+                "git merge experimental" ubicado en la master, fusiona experimental a nuestra rama master
+                "git branch -D rama" borrar la rama
+                "git push origin experimental" envia a github la rama experimental
+                "git branch -r" lista las ramas del servidor github
+                "git branch" lista las ramas locales
+                "git branch -a" lista todas las ramas servidor/local 
+
+        [git varios]
+                "git reset id --hard" vuelve en el tiempo a un commit anterior (--hard borra los commits q hubieran existido)
+                "git commit --amend" Si hiciste un commit apresurado, con esta opcion, puedes guardar tus ultimos cambios, en el ultimo commit realizado e incluso puedes cambiar el nombre 
+        
+        
+        [tag]
+                "git tag -a V0.1 -m 'Primera version' id" crear un nuevo tag con el id de un commit
+                "git tag" muestra todos los tags existentes
+                "git show-ref --tags" muestra los tags a q comit pertenecen
+                "git push origin --tags" envia a github solo los tags creados
+                "git tag -d nombreTag" elimina un tag especifico pero solo de manera local, no en github
+                "git push origin :refs/tags/nombreTag" ahora si elimina tag de github
+
+        [stash]
+                permite guardar temporalmente el estado actual, sin hacer comit
+                "git stash" vuelve instantaneamente al ultimo comit, pero el estado actual lo guarda temporalmente 
+                "git stash list" listar los stash 
+                "git stash pop" vuelve al estado guardado con los cambios hechos pero que estan sin hacer comit 
+                "git stash branch nuevaRama" lleva el estado actual con los cambios no guardados, a la nueva rama, con el estado actual, osea la rama no guardada, pero en la nueva rama esta lista para hacer un commit o hacer mas cambios, la rama anterior esta con el ultimo commit
+                "git stash drop" borra el stash guardado
+    }
+Hard [VSCODE]
+     Tips{
+         [PLUGINS]
+            "Ayu" Theme para VisualStudio
+            "Bookmarks" Añade puntos dereferencia para moverse rapidamente
+            "Bracket Pair Colorizer" Colorea de mejor manera las llaves,parentesis, if, for, etc
+            "Code Runner" Ejecuta un programa rapidamente 
+            "leetnote-txt" Colorea los txt
+            "Material IconTheme" Iconos mas bonitos 
+            "Prettier - Code format" Acomoda automaticamente todo el codigo
+            "Project Manager" Manejador de proyectos 
+            "Remote VSCode" Conectarse remotamente a un servidor 
+            "Settings Sync" Sincroniza todos los plugis instalados con una cuenta github
+            "vscode-faker" Crea datos falsos para pruebas 
+         [REMOTE VSCODE]
+            "DESCARGAR EN EL SERVIDOR PARA USAR CON CODE"
+            wget -O /usr/local/bin/rmate https://raw.github.com/aurora/rmate/master/rmate
+            chmod a+x /usr/local/bin/rmate
+            "Instalar en vscode remote VSCode, luego presionar F1 e iniciar "Remote Start Server", luego ingresar por ssh y puerto 52698"
+            ssh -R 52698:127.0.0.1:52698 ubuntu@192.168.0.27
+            "crear un alias para abrir un archivo con code"
+            sudo echo "alias code='rmate -p 52698'" >> ~/.bash_aliases
+            source ~/.bash_aliases
+            "luego solo iniciar cualquier archivo con:"
+            code index.js
+        [ALIAS]
+            "ALIAS SOLO PARA 1 SESION"
+            alias vps='ssh user@IP'
+            "CREAR UN ALIAS QUE PERSISTA"
+            sudo echo "alias vps='ssh user@IP'" >> ~/.bash_aliases
+            "luego reloguear la sesion o el siguiente comando para poder utilizar el nuevo alias"
+            source ~/.bash_aliases
+        
+    }

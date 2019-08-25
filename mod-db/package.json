@@ -1,0 +1,11 @@
+{
+  "name": "mod-db",
+  "version": "1.0.0",
+  "description": "Modulo de base de datos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}
