@@ -1,0 +1,16 @@
+.tabs{
+    display: block;
+    width: 100%;
+
+    &__title{
+        display: block;
+        width: 100%;
+        font-size: 20px;
+        line-height: 22px;
+    }
+
+    &__content{
+        text-decoration: none;
+        display: inline-block;
+    }
+}
