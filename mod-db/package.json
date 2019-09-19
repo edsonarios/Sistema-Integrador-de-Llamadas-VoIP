@@ -4,8 +4,29 @@
   "description": "Modulo de base de datos",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "DEBUG=mod:* nyc --reporter=lcov ava tests/ --verbose",
+    "setup": "DEBUG=mod:* node setup.js",
+    "lint": "standard"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^0.24.0",
+    "nyc": "^11.9.0",
+    "proxyquire": "^1.8.0",
+    "sinon": "^4.5.0",
+    "sqlite3": "^3.1.13",
+    "standard": "^10.0.3"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "debug": "^3.1.0",
+    "defaults": "^1.0.3",
+    "inquirer": "^4.0.2",
+    "minimist": "^1.2.0",
+    "moment": "^2.24.0",
+    "pg": "^7.11.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.10.1"
+  }
 }
