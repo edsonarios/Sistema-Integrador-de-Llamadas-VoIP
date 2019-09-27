@@ -1,0 +1,15 @@
+.checkbox {
+    display: none;
+    &--label {
+      font-family: Poppins-Regular;
+      font-size: 13px;
+      color: #999999;
+      line-height: 1.4;
+  
+      display: block;
+      position: relative;
+      padding-left: 26px;
+      cursor: pointer;
+    }
+  }
+  

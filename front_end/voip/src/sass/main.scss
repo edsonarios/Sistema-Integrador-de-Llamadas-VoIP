@@ -1,0 +1,32 @@
+//SETTINGS
+@import "settings/settings";
+@import "settings/verification";
+
+//TOOLS
+@import "tools/functions";
+@import "tools/mixins";
+
+//GENERIC
+@import "generic/generic";
+
+//TAGS
+@import "tags/tags";
+
+//OBJECTS
+@import "objects/color";
+@import "objects/container";
+@import "objects/boton";
+@import "objects/checkbox";
+
+//COMPONENTS
+@import "components/footer";
+@import "components/tabs";
+@import "components/slide";
+@import "components/login";
+
+//UTILITIES
+@import "utilities/utilities";
+@import "utilities/import";
+
+//FUENTES
+@import "fuentes/font";
