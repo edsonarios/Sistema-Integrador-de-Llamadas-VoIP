@@ -136,6 +136,19 @@ textarea:-ms-input-placeholder {
   background: transparent;
   padding: 0 5px;
 }
+
+input.input100 {
+  height: 45px;
+}
+
+.input100:focus + .focus-input100::before {
+  width: 100%;
+}
+
+.has-val.input100 + .focus-input100::before {
+  width: 100%;
+}
+
 //-------------------------------------
 label {
   display: block;
