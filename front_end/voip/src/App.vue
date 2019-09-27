@@ -1,13 +1,22 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <img alt="Vue logo" src="./assets/logo.png">
+    <Login>
+
+    </Login>
   </div>
 </template>
 
 <script>
+
+import Login from './components/Login.vue'
+import DashBoard from './components/DashBoard.vue'
+
 export default {
-  name: 'App'
+  name: 'app',
+  components: {
+   Login,DashBoard
+  }
 }
 </script>
 
