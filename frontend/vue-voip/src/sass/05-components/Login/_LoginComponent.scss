@@ -1,6 +1,7 @@
 ::placeholder {
 	color: #cbc8c8;
 }
+
 .container-login {
 	width: 60%;
 	margin: 0 auto;
@@ -62,4 +63,16 @@
 			}
 		}
 	}
+}
+
+@media screen and (max-width: 768px){
+	 .container-login {
+		margin-top: calc(20% - 3em);
+		min-width: 300px;
+		// margin-bottom: 20%;
+		 .login-form{
+			 grid-template-columns: 1fr;
+			 grid-template-rows: 150px 1fr 100px;
+		 }
+	 }
 }
