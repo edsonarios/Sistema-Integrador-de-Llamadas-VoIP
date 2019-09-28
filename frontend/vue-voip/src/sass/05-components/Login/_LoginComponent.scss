@@ -23,6 +23,7 @@
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
+				background-color: #4e5e7c;
 			}
 		}
 		&-right {
@@ -67,7 +68,7 @@
 
 @media screen and (max-width: 768px){
 	 .container-login {
-		margin-top: calc(20% - 3em);
+		margin-top: calc(15% - 3em);
 		min-width: 300px;
 		// margin-bottom: 20%;
 		 .login-form{
