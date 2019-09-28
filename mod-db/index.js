@@ -2,12 +2,12 @@
 
 const setupDatabase = require('./lib/db')
 
-const setupExtesions = require('./lib/extesions')
+const setupExtensions = require('./lib/extensions')
 const setupSip = require('./lib/sip')
 
 const defaults = require('defaults')
 
-const setupExtesionsModel = require('./models/extesions')
+const setupExtensionsModel = require('./models/extensions')
 const setupSipModel = require('./models/sip')
 
 
@@ -26,11 +26,11 @@ module.exports = async function (config) {
 
   const sequelize = setupDatabase(config)
 
-  const ExtesionsModel = setupExtesionsModel(config)
+  const ExtensionsModel = setupExtensionsModel(config)
   const SipModel = setupSipModel(config)
   
-  //ExtesionsModel.hasMany(SipModel)
-  //SipModel.belongsTo(ExtesionsModel, {onDelete: 'CASCADE'})
+  //ExtensionsModel.hasMany(SipModel)
+  //SipModel.belongsTo(ExtensionsModel, {onDelete: 'CASCADE'})
 
   await sequelize.authenticate()
 
@@ -38,12 +38,12 @@ module.exports = async function (config) {
     await sequelize.sync({ force: true })
   }
 
-  const Extesions = setupExtesions(ExtesionsModel)
-  const Sip = setupSip(SipModel, ExtesionsModel)
+  const Extensions = setupExtensions(ExtensionsModel)
+  const Sip = setupSip(SipModel, ExtensionsModel)
   
   
   return {
-    Extesions,
+    Extensions,
     Sip
   }
 }

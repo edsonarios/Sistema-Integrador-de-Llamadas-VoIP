@@ -7,7 +7,15 @@ module.exports = function setupSipModel (config) {
   const sequelize = setupDatabase(config)
 
   return sequelize.define('sip', {
+    name: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
     secret: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    callerid: {
       type: Sequelize.STRING,
       allowNull: false
     },

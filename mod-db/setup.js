@@ -29,7 +29,7 @@ async function setup () {
     database: process.env.DB_NAME || 'asterisk',
     username: process.env.DB_USER || 'asterisk',
     password: process.env.DB_PASS || 'asterisk',
-    host: process.env.DB_HOST || '192.168.0.24',
+    host: process.env.DB_HOST || 'localhost',
     dialect: 'postgres',
     logging: s => debug(s),
     setup: true
