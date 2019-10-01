@@ -25,7 +25,7 @@ module.exports = function setupExtensionsModel (config) {
     },
     appdata: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     }
 
   })

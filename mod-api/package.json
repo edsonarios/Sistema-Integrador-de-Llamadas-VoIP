@@ -1,11 +1,42 @@
 {
   "name": "mod-api",
   "version": "1.0.0",
-  "description": "Modulo Api-Rest",
-  "main": "index.js",
+  "private": true,
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "DEBUG=mod:* ava tests/ --verbose",
+    "start": "NODE_ENV=production node server.js",
+    "start-dev": "DEBUG=mod:* nodemon server.js",
+    "lint": "standard"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^0.24.0",
+    "nodemon": "^1.19.1",
+    "proxyquire": "^1.8.0",
+    "sinon": "^4.5.0",
+    "standard": "^10.0.3",
+    "supertest": "^3.4.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chalk": "^2.3.0",
+    "connect-multiparty": "^2.1.0",
+    "debug": "^3.1.0",
+    "express": "^4.17.1",
+    "express-asyncify": "^1.0.0",
+    "express-formidable": "^1.2.0",
+    "express-jwt": "^5.3.0",
+    "express-jwt-permissions": "^1.3.1",
+    "fcm-node": "^1.5.1",
+    "fcm-notification": "^2.0.0",
+    "jsonwebtoken": "^8.1.0",
+    "mod-db": "file:../mod-db",
+    "moment": "^2.24.0",
+    "path": "^0.12.7",
+    "pg": "^7.11.0",
+    "retry": "^0.9.0"
+  }
 }
