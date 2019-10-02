@@ -37,6 +37,8 @@ module.exports = async function (config) {
   })
 
   const sequelize = setupDatabase(config)
+  const AgentModel = setupAgentModel(config)
+  const MetricModel = setupMetricModel(config)
 
   const ExtensionsModel = setupExtensionsModel(config)
   const SipModel = setupSipModel(config)
@@ -47,6 +49,10 @@ module.exports = async function (config) {
   const VoiceMailModel = setupVoiceMailModel(config)
   const SalaModel = setupSalaModel(config)
   
+
+  AgentModel.hasMany(MetricModel)
+  MetricModel.belongsTo(AgentModel, {onDelete: 'CASCADE'})
+
   UsuarioModel.hasMany(VoiceMailModel)
   VoiceMailModel.belongsTo(UsuarioModel, {onDelete: 'CASCADE'})
 
