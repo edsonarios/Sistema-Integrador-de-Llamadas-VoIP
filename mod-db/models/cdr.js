@@ -52,7 +52,7 @@ module.exports = function setupCdrModel(config) {
             allowNull: true
         },
         calldate: {
-            type: Sequelize.STRING,
+            type: Sequelize.DATE,
             allowNull: true
         },
         duration: {
@@ -75,5 +75,9 @@ module.exports = function setupCdrModel(config) {
             type: Sequelize.FLOAT,
             allowNull: true
         }
-    })
+        
+    },
+    {timestamps: false}
+    )
+    
 }

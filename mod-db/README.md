@@ -50,3 +50,4 @@ setupDabase(config).then(db => {
   cli> odbc show
   #Consola Linux
   echo "select 1" | isql -v asterisk
+  cdr show pgsql status
