@@ -1,13 +1,27 @@
 'use strict'
 
 module.exports = function setupExtensions (ExtensionsModel) {
-  async function createOrUpdate (agent) {
-    
+  async function create (id, extensions) {
+    const usuario = await ExtensionsModel.findOne({
+      where: { id }
+    })
 
-    const result = await ExtensionsModel.create(agent)
-    return result.toJSON()
+    if (usuario) {
+      Object.assign(extensions, { usuarioId: usuario.id })
+      const result = await ExtensionsModel.create(xtensions)
+      return result.toJSON()
+    }
   }
-
+  async function updateExtensions (id, extensions) {
+    const cond = {
+      where: {
+        id
+      }
+    }
+    
+    const updated = await ExtensionsModel.update(extensions, cond)
+    return updated
+  }
   async function updateExtensionsPassword (id, extensions) {
     const cond = {
       where: {
@@ -89,7 +103,7 @@ module.exports = function setupExtensions (ExtensionsModel) {
  
   
   return {
-    createOrUpdate,
+    create,
     updateExtensionsPassword,
     updateExtensions,
     findAll,

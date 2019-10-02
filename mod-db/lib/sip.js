@@ -2,7 +2,7 @@
 
 module.exports = function setupSip (SipModel, UsuarioModel) {
   async function create (id, sip) {
-    const usuario = await UsuarioModel.findOne({
+    const usuario = await SipModel.findOne({
       where: { id }
     })
 
