@@ -9,15 +9,15 @@ module.exports = function setupVoiceMailModel (config) {
   return sequelize.define('voiceMail', {
     uniqueid: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     code: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     fechamensaje: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     }
     
   })

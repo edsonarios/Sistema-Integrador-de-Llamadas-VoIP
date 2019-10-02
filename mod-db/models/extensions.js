@@ -9,19 +9,19 @@ module.exports = function setupExtensionsModel (config) {
   return sequelize.define('extensions', {
     context: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     exten: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     priority: {
       type: Sequelize.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     app: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     appdata: {
       type: Sequelize.STRING,

@@ -9,7 +9,7 @@ module.exports = function setupQueueModel (config) {
   return sequelize.define('queue', {
     nombreQueue: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     }
     
   })

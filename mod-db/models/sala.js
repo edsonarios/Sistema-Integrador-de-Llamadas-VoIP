@@ -9,16 +9,16 @@ module.exports = function setupSalaModel (config) {
   return sequelize.define('sala', {
     nombreSala: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     username: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     
     descripcion: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     }
   })
 }

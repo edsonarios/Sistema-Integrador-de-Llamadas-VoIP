@@ -9,39 +9,39 @@ module.exports = function setupUsuarioModel (config) {
   return sequelize.define('usuario', {
     nombre: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     apPaterno: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     apMaterno: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     tipo: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     direccion: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     telefono: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     correo: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     password: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     conectado: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     }
 
   })

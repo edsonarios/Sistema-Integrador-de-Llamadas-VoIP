@@ -9,35 +9,35 @@ module.exports = function setupIaxModel (config) {
   return sequelize.define('iax', {
     name: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     secret: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     callerid: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     type: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     context: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     host: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     disallow:{
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     allow: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     }
     
   })
