@@ -84,6 +84,9 @@ module.exports = async function (config) {
     await sequelize.sync({ force: true })
   }
 
+  const Agent = setupAgent(AgentModel)
+  const Metric = setupMetric(MetricModel, AgentModel)
+
   const Extensions = setupExtensions(ExtensionsModel)
   const Sip = setupSip(SipModel, ExtensionsModel)
   const Cdr = setupCdr(CdrModel, ExtensionsModel)
@@ -96,6 +99,8 @@ module.exports = async function (config) {
   
   
   return {
+    Agent,
+    Metric,
     Extensions,
     Sip,
     Cdr,
