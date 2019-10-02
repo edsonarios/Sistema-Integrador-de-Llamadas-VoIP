@@ -6,7 +6,7 @@ const setupDatabase = require('../lib/db')
 module.exports = function setupIaxModel (config) {
   const sequelize = setupDatabase(config)
 
-  return sequelize.define('sip', {
+  return sequelize.define('iax', {
     name: {
       type: Sequelize.STRING,
       allowNull: false

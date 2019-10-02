@@ -3,10 +3,10 @@
 const Sequelize = require('sequelize')
 const setupDatabase = require('../lib/db')
 
-module.exports = function setupSalaModel (config) {
+module.exports = function setupQueueModel (config) {
   const sequelize = setupDatabase(config)
 
-  return sequelize.define('agent', {
+  return sequelize.define('queue', {
     nombreQueue: {
       type: Sequelize.STRING,
       allowNull: false

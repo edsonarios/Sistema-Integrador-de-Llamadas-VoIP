@@ -6,8 +6,8 @@ const setupDatabase = require('../lib/db')
 module.exports = function setupVoiceMailModel (config) {
   const sequelize = setupDatabase(config)
 
-  return sequelize.define('sip', {
-    id: {
+  return sequelize.define('voiceMail', {
+    uniqueid: {
       type: Sequelize.STRING,
       allowNull: false
     },
