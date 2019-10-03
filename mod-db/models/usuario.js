@@ -40,7 +40,7 @@ module.exports = function setupUsuarioModel (config) {
       allowNull: true
     },
     conectado: {
-      type: Sequelize.STRING,
+      type: Sequelize.BOOLEAN,
       allowNull: true
     }
 

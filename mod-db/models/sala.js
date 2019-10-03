@@ -11,11 +11,6 @@ module.exports = function setupSalaModel (config) {
       type: Sequelize.STRING,
       allowNull: true
     },
-    username: {
-      type: Sequelize.STRING,
-      allowNull: true
-    },
-    
     descripcion: {
       type: Sequelize.STRING,
       allowNull: true

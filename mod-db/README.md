@@ -51,3 +51,21 @@ setupDabase(config).then(db => {
   #Consola Linux
   echo "select 1" | isql -v asterisk
   cdr show pgsql status
+
+## Para los fronts
+  #Instalar
+  sudo apt-get install postgresql postgresql-client postgresql-contrib libpq-dev
+  service postgresql restart
+
+  #Iniciar DB
+  sudo su postgres
+  psql
+  CREATE ROLE asterisk WITH LOGIN PASSWORD 'asterisk';
+  CREATE DATABASE asterisk;
+  GRANT ALL PRIVILEGES ON DATABASE asterisk TO asterisk;
+  \quit
+  #Inicializar DB
+  cd mod-db
+  npm install
+  npm run setup -y
+

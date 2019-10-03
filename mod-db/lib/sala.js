@@ -1,50 +1,35 @@
 'use strict'
 
-module.exports = function setupSala (SalaModel, UsuarioModel) {
-    async function create (id, sala) {
-      const usuario = await SalaModel.findOne({
-        where: { id }
-      })
-  
-      if (usuario) {
-        Object.assign(sala, { usuarioId: usuario.id })
-        const result = await SalaModel.create(sala)
-        return result.toJSON()
-      }
-    }
-  async function updateSala (id, sala) {
+module.exports = function setupSala(SalaModel) {
+
+  async function create(obj) {
+    const result = await SalaModel.create(obj)
+    return result.toJSON()
+  }
+
+  async function update(id, obj) {
     const cond = {
       where: {
         id
       }
     }
-    
-    const updated = await SalaModel.update(sala, cond)
+
+    const updated = await SalaModel.update(obj, cond)
     return updated
   }
 
-  async function findById(salaId){
-    return await SalaModel.findAll({
-      where: {
-        salaId: salaId
-      }
-    }) 
-  }
-  async function findOne(id){
-    return SalaModel.findAll({
+  async function findById(id) {
+    return await SalaModel.findOne({
       where: {
         id
       }
     })
   }
-  async function findOne2(id){
-    return SalaModel.findOne({
-      where: {
-        id
-      }
-    })
+  async function findAll() {
+    return SalaModel.findAll()
   }
-  async function destroyAll(id){
+
+  async function destroyAll(id) {
     return await SalaModel.destroy({
       where: {
         salaId: id
@@ -52,7 +37,7 @@ module.exports = function setupSala (SalaModel, UsuarioModel) {
     })
   }
 
-  async function destroy(id){
+  async function destroy(id) {
     return await SalaModel.destroy({
       where: {
         id
@@ -61,10 +46,9 @@ module.exports = function setupSala (SalaModel, UsuarioModel) {
   }
   return {
     create,
-    updateSala,
+    update,
     findById,
-    findOne,
-    findOne2,
+    findAll,
     destroyAll,
     destroy
   }

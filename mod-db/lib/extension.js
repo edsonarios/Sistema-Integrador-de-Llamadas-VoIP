@@ -1,17 +1,17 @@
 'use strict'
 
-module.exports = function setupSip(SipModel, UsuarioModel) {
+module.exports = function setupExtension(ExtensionModel, SalaModel) {
 
   async function create(id, obj) {
-    const res = await UsuarioModel.findOne({
+    const res = await SalaModel.findOne({
       where: {
         id
       }
     })
 
     if (res) {
-      Object.assign(obj, { usuarioId: res.id })
-      const result = await SipModel.create(obj)
+      Object.assign(obj, { salaId: res.id })
+      const result = await ExtensionModel.create(obj)
       return result.toJSON()
     }
   }
@@ -23,23 +23,23 @@ module.exports = function setupSip(SipModel, UsuarioModel) {
       }
     }
 
-    const updated = await SipModel.update(obj, cond)
+    const updated = await ExtensionModel.update(obj, cond)
     return updated
   }
 
   async function findById(id) {
-    return await SipModel.findOne({
+    return await ExtensionModel.findOne({
       where: {
         id
       }
     })
   }
   async function findAll() {
-    return SipModel.findAll()
+    return ExtensionModel.findAll()
   }
 
   async function destroyAll(id) {
-    return await SipModel.destroy({
+    return await ExtensionModel.destroy({
       where: {
         salaId: id
       }
@@ -47,7 +47,7 @@ module.exports = function setupSip(SipModel, UsuarioModel) {
   }
 
   async function destroy(id) {
-    return await SipModel.destroy({
+    return await ExtensionModel.destroy({
       where: {
         id
       }

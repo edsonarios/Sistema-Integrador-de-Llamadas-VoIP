@@ -2,7 +2,7 @@
 
 const setupDatabase = require('./lib/db')
 
-const setupExtensions = require('./lib/extensions')
+const setupExtension = require('./lib/extension')
 const setupSip = require('./lib/sip')
 const setupCdr = require('./lib/cdr')
 const setupUsuario = require('./lib/usuario')
@@ -14,7 +14,7 @@ const setupVoiceMail = require('./lib/voiceMail')
 
 const defaults = require('defaults')
 
-const setupExtensionsModel = require('./models/extensions')
+const setupExtensionModel = require('./models/extension')
 const setupSipModel = require('./models/sip')
 const setupCdrModel = require('./models/cdr')
 const setupUsuarioModel = require('./models/usuario')
@@ -37,10 +37,8 @@ module.exports = async function (config) {
   })
 
   const sequelize = setupDatabase(config)
-  const AgentModel = setupAgentModel(config)
-  const MetricModel = setupMetricModel(config)
-
-  const ExtensionsModel = setupExtensionsModel(config)
+  
+  const ExtensionModel = setupExtensionModel(config)
   const SipModel = setupSipModel(config)
   const CdrModel = setupCdrModel(config)
   const UsuarioModel = setupUsuarioModel(config)
@@ -49,9 +47,6 @@ module.exports = async function (config) {
   const VoiceMailModel = setupVoiceMailModel(config)
   const SalaModel = setupSalaModel(config)
   
-
-  AgentModel.hasMany(MetricModel)
-  MetricModel.belongsTo(AgentModel, {onDelete: 'CASCADE'})
 
   UsuarioModel.hasMany(VoiceMailModel)
   VoiceMailModel.belongsTo(UsuarioModel, {onDelete: 'CASCADE'})
@@ -68,8 +63,8 @@ module.exports = async function (config) {
   SalaModel.hasMany(UsuarioModel)
   UsuarioModel.belongsTo(SalaModel, {onDelete: 'CASCADE'})
 
-  SalaModel.hasMany(ExtensionsModel)
-  ExtensionsModel.belongsTo(SalaModel, {onDelete: 'CASCADE'})
+  SalaModel.hasMany(ExtensionModel)
+  ExtensionModel.belongsTo(SalaModel, {onDelete: 'CASCADE'})
 
   SalaModel.hasMany(QueueModel)
   QueueModel.belongsTo(SalaModel, {onDelete: 'CASCADE'})
@@ -84,24 +79,19 @@ module.exports = async function (config) {
     await sequelize.sync({ force: true })
   }
 
-  const Agent = setupAgent(AgentModel)
-  const Metric = setupMetric(MetricModel, AgentModel)
-
-  const Extensions = setupExtensions(ExtensionsModel)
-  const Sip = setupSip(SipModel, ExtensionsModel)
-  const Cdr = setupCdr(CdrModel, ExtensionsModel)
-  const Usuario = setupUsuario(UsuarioModel)
-  const Iax = setupIax(IaxModel, ExtensionsModel)
+  const Extension = setupExtension(ExtensionModel,SalaModel)
+  const Sip = setupSip(SipModel, UsuarioModel)
+  const Cdr = setupCdr(CdrModel, UsuarioModel)
+  const Usuario = setupUsuario(UsuarioModel,SalaModel)
+  const Iax = setupIax(IaxModel, UsuarioModel)
   const Queue = setupQueue(QueueModel, SalaModel)
   const VoiceMail = setupVoiceMail(VoiceMailModel, UsuarioModel)
-  const Sala = setupSala(SalaModel, UsuarioModel)
+  const Sala = setupSala(SalaModel)
   
   
   
   return {
-    Agent,
-    Metric,
-    Extensions,
+    Extension,
     Sip,
     Cdr,
     Queue,
