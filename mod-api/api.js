@@ -197,30 +197,48 @@ api.get('/datosOperador', async (req, res) => {
 api.post('/addSala', async (req, res, next) => {
   const params = req.body
 
-  const obj = await Sala.create({
-    nombreSala: params.nombreSala,
-    descripcion: params.descripcion
-
-  })
-
+  let obj 
+  try{
+    obj= await Sala.create({
+      nombreSala: params.nombreSala,
+      descripcion: params.descripcion
+  
+    })
+  }catch(e){
+    return next(e)
+  }
+  
   res.send(obj)
 })
-api.post('/updateSala', async (req, res, next) => {
+api.put('/updateSala', async (req, res, next) => {
   const params = req.body
 
-  const obj = await Sala.update(params.id, {
-    nombreSala: params.nombreSala,
-    descripcion: params.descripcion
-  })
-
+  let obj 
+  try{
+    obj= await Sala.update(params.id, {
+      nombreSala: params.nombreSala,
+      descripcion: params.descripcion
+    })
+  }catch(e){
+    return next(e)
+  }
+  
   res.send(obj)
 })
 
 api.post('/findByIdSala', async (req, res, next) => {
   const params = req.body
 
-  const obj = await Sala.findById(params.id)
-
+  let obj 
+  try{
+    obj= await Sala.findById(params.id)
+  }catch(e){
+    return next(e)
+  }
+  if(!obj || obj.lenght==0){
+    return next(new Error(`Sala not found with id ${params.id}`))
+  }
+  
   res.send(obj)
 })
 
@@ -236,55 +254,79 @@ api.get('/findAllSala', async (req, res, next) => {
 api.post('/addUsuario', async (req, res, next) => {
   const params = req.body
 
-  const obj = await Usuario.create(params.salaId, {
-    nombre: params.nombre,
-    apPaterno: params.apPaterno,
-    apMaterno: params.apMaterno,
-    tipo: params.tipo,
-    direccion: params.direccion,
-    telefono: params.telefono,
-    correo: params.correo,
-    password: params.password,
-    conectado: params.conectado
-  })
-
+  let obj 
+  try{
+    obj= await Usuario.create(params.salaId, {
+      nombre: params.nombre,
+      apPaterno: params.apPaterno,
+      apMaterno: params.apMaterno,
+      tipo: params.tipo,
+      direccion: params.direccion,
+      telefono: params.telefono,
+      correo: params.correo,
+      password: params.password,
+      conectado: params.conectado
+    })
+  }catch(e){
+    return next(e)
+  }
+  
   res.send(obj)
 })
-api.post('/updateUsuario', async (req, res, next) => {
+api.put('/updateUsuario', async (req, res, next) => {
   const params = req.body
 
-  const obj = await Usuario.update(params.id, {
-    nombre: params.nombre,
-    apPaterno: params.apPaterno,
-    apMaterno: params.apMaterno,
-    tipo: params.tipo,
-    direccion: params.direccion,
-    telefono: params.telefono,
-    correo: params.correo,
-    password: params.password,
-    conectado: params.conectado
-  })
-
+  let obj 
+  try{
+    obj= await Usuario.update(params.id, {
+      nombre: params.nombre,
+      apPaterno: params.apPaterno,
+      apMaterno: params.apMaterno,
+      tipo: params.tipo,
+      direccion: params.direccion,
+      telefono: params.telefono,
+      correo: params.correo,
+      password: params.password,
+      conectado: params.conectado
+    })
+  }catch(e){
+    return next(e)
+  }
+  
   res.send(obj)
 })
 
 api.post('/findByIdUsuario', async (req, res, next) => {
   const params = req.body
 
-  const obj = await Usuario.findById(params.id)
+  let obj 
+  try{
+    obj= await Usuario.findById(params.id)
+  }catch(e){
+    return next(e)
+  }
+  
+  if(!obj || obj.lenght==0){
+    return next(new Error(`Usuario not found with id ${params.id}`))
+  }
 
   res.send(obj)
 })
 
 api.get('/findAllUsuario', async (req, res, next) => {
 
-  const obj = await Usuario.findAll()
-
+  let obj 
+  try{
+    obj= await Usuario.findAll()
+  }catch(e){
+    return next(e)
+  }
+  
   res.send(obj)
 })
 
 //LOGIN
-api.post('/login', async(req, res) => {
+api.post('/login', async(req, res, next) => {
   
   var params = req.body
   var correo = params.correo
@@ -307,7 +349,6 @@ api.post('/login', async(req, res) => {
           res.status(404).send({message: "el usuario no existe"})
         }
       }
-    //res.send(usu)
   })
   
 })
@@ -317,32 +358,42 @@ api.post('/login', async(req, res) => {
 api.post('/addSip', async (req, res, next) => {
   const params = req.body
 
-  const obj = await Sip.create(params.usuarioId, {
-    name: params.name,
-    secret: params.secret,
-    callerid: params.callerid,
-    type: params.type,
-    context: params.context,
-    host: params.host,
-    disallow: params.disallow,
-    allow: params.allow
-  })
+  let obj
+  try{
+    obj= await Sip.create(params.usuarioId, {
+      name: params.name,
+      secret: params.secret,
+      callerid: params.callerid,
+      type: params.type,
+      context: params.context,
+      host: params.host,
+      disallow: params.disallow,
+      allow: params.allow
+    })
+  }catch(e){
+    return next(e)
+  }
 
   res.send(obj)
 })
-api.post('/updateSip', async (req, res, next) => {
+api.put('/updateSip', async (req, res, next) => {
   const params = req.body
 
-  const obj = await Sip.update(params.id, {
-    name: params.name,
-    secret: params.secret,
-    callerid: params.callerid,
-    type: params.type,
-    context: params.context,
-    host: params.host,
-    disallow: params.disallow,
-    allow: params.allow
-  })
+  let obj
+  try{
+    obj= await Sip.update(params.id, {
+      name: params.name,
+      secret: params.secret,
+      callerid: params.callerid,
+      type: params.type,
+      context: params.context,
+      host: params.host,
+      disallow: params.disallow,
+      allow: params.allow
+    })
+  }catch(e){
+    return next(e)
+  }
 
   res.send(obj)
 })
@@ -350,14 +401,27 @@ api.post('/updateSip', async (req, res, next) => {
 api.post('/findByIdSip', async (req, res, next) => {
   const params = req.body
 
-  const obj = await Sip.findById(params.id)
+  let obj
+  try{
+    obj= await Sip.findById(params.id)
+  }catch(e){
+    return next(e)
+  }
+  if(!obj || obj.lenght==0){
+    return next(new Error(`Sip not found with id ${params.id}`))
+  }
 
   res.send(obj)
 })
 
 api.get('/findAllSip', async (req, res, next) => {
 
-  const obj = await Sip.findAll()
+  let obj
+  try{
+    obj= await Sip.findAll()
+  }catch(e){
+    return next(e)
+  }
 
   res.send(obj)
 })
@@ -367,26 +431,36 @@ api.get('/findAllSip', async (req, res, next) => {
 api.post('/addExtension', async (req, res, next) => {
   const params = req.body
 
-  const obj = await Extension.create(params.salaId, {
-    context: params.context,
-    exten: params.exten,
-    priority: params.priority,
-    app: params.app,
-    appdata: params.appdata
-  })
+  let obj
+  try{
+    obj= await Extension.create(params.salaId, {
+      context: params.context,
+      exten: params.exten,
+      priority: params.priority,
+      app: params.app,
+      appdata: params.appdata
+    })
+  }catch(e){
+    return next(e)
+  }
 
   res.send(obj)
 })
-api.post('/updateExtension', async (req, res, next) => {
+api.put('/updateExtension', async (req, res, next) => {
   const params = req.body
 
-  const obj = await Extension.update(params.id, {
-    context: params.context,
-    exten: params.exten,
-    priority: params.priority,
-    app: params.app,
-    appdata: params.appdata
-  })
+  let obj
+  try{
+    obj= await Extension.update(params.id, {
+      context: params.context,
+      exten: params.exten,
+      priority: params.priority,
+      app: params.app,
+      appdata: params.appdata
+    })
+  }catch(e){
+    return next(e)
+  }
 
   res.send(obj)
 })
@@ -394,14 +468,28 @@ api.post('/updateExtension', async (req, res, next) => {
 api.post('/findByIdExtension', async (req, res, next) => {
   const params = req.body
 
-  const obj = await Extension.findById(params.id)
+  let obj
+  try{
+    obj= await Extension.findById(params.id)
+  }catch(e){
+    return next(e)
+  }
+  if(!obj || obj.lenght==0){
+    return next(new Error(`Extension not found with id ${params.id}`))
+  }
+  
 
   res.send(obj)
 })
 
 api.get('/findAllExtension', async (req, res, next) => {
 
-  const obj = await Extension.findAll()
+  let obj
+  try{
+    obj= await Extension.findAll()
+  }catch(e){
+    return next(e)
+  }
 
   res.send(obj)
 })

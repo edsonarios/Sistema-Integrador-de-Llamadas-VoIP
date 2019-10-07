@@ -1,9 +1,12 @@
-##Install
+# mod-api
+
+## Install
     cd mod-api
     npm install
-##Iniciar 
+## Iniciar 
     npm run start-dev
-#Apis http://ip:3000/api/
+    sudo echo "alias api='pushd /home/ubuntu/Sistema-Integrador-de-Llamadas-VoIP/mod-api/;npm run start-dev;popd'" >> ~/.bash_aliases
+# Apis http://ip:3000/api/
     #Sala
     post /addSala       (Agrega una nueva sala)
         parametros = Todo el objeto
@@ -43,7 +46,7 @@
     get /findAllExtension
         parametros = No necesita nada
 
-##Datos Prueba
+## Datos Prueba
     get /datosRoot              (añade usuario root)
     get /datosOperador          (añade usuario operador)
     get /datosPrueba            (Añade 1 sala default, 2 usuarios, cada usuario con su sip, y 2 extensions, 201 para demo-congrats y _7XXX para que todos los 7XXX puedan llamarse)
