@@ -9,7 +9,7 @@ const setupUsuario = require('./lib/usuario')
 const setupIax = require('./lib/iax')
 const setupQueue = require('./lib/queue')
 const setupSala = require('./lib/sala')
-const setupVoiceMail = require('./lib/voiceMail')
+const setupVoicemail = require('./lib/voicemail')
 
 
 const defaults = require('defaults')
@@ -21,7 +21,7 @@ const setupUsuarioModel = require('./models/usuario')
 const setupIaxModel = require('./models/iax')
 const setupQueueModel = require('./models/queue')
 const setupSalaModel = require('./models/sala')
-const setupVoiceMailModel = require('./models/voiceMail')
+const setupVoicemailModel = require('./models/voicemail')
 
 module.exports = async function (config) {
   config = defaults(config, {
@@ -44,12 +44,12 @@ module.exports = async function (config) {
   const UsuarioModel = setupUsuarioModel(config)
   const IaxModel = setupIaxModel(config)
   const QueueModel = setupQueueModel(config)
-  const VoiceMailModel = setupVoiceMailModel(config)
+  const VoicemailModel = setupVoicemailModel(config)
   const SalaModel = setupSalaModel(config)
   
 
-  UsuarioModel.hasMany(VoiceMailModel)
-  VoiceMailModel.belongsTo(UsuarioModel, {onDelete: 'CASCADE'})
+  UsuarioModel.hasMany(VoicemailModel)
+  VoicemailModel.belongsTo(UsuarioModel, {onDelete: 'CASCADE'})
 
   UsuarioModel.hasMany(SipModel)
   SipModel.belongsTo(UsuarioModel, {onDelete: 'CASCADE'})
@@ -85,7 +85,7 @@ module.exports = async function (config) {
   const Usuario = setupUsuario(UsuarioModel,SalaModel)
   const Iax = setupIax(IaxModel, UsuarioModel)
   const Queue = setupQueue(QueueModel, SalaModel)
-  const VoiceMail = setupVoiceMail(VoiceMailModel, UsuarioModel)
+  const Voicemail = setupVoicemail(VoicemailModel, UsuarioModel)
   const Sala = setupSala(SalaModel)
   
   
@@ -97,7 +97,7 @@ module.exports = async function (config) {
     Queue,
     Iax,
     Usuario,
-    VoiceMail,
+    Voicemail,
     Sala
   }
 }

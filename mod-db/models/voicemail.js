@@ -6,20 +6,12 @@ const setupDatabase = require('../lib/db')
 module.exports = function setupVoiceMailModel (config) {
   const sequelize = setupDatabase(config)
 
-  return sequelize.define('voiceMail', {
+  return sequelize.define('voicemail', {
     uniqueid: {
       type: Sequelize.INTEGER,
       allowNull: true
     },
-    code: {
-      type: Sequelize.STRING,
-      allowNull: true
-    },
-    fechamensaje: {
-      type: Sequelize.STRING,
-      allowNull: true
-    },
-    customer: {
+    customer_id: {
       type: Sequelize.STRING,
       allowNull: true
     },
@@ -83,6 +75,10 @@ module.exports = function setupVoiceMailModel (config) {
       type: Sequelize.STRING,
       allowNull: true
     },
+    saydurationm: {
+      type: Sequelize.INTEGER,
+      allowNull: true
+    },
     sendvoicemail: {
       type: Sequelize.STRING,
       allowNull: true
@@ -108,7 +104,7 @@ module.exports = function setupVoiceMailModel (config) {
       allowNull: true
     },
     stamp: {
-      type: Sequelize.STRING,
+      type: Sequelize.DATE,
       allowNull: true
     }
   })

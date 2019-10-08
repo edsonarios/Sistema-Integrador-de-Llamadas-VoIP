@@ -28,7 +28,7 @@ const moment = require("moment")
 api.use(bodyParser.urlencoded({ extended: false }))
 api.use(bodyParser.json())
 
-let services, Cdr, Extension, Iax, Queue, Sala, Sip, Usuario, VoiceMail
+let services, Cdr, Extension, Iax, Queue, Sala, Sip, Usuario, Voicemail
 
 api.use('*', async (req, res, next) => {
   if (!services) {
@@ -46,7 +46,7 @@ api.use('*', async (req, res, next) => {
     Sala = services.Sala
     Sip = services.Sip
     Usuario = services.Usuario
-    VoiceMail = services.VoiceMail
+    Voicemail = services.Voicemail
 
 
   }
@@ -82,6 +82,33 @@ api.get('/datosPrueba', async (req, res) => {
     host: "dynamic",
     disallow: "all",
     allow: "ulaw"
+  })
+  const obj22 = await Voicemail.create(obj2.id, {
+    uniqueid:"1",
+    customer_id:"1",
+    context:"default",
+    mailbox:"7001",
+    password:"1234",
+    fullname:"Nombre y apellido",
+    email:"edson.anawaya@patelecomsrl.com",
+    pager:"",
+    tz:"central",
+    attach:"yes",
+    saycid:"no",
+    dialout:"",
+    callback:"",
+    review:"no",
+    operator:"no",
+    envelope:"no",
+    sayduration:"no",
+    saydurationm:1,
+    sendvoicemail:"no",
+    delete:"no",
+    nextaftercmd:"yes",
+    forcename:"no",
+    forcegreetings:"no",
+    hidefromdir:"no",
+    stamp:"2019-10-08 18:06:08"
   })
   //Usuario2
   const obj3 = await Usuario.create(obj.id, {
@@ -134,7 +161,7 @@ api.get('/datosPrueba', async (req, res) => {
     exten: "_7XXX",
     priority: "2",
     app: "Dial",
-    appdata: "SIP/${EXTEN},30,Ttr"
+    appdata: "SIP/${EXTEN},10,Ttr"
   })
   const obj52 = await Extension.create(obj.id, {
     context: "default",
@@ -143,9 +170,23 @@ api.get('/datosPrueba', async (req, res) => {
     app: "hangup",
     appdata: ""
   })
+  const obj53 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "_70XX",
+    priority: "2",
+    app: "VoiceMail",
+    appdata: "${EXTEN}@default')"
+  })
+  const obj54 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "_*0",
+    priority: "1",
+    app: "VoiceMailMain",
+    appdata: "${CALLERID(num)}@default"
+  })
 
 
-  res.send({ message: obj, obj2, obj21, obj3,obj31, obj4, obj41, obj5, obj51, obj52 });
+  res.send({ message: obj, obj2, obj21, obj3,obj31, obj4, obj41, obj5, obj51, obj52,obj53,obj22 });
 })
 
 api.get('/datosRoot', async (req, res) => {
