@@ -6,7 +6,7 @@
     <ColumnOne/>
     <div class="Dashboard-ColumnTwo">
     <br>
-    <h3>Bienvenido al Panel</h3>
+    <h3>Historial de Llamadas</h3>
     <br>
     <ul>
       <li>Formularios</li>
@@ -24,7 +24,7 @@ import SideBar from '@/components/DashboardComponent/SideBar.vue';
 import Header from '@/components/DashboardComponent/Header.vue';
 import ColumnOne from '@/components/DashboardComponent/ColumnOne.vue';
 export default {
-  name: 'Dashboard',
+  name: 'Historial-Llamadas',
   components: {
     SideBar,
     Header,

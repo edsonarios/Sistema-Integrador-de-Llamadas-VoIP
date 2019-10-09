@@ -6,14 +6,10 @@
     <ColumnOne/>
     <div class="Dashboard-ColumnTwo">
     <br>
-    <h3>Bienvenido al Panel</h3>
+    <h3>Agregar Contacto</h3>
+      <a href="/Contactos">Volver</a>
     <br>
-    <ul>
-      <li>Formularios</li>
-      <li>Listas</li>
-      <li>Cuentas</li>
-      <li>Historial de Llamadas</li>
-    </ul>
+   
   </div>
   </div>
 </template>
@@ -24,7 +20,7 @@ import SideBar from '@/components/DashboardComponent/SideBar.vue';
 import Header from '@/components/DashboardComponent/Header.vue';
 import ColumnOne from '@/components/DashboardComponent/ColumnOne.vue';
 export default {
-  name: 'Dashboard',
+  name: 'Contactos-Agregar',
   components: {
     SideBar,
     Header,
