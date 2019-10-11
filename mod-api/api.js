@@ -83,6 +83,7 @@ api.get('/datosPrueba', async (req, res) => {
     disallow: "all",
     allow: "ulaw"
   })
+  //VOICEMAIL PARA 7001
   const obj22 = await Voicemail.create(obj2.id, {
     uniqueid:"1",
     customer_id:"1",
@@ -170,13 +171,15 @@ api.get('/datosPrueba', async (req, res) => {
     app: "hangup",
     appdata: ""
   })
+  //VOICEMAIL
   const obj53 = await Extension.create(obj.id, {
     context: "default",
     exten: "_70XX",
-    priority: "2",
+    priority: "3",
     app: "VoiceMail",
-    appdata: "${EXTEN}@default')"
+    appdata: "${EXTEN}@default"
   })
+  //CONSULTAR VOICEMAIL
   const obj54 = await Extension.create(obj.id, {
     context: "default",
     exten: "_*0",
@@ -184,7 +187,203 @@ api.get('/datosPrueba', async (req, res) => {
     app: "VoiceMailMain",
     appdata: "${CALLERID(num)}@default"
   })
-
+  //RECORD AUDIOS PARA IVR
+  const obj55 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "777",
+    priority: "1",
+    app: "Answer",
+    appdata: ""
+  })
+  const obj56 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "777",
+    priority: "2",
+    app: "Wait",
+    appdata: "0.5"
+  })
+  const obj57 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "777",
+    priority: "3",
+    app: "Record",
+    appdata: "/tmp/soundsasterisk/recordejemplo.gsm"
+  })
+  const obj58 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "777",
+    priority: "4",
+    app: "Wait",
+    appdata: "1"
+  })
+  const obj59 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "777",
+    priority: "5",
+    app: "Playback",
+    appdata: "/tmp/soundsasterisk/recordejemplo"
+  })
+  const obj510 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "777",
+    priority: "6",
+    app: "hangup",
+    appdata: ""
+  })
+  //IVR
+  const obj61 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "*500",
+    priority: 1,
+    app: "Goto",
+    appdata: "ivr,s,1"
+  })
+  const obj62 = await Extension.create(obj.id, {
+    context: "ivr",
+    exten: "s",
+    priority: 1,
+    app: "Answer",
+    appdata: ""
+  })
+  const obj63 = await Extension.create(obj.id, {
+    context: "ivr",
+    exten: "s",
+    priority: 2,
+    app: "Background",
+    appdata: "/tmp/soundsasterisk/ivrejemplo"
+  })
+  const obj64 = await Extension.create(obj.id, {
+    context: "ivr",
+    exten: "s",
+    priority: 3,
+    app: "WaitExten",
+    appdata: ""
+  })
+  //NUMEROS DE IVR
+  const obj65 = await Extension.create(obj.id, {
+    context: "ivr",
+    exten: "1",
+    priority: 1,
+    app: "Playback",
+    appdata: "demo-congrats"
+  })
+  const obj66 = await Extension.create(obj.id, {
+    context: "ivr",
+    exten: "2",
+    priority: 1,
+    app: "Playback",
+    appdata: "hello-world"
+  })
+  const obj67 = await Extension.create(obj.id, {
+    context: "ivr",
+    exten: "3",
+    priority: 1,
+    app: "Playback",
+    appdata: "tt-monkeys"
+  })
+  const obj68 = await Extension.create(obj.id, {
+    context: "ivr",
+    exten: "t",
+    priority: 1,
+    app: "Playback",
+    appdata: "demo-thanks"
+  })
+  const obj69 = await Extension.create(obj.id, {
+    context: "ivr",
+    exten: "t",
+    priority: 2,
+    app: "hangup",
+    appdata: ""
+  })
+  //Calendario de llamadas para horas laborales sino enviar a IVR
+  const obj71 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "8000",
+    priority: 1,
+    app: "GotoIfTime",
+    appdata: "8:30-19:20,mon-fri,*,*?ivr,s,1"
+  })
+  const obj72 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "8000",
+    priority: 2,
+    app: "Playback",
+    appdata: "tt-monkeys"
+  })
+  const obj73 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "8000",
+    priority: 3,
+    app: "hangup",
+    appdata: ""
+  })
+  //PARA COLAS DE LLAMADAS, LLAMANDO A ESTE NUMERO SE AÑADE AGENTES PARA RECIBIR LLAMADAS
+  const obj81 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "*201",
+    priority: 1,
+    app: "AddQueueMember",
+    appdata: "support,SIP/${CHANNEL(peername)}"
+  })
+  const obj82 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "*201",
+    priority: 2,
+    app: "Playback",
+    appdata: "beep"
+  })
+  const obj83 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "*201",
+    priority: 3,
+    app: "hangup",
+    appdata: ""
+  })
+  //PARA COLAS DE LLAMADAS, LLAMANDO A ESTE NUMERO SE ELIMINA AGENTES PARA RECIBIR LLAMADAS
+  const obj91 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "*202",
+    priority: 1,
+    app: "RemoveQueueMember",
+    appdata: "support,SIP/${CHANNEL(peername)}"
+  })
+  const obj92 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "*202",
+    priority: 2,
+    app: "Playback",
+    appdata: "beep"
+  })
+  const obj93 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "*202",
+    priority: 3,
+    app: "hangup",
+    appdata: ""
+  })
+    //AQUI SE LLAMA PARA USAR LAS COLAS DE LLAMADAS (SOPORTE)
+    const obj101 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "*600",
+      priority: 1,
+      app: "Answer",
+      appdata: ""
+    })
+    const obj102 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "*600",
+      priority: 2,
+      app: "Queue",
+      appdata: "support,,,,60"
+    })
+    const obj103 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "*600",
+      priority: 3,
+      app: "hangup",
+      appdata: ""
+    })
+  
 
   res.send({ message: obj, obj2, obj21, obj3,obj31, obj4, obj41, obj5, obj51, obj52,obj53,obj22 });
 })

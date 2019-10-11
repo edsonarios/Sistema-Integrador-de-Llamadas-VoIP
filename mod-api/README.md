@@ -10,7 +10,7 @@
     #Sala
     post /addSala       (Agrega una nueva sala)
         parametros = Todo el objeto
-    post /updateSala    (Envias el id de lo que modificaras y todo el objeto )
+    put /updateSala    (Envias el id de lo que modificaras y todo el objeto )
         parametros = id, Todo el objeto
     post /findByIdSala  (Apartir de un id especifico, devuelve solo 1 resultado)
         parametros = id
@@ -19,7 +19,7 @@
 
     post /addUsuario    
         parametros = salaId, Todo el objeto
-    post /updateUsuario
+    put /updateUsuario
         parametros = id, Todo el objeto
     post /findByIdUsuario
         parametros = id
@@ -30,7 +30,7 @@
 
     post /addSip
         parametros = usuarioId, Todo el objeto
-    post /updateSip
+    put /updateSip
         parametros = id, Todo el objeto
     post /findByIdSip
         parametros = id
@@ -39,7 +39,7 @@
 
     post /addExtension
         parametros = salaId, Todo el objeto
-    post /updateExtension
+    put /updateExtension
         parametros = id, Todo el objeto
     post /findByIdExtension
         parametros = id

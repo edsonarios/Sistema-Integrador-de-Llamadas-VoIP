@@ -1,2 +1,14 @@
-usuario - extensions
-invernadero - sip
+[PENDIENTES]
+    - WebRTC
+    - apis cdr
+    - apis queue
+    - Funcionalidades asterisk
+        - Colas de llamadas         [LISTO]
+        - IVR                       [LISTO]
+        - Conferencias
+        - Interceptar llamada
+        - Calendario de llamadas para horas laborales sino enviar a IVR [LISTO]
+        - personalizar musichold    [LISTO]
+        - descargar audios
+        
+

@@ -1,58 +1,52 @@
 'use strict'
 
-module.exports = function setupIax (IaxModel, UsuarioModel) {
-  async function create (id, iax) {
-    const usuario = await IaxModel.findOne({
-      where: { id }
+module.exports = function setupIax(IaxModel, UsuarioModel) {
+
+  async function create(id, obj) {
+    const res = await UsuarioModel.findOne({
+      where: {
+        id
+      }
     })
 
-    if (usuario) {
-      Object.assign(iax, { usuarioId: usuario.id })
-      const result = await IaxModel.create(iax)
+    if (res) {
+      Object.assign(obj, { usuarioId: res.id })
+      const result = await IaxModel.create(obj)
       return result.toJSON()
     }
   }
-  async function updateIax (id, iax) {
+
+  async function update(id, obj) {
     const cond = {
       where: {
         id
       }
     }
-    
-    const updated = await IaxModel.update(iax, cond)
+
+    const updated = await IaxModel.update(obj, cond)
     return updated
   }
 
-  async function findById(usuarioId){
-    return await IaxModel.findAll({
-      where: {
-        usuarioId: usuarioId
-      }
-    }) 
-  }
-  async function findOne(id){
-    return IaxModel.findAll({
+  async function findById(id) {
+    return await IaxModel.findOne({
       where: {
         id
       }
     })
   }
-  async function findOne2(id){
-    return IaxModel.findOne({
-      where: {
-        id
-      }
-    })
+  async function findAll() {
+    return IaxModel.findAll()
   }
-  async function destroyAll(id){
+
+  async function destroyAll(id) {
     return await IaxModel.destroy({
       where: {
-        usuarioId: id
+        salaId: id
       }
     })
   }
 
-  async function destroy(id){
+  async function destroy(id) {
     return await IaxModel.destroy({
       where: {
         id
@@ -61,10 +55,9 @@ module.exports = function setupIax (IaxModel, UsuarioModel) {
   }
   return {
     create,
-    updateIax,
+    update,
     findById,
-    findOne,
-    findOne2,
+    findAll,
     destroyAll,
     destroy
   }
