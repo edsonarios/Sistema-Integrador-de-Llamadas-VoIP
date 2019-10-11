@@ -15,7 +15,7 @@ const md_upload = multipart({ uploadDir: './uploads/product' })
 const fs = require('fs')
 const path = require('path')
 
-//Notificaion
+//Notificaion 
 const FCM = require('fcm-node')
 
 const config = require('./config')
@@ -57,7 +57,7 @@ api.use('*', async (req, res, next) => {
 
 api.get('/datosPrueba', async (req, res) => {
 
-  const obj = await Sala.create({
+  const obj = await Sala.create({ 
     nombreSala: "default",
     descripcion: "sala por default"
   })

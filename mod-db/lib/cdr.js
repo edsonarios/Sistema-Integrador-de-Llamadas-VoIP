@@ -1,49 +1,18 @@
 'use strict'
 
 module.exports = function setupCdr (CdrModel, UsuarioModel) {
-  async function create (id, cdr) {
-    const usuario = await UsuarioModel.findOne({
-      where: { id }
-    })
-
-    if (usuario) {
-      Object.assign(cdr, { usuarioId: usuario.id })
-      const result = await CdrModel.create(cdr)
-      return result.toJSON()
-    }
-  }
-  async function updateCdr (id, cdr) {
-    const cond = {
-      where: {
-        id
-      }
-    }
-    
-    const updated = await CdrModel.update(cdr, cond)
-    return updated
+  async function findAll() {
+    return CdrModel.findAll()
   }
 
-  async function findById(usuarioId){
+  async function findById(id){
     return await CdrModel.findAll({
       where: {
-        usuarioId: usuarioId
+        id
       }
     }) 
   }
-  async function findOne(id){
-    return CdrModel.findAll({
-      where: {
-        id
-      }
-    })
-  }
-  async function findOne2(id){
-    return CdrModel.findOne({
-      where: {
-        id
-      }
-    })
-  }
+  
   async function destroyAll(id){
     return await CdrModel.destroy({
       where: {
@@ -60,11 +29,8 @@ module.exports = function setupCdr (CdrModel, UsuarioModel) {
     })
   }
   return {
-    create,
-    updateCdr,
     findById,
-    findOne,
-    findOne2,
+    findAll,
     destroyAll,
     destroy
   }
