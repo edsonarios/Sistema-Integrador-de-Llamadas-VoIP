@@ -1,0 +1,4 @@
+/* Aqui van los @mixin que se nos acurran en sass */
+@mixin colorChange($color : red) {
+	color : $color;
+}

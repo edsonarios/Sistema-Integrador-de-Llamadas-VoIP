@@ -1,85 +1,39 @@
-:host {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-}
+//SETTINGS
+//1. Settings**. Declararemos las variables
+@import './00-settings/fonts';
+@import './00-settings/colors';
+@import './00-settings/dimensions';
 
-.login {
-  font-family: monospace;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(20, 1fr);
-  height: 100vh;
-}
-.login__header {
-  padding-top: 12px;
-  grid-row: 1;
-  grid-column: 1 / 4;
-  background: #e3e5e8;
-}
-//BODY LOGIN
-.login__body {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  grid-row: 2 /20;
-  grid-column: 1 / 4;
-  background: url(../../assets/fondo-login4.jpg);
-  min-height: 100%;
-  background-size: cover;
-}
-.login__login {
-  grid-row: 2 / 4;
-  grid-column: 2;
-  border-radius: 5px;
-  background: #e3e5e8;
-  min-width: 550px;
-  text-align: left;
-  opacity: 0.95;
-  &--titulo {
-    color: midnightblue;
-    padding-top: 25px;
-    text-align: center;
-  }
-  &--form {
-    color: midnightblue;
-    width: 100%;
-    padding: 20px 30px 20px 30px;
-  }
-  &--label {
-    width: 100%;
-    padding-top: 10px;
-  }
-  &--input {
-    width: 100%;
-    padding-left: 5px;
-  }
-  &--btn {
-    height: 50px;
-    width: 100%;
-    background: midnightblue;
-  }
-}
-.label-left {
-  text-align: right;
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  &--right {
-    text-align: left;
-    padding-top: 15px;
-  }
-}
-//FIN BODY LOGIN
-.login__footer {
-  padding-top: 12px;
-  text-align: center;
-  grid-row: 20;
-  grid-column: 1 / 4;
-  background: #e3e5e8;
-  font-size: 18px;
-  font-weight: bold;
-  color: midnightblue;
-}
+//TOOLS
+//2. Tools**. Los mixins y funciones.
+@import './01-tools/tools';
+@import './01-tools/functions';
+@import './01-tools/mixins';
+
+//GENERIC
+//3. Generic**. El código genérico del proyecto, el reset de CSS, el Normalize o tus propios estilos, son los que incluiremos en esta carpeta.
+@import './02-generic/generic';
+
+//ELEMENTS
+//4. Element**. Para  los estilos que afectan a los elementos del HTML. No incluiremos el estilo para las clases.
+@import './03-elements/elements';
+
+//OBJECTS
+//5. Object**. Aquí sí, incorporaríamos las clases y colocaríamos todo lo relacionado con el layout.
+@import './04-objects/objects';
+
+//COMPONENTS
+//6. Components** : Todo lo que afecte a los diferentes bloques de nuestro documento, navegador, botones, recuadros de utilidades, cabecera, buscador,botones sociales, etc., debería de ir en esta carpeta. Dependiendo de las necesidades que tenga el proyecto, la carpeta Components tendrá más o menos ajustes, como es lógico.
+@import './05-components/components';
+@import './05-components/Login';
+@import './05-components/dashboard';
+//UTILITIES
+//7 Utilities**. Para finalizar, en esta carpeta colocaríamos utilidades que sobrescriban estilos significativos (incompatibilidades con navegadores)
+@import './06-utilities/utilities';
+@import './06-utilities/font';
+@import './06-utilities/colors';
+
+@import '../../../node_modules/bootstrap/dist/css/bootstrap-grid.min.css';
+
+
+
