@@ -1,0 +1,39 @@
+//SETTINGS
+//1. Settings**. Declararemos las variables
+@import './00-settings/fonts';
+@import './00-settings/colors';
+@import './00-settings/dimensions';
+
+//TOOLS
+//2. Tools**. Los mixins y funciones.
+@import './01-tools/tools';
+@import './01-tools/functions';
+@import './01-tools/mixins';
+
+//GENERIC
+//3. Generic**. El código genérico del proyecto, el reset de CSS, el Normalize o tus propios estilos, son los que incluiremos en esta carpeta.
+@import './02-generic/generic';
+
+//ELEMENTS
+//4. Element**. Para  los estilos que afectan a los elementos del HTML. No incluiremos el estilo para las clases.
+@import './03-elements/elements';
+
+//OBJECTS
+//5. Object**. Aquí sí, incorporaríamos las clases y colocaríamos todo lo relacionado con el layout.
+@import './04-objects/objects';
+
+//COMPONENTS
+//6. Components** : Todo lo que afecte a los diferentes bloques de nuestro documento, navegador, botones, recuadros de utilidades, cabecera, buscador,botones sociales, etc., debería de ir en esta carpeta. Dependiendo de las necesidades que tenga el proyecto, la carpeta Components tendrá más o menos ajustes, como es lógico.
+@import './05-components/components';
+@import './05-components/Login';
+@import './05-components/dashboard';
+//UTILITIES
+//7 Utilities**. Para finalizar, en esta carpeta colocaríamos utilidades que sobrescriban estilos significativos (incompatibilidades con navegadores)
+@import './06-utilities/utilities';
+@import './06-utilities/font';
+@import './06-utilities/colors';
+
+@import '../../../node_modules/bootstrap/dist/css/bootstrap-grid.min.css';
+
+
+
