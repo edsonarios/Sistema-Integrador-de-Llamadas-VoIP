@@ -56,7 +56,8 @@ api.use('*', async (req, res, next) => {
 })
 
 api.get('/datosPrueba', async (req, res) => {
-
+  var HoraYFecha = new Date()
+  console.log(HoraYFecha)
   const obj = await Sala.create({ 
     nombreSala: "default",
     descripcion: "sala por default"
@@ -81,7 +82,9 @@ api.get('/datosPrueba', async (req, res) => {
     context: "default",
     host: "dynamic",
     disallow: "all",
-    allow: "ulaw"
+    allow: "ulaw",
+    qualify:"yes",
+    nat:"force_rport,comedia"
   })
   //VOICEMAIL PARA 7001
   const obj22 = await Voicemail.create(obj2.id, {
@@ -109,7 +112,7 @@ api.get('/datosPrueba', async (req, res) => {
     forcename:"no",
     forcegreetings:"no",
     hidefromdir:"no",
-    stamp:"2019-10-08 18:06:08"
+    stamp:HoraYFecha
   })
   //Usuario2
   const obj3 = await Usuario.create(obj.id, {
@@ -131,7 +134,37 @@ api.get('/datosPrueba', async (req, res) => {
     context: "default",
     host: "dynamic",
     disallow: "all",
-    allow: "ulaw"
+    allow: "ulaw",
+    qualify:"yes",
+    nat:"force_rport,comedia"
+  })
+  //VOICEMAIL PARA 7002
+  const obj32 = await Voicemail.create(obj2.id, {
+    uniqueid:"1",
+    customer_id:"1",
+    context:"default",
+    mailbox:"7002",
+    password:"1234",
+    fullname:"Nombre y apellido",
+    email:"otro@patelecomsrl.com",
+    pager:"",
+    tz:"central",
+    attach:"yes",
+    saycid:"no",
+    dialout:"",
+    callback:"",
+    review:"no",
+    operator:"no",
+    envelope:"no",
+    sayduration:"no",
+    saydurationm:1,
+    sendvoicemail:"no",
+    delete:"no",
+    nextaftercmd:"yes",
+    forcename:"no",
+    forcegreetings:"no",
+    hidefromdir:"no",
+    stamp:HoraYFecha
   })
   
   //Añade 201 para demo-congrats
