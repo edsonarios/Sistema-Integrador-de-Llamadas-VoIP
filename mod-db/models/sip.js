@@ -35,6 +35,10 @@ module.exports = function setupSipModel (config) {
       type: Sequelize.STRING,
       allowNull: true
     },
+    allow:{
+      type: Sequelize.STRING,
+      allowNull: true
+    },
     qualify: {
       type: Sequelize.STRING,
       allowNull: true
