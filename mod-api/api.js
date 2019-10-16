@@ -641,7 +641,9 @@ api.post('/addSip', async (req, res, next) => {
       context: params.context,
       host: params.host,
       disallow: params.disallow,
-      allow: params.allow
+      allow: params.allow,
+      qualify: params.qualify,
+      nat: params.nat
     })
   }catch(e){
     return next(e)
@@ -662,7 +664,9 @@ api.put('/updateSip', async (req, res, next) => {
       context: params.context,
       host: params.host,
       disallow: params.disallow,
-      allow: params.allow
+      allow: params.allow,
+      qualify: params.qualify,
+      nat: params.nat
     })
   }catch(e){
     return next(e)
@@ -767,4 +771,103 @@ api.get('/findAllExtension', async (req, res, next) => {
   res.send(obj)
 })
 
+/// CDR /////////////////////////////////////////////////////////////////////
+
+api.get('/findAllCdr', async (req, res, next) => {
+
+  const obj = await Cdr.findAll()
+
+  res.send(obj)
+})
+
+api.post('/findByIdCdr', async (req, res, next) => {
+  const params = req.body
+
+  let obj 
+  try{
+    obj= await Cdr.findById(params.id)
+  }catch(e){
+    return next(e)
+  }
+  if(!obj || obj.lenght==0){
+    return next(new Error(`Sala not found with id ${params.id}`))
+  }
+  
+  res.send(obj)
+})
+
+
+/// IAX /////////////////////////////////////////////////////////////////////
+
+api.post('/addIax', async (req, res, next) => {
+  const params = req.body
+
+  let obj
+  try{
+    obj= await Iax.create(params.usuarioId, {
+      name: params.name,
+      secret: params.secret,
+      callerid: params.callerid,
+      type: params.type,
+      context: params.context,
+      host: params.host,
+      disallow: params.disallow,
+      allow: params.allow
+    })
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
+
+api.put('/updateIax', async (req, res, next) => {
+  const params = req.body
+
+  let obj
+  try{
+    obj= await Iax.update(params.id, {
+      name: params.name,
+      secret: params.secret,
+      callerid: params.callerid,
+      type: params.type,
+      context: params.context,
+      host: params.host,
+      disallow: params.disallow,
+      allow: params.allow
+    })
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
+
+api.post('/findByIdIax', async (req, res, next) => {
+  const params = req.body
+
+  let obj
+  try{
+    obj= await Iax.findById(params.id)
+  }catch(e){
+    return next(e)
+  }
+  if(!obj || obj.lenght==0){
+    return next(new Error(`Iax not found with id ${params.id}`))
+  }
+
+  res.send(obj)
+})
+
+api.get('/findAllIax', async (req, res, next) => {
+
+  let obj
+  try{
+    obj= await Iax.findAll()
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
 module.exports = api
