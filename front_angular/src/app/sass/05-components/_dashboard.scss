@@ -2,9 +2,8 @@
   text-align: center;
   display: grid;
   //grid-template-columns: repeat(8,1fr);
-  grid-template: auto / minmax(80px, 25%) minmax(250px, 75%);
+  grid-template: auto / minmax(80px, 4%) minmax(250px, 17%) auto;
   height: 100vh;
-  width: 20%;
   button {
     border: none;
     width: 80%;

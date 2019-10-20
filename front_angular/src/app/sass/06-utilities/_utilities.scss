@@ -5,3 +5,13 @@
   bottom: 0;
   top: 0;
 }
+
+button:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(0,0,0,.2);
+}
+
+button:active{
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
