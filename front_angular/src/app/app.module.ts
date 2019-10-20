@@ -10,6 +10,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,6 +20,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     LoginComponent
   ],
   imports: [
+    HttpModule,
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     AngularFontAwesomeModule,
