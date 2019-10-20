@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 @Component({
-  selector: 'app-dashboard',
+  selector: 'template-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['../../sass/main.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComp implements OnInit {
   faCoffee = faCoffee;
 
-  constructor() { }
+  constructor() { 
+  	console.log("Se carga el dashboard");
+  }
 
   ngOnInit() {
   }
