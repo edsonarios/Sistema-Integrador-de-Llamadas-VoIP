@@ -2,7 +2,8 @@
   Patelecom
 </header>
 <div class="login__body">
-  <form class="login__login" (submit)="Autentificador($event)">
+
+  <form class="login__login" (submit)="enviar($event)">
     <div class="login__login--titulo">
       <h2>INICIAR SESIÓN</h2>
     </div>
@@ -10,6 +11,8 @@
       <label class="login__login--label">USUARIO/EMAIL</label>
 
       <input
+        id="username"
+        name="username"
         class="login__login--input"
         type="text"
         placeholder="Ingrese nombre de Usuario"
@@ -19,8 +22,10 @@
       <label class="login__login--label">CONTRASEÑA</label>
 
       <input
+        id="password"
+        name="password"   
         class="login__login--input"
-        type="text"
+        type="password"
         placeholder="Ingrese su Contraseña"
         required
       />
