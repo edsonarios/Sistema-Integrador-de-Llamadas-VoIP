@@ -36,6 +36,7 @@ setupDabase(config).then(db => {
     /etc/asterisk/res_odbc.conf
     /etc/asterisk/res_pgsql.conf
     /etc/asterisk/cdr_pgsql.conf
+    /etc/asterisk/extconfig.conf
 
 ## CREA LA BASE DE DATOS
   sudo su postgres
