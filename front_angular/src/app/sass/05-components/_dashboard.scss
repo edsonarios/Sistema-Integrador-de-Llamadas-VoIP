@@ -2,8 +2,8 @@
   text-align: center;
   display: grid;
   //grid-template-columns: repeat(8,1fr);
-  grid-template: auto / minmax(80px, 4%) minmax(250px, 17%) auto;
-  height: 100vh;
+  grid-template: auto / minmax(80px, 4%) minmax(250px, 17%) minmax(500px,79%);
+  height: 100%;
   button {
     border: none;
     width: 80%;
@@ -38,6 +38,7 @@
     }
   }
   &__info {
+    position: relative;
 	background: #f2f3f5;
 	button{
 		width: 100%;
@@ -48,6 +49,13 @@
 		margin-bottom: 3px solid red;
 	}
 	
+  }
+  &__3col{
+    position: relative;
+    padding-left: 21%;
+    text-align: center;
+    background: red;
+    height: auto;
   }
 }
 .material-icons.md-48 {
