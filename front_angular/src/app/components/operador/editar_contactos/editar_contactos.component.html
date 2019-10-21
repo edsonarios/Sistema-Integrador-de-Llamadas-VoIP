@@ -1,4 +1,20 @@
-Editar contactos
-
 <br>
-<a href="/Operador/Contactos"><button type="button">volver</button></a>
+<h1>Editar Contacto</h1>
+<a href="/Operador/Contactos"><button type="button">volver Lista de Contactos</button></a>
+<br><br>
+<form method="POST">
+  <p>Nombre: <input type="text" name="nombre" size="10"></p>
+  <p>Ap Paterno: <input type="text" name="apellido_Pat" size="10"></p>
+   <p>Ap Materno: <input type="text" name="apellido_Pat" size="10"></p>
+   <p>Alias: <input type="text" name="alias" size="10"></p>
+  <p>Tipo:
+    <input type="radio" name="hm" value="h"> SIP
+    <input type="radio" name="hm" value="m"> IAX
+  </p>
+  <p>Descripcion: <input type="text" name="descripcion" size="10"></p>
+  <br>
+  <p>
+    <input type="submit" value="Agregar">
+    <input type="reset" value="Borrar">
+  </p>
+</form>

@@ -5,7 +5,7 @@ import { OperadorComponent } from './operador.component';
 import { ContactosComponent } from './contactos/contactos.component';
 import { AgregarContactosComponent } from './agregar_contactos/agregar_contactos.component';
 import { EditarContactosComponent } from './editar_contactos/editar_contactos.component';
-
+import { HistorialLlamadasComponent } from './historial_llamadas/historial_llamadas.component';
 
 const routes: Routes = [{
   path: '',
@@ -22,6 +22,10 @@ const routes: Routes = [{
     {
       path: 'Editar',
       component: EditarContactosComponent,
+    },
+    {
+      path: 'Historial',
+      component: HistorialLlamadasComponent,
     },
    /*  {
       path: '',

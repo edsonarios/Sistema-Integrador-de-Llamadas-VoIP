@@ -7,6 +7,7 @@ import { ContactosComponent } from './contactos/contactos.component';
 import { AgregarContactosComponent } from './agregar_contactos/agregar_contactos.component';
 import { EditarContactosComponent } from './editar_contactos/editar_contactos.component';
 
+import { HistorialLlamadasComponent } from './historial_llamadas/historial_llamadas.component';
 /*import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -23,7 +24,8 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
      DashboardComp,
      ContactosComponent,
      AgregarContactosComponent,
-     EditarContactosComponent
+     EditarContactosComponent,
+     HistorialLlamadasComponent
   ],
 })
 export class OperadorModule {
