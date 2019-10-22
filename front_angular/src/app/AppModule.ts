@@ -1,27 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { AgregarContactosComponent } from './components/operador/agregar_contactos/agregar_contactos.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-
+import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import { UserService } from '../services/user.service';
-import {FormsModule} from '@angular/forms';
-
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    AgregarContactosComponent,
   ],
   imports: [
-    FormsModule,
+    HttpModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
@@ -30,7 +24,8 @@ import {FormsModule} from '@angular/forms';
     AccordionModule,
     BsDropdownModule.forRoot()
   ],
-  providers: [UserService],
+  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
