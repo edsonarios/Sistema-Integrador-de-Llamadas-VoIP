@@ -15,10 +15,10 @@ const routes: Routes = [{
       path: 'Contactos',
       component: ContactosComponent,
     },
-    {
+    /*{
       path: 'Agregar',
       component: AgregarContactosComponent,
-    },
+    },*/
     {
       path: 'Editar',
       component: EditarContactosComponent,

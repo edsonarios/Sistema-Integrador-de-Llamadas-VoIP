@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
+import { AgregarContactosComponent } from './components/operador/agregar_contactos/agregar_contactos.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
@@ -16,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     LoginComponent,
+    AgregarContactosComponent,
   ],
   imports: [
     HttpModule,

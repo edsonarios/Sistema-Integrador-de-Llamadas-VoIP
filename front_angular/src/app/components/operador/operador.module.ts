@@ -23,7 +23,7 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
     OperadorComponent,
      DashboardComp,
      ContactosComponent,
-     AgregarContactosComponent,
+    // AgregarContactosComponent,
      EditarContactosComponent,
      HistorialLlamadasComponent
   ],
