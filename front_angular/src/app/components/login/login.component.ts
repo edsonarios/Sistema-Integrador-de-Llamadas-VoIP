@@ -1,7 +1,7 @@
 import { Component,  OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
-
+import { first } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //import { Sala } from '../../../models/sala';
@@ -18,35 +18,59 @@ import { Observable } from 'rxjs';
 
 export class LoginComponent implements OnInit {
   
-  public formulario: FormGroup;
-  public identity: Object;
-  
-  public status: string;
-   public user: User;
-  public 	 username;
-	public  password;
+  loginForm: FormGroup;
+    loading = false;
+    submitted = false;
+    returnUrl: string;
+    user: User;
   constructor(
     private router:Router,
     public userService: UserService,  
+    private formBuilder: FormBuilder,
    // public salamodel: Sala,
-    
-    ){ }
+    ){
+
+     }
 
   ngOnInit() {
     console.log('Componente formulario cargado');
     
     this.mostrar()
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+  });
+
   }
 
- 
+  // convenience getter for easy access to form fields
+  get f() { return this.loginForm.controls; } 
 
 enviar(e) {
-  //if (this.formulario.value.input1 === null || this.formulario.value.input2 === null ) {
-    //  console.log('estan vacios');
-   // }
-  //else{
-    //this.username = this.formulario.value.input1.toLowerCase();
-    //this.password = this.formulario.value.input2.toLowerCase();
+  this.submitted = true;
+
+  // stop here if form is invalid
+  if (this.loginForm.invalid) {
+      return;
+  }
+
+  this.user = new User('','','','','','',this.f.username.value,this.f.password.value,false,'');
+  this.loading = true;
+  this.userService.login(this.user)
+      .pipe(first())
+      .subscribe(
+          data => {
+            this.router.navigate(['/Operador/Contactos']);
+            console.log('entramos !!!')
+          },
+          error => {
+              console.log('mensaje de error...   '+ error)
+          });  
+
+
+
+
+    /*
     this.username = 'root@root';
     this.password = '1234';
     this.user = new User('','','','','','','root@root','1234',false,'');
@@ -67,7 +91,7 @@ enviar(e) {
 			}
 		)
  // }  
-
+      */
 }
 
 
@@ -75,50 +99,12 @@ enviar(e) {
   
 /*
 
-Login(e){
-  e.preventDefault(); 
 
 
 
-  console.log('usuario'+ this.username+ '   contraseña '+ this.password);
-	//Convierte todo a minusculas
-	this.username = this.username.toLowerCase();
-	this.password = this.password.toLowerCase();
+
+
   
-	this.user = new User('','','','','','','root@root','1234',false,'');
-
-	
-	//obtenemos todo el valor de el usuario
-	this.userService.login(this.user).subscribe(
-			response =>{	
-				this.identity = response;	
-          console.log('entramos...' + this.identity);
-          
-          //this.router.navigate(['/Operador/Contactos']);
-			},
-			error =>{	
-			this.status='denied'
-			console.log('error...' + error);
-			}
-		)
-}
-
-
-
-
-  Autentificador(e){
-  	console.log("Carga");
-  	
-  	this.router.navigate(['/Operador/Contactos']);
-  }
-
-
-  login(){
-      this.userService.login(this.salamodel).subscribe(res => {
-        console.log('Sala added!')
-        
-      }); 
-  }
 
 */
  // Issues list
@@ -127,9 +113,5 @@ Login(e){
     console.log(res)
   })
 }
-  /*
-  mostrar(){
-    this.userService.datosPrueba().subscribe(res =>{ console.log('retorno el mensaje')})
-  }
-  */
+
 }
