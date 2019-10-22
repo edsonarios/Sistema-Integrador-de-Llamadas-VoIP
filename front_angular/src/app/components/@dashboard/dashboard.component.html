@@ -63,14 +63,18 @@
       </ul>
     </div>
     <!-- ********contenido******** -->
-    <div></div>
+    <div>
+        <a [routerLink]="['/Agregar']">Agregar</a>
+    </div>
     <!-- *********estado********     -->
     <div></div>
   </div>
 
   <!-- tercera columna -->
   <div class="d-sidebar__3col">
-    <ng-content select="router-outlet"></ng-content>  
+      
+    <router-outlet></router-outlet>
+    <!-- <ng-content  select="router-outlet"></ng-content>   -->
   </div>
 
 </section>
