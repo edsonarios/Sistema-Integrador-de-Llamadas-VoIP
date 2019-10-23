@@ -4,15 +4,18 @@
 
 <div class="login__body">
 
-    <form class="login__login" [formGroup]="loginForm" (ngSubmit)="enviar()">
 
+    <form class="login__login" [formGroup]="loginForm" (ngSubmit)="enviar()">
       <div class="login__login--titulo">
           <h2>INICIAR SESIÓN</h2>
       </div>
 
       <div class="login__login--form">  
+          <div *ngIf="wrong" class="alert alert-danger" role="alert">
+              Error en password o usuario verifique sus datos
+            </div>
         <div class="form-group">
-            <label class="login__login--label" for="username">Username</label>
+            <label class="login__login--label" for="username">Usuario/Email</label>
             <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
             <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                 <div *ngIf="f.username.errors.required">Username is required</div>
@@ -33,54 +36,9 @@
                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                 Login
             </button>
-            <label class= "label-left--right">
-                <input type="checkbox" checked="checked" /> Recordar mis datos
-              </label>
         </div>
       </div>  
     </form>
-
-    <!--
-  <form class="login__login" (submit)="enviar($event)">
-    <div class="login__login--titulo">
-      <h2>INICIAR SESIÓN</h2>
-    </div>
-    <div class="login__login--form">
-      <label class="login__login--label">USUARIO/EMAIL</label>
-
-      <input
-        id="username"
-        name="username"
-        class="login__login--input"
-        type="text"
-        placeholder="Ingrese nombre de Usuario"
-        required
-      />
-
-      <label class="login__login--label">CONTRASEÑA</label>
-
-      <input
-        id="password"
-        name="password"   
-        class="login__login--input"
-        type="password"
-        placeholder="Ingrese su Contraseña"
-        required
-      />
-      <label class="label-left">
-         ¿Olvidaste tu Contraseña?
-      </label>
-      <button class="btn btn-primary login__login--btn" type="submit" [routerLink]="['/Operador']">
-        Iniciar Sesion
-      </button>
-      <label class= "label-left--right">
-        <input type="checkbox" checked="checked" /> Recordar mis datos
-      </label>
-    </div>
-  </form>
--->
-
-
 
 </div>
 

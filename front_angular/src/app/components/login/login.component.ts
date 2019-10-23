@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 //import { Sala } from '../../../models/sala';
 import { User } from '../../../models/user';
 import { Observable } from 'rxjs';
+import { stringify } from 'querystring';
 
 
 @Component({
@@ -17,8 +18,10 @@ import { Observable } from 'rxjs';
 })
 
 export class LoginComponent implements OnInit {
-  
-  loginForm: FormGroup;
+
+    wrong = false;
+    public identity: Object;
+    loginForm: FormGroup;
     loading = false;
     submitted = false;
     returnUrl: string;
@@ -60,11 +63,27 @@ enviar(e) {
       .pipe(first())
       .subscribe(
           data => {
-            this.router.navigate(['/Operador/Contactos']);
-            console.log('entramos !!!')
+            this.identity = data;	
+          console.log(this.identity);
+          console.log(data.result.id);
+            if(data.result.tipo == 'root'){
+              this.router.navigate(['/Operador/Contactos']);
+              console.log('entramos !!!'+ data.status)
+            }
+            if(data.result.tipo == 'standard'){
+              this.router.navigate(['/Operador/Contactos']);
+            }
+            else{
+
+            }
           },
           error => {
-              console.log('mensaje de error...   '+ error)
+              this.submitted = false;
+              this.loading = false;
+              if(error.indexOf('404')  > 0){
+                console.log('error 404    USUARIO O CONTRASEÑA INCORRECTOS');
+                this.wrong = true;
+              }
           });  
 
 
