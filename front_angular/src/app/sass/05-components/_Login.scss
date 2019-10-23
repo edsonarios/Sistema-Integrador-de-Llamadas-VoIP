@@ -1,35 +1,40 @@
 .login {
   font-family: monospace;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(20, 1fr);
+  width: 100%;
+  grid-template-rows: 50px auto 50px;
+  //grid-template-rows: repeat(20, 1fr);
+  grid-template-areas: "head" 
+                        "body"  
+                        "footer";
   height: 100vh;
 }
 .login__header {
+  grid-area: head;
   padding-top: 12px;
-  grid-row: 1;
-  grid-column: 1 / 4;
   background: #e3e5e8;
 }
 
+
+
+
 //BODY LOGIN
 .login__body {
+  grid-area: body;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  grid-row: 2 /20;
-  grid-column: 1 / 4;
+  width: 100%;
   background: url(../../assets/fondo-login4.jpg);
-  min-height: 100%;
   background-size: cover;
 }
 .login__login {
-  grid-row: 2 / 4;
-  grid-column: 2;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-bottom: 215px;
+  margin-top: 215px;
   border-radius: 5px;
   background: #e3e5e8;
-  min-width: 550px;
-  min-height: 380px;
+ // min-width: 550px;
+ // min-height: 380px;
   text-align: left;
   opacity: 0.95;
   &--titulo {
@@ -82,10 +87,9 @@
 }
 //FIN BODY LOGIN
 .login__footer {
+  grid-area: footer;
   padding-top: 12px;
   text-align: center;
-  grid-row: 20;
-  grid-column: 1 / 4;
   background: #e3e5e8;
   font-size: 18px;
   font-weight: bold;

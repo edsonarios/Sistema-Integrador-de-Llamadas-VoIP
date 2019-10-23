@@ -14,8 +14,11 @@
   &__1col {
     grid-area: col1;
     background: #e3e5e8;
+    button{
+      border-radius: 10%;
+    }
     //padding-top: 15px;
-    padding-bottom: 60px;
+    padding-bottom: 100px;
   }
   &__info {
     grid-area: col2;
@@ -40,7 +43,7 @@
 //primera columna
 .col1 {
   display: grid;
- grid-template-rows: 10% 68% 22%;
+ grid-template-rows: 10% 73% 17%;
   //grid-template-rows: repeat(3, 1fr);
   grid-template-areas:
     "logo"
