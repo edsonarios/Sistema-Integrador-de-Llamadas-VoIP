@@ -2,8 +2,8 @@
   width: 100%;
   text-align: center;
   display: grid;
-//  grid-template-columns: minmax(80px, 4%) minmax(250px, 17%) minmax(500px, 79%);
-  grid-template-columns: minmax(80px, 4%) minmax(250px, 17%) auto;
+  grid-template-columns: minmax(80px, 4%) minmax(250px, 17%) minmax(500px, 79%);
+ // grid-template-columns: minmax(80px, 4%) minmax(250px, 17%) auto;
 
   grid-template-areas: "col1 col2 col3";
   height: 100vh;
@@ -30,11 +30,10 @@
     }
   }
   &__3col {
-    position: relative;
+    //position: relative;
     grid-area: col3;
     text-align: center;
     height: 100%;
-    width: 150px;
   }
 }
 //-----------------------------------------------

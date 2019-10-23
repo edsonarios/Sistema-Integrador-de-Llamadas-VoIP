@@ -13,12 +13,11 @@ const routes: Routes = [
   path: 'Agregar',
   component: AgregarContactosComponent,
 },
-  {
-    path: 'Operador',
-    loadChildren: () => import('./components/operador/operador.module')
-      .then(m => m.OperadorModule),
-  },
-
+{
+  path: 'Operador',
+  loadChildren: () => import('./components/operador/operador.module')
+    .then(m => m.OperadorModule),
+},
 
 {
       path: '',
