@@ -1,9 +1,11 @@
-<section class="d-sidebar">
+<section class="dashboard">
   <!-- *******primera columna******* -->
-  <div class="d-sidebar__1col">
-    <button type="button">D</button>
+  <div class="dashboard__1col col1">
+    <div class="logo">
+      <button type="button">D</button>
+    </div>
 
-    <div class="d-sidebar__1col--sala">
+    <div class="sala">
       <button type="button">S1</button>
       <button type="button">S2</button>
       <button type="button">S3</button>
@@ -11,7 +13,7 @@
       <button type="button">+</button>
     </div>
 
-    <div class="d-sidebar__1col--options">
+    <div class="options">
       <button>
         <i class="large material-icons md-48">location_on</i>
       </button>
@@ -25,7 +27,7 @@
   </div>
 
   <!-- *******segunda columna******* -->
-  <div class="d-sidebar__info">
+  <div class="dashboard__info col2">
     <!-- ********menu desplegable******** -->
     <div class="btn-group" dropdown>
       <button
@@ -64,17 +66,15 @@
     </div>
     <!-- ********contenido******** -->
     <div>
-        <a [routerLink]="['/Agregar']">Agregar</a>
+      <a [routerLink]="['/Agregar']">Agregar</a>
     </div>
     <!-- *********estado********     -->
     <div></div>
   </div>
 
   <!-- tercera columna -->
-  <div class="d-sidebar__3col">
-      
+  <div class="dashboard__col3 col3">
     <router-outlet></router-outlet>
     <!-- <ng-content  select="router-outlet"></ng-content>   -->
   </div>
-
 </section>
