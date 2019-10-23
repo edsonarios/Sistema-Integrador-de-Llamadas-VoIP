@@ -14,8 +14,8 @@
   &__1col {
     grid-area: col1;
     background: #e3e5e8;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    //padding-top: 15px;
+    padding-bottom: 60px;
   }
   &__info {
     grid-area: col2;
@@ -41,7 +41,7 @@
 //primera columna
 .col1 {
   display: grid;
- grid-template-rows: 10% auto 22%;
+ grid-template-rows: 10% 68% 22%;
   //grid-template-rows: repeat(3, 1fr);
   grid-template-areas:
     "logo"
@@ -66,7 +66,6 @@
   display: grid;
   align-items: center;
   grid-area: options;
-  justify-content: center;
   button {
     padding-top: 7px;
     background: #e3e5e8;
