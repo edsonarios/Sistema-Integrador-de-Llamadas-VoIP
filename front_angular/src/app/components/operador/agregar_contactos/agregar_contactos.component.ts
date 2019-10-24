@@ -33,7 +33,7 @@ export class AgregarContactosComponent implements OnInit {
   ngOnInit() {
     console.log('Componente formulario cargado');
     
-    this.addContact()
+    this.addContact();
     this.addForm = this.formBuilder.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
@@ -42,6 +42,7 @@ export class AgregarContactosComponent implements OnInit {
       telnumero: ['', Validators.required],
       descripcion: ['', Validators.required],
   });
+  
   }
 
   get f() { return this.addForm.controls; } 
@@ -52,6 +53,6 @@ export class AgregarContactosComponent implements OnInit {
       }
     }
 
-    
+
 
 }
