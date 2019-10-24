@@ -23,12 +23,13 @@
   grid-area: body;
   display: grid;
   width: 100%;
-  background: url(../../assets/fondo-login4.jpg);
+  //background: url(../../assets/fondo-login4.jpg);
+  background: url(../../assets/bg.png);
   background-size: cover;
 }
 .login__login {
-  margin-left: 30%;
-  margin-right: 30%;
+  margin-left: 35%;
+  margin-right: 35%;
   margin-bottom: 215px;
   margin-top: 215px;
   border-radius: 5px;
@@ -36,7 +37,7 @@
  // min-width: 550px;
  // min-height: 380px;
   text-align: left;
-  opacity: 0.95;
+  opacity: 0.97;
   &--titulo {
     color: midnightblue;
     padding-top: 50px;
