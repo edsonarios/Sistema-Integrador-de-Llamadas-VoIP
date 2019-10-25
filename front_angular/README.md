@@ -1,27 +1,52 @@
-# Voip
+# Cambios Front-End Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.6.
+Se han realizado muchos cambios en su mayoria la estructura y contenido respecto a modulos y enrutamientos.
 
-## Development server
+## Archivos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Se ha modificado la estructura total de el proyecto teniendo solo 2 carpetas contenedoras:
+```
+Templates
+```
+_y tambien_
+```
+Pages
+```
+modularizando el proyecto lo mas que se pueda
 
-## Code scaffolding
+## Template (carpeta)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Dentro estara el dashobard y/o template para los siguientes tipos de usuario:
+* Operador - *Ya implementado* -
+* Administrador - *Pendiente* -
+* Usuario - *Pendiente* -
 
-## Build
+las mismas mediante sus modulos llaman a todos los componentes pertenecientes al tipo de usuario
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Pages (Carpeta)
+Aqui estara distribuido igual segun los tipos de usuario:
+* Operador - *Ya elaborado* -
+* Administrador - *Pendiente* -
+* Usuario - *Pendiente* -
 
-## Running unit tests
+el diseño es intuitivo, cada componente funciona de manera independiente a otro, estos componentes son llamados desde el template correspondiente para ser utilizado. a su vez se le asigna una ruta en el siguiente archivo [Operador-template.routing.ts](https://github.com/edsonarios/Sistema-Integrador-de-Llamadas-VoIP/blob/master/front_angular/src/app/components/templates/operador-template/operador-template.routing.ts).
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+### Operador 
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+para el operador se tienen las siguientes paginas
 
-## Further help
+* contactos
+* agregar_contactos 
+* editar_contactos
+* historial_llamadas
+* grabaciones
+* roles
+* tracking
+* cuentas
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+con  **Todos** sus componentes dirigiendo a Sass.
+
+si encuentran algun error o alguna observacion me lo hacen saber 
+
+_Atentamente: uno del front :v_
