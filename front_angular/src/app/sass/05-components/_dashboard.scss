@@ -1,63 +1,108 @@
-.d-sidebar {
+.dashboard {
+  width: 100%;
   text-align: center;
   display: grid;
-  //grid-template-columns: repeat(8,1fr);
-  grid-template: auto / minmax(80px, 4%) minmax(250px, 17%) minmax(500px,79%);
-  height: 100%;
-  button {
-    border: none;
+  grid-template-columns: minmax(80px, 4%) minmax(250px, 17%) minmax(500px, 79%);
+ // grid-template-columns: minmax(80px, 4%) minmax(250px, 17%) auto;
+
+  grid-template-areas: "col1 col2 col3";
+  height: 100vh;
+  button{
     width: 80%;
-    height: 63px;
     font-size: 25px;
-    background: #223a59;
-    border-radius: 20%;
-    color: white;
-    margin: 3px;
   }
   &__1col {
+    grid-area: col1;
     background: #e3e5e8;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    &--sala {
-      height: 662px;
-
-      padding-top: 20px;
-      button {
-        background: #5075bf;
-        color: white;
-        border-radius: 50%;
-      }
+    button{
+      border-radius: 10%;
     }
-    &--options {
-      height: auto;
-      button {
-        padding-top: 7px;
-        background: #e3e5e8;
-        color: #223a59;
-      }
-    }
+    //padding-top: 15px;
+    padding-bottom: 100px;
   }
   &__info {
-    position: relative;
-	background: #f2f3f5;
-	button{
-		width: 100%;
-		color: #223a59;
-		border-radius: 0%;
-		background: #F2F3F5;
-		padding-left: 30px;
-		margin-bottom: 3px solid red;
-	}
-	
+    grid-area: col2;
+    background: #f2f3f5;
+    button {
+      width: 100%;
+      color: #223a59;
+      border-radius: 0%;
+      background: #f2f3f5;
+      padding-left: 30px;
+      margin-bottom: 3px solid red;
+    }
   }
-  &__3col{
-    position: relative;
-    padding-left: 21%;
+  &__3col {
+    //position: relative;
+    grid-area: col3;
     text-align: center;
     height: 100%;
   }
 }
+//-----------------------------------------------
+//primera columna
+.col1 {
+  display: grid;
+ grid-template-rows: 10% 73% 17%;
+  //grid-template-rows: repeat(3, 1fr);
+  grid-template-areas:
+    "logo"
+    "sala"
+    "options";
+}
+.logo {
+  grid-area: logo;
+  padding-top: 10px;
+}
+.sala {
+  grid-area: sala;
+  //height: 662px;
+  padding-top: 20px;
+  button {
+    background: #5075bf;
+    color: white;
+    border-radius: 50%;
+  }
+}
+.options {
+  display: grid;
+  align-items: center;
+  grid-area: options;
+  button {
+    padding-top: 7px;
+    background: #e3e5e8;
+    color: #223a59;
+  }
+}
+//segunda columna
+.col2 {
+}
+//tercera columna
+.col3 {
+}
+//--------------------------------------------------
 .material-icons.md-48 {
   font-size: 48px;
 }
-
+// dial pad (copy & paste de alguna pagina xD)
+.phone-demo {
+  position: relative;
+  margin: 20px auto;
+}
+.dial-pad {
+  a {
+    margin: 2px 0 1px 0;
+    padding: 10px 30px;
+    width: 20px;
+    height: 20px;
+    color: #333;
+    text-decoration: none;
+    text-align: center;
+    font: 1em Helvetica, Arial, sans-serif;
+    background: #eee;
+    display: inline-block;
+    &:hover {
+      background: #999;
+    }
+  }
+}

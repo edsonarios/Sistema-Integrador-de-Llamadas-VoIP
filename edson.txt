@@ -1,6 +1,6 @@
 [PENDIENTES]
-    - WebRTC
-    - apis cdr
+    - WebRTC                        [LISTO]
+    - apis cdr                      [LISTO]
     - apis queue
     - Funcionalidades asterisk
         - Colas de llamadas         [LISTO]
@@ -10,5 +10,23 @@
         - Calendario de llamadas para horas laborales sino enviar a IVR [LISTO]
         - personalizar musichold    [LISTO]
         - descargar audios
-        
+[FUNCIONES]
+    - Crear Sips
+    - Llamar entre sips 
+    - llamar correo de voz
+    - Si el usuario no contesta ingresara a correo de voz 
+    - Grabar IVR 
+    - Llamar IVR
+    - Llamar en hora laborales o mandar a IVR 
+    - Registrar/borrar agentes de llamadas
+    - Llamar a cola de llamadas 
+    - WebRTC
+    
 
+[REUNION 21-10-19]
+    - Mockups terminados
+    - Angular
+        - Login
+        - Primera pantalla de salas
+        - Falta Rutas
+        - 

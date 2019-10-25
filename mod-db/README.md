@@ -81,3 +81,5 @@ setupDabase(config).then(db => {
   npm install
   npm run setup -y
 
+  ### Crear certificado SSL
+  ./ast_tls_cert -C monitoreafacil.com -O "My Organization" -d /etc/asterisk/keys

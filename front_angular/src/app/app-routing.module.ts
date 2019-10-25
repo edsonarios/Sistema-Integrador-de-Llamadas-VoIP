@@ -1,20 +1,27 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes} from '@angular/router';
 
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/pages/inicio/login/login.component';
+import { OperadorTemplateComponent } from './components/templates/operador-template/operador-template.component';
+//import { AgregarContactosComponent } from './components/pages/operador/agregar_contactos/agregar_contactos.component'; //quitar si se quiere usar fuera
 
-const routes: Routes = [
+export const AppRoutes: Routes = [
 {
    path: 'Login',
   component: LoginComponent,
 },
-  {
+/*{
+  path: 'Agregar',
+  component: AgregarContactosComponent,
+},*/
+{
     path: 'Operador',
-    loadChildren: () => import('./components/operador/operador.module')
-      .then(m => m.OperadorModule),
-  },
-
-
+    component: OperadorTemplateComponent,
+    children: [
+        {
+      path: '',
+      loadChildren:'./components/templates/operador-template/operador-template.module#OperadorTemplateModule',
+  }]},
 {
       path: '',
       redirectTo: 'Login',
@@ -25,9 +32,3 @@ const routes: Routes = [
       redirectTo: 'Login',
     },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
