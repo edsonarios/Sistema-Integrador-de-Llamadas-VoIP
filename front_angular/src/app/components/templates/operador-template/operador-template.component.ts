@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { User } from '../../../../models/user';
 import { Sala } from '../../../../models/sala';
+
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'operador-template',
@@ -11,12 +13,13 @@ export class OperadorTemplateComponent implements OnInit {
 user: User;
 public sala;
 
-
+  modalRef: BsModalRef
+    constructor(private modalService: BsModalService) {}
   ngOnInit() { 
   	console.log("Carga el dashboard");
-  	this.sala=[{"nombreSala":"dato Prueba",'descripcion':'Descripcion','usuarioId':'1'},
-  	{"nombreSala":"dato Prueba2",'descripcion':'Descripcion2','usuarioId':'2'},
-  	{"nombreSala":"dato Prueba3",'descripcion':'Descripcion3','usuarioId':'3'},];
+  	this.sala=[{"nombreSala":"Sala 1",'descripcion':'Descripcion','usuarioId':'1'},
+  	{"nombreSala":"Sala 2",'descripcion':'Descripcion2','usuarioId':'2'},
+  	{"nombreSala":"Sala 3",'descripcion':'Descripcion3','usuarioId':'3'},];
 
   	this.user={
   		'nombre': 'usuario',
@@ -36,8 +39,9 @@ public sala;
   datosSala(id,nombre,descripcion){
   	 window.alert('Id : '+id+"\n Nombre : "+nombre+'\n Descripcion : '+descripcion+'\n \n \t Listo para recibir metodos!');
   }
-   DialPad(){
-  	 window.alert('pendiente');
+   DialPad(template: TemplateRef<any>){
+      this.modalRef = this.modalService.show(template);
+  	 //window.alert('pendiente');
   }
   settings(){
   	 window.alert('pendiente plox');

@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['../../../../sass/main.scss']
 })
 export class ContactosComponent implements OnInit {
-
+public Contactos=new Array(10);
   constructor(private router:Router) { 
   	console.log("Contactos se Carga");
   }

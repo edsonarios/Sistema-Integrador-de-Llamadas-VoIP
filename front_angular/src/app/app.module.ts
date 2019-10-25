@@ -14,6 +14,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../services/user.service';
@@ -37,7 +39,9 @@ import {FormsModule} from '@angular/forms';
     AngularFontAwesomeModule,
     FontAwesomeModule,
     AccordionModule,
-    BsDropdownModule.forRoot()
+    TooltipModule.forRoot(),
+    BsDropdownModule.forRoot(),
+      ModalModule.forRoot(),
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

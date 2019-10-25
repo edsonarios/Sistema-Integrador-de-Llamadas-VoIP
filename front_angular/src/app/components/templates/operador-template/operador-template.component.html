@@ -7,23 +7,57 @@
 
     <div class="sala">
       <div *ngFor="let n of sala; let i=index"> 
-        <button type="button" (click)="datosSala(sala[i]['usuarioId'],sala[i]['nombreSala'],sala[i]['descripcion'])">S{{sala[i]['usuarioId']}}</button>
+        <button type="button" (click)="datosSala(sala[i]['usuarioId'],sala[i]['nombreSala'],sala[i]['descripcion'])"  
+        tooltip="{{sala[i]['nombreSala']}}" placement="right">S{{sala[i]['usuarioId']}}</button>
       </div>
       <button type="button" (click)="addSala()">+</button>
     </div>
 
     <div class="options">
       <button [routerLink]="['/Operador/Tracking']">
-        <i class="large material-icons md-48">location_on</i>
+        <i class="large material-icons md-48"  tooltip="Tracking" placement="right">location_on</i>
       </button>
-      <button (click)="DialPad()">
-        <i class="large material-icons md-48">call</i>
+      <button (click)="DialPad(template)">
+        <i class="large material-icons md-48"  tooltip="DialPad" placement="right">call</i>
       </button>
       <button (click)="settings()">
-        <i class="large material-icons md-48">settings</i>
+        <i class="large material-icons md-48"  tooltip="Opciones" placement="right">settings</i>
       </button>
     </div>
   </div>
+
+  <ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">DIALPAD</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Se ve feo pero funciona xD</p>
+    <div class="phone-demo">
+  <div class="dial-pad">
+    <a  class="one">1</a>
+    <a class="two">2</a>
+    <a class="three">3</a>
+    <br/>
+    <a class="four">4</a>
+    <a class="five">5</a>
+    <a class="six">6</a>
+    <br/>
+    <a  class="seven">7</a>
+    <a class="eight">8</a>
+    <a class="nine">9</a>
+    <br/>
+    <a >*</a>
+    <a  class="zero">0</a>
+    <a >#</a>
+  
+  </div>
+</div>
+  </div>
+</ng-template>
+
 
   <!-- *******segunda columna******* -->
   <div class="dashboard__info col2">
@@ -65,7 +99,7 @@
     </div>
     <!-- ********contenido******** -->
     <div>
-      <a [routerLink]="['/Operador/Agregar']">Agregar</a>
+    <!--  <a [routerLink]="['/Operador/Agregar']">Agregar</a>-->
     </div>
     <!-- *********estado********     -->
     <div></div>
@@ -73,6 +107,34 @@
 
   <!-- tercera columna -->
   <div class="dashboard__3col col3">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/Operador/Contactos']">Agenda <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" >Todos</a>
+      </li>
+     
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Conectado</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" style="background-color: #96F047" [routerLink]="['/Operador/Agregar']">Añadir Contacto</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" [routerLink]="['/Login']" style="cursor: pointer">
+      <i class="large material-icons md-24" >input</i>
+      <a class="nav-link" >Salir</a>
+    </form>
+  </div>
+</nav>
     <router-outlet></router-outlet>
     <!-- <ng-content  select="router-outlet"></ng-content>   -->
   </div>

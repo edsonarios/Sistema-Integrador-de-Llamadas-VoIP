@@ -1,7 +1,4 @@
 <br>
-<h1>Editar Contacto</h1>
-<a [routerLink]="['/Operador/Contactos']"><button type="button">volver Lista de Contactos</button></a>
-<br><br>
 <header>
     <h2>EDITAR CONTACTO</h2>
 </header>
@@ -44,10 +41,10 @@
         
         <div class="row">
           <div class="col">
-              <button type="button" class="btn btn-danger">Cancelar</button>
+              <button type="button" class="btn btn-danger" [routerLink]="['/Operador/Contactos']">Cancelar</button>
           </div>
           <div class="col">
-              <button type="button" class="btn btn-primary">Crear Contacto</button>
+              <button type="button" class="btn btn-primary" [routerLink]="['/Operador/Contactos']">Crear Contacto</button>
             </div>
         </div>
       </form>

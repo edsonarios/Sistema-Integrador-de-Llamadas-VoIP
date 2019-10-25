@@ -21,7 +21,7 @@ import { RolesComponent } from '../../pages/operador/roles/roles.component';
 import { GrabacionesComponent } from '../../pages/operador/grabaciones/grabaciones.component';
 import { CuentasComponent } from '../../pages/operador/cuentas/cuentas.component';
 
-
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -35,7 +35,8 @@ import { CuentasComponent } from '../../pages/operador/cuentas/cuentas.component
     ReactiveFormsModule,
     FontAwesomeModule,
     AccordionModule,
-    BsDropdownModule
+    BsDropdownModule,
+    TooltipModule.forRoot(),
    // NgbModule
   ],
   declarations: [
