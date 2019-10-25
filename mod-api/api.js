@@ -86,8 +86,46 @@ api.get('/datosPrueba', async (req, res) => {
     qualify:"yes",
     nat:"force_rport,comedia"
   })
+  //WEBRTC para usuario 1
+  const obj22 = await Sip.create(obj2.id, {
+    name: "7010",
+    secret: "7010",
+    callerid: "7010 <7010>",
+    type: "friend",
+    context: "default",
+    host: "dynamic",
+    disallow: "all",
+    allow: "ulaw",
+    qualify:"yes",
+    nat:"force_rport,comedia",
+
+    qualifyfreq:"60",
+    deny:"0.0.0.0/0.0.0.0",
+    dtnfnode:"rfc2833",
+    canreinvite:"no" ,
+    trustrpid:"yes",
+    sendrpid:"no" ,
+    transport:"udp,ws,wss",
+    avpf:"yes" ,
+    force_avp:"yes" ,
+    icesupport:"yes" ,
+    encryption:"yes" ,
+    callgroup:"",
+    pickupgroup:"",
+    dial:"SIP/7010",
+    permit:"0.0.0.0/0.0.0.0",
+    callcounter:"yes" ,
+    faxdetect:"no" ,
+    directmedia:"no",
+    dtlsenable:"yes" ,
+    dtlsverify:"fingerprint",
+    dtlscertfile:"/etc/asterisk/keys/asterisk.pem",
+    dtlscafile:"/etc/asterisk/keys/ca.crt" ,
+    dtlssetup:"actpass",
+    rtcp_mux:"yes"
+  })
   //VOICEMAIL PARA 7001
-  const obj22 = await Voicemail.create(obj2.id, {
+  const obj23 = await Voicemail.create(obj2.id, {
     uniqueid:"1",
     customer_id:"1",
     context:"default",
@@ -138,6 +176,44 @@ api.get('/datosPrueba', async (req, res) => {
     qualify:"yes",
     nat:"force_rport,comedia"
   })
+    //WEBRTC para usuario 1
+    const obj33 = await Sip.create(obj2.id, {
+      name: "7011",
+      secret: "7011",
+      callerid: "7011 <7011>",
+      type: "friend",
+      context: "default",
+      host: "dynamic",
+      disallow: "all",
+      allow: "ulaw",
+      qualify:"yes",
+      nat:"force_rport,comedia",
+      
+      qualifyfreq:"60",
+      deny:"0.0.0.0/0.0.0.0",
+      dtnfnode:"rfc2833",
+      canreinvite:"no" ,
+      trustrpid:"yes",
+      sendrpid:"no" ,
+      transport:"udp,ws,wss",
+      avpf:"yes" ,
+      force_avp:"yes" ,
+      icesupport:"yes" ,
+      encryption:"yes" ,
+      callgroup:"",
+      pickupgroup:"",
+      dial:"SIP/7011",
+      permit:"0.0.0.0/0.0.0.0",
+      callcounter:"yes" ,
+      faxdetect:"no" ,
+      directmedia:"no",
+      dtlsenable:"yes" ,
+      dtlsverify:"fingerprint",
+      dtlscertfile:"/etc/asterisk/keys/asterisk.pem",
+      dtlscafile:"/etc/asterisk/keys/ca.crt" ,
+      dtlssetup:"actpass",
+      rtcp_mux:"yes"
+    })
   //VOICEMAIL PARA 7002
   const obj32 = await Voicemail.create(obj2.id, {
     uniqueid:"1",
