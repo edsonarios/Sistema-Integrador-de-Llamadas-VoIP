@@ -40,33 +40,33 @@
 
       <ul *dropdownMenu class="dropdown-menu" role="menu">
         <li role="menuitem">
-          <a class="dropdown-item" href="#">Historial de Llamada</a>
+          <a class="dropdown-item" [routerLink]="['/Operador/Historial']">Historial de Llamada</a>
         </li>
         <li class="divider dropdown-divider"></li>
 
         <li role="menuitem">
-          <a class="dropdown-item" href="#">Grabaciones</a>
+          <a class="dropdown-item" [routerLink]="['/Operador/Grabaciones']">Grabaciones</a>
         </li>
         <li class="divider dropdown-divider"></li>
 
         <li role="menuitem">
-          <a class="dropdown-item" href="#">Tracking</a>
+          <a class="dropdown-item" [routerLink]="['/Operador/Tracking']">Tracking</a>
         </li>
         <li class="divider dropdown-divider"></li>
 
         <li role="menuitem">
-          <a class="dropdown-item" href="#">Cuentas</a>
+          <a class="dropdown-item" [routerLink]="['/Operador/Cuentas']">Cuentas</a>
         </li>
         <li class="divider dropdown-divider"></li>
 
         <li role="menuitem">
-          <a class="dropdown-item" href="#">Roles</a>
+          <a class="dropdown-item" [routerLink]="['/Operador/Roles']">Roles</a>
         </li>
       </ul>
     </div>
     <!-- ********contenido******** -->
     <div>
-      <a [routerLink]="['/Agregar']">Agregar</a>
+      <a [routerLink]="['/Operador/Agregar']">Agregar</a>
     </div>
     <!-- *********estado********     -->
     <div></div>

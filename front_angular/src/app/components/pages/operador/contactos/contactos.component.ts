@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'Contactos',
   templateUrl: './contactos.component.html',
-  styleUrls: ['../../../sass/main.scss']
+  styleUrls: ['../../../../sass/main.scss']
 })
 export class ContactosComponent implements OnInit {
 

@@ -1,11 +1,11 @@
 import { Component,  OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../../../services/user.service';
+import { UserService } from '../../../../../services/user.service';
 import { first } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 //import { Sala } from '../../../models/sala';
-import { User } from '../../../models/user';
+import { User } from '../../../../../models/user';
 import { Observable } from 'rxjs';
 import { stringify } from 'querystring';
 
@@ -13,7 +13,7 @@ import { stringify } from 'querystring';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['../../sass/main.scss'],
+  styleUrls: ['../../../../sass/main.scss'],
   providers: [UserService],
 })
 

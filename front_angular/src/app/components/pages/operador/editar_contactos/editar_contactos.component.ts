@@ -1,40 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { UserService } from '../../../../services/user.service';
-import { User } from '../../../../models/user';
+import { UserService } from '../../../../../services/user.service';
+import { User } from '../../../../../models/user';
 import { first } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'Agregar-Contactos',
-  templateUrl: './agregar_contactos.component.html',
-  styleUrls: ['../../../sass/main.scss'],
-  providers: [UserService],
-
+  selector: 'Editar-Contactos',
+  templateUrl: './editar_contactos.component.html',
+  styleUrls: ['../../../../sass/main.scss'],
+    providers: [UserService],
 })
-export class AgregarContactosComponent implements OnInit {
-
+export class EditarContactosComponent implements OnInit {
   wrong = false;
   public identity: Object;
-  addForm: FormGroup;
+  editForm: FormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
   user: User;
   constructor(
-    private router:Router,
+  	private router:Router,
     public userService: UserService,  
-    private formBuilder: FormBuilder,
-    ) { 
+    private formBuilder: FormBuilder,) { 
 
   }
 
   ngOnInit() {
-    console.log('Componente formulario cargado');
+  	  console.log('Componente formulario para editar cargado');
     
-    this.addContact()
-    this.addForm = this.formBuilder.group({
+    //this.editContact() //-warnings en consola
+
+    this.editForm = this.formBuilder.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       alias: ['', Validators.required],
@@ -43,15 +40,9 @@ export class AgregarContactosComponent implements OnInit {
       descripcion: ['', Validators.required],
   });
   }
-
-  get f() { return this.addForm.controls; } 
-
-    addContact(){
-      if (this.addForm.invalid) {
+   editContact(){
+      if (this.editForm.invalid) {
         return;
       }
     }
-
-    
-
 }
