@@ -7,11 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['../../../../sass/main.scss']
 })
 export class HistorialLlamadasComponent implements OnInit {
-
-  constructor(private router:Router) { 
-  	console.log("El historial se carga Correctamente");
+  constructor(private router: Router) {
+    console.log('El historial se carga Correctamente');
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

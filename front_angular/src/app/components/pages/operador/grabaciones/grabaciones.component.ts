@@ -7,11 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['../../../../sass/main.scss']
 })
 export class GrabacionesComponent implements OnInit {
-
-  constructor(private router:Router) { 
-  	console.log("componente grabaciones se cargo correctamente");
+  constructor(private router: Router) {
+    console.log('componente grabaciones se cargo correctamente');
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

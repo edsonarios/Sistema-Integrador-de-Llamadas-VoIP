@@ -10,14 +10,13 @@ import { GrabacionesComponent } from '../../pages/operador/grabaciones/grabacion
 import { CuentasComponent } from '../../pages/operador/cuentas/cuentas.component';
 
 export const OperadorTemplateRoutes: Routes = [
-      { path: 'Contactos',      component: ContactosComponent },
-      { path: 'Editar',      component: EditarContactosComponent },
-      { path: 'Agregar',      component: AgregarContactosComponent }, //comentar en caso de usar "agregar fuera"
-      { path: 'Historial',      component: HistorialLlamadasComponent },
-      { path: 'Grabaciones',      component: GrabacionesComponent },
-      { path: 'Roles',      component: RolesComponent },
-      { path: 'Tracking',      component: TrackingComponent },
-      { path: 'Cuentas',      component: CuentasComponent },
-   	  { path: '',			redirectTo: 'Contactos', 	pathMatch: 'full',},
-
+  { path: 'Contactos', component: ContactosComponent },
+  { path: 'Editar', component: EditarContactosComponent },
+  { path: 'Agregar', component: AgregarContactosComponent }, //comentar en caso de usar 'agregar fuera'
+  { path: 'Historial', component: HistorialLlamadasComponent },
+  { path: 'Grabaciones', component: GrabacionesComponent },
+  { path: 'Roles', component: RolesComponent },
+  { path: 'Tracking', component: TrackingComponent },
+  { path: 'Cuentas', component: CuentasComponent },
+  { path: '', redirectTo: 'Contactos', pathMatch: 'full' }
 ];

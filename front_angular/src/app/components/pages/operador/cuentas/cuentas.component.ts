@@ -7,11 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['../../../../sass/main.scss']
 })
 export class CuentasComponent implements OnInit {
-
-  constructor(private router:Router) { 
-  	console.log("componente cuentas se cargo correctamente");
+  constructor(private router: Router) {
+    console.log('componente cuentas se cargo correctamente');
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

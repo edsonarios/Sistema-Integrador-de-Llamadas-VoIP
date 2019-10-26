@@ -10,11 +10,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   selector: 'Agregar-Contactos',
   templateUrl: './agregar_contactos.component.html',
   styleUrls: ['../../../../sass/main.scss'],
-  providers: [UserService],
-
+  providers: [UserService]
 })
 export class AgregarContactosComponent implements OnInit {
-
   wrong = false;
   public identity: Object;
   addForm: FormGroup;
@@ -23,16 +21,14 @@ export class AgregarContactosComponent implements OnInit {
   returnUrl: string;
   user: User;
   constructor(
-    private router:Router,
-    public userService: UserService,  
-    private formBuilder: FormBuilder,
-    ) { 
-
-  }
+    private router: Router,
+    public userService: UserService,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit() {
     console.log('Componente formulario cargado');
-    
+
     //this.addContact();
     this.addForm = this.formBuilder.group({
       nombre: ['', Validators.required],
@@ -40,19 +36,17 @@ export class AgregarContactosComponent implements OnInit {
       alias: ['', Validators.required],
       tipo: ['', Validators.required],
       telnumero: ['', Validators.required],
-      descripcion: ['', Validators.required],
-  });
-  
+      descripcion: ['', Validators.required]
+    });
   }
 
-  get f() { return this.addForm.controls; } 
+  get f() {
+    return this.addForm.controls;
+  }
 
-    addContact(){
-      if (this.addForm.invalid) {
-        return;
-      }
+  addContact() {
+    if (this.addForm.invalid) {
+      return;
     }
-
-
-
+  }
 }
