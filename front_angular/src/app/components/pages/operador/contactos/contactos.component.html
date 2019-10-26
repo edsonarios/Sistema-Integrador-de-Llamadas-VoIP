@@ -1,0 +1,25 @@
+<br>
+<header>
+    <h2>LISTA DE CONTACTOS</h2>
+</header>
+<table border="1">
+		<tr>
+			<th>Nombre</th>
+			<th>Estado</th>
+			<th>Numero</th>
+			<th>Options</th>
+		</tr>
+		<tr *ngFor="let n of Contactos; let i=index">
+			<td>Daniel</td>
+			<td>Conectado</td>
+			<td>3001</td>
+			<td> 
+			 <i class="large material-icons md-12"  tooltip="Llamar" placement="top" style="color: #70F047">call</i>
+			 <i class="large material-icons md-12"  tooltip="Editar" placement="top" style="color: #22849C;cursor: pointer;" [routerLink]="['/Operador/Editar']">edit</i>
+			 <i class="large material-icons md-12"  tooltip="eliminar?" placement="top" style="color: #F7200E">face</i></td>
+		</tr>
+
+
+</table>
+
+

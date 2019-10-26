@@ -2,8 +2,8 @@
   width: 100%;
   text-align: center;
   display: grid;
-//  grid-template-columns: minmax(80px, 4%) minmax(250px, 17%) minmax(500px, 79%);
-  grid-template-columns: minmax(80px, 4%) minmax(250px, 17%) auto;
+  grid-template-columns: minmax(80px, 4%) minmax(250px, 17%) minmax(500px, 79%);
+ // grid-template-columns: minmax(80px, 4%) minmax(250px, 17%) auto;
 
   grid-template-areas: "col1 col2 col3";
   height: 100vh;
@@ -14,8 +14,11 @@
   &__1col {
     grid-area: col1;
     background: #e3e5e8;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    button{
+      border-radius: 10%;
+    }
+    //padding-top: 15px;
+    padding-bottom: 100px;
   }
   &__info {
     grid-area: col2;
@@ -30,18 +33,17 @@
     }
   }
   &__3col {
-    position: relative;
+    //position: relative;
     grid-area: col3;
     text-align: center;
     height: 100%;
-    width: 150px;
   }
 }
 //-----------------------------------------------
 //primera columna
 .col1 {
   display: grid;
- grid-template-rows: 10% auto 22%;
+ grid-template-rows: 10% 73% 17%;
   //grid-template-rows: repeat(3, 1fr);
   grid-template-areas:
     "logo"
@@ -66,7 +68,6 @@
   display: grid;
   align-items: center;
   grid-area: options;
-  justify-content: center;
   button {
     padding-top: 7px;
     background: #e3e5e8;
@@ -82,4 +83,26 @@
 //--------------------------------------------------
 .material-icons.md-48 {
   font-size: 48px;
+}
+// dial pad (copy & paste de alguna pagina xD)
+.phone-demo {
+  position: relative;
+  margin: 20px auto;
+}
+.dial-pad {
+  a {
+    margin: 2px 0 1px 0;
+    padding: 10px 30px;
+    width: 20px;
+    height: 20px;
+    color: #333;
+    text-decoration: none;
+    text-align: center;
+    font: 1em Helvetica, Arial, sans-serif;
+    background: #eee;
+    display: inline-block;
+    &:hover {
+      background: #999;
+    }
+  }
 }

@@ -86,8 +86,46 @@ api.get('/datosPrueba', async (req, res) => {
     qualify:"yes",
     nat:"force_rport,comedia"
   })
+  //WEBRTC para usuario 1
+  const obj22 = await Sip.create(obj2.id, {
+    name: "7010",
+    secret: "7010",
+    callerid: "7010 <7010>",
+    type: "friend",
+    context: "default",
+    host: "dynamic",
+    disallow: "all",
+    allow: "ulaw",
+    qualify:"yes",
+    nat:"force_rport,comedia",
+
+    qualifyfreq:"60",
+    deny:"0.0.0.0/0.0.0.0",
+    dtnfnode:"rfc2833",
+    canreinvite:"no" ,
+    trustrpid:"yes",
+    sendrpid:"no" ,
+    transport:"udp,ws,wss",
+    avpf:"yes" ,
+    force_avp:"yes" ,
+    icesupport:"yes" ,
+    encryption:"yes" ,
+    callgroup:"",
+    pickupgroup:"",
+    dial:"SIP/7010",
+    permit:"0.0.0.0/0.0.0.0",
+    callcounter:"yes" ,
+    faxdetect:"no" ,
+    directmedia:"no",
+    dtlsenable:"yes" ,
+    dtlsverify:"fingerprint",
+    dtlscertfile:"/etc/asterisk/keys/asterisk.pem",
+    dtlscafile:"/etc/asterisk/keys/ca.crt" ,
+    dtlssetup:"actpass",
+    rtcp_mux:"yes"
+  })
   //VOICEMAIL PARA 7001
-  const obj22 = await Voicemail.create(obj2.id, {
+  const obj23 = await Voicemail.create(obj2.id, {
     uniqueid:"1",
     customer_id:"1",
     context:"default",
@@ -138,6 +176,44 @@ api.get('/datosPrueba', async (req, res) => {
     qualify:"yes",
     nat:"force_rport,comedia"
   })
+    //WEBRTC para usuario 1
+    const obj33 = await Sip.create(obj2.id, {
+      name: "7011",
+      secret: "7011",
+      callerid: "7011 <7011>",
+      type: "friend",
+      context: "default",
+      host: "dynamic",
+      disallow: "all",
+      allow: "ulaw",
+      qualify:"yes",
+      nat:"force_rport,comedia",
+      
+      qualifyfreq:"60",
+      deny:"0.0.0.0/0.0.0.0",
+      dtnfnode:"rfc2833",
+      canreinvite:"no" ,
+      trustrpid:"yes",
+      sendrpid:"no" ,
+      transport:"udp,ws,wss",
+      avpf:"yes" ,
+      force_avp:"yes" ,
+      icesupport:"yes" ,
+      encryption:"yes" ,
+      callgroup:"",
+      pickupgroup:"",
+      dial:"SIP/7011",
+      permit:"0.0.0.0/0.0.0.0",
+      callcounter:"yes" ,
+      faxdetect:"no" ,
+      directmedia:"no",
+      dtlsenable:"yes" ,
+      dtlsverify:"fingerprint",
+      dtlscertfile:"/etc/asterisk/keys/asterisk.pem",
+      dtlscafile:"/etc/asterisk/keys/ca.crt" ,
+      dtlssetup:"actpass",
+      rtcp_mux:"yes"
+    })
   //VOICEMAIL PARA 7002
   const obj32 = await Voicemail.create(obj2.id, {
     uniqueid:"1",
@@ -641,7 +717,9 @@ api.post('/addSip', async (req, res, next) => {
       context: params.context,
       host: params.host,
       disallow: params.disallow,
-      allow: params.allow
+      allow: params.allow,
+      qualify: params.qualify,
+      nat: params.nat
     })
   }catch(e){
     return next(e)
@@ -662,7 +740,9 @@ api.put('/updateSip', async (req, res, next) => {
       context: params.context,
       host: params.host,
       disallow: params.disallow,
-      allow: params.allow
+      allow: params.allow,
+      qualify: params.qualify,
+      nat: params.nat
     })
   }catch(e){
     return next(e)
@@ -767,4 +847,103 @@ api.get('/findAllExtension', async (req, res, next) => {
   res.send(obj)
 })
 
+/// CDR /////////////////////////////////////////////////////////////////////
+
+api.get('/findAllCdr', async (req, res, next) => {
+
+  const obj = await Cdr.findAll()
+
+  res.send(obj)
+})
+
+api.post('/findByIdCdr', async (req, res, next) => {
+  const params = req.body
+
+  let obj 
+  try{
+    obj= await Cdr.findById(params.id)
+  }catch(e){
+    return next(e)
+  }
+  if(!obj || obj.lenght==0){
+    return next(new Error(`Sala not found with id ${params.id}`))
+  }
+  
+  res.send(obj)
+})
+
+
+/// IAX /////////////////////////////////////////////////////////////////////
+
+api.post('/addIax', async (req, res, next) => {
+  const params = req.body
+
+  let obj
+  try{
+    obj= await Iax.create(params.usuarioId, {
+      name: params.name,
+      secret: params.secret,
+      callerid: params.callerid,
+      type: params.type,
+      context: params.context,
+      host: params.host,
+      disallow: params.disallow,
+      allow: params.allow
+    })
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
+
+api.put('/updateIax', async (req, res, next) => {
+  const params = req.body
+
+  let obj
+  try{
+    obj= await Iax.update(params.id, {
+      name: params.name,
+      secret: params.secret,
+      callerid: params.callerid,
+      type: params.type,
+      context: params.context,
+      host: params.host,
+      disallow: params.disallow,
+      allow: params.allow
+    })
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
+
+api.post('/findByIdIax', async (req, res, next) => {
+  const params = req.body
+
+  let obj
+  try{
+    obj= await Iax.findById(params.id)
+  }catch(e){
+    return next(e)
+  }
+  if(!obj || obj.lenght==0){
+    return next(new Error(`Iax not found with id ${params.id}`))
+  }
+
+  res.send(obj)
+})
+
+api.get('/findAllIax', async (req, res, next) => {
+
+  let obj
+  try{
+    obj= await Iax.findAll()
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
 module.exports = api
