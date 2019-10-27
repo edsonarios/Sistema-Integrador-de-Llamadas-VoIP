@@ -2,7 +2,10 @@ import { Component, OnInit, TemplateRef} from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal'
+
 import { EditarContactosComponent } from '../editar_contactos/editar_contactos.component';
+import { LlamadaComponent } from '../llamada/llamada.component';
+
 @Component({
   selector: 'Contactos',
   templateUrl: './contactos.component.html',
@@ -64,6 +67,12 @@ modalRef: BsModalRef;
 
    EditarContactoComponent() {
     this.modalRef = this.modalService.show(EditarContactosComponent);
+  }
+   LlamadaComponent() {
+    this.modalRef = this.modalService.show(LlamadaComponent);
+  }
+   Eliminar(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
    submit(){
     

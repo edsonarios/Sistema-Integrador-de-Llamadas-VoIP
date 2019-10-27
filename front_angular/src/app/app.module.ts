@@ -11,6 +11,7 @@ import { LoginComponent } from './components/pages/inicio/login/login.component'
 import { DialPadComponent } from './components/pages/operador/dialpad/dialpad.component';
 import { AgregarContactosComponent } from './components/pages/operador/agregar_contactos/agregar_contactos.component';
 import { EditarContactosComponent } from './components/pages/operador/editar_contactos/editar_contactos.component';
+import { LlamadaComponent } from './components/pages/operador/llamada/llamada.component';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -30,6 +31,7 @@ import {FormsModule} from '@angular/forms';
     DialPadComponent,
     AgregarContactosComponent,
     EditarContactosComponent,
+    LlamadaComponent,
     OperadorTemplateComponent
   ],
   imports: [
@@ -49,6 +51,10 @@ import {FormsModule} from '@angular/forms';
   ],
   providers: [UserService],
   bootstrap: [AppComponent],
-  entryComponents: [DialPadComponent,AgregarContactosComponent,EditarContactosComponent]
+  entryComponents: [
+  DialPadComponent,
+  AgregarContactosComponent,
+  EditarContactosComponent,
+  LlamadaComponent]
 })
 export class AppModule { }

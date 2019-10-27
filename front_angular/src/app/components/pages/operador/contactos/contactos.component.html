@@ -45,10 +45,12 @@
             {{Contactos[i]['Numero']}}
           </td>
           <td> 
-			 <i class="large material-icons md-12"  tooltip="Llamar" placement="top" style="color: #70F047">call</i>
+			 <i class="large material-icons md-12"  tooltip="Llamar" placement="top" style="color: #70F047;cursor: pointer;"
+        (click)="LlamadaComponent()">call</i>
 			 <i class="large material-icons md-12"  tooltip="Editar" placement="top" style="color: #22849C;cursor: pointer;" 
 			 (click)="EditarContactoComponent()">edit</i>
-			 <i class="large material-icons md-12"  tooltip="eliminar?" placement="top" style="color: #F7200E">face</i>
+			 <i class="large material-icons md-12"  tooltip="eliminar" placement="top" style="color: #F7200E;cursor: pointer;"
+       (click)="Eliminar(EliminarTemplate)">face</i>
 			</td>
         </tr>
         
@@ -56,3 +58,20 @@
     </table>
   </div>
 </div>
+
+
+<ng-template #EliminarTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Eliminar Contacto</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Esta seguro que desea eliminar este contacto?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger btn-block"  (click)="modalRef.hide()">Aceptar</button>
+    <button type="button" class="btn btn-primary btn-block" data-dismiss="modal"  (click)="modalRef.hide()">Cancelar</button>
+  </div>
+</ng-template>
