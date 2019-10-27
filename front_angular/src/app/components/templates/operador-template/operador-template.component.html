@@ -14,112 +14,189 @@
 </head>-->
 
 <section class="dashboard">
-	<!-- *******primera columna******* -->
-	<div class="dashboard__1col col1">
-		<div class="logo">
-			<button type="button" [routerLink]="['/Operador/Contactos']">D</button>
-		</div>
+  <!-- *******primera columna******* -->
+  <div class="dashboard__1col col1">
+    <div class="logo">
+      <button type="button" [routerLink]="['/Operador/Contactos']">D</button>
+    </div>
 
-		<div class="sala">
-			<div *ngFor="let n of sala; let i=index"> 
-				<button type="button" (click)="datosSala(sala[i]['usuarioId'],sala[i]['nombreSala'],sala[i]['descripcion'])"  
-				tooltip="{{sala[i]['nombreSala']}}" placement="right">S{{sala[i]['usuarioId']}}</button>
-			</div>
-			<button type="button" (click)="addSala()">+</button>
-		</div>
+    <div class="sala">
+      <div *ngFor="let n of sala; let i = index">
+        <button
+          type="button"
+          (click)="
+            datosSala(
+              sala[i]['usuarioId'],
+              sala[i]['nombreSala'],
+              sala[i]['descripcion']
+            )
+          "
+          tooltip="{{ sala[i]['nombreSala'] }}"
+          placement="right"
+        >
+          S{{ sala[i]["usuarioId"] }}
+        </button>
+      </div>
+      <button type="button" (click)="addSala()">+</button>
+    </div>
 
-		<div class="options">
-			<button [routerLink]="['/Operador/Tracking']">
-				<i class="large material-icons md-48"  tooltip="Tracking" placement="right">location_on</i>
-			</button>
-			<button (click)="DialPadComponent()">
-				<i class="large material-icons md-48"  tooltip="DialPad" placement="right">call</i>
-			</button>
-			<button (click)="settings()">
-				<i class="large material-icons md-48"  tooltip="Opciones" placement="right">settings</i>
-			</button>
-		</div>
-	</div>
+    <div class="options">
+      <button [routerLink]="['/Operador/Tracking']">
+        <i
+          class="large material-icons md-48"
+          tooltip="Tracking"
+          placement="right"
+          >location_on</i
+        >
+      </button>
+      <button (click)="DialPadComponent()">
+        <i
+          class="large material-icons md-48"
+          tooltip="DialPad"
+          placement="right"
+          >call</i
+        >
+      </button>
+      <button (click)="settings()">
+        <i
+          class="large material-icons md-48"
+          tooltip="Opciones"
+          placement="right"
+          >settings</i
+        >
+      </button>
+    </div>
+  </div>
 
-	
+  <!-- *******segunda columna******* -->
+  <div class="dashboard__info col2">
+    <!-- ********menu desplegable******** -->
+    <div class="btn-group c2-header" dropdown>
+      <button
+        dropdownToggle
+        type="button"
+        class="btn btn-primary dropdown-toggle"
+      >
+        {{ user["correo"] }}<span class="caret"></span>
+      </button>
 
+      <ul *dropdownMenu class="dropdown-menu" role="menu">
+        <li role="menuitem">
+          <a class="dropdown-item" [routerLink]="['/Operador/Historial']"
+            >Historial de Llamada</a
+          >
+        </li>
+        <li class="divider dropdown-divider"></li>
 
-	<!-- *******segunda columna******* -->
-	<div class="dashboard__info col2">
-		<!-- ********menu desplegable******** -->
-		<div class="btn-group" dropdown>
-			<button
-				dropdownToggle
-				type="button"
-				class="btn btn-primary dropdown-toggle"
-			>
-				{{user['correo']}}<span class="caret"></span>
-			</button>
+        <li role="menuitem">
+          <a class="dropdown-item" [routerLink]="['/Operador/Grabaciones']"
+            >Grabaciones</a
+          >
+        </li>
+        <li class="divider dropdown-divider"></li>
 
-			<ul *dropdownMenu class="dropdown-menu" role="menu">
-				<li role="menuitem">
-					<a class="dropdown-item" [routerLink]="['/Operador/Historial']">Historial de Llamada</a>
-				</li>
-				<li class="divider dropdown-divider"></li>
+        <li role="menuitem">
+          <a class="dropdown-item" [routerLink]="['/Operador/Tracking']"
+            >Tracking</a
+          >
+        </li>
+        <li class="divider dropdown-divider"></li>
 
-				<li role="menuitem">
-					<a class="dropdown-item" [routerLink]="['/Operador/Grabaciones']">Grabaciones</a>
-				</li>
-				<li class="divider dropdown-divider"></li>
+        <li role="menuitem">
+          <a class="dropdown-item" [routerLink]="['/Operador/Cuentas']"
+            >Cuentas</a
+          >
+        </li>
+        <li class="divider dropdown-divider"></li>
 
-				<li role="menuitem">
-					<a class="dropdown-item" [routerLink]="['/Operador/Tracking']">Tracking</a>
-				</li>
-				<li class="divider dropdown-divider"></li>
+        <li role="menuitem">
+          <a class="dropdown-item" [routerLink]="['/Operador/Roles']">Roles</a>
+        </li>
+      </ul>
+    </div>
+    <!-- ********contenido******** -->
+    <div class="c2-body"></div>
+    <!-- *********estado********   -->
+    <div class="c2-footer">
+      <div class="c2-logo"></div>
+      <div class="c2-nombre">
+        User
+        <br />
+        <div class="c2-nombre__sip">
+          SIP 3000
+        </div>
+      </div>
+      <div class="c2-microfono">
+        <button>
+          <i class="fa fa-microphone" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="c2-audio">
+        <button>
+          <i class="fa fa-headphones" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="c2-señal">
+        <button>
+          <i class="fa fa-wifi" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 
-				<li role="menuitem">
-					<a class="dropdown-item" [routerLink]="['/Operador/Cuentas']">Cuentas</a>
-				</li>
-				<li class="divider dropdown-divider"></li>
+  <!-- tercera columna -->
+  <div class="dashboard__3col col3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-				<li role="menuitem">
-					<a class="dropdown-item" [routerLink]="['/Operador/Roles']">Roles</a>
-				</li>
-			</ul>
-		</div>
-		<!-- ********contenido******** -->
-		<div>
-		</div>
-		<!-- *********estado********   -->
-		<div></div>
-	</div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" [routerLink]="['/Operador/Contactos']"
+              >Agenda <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">Todos</a>
+          </li>
 
-	<!-- tercera columna -->
-	<div class="dashboard__3col col3">
-
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				<a class="nav-link" [routerLink]="['/Operador/Contactos']">Agenda <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" >Todos</a>
-			</li>
-		 
-			<li class="nav-item">
-				<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Conectado</a>
-			</li>
-			<li class="nav-item" (click)="AgregarContactosComponent()">
-			 <a class="nav-link" style="background-color: #96F047;cursor: pointer;" >Añadir Contacto</a>
-			</li>
-		</ul>
-		<form class="form-inline my-2 my-lg-0" [routerLink]="['/Login']" style="cursor: pointer">
-			<i class="large material-icons md-24" >input</i>
-			<a class="nav-link" >Salir</a>
-		</form>
-	</div>
-</nav>
-		<router-outlet></router-outlet>
-	</div>
+          <li class="nav-item">
+            <a
+              class="nav-link disabled"
+              href="#"
+              tabindex="-1"
+              aria-disabled="true"
+              >Conectado</a
+            >
+          </li>
+          <li class="nav-item" (click)="AgregarContactosComponent()">
+            <a
+              class="nav-link"
+              style="background-color: #96F047;cursor: pointer;"
+              >Añadir Contacto</a
+            >
+          </li>
+        </ul>
+        <form
+          class="form-inline my-2 my-lg-0"
+          [routerLink]="['/Login']"
+          style="cursor: pointer"
+        >
+          <i class="large material-icons md-24">input</i>
+          <a class="nav-link">Salir</a>
+        </form>
+      </div>
+    </nav>
+    <router-outlet></router-outlet>
+  </div>
 </section>
-

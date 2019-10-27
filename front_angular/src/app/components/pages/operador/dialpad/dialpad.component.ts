@@ -9,9 +9,9 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class DialPadComponent implements OnInit {
   constructor(private router: Router,
-  	private modalService: BsModalService,) {
+    private modalService: BsModalService, ) {
     console.log('Dialpad se cargo Correctamente');
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }
