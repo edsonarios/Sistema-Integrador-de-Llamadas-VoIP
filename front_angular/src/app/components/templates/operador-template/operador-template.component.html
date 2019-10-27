@@ -1,218 +1,210 @@
 <head>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <style>
-      .close{
-          color: white;
-      }
-  .modal-header{
-      background-color: rgb(51, 44, 97);
-      color: white;
-  }
-  .modal-body{
-      background-color: lavender;
-  }
-  </style>
+	<!-- Bootstrap CSS -->
+	<style>
+			.close{
+					color: white;
+			}
+	.modal-header{
+			background-color: rgb(51, 44, 97);
+			color: white;
+	}
+	.modal-body{
+			background-color: lavender;
+	}
+	</style>
 </head>
 
 <section class="dashboard">
-  <!-- *******primera columna******* -->
-  <div class="dashboard__1col col1">
-    <div class="logo">
-      <button type="button" [routerLink]="['/Operador/Contactos']">D</button>
-    </div>
+	<!-- *******primera columna******* -->
+	<div class="dashboard__1col col1">
+		<div class="logo">
+			<button type="button" [routerLink]="['/Operador/Contactos']">D</button>
+		</div>
 
-    <div class="sala">
-      <div *ngFor="let n of sala; let i=index"> 
-        <button type="button" (click)="datosSala(sala[i]['usuarioId'],sala[i]['nombreSala'],sala[i]['descripcion'])"  
-        tooltip="{{sala[i]['nombreSala']}}" placement="right">S{{sala[i]['usuarioId']}}</button>
-      </div>
-      <button type="button" (click)="addSala()">+</button>
-    </div>
+		<div class="sala">
+			<div *ngFor="let n of sala; let i=index"> 
+				<button type="button" (click)="datosSala(sala[i]['usuarioId'],sala[i]['nombreSala'],sala[i]['descripcion'])"  
+				tooltip="{{sala[i]['nombreSala']}}" placement="right">S{{sala[i]['usuarioId']}}</button>
+			</div>
+			<button type="button" (click)="addSala()">+</button>
+		</div>
 
-    <div class="options">
-      <button [routerLink]="['/Operador/Tracking']">
-        <i class="large material-icons md-48"  tooltip="Tracking" placement="right">location_on</i>
-      </button>
-      <button (click)="DialPad(template)">
-        <i class="large material-icons md-48"  tooltip="DialPad" placement="right">call</i>
-      </button>
-      <button (click)="settings()">
-        <i class="large material-icons md-48"  tooltip="Opciones" placement="right">settings</i>
-      </button>
-    </div>
-  </div>
+		<div class="options">
+			<button [routerLink]="['/Operador/Tracking']">
+				<i class="large material-icons md-48"  tooltip="Tracking" placement="right">location_on</i>
+			</button>
+			<button (click)="DialPad(template)">
+				<i class="large material-icons md-48"  tooltip="DialPad" placement="right">call</i>
+			</button>
+			<button (click)="settings()">
+				<i class="large material-icons md-48"  tooltip="Opciones" placement="right">settings</i>
+			</button>
+		</div>
+	</div>
 
-  <ng-template #template>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">DIALPAD</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p>Se ve feo pero funciona xD</p>
-    <div class="phone-demo">
-  <div class="dial-pad">
-    <a  class="one">1</a>
-    <a class="two">2</a>
-    <a class="three">3</a>
-    <br/>
-    <a class="four">4</a>
-    <a class="five">5</a>
-    <a class="six">6</a>
-    <br/>
-    <a  class="seven">7</a>
-    <a class="eight">8</a>
-    <a class="nine">9</a>
-    <br/>
-    <a >*</a>
-    <a  class="zero">0</a>
-    <a >#</a>
-  
-  </div>
-</div>
-  </div>
-</ng-template>
+	
 
 
-  <!-- *******segunda columna******* -->
-  <div class="dashboard__info col2">
-    <!-- ********menu desplegable******** -->
-    <div class="btn-group" dropdown>
-      <button
-        dropdownToggle
-        type="button"
-        class="btn btn-primary dropdown-toggle"
-      >
-        {{user['correo']}}<span class="caret"></span>
-      </button>
+	<!-- *******segunda columna******* -->
+	<div class="dashboard__info col2">
+		<!-- ********menu desplegable******** -->
+		<div class="btn-group" dropdown>
+			<button
+				dropdownToggle
+				type="button"
+				class="btn btn-primary dropdown-toggle"
+			>
+				{{user['correo']}}<span class="caret"></span>
+			</button>
 
-      <ul *dropdownMenu class="dropdown-menu" role="menu">
-        <li role="menuitem">
-          <a class="dropdown-item" [routerLink]="['/Operador/Historial']">Historial de Llamada</a>
-        </li>
-        <li class="divider dropdown-divider"></li>
+			<ul *dropdownMenu class="dropdown-menu" role="menu">
+				<li role="menuitem">
+					<a class="dropdown-item" [routerLink]="['/Operador/Historial']">Historial de Llamada</a>
+				</li>
+				<li class="divider dropdown-divider"></li>
 
-        <li role="menuitem">
-          <a class="dropdown-item" [routerLink]="['/Operador/Grabaciones']">Grabaciones</a>
-        </li>
-        <li class="divider dropdown-divider"></li>
+				<li role="menuitem">
+					<a class="dropdown-item" [routerLink]="['/Operador/Grabaciones']">Grabaciones</a>
+				</li>
+				<li class="divider dropdown-divider"></li>
 
-        <li role="menuitem">
-          <a class="dropdown-item" [routerLink]="['/Operador/Tracking']">Tracking</a>
-        </li>
-        <li class="divider dropdown-divider"></li>
+				<li role="menuitem">
+					<a class="dropdown-item" [routerLink]="['/Operador/Tracking']">Tracking</a>
+				</li>
+				<li class="divider dropdown-divider"></li>
 
-        <li role="menuitem">
-          <a class="dropdown-item" [routerLink]="['/Operador/Cuentas']">Cuentas</a>
-        </li>
-        <li class="divider dropdown-divider"></li>
+				<li role="menuitem">
+					<a class="dropdown-item" [routerLink]="['/Operador/Cuentas']">Cuentas</a>
+				</li>
+				<li class="divider dropdown-divider"></li>
 
-        <li role="menuitem">
-          <a class="dropdown-item" [routerLink]="['/Operador/Roles']">Roles</a>
-        </li>
-      </ul>
-    </div>
-    <!-- ********contenido******** -->
-    <div>
-    <!--  <a [routerLink]="['/Operador/Agregar']">Agregar</a>-->
-    </div>
-    <!-- *********estado********     -->
-    <div></div>
-  </div>
+				<li role="menuitem">
+					<a class="dropdown-item" [routerLink]="['/Operador/Roles']">Roles</a>
+				</li>
+			</ul>
+		</div>
+		<!-- ********contenido******** -->
+		<div>
+		</div>
+		<!-- *********estado********   -->
+		<div></div>
+	</div>
 
-  <!-- tercera columna -->
-  <div class="dashboard__3col col3">
+	<!-- tercera columna -->
+	<div class="dashboard__3col col3">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['/Operador/Contactos']">Agenda <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" >Todos</a>
-      </li>
-     
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Conectado</a>
-      </li>
-      <li class="nav-item">
-       <!-- <a class="nav-link" href="#" style="background-color: #96F047" [routerLink]="['/Operador/Agregar']">Añadir Contacto</a>-->
-       <!--modal para añadir Contacto-->
-        <a href="#ventana1" style="background-color: #96F047" data-toggle="modal">Añadir Contacto</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0" [routerLink]="['/Login']" style="cursor: pointer">
-      <i class="large material-icons md-24" >input</i>
-      <a class="nav-link" >Salir</a>
-    </form>
-  </div>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" [routerLink]="['/Operador/Contactos']">Agenda <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" >Todos</a>
+			</li>
+		 
+			<li class="nav-item">
+				<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Conectado</a>
+			</li>
+			<li class="nav-item" (click)="openModal(addContacto)">
+			 <a class="nav-link" style="background-color: #96F047;cursor: pointer;" >Añadir Contacto</a>
+			</li>
+		</ul>
+		<form class="form-inline my-2 my-lg-0" [routerLink]="['/Login']" style="cursor: pointer">
+			<i class="large material-icons md-24" >input</i>
+			<a class="nav-link" >Salir</a>
+		</form>
+	</div>
 </nav>
-    <router-outlet></router-outlet>
-    <!-- <ng-content  select="router-outlet"></ng-content>   -->
-  </div>
+		<router-outlet></router-outlet>
+		<!-- <ng-content  select="router-outlet"></ng-content>   -->
+	</div>
 </section>
 
+<!-- Template Modal Agregar -->
+<ng-template #addContacto>
+ <div class="modal-header">
+			<h6 class="modal-title">AÑADIR CONTACTO</h6>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"  (click)="modalRef.hide()">&times;</button>
+								</div>   
+										<div class="modal-body">
+								<div class="container ">
+								<form class="añadir_contact" [formGroup]="addForm" (ngSubmit)="addContact()">
+								<div class="row">
+																		<div class="col-sm-6 form-group">
+													<label for="nombre">NOMBRE</label>
+							<input type="text" formControlName="nombre" class="form-control" />
+													</div>
+								<div class="col-sm-6 form-group">
+														<label for="apellido">APELLIDO</label>
+												<input type="text" formControlName="apellido" class="form-control" />
+																		</div>
+																	</div>
+																		
+											<div class="row">
+																			<div class="col-md-4 form-group">
+																					<label for="alias">ALIAS</label>
+																					<input type="text" formControlName="alias" class="form-control" />  
+																			</div>
+												<div class="col-md-4 form-group">
+													<label for="telnumero">#/TELÉFONO</label>
+														<input type="text" formControlName="telnumero" class="form-control" />  
+														</div>
+													<div class="col-md-4 form-group">   
+													<label for="telnumero">TIPO</label>
+												<select class="form-control" id="inputGroupSelect01" >
+												<option selected>Elegir Tipo</option>
+												<option value="1">SIP</option>
+												<option value="2">IAX</option>
+								</select>                             
+						</div>
+					</div>         
+					<div class="row form-group">
+							<label for="descripcion">DESCRIPCIÓN</label>
+							<input type="text" formControlName="descripcion" class="form-control" />  
+					</div>          
+				</form>
+			</div>                    
+		</div>
+		<div class="modal-footer">
+		<button type="button" class="btn btn-danger btn-block"  (click)="modalRef.hide()">Cancelar</button>
+		<button type="button" class="btn btn-primary btn-block" data-dismiss="modal"  (click)="modalRef.hide()">Crear contacto</button>
+	</div>
+</ng-template>
 
-    <!--Html para añadir Contacto-->
-        <div class="container">
-          <div class="modal fade" id="ventana1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h6 class="modal-title">AÑADIR CONTACTO</h6>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>   
-                    <div class="modal-body">
-                            <div class="container ">
-                              <form class="añadir_contact" [formGroup]="addForm" (ngSubmit)="addContact()">
-                                  <div class="row">
-                                    <div class="col-sm-6 form-group">
-                                        <label for="nombre">NOMBRE</label>
-                                        <input type="text" formControlName="nombre" class="form-control" />
-                                    </div>
-                                    <div class="col-sm-6 form-group">
-                                        <label for="apellido">APELLIDO</label>
-                                        <input type="text" formControlName="apellido" class="form-control" />
-                                    </div>
-                                  </div>
-                                    
-                                    <div class="row">
-                                      <div class="col-md-4 form-group">
-                                          <label for="alias">ALIAS</label>
-                                          <input type="text" formControlName="alias" class="form-control" />  
-                                      </div>
-                                      <div class="col-md-4 form-group">
-                                            <label for="telnumero">#/TELÉFONO</label>
-                                            <input type="text" formControlName="telnumero" class="form-control" />  
-                                      </div>
-                                      <div class="col-md-4 form-group">   
-                                          <label for="telnumero">TIPO</label>
-                                          <select class="form-control" id="inputGroupSelect01" >
-                                                  <option selected>Elegir Tipo</option>
-                                                  <option value="1">SIP</option>
-                                                  <option value="2">IAX</option>
-                                          </select>                             
-                                      </div>
-                                    </div>         
-                                    <div class="row form-group">
-                                            <label for="descripcion">DESCRIPCIÓN</label>
-                                            <input type="text" formControlName="descripcion" class="form-control" />  
-                                    </div>          
-                              </form>
-                            </div>                    
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger btn-block">Cancelar</button>
-                        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Crear contacto</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-      </div>
+<!-- Template Modal DialPad -->
+<ng-template #template>
+	<div class="modal-header">
+		<h4 class="modal-title pull-left">DIALPAD</h4>
+		<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<p>Se ve feo pero funciona xD</p>
+		<div class="phone-demo">
+	<div class="dial-pad">
+		<a  class="one">1</a>
+		<a class="two">2</a>
+		<a class="three">3</a>
+		<br/>
+		<a class="four">4</a>
+		<a class="five">5</a>
+		<a class="six">6</a>
+		<br/>
+		<a  class="seven">7</a>
+		<a class="eight">8</a>
+		<a class="nine">9</a>
+		<br/>
+		<a >*</a>
+		<a  class="zero">0</a>
+		<a >#</a>
+	
+	</div>
+</div>
+	</div>
+</ng-template>

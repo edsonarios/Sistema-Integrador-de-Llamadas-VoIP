@@ -1,6 +1,6 @@
 <head>
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 	<style>
 		.close{
 			color: white;
@@ -20,35 +20,49 @@
 <header>
     <h2>LISTA DE CONTACTOS</h2>
 </header>
-<table border="1">
-		<tr>
-			<th>Nombre</th>
-			<th>Estado</th>
-			<th>Numero</th>
-			<th>Options</th>
-		</tr>
-		<tr *ngFor="let n of Contactos; let i=index">
-			<td>Daniel</td>
-			<td>Conectado</td>
-			<td>3001</td>
-			<td> 
+<div class="Contactos">
+	<div class="table-responsive-vertical shadow-z-1">
+  <!-- Table starts here -->
+  <table id="table" class="table table-hover table-mc-light-blue">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Estado</th>
+          <th>Numero</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let n of Contactos; let i=index">
+          <td data-title="ID">{{i+1}}</td>
+          <td data-title="Name">{{Contactos[i]['Nombre']}}</td>
+          <td data-title="Status">
+          	<span style="color: green" *ngIf='Contactos[i]["Estado"]=="Conectado"'>{{Contactos[i]['Estado']}}</span>
+          	<span style="color: red" *ngIf='Contactos[i]["Estado"]=="Desconectado"'>{{Contactos[i]['Estado']}}</span>
+          </td>
+          <td data-title="Link">
+            {{Contactos[i]['Numero']}}
+          </td>
+          <td> 
 			 <i class="large material-icons md-12"  tooltip="Llamar" placement="top" style="color: #70F047">call</i>
-			 <i class="large material-icons md-12"  tooltip="Editar" placement="top" style="color: #22849C;cursor: pointer;"><a href="#ventana2" data-toggle="modal">edit</a></i>
-			 <i class="large material-icons md-12"  tooltip="eliminar?" placement="top" style="color: #F7200E">face</i></td>
-		</tr>
-
-
-</table>
+			 <i class="large material-icons md-12"  tooltip="Editar" placement="top" style="color: #22849C;cursor: pointer;" 
+			 (click)="openModal(template)">edit</i>
+			 <i class="large material-icons md-12"  tooltip="eliminar?" placement="top" style="color: #F7200E">face</i>
+			</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
 
 
 <!--Html para Editar Contacto-->
-<div class="container">
-	<div class="modal fade" id="ventana2">
-	  <div class="modal-dialog">
-		  <div class="modal-content">
-			  <div class="modal-header">
+<ng-template #template>
+<div class="modal-header">
 				  <h6 class="modal-title">EDITAR CONTACTO</h6>
-				  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"  (click)="modalRef.hide()">&times;</button>
 			  </div>   
 			  <div class="modal-body">
 					  <div class="container ">
@@ -90,10 +104,8 @@
 					  </div>                    
 			  </div>
 			  <div class="modal-footer">
-				  <button type="button" class="btn btn-danger btn-block">Cancelar</button>
-				  <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Crear contacto</button>
+				  <button type="button" class="btn btn-danger btn-block"  (click)="modalRef.hide()">Cancelar</button>
+				  <button type="button" class="btn btn-primary btn-block" data-dismiss="modal"  (click)="modalRef.hide()">Crear contacto</button>
 			  </div>
-		  </div>
-	  </div>
-  </div>
-</div>
+			  
+</ng-template>

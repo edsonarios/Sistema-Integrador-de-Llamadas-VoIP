@@ -13,8 +13,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { OperadorTemplateRoutes } from './operador-template.routing';
 
 import { ContactosComponent } from '../../pages/operador/contactos/contactos.component';
-import { EditarContactosComponent } from '../../pages/operador/editar_contactos/editar_contactos.component';
-import { AgregarContactosComponent } from '../../pages/operador/agregar_contactos/agregar_contactos.component';
 import { HistorialLlamadasComponent } from '../../pages/operador/historial_llamadas/historial_llamadas.component';
 import { TrackingComponent } from '../../pages/operador/tracking/tracking.component';
 import { RolesComponent } from '../../pages/operador/roles/roles.component';
@@ -22,6 +20,7 @@ import { GrabacionesComponent } from '../../pages/operador/grabaciones/grabacion
 import { CuentasComponent } from '../../pages/operador/cuentas/cuentas.component';
 
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+
 
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -41,8 +40,6 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
   ],
   declarations: [
     ContactosComponent,
-    EditarContactosComponent,
-    AgregarContactosComponent,
     HistorialLlamadasComponent,
     TrackingComponent,
     RolesComponent,

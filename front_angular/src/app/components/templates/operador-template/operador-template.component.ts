@@ -3,7 +3,7 @@ import { User } from '../../../../models/user';
 import { Sala } from '../../../../models/sala';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'operador-template',
   templateUrl: './operador-template.component.html',
@@ -13,8 +13,18 @@ export class OperadorTemplateComponent implements OnInit {
   user: User;
   public sala;
 
+   wrong = false;
+  public identity: Object;
+  addForm: FormGroup;
+  loading = false;
+  submitted = false;
+  returnUrl: string;
+
   modalRef: BsModalRef;
-  constructor(private modalService: BsModalService) {}
+  constructor(private modalService: BsModalService,
+     private formBuilder: FormBuilder,) {
+
+  }
   ngOnInit() {
     console.log('Carga el dashboard');
     this.sala = [
@@ -35,8 +45,33 @@ export class OperadorTemplateComponent implements OnInit {
       conectado: true,
       salaId: '1'
     };
-    //console.log(this.sala);
-    //console.log(this.user);
+   
+    this.submit();
+    //this.addContact();
+    this.addForm = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
+      alias: ['', Validators.required],
+      tipo: ['', Validators.required],
+      telnumero: ['', Validators.required],
+      descripcion: ['', Validators.required]
+    });
+  }
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+   submit(){
+    
+  }
+
+  get f() {
+    return this.addForm.controls;
+  }
+
+  addContact() {
+    if (this.addForm.invalid) {
+      return;
+    }
   }
   datosSala(id, nombre, descripcion) {
     window.alert(
