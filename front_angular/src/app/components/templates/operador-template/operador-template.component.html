@@ -71,6 +71,18 @@
   <!-- *******segunda columna******* -->
   <div class="dashboard__info col2">
     <!-- ********menu desplegable******** -->
+
+    <div class="btn-group c2-header">
+       <button
+        type="button"
+        class="btn btn-primary "
+        (click)="OpenMenu()"
+      >
+        {{ user["correo"] }} <span *ngIf="menu==0"><i class="large material-icons md-24">keyboard_arrow_down</i></span>
+        <span *ngIf="menu==1"><i class="large material-icons md-24" style="color:red;">close</i></span>
+      </button>
+    </div>
+    <!--
     <div class="btn-group c2-header" dropdown>
       <button
         dropdownToggle
@@ -113,9 +125,45 @@
           <a class="dropdown-item" [routerLink]="['/Operador/Roles']">Roles</a>
         </li>
       </ul>
-    </div>
+    </div>-->
     <!-- ********contenido******** -->
-    <div class="c2-body"></div>
+    <div class="c2-body">
+      <div class="left-container container" *ngIf="menu==1">
+                <div class="menu-box block"> <!-- MENU BOX (LEFT-CONTAINER) -->
+                    
+                    <ul class="menu-box-menu">
+                        <li>
+                            <a class="menu-box-tab" [routerLink]="['/Operador/Historial']">Historial de Llamada<div class="menu-box-number">
+                            <i class="large material-icons md-24">perm_phone_msg</i>
+                          </div></a>                            
+                        </li>
+                        <li>
+                            <a class="menu-box-tab" [routerLink]="['/Operador/Grabaciones']">Grabaciones<div class="menu-box-number">
+                            <i class="large material-icons md-24">mic</i>
+                          </div></a>                            
+                        </li>
+                        <li>
+                            <a class="menu-box-tab" [routerLink]="['/Operador/Tracking']">Tracking<div class="menu-box-number">
+                            <i class="large material-icons md-24">map</i>
+                          </div></a>                            
+                        </li>
+                        <li>
+                            <a class="menu-box-tab" [routerLink]="['/Operador/Cuentas']">Cuentas
+                            <div class="menu-box-number">
+                            <i class="large material-icons md-24">account_box</i>
+                          </div></a>
+                        </li>
+                        <li>
+                            <a class="menu-box-lasttab" [routerLink]="['/Operador/Roles']">Roles
+                            <div class="menu-box-number">
+                            <i class="large material-icons md-24">people_alt</i>
+                          </div></a>
+                        </li>                        
+                    </ul>
+                </div>
+
+      </div>
+    </div>
     <!-- *********footer********   -->
     <div class="c2-footer">
       <div class="c2-logo">
