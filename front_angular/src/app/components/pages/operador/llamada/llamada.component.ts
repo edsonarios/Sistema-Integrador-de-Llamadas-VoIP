@@ -9,7 +9,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class LlamadaComponent implements OnInit {
   constructor(private router: Router,
-  	private modalService: BsModalService,) {
+  	private  bsModalRef: BsModalRef,) {
     
   }
 
