@@ -1,3 +1,22 @@
+<head>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>Añadir Contacto</title>
+  <style>
+      .close{
+          color: white;
+      }
+  .modal-header{
+      background-color: rgb(51, 44, 97);
+      color: white;
+  }
+  .modal-body{
+      background-color: lavender;
+  }
+  </style>
+</head>
+
 <section class="dashboard">
   <!-- *******primera columna******* -->
   <div class="dashboard__1col col1">
@@ -126,7 +145,9 @@
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Conectado</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" style="background-color: #96F047" [routerLink]="['/Operador/Agregar']">Añadir Contacto</a>
+       <!-- <a class="nav-link" href="#" style="background-color: #96F047" [routerLink]="['/Operador/Agregar']">Añadir Contacto</a>-->
+       <!--modal para añadir Contacto-->
+        <a href="#ventana1" style="background-color: #96F047" data-toggle="modal">Añadir Contacto</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" [routerLink]="['/Login']" style="cursor: pointer">
@@ -139,3 +160,61 @@
     <!-- <ng-content  select="router-outlet"></ng-content>   -->
   </div>
 </section>
+
+
+    <!--Html para añadir Contacto-->
+        <div class="container">
+          <div class="modal fade" id="ventana1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title">AÑADIR CONTACTO</h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>   
+                    <div class="modal-body">
+                            <div class="container ">
+                              <form class="añadir_contact" [formGroup]="addForm" (ngSubmit)="addContact()">
+                                  <div class="row">
+                                    <div class="col-sm-6 form-group">
+                                        <label for="nombre">NOMBRE</label>
+                                        <input type="text" formControlName="nombre" class="form-control" />
+                                    </div>
+                                    <div class="col-sm-6 form-group">
+                                        <label for="apellido">APELLIDO</label>
+                                        <input type="text" formControlName="apellido" class="form-control" />
+                                    </div>
+                                  </div>
+                                    
+                                    <div class="row">
+                                      <div class="col-md-4 form-group">
+                                          <label for="alias">ALIAS</label>
+                                          <input type="text" formControlName="alias" class="form-control" />  
+                                      </div>
+                                      <div class="col-md-4 form-group">
+                                            <label for="telnumero">#/TELÉFONO</label>
+                                            <input type="text" formControlName="telnumero" class="form-control" />  
+                                      </div>
+                                      <div class="col-md-4 form-group">   
+                                          <label for="telnumero">TIPO</label>
+                                          <select class="form-control" id="inputGroupSelect01" >
+                                                  <option selected>Elegir Tipo</option>
+                                                  <option value="1">SIP</option>
+                                                  <option value="2">IAX</option>
+                                          </select>                             
+                                      </div>
+                                    </div>         
+                                    <div class="row form-group">
+                                            <label for="descripcion">DESCRIPCIÓN</label>
+                                            <input type="text" formControlName="descripcion" class="form-control" />  
+                                    </div>          
+                              </form>
+                            </div>                    
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-block">Cancelar</button>
+                        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Crear contacto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
