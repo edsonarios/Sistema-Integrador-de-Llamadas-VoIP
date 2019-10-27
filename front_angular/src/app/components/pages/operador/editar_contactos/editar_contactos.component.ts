@@ -4,7 +4,7 @@ import { UserService } from '../../../../../services/user.service';
 import { User } from '../../../../../models/user';
 //import { first } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'Editar-Contactos',
   templateUrl: './editar_contactos.component.html',
@@ -22,7 +22,8 @@ export class EditarContactosComponent implements OnInit {
   constructor(
     private router: Router,
     public userService: UserService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+      public bsModalRef: BsModalRef
   ) {}
 
   ngOnInit() {

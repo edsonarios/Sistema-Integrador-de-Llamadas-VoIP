@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'agregar-cotactos',
   templateUrl: './agregar_contactos.component.html',
@@ -15,7 +16,8 @@ export class AgregarContactosComponent implements OnInit {
   returnUrl: string;
 
   constructor(private router: Router,
-  	private formBuilder: FormBuilder) {
+  	private formBuilder: FormBuilder,
+    public bsModalRef: BsModalRef) {
     console.log('Dialpad se cargo Correctamente');
   }
 
