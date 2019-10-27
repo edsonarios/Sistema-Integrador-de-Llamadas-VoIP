@@ -16,7 +16,7 @@
                             "siete siete ocho ocho nueve nueve"
                             "mas mas cero cero num num"
                             "cancelar cancelar cancelar llamar llamar llamar";
-    height: 600px;
+    height: 620px;
     button{
         font-weight: bold;
         border-radius: 10px;
@@ -34,6 +34,7 @@
 
 .d-logo{
     grid-area: logo;
+    font-size: 30px;
 }
 
 .d-vista{
@@ -62,6 +63,7 @@
 }
 .d-cinco{
     grid-area: cinco;
+    font-size: 28px;
 }
 .d-seis{
     font-size: 28px;
