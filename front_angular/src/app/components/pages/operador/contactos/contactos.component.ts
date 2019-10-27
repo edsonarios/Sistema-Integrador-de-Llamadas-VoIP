@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef} from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal'
+import { EditarContactosComponent } from '../editar_contactos/editar_contactos.component';
 @Component({
   selector: 'Contactos',
   templateUrl: './contactos.component.html',
@@ -60,8 +61,9 @@ modalRef: BsModalRef;
       descripcion: ['', Validators.required]
     });
   }
-   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+
+   EditarContactoComponent() {
+    this.modalRef = this.modalService.show(EditarContactosComponent);
   }
    submit(){
     

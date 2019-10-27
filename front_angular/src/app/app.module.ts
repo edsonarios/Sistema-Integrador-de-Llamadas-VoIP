@@ -7,8 +7,10 @@ import { AppRoutes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { OperadorTemplateComponent } from './components/templates/operador-template/operador-template.component';
 import { LoginComponent } from './components/pages/inicio/login/login.component';
-
-//import { AgregarContactosComponent } from './components/pages/operador/agregar_contactos/agregar_contactos.component'; //quitar si se quiere usar fuera
+//Modal Components
+import { DialPadComponent } from './components/pages/operador/dialpad/dialpad.component';
+import { AgregarContactosComponent } from './components/pages/operador/agregar_contactos/agregar_contactos.component';
+import { EditarContactosComponent } from './components/pages/operador/editar_contactos/editar_contactos.component';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -25,7 +27,9 @@ import {FormsModule} from '@angular/forms';
   declarations: [
     AppComponent,
     LoginComponent,
-  //  AgregarContactosComponent,  //Quitar si se quiere usar fuera
+    DialPadComponent,
+    AgregarContactosComponent,
+    EditarContactosComponent,
     OperadorTemplateComponent
   ],
   imports: [
@@ -44,6 +48,7 @@ import {FormsModule} from '@angular/forms';
       ModalModule.forRoot(),
   ],
   providers: [UserService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialPadComponent,AgregarContactosComponent,EditarContactosComponent]
 })
 export class AppModule { }

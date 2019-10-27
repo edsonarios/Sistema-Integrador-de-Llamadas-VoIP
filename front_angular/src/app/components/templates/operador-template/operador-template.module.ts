@@ -20,9 +20,8 @@ import { GrabacionesComponent } from '../../pages/operador/grabaciones/grabacion
 import { CuentasComponent } from '../../pages/operador/cuentas/cuentas.component';
 
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
-
-//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -35,7 +34,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     FontAwesomeModule,
     AccordionModule,
     BsDropdownModule,
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+     ModalModule.forRoot(),
     // NgbModule
   ],
   declarations: [

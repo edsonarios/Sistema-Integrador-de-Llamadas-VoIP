@@ -4,6 +4,10 @@ import { Sala } from '../../../../models/sala';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+import { DialPadComponent } from '../../pages/operador/dialpad/dialpad.component';
+import {AgregarContactosComponent } from '../../pages/operador/agregar_contactos/agregar_contactos.component';
+
 @Component({
   selector: 'operador-template',
   templateUrl: './operador-template.component.html',
@@ -59,6 +63,12 @@ export class OperadorTemplateComponent implements OnInit {
   }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+  DialPadComponent(){
+    this.modalRef = this.modalService.show(DialPadComponent);
+  }
+  AgregarContactosComponent(){
+    this.modalRef = this.modalService.show(AgregarContactosComponent);
   }
    submit(){
     

@@ -1,5 +1,4 @@
-<head>
-	<!-- Bootstrap CSS -->
+<!--<head>
 	<style>
 			.close{
 					color: white;
@@ -12,7 +11,7 @@
 			background-color: lavender;
 	}
 	</style>
-</head>
+</head>-->
 
 <section class="dashboard">
 	<!-- *******primera columna******* -->
@@ -33,7 +32,7 @@
 			<button [routerLink]="['/Operador/Tracking']">
 				<i class="large material-icons md-48"  tooltip="Tracking" placement="right">location_on</i>
 			</button>
-			<button (click)="DialPad(template)">
+			<button (click)="DialPadComponent()">
 				<i class="large material-icons md-48"  tooltip="DialPad" placement="right">call</i>
 			</button>
 			<button (click)="settings()">
@@ -110,7 +109,7 @@
 			<li class="nav-item">
 				<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Conectado</a>
 			</li>
-			<li class="nav-item" (click)="openModal(addContacto)">
+			<li class="nav-item" (click)="AgregarContactosComponent()">
 			 <a class="nav-link" style="background-color: #96F047;cursor: pointer;" >Añadir Contacto</a>
 			</li>
 		</ul>
@@ -121,90 +120,6 @@
 	</div>
 </nav>
 		<router-outlet></router-outlet>
-		<!-- <ng-content  select="router-outlet"></ng-content>   -->
 	</div>
 </section>
 
-<!-- Template Modal Agregar -->
-<ng-template #addContacto>
- <div class="modal-header">
-			<h6 class="modal-title">AÑADIR CONTACTO</h6>
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"  (click)="modalRef.hide()">&times;</button>
-								</div>   
-										<div class="modal-body">
-								<div class="container ">
-								<form class="añadir_contact" [formGroup]="addForm" (ngSubmit)="addContact()">
-								<div class="row">
-																		<div class="col-sm-6 form-group">
-													<label for="nombre">NOMBRE</label>
-							<input type="text" formControlName="nombre" class="form-control" />
-													</div>
-								<div class="col-sm-6 form-group">
-														<label for="apellido">APELLIDO</label>
-												<input type="text" formControlName="apellido" class="form-control" />
-																		</div>
-																	</div>
-																		
-											<div class="row">
-																			<div class="col-md-4 form-group">
-																					<label for="alias">ALIAS</label>
-																					<input type="text" formControlName="alias" class="form-control" />  
-																			</div>
-												<div class="col-md-4 form-group">
-													<label for="telnumero">#/TELÉFONO</label>
-														<input type="text" formControlName="telnumero" class="form-control" />  
-														</div>
-													<div class="col-md-4 form-group">   
-													<label for="telnumero">TIPO</label>
-												<select class="form-control" id="inputGroupSelect01" >
-												<option selected>Elegir Tipo</option>
-												<option value="1">SIP</option>
-												<option value="2">IAX</option>
-								</select>                             
-						</div>
-					</div>         
-					<div class="row form-group">
-							<label for="descripcion">DESCRIPCIÓN</label>
-							<input type="text" formControlName="descripcion" class="form-control" />  
-					</div>          
-				</form>
-			</div>                    
-		</div>
-		<div class="modal-footer">
-		<button type="button" class="btn btn-danger btn-block"  (click)="modalRef.hide()">Cancelar</button>
-		<button type="button" class="btn btn-primary btn-block" data-dismiss="modal"  (click)="modalRef.hide()">Crear contacto</button>
-	</div>
-</ng-template>
-
-<!-- Template Modal DialPad -->
-<ng-template #template>
-	<div class="modal-header">
-		<h4 class="modal-title pull-left">DIALPAD</h4>
-		<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-			<span aria-hidden="true">&times;</span>
-		</button>
-	</div>
-	<div class="modal-body">
-		<p>Se ve feo pero funciona xD</p>
-		<div class="phone-demo">
-	<div class="dial-pad">
-		<a  class="one">1</a>
-		<a class="two">2</a>
-		<a class="three">3</a>
-		<br/>
-		<a class="four">4</a>
-		<a class="five">5</a>
-		<a class="six">6</a>
-		<br/>
-		<a  class="seven">7</a>
-		<a class="eight">8</a>
-		<a class="nine">9</a>
-		<br/>
-		<a >*</a>
-		<a  class="zero">0</a>
-		<a >#</a>
-	
-	</div>
-</div>
-	</div>
-</ng-template>
