@@ -14,6 +14,8 @@ import {AgregarContactosComponent } from '../../pages/operador/agregar_contactos
   styleUrls: ['../../../sass/main.scss']
 })
 export class OperadorTemplateComponent implements OnInit {
+public menu=0;
+
   user: User;
   public sala;
 
@@ -60,6 +62,15 @@ export class OperadorTemplateComponent implements OnInit {
       telnumero: ['', Validators.required],
       descripcion: ['', Validators.required]
     });
+  }
+  OpenMenu() {
+    if (this.menu==1) {
+      this.menu=0;
+    }
+    else{
+      this.menu=1;
+    }
+    
   }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
