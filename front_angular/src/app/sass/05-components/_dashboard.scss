@@ -100,56 +100,94 @@
 .c2-body {
   grid-area: c2-body;
 
-    .left-container {}
-        .menu-box {
-            margin-top: 10px;
-            background-color: white;
-            padding:20px;
-            border-radius:5px;
+.left-container {}
+    .menu-box {
+      margin-top: 10px;
+      background-color: white;
+      padding:20px;
+      border-radius:5px;
+    }
+    .menu-box-number {
+        width: 36px;
+        line-height: 22px;
+         text-align: center;
+         position: absolute;
+         top: 15px;
+         right: 15px;
+         -webkit-transition: all .3s;
+               transition: all .3s;
+         }
+         .menu-box-menu li{
+             height: 60px;
+             position: relative;                                     
+           }
+           .menu-box-tab {
+           text-align: left;
+             line-height: 60px;
+             display: block;
+             border-bottom: 1px solid #1f253d;
+            //box-shadow: 0px 28px 3px -28px black;
+            border-bottom-width: 1px;
+            -webkit-transition: background .2s;
+            transition: background .2s;
           }
-                .menu-box-number {
-                    width: 36px;
-                    line-height: 22px;
-                    text-align: center;
-                    position: absolute;
-                    top: 15px;
-                    right: 15px;
-                    -webkit-transition: all .3s;
-                    transition: all .3s;
+           .menu-box-lasttab {
+            text-align: left;
+              line-height: 60px;
+              display: block;
+              border-bottom-width: 1px;
+              -webkit-transition: background .2s;
+              transition: background .2s;
                 }
-                .menu-box-menu li{
-                    height: 60px;
-                    position: relative;                                     
-                }
-                .menu-box-tab {
-                  text-align: left;
-                    line-height: 60px;
-                    display: block;
-                    //border-bottom: 1px solid #1f253d;
-                    box-shadow: 0px 24px 3px -24px black;
-                    border-bottom-width: 1px;
-                    -webkit-transition: background .2s;
-                    transition: background .2s;
-                }
-                 .menu-box-lasttab {
-                  text-align: left;
-                    line-height: 60px;
-                    display: block;
-                    border-bottom-width: 1px;
-                    -webkit-transition: background .2s;
-                    transition: background .2s;
-                }
-                    .menu-box-tab:hover {
-                        //background: #ffffff;
-                       // border-top: 1px solid #1f253d;
-                        text-decoration: none;
+           .menu-box-tab:hover {
+               //background: #ffffff;
+              // border-top: 1px solid #1f253d;
+               text-decoration: none;
                     }
-                    .menu-box-lasttab:hover {
-                        //background: #ffffff;
-                       // border-top: 1px solid #1f253d;
-                        text-decoration: none;
+             .menu-box-lasttab:hover {
+                 //background: #ffffff;
+                // border-top: 1px solid #1f253d;
+                 text-decoration: none;
                     }       
 }
+.SalaForm{
+  margin-top: 10px;
+  border-radius: 4px;
+  background-color:#dee0e4;
+  //border: 1px solid black;
+  
+  button{
+    color:white;
+    border-radius:10px;
+    height: 40px;
+    width: auto;
+    padding: 10px;
+
+  }
+  .SalaForm-header{
+
+  }
+  .SalaForm-content{
+    .form-group{
+     margin:0px 30px 0px 30px;
+    }
+  }
+  .SalaForm-footer{
+     padding-top: 20px;
+     padding-bottom: 20px;
+     padding-left: 10%;
+     width: auto;
+     align-items: center;
+      .Cancel{
+      background-color:#f04747;
+    }
+    .CrearSala{
+      background-color:#223a59;
+    }
+  }
+
+}
+
 //inicio columna 2 footer__________________________________
 .c2-footer {
   grid-area: c2-footer;

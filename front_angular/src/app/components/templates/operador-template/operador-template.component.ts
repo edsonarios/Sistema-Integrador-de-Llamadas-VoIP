@@ -15,7 +15,7 @@ import {AgregarContactosComponent } from '../../pages/operador/agregar_contactos
 })
 export class OperadorTemplateComponent implements OnInit {
 public menu=0;
-
+public formSala=0;
   user: User;
   public sala;
 
@@ -64,6 +64,9 @@ public menu=0;
     });
   }
   OpenMenu() {
+    if (this.formSala==1) {
+      this.formSala=0;
+    }
     if (this.menu==1) {
       this.menu=0;
     }
@@ -113,6 +116,14 @@ public menu=0;
     window.alert('pendiente plox');
   }
   addSala() {
-    window.alert('pendiente , nueva ventana + ruta');
+   if (this.menu==1) {
+     this.menu=0;
+   }
+   if (this.formSala==1) {
+     this.formSala=0;
+   }
+   else{
+     this.formSala=1;
+   }
   }
 }
