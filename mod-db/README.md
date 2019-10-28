@@ -32,6 +32,9 @@ setupDabase(config).then(db => {
 
   sudo echo "alias cpL='pushd /etc/;sudo cp odbcinst.ini /home/ubuntu/Sistema-Integrador-de-Llamadas-VoIP/mod-db/etc/ -rf;sudo cp odbc.ini /home/ubuntu/Sistema-Integrador-de-Llamadas-VoIP/mod-db/etc/ -rf;cd asterisk/;sudo cp * /home/ubuntu/Sistema-Integrador-de-Llamadas-VoIP/mod-db/etc-asterisk/ -rf;popd'" >> ~/.bash_aliases
 
+  ### Archivos /etc/asterisk/
+  root manager.d 
+
   ### Archivos modificados
     /etc/asterisk/res_odbc.conf
     /etc/asterisk/res_pgsql.conf
@@ -83,3 +86,10 @@ setupDabase(config).then(db => {
 
   ### Crear certificado SSL
   ./ast_tls_cert -C monitoreafacil.com -O "My Organization" -d /etc/asterisk/keys
+
+  ## Varios
+  ### Copiar archivos de monitor asterisk a /ubuntu/home/ listo para descargar
+  sudo cp -rf /var/spool/asterisk/monitor /home/ubuntu/;sudo chown ubuntu: monitor;sudo chown ubuntu: monitor/*
+  
+  ### Descargar mediante ssh
+  scp -i "C:\Users\edson\Desktop\Edson\Proyectos\asterisk_patelecom.pem" -r ubuntu@18.216.202.26:/home/ubuntu/monitor/ monitor
