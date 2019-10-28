@@ -44,4 +44,8 @@ export class AgregarContactosComponent implements OnInit {
       return;
     }
   }
+
+  cerrar(e) {
+    e.close();
+  }
 }
