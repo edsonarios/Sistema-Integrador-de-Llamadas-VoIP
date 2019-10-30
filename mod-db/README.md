@@ -1,5 +1,11 @@
+## Table of Contents
+- [Instalar Asterisk](#instalar-asterisk)
+- [Crear certificado SSL](#crear-certificado-ssl)
+- [Instalar Postgresql](#instalar-postgresql)
+- [Iniciar la base de datos con Node.js](#iniciar-la-base-de-datos-con-nodejs)
+- [Crear alias para el Backend](#crear-alias-para-el-backend)
+- [Docs](#docs)
 ## Instalar Asterisk
-
 Descargar ASTERISK
 
 * [Asterisk stable version](https://www.asterisk.org/downloads/asterisk/all-asterisk-versions)
@@ -35,7 +41,9 @@ Para colocar el **idioma** a español se debe seleccionar los siguientes módulo
 
 ```
 Core Sound Packages
-	[*] CORE-SOUNDS-ES-ULAW                                                                   [*] CORE-SOUNDS-ES-ALAW                                                                   [*] CORE-SOUNDS-ES-GSM  
+	[*] CORE-SOUNDS-ES-ULAW
+	[*] CORE-SOUNDS-ES-ALAW
+	[*] CORE-SOUNDS-ES-GSM  
 ```
 
 > **Nota** también seleccionar `CORE-SOUNDS-EN-XXX` **ulaw, alaw, gsm**
@@ -143,3 +151,7 @@ sudo echo "alias cpL='pushd /etc/;sudo cp odbcinst.ini <ruta_git>/Sistema-Integr
 > **NOTA**
 >
 > Para crear los alias pueden usar  `>> ~/.bash_aliases` si usan la t**erminal por defecto** del sistema en caso que usen **Oh My ZSH** deben usar `>> ~/.zshrc`
+
+## Docs
+
+* [Refactor DB Asterisk](https://github.com/edsonarios/Sistema-Integrador-de-Llamadas-VoIP/blob/master/mod-db/Docs/DB%20Refactor.md)

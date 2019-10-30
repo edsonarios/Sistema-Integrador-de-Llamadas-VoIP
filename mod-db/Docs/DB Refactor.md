@@ -1,8 +1,7 @@
 # Refactor DB Asterisk
 
 ### Table of Contents
-
-  - [CDR Table](#cdr-table)
+  * [CDR Table](#cdr-table)
   * [SIP Table](#sip-table)
   * [IAX Table](#iax-table)
   * [Contacts Table](#contacts-table)
@@ -14,7 +13,7 @@
 
 ### CDR Table
 
-```mariadb
+```sql
 CREATE TABLE cdr (
     accountcode VARCHAR(20), 
     src VARCHAR(80), 
@@ -44,7 +43,7 @@ CREATE TABLE cdr (
 
 Valores para configurar los **SIP**
 
-```mariadb
+```sql
 CREATE TYPE type_values AS ENUM ('friend', 'user', 'peer');
 CREATE TYPE sip_transport_values AS ENUM ('udp', 'tcp', 'tls', 'ws', 'wss', 'udp,tcp', 'tcp,udp');
 CREATE TYPE sip_dtmfmode_values AS ENUM ('rfc2833', 'info', 'shortinfo', 'inband', 'auto');
@@ -58,7 +57,7 @@ CREATE TYPE sip_callingpres_values AS ENUM ('allowed_not_screened', 'allowed_pas
 
 Tabla para los **SIP**
 
-```mariadb
+```sql
 CREATE TABLE sippeers (
     id SERIAL NOT NULL, 
     name VARCHAR(40) NOT NULL, 
@@ -156,7 +155,7 @@ CREATE TABLE sippeers (
 
 ### IAX Table
 
-```mariadb
+```sql
 CREATE TABLE iaxfriends (
     id SERIAL NOT NULL, 
     name VARCHAR(40) NOT NULL, 
@@ -211,7 +210,7 @@ CREATE TABLE iaxfriends (
 
 ### Contacts Table
 
-```mariadb
+```sql
 CREATE TABLE ps_contacts (
     id VARCHAR(40) NOT NULL, 
     uri VARCHAR(40), 
@@ -223,7 +222,7 @@ CREATE TABLE ps_contacts (
 
 ### Extensions table
 
-```mariadb
+```sql
 CREATE TABLE extensions (
     id BIGSERIAL NOT NULL, 
     context VARCHAR(40) NOT NULL, 
@@ -239,7 +238,7 @@ CREATE TABLE extensions (
 
 ### Queues Table
 
-```mariadb
+```sql
 CREATE TYPE queue_autopause_values AS ENUM ('yes', 'no', 'all');
 CREATE TYPE queue_strategy_values AS ENUM ('ringall', 'leastrecent', 'fewestcalls', 'random', 'rrmemory', 'linear', 'wrandom', 'rrordered');
 
@@ -305,7 +304,7 @@ CREATE TABLE queues (
 
 ### Queue Members Table
 
-```mariadb
+```sql
 CREATE TABLE queue_members (
     queue_name VARCHAR(80) NOT NULL, 
     interface VARCHAR(80) NOT NULL, 
@@ -320,8 +319,7 @@ CREATE TABLE queue_members (
 
 ### Voicemail Messages Table
 
-```mariadb
-
+```sql
 CREATE TABLE voicemail_messages (
     dir VARCHAR(255) NOT NULL, 
     msgnum INTEGER NOT NULL, 
@@ -341,7 +339,7 @@ CREATE TABLE voicemail_messages (
 
 ### Voicemail Table
 
-```mariadb
+```sql
 CREATE TABLE voicemail (
     uniqueid SERIAL NOT NULL, 
     context VARCHAR(80) NOT NULL, 
@@ -380,4 +378,3 @@ CREATE TABLE voicemail (
     PRIMARY KEY (uniqueid)
 );
 ```
-
