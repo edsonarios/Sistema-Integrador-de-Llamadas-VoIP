@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./sass/main.scss']
+	selector: 'app-root',
+	templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'voip';
+	title = 'voip';
 }

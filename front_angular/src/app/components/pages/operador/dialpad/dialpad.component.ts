@@ -3,15 +3,13 @@ import { Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
-  selector: 'dialpad',
-  templateUrl: './dialpad.component.html',
-  styleUrls: ['../../../../sass/main.scss']
+	selector: 'dialpad',
+	templateUrl: './dialpad.component.html'
 })
 export class DialPadComponent implements OnInit {
-  constructor(private router: Router,
-    private modalService: BsModalService, ) {
-    console.log('Dialpad se cargo Correctamente');
-  }
+	constructor(private router: Router, private modalService: BsModalService) {
+		console.log('Dialpad se cargo Correctamente');
+	}
 
-  ngOnInit() { }
+	ngOnInit() {}
 }

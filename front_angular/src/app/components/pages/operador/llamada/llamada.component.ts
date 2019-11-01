@@ -3,15 +3,11 @@ import { Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
-  selector: 'llamada',
-  templateUrl: './llamada.component.html',
-  styleUrls: ['../../../../sass/main.scss']
+	selector: 'llamada',
+	templateUrl: './llamada.component.html'
 })
 export class LlamadaComponent implements OnInit {
-  constructor(private router: Router,
-  	private  bsModalRef: BsModalRef,) {
-    
-  }
+	constructor(private router: Router, private bsModalRef: BsModalRef) {}
 
-  ngOnInit() {}
+	ngOnInit() {}
 }

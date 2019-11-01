@@ -9,17 +9,11 @@
       <div *ngFor="let n of sala; let i = index">
         <button
           type="button"
-          (click)="
-            datosSala(
-              sala[i]['usuarioId'],
-              sala[i]['nombreSala'],
-              sala[i]['descripcion']
-            )
-          "
+          (click)="datosSala(sala[i]['usuarioId'], sala[i]['nombreSala'], sala[i]['descripcion'])"
           tooltip="{{ sala[i]['nombreSala'] }}"
           placement="right"
         >
-          S{{ sala[i]["usuarioId"] }}
+          S{{ sala[i]['usuarioId'] }}
         </button>
       </div>
       <button type="button" (click)="addSala()">+</button>
@@ -27,28 +21,13 @@
 
     <div class="options">
       <button [routerLink]="['/Operador/Tracking']">
-        <i
-          class="large material-icons md-48"
-          tooltip="Tracking"
-          placement="right"
-          >location_on</i
-        >
+        <i class="large material-icons md-48" tooltip="Tracking" placement="right">location_on</i>
       </button>
       <button (click)="DialPadComponent()">
-        <i
-          class="large material-icons md-48"
-          tooltip="DialPad"
-          placement="right"
-          >call</i
-        >
+        <i class="large material-icons md-48" tooltip="DialPad" placement="right">call</i>
       </button>
       <button (click)="settings()">
-        <i
-          class="large material-icons md-48"
-          tooltip="Opciones"
-          placement="right"
-          >settings</i
-        >
+        <i class="large material-icons md-48" tooltip="Opciones" placement="right">settings</i>
       </button>
     </div>
   </div>
@@ -59,15 +38,9 @@
 
     <div class="btn-group c2-header">
       <button type="button" class="btn" (click)="OpenMenu()">
-        {{ user["correo"] }}
-        <span *ngIf="menu == 0"
-          ><i class="large material-icons md-24">keyboard_arrow_down</i></span
-        >
-        <span *ngIf="menu == 1"
-          ><i class="large material-icons md-24" style="color:red;"
-            >close</i
-          ></span
-        >
+        {{ user['correo'] }}
+        <span *ngIf="menu == 0"><i class="large material-icons md-24">keyboard_arrow_down</i></span>
+        <span *ngIf="menu == 1"><i class="large material-icons md-24" style="color:red;">close</i></span>
       </button>
     </div>
     <!-- ********contenido******** -->
@@ -128,20 +101,12 @@
           <form [formGroup]="addForm" (ngSubmit)="addContact()">
             <div class="row form-group">
               <label for="descripcion">Nombre :</label>
-              <input
-                type="text"
-                formControlName="nombre"
-                class="form-control"
-              />
+              <input type="text" formControlName="nombre" class="form-control" />
             </div>
 
             <div class="row form-group">
               <label for="descripcion">Descripcion :</label>
-              <input
-                type="text"
-                formControlName="descripcion"
-                class="form-control"
-              />
+              <input type="text" formControlName="descripcion" class="form-control" />
             </div>
           </form>
         </div>
@@ -199,36 +164,20 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" [routerLink]="['/Operador/Contactos']"
-              >Agenda <span class="sr-only">(current)</span></a
-            >
+            <a class="nav-link" [routerLink]="['/Operador/Contactos']">Agenda <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link">Todos</a>
           </li>
 
           <li class="nav-item">
-            <a
-              class="nav-link disabled"
-              href="#"
-              tabindex="-1"
-              aria-disabled="true"
-              >Conectado</a
-            >
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Conectado</a>
           </li>
           <li class="nav-item" (click)="AgregarContactosComponent()">
-            <a
-              class="nav-link"
-              style="background-color: #96F047;cursor: pointer;"
-              >Añadir Contacto</a
-            >
+            <a class="nav-link" style="background-color: #96F047;cursor: pointer;">Añadir Contacto</a>
           </li>
         </ul>
-        <form
-          class="form-inline my-2 my-lg-0"
-          [routerLink]="['/Login']"
-          style="cursor: pointer"
-        >
+        <form class="form-inline my-2 my-lg-0" [routerLink]="['/Login']" style="cursor: pointer">
           <i class="large material-icons md-24">input</i>
           <a class="nav-link">Salir</a>
         </form>
