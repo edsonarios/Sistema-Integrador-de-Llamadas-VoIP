@@ -38,7 +38,9 @@
 					<td data-title="ID">{{ i + 1 }}</td>
 					<td data-title="Name">{{ Contactos[i]['Nombre'] }}</td>
 					<td data-title="Status">
-						<span style="color: green" *ngIf="Contactos[i]['Estado'] == 'Conectado'">{{ Contactos[i]['Estado'] }}</span>
+						<span style="color: green" *ngIf="Contactos[i]['Estado'] == 'Conectado'">{{
+							Contactos[i]['Estado']
+						}}</span>
 						<span style="color: red" *ngIf="Contactos[i]['Estado'] == 'Desconectado'">{{
 							Contactos[i]['Estado']
 						}}</span>
@@ -47,30 +49,13 @@
 						{{ Contactos[i]['Numero'] }}
 					</td>
 					<td>
+						<i class="v-icon-phone" (click)="LlamadaComponent()" tooltip="Llamar"></i>
 						<i
-							class="large material-icons md-12"
-							tooltip="Llamar"
-							placement="top"
-							style="color: #70F047;cursor: pointer;"
-							(click)="LlamadaComponent()"
-							>call</i
-						>
-						<i
-							class="large material-icons md-12"
+							class="v-icon-pencil-edit-button"
 							tooltip="Editar"
-							placement="top"
-							style="color: #22849C;cursor: pointer;"
 							(click)="EditarContactoComponent()"
-							>edit</i
-						>
-						<i
-							class="large material-icons md-12"
-							tooltip="eliminar"
-							placement="top"
-							style="color: #F7200E;cursor: pointer;"
-							(click)="Eliminar(EliminarTemplate)"
-							>face</i
-						>
+						></i>
+						<i class="v-icon-usersdel" tooltip="Eliminar" (click)="Eliminar(EliminarTemplate)"></i>
 					</td>
 				</tr>
 			</tbody>
@@ -89,8 +74,15 @@
 		Esta seguro que desea eliminar este contacto?
 	</div>
 	<div class="modal-footer">
-		<button type="button" class="btn btn-danger btn-block" (click)="modalRef.hide()">Aceptar</button>
-		<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" (click)="modalRef.hide()">
+		<button type="button" class="btn btn-danger btn-block" (click)="modalRef.hide()">
+			Aceptar
+		</button>
+		<button
+			type="button"
+			class="btn btn-primary btn-block"
+			data-dismiss="modal"
+			(click)="modalRef.hide()"
+		>
 			Cancelar
 		</button>
 	</div>

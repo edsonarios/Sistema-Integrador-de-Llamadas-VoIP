@@ -10,12 +10,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { OperadorTemplateRoutes } from './operador-template.routing';
 
-import { ContactosComponent } from '../../pages/operador/contactos/contactos.component';
-import { HistorialLlamadasComponent } from '../../pages/operador/historial_llamadas/historial_llamadas.component';
-import { TrackingComponent } from '../../pages/operador/tracking/tracking.component';
-import { RolesComponent } from '../../pages/operador/roles/roles.component';
-import { GrabacionesComponent } from '../../pages/operador/grabaciones/grabaciones.component';
-import { CuentasComponent } from '../../pages/operador/cuentas/cuentas.component';
+import { ContactosComponent } from '@operador/contactos/contactos.component';
+import { HistorialLlamadasComponent } from '@operador/historial_llamadas/historial_llamadas.component';
+import { TrackingComponent } from '@operador/tracking/tracking.component';
+import { RolesComponent } from '@operador/roles/roles.component';
+import { GrabacionesComponent } from '@operador/grabaciones/grabaciones.component';
+import { CuentasComponent } from '@operador/cuentas/cuentas.component';
 
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';

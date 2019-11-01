@@ -1,11 +1,13 @@
-//SETTINGS
-//1. Settings**. Declararemos las variables
-@import './00-settings/fonts';
-@import './00-settings/colors';
-@import './00-settings/dimensions';
+/*=============================================
+=                   SETTINGS                  =
+=============================================*/
 
-//TOOLS
-//2. Tools**. Los mixins y funciones.
+@import '00-settings/settings';
+
+/*=============================================
+=                   TOOLS                     =
+=============================================*/
+
 @import './01-tools/tools';
 @import './01-tools/functions';
 @import './01-tools/mixins';
@@ -31,9 +33,3 @@
 @import './05-components/modaladdcontact';
 //UTILITIES
 //7 Utilities**. Para finalizar, en esta carpeta colocaríamos utilidades que sobrescriban estilos significativos (incompatibilidades con navegadores)
-@import './06-utilities/utilities';
-// @import './06-utilities/font';
-@import './06-utilities/colors';
-
-// @import '../../../node_modules/bootstrap/dist/css/bootstrap-grid.min.css';
-// @import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
