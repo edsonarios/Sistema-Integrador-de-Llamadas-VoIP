@@ -1,11 +1,11 @@
 <section class="dashboard">
 	<!-- *******primera columna******* -->
-	<div class="dashboard__1col col1">
-		<div class="logo">
+	<div class="col1">
+		<div class="c1-logo">
 			<button type="button" [routerLink]="['/Operador/Contactos']">D</button>
 		</div>
 
-		<div class="sala">
+		<div class="c1-sala">
 			<div *ngFor="let n of sala; let i = index">
 				<button
 					type="button"
@@ -19,7 +19,7 @@
 			<button type="button" (click)="addSala()">+</button>
 		</div>
 
-		<div class="options">
+		<div class="c1-options">
 			<button [routerLink]="['/Operador/Tracking']">
 				<i class="v-icon-pin" tooltip="Tracking" placement="right"></i>
 			</button>
