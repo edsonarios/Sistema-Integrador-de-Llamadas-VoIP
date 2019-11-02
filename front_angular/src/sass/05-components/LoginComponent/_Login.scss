@@ -1,0 +1,102 @@
+/*=============================================
+=                   LOGIN                     =
+=============================================*/
+
+.v-login {
+	margin: 0 auto;
+	width: 528px;
+	max-width: 480px;
+}
+.v-alert-login {
+	width: 100%;
+	background-color: $colorBlueCurrent;
+	text-align: center;
+	font-size: 18px;
+	font-weight: 400;
+	border-radius: 4px;
+	margin-bottom: 40px;
+	color: white;
+	padding: 1em 0;
+}
+.login {
+	font-family: $fontPrimary;
+	height: 100vh;
+	display: grid;
+	grid-template-rows: 56px auto 56px;
+	&__input {
+		background-color: #fff;
+		border: thin solid darken($colorLead, 5);
+		padding: 0 1em;
+		border-radius: 4px;
+		transition: border 0.3s ease-in;
+		font-size: 1rem;
+		&:focus {
+			border: thin solid darken($colorLead, 10);
+		}
+	}
+}
+
+.login__header,
+.login__footer {
+	color: $colorBlue;
+	background: $colorLead;
+	display: flex;
+	align-items: center;
+}
+
+.login__footer {
+	text-align: center;
+}
+
+.login__body {
+	background: url(assets/bg.png);
+	background-size: cover;
+	// background-attachment: fixed;
+	width: 100%;
+	background-position: 0% 90%;
+	display: flex;
+	align-items: center;
+}
+
+.label__left {
+	text-align: right;
+	font-size: 14px;
+	font-weight: bold;
+	color: $colorBlue;
+	transition: color 0.3s ease;
+	&:hover {
+		text-decoration: none;
+		color: darken($colorBlue, 5);
+	}
+}
+
+.login__login {
+	background-color: $colorLead;
+	padding: 1.5em;
+	border-radius: 4px;
+	font-size: 14px;
+	box-shadow: 0 3px 6px rgba(black, 0.16), 0 3px 6px rgba(black, 0.23);
+	&--title {
+		color: $colorBlue;
+		text-align: center;
+	}
+	&--form {
+		color: $colorBlue;
+		display: grid;
+		row-gap: 16px;
+	}
+	&--btn {
+		padding: 0.7rem 0;
+		width: 100%;
+		background: $colorBlue;
+		border-radius: 4px;
+		color: #fff;
+		font-size: 1em;
+		border: thin solid transparent;
+		transition: background 0.3s ease;
+		outline: none;
+		&:hover {
+			background-color: darken($colorBlue, 5);
+		}
+	}
+}

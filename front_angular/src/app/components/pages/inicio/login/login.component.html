@@ -1,56 +1,61 @@
-<section class="login">
+<main class="login">
 	<div class="login__header">
-		Patelecom
+		<div class="v-container">
+			<h4 class="fz28 fregular">Patelecom</h4>
+		</div>
 	</div>
-
-	<div class="login__body ">
-		<form class="login__login" [formGroup]="loginForm" (ngSubmit)="enviar()">
-			<div class="login__login--titulo">
-				<h2>INICIAR SESIÓN</h2>
-			</div>
-
-			<div class="login__login--form">
-				<div *ngIf="wrong" class="alert alert-danger" role="alert">
-					Error en password o usuario verifique sus datos
+	<div class="login__body">
+		<div class="v-container">
+			<div class="v-login">
+				<div class="v-alert-login" *ngIf="alertShow">
+					Error en contraseña o usuario verifique sus datos
 				</div>
-				<div class="form-group">
-					<label class="login__login--label" for="username">Usuario/Email</label>
-					<input
-						type="text"
-						formControlName="username"
-						class="form-control"
-						[ngClass]="{ 'is-invalid': submitted && f.username.errors }"
-					/>
-					<div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-						<div *ngIf="f.username.errors.required">Username is required</div>
+				<form class="login__login" [formGroup]="loginForm" (ngSubmit)="enviar()">
+					<div class="login__login--form">
+						<span class="login__login--title fs26">INICIAR SESIÓN</span>
+						<!-- <div *ngIf="wrong" class="alert alert-danger" role="alert">
+									Error en password o usuario verifique sus datos
+								</div> -->
+						<div class="v-form-group">
+							<label class="login__login--label" for="username">Usuario/Email</label>
+							<input
+								class="login__input"
+								type="text"
+								formControlName="username"
+								[ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+							/>
+							<div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+								<div *ngIf="f.username.errors.required">Username is required</div>
+							</div>
+						</div>
+						<div class="v-form-group">
+							<label class="login__login--label" for="password">Contraseña</label>
+							<input
+								type="password"
+								formControlName="password"
+								class="login__input"
+								formControlName="password"
+								[ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+							/>
+							<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+								<div *ngIf="f.password.errors.required">Password is required</div>
+							</div>
+						</div>
+						<div href="/" class="label__left fbold" (click)="alertShow = !alertShow">
+							¿ Recuperar contraseña ?
+						</div>
+						<button class="login__login--btn">
+							<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+							Iniciar Sesión
+						</button>
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="login__login--label" for="password">Password</label>
-					<input
-						type="password"
-						formControlName="password"
-						class="form-control"
-						[ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-					/>
-					<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-						<div *ngIf="f.password.errors.required">Password is required</div>
-					</div>
-					<label class="label-left">
-						¿Olvidaste tu Contraseña?
-					</label>
-				</div>
-				<div class="form-group">
-					<button [disabled]="loading" class="btn btn-primary login__login--btn">
-						<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-						Login
-					</button>
-				</div>
+				</form>
 			</div>
-		</form>
+		</div>
 	</div>
-
-	<footer class="login__footer">
-		2019 Patelecom
-	</footer>
-</section>
+	<div class="login__footer">
+		<footer class="container">
+			<h4 class="fs15 fbold">{{ year }} Patelecom</h4>
+		</footer>
+	</div>
+</main>

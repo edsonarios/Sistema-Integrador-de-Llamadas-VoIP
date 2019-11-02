@@ -16,11 +16,14 @@ import { stringify } from 'querystring';
 export class LoginComponent implements OnInit {
 	public wrong = false;
 	public identity: Object;
+	public year: any;
 	loginForm: FormGroup;
 	loading = false;
 	submitted = false;
-	returnUrl: string;
+	returnUrl: String;
 	user: User;
+	public alertShow: Boolean = false;
+
 	constructor(
 		private router: Router,
 		public userService: UserService,
@@ -29,6 +32,7 @@ export class LoginComponent implements OnInit {
 
 	ngOnInit() {
 		console.log('Componente formulario cargado');
+		this.year = new Date().getFullYear();
 		// this.mostrar()
 		this.loginForm = this.formBuilder.group({
 			username: ['', Validators.required],

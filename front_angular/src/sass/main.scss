@@ -24,12 +24,11 @@
 //5. Object**. Aquí sí, incorporaríamos las clases y colocaríamos todo lo relacionado con el layout.
 @import './04-objects/objects';
 
-//COMPONENTS
-//6. Components** : Todo lo que afecte a los diferentes bloques de nuestro documento, navegador, botones, recuadros de utilidades, cabecera, buscador,botones sociales, etc., debería de ir en esta carpeta. Dependiendo de las necesidades que tenga el proyecto, la carpeta Components tendrá más o menos ajustes, como es lógico.
+/*=============================================
+=                   COMPONENTS                =
+=============================================*/
+
 @import './05-components/components';
-@import './05-components/Login';
-@import './05-components/dashboard';
-@import './05-components/dialpad';
-@import './05-components/modaladdcontact';
+
 //UTILITIES
 //7 Utilities**. Para finalizar, en esta carpeta colocaríamos utilidades que sobrescriban estilos significativos (incompatibilidades con navegadores)

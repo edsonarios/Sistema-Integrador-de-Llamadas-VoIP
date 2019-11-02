@@ -1,15 +1,14 @@
 *,
 *:after,
 *:before {
-  padding: 0;
-  margin: 0;
-  outline: 0px solid;
-  box-sizing: border-box;
-
-  &:hover,
-  &:active,
-  &:focus,
-  &:visited {
-    outline: 0px solid;
-  }
+	padding: 0;
+	margin: 0;
+	outline: none;
+	box-sizing: border-box;
+	&:hover,
+	&:active,
+	&:focus,
+	&:visited {
+		outline: none;
+	}
 }

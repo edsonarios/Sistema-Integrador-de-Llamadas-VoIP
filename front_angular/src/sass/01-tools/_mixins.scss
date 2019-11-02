@@ -1,65 +1,29 @@
-@mixin font-size($size) {
-    font-size: $size;
-    font-size: calculate-rem($size);
-  }
-  
-  @function str-replace($string, $search, $replace: "") {
-    $index: str-index($string, $search);
-  
-    @if $index {
-      @return str-slice($string, 1, $index - 1) + $replace +
-        str-replace(
-          str-slice($string, $index + str-length($search)),
-          $search,
-          $replace
-        );
-    }
-  
-    @return $string;
-  }
-  
-  // =============================================================================
-  // Font Face
-  // =============================================================================
-  
-  @mixin font-face(
-    $name,
-    $path,
-    $weight: null,
-    $style: null,
-    $exts: eot woff2 woff ttf svg
-  ) {
-    $src: null;
-  
-    $extmods: (
-      eot: "?",
-      svg: "#" + str-replace($name, " ", "_")
-    );
-  
-    $formats: (
-      otf: "opentype",
-      ttf: "truetype"
-    );
-  
-    @each $ext in $exts {
-      $extmod: if(
-        map-has-key($extmods, $ext),
-        $ext + map-get($extmods, $ext),
-        $ext
-      );
-      $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
-      $src: append(
-        $src,
-        url(quote($path + "." + $extmod)) format(quote($format)),
-        comma
-      );
-    }
-  
-    @font-face {
-      font-family: quote($name);
-      font-style: $style;
-      font-weight: $weight;
-      src: $src;
-    }
-  }
-  
+// =============================================================================
+// FONTS SIZES
+// =============================================================================
+
+$sizeFonts: (
+	fs12: 12px,
+	fs15: 15px,
+	fs26: 26px,
+	fs28: 28px
+);
+
+@each $element, $size in $sizeFonts {
+	.#{$element} {
+		font-size: $size;
+	}
+}
+
+$fontWeight: (
+	fnormal: 300,
+	fregular: 400,
+	fsemibold: 500,
+	fbold: 600
+);
+
+@each $element, $weight in $fontWeight {
+	.#{$element} {
+		font-weight: $weight;
+	}
+}

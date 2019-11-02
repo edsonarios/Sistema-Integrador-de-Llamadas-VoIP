@@ -1,11 +1,11 @@
 <section class="dashboard">
 	<!-- *******primera columna******* -->
-	<div class="col1">
-		<div class="c1-logo">
+	<div class="dashboard__1col col1">
+		<div class="logo">
 			<button type="button" [routerLink]="['/Operador/Contactos']">D</button>
 		</div>
 
-		<div class="c1-sala">
+		<div class="sala">
 			<div *ngFor="let n of sala; let i = index">
 				<button
 					type="button"
@@ -19,7 +19,7 @@
 			<button type="button" (click)="addSala()">+</button>
 		</div>
 
-		<div class="c1-options">
+		<div class="options">
 			<button [routerLink]="['/Operador/Tracking']">
 				<i class="v-icon-pin" tooltip="Tracking" placement="right"></i>
 			</button>
@@ -33,17 +33,15 @@
 	</div>
 
 	<!-- *******segunda columna******* -->
-	<div class="col2">
+	<div class="dashboard__info col2">
 		<!-- ********menu desplegable******** -->
 		<div class="btn-group c2-header">
 			<button type="button" class="btn" (click)="OpenMenu()">
 				{{ user['correo'] }}
-				<span *ngIf="menu == 0">
-						<i class="v-icon-arrow-pointing-down" tooltip="Opciones" placement="right"></i>
-				</span>
-				<span *ngIf="menu == 1">
-					<!-- Aqui estaba un Icono de Flecha hacia abajo -->
-				</span>
+				<span *ngIf="menu == 0"><i class="large material-icons md-24">keyboard_arrow_down</i></span>
+				<span *ngIf="menu == 1"
+					><i class="large material-icons md-24" style="color:red;">close</i></span
+				>
 			</button>
 		</div>
 		<!-- ********contenido******** -->
@@ -57,7 +55,7 @@
 							<a class="menu-box-tab" [routerLink]="['/Operador/Historial']"
 								>Historial de Llamada
 								<div class="menu-box-number">
-									<i class="v-icon-history" tooltip="Opciones" placement="right"></i>
+									<i class="large material-icons md-24">perm_phone_msg</i>
 								</div>
 							</a>
 						</li>
@@ -65,33 +63,33 @@
 							<a class="menu-box-tab" [routerLink]="['/Operador/Grabaciones']"
 								>Grabaciones
 								<div class="menu-box-number">
-									<i class="v-icon-record" tooltip="Opciones" placement="right"></i>
-								</div>
-							</a>
+									<i class="large material-icons md-24">mic</i>
+								</div></a
+							>
 						</li>
 						<li>
 							<a class="menu-box-tab" [routerLink]="['/Operador/Tracking']"
 								>Tracking
 								<div class="menu-box-number">
-									<i class="v-icon-tracking" tooltip="Opciones" placement="right"></i>
-								</div>
-							</a>
+									<i class="large material-icons md-24">map</i>
+								</div></a
+							>
 						</li>
 						<li>
 							<a class="menu-box-tab" [routerLink]="['/Operador/Cuentas']"
 								>Cuentas
 								<div class="menu-box-number">
-									<i class="v-icon-user-silhouette" tooltip="Opciones" placement="right"></i>
-								</div>
-							</a>
+									<i class="large material-icons md-24">account_box</i>
+								</div></a
+							>
 						</li>
 						<li>
 							<a class="menu-box-lasttab" [routerLink]="['/Operador/Roles']"
 								>Roles
 								<div class="menu-box-number">
-									<i class="v-icon-support" tooltip="Opciones" placement="right"></i>
-								</div>
-							</a>
+									<i class="large material-icons md-24">people_alt</i>
+								</div></a
+							>
 						</li>
 					</ul>
 				</div>
@@ -133,17 +131,17 @@
 			</div>
 			<div class="c2-microfono">
 				<button>
-					<i class="v-icon-microphone" tooltip="Opciones" placement="right"></i>
+					<i class="fa fa-microphone" aria-hidden="true"></i>
 				</button>
 			</div>
 			<div class="c2-audio">
 				<button>
-					<i class="v-icon-support" tooltip="Opciones" placement="right"></i>
+					<i class="fa fa-headphones" aria-hidden="true"></i>
 				</button>
 			</div>
 			<div class="c2-señal">
 				<button>
-					<i class="v-icon-wifi" tooltip="Opciones" placement="right"></i>
+					<i class="fa fa-wifi" aria-hidden="true"></i>
 				</button>
 			</div>
 		</div>
