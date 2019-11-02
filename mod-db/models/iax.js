@@ -1,10 +1,10 @@
-'use strict'
+'use strict';
 
-const Sequelize = require('sequelize')
-const setupDatabase = require('../lib/db')
+const Sequelize = require('sequelize');
+const setupDatabase = require('../lib/db');
 
-module.exports = function setupIaxModel (config) {
-  const sequelize = setupDatabase(config)
+module.exports = function setupIaxModel(config) {
+  const sequelize = setupDatabase(config);
 
   return sequelize.define('iax', {
     name: {
@@ -31,7 +31,7 @@ module.exports = function setupIaxModel (config) {
       type: Sequelize.STRING,
       allowNull: true
     },
-    disallow:{
+    disallow: {
       type: Sequelize.STRING,
       allowNull: true
     },
@@ -39,6 +39,5 @@ module.exports = function setupIaxModel (config) {
       type: Sequelize.STRING,
       allowNull: true
     }
-    
-  })
-}
+  });
+};

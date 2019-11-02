@@ -1,10 +1,10 @@
-'use strict'
+'use strict';
 
-const Sequelize = require('sequelize')
-const setupDatabase = require('../lib/db')
+const Sequelize = require('sequelize');
+const setupDatabase = require('../lib/db');
 
-module.exports = function setupVoiceMailModel (config) {
-  const sequelize = setupDatabase(config)
+module.exports = function setupVoiceMailModel(config) {
+  const sequelize = setupDatabase(config);
 
   return sequelize.define('voicemail', {
     uniqueid: {
@@ -107,5 +107,5 @@ module.exports = function setupVoiceMailModel (config) {
       type: Sequelize.DATE,
       allowNull: true
     }
-  })
-}
+  });
+};

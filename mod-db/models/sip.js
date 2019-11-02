@@ -1,10 +1,10 @@
-'use strict'
+'use strict';
 
-const Sequelize = require('sequelize')
-const setupDatabase = require('../lib/db')
+const Sequelize = require('sequelize');
+const setupDatabase = require('../lib/db');
 
-module.exports = function setupSipModel (config) {
-  const sequelize = setupDatabase(config)
+module.exports = function setupSipModel(config) {
+  const sequelize = setupDatabase(config);
 
   return sequelize.define('sip', {
     name: {
@@ -31,11 +31,11 @@ module.exports = function setupSipModel (config) {
       type: Sequelize.STRING,
       allowNull: true
     },
-    disallow:{
+    disallow: {
       type: Sequelize.STRING,
       allowNull: true
-    }, 
-    allow:{
+    },
+    allow: {
       type: Sequelize.STRING,
       allowNull: true
     },
@@ -144,7 +144,5 @@ module.exports = function setupSipModel (config) {
       type: Sequelize.STRING,
       allowNull: true
     }
-    
-    
-  })
-}
+  });
+};
