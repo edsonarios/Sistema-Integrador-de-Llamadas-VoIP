@@ -38,10 +38,12 @@
 		<div class="btn-group c2-header">
 			<button type="button" class="btn" (click)="OpenMenu()">
 				{{ user['correo'] }}
-				<span *ngIf="menu == 0"><i class="large material-icons md-24">keyboard_arrow_down</i></span>
-				<span *ngIf="menu == 1"
-					><i class="large material-icons md-24" style="color:red;">close</i></span
-				>
+				<span *ngIf="menu == 0">
+						<i class="v-icon-arrow-pointing-down" tooltip="Opciones" placement="right"></i>
+				</span>
+				<span *ngIf="menu == 1">
+					<!-- Aqui estaba un Icono de Flecha hacia abajo -->
+				</span>
 			</button>
 		</div>
 		<!-- ********contenido******** -->
@@ -55,7 +57,7 @@
 							<a class="menu-box-tab" [routerLink]="['/Operador/Historial']"
 								>Historial de Llamada
 								<div class="menu-box-number">
-									<i class="fa fa-book-open" aria-hidden="true"></i>
+									<i class="v-icon-history" tooltip="Opciones" placement="right"></i>
 								</div>
 							</a>
 						</li>
@@ -63,33 +65,33 @@
 							<a class="menu-box-tab" [routerLink]="['/Operador/Grabaciones']"
 								>Grabaciones
 								<div class="menu-box-number">
-									<i class="fa fa-microphone" aria-hidden="true"></i>
-								</div></a
-							>
+									<i class="v-icon-record" tooltip="Opciones" placement="right"></i>
+								</div>
+							</a>
 						</li>
 						<li>
 							<a class="menu-box-tab" [routerLink]="['/Operador/Tracking']"
 								>Tracking
 								<div class="menu-box-number">
-									<i class="fa fa-map" aria-hidden="true"></i>
-								</div></a
-							>
+									<i class="v-icon-tracking" tooltip="Opciones" placement="right"></i>
+								</div>
+							</a>
 						</li>
 						<li>
 							<a class="menu-box-tab" [routerLink]="['/Operador/Cuentas']"
 								>Cuentas
 								<div class="menu-box-number">
-									<i class="fa fa-account" aria-hidden="true"></i>
-								</div></a
-							>
+									<i class="v-icon-user-silhouette" tooltip="Opciones" placement="right"></i>
+								</div>
+							</a>
 						</li>
 						<li>
 							<a class="menu-box-lasttab" [routerLink]="['/Operador/Roles']"
 								>Roles
 								<div class="menu-box-number">
-									<i class="fa fa-people" aria-hidden="true"></i>
-								</div></a
-							>
+									<i class="v-icon-support" tooltip="Opciones" placement="right"></i>
+								</div>
+							</a>
 						</li>
 					</ul>
 				</div>
@@ -131,17 +133,17 @@
 			</div>
 			<div class="c2-microfono">
 				<button>
-					<i class="fa fa-microphone" aria-hidden="true"></i>
+					<i class="v-icon-microphone" tooltip="Opciones" placement="right"></i>
 				</button>
 			</div>
 			<div class="c2-audio">
 				<button>
-					<i class="fa fa-headphones" aria-hidden="true"></i>
+					<i class="v-icon-support" tooltip="Opciones" placement="right"></i>
 				</button>
 			</div>
 			<div class="c2-señal">
 				<button>
-					<i class="fa fa-wifi" aria-hidden="true"></i>
+					<i class="v-icon-wifi" tooltip="Opciones" placement="right"></i>
 				</button>
 			</div>
 		</div>
