@@ -3,7 +3,7 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"test-angular": {
+		"front_angular": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
@@ -35,6 +35,14 @@
 						"scripts": []
 					},
 					"configurations": {
+						"hmr": {
+							"fileReplacements": [
+								{
+									"replace": "src/environments/environment.ts",
+									"with": "src/environments/environment.hmr.ts"
+								}
+							]
+						},
 						"production": {
 							"fileReplacements": [
 								{
@@ -69,18 +77,22 @@
 				"serve": {
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"options": {
-						"browserTarget": "test-angular:build"
+						"browserTarget": "front_angular:build"
 					},
 					"configurations": {
+						"hmr": {
+							"hmr": true,
+							"browserTarget": "front_angular:build:hmr"
+						},
 						"production": {
-							"browserTarget": "test-angular:build:production"
+							"browserTarget": "front_angular:build:production"
 						}
 					}
 				},
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"browserTarget": "test-angular:build"
+						"browserTarget": "front_angular:build"
 					}
 				},
 				"test": {
@@ -106,11 +118,11 @@
 					"builder": "@angular-devkit/build-angular:protractor",
 					"options": {
 						"protractorConfig": "e2e/protractor.conf.js",
-						"devServerTarget": "test-angular:serve"
+						"devServerTarget": "front_angular:serve"
 					},
 					"configurations": {
 						"production": {
-							"devServerTarget": "test-angular:serve:production"
+							"devServerTarget": "front_angular:serve:production"
 						}
 					}
 				}
