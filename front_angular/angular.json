@@ -3,7 +3,7 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"front_angular": {
+		"front-angular": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
@@ -18,7 +18,7 @@
 					"builder": "@angular-devkit/build-angular:browser",
 					"options": {
 						"stylePreprocessorOptions": {
-							"includePaths": ["src/app/sass", "src/app/sass/05-components"]
+							"includePaths": ["src/app/sass", "node_modules/bootstrap/"]
 						},
 						"outputPath": "dist",
 						"index": "src/index.html",
@@ -27,11 +27,7 @@
 						"tsConfig": "tsconfig.app.json",
 						"aot": false,
 						"assets": ["src/favicon.ico", "src/assets"],
-						"styles": [
-							"node_modules/bootstrap/scss/bootstrap.scss",
-							"src/styles.scss",
-							"src/assets/icons/icons.css"
-						],
+						"styles": ["src/styles.scss", "src/assets/icons/icons.css","src/assets/fonts/WhitneyFont.css"],
 						"scripts": []
 					},
 					"configurations": {
@@ -77,22 +73,22 @@
 				"serve": {
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"options": {
-						"browserTarget": "front_angular:build"
+						"browserTarget": "front-angular:build"
 					},
 					"configurations": {
 						"hmr": {
 							"hmr": true,
-							"browserTarget": "front_angular:build:hmr"
+							"browserTarget": "front-angular:build:hmr"
 						},
 						"production": {
-							"browserTarget": "front_angular:build:production"
+							"browserTarget": "front-angular:build:production"
 						}
 					}
 				},
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"browserTarget": "front_angular:build"
+						"browserTarget": "front-angular:build"
 					}
 				},
 				"test": {
@@ -118,16 +114,16 @@
 					"builder": "@angular-devkit/build-angular:protractor",
 					"options": {
 						"protractorConfig": "e2e/protractor.conf.js",
-						"devServerTarget": "front_angular:serve"
+						"devServerTarget": "front-angular:serve"
 					},
 					"configurations": {
 						"production": {
-							"devServerTarget": "front_angular:serve:production"
+							"devServerTarget": "front-angular:serve:production"
 						}
 					}
 				}
 			}
 		}
 	},
-	"defaultProject": "front_angular"
+	"defaultProject": "front-angular"
 }

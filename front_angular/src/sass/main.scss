@@ -32,3 +32,25 @@
 
 //UTILITIES
 //7 Utilities**. Para finalizar, en esta carpeta colocaríamos utilidades que sobrescriban estilos significativos (incompatibilidades con navegadores)
+
+/*=============================================
+=                   BOOTSTRAP                 =
+=============================================*/
+
+// =============================================================================
+// https://github.com/twbs/bootstrap/blob/master/scss/bootstrap.scss
+// =============================================================================
+
+// Required
+@import 'scss/functions';
+@import 'scss/variables';
+@import 'scss/mixins';
+@import 'scss/utilities';
+// @import 'scss/root';
+
+// @import 'scss/reboot';
+@import 'scss/grid';
+@import 'scss/transitions';
+@import 'scss/modal';
+// @import 'scss/forms';
+@import 'scss/tooltip';

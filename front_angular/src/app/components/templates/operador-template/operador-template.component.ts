@@ -18,22 +18,32 @@ export class OperadorTemplateComponent implements OnInit {
 	public formSala = 0;
 	user: User;
 	public sala;
-
 	wrong = false;
 	public identity: Record<string, any>;
 	addForm: FormGroup;
 	loading = false;
 	submitted = false;
 	returnUrl: string;
-
 	modalRef: BsModalRef;
+
+	// Configuracion para centrar el modal
+	// pasar como argumento al servicio de modal
+	public centerModal: any = {
+		class: 'modal-dialog-centered'
+	};
+
 	constructor(private modalService: BsModalService, private formBuilder: FormBuilder) {}
 	ngOnInit() {
 		console.log('Carga el dashboard');
 		this.sala = [
 			{ nombreSala: 'Sala 1', descripcion: 'Descripcion', usuarioId: '1' },
 			{ nombreSala: 'Sala 2', descripcion: 'Descripcion2', usuarioId: '2' },
-			{ nombreSala: 'Sala 3', descripcion: 'Descripcion3', usuarioId: '3' }
+			{ nombreSala: 'Sala 3', descripcion: 'Descripcion3', usuarioId: '3' },
+			{ nombreSala: 'Sala 4', descripcion: 'Descripcion3', usuarioId: '4' }
+			// { nombreSala: 'Sala 5', descripcion: 'Descripcion3', usuarioId: '5' },
+			// { nombreSala: 'Sala 6', descripcion: 'Descripcion3', usuarioId: '6' },
+			// { nombreSala: 'Sala 7', descripcion: 'Descripcion3', usuarioId: '7' },
+			// { nombreSala: 'Sala 8', descripcion: 'Descripcion3', usuarioId: '8' }
 		];
 
 		this.user = {
@@ -74,10 +84,10 @@ export class OperadorTemplateComponent implements OnInit {
 		this.modalRef = this.modalService.show(template);
 	}
 	DialPadComponent() {
-		this.modalRef = this.modalService.show(DialPadComponent);
+		this.modalRef = this.modalService.show(DialPadComponent, this.centerModal);
 	}
 	AgregarContactosComponent() {
-		this.modalRef = this.modalService.show(AgregarContactosComponent);
+		this.modalRef = this.modalService.show(AgregarContactosComponent, this.centerModal);
 	}
 	submit() {}
 

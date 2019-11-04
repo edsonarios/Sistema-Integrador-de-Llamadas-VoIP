@@ -1,0 +1,49 @@
+.v-dashboard__operations {
+	grid-area: sidebar;
+	// background-color: orangered;
+	display: grid;
+	grid-template-rows: $sizeTop 1fr $sizeCallActions;
+}
+
+.v-dashboard__operations {
+	&-header {
+		z-index: 1;
+		display: flex;
+		background-color: var(--colorSecondary);
+		justify-content: space-between;
+		align-items: center;
+		text-transform: uppercase;
+		padding: 0 1em;
+		font-size: 12px;
+		box-shadow: var(--shadowTop);
+	}
+	.v-icon-right-arrow {
+		// background-color: green;
+		transform: rotate(90deg);
+		padding: 1em 0;
+		cursor: pointer;
+	}
+}
+
+.v-dashboard__operations {
+	&-content {
+		background-color: var(--colorSecondary);
+		padding: 8px 0;
+		overflow-y: scroll;
+		display: grid;
+		row-gap: 5px;
+		.box {
+			background-color: rgba(black, 0.1);
+			padding: 11px;
+			border-radius: 4px;
+			margin: 0 8px;
+		}
+	}
+}
+
+.v-dashboard__operations {
+	&-actions {
+		background-color: $colorLSecondaryCurrent;
+		display: flex;
+	}
+}

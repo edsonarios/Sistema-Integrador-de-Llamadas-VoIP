@@ -7,7 +7,7 @@ import { EditarContactosComponent } from '@operador/editar_contactos/editar_cont
 import { LlamadaComponent } from '@operador/llamada/llamada.component';
 
 @Component({
-	selector: 'Contactos',
+	selector: 'contactos',
 	templateUrl: './contactos.component.html'
 })
 export class ContactosComponent implements OnInit {

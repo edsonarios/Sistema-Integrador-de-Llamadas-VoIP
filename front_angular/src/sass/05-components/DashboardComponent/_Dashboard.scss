@@ -1,0 +1,28 @@
+::-webkit-scrollbar {
+	width: 2px;
+}
+::-webkit-scrollbar-track {
+	background: blue;
+}
+::-webkit-scrollbar-thumb {
+	background: red;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: green;
+}
+
+.v-dashboard {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	display: grid;
+	grid-template-columns: $sizeLeftSala 250px 1fr;
+	grid-template-rows: $sizeTop 1fr;
+	grid-template-areas:
+		'sala sidebar dashtop'
+		'sala sidebar dashreload';
+}
+
+@import 'SalaView';
+@import 'Operations';
+@import 'ViewReload';

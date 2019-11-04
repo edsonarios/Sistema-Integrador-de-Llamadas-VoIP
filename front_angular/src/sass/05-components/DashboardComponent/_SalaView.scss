@@ -1,0 +1,113 @@
+.v-dashboard {
+	&__sala {
+		position: relative;
+		grid-area: sala;
+		background-color: $colorLead;
+	}
+	&__user {
+		width: 80%;
+		background-color: red;
+		border-radius: 1em;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		background-color: $colorBlue;
+		a {
+			color: white;
+			font-size: 24px;
+			text-decoration: none;
+		}
+	}
+	&__salas {
+		// margin-top: 10px;
+		// background-color: red;
+		height: calc(100vh - 190px); /* 238px tamaño calculado */
+		overflow-y: scroll;
+		display: grid;
+		grid-auto-rows: 48px;
+		row-gap: 6px;
+		justify-items: center;
+		color: white;
+	}
+	&__btn-add {
+		background-color: #fff;
+		border: 0;
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 24px;
+		color: var(--colorBlueCurrent);
+	}
+	&__btn-salas {
+		position: relative;
+		cursor: pointer;
+		background-color: $colorBlueCurrent;
+		width: 48px;
+		height: 48px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 50%;
+		transition: all 0.3s ease;
+		font-size: 18px;
+		font-weight: 300;
+		&:before {
+			content: '';
+			position: absolute;
+			background-color: $colorBlueCurrent;
+			width: 15px;
+			height: 15px;
+			border-radius: 50%;
+			top: 18px;
+			left: 0;
+			// bottom: 0px;
+			// z-index: -1;
+			transform: translateX(-170%);
+			transition: all 0.3s linear;
+		}
+		&:hover {
+			background-color: darken($colorBlueCurrent, 2);
+			border-radius: 30%;
+			&:before {
+				transform: translateX(-120%);
+			}
+		}
+	}
+	&__options {
+		background-color: $colorLead;
+		// position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		display: flex;
+		justify-content: center;
+		&--btn {
+			cursor: pointer;
+			padding: 0 1em;
+			border: 0;
+			background-color: transparent;
+			color: $colorBlue;
+			span {
+				font-size: 26px;
+				transition: color 0.3s ease;
+			}
+			&:hover span {
+				color: lighten($colorBlue, 4);
+			}
+		}
+		/* Configuracion Fixed*/
+		&--fix {
+			// width: 90%;
+			display: grid;
+			grid-auto-rows: 48px; /* Tamaño de las rows */
+			row-gap: 5px;
+			justify-content: center;
+			// background-color: red;
+			margin: 18px 0;
+		}
+	}
+}

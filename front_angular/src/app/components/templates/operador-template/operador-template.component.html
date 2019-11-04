@@ -1,126 +1,111 @@
-<section class="dashboard">
-	<!-- *******primera columna******* -->
-	<div class="dashboard__1col col1">
-		<div class="logo">
-			<button type="button" [routerLink]="['/Operador/Contactos']">D</button>
+<main class="v-dashboard">
+	<!--=====================================
+		=                SALA                  =
+		======================================-->
+	<div class="v-dashboard__sala">
+		<div class="v-dashboard__salas">
+			<div class="v-dashboard__user" [routerLink]="['/operador/contactos']">
+				<a type="button">D</a>
+			</div>
+			<div
+				class="v-dashboard__btn-salas"
+				*ngFor="let data of sala; let i = index"
+				tooltip="{{ data.nombreSala }}"
+				placement="left"
+				(click)="datosSala(data.usuarioId, data.nombreSala, data.descripcion)"
+			>
+				<a type="button"> S{{ data.usuarioId }} </a>
+			</div>
+			<button
+				type="button"
+				(click)="addSala()"
+				class="v-icon-plus-symbol v-dashboard__btn-add"
+			></button>
 		</div>
-
-		<div class="sala">
-			<div *ngFor="let n of sala; let i = index">
+		<div class="v-dashboard__options">
+			<div class="v-dashboard__options--fix">
 				<button
-					type="button"
-					(click)="datosSala(sala[i]['usuarioId'], sala[i]['nombreSala'], sala[i]['descripcion'])"
-					tooltip="{{ sala[i]['nombreSala'] }}"
+					[routerLink]="['/operador/tracking']"
+					class="v-dashboard__options--btn"
+					tooltip="Tracking"
 					placement="right"
 				>
-					S{{ sala[i]['usuarioId'] }}
+					<span class="v-icon-pin"></span>
+				</button>
+				<button
+					(click)="DialPadComponent()"
+					class="v-dashboard__options--btn"
+					tooltip="DialPad"
+					placement="right"
+				>
+					<span class="v-icon-phone "></span>
+				</button>
+				<button
+					(click)="settings()"
+					class=" v-dashboard__options--btn"
+					tooltip="Opciones"
+					placement="right"
+				>
+					<span class="v-icon-settings1"></span>
 				</button>
 			</div>
-			<button type="button" (click)="addSala()">+</button>
-		</div>
-
-		<div class="options">
-			<button [routerLink]="['/Operador/Tracking']">
-				<i class="v-icon-pin" tooltip="Tracking" placement="right"></i>
-			</button>
-			<button (click)="DialPadComponent()">
-				<i class="v-icon-phone" tooltip="DialPad" placement="right"></i>
-			</button>
-			<button (click)="settings()">
-				<i class="v-icon-settings1" tooltip="Opciones" placement="right"></i>
-			</button>
 		</div>
 	</div>
 
-	<!-- *******segunda columna******* -->
-	<div class="dashboard__info col2">
-		<!-- ********menu desplegable******** -->
-		<div class="btn-group c2-header">
-			<button type="button" class="btn" (click)="OpenMenu()">
-				{{ user['correo'] }}
-				<span *ngIf="menu == 0"><i class="large material-icons md-24">keyboard_arrow_down</i></span>
-				<span *ngIf="menu == 1"
-					><i class="large material-icons md-24" style="color:red;">close</i></span
-				>
-			</button>
+	<!--=======  End of SALA  ========-->
+
+	<!--=====================================
+		=                OPERACIONES            =
+		======================================-->
+	<div class="v-dashboard__operations">
+		<div class="v-dashboard__operations-header">
+			<!-- <button type="button" class="btn" (click)="OpenMenu()">
+					{{ user['correo'] }}
+					<span *ngIf="menu == 0"><i class="large material-icons md-24">keyboard_arrow_down</i></span>
+					<span *ngIf="menu == 1"
+						><i class="large material-icons md-24" style="color:red;">close</i></span
+					>
+				</button> -->
+			<div class="v-dashboard__operations-user">Historial de Llamada</div>
+			<div class="v-icon-right-arrow"></div>
 		</div>
-		<!-- ********contenido******** -->
-		<div class="c2-body">
-			<div class="left-container container" *ngIf="menu == 1">
-				<div class="menu-box block">
-					<!-- MENU BOX (LEFT-CONTAINER) -->
-
-					<ul class="menu-box-menu">
-						<li>
-							<a class="menu-box-tab" [routerLink]="['/Operador/Historial']"
-								>Historial de Llamada
-								<div class="menu-box-number">
-									<i class="large material-icons md-24">perm_phone_msg</i>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a class="menu-box-tab" [routerLink]="['/Operador/Grabaciones']"
-								>Grabaciones
-								<div class="menu-box-number">
-									<i class="large material-icons md-24">mic</i>
-								</div></a
-							>
-						</li>
-						<li>
-							<a class="menu-box-tab" [routerLink]="['/Operador/Tracking']"
-								>Tracking
-								<div class="menu-box-number">
-									<i class="large material-icons md-24">map</i>
-								</div></a
-							>
-						</li>
-						<li>
-							<a class="menu-box-tab" [routerLink]="['/Operador/Cuentas']"
-								>Cuentas
-								<div class="menu-box-number">
-									<i class="large material-icons md-24">account_box</i>
-								</div></a
-							>
-						</li>
-						<li>
-							<a class="menu-box-lasttab" [routerLink]="['/Operador/Roles']"
-								>Roles
-								<div class="menu-box-number">
-									<i class="large material-icons md-24">people_alt</i>
-								</div></a
-							>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="SalaForm" *ngIf="formSala == 1">
-				<div class="SalaForm-header">
-					<h4>Crear Sala</h4>
-				</div>
-				<div class="SalaForm-content">
-					<form [formGroup]="addForm" (ngSubmit)="addContact()">
-						<div class="row form-group">
-							<label for="descripcion">Nombre :</label>
-							<input type="text" formControlName="nombre" class="form-control" />
-						</div>
-
-						<div class="row form-group">
-							<label for="descripcion">Descripcion :</label>
-							<input type="text" formControlName="descripcion" class="form-control" />
-						</div>
-					</form>
-				</div>
-				<div class="SalaForm-footer">
-					<div class="row">
-						<button type="button" class="Cancel">Cancelar</button>
-						<button type="button" class="CrearSala">Crear Sala</button>
-					</div>
-				</div>
-			</div>
+		<div class="v-dashboard__operations-content">
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
+			<div class="box">Daniel</div>
 		</div>
 		<!-- *********footer********   -->
-		<div class="c2-footer">
+		<div class="v-dashboard__operations-actions">
 			<div class="c2-logo"></div>
 			<div class="c2-nombre">
 				User
@@ -129,65 +114,102 @@
 					SIP 3000
 				</div>
 			</div>
-			<div class="c2-microfono">
-				<button>
-					<i class="fa fa-microphone" aria-hidden="true"></i>
-				</button>
+			<div class="buttons">
+				<button class="v-icon-wifi"></button>
 			</div>
-			<div class="c2-audio">
-				<button>
-					<i class="fa fa-headphones" aria-hidden="true"></i>
-				</button>
+			<div class="buttons">
+				<button class="v-icon-microphone-black-shape"></button>
 			</div>
-			<div class="c2-señal">
-				<button>
-					<i class="fa fa-wifi" aria-hidden="true"></i>
-				</button>
+			<div class="buttons">
+				<button class="v-icon-support"></button>
 			</div>
 		</div>
 	</div>
+	<!--======= End of OPERACIONES =======-->
 
-	<!-- tercera columna -->
-	<div class="dashboard__3col col3">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<button
-				class="navbar-toggler"
-				type="button"
-				data-toggle="collapse"
-				data-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent"
-				aria-expanded="false"
-				aria-label="Toggle navigation"
-			>
-				<span class="navbar-toggler-icon"></span>
-			</button>
-
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
-						<a class="nav-link" [routerLink]="['/Operador/Contactos']"
-							>Agenda <span class="sr-only">(current)</span></a
-						>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link">Todos</a>
-					</li>
-
-					<li class="nav-item">
-						<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Conectado</a>
-					</li>
-					<li class="nav-item" (click)="AgregarContactosComponent()">
-						<a class="nav-link" style="background-color: #96F047;cursor: pointer;"
-							>Añadir Contacto</a
-						>
-					</li>
-				</ul>
-				<form class="form-inline my-2 my-lg-0" [routerLink]="['/Login']" style="cursor: pointer">
-					<i class="large material-icons md-24">input</i>
-					<a class="nav-link">Salir</a>
-				</form>
-			</div>
-		</nav>
+	<!--=====================================
+		=                VIEW RELOAD            =
+		======================================-->
+	<div class="v-dashboard__view-header">
+		<button class="btns">Agenda</button>
+		<button class="btns">Todos</button>
+		<button class="btns">Conectado</button>
+		<button class="btns" (click)="AgregarContactosComponent()">Añadir contacto</button>
+		<button class="btns">Conectado</button>
+	</div>
+	<div class="v-dashboard__view-reload">
 		<router-outlet></router-outlet>
 	</div>
-</section>
+	<!--====== End of VIEW RELOAD ========-->
+</main>
+
+<!-- <div class="left-container container" *ngIf="menu == 1">
+		<div class="menu-box block">
+			<ul class="menu-box-menu">
+				<li>
+					<a class="menu-box-tab" [routerLink]="['/Operador/Historial']"
+						>Historial de Llamada
+						<div class="menu-box-number">
+							<i class="large material-icons md-24">perm_phone_msg</i>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a class="menu-box-tab" [routerLink]="['/Operador/Grabaciones']"
+						>Grabaciones
+						<div class="menu-box-number">
+							<i class="large material-icons md-24">mic</i>
+						</div></a
+					>
+				</li>
+				<li>
+					<a class="menu-box-tab" [routerLink]="['/Operador/Tracking']"
+						>Tracking
+						<div class="menu-box-number">
+							<i class="large material-icons md-24">map</i>
+						</div></a
+					>
+				</li>
+				<li>
+					<a class="menu-box-tab" [routerLink]="['/Operador/Cuentas']"
+						>Cuentas
+						<div class="menu-box-number">
+							<i class="large material-icons md-24">account_box</i>
+						</div></a
+					>
+				</li>
+				<li>
+					<a class="menu-box-lasttab" [routerLink]="['/Operador/Roles']"
+						>Roles
+						<div class="menu-box-number">
+							<i class="large material-icons md-24">people_alt</i>
+						</div></a
+					>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="SalaForm" *ngIf="formSala == 1">
+		<div class="SalaForm-header">
+			<h4>Crear Sala</h4>
+		</div>
+		<div class="SalaForm-content">
+			<form [formGroup]="addForm" (ngSubmit)="addContact()">
+				<div class="row form-group">
+					<label for="descripcion">Nombre :</label>
+					<input type="text" formControlName="nombre" class="form-control" />
+				</div>
+
+				<div class="row form-group">
+					<label for="descripcion">Descripcion :</label>
+					<input type="text" formControlName="descripcion" class="form-control" />
+				</div>
+			</form>
+		</div>
+		<div class="SalaForm-footer">
+			<div class="row">
+				<button type="button" class="Cancel">Cancelar</button>
+				<button type="button" class="CrearSala">Crear Sala</button>
+			</div>
+		</div>
+	</div> -->

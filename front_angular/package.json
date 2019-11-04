@@ -8,7 +8,7 @@
 		"test": "ng test",
 		"lint": "ng lint",
 		"e2e": "ng e2e",
-		"hot": "ng serve --configuration hmr"
+		"hot": "ng serve -o --configuration hmr"
 	},
 	"private": true,
 	"dependencies": {
@@ -37,12 +37,7 @@
 		"@types/jasmine": "~3.3.8",
 		"@types/jasminewd2": "~2.0.3",
 		"@types/node": "~8.9.4",
-		"@typescript-eslint/eslint-plugin": "^2.6.0",
-		"@typescript-eslint/parser": "^2.6.0",
 		"codelyzer": "^5.0.0",
-		"eslint": "^6.6.0",
-		"eslint-config-prettier": "^6.5.0",
-		"eslint-plugin-prettier": "^3.1.1",
 		"jasmine-core": "~3.4.0",
 		"jasmine-spec-reporter": "~4.2.1",
 		"karma": "~4.1.0",
@@ -50,7 +45,6 @@
 		"karma-coverage-istanbul-reporter": "~2.0.1",
 		"karma-jasmine": "~2.0.1",
 		"karma-jasmine-html-reporter": "^1.4.0",
-		"prettier": "^1.18.2",
 		"protractor": "~5.4.0",
 		"ts-node": "~7.0.0",
 		"tslint": "~5.15.0",

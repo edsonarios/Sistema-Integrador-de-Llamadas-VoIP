@@ -1,9 +1,9 @@
 /* Configuración de los elementos de HTML por defecto */
-html,
 body {
 	font-family: $fontPrimary;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
 }
 
 h1,
@@ -13,10 +13,5 @@ h4,
 h5,
 h6 {
 	padding: 0;
-	margin: 0;
-	line-height: 0;
-}
-
-label {
 	margin: 0;
 }

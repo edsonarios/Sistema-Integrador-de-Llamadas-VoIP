@@ -8,7 +8,7 @@ import { OperadorTemplateComponent } from './components/templates/operador-templ
 
 export const AppRoutes: Routes = [
 	{
-		path: 'Login',
+		path: 'login',
 		component: LoginComponent
 	},
 	/*{
@@ -16,22 +16,23 @@ export const AppRoutes: Routes = [
   component: AgregarContactosComponent,
 },*/
 	{
-		path: 'Operador',
+		path: 'operador',
 		component: OperadorTemplateComponent,
 		children: [
 			{
 				path: '',
-				loadChildren: './components/templates/operador-template/operador-template.module#OperadorTemplateModule'
+				loadChildren:
+					'./components/templates/operador-template/operador-template.module#OperadorTemplateModule'
 			}
 		]
 	},
 	{
 		path: '',
-		redirectTo: 'Login',
+		redirectTo: 'login',
 		pathMatch: 'full'
 	},
 	{
 		path: '**',
-		redirectTo: 'Login'
+		redirectTo: 'login'
 	}
 ];
