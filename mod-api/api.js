@@ -946,4 +946,16 @@ api.get('/findAllIax', async (req, res, next) => {
 
   res.send(obj)
 })
+
+api.get('/prueba', async (req, res, next) => {
+  moment.locale('es');
+  moment.defineLocale
+  console.log(moment.locale());
+  console.log(moment(1572566609).format("MM ddd, YYYY hh:mm:ss"))
+  //console.log(moment(1517522296902).format("MM ddd, YYYY hh:mm:ss a"));
+
+  res.send("algo")
+
+})
 module.exports = api
+//moment(m.createdAt).format("YYYY-MM-DD")

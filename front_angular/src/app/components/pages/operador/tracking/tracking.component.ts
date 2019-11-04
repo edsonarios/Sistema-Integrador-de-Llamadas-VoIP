@@ -7,11 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['../../../../sass/main.scss']
 })
 export class TrackingComponent implements OnInit {
-
-  constructor(private router:Router) { 
-  	console.log("El tracking se cargo correctamente");
+  constructor(private router: Router) {
+    console.log('El tracking se cargo correctamente');
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

@@ -27,6 +27,8 @@
 @import './05-components/components';
 @import './05-components/Login';
 @import './05-components/dashboard';
+@import './05-components/dialpad';
+@import './05-components/modaladdcontact';
 //UTILITIES
 //7 Utilities**. Para finalizar, en esta carpeta colocaríamos utilidades que sobrescriban estilos significativos (incompatibilidades con navegadores)
 @import './06-utilities/utilities';
@@ -34,6 +36,7 @@
 @import './06-utilities/colors';
 
 @import '../../../node_modules/bootstrap/dist/css/bootstrap-grid.min.css';
+@import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 
 

@@ -3,6 +3,10 @@ import { User } from '../../../../models/user';
 import { Sala } from '../../../../models/sala';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+import { DialPadComponent } from '../../pages/operador/dialpad/dialpad.component';
+import {AgregarContactosComponent } from '../../pages/operador/agregar_contactos/agregar_contactos.component';
 
 @Component({
   selector: 'operador-template',
@@ -10,44 +14,116 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['../../../sass/main.scss']
 })
 export class OperadorTemplateComponent implements OnInit {
-user: User;
-public sala;
+public menu=0;
+public formSala=0;
+  user: User;
+  public sala;
 
-  modalRef: BsModalRef
-    constructor(private modalService: BsModalService) {}
-  ngOnInit() { 
-  	console.log("Carga el dashboard");
-  	this.sala=[{"nombreSala":"Sala 1",'descripcion':'Descripcion','usuarioId':'1'},
-  	{"nombreSala":"Sala 2",'descripcion':'Descripcion2','usuarioId':'2'},
-  	{"nombreSala":"Sala 3",'descripcion':'Descripcion3','usuarioId':'3'},];
+   wrong = false;
+  public identity: Object;
+  addForm: FormGroup;
+  loading = false;
+  submitted = false;
+  returnUrl: string;
 
-  	this.user={
-  		'nombre': 'usuario',
-        'apPaterno': 'userPat',
-        'apMaterno': 'userMat',
-        'tipo': 'Operador',
-        'direccion': 'Prueba',
-        'telefono': '12345',
-        'correo': 'ope@operador',
-        'password': '1234',
-        'conectado': true,
-        'salaId': '1'
-  	};
-  	//console.log(this.sala);
-  	//console.log(this.user);
+  modalRef: BsModalRef;
+  constructor(private modalService: BsModalService,
+     private formBuilder: FormBuilder,) {
+
   }
-  datosSala(id,nombre,descripcion){
-  	 window.alert('Id : '+id+"\n Nombre : "+nombre+'\n Descripcion : '+descripcion+'\n \n \t Listo para recibir metodos!');
+  ngOnInit() {
+    console.log('Carga el dashboard');
+    this.sala = [
+      { nombreSala: 'Sala 1', descripcion: 'Descripcion', usuarioId: '1' },
+      { nombreSala: 'Sala 2', descripcion: 'Descripcion2', usuarioId: '2' },
+      { nombreSala: 'Sala 3', descripcion: 'Descripcion3', usuarioId: '3' }
+    ];
+
+    this.user = {
+      nombre: 'usuario',
+      apPaterno: 'userPat',
+      apMaterno: 'userMat',
+      tipo: 'Operador',
+      direccion: 'Prueba',
+      telefono: '12345',
+      correo: 'ope@operador',
+      password: '1234',
+      conectado: true,
+      salaId: '1'
+    };
+   
+    this.submit();
+    //this.addContact();
+    this.addForm = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
+      alias: ['', Validators.required],
+      tipo: ['', Validators.required],
+      telnumero: ['', Validators.required],
+      descripcion: ['', Validators.required]
+    });
   }
-   DialPad(template: TemplateRef<any>){
-      this.modalRef = this.modalService.show(template);
-  	 //window.alert('pendiente');
+  OpenMenu() {
+    if (this.formSala==1) {
+      this.formSala=0;
+    }
+    if (this.menu==1) {
+      this.menu=0;
+    }
+    else{
+      this.menu=1;
+    }
+    
   }
-  settings(){
-  	 window.alert('pendiente plox');
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
-	addSala(){
-  	 window.alert('pendiente , nueva ventana + ruta');
+  DialPadComponent(){
+    this.modalRef = this.modalService.show(DialPadComponent);
+  }
+  AgregarContactosComponent(){
+    this.modalRef = this.modalService.show(AgregarContactosComponent);
+  }
+   submit(){
+    
   }
 
+  get f() {
+    return this.addForm.controls;
+  }
+
+  addContact() {
+    if (this.addForm.invalid) {
+      return;
+    }
+  }
+  datosSala(id, nombre, descripcion) {
+    window.alert(
+      'Id : ' +
+        id +
+        '\n Nombre : ' +
+        nombre +
+        '\n Descripcion : ' +
+        descripcion +
+        '\n \n \t Listo para recibir metodos!'
+    );
+  }
+  DialPad(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+    //window.alert('pendiente');
+  }
+  settings() {
+    window.alert('pendiente plox');
+  }
+  addSala() {
+   if (this.menu==1) {
+     this.menu=0;
+   }
+   if (this.formSala==1) {
+     this.formSala=0;
+   }
+   else{
+     this.formSala=1;
+   }
+  }
 }

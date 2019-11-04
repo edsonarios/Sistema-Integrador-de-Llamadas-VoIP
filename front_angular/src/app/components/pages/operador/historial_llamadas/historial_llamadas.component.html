@@ -2,61 +2,52 @@
 <header>
     <h2>HISTORIAL DE LLAMADAS</h2>
 </header>
-<br>
-<table border="1">
-		<tr>
-			<th>Id</th>
-			<th>Nombre de Usuario</th>
-			<th>Tipo</th>
-			<th>Origen</th>
-			<th>Destino</th>
-			<th>Duracion</th>
-			<th>Fecha</th>
-			<th>Acciones</th>
-			<th>Descargar Audio</th>
-		</tr>
-		<tr>
-			<th>1</th>
-			<th>Juan < 3001 ></th>
-			<th>icon saliente</th>
-			<th>icon caja</th>
-			<th>icon patrulla</th>
-			<th>02:30 min</th>
-			<th>05/07/2019</th>
-			<th>(reproductor)</th>
-			<th>button</th>
-		</tr>
-		<tr>
-			<th>2</th>
-			<th>Brenda < 3006 ></th>
-			<th>icon etrante</th>
-			<th>icon caja</th>
-			<th>icon patrulla</th>
-			<th>02:30 min</th>
-			<th>05/07/2019</th>
-			<th>(reproductor)</th>
-			<th>button</th>
-		</tr>
-		<tr>
-			<th>3</th>
-			<th>Pamela < 3001 ></th>
-			<th>icon perdida</th>
-			<th>icon caja</th>
-			<th>icon patrulla</th>
-			<th>02:30 min</th>
-			<th>05/07/2019</th>
-			<th>(reproductor)</th>
-			<th>button</th>
-		</tr>
-		<tr>
-			<th>4</th>
-			<th>Daniela < 3001 ></th>
-			<th>icon saliente</th>
-			<th>icon caja</th>
-			<th>icon patrulla</th>
-			<th>02:30 min</th>
-			<th>05/07/2019</th>
-			<th>(reproductor)</th>
-			<th>button</th>
-		</tr>
-</table>
+<div class="Historial">
+	<div class="table-responsive-vertical shadow-z-1">
+  <!-- Table starts here -->
+  <table id="table" class="table table-hover table-mc-light-blue">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre de Usuario</th>
+          <th>Tipo</th>
+          <th>Origen</th>
+          <th>Destino</th>
+          <th>Duracion</th>
+          <th>Fecha</th>
+          <th>Acciones</th>
+          <th>Descargar Audio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let n of Historial; let i=index">
+          <td data-title="ID">{{i+1}}</td>
+          <td data-title="Name">< {{Historial[i]['Numero']}} > {{Historial[i]['Nombre']}}</td>
+          <td data-title="Status">
+          	<span *ngIf='Historial[i]["Tipo"]=="Perdida"' style="color: red"><i class="large material-icons md-12"  >phone_missed</i> 
+          		{{Historial[i]['Tipo']}}</span>
+          	<span *ngIf='Historial[i]["Tipo"]=="Entrante"' style="color: blue"><i class="large material-icons md-12"  >phone_callback</i> 
+          		{{Historial[i]['Tipo']}}</span>
+          	<span *ngIf='Historial[i]["Tipo"]=="Saliente"' style="color: green"><i class="large material-icons md-12"  >phone_forwarded</i> 
+          		{{Historial[i]['Tipo']}}</span>
+      	</td>
+          <td data-title="Link">
+          	<i class="large material-icons md-12" placement="top">router</i> 
+          {{Historial[i]['Origen']}}</td>
+          <td data-title="Link">
+          <i class="large material-icons md-12" >local_shipping</i> {{Historial[i]['Destino']}}</td>
+          <td data-title="Link">{{Historial[i]['Duracion']}}</td>
+           <td data-title="Link">{{Historial[i]['Fecha']}}</td>
+            <td data-title="Link">-Reproductor-</td>
+          <td> 
+          	<span class="download">
+          		<i class="large material-icons md-12"  tooltip="Descargar Audio" placement="top" >cloud_download</i>
+          	</span>
+			 
+			</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</div>

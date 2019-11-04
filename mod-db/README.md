@@ -1,95 +1,158 @@
-# mod-db
+## Table of Contents
+- [Instalar Asterisk](#instalar-asterisk)
+- [Crear certificado SSL](#crear-certificado-ssl)
+- [Instalar Postgresql](#instalar-postgresql)
+- [Iniciar la base de datos con Node.js](#iniciar-la-base-de-datos-con-nodejs)
+- [Crear alias para el Backend](#crear-alias-para-el-backend)
+- [Docs](#docs)
+## Instalar Asterisk
+Descargar ASTERISK
 
-## Usage
+* [Asterisk stable version](https://www.asterisk.org/downloads/asterisk/all-asterisk-versions)
 
-``` js
-const setupDatabase = require('mod-db')
+Una vez que se completa la descarga, **extraemos el contenido del paquete descargado**
 
-setupDabase(config).then(db => {
-  const { Agent, Metric } = db
-
-}).catch(err => console.error(err))
+```bash
+sudo tar zxf asterisk-XXX-current.tar.gz
+cd asterisk-XXX
 ```
-## Install
-  sudo apt-get install unixodbc unixodbc-dev odbc-postgresql
 
-  sudo apt-get install postgresql postgresql-client postgresql-contrib libpq-dev
-  
-  
+Usaremos el **`script install_prereq` para resolver todas las dependencias** en nuestro sistema
 
-  Copiar los archivos 
-  
-  cd mod-db/etc && cp odbcinst.ini /etc/
-  cd mod-db/etc && cp odbc.ini /etc/
-  cd .. && cd etc-asterisk && cp * /etc/asterisk -rf
-  
-  ### Alias
-  Copia Archivos de repositorio a linux
+```bash
+sudo contrib/scripts/install_prereq install
+```
 
-  sudo echo "alias cpA='pushd /home/ubuntu/Sistema-Integrador-de-Llamadas-VoIP/mod-db/etc/;sudo cp * /etc/ -rf;cd ..;cd etc-asterisk/;sudo cp * /etc/asterisk/ -rf;popd'" >> ~/.bash_aliases
+El anterior comando instalará todos los paquetes necesarios. Al finalizar con éxito, imprimirá el siguiente mensaje
 
-  Copia Archivos de linux a repositorio
+```
+#############################################
+## install completed successfully
+#############################################
+```
 
-  sudo echo "alias cpL='pushd /etc/;sudo cp odbcinst.ini /home/ubuntu/Sistema-Integrador-de-Llamadas-VoIP/mod-db/etc/ -rf;sudo cp odbc.ini /home/ubuntu/Sistema-Integrador-de-Llamadas-VoIP/mod-db/etc/ -rf;cd asterisk/;sudo cp * /home/ubuntu/Sistema-Integrador-de-Llamadas-VoIP/mod-db/etc-asterisk/ -rf;popd'" >> ~/.bash_aliases
+Instalación del servicio de Asterisk
 
-  ### Archivos /etc/asterisk/
-  root manager.d 
+```bash
+sudo ./configure
+sudo make menuselect
+```
+Para colocar el **idioma** a español se debe seleccionar los siguientes módulos
 
-  ### Archivos modificados
-    /etc/asterisk/res_odbc.conf
-    /etc/asterisk/res_pgsql.conf
-    /etc/asterisk/cdr_pgsql.conf
-    /etc/asterisk/extconfig.conf
+```
+Core Sound Packages
+	[*] CORE-SOUNDS-ES-ULAW
+	[*] CORE-SOUNDS-ES-ALAW
+	[*] CORE-SOUNDS-ES-GSM  
+```
 
-## CREA LA BASE DE DATOS
-  sudo su postgres
-  psql
-  CREATE ROLE asterisk WITH LOGIN PASSWORD 'asterisk';
-  CREATE DATABASE asterisk;
-  GRANT ALL PRIVILEGES ON DATABASE asterisk TO asterisk;
-  \quit
+> **Nota** también seleccionar `CORE-SOUNDS-EN-XXX` **ulaw, alaw, gsm**
 
-## VER BD ESPECIFICO
-  sudo su - postgres
-  psql -U postgres asterisk
-  \dt
+continuar con las **instalación**
 
-## Iniciar la DB
-  npm install
-  npm run setup
-  sudo echo "alias db='pushd /home/ubuntu/Sistema-Integrador-de-Llamadas-VoIP/mod-db/;npm run setup;popd'" >> ~/.bash_aliases
+```bash
+sudo make
+sudo make install
+sudo make samples
+sudo make config
+```
 
-## Comprobar funcionamiento
-  #Asterisk
-  cli> odbc show
-  #Consola Linux
-  echo "select 1" | isql -v asterisk
-  cdr show pgsql status
+## Crear certificado SSL
 
-## Para los fronts
-  ### Instalar
-  sudo apt-get install postgresql postgresql-client postgresql-contrib libpq-dev
-  service postgresql restart
+Para el funcionamiento del WebRTC se debe crear los certificados auto firmados
 
-  ### Iniciar DB
-  sudo su postgres
-  psql
-  CREATE ROLE asterisk WITH LOGIN PASSWORD 'asterisk';
-  CREATE DATABASE asterisk;
-  GRANT ALL PRIVILEGES ON DATABASE asterisk TO asterisk;
-  \quit
+```bash
+sudo mkdir /etc/asterisk/keys
+sudo contrib/scripts/ast_tls_cert -C monitoreafacil.com -O "My Organization" -d /etc/asterisk/keys
+```
 
-  #### Inicializar DB
-  cd mod-db
-  npm install
-  npm run setup -y
+Se debe colocar un contraseña este proceso se repetirá varias veces
 
-  ### Crear certificado SSL
-  ./ast_tls_cert -C monitoreafacil.com -O "My Organization" -d /etc/asterisk/keys
+> **Nota** para que el navegador reconozca el certificado se debe colocar la siguiente 
+>
+> **URL**: `https://ip_server:8089/ws` 
 
-  ## Varios
-  ### Copiar archivos de monitor asterisk a /ubuntu/home/ listo para descargar
-  sudo cp -rf /var/spool/asterisk/monitor /home/ubuntu/;sudo chown ubuntu: monitor;sudo chown ubuntu: monitor/*
-  
-  ### Descargar mediante ssh
-  scp -i "C:\Users\edson\Desktop\Edson\Proyectos\asterisk_patelecom.pem" -r ubuntu@18.216.202.26:/home/ubuntu/monitor/ monitor
+## Instalar Postgresql
+
+Instalar dependencias de `Postgresql`
+
+```bash
+sudo apt-get install unixodbc unixodbc-dev odbc-postgresql
+sudo apt-get install postgresql postgresql-client postgresql-contrib libpq-dev
+```
+
+Copiar los archivos del repositorio de **Git** `mod-db/etc`  y `mod-db/etc-asterisk` 
+
+```bash
+sudo cp odbcinst.ini /etc/ 
+sudo cp odbc.ini /etc/ 
+cd ..
+cd etc-asterisk && cp * /etc/asterisk -rf
+```
+
+Crear `DB` para **Asterisk** y configurar un usuario con password
+
+```bash
+sudo su postgres
+psql
+CREATE ROLE asterisk WITH LOGIN PASSWORD 'asterisk'; 
+CREATE DATABASE asterisk; 
+GRANT ALL PRIVILEGES ON DATABASE asterisk TO asterisk;
+\quit
+```
+
+Ingresar a la consola de `Posgresql`
+
+```bash
+sudo -u postgres psql -U postgres asterisk 
+asterisk-# \dt #data table
+```
+Verificar conexión de la **DB** en **Asterisk**
+```
+*CLI> odbc show 
+
+ODBC DSN Settings
+-----------------
+  Name:   asterisk
+  DSN:    asterisk
+    Last connection attempt: 1969-12-31 20:00:00
+    Number of active connections: 1 (out of 100)
+    Logging: Enabled
+    Number of prepares executed: 13
+    Number of queries executed: 12
+    ...
+```
+Verificar conexión con **Postgresql**
+```bash
+$ echo "select 1" | isql -v asterisk asterisk asterisk cdr show pgsql status
+```
+
+## Iniciar la base de datos con Node.js
+
+En la carpeta `mod-db/`  ejecutar
+
+```bash
+npm install
+npm run setup 
+sudo echo "alias db='cd <ruta_git>/Sistema-Integrador-de-Llamadas-VoIP/mod-db/;npm run setup'" >> ~/.zshrc # opcional ~/.bash_aliases
+```
+
+## Crear alias para el Backend
+
+Crear alias para **copiar** los archivos a la carpeta de **Git**  desde `/etc/asterisk/*`
+
+```bash
+sudo echo "alias cpA='pushd <ruta_git>/Sistema-Integrador-de-Llamadas-VoIP/mod-db/etc/;sudo cp * /etc/ -rf;cd ..;cd etc-asterisk/;sudo cp * /etc/asterisk/ -rf;popd'" >> ~/.zshrc 
+```
+Alias para **copiar las configuraciones** de la **DB** ubicada en `/etc/` a la carpeta de **Git**
+```bash
+sudo echo "alias cpL='pushd /etc/;sudo cp odbcinst.ini <ruta_git>/Sistema-Integrador-de-Llamadas-VoIP/mod-db/etc/ -rf;sudo cp odbc.ini <ruta_git>/Sistema-Integrador-de-Llamadas-VoIP/mod-db/etc/ -rf;cd asterisk/;sudo cp * <ruta_git>/Sistema-Integrador-de-Llamadas-VoIP/mod-db/etc-asterisk/ -rf;popd'" >> ~/.zshrc
+```
+
+> **NOTA**
+>
+> Para crear los alias pueden usar  `>> ~/.bash_aliases` si usan la t**erminal por defecto** del sistema en caso que usen **Oh My ZSH** deben usar `>> ~/.zshrc`
+
+## Docs
+
+* [Refactor DB Asterisk](https://github.com/edsonarios/Sistema-Integrador-de-Llamadas-VoIP/blob/master/mod-db/Docs/DB%20Refactor.md)

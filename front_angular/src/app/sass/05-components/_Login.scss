@@ -59,21 +59,14 @@
   button{
     border-radius: 2%;
   }
+  button:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0,0,0,.2);
+  }
   &--btn {
     height: 50px;
     width: 100%;
     background: midnightblue;
-  }
-  &--btn::after{
-    content: "";
-    display: inline-block;
-    height: 100%;
-    width: 100%;
-    border-radius: 100px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
   }
 }
 .label-left {

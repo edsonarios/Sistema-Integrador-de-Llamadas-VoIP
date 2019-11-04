@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule , ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
@@ -13,8 +13,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { OperadorTemplateRoutes } from './operador-template.routing';
 
 import { ContactosComponent } from '../../pages/operador/contactos/contactos.component';
-import { EditarContactosComponent } from '../../pages/operador/editar_contactos/editar_contactos.component';
-import { AgregarContactosComponent } from '../../pages/operador/agregar_contactos/agregar_contactos.component';
 import { HistorialLlamadasComponent } from '../../pages/operador/historial_llamadas/historial_llamadas.component';
 import { TrackingComponent } from '../../pages/operador/tracking/tracking.component';
 import { RolesComponent } from '../../pages/operador/roles/roles.component';
@@ -22,8 +20,8 @@ import { GrabacionesComponent } from '../../pages/operador/grabaciones/grabacion
 import { CuentasComponent } from '../../pages/operador/cuentas/cuentas.component';
 
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
-//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -37,18 +35,16 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     AccordionModule,
     BsDropdownModule,
     TooltipModule.forRoot(),
-   // NgbModule
+     ModalModule.forRoot(),
+    // NgbModule
   ],
   declarations: [
-  ContactosComponent,
-  EditarContactosComponent,
-  AgregarContactosComponent,
-  HistorialLlamadasComponent,
-  TrackingComponent,
-  RolesComponent,
-  GrabacionesComponent,
-  CuentasComponent,
-  ],
+    ContactosComponent,
+    HistorialLlamadasComponent,
+    TrackingComponent,
+    RolesComponent,
+    GrabacionesComponent,
+    CuentasComponent
+  ]
 })
-
 export class OperadorTemplateModule {}

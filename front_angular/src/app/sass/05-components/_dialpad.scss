@@ -1,0 +1,123 @@
+.dialpad{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5%;
+    border: 2px solid red;
+    border-radius: 5%;
+    color: #7298CB;
+
+    display: grid;
+    grid-template-rows: repeat(7, 1fr);
+    grid-template-columns: repeat(6 1fr);
+    grid-template-areas:    "titulo titulo titulo titulo titulo logo"
+                            "vista vista vista vista vista vista"
+                            "uno uno dos dos tres tres"
+                            "cuatro cuatro cinco cinco seis seis"
+                            "siete siete ocho ocho nueve nueve"
+                            "mas mas cero cero num num"
+                            "cancelar cancelar cancelar llamar llamar llamar";
+    height: 620px;
+    button{
+        font-weight: bold;
+        border-radius: 10px;
+        background: #F3F3F3;
+        color: #5075BF;
+        width: 133px;
+        height: 70px;
+        border: 2px solid #E2E6EA;
+    }
+    grid-gap: 12px;
+}
+.d-titulo{
+    grid-area: titulo;
+}
+
+.d-logo{
+    grid-area: logo;
+    font-size: 30px;
+}
+
+.d-vista{
+    grid-area: vista;
+    border: 2px solid #A8BACA;
+    border-radius:5%;
+    background: #F2F3F5;
+    height: 70px;
+}
+
+.d-uno{
+    font-size: 28px;
+    grid-area: uno;
+}
+.d-dos{
+    font-size: 28px;
+    grid-area: dos;
+}
+.d-tres{
+    font-size: 28px;
+    grid-area: tres;
+}
+.d-cuatro{
+    font-size: 28px;
+    grid-area: cuatro;
+}
+.d-cinco{
+    grid-area: cinco;
+    font-size: 28px;
+}
+.d-seis{
+    font-size: 28px;
+    grid-area: seis;
+}
+.d-siete{
+    font-size: 28px;
+    grid-area: siete;
+}
+.d-ocho{
+    font-size: 28px;
+    grid-area: ocho;
+}
+.d-nueve{
+    font-size: 28px;
+    grid-area: nueve;
+}
+.d-mas{
+    font-size: 28px;
+    grid-area: mas;
+    button{
+        background: #5075BF;
+        color:white;
+    }
+}
+.d-cero{
+    font-size: 28px;
+    grid-area: cero,
+}
+.d-numeral{
+    font-size: 28px;
+    grid-area: num;
+    button{
+        background: #5075BF;
+        color:white;
+    }
+}
+.d-cancelar{
+    grid-area: cancelar;
+    text-align: center;
+    button{
+        font-weight: bold;
+        background: #F04747;
+        color:white;
+        width: 200px;
+    }
+}
+.d-llamar{
+    grid-area: llamar;
+    text-align: center;
+    button{
+        font-weight: bold;
+        background: #A1C65A;
+        color:white;
+        width: 200px;
+    }
+}

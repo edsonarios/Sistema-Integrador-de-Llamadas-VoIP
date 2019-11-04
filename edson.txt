@@ -10,6 +10,16 @@
         - Calendario de llamadas para horas laborales sino enviar a IVR [LISTO]
         - personalizar musichold    [LISTO]
         - descargar audios
+
+
+
+
+
+
+
+
+
+
 [FUNCIONES]
     - Crear Sips
     - Llamar entre sips 
@@ -22,6 +32,15 @@
     - Llamar a cola de llamadas 
     - WebRTC
     
+    
+
+
+
+
+
+
+
+
 
 [REUNION 21-10-19]
     - Mockups terminados

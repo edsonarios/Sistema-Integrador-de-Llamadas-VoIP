@@ -7,11 +7,20 @@ import { Router } from '@angular/router';
   styleUrls: ['../../../../sass/main.scss']
 })
 export class HistorialLlamadasComponent implements OnInit {
-
-  constructor(private router:Router) { 
-  	console.log("El historial se carga Correctamente");
+	public Historial;
+  constructor(private router: Router) {
+    console.log('El historial se carga Correctamente');
+    this.Historial=[
+  		{'Nombre':'Daniel','Numero':'3001','Tipo':'Entrante','Origen':'Caja','Destino':'Patrulla','Duracion':'02:30 min','Fecha':'05/02/2019','Audio':'jfdsafdsajp1321.wmp'},
+  		{'Nombre':'Daniel','Numero':'3001','Tipo':'Saliente','Origen':'Caja','Destino':'Patrulla','Duracion':'02:30 min','Fecha':'05/02/2019','Audio':'jfdsafdsajp1321.wmp'},
+  		{'Nombre':'Daniel','Numero':'3001','Tipo':'Entrante','Origen':'Caja','Destino':'Patrulla','Duracion':'02:30 min','Fecha':'05/02/2019','Audio':'jfdsafdsajp1321.wmp'},
+  		{'Nombre':'Daniel','Numero':'3001','Tipo':'Perdida','Origen':'Caja','Destino':'Patrulla','Duracion':'02:30 min','Fecha':'05/02/2019','Audio':'jfdsafdsajp1321.wmp'},
+  		{'Nombre':'Daniel','Numero':'3001','Tipo':'Entrante','Origen':'Caja','Destino':'Patrulla','Duracion':'02:30 min','Fecha':'05/02/2019','Audio':'jfdsafdsajp1321.wmp'},
+  		{'Nombre':'Daniel','Numero':'3001','Tipo':'Saliente','Origen':'Caja','Destino':'Patrulla','Duracion':'02:30 min','Fecha':'05/02/2019','Audio':'jfdsafdsajp1321.wmp'},
+  		{'Nombre':'Daniel','Numero':'3001','Tipo':'Saliente','Origen':'Caja','Destino':'Patrulla','Duracion':'02:30 min','Fecha':'05/02/2019','Audio':'jfdsafdsajp1321.wmp'},
+  		{'Nombre':'Daniel','Numero':'3001','Tipo':'Perdida','Origen':'Caja','Destino':'Patrulla','Duracion':'02:30 min','Fecha':'05/02/2019','Audio':'jfdsafdsajp1321.wmp'},
+  		{'Nombre':'Daniel','Numero':'3001','Tipo':'Entrante','Origen':'Caja','Destino':'Patrulla','Duracion':'02:30 min','Fecha':'05/02/2019','Audio':'jfdsafdsajp1321.wmp'},];
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }
