@@ -1,15 +1,19 @@
 [PENDIENTES]
     - WebRTC                        [LISTO]
     - apis cdr                      [LISTO]
-    - apis queue
+    - apis queue                    [LISTO]
     - Funcionalidades asterisk
         - Colas de llamadas         [LISTO]
         - IVR                       [LISTO]
-        - Conferencias
-        - Interceptar llamada
+        - Conferencias              [LISTO]
+        - Interceptar llamadas      
         - Calendario de llamadas para horas laborales sino enviar a IVR [LISTO]
         - personalizar musichold    [LISTO]
         - descargar audios
+        - troncal
+        - Modificar archivo asterisk desde api
+        - Socket
+        - Reload por api
 
 
 

@@ -492,6 +492,21 @@ api.get('/datosPrueba', async (req, res) => {
       app: "hangup",
       appdata: ""
     })
+    //Numero para conferencia, numero al llamar exten:3, sala conferencia, appdata:3
+    const obj110 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "3",
+      priority: 1,
+      app: "answer",
+      appdata: ""
+    })
+    const obj111 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "3",
+      priority: 2,
+      app: "confbridge",
+      appdata: "3"
+    })
   
 
   res.send({ message: obj, obj2, obj21, obj3,obj31, obj4, obj41, obj5, obj51, obj52,obj53,obj22 });
