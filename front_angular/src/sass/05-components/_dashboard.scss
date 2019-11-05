@@ -1,9 +1,9 @@
 .dashboard {
 	text-align: center;
 	display: grid;
-	grid-template-columns: minmax(80px, 4%) minmax(280px, 17%) minmax(500px, 79%);
-	// grid-template-columns: minmax(80px, 4%) minmax(250px, 17%) auto;
-	grid-template-areas: 'colum1 colum2 colum3';
+	//grid-template-columns: minmax(80px, 4%) minmax(280px, 17%) minmax(500px, 79%);
+	 grid-template-columns: minmax(80px, 4%) minmax(780px, 96%) ;
+	grid-template-areas: 'colum1 colum2 ';
 	height: 100vh;
 	button {
 		border: none;
@@ -21,8 +21,8 @@
 	//grid-template-rows: repeat(3, 1fr);
 	grid-template-areas:
 		'c1-logo'
-		'c1-sala'
-		'c1-options';
+		'c1-options-top'
+		'c1-options-bottom';
 	background: #e3e5e8;
 	button {
 		border-radius: 10%;
@@ -45,18 +45,18 @@
 		color: white;
 	}
 }
-.c1-sala {
-	grid-area: c1-sala;
+.c1-options-top {
+	grid-area: c1-options-top;
 	padding-top: 20px;
 	button {
-		background: #5075bf;
-		color: white;
-		border-radius: 50%;
+		font-size: 40px;
+		background: #e3e5e8;
+		color: #223a59;
 		margin-bottom: 10px;
 	}
 }
-.c1-options {
-	grid-area: c1-options;
+.c1-options-bottom {
+	grid-area: c1-options-bottom;
 	display: grid;
 	padding-left: 6px;
 	button {
@@ -69,17 +69,39 @@
 .col2 {
 	grid-area: colum2;
 	display: grid;
+	 grid-template-columns: minmax(120px, 80%) minmax(200px, 20%) ;
+	grid-template-areas: 'c2-escritorio c2-lateral ';
+}
+.c2-escritorio{
+	grid-area: c2-escritorio;
+
+	p{
+	margin: 0;
+    font-size: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-70%, -50%)
+	}
+	span{
+    font-size: 150px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-80%, -5%)
+	}
+}
+.c2-lateral{
+	grid-area: c2-lateral;
+	display: grid;
 	grid-template-rows: 8% 85% 7%;
 	grid-template-areas:
 		'c2-header'
 		'c2-body'
 		'c2-footer';
 	background: #f2f3f5;
-	button {
-		color: #223a59;
-		background: #f2f3f5;
-		margin-bottom: 3px solid red;
-	}
 }
 .c2-header {
 	grid-area: c2-header;
@@ -87,85 +109,6 @@
 }
 .c2-body {
 	grid-area: c2-body;
-	.menu-box {
-		margin-top: 10px;
-		background-color: white;
-		padding: 20px;
-		border-radius: 5px;
-	}
-	.menu-box-number {
-		width: 36px;
-		line-height: 22px;
-		text-align: center;
-		position: absolute;
-		top: 15px;
-		right: 15px;
-		-webkit-transition: all 0.3s;
-		transition: all 0.3s;
-	}
-	.menu-box {
-		a {
-			font-weight: bold;
-			color: #5075bf;
-			border-bottom: 2px solid #eeeeee;
-		}
-	}
-	.menu-box-menu li {
-		height: 60px;
-		position: relative;
-	}
-	.menu-box-tab {
-		text-align: left;
-		line-height: 60px;
-		display: block;
-		border-bottom: 1px solid #1f253d;
-		//box-shadow: 0px 28px 3px -28px black;
-		border-bottom-width: 1px;
-		-webkit-transition: background 0.2s;
-		transition: background 0.2s;
-	}
-	.menu-box-lasttab {
-		text-align: left;
-		line-height: 60px;
-		display: block;
-		border-bottom-width: 1px;
-		-webkit-transition: background 0.2s;
-		transition: background 0.2s;
-	}
-}
-.SalaForm {
-	margin-top: 10px;
-	border-radius: 4px;
-	background-color: #dee0e4;
-	//border: 1px solid black;
-
-	button {
-		color: white;
-		border-radius: 10px;
-		height: 40px;
-		width: auto;
-		padding: 10px;
-	}
-	// .SalaForm-header {
-	// }
-	.SalaForm-content {
-		.form-group {
-			margin: 0px 30px 0px 30px;
-		}
-	}
-	.SalaForm-footer {
-		padding-top: 20px;
-		padding-bottom: 20px;
-		padding-left: 10%;
-		width: auto;
-		align-items: center;
-		.Cancel {
-			background-color: #f04747;
-		}
-		.CrearSala {
-			background-color: #223a59;
-		}
-	}
 }
 
 //inicio columna 2 footer__________________________________
@@ -211,11 +154,18 @@
 	grid-area: c2-señal;
 	color: #223a59;
 }
+
+
+
+
+
+
+
 //fin columna 2 footer__________________________________
 
 //tercera columna
 .col3 {
-	grid-area: colum3;
+	grid-area: colum2;
 	overflow-y: scroll;
 }
 //--------------------------------------------------

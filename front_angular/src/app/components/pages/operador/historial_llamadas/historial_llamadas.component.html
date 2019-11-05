@@ -25,28 +25,28 @@
           <td data-title="Name">< {{ Historial[i]['Numero'] }} > {{ Historial[i]['Nombre'] }}</td>
           <td data-title="Status">
             <span *ngIf="Historial[i]['Tipo'] == 'Perdida'" style="color: red"
-              ><i class="large material-icons md-12">phone_missed</i> {{ Historial[i]['Tipo'] }}</span
+              ><i class="v-icon-phone"></i> {{ Historial[i]['Tipo'] }}</span
             >
             <span *ngIf="Historial[i]['Tipo'] == 'Entrante'" style="color: blue"
-              ><i class="large material-icons md-12">phone_callback</i> {{ Historial[i]['Tipo'] }}</span
+              ><i class="v-icon-incoming-call"></i> {{ Historial[i]['Tipo'] }}</span
             >
             <span *ngIf="Historial[i]['Tipo'] == 'Saliente'" style="color: green"
-              ><i class="large material-icons md-12">phone_forwarded</i> {{ Historial[i]['Tipo'] }}</span
+              ><i class="v-icon-telephone-receiver-with-up-arrow"></i> {{ Historial[i]['Tipo'] }}</span
             >
           </td>
           <td data-title="Link">
-            <i class="large material-icons md-12" placement="top">router</i>
+            <i class="v-icon-walkie-talkie"></i>
             {{ Historial[i]['Origen'] }}
           </td>
           <td data-title="Link">
-            <i class="large material-icons md-12">local_shipping</i> {{ Historial[i]['Destino'] }}
+            <i class="v-icon-ambulance-side-view"></i> {{ Historial[i]['Destino'] }}
           </td>
           <td data-title="Link">{{ Historial[i]['Duracion'] }}</td>
           <td data-title="Link">{{ Historial[i]['Fecha'] }}</td>
           <td data-title="Link">-Reproductor-</td>
           <td>
             <span class="download">
-              <i class="large material-icons md-12" tooltip="Descargar Audio" placement="top">cloud_download</i>
+              <i class="v-icon-download-to-storage-drive" tooltip="Descargar Audio"></i>
             </span>
           </td>
         </tr>

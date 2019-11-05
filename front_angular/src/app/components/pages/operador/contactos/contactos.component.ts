@@ -34,21 +34,8 @@ export class ContactosComponent implements OnInit {
 			{ Nombre: 'Daniel', Estado: 'Conectado', Numero: '3001' },
 			{ Nombre: 'Ramiro', Estado: 'Desconectado', Numero: '3002' },
 			{ Nombre: 'Daniel', Estado: 'Conectado', Numero: '3001' },
-			{ Nombre: 'Manuel', Estado: 'Desconectado', Numero: '3001' },
-			{ Nombre: 'Daniel', Estado: 'Conectado', Numero: '3001' },
-			{ Nombre: 'Daniel', Estado: 'Desconectado', Numero: '3002' },
-			{ Nombre: 'Antonio', Estado: 'Conectado', Numero: '3001' },
-			{ Nombre: 'Daniel', Estado: 'Desconectado', Numero: '3001' },
-			{ Nombre: 'Carlos', Estado: 'Conectado', Numero: '3001' },
-			{ Nombre: 'Daniel', Estado: 'Desconectado', Numero: '3002' },
-			{ Nombre: 'Daniel', Estado: 'Conectado', Numero: '3001' },
-			{ Nombre: 'Manuel', Estado: 'Desconectado', Numero: '3001' },
-			{ Nombre: 'Daniel', Estado: 'Conectado', Numero: '3001' },
-			{ Nombre: 'Daniel', Estado: 'Desconectado', Numero: '3002' },
-			{ Nombre: 'Antonio', Estado: 'Conectado', Numero: '3001' },
-			{ Nombre: 'Daniel', Estado: 'Desconectado', Numero: '3001' },
-			{ Nombre: 'Carlos', Estado: 'Conectado', Numero: '3001' },
-			{ Nombre: 'Daniel', Estado: 'Desconectado', Numero: '3002' }
+			{ Nombre: 'Manuel', Estado: 'Desconectado', Numero: '3001' }
+			
 		];
 		console.log('Contactos se Carga');
 	}

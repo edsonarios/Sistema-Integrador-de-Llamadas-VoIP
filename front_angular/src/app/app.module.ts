@@ -24,6 +24,7 @@ import { UserService } from '../services/user.service';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -35,6 +36,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		OperadorTemplateComponent
 	],
 	imports: [
+		AngularFontAwesomeModule,
 		ReactiveFormsModule,
 		FormsModule,
 		HttpClientModule,

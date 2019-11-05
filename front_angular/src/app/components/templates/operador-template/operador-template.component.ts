@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { User } from 'models/user';
 // import { Sala } from '../../../../models/sala';
-
+import { Entrance, Quit } from 'services/animations';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -9,11 +9,15 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DialPadComponent } from '@operador/dialpad/dialpad.component';
 import { AgregarContactosComponent } from '@operador/agregar_contactos/agregar_contactos.component';
 
+import {interval, timer } from 'rxjs';
 @Component({
 	selector: 'operador-template',
-	templateUrl: './operador-template.component.html'
+	templateUrl: './operador-template.component.html',
+	animations: [Entrance,Quit]
 })
 export class OperadorTemplateComponent implements OnInit {
+	hide=0;
+	public datoNumber;
 	public menu = 0;
 	public formSala = 0;
 	user: User;
@@ -27,7 +31,15 @@ export class OperadorTemplateComponent implements OnInit {
 	returnUrl: string;
 
 	modalRef: BsModalRef;
-	constructor(private modalService: BsModalService, private formBuilder: FormBuilder) {}
+	constructor(private modalService: BsModalService, private formBuilder: FormBuilder) {
+		const contador=interval(1000);
+
+		contador.subscribe((n)=>{
+			this.datoNumber=n;
+			console.log('Dato Number :'+n);
+		});
+
+	}
 	ngOnInit() {
 		console.log('Carga el dashboard');
 		this.sala = [
@@ -72,6 +84,16 @@ export class OperadorTemplateComponent implements OnInit {
 	}
 	openModal(template: TemplateRef<any>) {
 		this.modalRef = this.modalService.show(template);
+	}
+	LoaderPage(funtion) {
+	if (funtion=='page') {
+		this.hide=1;	
+	}else{
+		if (funtion=='operational') {
+			this.hide=0;
+		}
+	}
+
 	}
 	DialPadComponent() {
 		this.modalRef = this.modalService.show(DialPadComponent);
