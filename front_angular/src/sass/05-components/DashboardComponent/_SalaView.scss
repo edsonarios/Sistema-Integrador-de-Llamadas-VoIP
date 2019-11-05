@@ -29,6 +29,16 @@
 		row-gap: 6px;
 		justify-items: center;
 		color: white;
+		&::-webkit-scrollbar {
+			width: 1px;
+		}
+		&::-webkit-scrollbar-track {
+			border-radius: 16px;
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: rgba(black, 0.1);
+			border-radius: 16px;
+		}
 	}
 	&__btn-add {
 		background-color: #fff;
@@ -41,6 +51,11 @@
 		align-items: center;
 		font-size: 24px;
 		color: var(--colorBlueCurrent);
+		cursor: pointer;
+		transition: all 0.25s ease-in;
+		&:hover {
+			border-radius: 25%;
+		}
 	}
 	&__btn-salas {
 		position: relative;
@@ -66,7 +81,7 @@
 			left: 0;
 			// bottom: 0px;
 			// z-index: -1;
-			transform: translateX(-170%);
+			transform: translateX(-180%);
 			transition: all 0.3s linear;
 		}
 		&:hover {

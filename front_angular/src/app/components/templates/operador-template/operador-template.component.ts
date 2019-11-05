@@ -39,8 +39,8 @@ export class OperadorTemplateComponent implements OnInit {
 			{ nombreSala: 'Sala 1', descripcion: 'Descripcion', usuarioId: '1' },
 			{ nombreSala: 'Sala 2', descripcion: 'Descripcion2', usuarioId: '2' },
 			{ nombreSala: 'Sala 3', descripcion: 'Descripcion3', usuarioId: '3' },
-			{ nombreSala: 'Sala 4', descripcion: 'Descripcion3', usuarioId: '4' }
-			// { nombreSala: 'Sala 5', descripcion: 'Descripcion3', usuarioId: '5' },
+			{ nombreSala: 'Sala 4', descripcion: 'Descripcion3', usuarioId: '4' },
+			{ nombreSala: 'Sala 5', descripcion: 'Descripcion3', usuarioId: '5' },
 			// { nombreSala: 'Sala 6', descripcion: 'Descripcion3', usuarioId: '6' },
 			// { nombreSala: 'Sala 7', descripcion: 'Descripcion3', usuarioId: '7' },
 			// { nombreSala: 'Sala 8', descripcion: 'Descripcion3', usuarioId: '8' }

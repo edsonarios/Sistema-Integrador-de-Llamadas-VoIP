@@ -2,7 +2,7 @@
 $colorPrimary: #fff;
 $colorSecondary: rgb(242, 243, 245);
 $colorLead: #e3e5e8;
-$colorLSecondaryCurrent: rgb(235, 237, 239);
+$colorSecondaryCurrent: rgb(235, 237, 239);
 $colorBlue: #222a59;
 $colorBlueCurrent: #5075bf;
 $textColor: rgb(46, 51, 56);
@@ -15,4 +15,5 @@ $shadowTop: 0 1px 0 rgba(6, 6, 7, 0.1), 0 1.5px 0 rgba(6, 6, 7, 0.025), 0 2px 0 
 	--shadowTop: #{$shadowTop};
 	--colorPrimary: #{$colorPrimary};
 	--colorSecondary: #{$colorSecondary};
+	--colorSecondaryCurrent: #{$colorSecondaryCurrent};
 }

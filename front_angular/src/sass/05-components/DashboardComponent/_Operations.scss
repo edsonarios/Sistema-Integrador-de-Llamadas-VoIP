@@ -32,6 +32,19 @@
 		overflow-y: scroll;
 		display: grid;
 		row-gap: 5px;
+		transition: all 0.3s ease-in;
+		&::-webkit-scrollbar {
+			width: 6px;
+		}
+		&::-webkit-scrollbar-track {
+			border-radius: 50px;
+			margin-top: 8px;
+			margin-bottom: 8px;
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: rgba(black, 0.15);
+			border-radius: 16px;
+		}
 		.box {
 			background-color: rgba(black, 0.1);
 			padding: 11px;
@@ -43,7 +56,7 @@
 
 .v-dashboard__operations {
 	&-actions {
-		background-color: $colorLSecondaryCurrent;
+		background-color: $colorSecondaryCurrent;
 		display: flex;
 	}
 }
