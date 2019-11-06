@@ -15,6 +15,13 @@
         - Socket
         - Reload por api
 
+        - prioridad de llamadas, para cola de llamadas
+        - incorporar usuarios a una conferencia
+        - intervernir silencionamente, o participando
+        - ingresar a otro agente a mi llamada
+        - libera automaticamente de un ptt despues de 3 min
+        - Ficha para reportar el incidente
+
 
 
 
