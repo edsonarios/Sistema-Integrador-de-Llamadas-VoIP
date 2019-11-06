@@ -93,7 +93,7 @@ module.exports = async function (config) {
   const Queue = setupQueue(QueueModel, SalaModel)
   const Voicemail = setupVoicemail(VoicemailModel, UsuarioModel)
   const Sala = setupSala(SalaModel)
-  const Contacto = setupContacto(SalaContacto)
+  const Contacto = setupContacto(ContactoModel, UsuarioModel)
   
   
   
