@@ -5,6 +5,7 @@
 			<button type="button"  (click)="LoaderPage('operational')">Logo</button>
 		</div>
 		<div class="c1-options-top">
+			{{Hide}}
 			<button [routerLink]="['/Operador/Historial']" tooltip="Historial de Llamada" placement="right" (click)="LoaderPage('page')">
 				<i class="v-icon-phone-call" placement="right"></i>
 			</button>
@@ -31,11 +32,14 @@
 </a>
 </ng-template>
 	<!-- *******segunda columna******* -->
-	<div class="col2" *ngIf="hide=='0'" [@SladeOff]>
+	<div class="col2" *ngIf="Hide==true; else elseBlock" [@SladeOff]>
 		<!-- ********menu desplegable******** -->
 		<div class="c2-escritorio">
-			 <p>Escritorio</p><br>
-			 <span>{{datoNumber}}</span>
+			
+			  <escritorio-llamada></escritorio-llamada>
+			  <escritorio-sala></escritorio-sala>
+			
+			 
 		</div>
 		<div class="c2-lateral">
 			<div class="btn-group c2-header">
@@ -94,11 +98,14 @@
 	</div>
 
 		<!-- ********Componentes******** -->
-	<div class="col3" *ngIf="hide=='1'" [@SladeIn]>
+<ng-template #elseBlock>
+			<div class="col3" [@SladeIn] style="border-bottom: 5px solid black;">
 		<!-- ********contenido******** -->
 			<router-outlet></router-outlet>
 		<!-- *********footer********   -->
 	</div>
+</ng-template>
+	
 	<!-- tercera columna -->
 	<!--<div class="dashboard__3col col3">
 		<router-outlet></router-outlet>

@@ -16,6 +16,10 @@ import { AgendaComponent } from '@operador/agenda/agenda.component';
 import { NotificacionComponent } from '@operador/notificacion/notificacion.component';
 import { SalaComponent } from '@operador/sala/sala.component';
 
+import { EscritorioLlamadaComponent } from '@operador/escritorio_llamada/escritorio_llamada.component';
+import { EscritorioSalaComponent } from '@operador/escritorio_sala/escritorio_sala.component';
+
+
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -36,7 +40,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		OperadorTemplateComponent,
 		AgendaComponent,
 		NotificacionComponent,
-		SalaComponent
+		SalaComponent,
+		EscritorioLlamadaComponent,
+		EscritorioSalaComponent
 	],
 	imports: [
 		ReactiveFormsModule,
