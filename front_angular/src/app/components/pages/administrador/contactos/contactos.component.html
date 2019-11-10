@@ -1,1 +1,56 @@
-<h1>Contactos</h1>
+<br>
+<header>
+    <h2>LISTA DE CONTACTOS</h2>
+</header>
+<div class="Contactos">
+	<div class="table-responsive-vertical shadow-z-1">
+  <!-- Table starts here -->
+  <table id="table" class="table table-hover table-mc-light-blue">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Estado</th>
+          <th>Numero</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let n of Contactos; let i=index">
+          <td data-title="ID">{{i+1}}</td>
+          <td data-title="Name">{{Contactos[i]['Nombre']}}</td>
+          <td data-title="Status">
+          	<span style="color: green" *ngIf='Contactos[i]["Estado"]=="Conectado"'>{{Contactos[i]['Estado']}}</span>
+          	<span style="color: red" *ngIf='Contactos[i]["Estado"]=="Desconectado"'>{{Contactos[i]['Estado']}}</span>
+          </td>
+          <td data-title="Link">
+            {{Contactos[i]['Numero']}}
+          </td>
+          <td> 
+			 <i class=" v-icon-call"  tooltip="Llamar" placement="top" style="color: #70F047;cursor: pointer;"></i>
+			 <i class="v-icon-pencil-edit-button"  tooltip="Editar" placement="top" style="color: #22849C;cursor: pointer;" ></i>
+			 <i class="v-icon-userdel"  tooltip="eliminar" placement="top" style="color: #F7200E;cursor: pointer;"></i>
+			</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!--<ng-template #EliminarTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Eliminar Contacto</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Esta seguro que desea eliminar este contacto?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger btn-block"  (click)="modalRef.hide()">Aceptar</button>
+    <button type="button" class="btn btn-primary btn-block" data-dismiss="modal"  (click)="modalRef.hide()">Cancelar</button>
+  </div>
+</ng-template>-->
