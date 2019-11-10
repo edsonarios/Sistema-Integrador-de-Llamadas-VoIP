@@ -1,0 +1,29 @@
+.notificaciones{
+    border: groove 3px #223A59;
+    margin: 5px;
+    background: #FFFFFF;
+    display: grid;
+    grid-template-columns: 30% 50% 20%;
+    grid-template-areas: "nombre tipo accion";
+    //align-items: center;
+    align-content: center;
+    height: 80px;
+}
+.n-nombre{
+    grid-area: nombre;
+}
+.n-tipo{
+    grid-area: tipo;
+
+    &--entrante{
+        background: #22BB33;
+
+    }
+    &--espera{
+        background: #EFFFC0;
+    }
+
+}
+.n-accion{
+    grid-area: accion;
+}
