@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 export class HistorialLlamadasComponent implements OnInit {
 	public Historial;
 	constructor(private router: Router) {
-		console.log('El historial se carga Correctamente');
 		this.Historial = [
 			{
 				Nombre: 'Daniel',

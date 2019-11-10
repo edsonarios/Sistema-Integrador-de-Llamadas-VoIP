@@ -5,7 +5,7 @@ export const Entrance=
 		transition(':enter',[
 			style({
 				opacity:0,
-				transform: 'translateY(-80%)'
+				transform: 'translateY(-100%)'
 			}),
 			animate('500ms ease-in',
 				style({
@@ -21,7 +21,7 @@ export const Entrance=
 			animate('500ms ease-in',
 				style({
 					opacity: 0,
-					transform: 'translateY(-80%)'
+					transform: 'translateY(-100%)'
 				}))
 			])
 		]);
@@ -32,7 +32,7 @@ export const Quit=
 		transition(':enter',[
 			style({
 				opacity:1,
-				transform: 'translateY(80%)'
+				transform: 'translateY(100%)'
 			}),
 			animate('500ms ease-in',
 				style({
@@ -48,7 +48,7 @@ export const Quit=
 			animate('500ms ease-in',
 				style({
 					opacity: 1,
-					transform: 'translateY(80%)'
+					transform: 'translateY(100%)'
 				}))
 			])
 		]);

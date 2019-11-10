@@ -1,9 +1,8 @@
 # Dependencias
 /node_modules
 
-#Archivos
+# Archivos
 datos.txt
-comandos_git.txt
 comandos.txt
 
 # exclude

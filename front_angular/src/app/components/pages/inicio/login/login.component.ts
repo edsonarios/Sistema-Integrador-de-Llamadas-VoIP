@@ -69,11 +69,11 @@ export class LoginComponent implements OnInit {
 					console.log(this.identity);
 					console.log(data.result.id);
 					if (data.result.tipo == 'root') {
-						this.router.navigate(['/Operador/Contactos']);
+						this.router.navigate(['/Operador/Historial']);
 						console.log('entramos !!!' + data.status);
 					}
 					if (data.result.tipo == 'standard') {
-						this.router.navigate(['/Operador/Contactos']);
+						this.router.navigate(['/Operador/Historial']);
 					} else {
 					}
 				},

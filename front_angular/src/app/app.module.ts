@@ -10,14 +10,18 @@ import { LoginComponent } from './components/pages/inicio/login/login.component'
 
 // Modal Components
 import { DialPadComponent } from './components/pages/operador/dialpad/dialpad.component';
-import { AgregarContactosComponent } from './components/pages/operador/agregar_contactos/agregar_contactos.component';
-import { EditarContactosComponent } from './components/pages/operador/editar_contactos/editar_contactos.component';
-import { LlamadaComponent } from './components/pages/operador/llamada/llamada.component';
+
+
+import { AgendaComponent } from '@operador/agenda/agenda.component';
+import { NotificacionComponent } from '@operador/notificacion/notificacion.component';
+import { SalaComponent } from '@operador/sala/sala.component';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../services/user.service';
@@ -29,10 +33,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		AppComponent,
 		LoginComponent,
 		DialPadComponent,
-		AgregarContactosComponent,
-		EditarContactosComponent,
-		LlamadaComponent,
-		OperadorTemplateComponent
+		OperadorTemplateComponent,
+		AgendaComponent,
+		NotificacionComponent,
+		SalaComponent
 	],
 	imports: [
 		ReactiveFormsModule,
@@ -46,10 +50,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		TooltipModule.forRoot(),
 		BsDropdownModule.forRoot(),
 		ModalModule.forRoot(),
+		TabsModule.forRoot(),
+		PopoverModule.forRoot(),
 		BrowserAnimationsModule
 	],
 	providers: [UserService],
 	bootstrap: [AppComponent],
-	entryComponents: [DialPadComponent, AgregarContactosComponent, EditarContactosComponent, LlamadaComponent]
+	entryComponents: [DialPadComponent]
 })
 export class AppModule {}

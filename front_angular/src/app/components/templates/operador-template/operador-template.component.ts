@@ -7,7 +7,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 // import { DialPadComponent } from '../../pages/operador/dialpad/dialpad.component';
 import { DialPadComponent } from '@operador/dialpad/dialpad.component';
-import { AgregarContactosComponent } from '@operador/agregar_contactos/agregar_contactos.component';
+
 
 import {interval, timer } from 'rxjs';
 @Component({
@@ -31,17 +31,16 @@ export class OperadorTemplateComponent implements OnInit {
 	returnUrl: string;
 
 	modalRef: BsModalRef;
-	constructor(private modalService: BsModalService, private formBuilder: FormBuilder) {
+	constructor(private modalService: BsModalService, private formBuilder: FormBuilder) {/*
 		const contador=interval(1000);
 
 		contador.subscribe((n)=>{
 			this.datoNumber=n;
 			console.log('Dato Number :'+n);
 		});
-
+*/
 	}
 	ngOnInit() {
-		console.log('Carga el dashboard');
 		this.sala = [
 			{ nombreSala: 'Sala 1', descripcion: 'Descripcion', usuarioId: '1' },
 			{ nombreSala: 'Sala 2', descripcion: 'Descripcion2', usuarioId: '2' },
@@ -98,9 +97,7 @@ export class OperadorTemplateComponent implements OnInit {
 	DialPadComponent() {
 		this.modalRef = this.modalService.show(DialPadComponent);
 	}
-	AgregarContactosComponent() {
-		this.modalRef = this.modalService.show(AgregarContactosComponent);
-	}
+	
 	submit() {}
 
 	get f() {

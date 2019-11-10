@@ -1,4 +1,56 @@
-<br />
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link">
+              <i class="v-icon-phone-call" placement="right"></i> Historial de Llamadas <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">Todos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">Salientes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">Entrantes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">Perdidas</a>
+          </li>
+           <li class="nav-item">
+          <input type="text"
+           placeholder="Datepicker"
+           class="form-control"
+           bsDatepicker
+           [bsConfig]="{ isAnimated: true }">
+          </li>
+          <li>
+              <div class="search">
+            <input type="text" class="form-control" placeholder="Contacto">
+            <button type="submit" class="searchButton">
+              <i class="v-icon-magnifying-glass"></i>
+           </button>
+         </div>
+          </li>
+         
+        </ul>
+      
+      </div>
+    </nav>
+
 <header>
   <h2>HISTORIAL DE LLAMADAS</h2>
 </header>
@@ -15,8 +67,6 @@
           <th>Destino</th>
           <th>Duracion</th>
           <th>Fecha</th>
-          <th>Acciones</th>
-          <th>Descargar Audio</th>
         </tr>
       </thead>
       <tbody>
@@ -43,12 +93,6 @@
           </td>
           <td data-title="Link">{{ Historial[i]['Duracion'] }}</td>
           <td data-title="Link">{{ Historial[i]['Fecha'] }}</td>
-          <td data-title="Link">-Reproductor-</td>
-          <td>
-            <span class="download">
-              <i class="v-icon-download-to-storage-drive" tooltip="Descargar Audio"></i>
-            </span>
-          </td>
         </tr>
       </tbody>
     </table>

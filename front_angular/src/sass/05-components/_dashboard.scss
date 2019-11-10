@@ -5,19 +5,22 @@
 	 grid-template-columns: minmax(80px, 4%) minmax(780px, 96%) ;
 	grid-template-areas: 'colum1 colum2 ';
 	height: 100vh;
+	overflow: hidden;
 	button {
 		border: none;
 		width: 80%;
 		height: 60px;
 		font-size: 25px;
 	}
+
 }
 //-----------------------------------------------
 //primera columna
 .col1 {
 	grid-area: colum1;
 	display: grid;
-	grid-template-rows: 80px 635px 250px;
+	//grid-template-rows: 80px 635px 250px;
+	grid-template-rows: 10% 60% 30%;
 	//grid-template-rows: repeat(3, 1fr);
 	grid-template-areas:
 		'c1-logo'
@@ -106,6 +109,36 @@
 .c2-header {
 	grid-area: c2-header;
 	border-bottom: 3px solid #e2e3e7;
+	.search {
+	  width: 80%;
+	  position: relative;
+	  margin: auto;
+	  display: flex;
+	}
+	.searchTerm {
+	  width: 100%;
+	  border: 3px solid #223a59;
+	  border-right: none;
+	  padding: 5px;
+	  height: 40px;
+	  border-radius: 5px 0 0 3px;
+	  outline: none;
+	 
+	}
+	.searchTerm:focus{
+	  color: #223a59;
+	}
+	.searchButton {
+	  width: 40px;
+	  height: 40px;
+	  border: 1px solid #223a59;
+	  background: #223a59;
+	  text-align: center;
+	  color: #fff;
+	  border-radius: 0 5px 5px 0;
+	  cursor: pointer;
+	  font-size: 20px;
+	}
 }
 .c2-body {
 	grid-area: c2-body;
@@ -167,6 +200,28 @@
 .col3 {
 	grid-area: colum2;
 	overflow-y: scroll;
+	.search {
+		padding-left:10px;
+	  width: 100%;
+	  position: relative;
+	  margin: auto;
+	  display: flex;
+	}
+	
+	.searchTerm:focus{
+	  color: #223a59;
+	}
+	.searchButton {
+	  width: 40px;
+	  height: auto;
+	  border: 1px solid #223a59;
+	  background: #223a59;
+	  text-align: center;
+	  color: #fff;
+	  border-radius: 0 5px 5px 0;
+	  cursor: pointer;
+	  font-size: 20px;
+	}
 }
 //--------------------------------------------------
 .material-icons.md-48 {
