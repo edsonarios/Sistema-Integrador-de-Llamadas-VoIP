@@ -8,5 +8,5 @@ export const OperadorTemplateRoutes: Routes = [
   { path: 'Historial', component: HistorialLlamadasComponent },
   { path: 'Grabaciones', component: GrabacionesComponent },
   { path: 'Tracking', component: TrackingComponent },
-  { path: '', redirectTo: 'Contactos', pathMatch: 'full' }
+  { path: '', redirectTo: 'Historial', pathMatch: 'full' }
 ];

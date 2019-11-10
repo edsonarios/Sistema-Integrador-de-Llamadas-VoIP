@@ -5,6 +5,7 @@
 		"paths": {
 			"@models/*": ["models/*"],
 			"@operador/*": ["app/components/pages/operador/*"],
+			"@administrador/*": ["app/components/pages/administrador/*"],
 			"@services/*": ["services/*"]
 		},
 		"module": "commonjs",

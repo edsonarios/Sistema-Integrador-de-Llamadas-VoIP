@@ -5,8 +5,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutes } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { OperadorTemplateComponent } from './components/templates/operador-template/operador-template.component';
+
 import { LoginComponent } from './components/pages/inicio/login/login.component';
+
+// Templates
+import { OperadorTemplateComponent } from './components/templates/operador-template/operador-template.component';
+import { AdministradorTemplateComponent } from './components/templates/administrador-template/administrador-template.component';
+
 
 // Modal Components
 import { DialPadComponent } from './components/pages/operador/dialpad/dialpad.component';
@@ -38,6 +43,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		LoginComponent,
 		DialPadComponent,
 		OperadorTemplateComponent,
+		AdministradorTemplateComponent,
 		AgendaComponent,
 		NotificacionComponent,
 		SalaComponent,

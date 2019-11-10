@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		console.log('Componente formulario cargado');
 		// this.mostrar()
 		this.loginForm = this.formBuilder.group({
 			username: ['', Validators.required],
@@ -67,13 +66,14 @@ export class LoginComponent implements OnInit {
 				data => {
 					this.identity = data;
 					console.log(this.identity);
-					console.log(data.result.id);
-					if (data.result.tipo == 'root') {
-						this.router.navigate(['/Operador/Historial']);
-						console.log('entramos !!!' + data.status);
+					//console.log(data.result.id);
+					if (data.result.tipo == 'admin') {
+						this.router.navigate(['/Administrador/Contactos']);
+						console.log('entramos como admin!!!' + data.status);
 					}
 					if (data.result.tipo == 'standard') {
 						this.router.navigate(['/Operador/Historial']);
+					console.log('entramos  como operador!!!' + data.status);
 					} else {
 					}
 				},
@@ -87,25 +87,6 @@ export class LoginComponent implements OnInit {
 				}
 			);
 
-		/* this.username = 'root@root';
-    this.password = '1234';
-    this.user = new User('', '', '', '', '', '', 'root@root', '1234', false, '');
-    this.userService.login(this.user).subscribe(
-      result => {
-        this.identity = result;
-        console.log(this.identity);
-        console.log(result.result.id);
-        if (result.result.tipo == 'root') {
-          this.router.navigate(['/Operador/Contactos']);
-        }
-
-        //this.router.navigate(['/Operador/Contactos']);
-      },
-      error => {
-        this.status = 'denied';
-        console.log('error...' + error);
-      }
-    ); */
 	}
 	// Issues list
 	mostrar() {

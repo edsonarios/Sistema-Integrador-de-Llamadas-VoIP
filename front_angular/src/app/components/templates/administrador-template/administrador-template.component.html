@@ -1,0 +1,31 @@
+<section class="dashboard">
+	<!-- *******primera columna******* -->
+	<div class="col1">
+		<div class="c1-logo">
+			<button type="button" >Logo</button>
+		</div>
+		<div class="c1-options-top">
+		
+		</div>
+
+		<div class="c1-options-bottom" >
+		<button  tooltip="Opciones" placement="right"  [popover]="popTemplate" popoverTitle="     Opciones      ">
+				<i class="v-icon-settings1" ></i>
+			</button>
+		</div>
+	</div>
+<ng-template #popTemplate>
+<a [routerLink]="['/Login']">
+  <span align="right">Salir</span>
+</a>
+</ng-template>
+
+
+<div class="col3" >
+	<router-outlet></router-outlet>
+</div>
+
+	
+	
+	
+</section>
