@@ -5,7 +5,6 @@
 			<button type="button"  (click)="LoaderPage('operational')">Logo</button>
 		</div>
 		<div class="c1-options-top">
-			{{Hide}}
 			<button [routerLink]="['/Operador/Historial']" tooltip="Historial de Llamada" placement="right" (click)="LoaderPage('page')">
 				<i class="v-icon-phone-call" placement="right"></i>
 			</button>
@@ -36,10 +35,7 @@
 		<!-- ********menu desplegable******** -->
 		<div class="c2-escritorio">
 			
-			  <escritorio-llamada></escritorio-llamada>
-			  <escritorio-sala></escritorio-sala>
-			
-			 
+			 <llamada></llamada>
 		</div>
 		<div class="c2-lateral">
 			<div class="btn-group c2-header">

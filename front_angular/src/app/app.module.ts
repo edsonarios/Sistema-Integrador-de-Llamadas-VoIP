@@ -16,8 +16,8 @@ import { AgendaComponent } from '@operador/agenda/agenda.component';
 import { NotificacionComponent } from '@operador/notificacion/notificacion.component';
 import { SalaComponent } from '@operador/sala/sala.component';
 
-import { EscritorioLlamadaComponent } from '@operador/escritorio_llamada/escritorio_llamada.component';
-import { EscritorioSalaComponent } from '@operador/escritorio_sala/escritorio_sala.component';
+import { LlamadaComponent } from '@operador/llamada/llamada.component';
+
 
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
@@ -41,8 +41,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		AgendaComponent,
 		NotificacionComponent,
 		SalaComponent,
-		EscritorioLlamadaComponent,
-		EscritorioSalaComponent
+		LlamadaComponent
+		
 	],
 	imports: [
 		ReactiveFormsModule,

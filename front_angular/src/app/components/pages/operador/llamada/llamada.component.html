@@ -1,22 +1,50 @@
-<div class="modal-header">
-  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
-  <div class="llamada">
-    <div class="box">
+<!-- Llamada con Sip -->
+<div class="SipCall" style="border: 1px solid Red;width: 30%;">
+  <div class="header">
+    X
+  </div>
+  <div class="body">
+    <div class="left">
       <div class="top">
-        <div class="userpic"></div>
-        <h1 class="title">Llamada Iniciada</h1>
-        <h3 class="name">Usuario 1</h3>
-        <h3 class="number">SIP 3001</h3>
+        Nombre-Alias
       </div>
       <div class="bottom">
-        <div class="left" id="icon"><i class="large material-icons md-48">mic</i></div>
-        <div class="time"><h3>01:20</h3></div>
-        <div class="right" id="icon"><i class="large material-icons md-48">phone_missed</i></div>
+        Icon
       </div>
     </div>
+    <div class="right">
+      pause<br>
+      colgar
+    </div> 
+  </div>
+  <div class="footer">
+    <3001> <br>
+      00:30
+  </div>
+</div>
+
+
+<!-- Llamada Con PTT -->
+
+<div class="RadioCall" style="border: 1px solid Red;width: 30%;">
+  <div class="header">
+    X
+  </div>
+  <div class="body">
+    <div class="left">
+      <div class="top">
+        Nombre-Alias
+      </div>
+      <div class="bottom">
+        Icon
+      </div>
+    </div>
+    <div class="right">
+      PTT btn
+    </div> 
+  </div>
+  <div class="footer">
+    <3001> <br>
+      00:30
   </div>
 </div>
