@@ -1,0 +1,53 @@
+
+.escritorio{
+    margin: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    color: white;
+    button{
+        font-size: 15px;
+        width: 50%;
+        height: 30px;
+        background: red;
+    }
+    &__header{
+        background: #223A59;
+        &--ocupado{
+            background: #81DBE0;
+            
+        }
+    }
+    &__body{
+        color: black;
+        background: #F2F3F5;
+    }
+    &__footer{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background: #E3E5E8;
+        color: #223A59;
+    }
+}
+
+.e-responsive{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+
+@media screen and (max-width: 1700px){
+    .e-responsive{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 1400px){
+    .e-responsive{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media screen and (max-width: 1000px){
+    .e-responsive{
+        grid-template-columns: 1fr;
+        padding: 0% 15%;
+    }
+}

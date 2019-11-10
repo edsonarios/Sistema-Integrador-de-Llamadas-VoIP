@@ -8,6 +8,9 @@ import { AppComponent } from './app.component';
 
 import { LoginComponent } from './components/pages/inicio/login/login.component';
 
+
+//fontawesome
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 // Templates
 import { OperadorTemplateComponent } from './components/templates/operador-template/operador-template.component';
 import { AdministradorTemplateComponent } from './components/templates/administrador-template/administrador-template.component';
@@ -51,6 +54,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		
 	],
 	imports: [
+		AngularFontAwesomeModule,
 		ReactiveFormsModule,
 		FormsModule,
 		HttpClientModule,

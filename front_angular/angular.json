@@ -32,7 +32,8 @@
 							"src/styles.scss",
 							"./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
 							"./node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
-							"src/assets/icons/icons.css"						],
+							"src/assets/icons/icons.css",
+							"./node_modules/font-awesome/css/font-awesome.css"						],
 						"scripts": []
 					},
 					"configurations": {
