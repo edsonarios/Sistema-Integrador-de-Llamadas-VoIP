@@ -13,13 +13,14 @@ import { OperadorTemplateRoutes } from './operador-template.routing';
 import { HistorialLlamadasComponent } from '@operador/historial_llamadas/historial_llamadas.component';
 import { TrackingComponent } from '@operador/tracking/tracking.component';
 import { GrabacionesComponent } from '@operador/grabaciones/grabaciones.component';
+import { AudioPlayerComponent } from '@operador/grabaciones/audio_player/audio_player.component';
 
 
 
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 @NgModule({
 	imports: [
@@ -33,6 +34,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 		TooltipModule.forRoot(),
 		ModalModule.forRoot(),
 		BsDatepickerModule.forRoot(),
+		ProgressbarModule.forRoot()
 
 		// NgbModule
 	],
@@ -41,6 +43,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 		HistorialLlamadasComponent,
 		TrackingComponent,
 		GrabacionesComponent,
+		AudioPlayerComponent
 
 	]
 })
