@@ -4,6 +4,7 @@
 # Archivos
 datos.txt
 comandos.txt
+upload.sh
 
 # exclude
 yarn.lock
