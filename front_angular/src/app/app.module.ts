@@ -23,6 +23,7 @@ import { DialPadComponent } from './components/pages/operador/dialpad/dialpad.co
 import { AgendaComponent } from '@operador/agenda/agenda.component';
 import { NotificacionComponent } from '@operador/notificacion/notificacion.component';
 import { SalaComponent } from '@operador/sala/sala.component';
+import { PanelComponent } from '@operador/panel/panel.component';
 
 import { LlamadaComponent } from '@operador/llamada/llamada.component';
 
@@ -50,7 +51,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		AgendaComponent,
 		NotificacionComponent,
 		SalaComponent,
-		LlamadaComponent
+		LlamadaComponent,
+		PanelComponent
 		
 	],
 	imports: [
