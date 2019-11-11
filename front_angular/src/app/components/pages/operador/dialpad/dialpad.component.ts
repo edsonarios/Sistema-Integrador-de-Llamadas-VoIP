@@ -7,9 +7,16 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 	templateUrl: './dialpad.component.html'
 })
 export class DialPadComponent implements OnInit {
+	dialNumber: string = '';
 	constructor(private router: Router, private modalService: BsModalService) {
-		console.log('Dialpad se cargo Correctamente');
+
 	}
 
 	ngOnInit() {}
+	DialNum(Num){
+		this.dialNumber=this.dialNumber+Num;
+	}
+	Llamada() {
+		window.alert('Llamando al : '+this.dialNumber);
+	}
 }

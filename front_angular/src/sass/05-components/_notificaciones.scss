@@ -1,0 +1,48 @@
+.notificaciones {
+	border: solid 2px #223a59;
+	margin: 8px;
+	background: #ffffff;
+	display: grid;
+	grid-template-columns: 27% 45% 28%;
+	grid-template-areas: 'nombre tipo accion';
+    height: 80px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.n-nombre {
+    display: grid;
+    grid-area: nombre;
+    color: white;
+    background: #223a59;
+    align-items: center;
+}
+.n-tipo {
+	grid-area: tipo;
+	&--entrante {
+		padding-top: 15%;
+		background: #6BEE17;
+	}
+	&--espera {
+		padding-top: 15%;
+		background: #efffc0;
+	}
+}
+.n-accion {
+	button {
+		width: 100%;
+        height: 50%;
+        font-size: 15px;
+        color: white;
+        text-transform: uppercase;
+    }
+    button:hover{
+        transition: all 0.4s ease 0s;
+        letter-spacing: 1px;
+    }
+    grid-area: accion;
+    &--contestar{
+        background: #223a59;
+    }
+    &--colgar{
+        background: #F43A29;
+    }
+}

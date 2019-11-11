@@ -10,15 +10,17 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { OperadorTemplateRoutes } from './operador-template.routing';
 
-import { ContactosComponent } from '@operador/contactos/contactos.component';
 import { HistorialLlamadasComponent } from '@operador/historial_llamadas/historial_llamadas.component';
 import { TrackingComponent } from '@operador/tracking/tracking.component';
-import { RolesComponent } from '@operador/roles/roles.component';
 import { GrabacionesComponent } from '@operador/grabaciones/grabaciones.component';
-import { CuentasComponent } from '@operador/cuentas/cuentas.component';
+import { AudioPlayerComponent } from '@operador/grabaciones/audio_player/audio_player.component';
+
+
 
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 @NgModule({
 	imports: [
@@ -30,16 +32,19 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 		AccordionModule,
 		BsDropdownModule,
 		TooltipModule.forRoot(),
-		ModalModule.forRoot()
+		ModalModule.forRoot(),
+		BsDatepickerModule.forRoot(),
+		ProgressbarModule.forRoot()
+
 		// NgbModule
 	],
 	declarations: [
-		ContactosComponent,
+
 		HistorialLlamadasComponent,
 		TrackingComponent,
-		RolesComponent,
 		GrabacionesComponent,
-		CuentasComponent
+		AudioPlayerComponent
+
 	]
 })
 export class OperadorTemplateModule {}

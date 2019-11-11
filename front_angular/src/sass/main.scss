@@ -29,7 +29,12 @@
 @import './05-components/components';
 @import './05-components/Login';
 @import './05-components/dashboard';
+@import './05-components/adminDashboard';
 @import './05-components/dialpad';
 @import './05-components/modaladdcontact';
+@import './05-components/notificaciones';
+@import './05-components/escritorio';
+@import './05-components/salas';
 //UTILITIES
+@import './06-utilities/utilities';
 //7 Utilities**. Para finalizar, en esta carpeta colocaríamos utilidades que sobrescriban estilos significativos (incompatibilidades con navegadores)

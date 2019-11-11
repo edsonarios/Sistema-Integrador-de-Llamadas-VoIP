@@ -1,35 +1,40 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { User } from 'models/user';
 // import { Sala } from '../../../../models/sala';
-
+import { Entrance, Quit } from 'services/animations';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 // import { DialPadComponent } from '../../pages/operador/dialpad/dialpad.component';
 import { DialPadComponent } from '@operador/dialpad/dialpad.component';
-import { AgregarContactosComponent } from '@operador/agregar_contactos/agregar_contactos.component';
 
+
+import {interval, timer } from 'rxjs';
 @Component({
 	selector: 'operador-template',
-	templateUrl: './operador-template.component.html'
+	templateUrl: './operador-template.component.html',
+	animations: [Entrance,Quit]
 })
 export class OperadorTemplateComponent implements OnInit {
-	public menu = 0;
-	public formSala = 0;
+	private Hide:boolean= true;
+	private datoNumber;
 	user: User;
-	public sala;
+	private sala;
 
-	wrong = false;
-	public identity: Record<string, any>;
-	addForm: FormGroup;
-	loading = false;
-	submitted = false;
-	returnUrl: string;
+	
 
 	modalRef: BsModalRef;
-	constructor(private modalService: BsModalService, private formBuilder: FormBuilder) {}
+	constructor(private modalService: BsModalService, private formBuilder: FormBuilder) {
+	/*
+		const contador=interval(1000);
+
+		contador.subscribe((n)=>{
+			this.datoNumber=n;
+			console.log('Dato Number :'+n);
+		});
+*/
+	}
 	ngOnInit() {
-		console.log('Carga el dashboard');
 		this.sala = [
 			{ nombreSala: 'Sala 1', descripcion: 'Descripcion', usuarioId: '1' },
 			{ nombreSala: 'Sala 2', descripcion: 'Descripcion2', usuarioId: '2' },
@@ -48,68 +53,18 @@ export class OperadorTemplateComponent implements OnInit {
 			conectado: true,
 			salaId: '1'
 		};
-
-		this.submit();
-		// this.addContact();
-		this.addForm = this.formBuilder.group({
-			nombre: ['', Validators.required],
-			apellido: ['', Validators.required],
-			alias: ['', Validators.required],
-			tipo: ['', Validators.required],
-			telnumero: ['', Validators.required],
-			descripcion: ['', Validators.required]
-		});
 	}
-	OpenMenu() {
-		if (this.formSala == 1) {
-			this.formSala = 0;
+	LoaderPage(funtion) {
+		if (funtion=='page') {
+			this.Hide=false;	
+		}else{
+			if (funtion=='operational') {
+				this.Hide=true;
+			}
 		}
-		if (this.menu == 1) {
-			this.menu = 0;
-		} else {
-			this.menu = 1;
-		}
-	}
-	openModal(template: TemplateRef<any>) {
-		this.modalRef = this.modalService.show(template);
 	}
 	DialPadComponent() {
 		this.modalRef = this.modalService.show(DialPadComponent);
 	}
-	AgregarContactosComponent() {
-		this.modalRef = this.modalService.show(AgregarContactosComponent);
-	}
-	submit() {}
 
-	get f() {
-		return this.addForm.controls;
-	}
-
-	addContact() {
-		if (this.addForm.invalid) {
-			return;
-		}
-	}
-	datosSala(id, nombre, descripcion) {
-		window.alert(
-			`ID ${id}\nNombre: ${nombre}\nDescripcion:${descripcion}\nListo para recibir metodos!`
-		);
-	}
-	DialPad(template: TemplateRef<any>) {
-		this.modalRef = this.modalService.show(template);
-		// window.alert('pendiente');
-	}
-	settings() {
-		window.alert('pendiente plox');
-	}
-	addSala() {
-		if (this.menu == 1) {
-			this.menu = 0;
-		}
-		if (this.formSala == 1) {
-			this.formSala = 0;
-		} else {
-			this.formSala = 1;
-		}
-	}
 }

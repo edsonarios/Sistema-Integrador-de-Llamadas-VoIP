@@ -1,10 +1,10 @@
 # Dependencias
 /node_modules
 
-#Archivos
+# Archivos
 datos.txt
-comandos_git.txt
 comandos.txt
+upload.sh
 
 # exclude
 yarn.lock
