@@ -1,5 +1,6 @@
 export class User {
 	constructor(
+		
 		public nombre: string,
 		public apPaterno: string,
 		public apMaterno: string,
@@ -11,4 +12,6 @@ export class User {
 		public conectado: boolean,
 		public salaId: string
 	) {}
+
+	
 }

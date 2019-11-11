@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
 			return;
 		}
 		this.user = new User(
+			
 			'',
 			'',
 			'',
@@ -68,6 +69,7 @@ export class LoginComponent implements OnInit {
 					this.identity = data;
 					console.log(this.identity);
 					console.log(data.result.id);
+					localStorage.setItem("idUser", data.result.id);
 					if (data.result.tipo == 'root') {
 						this.router.navigate(['/Operador/Contactos']);
 						console.log('entramos !!!' + data.status);

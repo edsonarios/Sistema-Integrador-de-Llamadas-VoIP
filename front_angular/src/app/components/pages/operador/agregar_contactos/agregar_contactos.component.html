@@ -1,12 +1,14 @@
+
 <div class="modal-header">
 	<h6 class="modal-title">AÑADIR CONTACTO</h6>
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="bsModalRef.hide()">
 		&times;
 	</button>
 </div>
+
 <div class="modal-body">
 	<div class="container ">
-		<form class="añadir_contact" [formGroup]="addForm" (ngSubmit)="addContact()">
+		<form class="añadir_contact" [formGroup]="addForm" (ngSubmit)="onSubmit()">
 			<div class="row">
 				<div class="col-sm-6 form-group">
 					<label for="nombre">NOMBRE</label>
@@ -29,10 +31,9 @@
 				</div>
 				<div class="col-md-4 form-group">
 					<label for="telnumero">TIPO</label>
-					<select class="form-control" id="inputGroupSelect01">
-						<option selected>Elegir Tipo</option>
-						<option value="1">SIP</option>
-						<option value="2">IAX</option>
+					<select class="form-control" id="inputGroupSelect01" formControlName="tipo">
+						<option value="SIP">SIP</option>
+						<option value="IAX">IAX</option>
 					</select>
 				</div>
 			</div>
@@ -43,12 +44,14 @@
 		</form>
 	</div>
 </div>
-<div class="modal-footer">
+<div class="modal-footer form-group">
 	<button type="button" class="btn btn-danger btn-block" (click)="bsModalRef.hide()">Cancelar</button>
-	<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" (click)="bsModalRef.hide()">
+	<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" (click)="crearcontacto()">
 		Crear contacto
 	</button>
 </div>
+
+
 
 <!-- <div class="modal-header">
 			<h6 class="modal-title">AÑADIR CONTACTO</h6>

@@ -5,14 +5,17 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
 import { User } from '../models/user';
+import { Sip } from '../models/sip';
 import { GLOBAL } from './global';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  public idUser = localStorage.getItem('idUser');
   public url: string;
   public user: User;
+  public sip: Sip;
   constructor(private http: HttpClient) {
     this.url = GLOBAL.url;
   }
@@ -67,12 +70,14 @@ export class UserService {
     );
   }
 
-  addUsuario(user): Observable<any> {
-    return this.http.post<any>(this.url + 'addUsuario', user, this.httpOptions).pipe(
+  addUsuario( user): Observable<any> {
+    this.user = user;
+    return this.http.post<any>(this.url + 'addUsuario',  this.user , this.httpOptions).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
+
 
   // Error handling
   errorHandl(error) {
