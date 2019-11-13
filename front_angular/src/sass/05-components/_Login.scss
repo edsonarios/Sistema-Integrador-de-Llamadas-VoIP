@@ -1,16 +1,17 @@
 .login {
+	height: 100vh;
 	font-family: $fontPrimary;
 	display: grid;
 	width: 100%;
 	grid-template-rows: 50px auto 50px;
-	//grid-template-rows: repeat(20, 1fr);
 	grid-template-areas:
 		'head'
 		'body'
-		'footer';
-	height: 100vh;
+		'footr';
 }
+
 .login__header {
+	min-height: 5vh;
 	grid-area: head;
 	padding-top: 12px;
 	background: #e3e5e8;
@@ -18,22 +19,24 @@
 
 //BODY LOGIN
 .login__body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
 	grid-area: body;
-	display: grid;
 	width: 100%;
-	//background: url(../../assets/fondo-login4.jpg);
 	background: url(assets/bg.png);
 	background-size: cover;
+	//
 }
 .login__login {
-	margin-left: 35%;
+	/*margin-left: 35%;
 	margin-right: 35%;
 	margin-bottom: 215px;
-	margin-top: 215px;
+	margin-top: 215px;*/
+	
 	border-radius: 5px;
 	background: #e3e5e8;
-	// min-width: 550px;
-	// min-height: 380px;
 	text-align: left;
 	opacity: 0.97;
 	&--titulo {
@@ -79,7 +82,7 @@
 }
 //FIN BODY LOGIN
 .login__footer {
-	grid-area: footer;
+	grid-area: footr;
 	padding-top: 12px;
 	text-align: center;
 	background: #e3e5e8;
