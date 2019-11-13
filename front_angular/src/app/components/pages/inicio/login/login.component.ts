@@ -67,18 +67,19 @@ export class LoginComponent implements OnInit {
 				data => {
 					this.identity = data;
 					console.log(this.identity);
-<<<<<<< HEAD
+// >>>>>>>>>HEAD
 					console.log(data.result.id);
 					localStorage.setItem("idUser", data.result.id);
 					if (data.result.tipo == 'root') {
 						this.router.navigate(['/Operador/Contactos']);
 						console.log('entramos !!!' + data.status);
-=======
+					}
+//=======
 					//console.log(data.result.id);
 					if (data.result.tipo == 'admin') {
 						this.router.navigate(['/Administrador/Contactos']);
 						console.log('entramos como admin!!!' + data.status);
->>>>>>> origin/master
+//>>>>>>> origin/master
 					}
 					if (data.result.tipo == 'standard') {
 						this.router.navigate(['/Operador/Historial']);
@@ -96,7 +97,7 @@ export class LoginComponent implements OnInit {
 				}
 			);
 
-	}
+	};
 	// Issues list
 	mostrar() {
 		return this.userService.datosPrueba().subscribe(res => {
