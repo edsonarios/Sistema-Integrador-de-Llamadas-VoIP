@@ -35,7 +35,8 @@
 		<!-- ********menu desplegable******** -->
 		<div class="c2-escritorio">
 			<div class="c2-desktop">
-				<div *ngFor="let n of Llamada; let i = index">
+				<section class="e-responsive">
+				<div class="escritorio"  *ngFor="let n of Llamada; let i = index">
 				<llamada
 				Nombre="{{Llamada[i]['nombre']}}"
 				Numero="{{Llamada[i]['numero']}}"
@@ -45,6 +46,7 @@
 
 				></llamada>
 				</div>
+				</section>
 			</div>
 			 <div class="c2-panel">
 			 	<panel Tiempo='{{datoNumber}}'></panel>
