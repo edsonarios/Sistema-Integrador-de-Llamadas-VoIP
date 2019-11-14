@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap/modal';
 import { User } from '@models/user';
 import { UserService } from '@services/user.service';
 import { SipService } from '@services/sip.service';
-
+import { BsModalRef } from 'ngx-bootstrap/modal';
 @Component({
-	selector: 'agregar-cotactos',
-	templateUrl: './agregar_contactos.component.html',
+	selector: 'agregar-cotacto',
+	templateUrl: './agregar_contacto.component.html',
 	providers: [UserService],
 })
 export class AgregarContactosComponent implements OnInit {
@@ -25,12 +24,11 @@ export class AgregarContactosComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private formBuilder: FormBuilder,
-		public bsModalRef: BsModalRef,
 		private serviceUser: UserService,
-		private serviceSip: SipService
+		private serviceSip: SipService,
+		public modalRef: BsModalRef
 	) {
 		this.submitted = true;
-		console.log('Dialpad se cargo Correctamente');
 		
 	}
 	
@@ -47,6 +45,7 @@ export class AgregarContactosComponent implements OnInit {
 	
 	
 	onSubmit(){
+		
 		this.submitted = false;
 		if(!this.addForm.invalid){
 		  return;
@@ -60,6 +59,7 @@ export class AgregarContactosComponent implements OnInit {
 	}
 
 	crearcontacto() {
+		
 		var tip = this.addForm.value.tipo;
 		if(tip == 'SIP'){
 		console.log(this.addForm.value);
@@ -74,6 +74,7 @@ export class AgregarContactosComponent implements OnInit {
 		);
 		console.log(this.addForm.value);
 		}	
+	
 	}
 	cerrar(e) {
 		e.close();

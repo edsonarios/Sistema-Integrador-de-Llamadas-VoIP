@@ -14,8 +14,18 @@
 	}
 	&__header {
 		background: #223a59;
+		span{
+			float:right;
+			padding-right: 10px;
+			font-size: 18px;
+		}
 		&--ocupado {
 			background: #81dbe0;
+			span{
+			float:right;
+			padding-right: 10px;
+			font-size: 18px;
+		}
 		}
 	}
 	&__body {

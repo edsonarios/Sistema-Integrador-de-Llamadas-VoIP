@@ -86,8 +86,8 @@
 grid-area: c2-desktop;
 }
 .c2-panel{
- border-top: 2px solid black;
 grid-area: c2-panel;
+ box-shadow: 0 -5px 15px -5px #333;
 }
 
 }

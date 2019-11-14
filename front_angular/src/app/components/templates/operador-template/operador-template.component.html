@@ -35,10 +35,19 @@
 		<!-- ********menu desplegable******** -->
 		<div class="c2-escritorio">
 			<div class="c2-desktop">
-				<llamada></llamada>
+				<div *ngFor="let n of Llamada; let i = index">
+				<llamada
+				Nombre="{{Llamada[i]['nombre']}}"
+				Numero="{{Llamada[i]['numero']}}"
+				Tipo="{{Llamada[i]['Tipo']}}"
+				Id="{{Llamada[i]['id']}}"
+				Estado="{{Llamada[i]['Estado']}}"
+
+				></llamada>
+				</div>
 			</div>
 			 <div class="c2-panel">
-			 	<panel></panel>
+			 	<panel Tiempo='{{datoNumber}}'></panel>
 			 </div>
 			 
 		</div>
@@ -60,8 +69,15 @@
 		  <tab heading="Agenda">
 		  	<Agenda></Agenda>
 		  </tab>
-		  <tab heading="Salas">
-		  	<Sala></Sala>
+		  <tab heading="Salas" >
+		  	<div *ngFor="let n of Salas; let i = index">
+		  	<Sala (propagar)="procesaPropagar($event)"
+		  	Nombre="{{Salas[i]['nombre']}}"
+		  	Ocupado="{{Salas[i]['Ocupando']}}"
+		  	Dimensions="{{Salas[i]['Dimesions']}}"
+		  	Id="{{Salas[i]['id']}}">
+		  	</Sala>
+		  	</div>
 		  </tab>
 		</tabset>
 			 

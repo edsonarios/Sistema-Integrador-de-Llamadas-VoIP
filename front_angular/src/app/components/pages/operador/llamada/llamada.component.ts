@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input} from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,14 @@ import { Router } from '@angular/router';
 	templateUrl: './llamada.component.html'
 })
 export class LlamadaComponent implements OnInit {
-	constructor(private router: Router) {}
+	 @Input() Nombre: string;
+	 @Input() Numero: string;
+	 @Input() Tipo: string;
+	 @Input() Id: string;
+	 @Input() Estado: string;
+	constructor(private router: Router) {
+
+	}
 
 	ngOnInit() {}
 }
