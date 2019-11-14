@@ -1,23 +1,23 @@
 <section class="e-responsive">
 	<!-- Llamada SIP Inactivo -->
-	<div class="escritorio" *ngIf="Tipo=='Llamada'&&Estado=='Inactiva'">
+	<div class="escritorio" *ngIf="Tipo == 'Llamada' && Estado == 'Inactiva'">
 		<div class="escritorio__header">
-			{{Tipo}} {{Estado}}
+			{{ Tipo }} {{ Estado }}
 			<span>
-			<i class="v-icon-delete" tooltip="Cerrar" style="color: #f04747"></i>
+				<i class="v-icon-delete" tooltip="Cerrar" style="color: #f04747"></i>
 			</span>
 		</div>
 		<div class="escritorio__body">
 			<div>
 				<div>
-					{{Nombre}}
+					{{ Nombre }}
 				</div>
 				<div>
 					<i class="fa fa-tv" aria-hidden="true"></i>
 				</div>
 			</div>
 			<div>
-				{{Numero}}
+				{{ Numero }}
 			</div>
 			<div>
 				00:30
@@ -25,7 +25,7 @@
 		</div>
 		<div class="escritorio__footer-normal">
 			<button>
-				<i class="fa fa-pause"  aria-hidden="true"></i>
+				<i class="fa fa-pause" aria-hidden="true"></i>
 				PAUSA
 			</button>
 			<button class="escritorio__footer--play">
@@ -35,25 +35,46 @@
 		</div>
 	</div>
 
+
+
+
+
+	
+
+	<!-- PRUEBA SALAS EN ESCRITORIO BORRAR -->
+	<div class="escritorio">
+		hola
+	</div>
+	<div class="escritorio">
+		hola
+	</div>
+	<!-- PRUEBA SALAS EN ESCRITORIO BORRAR -->
+
+
+
+
+
+
+
 	<!-- Llamada SIP Inactivo -->
-	<div class="escritorio" *ngIf="Tipo=='Llamada'&&Estado=='Activa'">
+	<div class="escritorio" *ngIf="Tipo == 'Llamada' && Estado == 'Activa'">
 		<div class="escritorio__header--ocupado">
-			{{Tipo}} {{Estado}}
+			{{ Tipo }} {{ Estado }}
 			<span>
-			<i class="v-icon-delete" tooltip="Cerrar" style="color: #f04747"></i>
+				<i class="v-icon-delete" tooltip="Cerrar" style="color: #f04747"></i>
 			</span>
 		</div>
 		<div class="escritorio__body">
 			<div>
 				<div>
-					{{Nombre}}
+					{{ Nombre }}
 				</div>
 				<div>
 					<i class="fa fa-tv" aria-hidden="true"></i>
 				</div>
 			</div>
 			<div>
-				{{Numero}}
+				{{ Numero }}
 			</div>
 			<div>
 				00:30
@@ -61,7 +82,7 @@
 		</div>
 		<div class="escritorio__footer-normal">
 			<button>
-				<i class="fa fa-pause"  aria-hidden="true"></i>
+				<i class="fa fa-pause" aria-hidden="true"></i>
 				PAUSA
 			</button>
 			<button class="escritorio__footer--play">
@@ -72,24 +93,24 @@
 	</div>
 
 	<!-- Llamada Radio Activo -->
-	<div class="escritorio" *ngIf="Tipo=='Sala'&&Estado=='Activa'">
+	<div class="escritorio" *ngIf="Tipo == 'Sala' && Estado == 'Activa'">
 		<div class="escritorio__header--ocupado">
-			{{Tipo}} {{Estado}}
+			{{ Tipo }} {{ Estado }}
 			<span>
-			<i class="v-icon-delete" tooltip="Cerrar" style="color: #f04747"></i>
+				<i class="v-icon-delete" tooltip="Cerrar" style="color: #f04747"></i>
 			</span>
 		</div>
 		<div class="escritorio__body">
 			<div>
 				<div>
-					{{Nombre}}
+					{{ Nombre }}
 				</div>
 				<div>
 					<i class="fa fa-pencil" aria-hidden="true"></i>
 				</div>
 			</div>
 			<div>
-				{{Numero}}
+				{{ Numero }}
 			</div>
 			<div>
 				00:30
@@ -97,31 +118,31 @@
 		</div>
 		<div class="escritorio__footer-ptt">
 			<button>
-				<i class="fa fa-microphone"  aria-hidden="true"></i>
+				<i class="fa fa-microphone" aria-hidden="true"></i>
 				HABLAR
 			</button>
 		</div>
 	</div>
 
 	<!-- Llamada Radio Inactivo -->
-	<div class="escritorio" *ngIf="Tipo=='Sala'&&Estado=='Inactiva'">
+	<div class="escritorio" *ngIf="Tipo == 'Sala' && Estado == 'Inactiva'">
 		<div class="escritorio__header">
-			{{Tipo}} {{Estado}}
+			{{ Tipo }} {{ Estado }}
 			<span>
-			<i class="v-icon-delete" tooltip="Cerrar" style="color: #f04747"></i>
+				<i class="v-icon-delete" tooltip="Cerrar" style="color: #f04747"></i>
 			</span>
 		</div>
 		<div class="escritorio__body">
 			<div>
 				<div>
-					{{Nombre}}
+					{{ Nombre }}
 				</div>
 				<div>
 					<i class="fa fa-tv" aria-hidden="true"></i>
 				</div>
 			</div>
 			<div>
-				{{Numero}}
+				{{ Numero }}
 			</div>
 			<div>
 				00:30
@@ -134,5 +155,4 @@
 			</button>
 		</div>
 	</div>
-
 </section>
