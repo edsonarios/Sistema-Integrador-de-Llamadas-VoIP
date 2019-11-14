@@ -29,12 +29,31 @@
 @import './05-components/components';
 @import './05-components/Login';
 @import './05-components/dashboard';
-@import './05-components/adminDashboard';
 @import './05-components/dialpad';
 @import './05-components/modaladdcontact';
 @import './05-components/notificaciones';
 @import './05-components/escritorio';
 @import './05-components/salas';
+@import './05-components/panelEstados';
+@import './05-components/historial';
+@import './05-components/Agenda';
 //UTILITIES
 @import './06-utilities/utilities';
 //7 Utilities**. Para finalizar, en esta carpeta colocaríamos utilidades que sobrescriban estilos significativos (incompatibilidades con navegadores)
+
+
+/*
+colores
+#23374d
+#1089ff
+#e5e5e5
+#eeeeee
+*/
+
+
+/*
+10316b
+000000
+e25822
+ececeb
+*/
