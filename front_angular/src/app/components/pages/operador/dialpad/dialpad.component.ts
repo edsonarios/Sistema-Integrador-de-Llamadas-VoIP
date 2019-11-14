@@ -19,4 +19,7 @@ export class DialPadComponent implements OnInit {
 	Llamada() {
 		window.alert('Llamando al : '+this.dialNumber);
 	}
+	Limpiar(){
+		this.dialNumber='';
+	}
 }

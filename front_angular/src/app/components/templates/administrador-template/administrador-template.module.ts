@@ -16,9 +16,11 @@ import { HistorialLlamadasComponent } from '@administrador/historial_llamadas/hi
 import { TrackingComponent } from '@administrador/tracking/tracking.component';
 import { SalasComponent } from '@administrador/salas/salas.component'
 
+import { AgregarContactosComponent } from '@administrador/contactos/agregar_contacto/agregar_contacto.component';
+import { EditarContactoComponent } from '@administrador/contactos/editar_contacto/editar_contacto.component';
 
 //import { TooltipModule } from 'ngx-bootstrap/tooltip';
-//import { ModalModule } from 'ngx-bootstrap/modal';
+import { ModalModule } from 'ngx-bootstrap/modal';
 //import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 @NgModule({
@@ -30,7 +32,7 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 		ReactiveFormsModule,
 
 		//TooltipModule.forRoot(),
-		//ModalModule.forRoot(),
+		ModalModule.forRoot(),
 		//BsDatepickerModule.forRoot(),
 		ProgressbarModule.forRoot(),
 		// NgbModule
@@ -42,8 +44,11 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 		HistorialLlamadasComponent,
 		TrackingComponent,
 		SalasComponent,
-		AudioPlayerComponent
+		AudioPlayerComponent,
+		AgregarContactosComponent,
+		EditarContactoComponent
 
-	]
+	],
+	entryComponents: [AgregarContactosComponent,EditarContactoComponent]
 })
 export class AdministradorTemplateModule {}

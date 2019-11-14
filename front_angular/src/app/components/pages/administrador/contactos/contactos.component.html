@@ -1,4 +1,30 @@
-<br>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link">
+              <i class="v-icon-phone-call" placement="right"></i> Historial de Llamadas <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item" (click)="AgregarContacto()">
+            <a class="nav-link">Agregar Contacto</a>
+          </li>
+        </ul>
+      
+      </div>
+    </nav>
 <header>
     <h2>LISTA DE CONTACTOS</h2>
 </header>
@@ -28,8 +54,10 @@
           </td>
           <td> 
 			 <i class=" v-icon-call"  tooltip="Llamar" placement="top" style="color: #70F047;cursor: pointer;"></i>
-			 <i class="v-icon-pencil-edit-button"  tooltip="Editar" placement="top" style="color: #22849C;cursor: pointer;" ></i>
-			 <i class="v-icon-userdel"  tooltip="eliminar" placement="top" style="color: #F7200E;cursor: pointer;"></i>
+			 <i class="v-icon-pencil-edit-button"  tooltip="Editar" placement="top" style="color: #22849C;cursor: pointer;"
+       (click)="EditarContacto()" ></i>
+			 <i class="v-icon-userdel"  tooltip="eliminar" placement="top" style="color: #F7200E;cursor: pointer;"
+       (click)="openModal(EliminarTemplate)"></i>
 			</td>
         </tr>
         
@@ -39,7 +67,7 @@
 </div>
 
 
-<!--<ng-template #EliminarTemplate>
+<ng-template #EliminarTemplate>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Eliminar Contacto</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -53,4 +81,4 @@
     <button type="button" class="btn btn-danger btn-block"  (click)="modalRef.hide()">Aceptar</button>
     <button type="button" class="btn btn-primary btn-block" data-dismiss="modal"  (click)="modalRef.hide()">Cancelar</button>
   </div>
-</ng-template>-->
+</ng-template>
