@@ -31,13 +31,16 @@
 .n-accion {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    background: #CDB380;
     i{
         color: black;
         font-size: 30px;
     }
 	button {
-		width: 100%;
-        height: 100%;
+        border-radius: 50%;
+		width: 80%;
+        height: 80%;
+        margin-top:10%;
         font-size: 13px;
         color: #031634;
         text-transform: uppercase;
@@ -48,9 +51,9 @@
     }
     grid-area: accion;
     &--contestar{
-        background: #f6da63;
+        background: #2ecc71;
     }
     &--colgar{
-        background: #da2d2d;
+        background: #e74c3c;
     }
 }
