@@ -4,7 +4,7 @@
 	margin: 8px;
 	background: #E8DDCB;
 	display: grid;
-	grid-template-columns: 27% 40% 33%;
+	grid-template-columns: 20% 42% 38%;
 	grid-template-areas: 'nombre tipo accion';
     height: 80px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -13,7 +13,8 @@
     display: grid;
     grid-area: nombre;
     color: #E8DDCB;
-    background: #033649;
+    background-image: url(assets/avatar.png);
+    background-size: cover;
     align-items: center;
 }
 .n-tipo {

@@ -1,16 +1,13 @@
 <div class="notificaciones">
 	<div class="n-nombre">
-		{{Nombre}} {{Numero}}
 	</div>
-	<div class="n-tipo--entrante">
-		Llamada {{Estado}}
-	</div>
+	<div class="n-tipo--entrante">{{ Nombre }} {{ Numero }}</div>
 	<div class="n-accion">
-			<button class="n-accion--contestar" (click)="ContestarLlamada(Nombre,Numero,Id)">
+		<button class="n-accion--contestar" (click)="ContestarLlamada(Nombre, Numero, Id)">
 			Contestar
 			<i class="fa fa-phone" aria-hidden="true"></i>
 		</button>
-		<button class="n-accion--colgar" (click)="ColgarLlamada(Nombre,Numero,Id)">
+		<button class="n-accion--colgar" (click)="ColgarLlamada(Nombre, Numero, Id)">
 			Colgar
 			<i class="fa fa-phone" aria-hidden="true"></i>
 		</button>
