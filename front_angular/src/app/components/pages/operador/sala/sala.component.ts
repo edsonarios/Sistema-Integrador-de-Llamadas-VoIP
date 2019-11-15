@@ -9,18 +9,19 @@ export class SalaComponent implements OnInit {
 	 @Input() Nombre: string;
 	 @Input() Ocupado: string;
 	 @Input() Dimensions: string;
+	 @Input() Numero: string;
 	 @Input() Id: string;
 
 	 public sala;
 
-	@Output() propagar = new EventEmitter<string>();
+	@Output() DatoSala = new EventEmitter<string>();
 	constructor(private router: Router) {
 
 	}
 
 	ngOnInit() {}
-	 onPropagar(Nombre:string,id_sala:string) {
-    this.sala={'nombre':Nombre,'id':id_sala};
-    this.propagar.emit(this.sala);
+	EntrarSala(Nombre:string,id_sala:string,numero:string) {
+    this.sala={'nombre':Nombre,'id':id_sala,'numero':numero};
+    this.DatoSala.emit(this.sala);
   }
 }

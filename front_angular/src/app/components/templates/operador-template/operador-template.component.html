@@ -46,9 +46,18 @@
 		</div>
 	</div>
 	<ng-template #popTemplate>
-		<a [routerLink]="['/Login']">
-			<span align="right">Salir</span>
-		</a>
+			<ul>
+		<li >
+			<a (click)="AgregarEventoNotificacion()" style="cursor: pointer;">
+			  <span align="right"> < Evento Notificacion > </span>
+			</a>
+		</li>
+		<li>
+			<a [routerLink]="['/Login']">
+			  <span align="right">Salir</span>
+			</a>
+		</li>
+	</ul>
 	</ng-template>
 	<!-- *******segunda columna******* -->
 	<div class="col2" *ngIf="Hide == true; else elseBlock" [@SladeOff]>
@@ -56,15 +65,15 @@
 		<div class="c2-escritorio">
 			<div class="c2-desktop">
 				<section class="e-responsive">
-					<div class="escritorio" *ngFor="let n of Llamada; let i = index">
-						<llamada
-							Nombre="{{ Llamada[i]['nombre'] }}"
-							Numero="{{ Llamada[i]['numero'] }}"
-							Tipo="{{ Llamada[i]['Tipo'] }}"
-							Id="{{ Llamada[i]['id'] }}"
-							Estado="{{ Llamada[i]['Estado'] }}"
-						></llamada>
-					</div>
+				<div class="escritorio"  *ngFor="let n of Llamada; let i = index">
+				<llamada (llamadaClose)="CerrarLlamada($event)"
+				Nombre="{{Llamada[i]['nombre']}}"
+				Numero="{{Llamada[i]['numero']}}"
+				Tipo="{{Llamada[i]['Tipo']}}"
+				Id="{{Llamada[i]['id']}}"
+				Estado="{{Llamada[i]['Estado']}}"
+				></llamada>
+				</div>
 				</section>
 			</div>
 			<div class="c2-panel">
@@ -84,23 +93,30 @@
 			<div class="c2-body">
 				<tabset [justified]="true">
 					<tab heading="Notificaciones">
-						<Notificacion></Notificacion>
-					</tab>
+				  	<div *ngFor="let n of Notificaciones; let i = index">
+					  	<Notificacion
+					  	(ContestaLlamada)="ContestarLlamada($event)"
+					  	(CancelaLlamada)="ColgarLlamada($event)"
+					  	Nombre="{{Notificaciones[i]['nombre']}}"
+					  	Numero="{{Notificaciones[i]['numero']}}"
+					  	Estado="{{Notificaciones[i]['estado']}}"
+					  	Id="{{Notificaciones[i]['id']}}"></Notificacion>
+				 	 </div>
+				  </tab>
 					<tab heading="Agenda">
 						<Agenda></Agenda>
 					</tab>
-					<tab heading="Salas">
-						<div *ngFor="let n of Salas; let i = index">
-							<Sala
-								(propagar)="procesaPropagar($event)"
-								Nombre="{{ Salas[i]['nombre'] }}"
-								Ocupado="{{ Salas[i]['Ocupando'] }}"
-								Dimensions="{{ Salas[i]['Dimesions'] }}"
-								Id="{{ Salas[i]['id'] }}"
-							>
-							</Sala>
-						</div>
-					</tab>
+					 <tab heading="Salas" >
+					  	<div *ngFor="let n of Salas; let i = index">
+					  	<Sala (DatoSala)="RegistraSala($event)"
+					  	Nombre="{{Salas[i]['nombre']}}"
+					  	Ocupado="{{Salas[i]['Ocupando']}}"
+					  	Dimensions="{{Salas[i]['Dimesions']}}"
+					  	Numero="{{Salas[i]['Numero']}}"
+					  	Id="{{Salas[i]['id']}}">
+					  	</Sala>
+					  	</div>
+				  </tab>
 				</tabset>
 			</div>
 			<!-- *********footer********   -->

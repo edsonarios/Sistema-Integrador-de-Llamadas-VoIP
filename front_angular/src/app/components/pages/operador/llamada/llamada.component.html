@@ -2,14 +2,14 @@
 	<!-- Llamada SIP Inactivo -->
 		<div class="escritorio__header">
 			{{ Tipo }} {{ Estado }}
-			<span>
+			<span (click)="CerrarLlamada(Nombre,Numero,Id,Tipo)" style="cursor: pointer;">
 				<i class="v-icon-delete" tooltip="Cerrar" style="color: #f04747"></i>
 			</span>
 		</div>
 		<div class="escritorio__body">
 			<div>
 				<div>
-					{{ Nombre }}
+					{{ Nombre }} - {{Tipo}}
 				</div>
 				<div>
 					<i class="fa fa-tv" aria-hidden="true"></i>
@@ -22,7 +22,7 @@
 				00:30
 			</div>
 		</div>
-		<div class="escritorio__footer-normal">
+		<div class="escritorio__footer-normal" *ngIf="Tipo=='Llamada'">
 			<button>
 				<i class="fa fa-pause" aria-hidden="true"></i>
 				PAUSA
@@ -32,4 +32,14 @@
 				PLAY
 			</button>
 		</div>
+		<div class="escritorio__footer-ptt" *ngIf="Tipo=='Sala'">
+			<button class="escritorio__footer--play">
+				<i class="fa fa-microphone" aria-hidden="true"></i>
+				HABLAR
+			</button>
+		</div>
+
+
+
+
 
