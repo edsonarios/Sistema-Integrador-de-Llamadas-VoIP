@@ -1,9 +1,10 @@
+//#E8DDCB, #CDB380, #036564, #033649, #031634
+
 .notificaciones {
-	border: solid 2px #223a59;
 	margin: 8px;
-	background: #ffffff;
+	background: #E8DDCB;
 	display: grid;
-	grid-template-columns: 27% 45% 28%;
+	grid-template-columns: 27% 40% 33%;
 	grid-template-areas: 'nombre tipo accion';
     height: 80px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -11,15 +12,15 @@
 .n-nombre {
     display: grid;
     grid-area: nombre;
-    color: white;
-    background: #223a59;
+    color: #E8DDCB;
+    background: #033649;
     align-items: center;
 }
 .n-tipo {
 	grid-area: tipo;
 	&--entrante {
 		padding-top: 15%;
-		background: #6BEE17;
+		background: #CDB380;
 	}
 	&--espera {
 		padding-top: 15%;
@@ -27,11 +28,17 @@
 	}
 }
 .n-accion {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    i{
+        color: black;
+        font-size: 30px;
+    }
 	button {
 		width: 100%;
-        height: 50%;
-        font-size: 15px;
-        color: white;
+        height: 100%;
+        font-size: 13px;
+        color: #031634;
         text-transform: uppercase;
     }
     button:hover{
@@ -40,9 +47,9 @@
     }
     grid-area: accion;
     &--contestar{
-        background: #223a59;
+        background: #f6da63;
     }
     &--colgar{
-        background: #F43A29;
+        background: #da2d2d;
     }
 }

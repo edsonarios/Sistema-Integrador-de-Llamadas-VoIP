@@ -1,15 +1,12 @@
 //#E8DDCB, #CDB380, #036564, #033649, #031634
 .panel{
-    //display: flex;
-    //align-content: center;
-    //align-items: center;
     &__header{
         background: #031634;
-        color: white;
+        color: #E8DDCB;
     }
     
     table{
-        background: white;
+        background: #E8DDCB;
         text-align: left;
     }
     th,td{
@@ -18,11 +15,11 @@
     }
     thead{
         background: #033649;
-        color: white;
+        color: #E8DDCB;
         border-bottom:solid 5px #223A59;
     }
     tr:hover td{
-        background: #E8DDCB;
+        background: #CDB380;
         color: white;
     }
 }

@@ -14,7 +14,7 @@
 }
 /*
 colores
-#E8DDCB, #CDB380, #036564, #033649, #031634
+#e8e3de, #E8DDCB, #CDB380, #036564, #033649, #031634
 */
 //-----------------------------------------------
 //primera columna
@@ -74,12 +74,12 @@ colores
 	display: grid;
 	grid-template-columns: minmax(150px, 75%) minmax(300px, 25%);
 	grid-template-areas: 'c2-escritorio c2-lateral ';
-	background: yellow;
+	background: #e8e3de;
 }
 .c2-escritorio {
 	grid-area: c2-escritorio;
 	display: grid;
-	grid-template-rows: minmax(120px, 80%) minmax(200px, 20%);
+	grid-template-rows: minmax(120px, 75%) minmax(200px, 25%);
 	grid-template-areas:
 		'c2-desktop'
 		'c2-panel';

@@ -14,7 +14,8 @@
 	min-height: 5vh;
 	grid-area: head;
 	padding-top: 12px;
-	background: #e3e5e8;
+	color: #E8DDCB;
+	background: #031634;
 }
 
 //BODY LOGIN
@@ -32,16 +33,16 @@
 .login__login {
 	width: 500px;
 	border-radius: 5px;
-	background: #e3e5e8;
+	background: #e8e3de;
 	text-align: left;
 	opacity: 0.97;
 	&--titulo {
-		color: midnightblue;
+		color: #036564;
 		padding-top: 50px;
 		text-align: center;
 	}
 	&--form {
-		color: midnightblue;
+		color: #036564;
 		width: 100%;
 		padding: 20px 30px 20px 30px;
 	}
@@ -55,15 +56,17 @@
 	}
 	button {
 		border-radius: 2%;
+		border: none;
 	}
 	button:hover {
 		transform: translateY(-3px);
-		box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+		box-shadow: 0 5px 20px #036564;
+		background: #036564;
 	}
 	&--btn {
 		height: 50px;
 		width: 100%;
-		background: midnightblue;
+		background: #CDB380;
 	}
 }
 .label-left {
@@ -81,8 +84,8 @@
 	grid-area: footr;
 	padding-top: 12px;
 	text-align: center;
-	background: #e3e5e8;
+	background: #031634;
 	font-size: 18px;
 	font-weight: bold;
-	color: midnightblue;
+	color: #E8DDCB;
 }
