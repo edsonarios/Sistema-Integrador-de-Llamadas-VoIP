@@ -1,7 +1,11 @@
-.Contactos {
-	margin: 20px auto;
-	max-width: 960px;
+//#e8e3de, #E8DDCB, #CDB380, #036564, #033649, #031634
+
+.Agenda {
+
+	margin: 10px;
+	background: #E8DDCB;
 	.table {
+		color: #031634;
 		width: 100%;
 		max-width: 100%;
 		margin-bottom: 2rem;
@@ -12,12 +16,17 @@
 			tr {
 				th,
 				td {
+					margin: 0px;
 					text-align: left;
 					padding: 0.8rem;
 					vertical-align: top;
-					border-top: 0;
 				}
 			}
+		}
+
+		tr:hover td{
+			background: #CDB380;
+			color: white;
 		}
 	}
 }
