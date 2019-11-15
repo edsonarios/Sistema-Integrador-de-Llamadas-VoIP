@@ -16,39 +16,21 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
+				<tr *ngFor="let n of Panel; let i = index">
 					<td data-title="Link">
 						<i class="v-icon-incoming-call" tooltip="Entrante" style="color: green"></i>
 					</td>
 					<td data-title="Link">
-						4001
+						{{Panel[i]['Numero']}}
 					</td>
 					<td data-title="Link">
-						20/10/2019
+						{{Panel[i]['fecha']}}
 					</td>
 					<td data-title="Link">
-						{{ Tiempo }}
+						- - : - - : - -
 					</td>
 					<td>
-						<i class="v-icon-delete" tooltip="Finalizar" style="color: red"></i>
-					</td>
-				</tr>
-
-				<tr>
-					<td data-title="Link">
-						<i class="v-icon-incoming-call" tooltip="Entrante" style="color: green"></i>
-					</td>
-					<td data-title="Link">
-						4002
-					</td>
-					<td data-title="Link">
-						03/11/2019
-					</td>
-					<td data-title="Link">
-						{{ Tiempo }}
-					</td>
-					<td>
-						<i class="v-icon-delete" tooltip="Finalizar" style="color: red"></i>
+						<i class="v-icon-delete" tooltip="Borrar" style="color: red"></i>
 					</td>
 				</tr>
 			</tbody>

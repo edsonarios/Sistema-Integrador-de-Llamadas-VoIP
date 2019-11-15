@@ -1,6 +1,7 @@
 .escritorio {
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	color: white;
+	border-radius: 10px;
+	 box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+	background:  linear-gradient(45deg, #F4EBE5, #E3D4CA);
 	margin: 10px;
 	button {
 		font-size: 15px;
@@ -13,7 +14,8 @@
 		background: #efffc0;
 	}
 	&__header {
-		background: #223a59;
+		border-radius: 10px 10px 0px 0px;
+		background: #eeeeee;
 		span{
 			float:right;
 			padding-right: 10px;
@@ -31,7 +33,7 @@
 
 	&__body {
 		color: black;
-		background: #f2f3f5;
+		background: #ffffff;
 	}
 	&__footer-normal {
 		display: grid;

@@ -1,10 +1,10 @@
 <section class="admin-dashboard">
 	<!-- *******primera columna******* -->
-	<div class="columna1">
-		<div class="c1-logo">
+	<div class="sidebar">
+		<div class="sidebar-logo">
 			<button type="button" >Logo</button>
 		</div>
-		<div class="c1-options-top">
+		<div class="sidebar-options-top">
 			<ul>
 				<li>
 					<a [routerLink]="['/Administrador/Contactos']">
@@ -31,19 +31,19 @@
   					<span align="right">Tracking</span>
 					</a>
 				</li>
+				<li>
+					<a [routerLink]="['/Login']">
+		  			<span align="right">Salir</span>
+					</a>
+				</li>
 			</ul>
 		</div>
 
-		<div class="c1-options-bottom" >
-			<a [routerLink]="['/Login']">
-  			<span align="right">Salir</span>
-			</a>
-		</div>
 	</div>
 
 
 
-<div class="columna2" >
+<div class="contenido" >
 	<router-outlet></router-outlet>
 </div>
 

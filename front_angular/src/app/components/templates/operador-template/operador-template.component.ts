@@ -20,11 +20,10 @@ export class OperadorTemplateComponent implements OnInit {
 public Llamada=[];
 public Salas;
 public Notificaciones=[];
+public Panel=[];
 	public Hide:boolean= true;
 	private datoNumber;
 	user: User;
-
-
 
 	modalRef: BsModalRef;
 	constructor(private modalService: BsModalService, private formBuilder: FormBuilder) {
@@ -79,6 +78,9 @@ public Notificaciones=[];
 		var id= Math.round((Math.random()*(20-11)+11));
 		this.Notificaciones.push({'nombre':'Alias','numero':numero,'estado':'entrante','id':id});
 	}
+	AgregarEventoPanel(numero,fecha,tiempo,tipo){
+		this.Panel.push({'tipo':tipo,'Numero':numero,'fecha':fecha,'tiempo':tiempo});
+	}
 	RegistraSala(Sala) {
   	this.Llamada.push({'nombre':Sala['nombre'],'id':Sala['id'],'numero':Sala['numero'],'Tipo':'Sala','Estado':'Inactiva'});
   	this.EliminaItemSalas(Sala['id']);
@@ -96,10 +98,12 @@ public Notificaciones=[];
 	ContestarLlamada(Notificacion){
 		this.Llamada.push({'nombre':Notificacion['Nombre'],'id':Notificacion['Id'],'numero':Notificacion['Numero'],'Tipo':'Llamada','Estado':'Inactiva'});
 		this.EliminaItemNotificacion(Notificacion['Id']);
+		this.AgregarEventoPanel(Notificacion['Numero'],'15/11/2019','false','entrante');
 
 	}
 	ColgarLlamada(Notificacion){
 		this.EliminaItemNotificacion(Notificacion['Id']);
+		this.AgregarEventoPanel(Notificacion['Numero'],'15/11/2019','false','perdida');
 		
 	}
 

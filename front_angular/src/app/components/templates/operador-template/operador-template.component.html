@@ -47,16 +47,17 @@
 	</div>
 	<ng-template #popTemplate>
 			<ul>
-		<li >
-			<a (click)="AgregarEventoNotificacion()" style="cursor: pointer;">
-			  <span align="right"> < Evento Notificacion > </span>
-			</a>
-		</li>
-		<li>
-			<a [routerLink]="['/Login']">
-			  <span align="right">Salir</span>
-			</a>
-		</li>
+			<li >
+				<a (click)="AgregarEventoNotificacion()" style="cursor: pointer;">
+				  <span align="right"> < Evento Notificacion > </span>
+				</a>
+			</li>
+			<hr>
+			<li>
+				<a [routerLink]="['/Login']">
+				  <span align="right">Salir</span>
+				</a>
+			</li>
 	</ul>
 	</ng-template>
 	<!-- *******segunda columna******* -->
@@ -77,7 +78,7 @@
 				</section>
 			</div>
 			<div class="c2-panel">
-				<panel Tiempo="{{ datoNumber }}"></panel>
+				<panel [Objeto]="Panel"></panel>
 			</div>
 		</div>
 		<div class="c2-lateral">

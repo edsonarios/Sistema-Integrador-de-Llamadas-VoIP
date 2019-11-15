@@ -1,0 +1,47 @@
+.admin-dashboard {
+	text-align: center;
+	display: grid;
+	grid-template-columns: 20% 80%;
+	grid-template-areas: 'sidebar contenido';
+	height: 100vh;
+	overflow: hidden;
+	button {
+		border: none;
+		width: 80%;
+		height: 60px;
+		font-size: 25px;
+	}
+}
+.sidebar {
+	grid-area: sidebar;
+	display: grid;
+	grid-template-rows: 10% 60% 30%;
+	grid-template-areas:
+		'sidebar-logo'
+		'sidebar-options-top'
+		'sidebar-options-bottom';
+}
+.sidebar-logo {
+	grid-area: sidebar-logo;
+	padding-top: 10px;
+	button {
+		background: #036564;
+	}
+}
+.sidebar-options-top {
+	grid-area: sidebar-options-top;
+	padding-top: 20px;
+	button {
+		font-size: 40px;
+		background: #036564;
+		color: #e8ddcb;
+		margin-bottom: 10px;
+	}
+}
+.contenido {
+	grid-area: contenido;
+
+}
+
+
+
