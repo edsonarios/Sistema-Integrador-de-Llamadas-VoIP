@@ -199,4 +199,29 @@ colores
 }
 
 //fin columna 2 footer__________________________________
-
+.col3 {
+	grid-area: colum2;
+	overflow-y: scroll;
+	.search {
+		padding-left:10px;
+	  width: 100%;
+	  position: relative;
+	  margin: auto;
+	  display: flex;
+	}
+	
+	.searchTerm:focus{
+	  color: #223a59;
+	}
+	.searchButton {
+	  width: 40px;
+	  height: auto;
+	  border: 1px solid #223a59;
+	  background: #223a59;
+	  text-align: center;
+	  color: #fff;
+	  border-radius: 0 5px 5px 0;
+	  cursor: pointer;
+	  font-size: 20px;
+	}
+}
