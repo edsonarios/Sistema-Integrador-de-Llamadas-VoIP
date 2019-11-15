@@ -20,7 +20,7 @@ export class OperadorTemplateComponent implements OnInit {
 public Llamada=[];
 public Salas;
 public Notificaciones=[];
-	private Hide:boolean= true;
+	public Hide:boolean= true;
 	private datoNumber;
 	user: User;
 

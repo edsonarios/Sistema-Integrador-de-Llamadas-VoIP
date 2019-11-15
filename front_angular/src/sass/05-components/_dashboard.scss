@@ -79,7 +79,7 @@ colores
 .c2-escritorio {
 	grid-area: c2-escritorio;
 	display: grid;
-	grid-template-rows: minmax(120px, 75%) minmax(200px, 25%);
+	grid-template-rows: minmax(120px, 75vh) minmax(200px, 25vh);
 	grid-template-areas:
 		'c2-desktop'
 		'c2-panel';
