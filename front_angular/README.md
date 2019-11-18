@@ -78,34 +78,34 @@ con **Todos** sus componentes dirigidos a la carpeta con los estilos Sass.
 
 ```
 **TEMPLATES**
-- :ballot_box_with_check: Crear el template del operador
-- :ballot_box_with_check: Crear el componente de Salas
-- :ballot_box_with_check: Crear el componente para Agenda
-- :ballot_box_with_check: Crear el componente para Notificaciones
-- :ballot_box_with_check: Crear el componente Historial de llamadas
-- :ballot_box_with_check: Crear el componente Grabaciones
-- :ballot_box_with_check: Crear el enrutamiento entre componentes
-- :ballot_box_with_check: Enlazar en tablas los componentes (notificaciones,salas,agenda) a la columna Lateral
-- :ballot_box_with_check: Crear el template de llamada SIP (Notificaciones)
-- :ballot_box_with_check: Crear modelos locales para los componentes (notificaciones,salas,agenda)
-- :ballot_box_with_check: Agregar Nabvar para Historial de llamadas
-- :ballot_box_with_check: Agregar Nabvar para grabaciones
-- :ballot_box_with_check: Crear modelo de Grabaciones
-- :ballot_box_with_check: Crear un template de reproductor de audio
-- :ballot_box_with_check: Agregar un gestor de opciones para salir del sistema
-- :ballot_box_with_check: Añadir el Template de Administrador
-- :ballot_box_with_check: Crear Dashboard para el Administrador (solo 2 columnas)
-- :ballot_box_with_check: Crear el Componente de Contactos-Operadores
-- :ballot_box_with_check: Crear el componente de Añadir Contactos
-- :ballot_box_with_check: Crear el componente de Grabaciones
-- :ballot_box_with_check: incorporar el modulo de reproductor de audio
-- :ballot_box_with_check: Crear el componente de Tracking
-- :ballot_box_with_check: Crear el componente de Historial de llamadas
-- :ballot_box_with_check: Crear modelos locales para el escritorio
-- :ballot_box_with_check: Hacer interactuable el escritorio con las salas
-- :ballot_box_with_check: Hacer interactuable el escritorio con las Notificaciones
-- :ballot_box_with_check: Hacer interactuable el escritorio con el panel
-- :arrow_right: Incorporar funcionalidades al reproductor de audio con sonido
+- (Listo) Crear el template del operador
+- (Listo) Crear el componente de Salas
+- (Listo) Crear el componente para Agenda
+- (Listo) Crear el componente para Notificaciones
+- (Listo) Crear el componente Historial de llamadas
+- (Listo) Crear el componente Grabaciones
+- (Listo) Crear el enrutamiento entre componentes
+- (Listo) Enlazar en tablas los componentes (notificaciones,salas,agenda) a la columna Lateral
+- (Listo) Crear el template de llamada SIP (Notificaciones)
+- (Listo) Crear modelos locales para los componentes (notificaciones,salas,agenda)
+- (Listo) Agregar Nabvar para Historial de llamadas
+- (Listo) Agregar Nabvar para grabaciones
+- (Listo) Crear modelo de Grabaciones
+- (Listo) Crear un template de reproductor de audio
+- (Listo) Agregar un gestor de opciones para salir del sistema
+- (Listo) Añadir el Template de Administrador
+- (Listo) Crear Dashboard para el Administrador (solo 2 columnas)
+- (Listo) Crear el Componente de Contactos-Operadores
+- (Listo) Crear el componente de Añadir Contactos
+- (Listo) Crear el componente de Grabaciones
+- (Listo) incorporar el modulo de reproductor de audio
+- (Listo) Crear el componente de Tracking
+- (Listo) Crear el componente de Historial de llamadas
+- (Listo) Crear modelos locales para el escritorio
+- (Listo) Hacer interactuable el escritorio con las salas
+- (Listo) Hacer interactuable el escritorio con las Notificaciones
+- (Listo) Hacer interactuable el escritorio con el panel
+- (En curso) Incorporar funcionalidades al reproductor de audio con sonido
 - Probar descargas
 - Importar las animaciones faltantes de transicion
 - Desplegar datos mediante servicio al template-operador
@@ -119,13 +119,13 @@ con **Todos** sus componentes dirigidos a la carpeta con los estilos Sass.
 **ESTILOS**
 
 	_OPERADOR_
-- :ballot_box_with_check: Añadir estilos al componente de Agenda
-- :ballot_box_with_check: Añadir estilos al componente de panel de estados
-- :ballot_box_with_check: Añadir estilos al componente de notificaciones
-- :ballot_box_with_check: Añadir estilos al componente de salas
-- :ballot_box_with_check: Añadir estilos al componente de contactos
-- :ballot_box_with_check: Añadir estilos al componente del escritorio para llamadas 
-- :arrow_right: Estandarizar colores
+- (Listo) Añadir estilos al componente de Agenda
+- (Listo) Añadir estilos al componente de panel de estados
+- (Listo) Añadir estilos al componente de notificaciones
+- (Listo) Añadir estilos al componente de salas
+- (Listo) Añadir estilos al componente de contactos
+- (Listo) Añadir estilos al componente del escritorio para llamadas 
+- (En curso) Estandarizar colores
 	_ADMINISTRADOR_
 - añadir estilos a el dashboard-administrador
 - Añadir estilos grid para el template del adminsitrador
@@ -140,12 +140,12 @@ con **Todos** sus componentes dirigidos a la carpeta con los estilos Sass.
 
 ```
 **SERVICIOS**
-- :ballot_box_with_check: Crear los modelos de usuarios
-- :ballot_box_with_check: Crear los modelos de Salas
-- :ballot_box_with_check: crear los modelos de Sip
-- :ballot_box_with_check: Añadir servicio de Login
-- :ballot_box_with_check: Añadir servicio para Agregar usuario
-- :arrow_right: Añadir servicio para editar usuario
+- (Listo) Crear los modelos de usuarios
+- (Listo) Crear los modelos de Salas
+- (Listo) crear los modelos de Sip
+- (Listo) Añadir servicio de Login
+- (Listo) Añadir servicio para Agregar usuario
+- (En curso) Añadir servicio para editar usuario
 - Añadir servicio para dar de alta un usuario
 - Añadir servicio para crear una sala
 - Añadir servicio para editar una sala
@@ -156,6 +156,6 @@ con **Todos** sus componentes dirigidos a la carpeta con los estilos Sass.
 
 ## Resumen General Front-End
 
--Templates _80% terminado_
--Estilos _70% terminado_
--Servicios _40% terminado_
+- Templates _80% terminado_
+- Estilos _70% terminado_
+- Servicios _40% terminado_
