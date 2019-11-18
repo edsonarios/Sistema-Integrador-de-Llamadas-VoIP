@@ -1,16 +1,16 @@
-//#e8e3de, #E8DDCB, #CDB380, #036564, #033649, #031634
+//var(--color-uno), var(--color-dos), var(--color-tres), var(--color-cuatro), var(--color-cinco), var(--color-seis)
 .modal-content{
   border-radius: 2%;
   width: 400px;
   border: none;
-  background: #e8e3de;
+  background: var(--color-uno);
   height: 610px;
 }
 .dialpad {
 	font-size: 15px;
 	font-weight: bold;
   padding: 3%;
-  color: #031634;
+  color: var(--color-seis);
   border-radius: 2%;
   display: grid;
   justify-content: center;
@@ -28,7 +28,7 @@
 		font-weight: bold;
 		border-radius: 50%;
 		background: #f3f3f3;
-		color: #031634;
+		color: var(--color-seis);
 		width: 80px;
 		height: 80px;
 		border: none;
@@ -64,7 +64,7 @@
 	button {
 		font-weight: bold;
 		border-radius: 10px;
-		background: #CDB380;
+		background: var(--color-tres);
 		color: 031634;
 		width: 90px;
 		height: 70px;
@@ -131,7 +131,7 @@
 	button {
 		font-weight: bold;
 		background: #a1c65a;
-		color: #031634;
+		color: var(--color-seis);
     width: 80px;
     height: 80px;
 	}

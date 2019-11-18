@@ -14,8 +14,8 @@
 	min-height: 5vh;
 	grid-area: head;
 	padding-top: 12px;
-	color: #E8DDCB;
-	background: #031634;
+	color: var(--color-dos);
+	background: var(--color-seis);
 }
 
 //BODY LOGIN
@@ -33,16 +33,16 @@
 .login__login {
 	width: 500px;
 	border-radius: 5px;
-	background: #e8e3de;
+	background: var(--color-uno);
 	text-align: left;
 	opacity: 0.97;
 	&--titulo {
-		color: #036564;
+		color: var(--color-cuatro);
 		padding-top: 50px;
 		text-align: center;
 	}
 	&--form {
-		color: #036564;
+		color: var(--color-cuatro);
 		width: 100%;
 		padding: 20px 30px 20px 30px;
 	}
@@ -60,13 +60,13 @@
 	}
 	button:hover {
 		transform: translateY(-3px);
-		box-shadow: 0 5px 20px #036564;
-		background: #036564;
+		box-shadow: 0 5px 20px var(--color-cuatro);
+		background: var(--color-cuatro);
 	}
 	&--btn {
 		height: 50px;
 		width: 100%;
-		background: #CDB380;
+		background: var(--color-tres);
 	}
 }
 .label-left {
@@ -84,8 +84,8 @@
 	grid-area: footr;
 	padding-top: 12px;
 	text-align: center;
-	background: #031634;
+	background: var(--color-seis);
 	font-size: 18px;
 	font-weight: bold;
-	color: #E8DDCB;
+	color: var(--color-dos);
 }

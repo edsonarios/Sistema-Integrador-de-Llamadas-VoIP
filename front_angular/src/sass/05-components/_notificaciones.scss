@@ -1,8 +1,8 @@
-//#E8DDCB, #CDB380, #036564, #033649, #031634
+//var(--color-dos), var(--color-tres), var(--color-cuatro), var(--color-cinco), var(--color-seis)
 
 .notificaciones {
 	margin: 8px;
-	background: #E8DDCB;
+	background: var(--color-dos);
 	display: grid;
 	grid-template-columns: 20% 42% 38%;
 	grid-template-areas: 'nombre tipo accion';
@@ -12,7 +12,7 @@
 .n-nombre {
     display: grid;
     grid-area: nombre;
-    color: #E8DDCB;
+    color: var(--color-dos);
     background-image: url(assets/avatar.png);
     background-size: cover;
     align-items: center;
@@ -21,7 +21,7 @@
 	grid-area: tipo;
 	&--entrante {
 		padding-top: 15%;
-		background: #CDB380;
+		background: var(--color-tres);
 	}
 	&--espera {
 		padding-top: 15%;
@@ -31,7 +31,7 @@
 .n-accion {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background: #CDB380;
+    background: var(--color-tres);
     i{
         color: black;
         font-size: 30px;
@@ -42,7 +42,7 @@
         height: 80%;
         margin-top:10%;
         font-size: 13px;
-        color: #031634;
+        color: var(--color-seis);
         text-transform: uppercase;
     }
     button:hover{

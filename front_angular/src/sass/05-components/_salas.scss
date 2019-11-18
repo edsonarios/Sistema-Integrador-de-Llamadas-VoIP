@@ -1,4 +1,4 @@
-//#e8e3de, #E8DDCB, #CDB380, #036564, #033649, #031634
+//var(--color-uno), var(--color-dos), var(--color-tres), var(--color-cuatro), var(--color-cinco), var(--color-seis)
 
 .sala {
 	display: grid;
@@ -6,20 +6,20 @@
 	grid-template-areas: 'flecha sala detalle';
 	height: 80px;
 	margin: 10px;
-	color: #e8e3de;
+	color: var(--color-uno);
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .s-flecha {
 	grid-area: flecha;
 	button {
-		background: #cdb380;
+		background: var(--color-tres);
 		height: 100%;
 		width: 100%;
 	}
 	button:hover {
-		background: #031634;
-		color: #e8e3de;
+		background: var(--color-seis);
+		color: var(--color-uno);
 		animation-name: initial;
 	}
 }
@@ -28,7 +28,7 @@
 	display: grid;
 	align-content: center;
 	grid-area: sala;
-	background: #e8ddcb;
+	background: var(--color-dos);
 	color: #012036;
 }
 
@@ -36,5 +36,5 @@
 	display: grid;
 	align-content: center;
 	grid-area: detalle;
-	background: #033649;
+	background: var(--color-cinco);
 }

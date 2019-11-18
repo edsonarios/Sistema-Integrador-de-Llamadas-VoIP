@@ -59,6 +59,11 @@ _Atentamente: uno del front :v_
 
 
 
+
+- TEMPLATES ====> Richard
+- ESTILOS ======> Jorge
+- SERVICIOS ====> Henry
+
 =====TEMPLATES=====
 
 - ( Listo ) Quitar el router de Contactos
@@ -93,7 +98,9 @@ _Atentamente: uno del front :v_
 - ( Listo ) Añadir estilos al template de notificaciones
 - ( Listo ) Añadir estilos al template de salas
 - ( Listo ) Añadir estilos al template de contactos
-- ( Listo ) Añadir estilos al componente del escritorio para llamadas (radios-operadores)
+- ( Listo ) Añadir estilos al componente del escritorio para llamadas 
+- ( En Curso ) Estandarizar colores
+
 
 - añadir estilos a el dashboard-administrador
 - Añadir estilos grid para el template del adminsitrador

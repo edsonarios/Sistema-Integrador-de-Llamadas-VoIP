@@ -1,11 +1,11 @@
-//#e8e3de, #E8DDCB, #CDB380, #036564, #033649, #031634
+//var(--color-uno), var(--color-dos), var(--color-tres), var(--color-cuatro), var(--color-cinco), var(--color-seis)
 
 .Agenda {
 
 	margin: 10px;
-	background: #E8DDCB;
+	background: var(--color-dos);
 	.table {
-		color: #031634;
+		color: var(--color-seis);
 		width: 100%;
 		max-width: 100%;
 		margin-bottom: 2rem;
@@ -25,7 +25,7 @@
 		}
 
 		tr:hover td{
-			background: #CDB380;
+			background: var(--color-tres);
 			color: white;
 		}
 	}
