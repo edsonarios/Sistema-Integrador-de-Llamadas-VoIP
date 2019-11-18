@@ -17,39 +17,30 @@ import {interval, timer } from 'rxjs';
 })
 export class OperadorTemplateComponent implements OnInit {
 
-public Llamada;
-	
-
-	private Hide:boolean= true;
+public Llamada=[];
+public Salas;
+public Notificaciones=[];
+public Panel=[];
+	public Hide:boolean= true;
 	private datoNumber;
 	user: User;
-	private sala;
-
-	public Salas;
-
 
 	modalRef: BsModalRef;
 	constructor(private modalService: BsModalService, private formBuilder: FormBuilder) {
 		this.Salas=[
-		{'nombre':'Sala 1','id':'1','Dimesions':'10','Ocupando':'2'},
-		{'nombre':'Sala 2','id':'2','Dimesions':'5','Ocupando':'1'},
-		{'nombre':'Emergencias 1','id':'3','Dimesions':'5','Ocupando':'3'},
-		{'nombre':'Emergencias 2','id':'4','Dimesions':'5','Ocupando':'0'},
-		{'nombre':'Emergencia 3','id':'5','Dimesions':'5','Ocupando':'1'},
-		{'nombre':'Radio 1','id':'6','Dimesions':'4','Ocupando':'4'},
-		{'nombre':'Radio 2','id':'7','Dimesions':'2','Ocupando':'0'}
+		{'nombre':'Sala 1','id':'1','Dimesions':'10','Ocupando':'2','Numero':'3001'},
+		{'nombre':'Sala 2','id':'2','Dimesions':'5','Ocupando':'1','Numero':'3002'},
+		{'nombre':'Emergencias 1','id':'3','Dimesions':'5','Ocupando':'3','Numero':'3003'},
+		{'nombre':'Emergencias 2','id':'4','Dimesions':'5','Ocupando':'0','Numero':'3004'},
+		{'nombre':'Emergencia 3','id':'5','Dimesions':'5','Ocupando':'1','Numero':'3005'},
+		{'nombre':'Radio 1','id':'6','Dimesions':'4','Ocupando':'4','Numero':'3006'},
+		{'nombre':'Radio 2','id':'7','Dimesions':'2','Ocupando':'0','Numero':'3007'}
 		];
 
-		this.Llamada=[
-		{'nombre':'Richard','id':'1','numero':'3001','Tipo':'Llamada','Estado':'Inactiva'},
-		//{'nombre':'Sala PTT','id':'2','numero':'3002','Tipo':'Sala','Estado':'Activa'},
-		//{'nombre':'Sala PTT','id':'3','numero':'3003','Tipo':'Sala','Estado':'Inactiva'},
-		//{'nombre':'Sala 2','id':'4','numero':'3005','Tipo':'Llamada','Estado':'Inactiva'},
-		//{'nombre':'Sala 4','id':'5','numero':'3004','Tipo':'Llamada','Estado':'Inactiva'},
-		//{'nombre':'Sala 3','id':'6','numero':'3006','Tipo':'Llamada','Estado':'Inactiva'}
-		];
+	/*this.Llamada=[{'nombre':'Daniel','id':'1','numero':'3001','Tipo':'Llamada','Estado':'Inactiva'},
+				{'nombre':'Prueba Sala','id':'2','numero':'3002','Tipo':'Sala','Estado':'Inactiva'}];*/
 
-		console.log(this.Salas)
+		//console.log(this.Salas)
 		//const contador=interval(1000);
 
 		/*contador.subscribe((n)=>{
@@ -59,12 +50,7 @@ public Llamada;
 
 	}
 	ngOnInit() {
-		this.sala = [
-			{ nombreSala: 'Sala 1', descripcion: 'Descripcion', usuarioId: '1' },
-			{ nombreSala: 'Sala 2', descripcion: 'Descripcion2', usuarioId: '2' },
-			{ nombreSala: 'Sala 3', descripcion: 'Descripcion3', usuarioId: '3' }
-		];
-
+	
 		this.user = {
 			nombre: 'usuario',
 			apPaterno: 'userPat',
@@ -87,15 +73,69 @@ public Llamada;
 			}
 		}
 	}
-	procesaPropagar(nombre) {
-  //	console.log(nombre);
-  	console.log('Recibido : '+ nombre['nombre']);
-  	console.log('Recibido : '+ nombre['id']);
-  	this.Llamada.push({'nombre':'Sala 2','id':'4','numero':'3005','Tipo':'Llamada','Estado':'Inactiva'});
+	AgregarEventoNotificacion(){
+		var numero= Math.round((Math.random() * (3020 - 3000) + 3000));
+		var id= Math.round((Math.random()*(20-11)+11));
+		this.Notificaciones.push({'nombre':'Alias','numero':numero,'estado':'entrante','id':id});
+	}
+	AgregarEventoPanel(numero,fecha,tiempo,tipo){
+		this.Panel.push({'tipo':tipo,'Numero':numero,'fecha':fecha,'tiempo':tiempo});
+	}
+	RegistraSala(Sala) {
+  	this.Llamada.push({'nombre':Sala['nombre'],'id':Sala['id'],'numero':Sala['numero'],'Tipo':'Sala','Estado':'Inactiva'});
+  	this.EliminaItemSalas(Sala['id']);
   		
 	}
+	CerrarLlamada(llamada){
+
+		this.EliminaItemLlamadas(llamada['Id']);
+		if (llamada['Tipo']=='Sala') {
+			this.Salas.push({'nombre':llamada['Nombre'],'id':llamada['Id'],'Dimesions':'5','Ocupando':'1','Numero':llamada['Numero']});
+		}
+		
+
+	}
+	ContestarLlamada(Notificacion){
+		this.Llamada.push({'nombre':Notificacion['Nombre'],'id':Notificacion['Id'],'numero':Notificacion['Numero'],'Tipo':'Llamada','Estado':'Inactiva'});
+		this.EliminaItemNotificacion(Notificacion['Id']);
+		this.AgregarEventoPanel(Notificacion['Numero'],'15/11/2019','false','entrante');
+
+	}
+	ColgarLlamada(Notificacion){
+		this.EliminaItemNotificacion(Notificacion['Id']);
+		this.AgregarEventoPanel(Notificacion['Numero'],'15/11/2019','false','perdida');
+		
+	}
+
 	DialPadComponent() {
 		this.modalRef = this.modalService.show(DialPadComponent);
+	}
+	EliminaItemLlamadas(id_llamada){
+		let aux=[];
+		for (var i = 0 ; i < this.Llamada.length; i++) {
+			if (id_llamada != this.Llamada[i]['id']) {
+				aux.push(this.Llamada[i]);
+			}
+		}
+		this.Llamada=aux;
+	}
+	EliminaItemSalas(id_Salas){
+		let aux=[];
+		for (var i = 0 ; i < this.Salas.length; i++) {
+			if (id_Salas != this.Salas[i]['id']) {
+				aux.push(this.Salas[i]);
+			}
+		}
+		this.Salas=aux;
+	}
+	EliminaItemNotificacion(id_Notificacion){
+		let aux=[];
+		for (var i = 0 ; i < this.Notificaciones.length; i++) {
+			if (id_Notificacion != this.Notificaciones[i]['id']) {
+				aux.push(this.Notificaciones[i]);
+			}
+		}
+		this.Notificaciones=aux;
 	}
 	ConvertirTiempo(tiempo){
 		//  PENDIENTE

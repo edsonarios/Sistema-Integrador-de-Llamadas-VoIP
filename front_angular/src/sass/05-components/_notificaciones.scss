@@ -1,9 +1,10 @@
+//var(--color-dos), var(--color-tres), var(--color-cuatro), var(--color-cinco), var(--color-seis)
+
 .notificaciones {
-	border: solid 2px #223a59;
 	margin: 8px;
-	background: #ffffff;
+	background: var(--color-dos);
 	display: grid;
-	grid-template-columns: 27% 45% 28%;
+	grid-template-columns: 20% 42% 38%;
 	grid-template-areas: 'nombre tipo accion';
     height: 80px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -11,15 +12,16 @@
 .n-nombre {
     display: grid;
     grid-area: nombre;
-    color: white;
-    background: #223a59;
+    color: var(--color-dos);
+    background-image: url(assets/avatar.png);
+    background-size: cover;
     align-items: center;
 }
 .n-tipo {
 	grid-area: tipo;
 	&--entrante {
 		padding-top: 15%;
-		background: #6BEE17;
+		background: var(--color-tres);
 	}
 	&--espera {
 		padding-top: 15%;
@@ -27,11 +29,20 @@
 	}
 }
 .n-accion {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--color-tres);
+    i{
+        color: black;
+        font-size: 30px;
+    }
 	button {
-		width: 100%;
-        height: 50%;
-        font-size: 15px;
-        color: white;
+        border-radius: 50%;
+		width: 80%;
+        height: 80%;
+        margin-top:10%;
+        font-size: 13px;
+        color: var(--color-seis);
         text-transform: uppercase;
     }
     button:hover{
@@ -40,9 +51,9 @@
     }
     grid-area: accion;
     &--contestar{
-        background: #223a59;
+        background: #2ecc71;
     }
     &--colgar{
-        background: #F43A29;
+        background: #e74c3c;
     }
 }

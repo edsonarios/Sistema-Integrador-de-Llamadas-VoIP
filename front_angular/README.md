@@ -56,3 +56,72 @@ con **Todos** sus componentes dirigiendo a Sass.
 si encuentran algun error o alguna observacion me lo hacen saber
 
 _Atentamente: uno del front :v_
+
+
+
+
+- TEMPLATES ====> Richard
+- ESTILOS ======> Jorge
+- SERVICIOS ====> Henry
+
+=====TEMPLATES=====
+
+- ( Listo ) Quitar el router de Contactos
+- ( Listo ) Crear el componente de Salas
+- ( Listo ) Crear el componente para Agenda
+- ( Listo ) Crear el componente para Notificaciones
+- ( Listo ) Enlazar en tablas los componentes (notificaciones,salas,agenda) a la columna Lateral
+- ( Listo ) Crear el template de llamada SIP (Notificaciones)
+- ( Listo ) Crear el template de Salas 
+- ( Listo ) Crear el template para agendas
+- ( Listo ) Crear modelos locales para los componentes (notificaciones,salas,agenda)
+- ( Listo ) Agregar Nabvar para Historial de llamadas
+- ( Listo ) Crear modelo de Grabaciones
+- ( Listo ) Crear un template de reproductor de audio
+- ( Listo ) Agregar un gestor de opciones para salir del sistema
+
+- Añadir el Template de Administrador
+- Crear Dashboard para el Administrador (solo 2 columnas)
+- Crear el Componente de Contactos-Operadores
+- Crear el componente de Añadir Contactos
+- Crear el componente de Grabaciones
+- incorporar el modulo de reproductor de audio
+- Crear el componente de Tracking
+- Crear el componente de Historial de llamadas
+
+- Probar descargas
+
+=====ESTILOS=====
+- ( Listo ) ESTILOS OPERADOR
+- ( Listo ) Añadir estilos al template de Agenda
+- ( Listo ) Añadir estilos al template de panel de estados
+- ( Listo ) Añadir estilos al template de notificaciones
+- ( Listo ) Añadir estilos al template de salas
+- ( Listo ) Añadir estilos al template de contactos
+- ( Listo ) Añadir estilos al componente del escritorio para llamadas 
+- ( En Curso ) Estandarizar colores
+
+
+- añadir estilos a el dashboard-administrador
+- Añadir estilos grid para el template del adminsitrador
+- incorporar estilos a los formularios de añadir y editar contactos
+- añadir estilos a la lista de contactos
+- añadir estilos a el historial de llamadas
+- añadir estilos a el tracking
+- añadir estilos a las grabaciones
+
+
+=====SERVICIOS=====
+- Agarrar todos los datos del usuario al Ingresar Y mostrarlos
+- Obtener todas las Salas
+- Obtener todos los contactos
+- Obtener el historial de llamadas
+- Obtener los datos de las grabaciones
+
+- Modificar un contacto
+- Eliminar un contacto
+- Añadir una sala
+- Dar de alta un contacto
+- Dar de alta una radio
+- Obtener el historial de llamadas de un operador
+- Obtener el registro de grabaciones de un operador

@@ -1,36 +1,40 @@
+//var(--color-uno), var(--color-dos), var(--color-tres), var(--color-cuatro), var(--color-cinco), var(--color-seis)
+
 .sala {
 	display: grid;
 	grid-template-columns: 15% 55% 30%;
-    grid-template-areas: 'flecha sala detalle';
-    height: 80px;
-    margin: 10px;
-    color: white;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	grid-template-areas: 'flecha sala detalle';
+	height: 80px;
+	margin: 10px;
+	color: var(--color-uno);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .s-flecha {
-    grid-area: flecha;
-    button{
-        height: 100%;
-        width: 100%;
-    }
-    button:hover{
-        background: red;
-        animation-name: initial;
-    }
+	grid-area: flecha;
+	button {
+		background: var(--color-tres);
+		height: 100%;
+		width: 100%;
+	}
+	button:hover {
+		background: var(--color-seis);
+		color: var(--color-uno);
+		animation-name: initial;
+	}
 }
 
 .s-sala {
-    display: grid;
-    align-content: center;
-    grid-area: sala;
-    background: #F2F3F5;
-    color: #012036;
+	display: grid;
+	align-content: center;
+	grid-area: sala;
+	background: var(--color-dos);
+	color: #012036;
 }
 
 .s-detalle {
-    display: grid;
-    align-content: center;
-    grid-area: detalle;
-    background: #6BEE17;
+	display: grid;
+	align-content: center;
+	grid-area: detalle;
+	background: var(--color-cinco);
 }

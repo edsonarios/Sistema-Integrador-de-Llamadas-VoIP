@@ -1,4 +1,4 @@
-import { Component, OnInit , Input} from '@angular/core';
+import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,9 +11,17 @@ export class LlamadaComponent implements OnInit {
 	 @Input() Tipo: string;
 	 @Input() Id: string;
 	 @Input() Estado: string;
+
+	 @Output() llamadaClose = new EventEmitter<string>();
+	 public llamada;
+
 	constructor(private router: Router) {
 
 	}
 
 	ngOnInit() {}
+	CerrarLlamada(nombre:string,numero:string,id_llamada:string,tipo:string) {
+		this.llamada={'Nombre':nombre,'Numero':numero,'Id':id_llamada,'Tipo':tipo};
+		this.llamadaClose.emit(this.llamada);
+  }
 }

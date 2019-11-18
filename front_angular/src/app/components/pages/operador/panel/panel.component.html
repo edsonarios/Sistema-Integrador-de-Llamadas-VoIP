@@ -1,9 +1,9 @@
-<header>
-	Panel de Estados
-</header>
+<section class="panel">
+	<header class="panel__header">
+		Panel de Estados
+	</header>
 
-<div class="Contactos">
-	<div class="table-responsive-vertical shadow-z-1">
+	<div>
 		<!-- Table starts here -->
 		<table id="table" class="table table-hover table-mc-light-blue">
 			<thead>
@@ -16,24 +16,24 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr >
+				<tr *ngFor="let n of Panel; let i = index">
 					<td data-title="Link">
 						<i class="v-icon-incoming-call" tooltip="Entrante" style="color: green"></i>
 					</td>
 					<td data-title="Link">
-						4001
+						{{Panel[i]['Numero']}}
 					</td>
 					<td data-title="Link">
-						20/10/2019
+						{{Panel[i]['fecha']}}
 					</td>
 					<td data-title="Link">
-						{{Tiempo}}
+						- - : - - : - -
 					</td>
 					<td>
-						<i class="v-icon-delete" tooltip="Finalizar" style="color: red"></i>
+						<i class="v-icon-delete" tooltip="Borrar" style="color: red"></i>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-</div>
+</section>

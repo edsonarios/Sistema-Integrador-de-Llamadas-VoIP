@@ -1,67 +1,15 @@
 <div class="notificaciones">
 	<div class="n-nombre">
-		Alias 3001
 	</div>
-	<div class="n-tipo--entrante">
-		Llamada Entrante
-	</div>
+	<div class="n-tipo--entrante">{{ Nombre }} {{ Numero }}</div>
 	<div class="n-accion">
-		<button class="n-accion--contestar">
-			Contestar
+		<button class="n-accion--contestar" (click)="ContestarLlamada(Nombre, Numero, Id)" tooltip="Contestar">
+			
+			<i class="v-icon-call" aria-hidden="true"></i>
 		</button>
-		<button class="n-accion--colgar">
-			Colgar
-		</button>
-	</div>
-</div>
+		<button class="n-accion--colgar" (click)="ColgarLlamada(Nombre, Numero, Id)" tooltip="Colgar">
 
-<div class="notificaciones">
-	<div class="n-nombre">
-		Alias 3002
-	</div>
-	<div class="n-tipo--entrante">
-		Llamada Entrante
-	</div>
-	<div class="n-accion">
-		<button class="n-accion--contestar">
-			Contestar
-		</button>
-		<button class="n-accion--colgar">
-			Colgar
-		</button>
-	</div>
-</div>
-
-<div class="notificaciones">
-	<div class="n-nombre">
-		Alias 3003
-	</div>
-	<div class="n-tipo--espera">
-		Llamada en Espera
-	</div>
-	<div class="n-accion">
-		<button class="n-accion--contestar">
-			CONTESTAR
-		</button>
-		<button class="n-accion--colgar">
-			COLGAR
-		</button>
-	</div>
-</div>
-
-<div class="notificaciones">
-	<div class="n-nombre">
-		Alias 3004
-	</div>
-	<div class="n-tipo--entrante">
-		Llamada Entrante
-	</div>
-	<div class="n-accion">
-		<button class="n-accion--contestar">
-			Contestar
-		</button>
-		<button class="n-accion--colgar">
-			Colgar
+			<i class="v-icon-call_end" aria-hidden="true"></i>
 		</button>
 	</div>
 </div>

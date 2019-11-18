@@ -7,11 +7,14 @@ import { Router } from '@angular/router';
 })
 export class PanelComponent implements OnInit {
 	 @Input() Tiempo: string;
+	 @Input() Objeto: any; 
 
+	 public Panel=[];
 	constructor(private router: Router) {
-	
 	}
 
-	ngOnInit() {}
+	ngOnInit() {
+		this.Panel=this.Objeto;
+	}
 
 }

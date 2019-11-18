@@ -1,184 +1,213 @@
 @font-face {
-	font-family: 'AsteriskIcons';
-	src: url('fonts/AsteriskIcons.eot?9h7x2h');
-	src: url('fonts/AsteriskIcons.eot?9h7x2h#iefix') format('embedded-opentype'),
-		url('fonts/AsteriskIcons.ttf?9h7x2h') format('truetype'),
-		url('fonts/AsteriskIcons.woff?9h7x2h') format('woff'),
-		url('fonts/AsteriskIcons.svg?9h7x2h#AsteriskIcons') format('svg');
-	font-weight: normal;
-	font-style: normal;
-	font-display: block;
+  font-family: 'AsteriskIcons';
+  src:  url('fonts/AsteriskIcons.eot?wvk4wm');
+  src:  url('fonts/AsteriskIcons.eot?wvk4wm#iefix') format('embedded-opentype'),
+    url('fonts/AsteriskIcons.ttf?wvk4wm') format('truetype'),
+    url('fonts/AsteriskIcons.woff?wvk4wm') format('woff'),
+    url('fonts/AsteriskIcons.svg?wvk4wm#AsteriskIcons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
 }
 
-[class^='v-icon-'],
-[class*=' v-icon-'] {
-	/* use !important to prevent issues with browser extensions that change fonts */
-	font-family: 'AsteriskIcons' !important;
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
+[class^="v-icon-"], [class*=" v-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'AsteriskIcons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
 
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.v-icon-add:before {
-	content: '\e900';
+.v-icon-cancel:before {
+  content: "\e900";
 }
-.v-icon-ambulance-side-view:before {
-	content: '\e901';
+.v-icon-close:before {
+  content: "\e900";
 }
-.v-icon-arrow-pointing-down:before {
-	content: '\e902';
+.v-icon-trash:before {
+  content: "\e901";
 }
-.v-icon-calendar:before {
-	content: '\e903';
-}
-.v-icon-call:before {
-	content: '\e904';
-}
-.v-icon-check-symbol:before {
-	content: '\e905';
-}
-.v-icon-cloud-computing:before {
-	content: '\e906';
+.v-icon-remove:before {
+  content: "\e901";
 }
 .v-icon-delete:before {
-	content: '\e907';
+  content: "\e901";
+}
+.v-icon-pause:before {
+  content: "\e902";
+}
+.v-icon-group:before {
+  content: "\e903";
+}
+.v-icon-users:before {
+  content: "\e903";
+}
+.v-icon-radio:before {
+  content: "\e904";
+}
+.v-icon-phone_missed:before {
+  content: "\e905";
+}
+.v-icon-call_end:before {
+  content: "\e906";
+}
+.v-icon-call:before {
+  content: "\e907";
+}
+.v-icon-add:before {
+  content: "\e908";
+}
+.v-icon-ambulance-side-view:before {
+  content: "\e909";
+}
+.v-icon-arrow-pointing-down:before {
+  content: "\e90a";
+}
+.v-icon-calendar:before {
+  content: "\e90b";
+}
+.v-icon-call1:before {
+  content: "\e90c";
+}
+.v-icon-check-symbol:before {
+  content: "\e90d";
+}
+.v-icon-cloud-computing:before {
+  content: "\e90e";
+}
+.v-icon-delete1:before {
+  content: "\e90f";
 }
 .v-icon-dial:before {
-	content: '\e908';
+  content: "\e910";
 }
 .v-icon-download-to-storage-drive:before {
-	content: '\e909';
+  content: "\e911";
 }
 .v-icon-edit:before {
-	content: '\e90a';
+  content: "\e912";
 }
 .v-icon-expand:before {
-	content: '\e90b';
+  content: "\e913";
 }
 .v-icon-funnel:before {
-	content: '\e90c';
+  content: "\e914";
 }
 .v-icon-history:before {
-	content: '\e90d';
+  content: "\e915";
 }
 .v-icon-identification:before {
-	content: '\e90e';
+  content: "\e916";
 }
 .v-icon-incoming-call:before {
-	content: '\e90f';
+  content: "\e917";
 }
 .v-icon-location:before {
-	content: '\e910';
+  content: "\e918";
 }
 .v-icon-logistics-delivery-truck-in-movement:before {
-	content: '\e911';
+  content: "\e919";
 }
 .v-icon-magnifying-glass:before {
-	content: '\e912';
+  content: "\e91a";
 }
 .v-icon-menu:before {
-	content: '\e913';
+  content: "\e91b";
 }
 .v-icon-microphone:before {
-	content: '\e914';
+  content: "\e91c";
 }
 .v-icon-microphone1:before {
-	content: '\e915';
+  content: "\e91d";
 }
 .v-icon-microphone-black-shape:before {
-	content: '\e916';
+  content: "\e91e";
 }
 .v-icon-minimize:before {
-	content: '\e917';
+  content: "\e91f";
 }
 .v-icon-more:before {
-	content: '\e918';
+  content: "\e920";
 }
 .v-icon-muted-1:before {
-	content: '\e919';
+  content: "\e921";
 }
 .v-icon-pencil-edit-button:before {
-	content: '\e91a';
+  content: "\e922";
 }
 .v-icon-phone:before {
-	content: '\e91b';
+  content: "\e923";
 }
 .v-icon-phone-call:before {
-	content: '\e91c';
-}
-.v-icon-phone-call-2:before {
-	content: '\e91d';
-}
-.v-icon-phone-call-1:before {
-	content: '\e91e';
+  content: "\e924";
 }
 .v-icon-pin:before {
-	content: '\e91f';
+  content: "\e925";
 }
 .v-icon-play-button:before {
-	content: '\e920';
+  content: "\e926";
 }
 .v-icon-plus-symbol:before {
-	content: '\e921';
+  content: "\e927";
 }
 .v-icon-record:before {
-	content: '\e922';
+  content: "\e928";
 }
 .v-icon-record-1:before {
-	content: '\e923';
+  content: "\e929";
 }
 .v-icon-right-arrow:before {
-	content: '\e924';
+  content: "\e92a";
 }
 .v-icon-round-account-button-with-user-inside:before {
-	content: '\e925';
+  content: "\e92b";
 }
 .v-icon-route:before {
-	content: '\e926';
+  content: "\e92c";
 }
 .v-icon-search:before {
-	content: '\e927';
+  content: "\e92d";
 }
 .v-icon-settings:before {
-	content: '\e928';
+  content: "\e92e";
 }
 .v-icon-settings1:before {
-	content: '\e929';
+  content: "\e92f";
 }
 .v-icon-speaker:before {
-	content: '\e92a';
+  content: "\e930";
 }
 .v-icon-support:before {
-	content: '\e92b';
+  content: "\e931";
 }
 .v-icon-telephone-receiver-with-up-arrow:before {
-	content: '\e92c';
+  content: "\e932";
 }
 .v-icon-tracking:before {
-	content: '\e92d';
+  content: "\e933";
 }
 .v-icon-userdel:before {
-	content: '\e92e';
+  content: "\e934";
 }
 .v-icon-usersdel:before {
-	content: '\e92f';
+  content: "\e935";
 }
 .v-icon-user-silhouette:before {
-	content: '\e930';
+  content: "\e936";
 }
 .v-icon-volume-off:before {
-	content: '\e931';
+  content: "\e937";
 }
 .v-icon-walkie-talkie:before {
-	content: '\e932';
+  content: "\e938";
 }
 .v-icon-wifi:before {
-	content: '\e933';
+  content: "\e939";
 }
