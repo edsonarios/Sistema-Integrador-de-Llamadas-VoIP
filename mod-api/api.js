@@ -613,6 +613,22 @@ api.get('/findAllSala', async (req, res, next) => {
   res.send(obj)
 })
 
+api.post('/getUsuariosPorSala', async (req, res, next) => {
+  var params = req.body
+
+  const usuariosTodos = await Usuario.findAll();
+  var usuariosSala = []
+
+  usuariosTodos.forEach(usuario => {
+            
+          if(usuario.salaId == params.salaId){
+                 
+              usuariosSala.push(usuario)
+          }
+  })
+
+  res.send(usuariosSala)
+});
 /// USUARIO /////////////////////////////////////////////////////////////////////
 
 api.post('/addUsuario', async (req, res, next) => {
