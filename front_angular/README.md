@@ -1,158 +1,79 @@
-# Cambios Front-End Noviembre 2019
+# SISTEMA INTEGRADOR DE LLAMADAS VOIP (Front - End)
 
-Se han realizado varios avances y muchos cambios en su mayoria la estructura y contenido respecto a modulos y enrutamientos.
-Asi tambien se asignaron los siguientes roles:
-- TEMPLATES  -_Richard_-
-- ESTILOS  -_Jorge_-
-- SERVICIOS  -_Henry_-
+## Responsables
+### Templates (_Encargado **Richard**_)
 
+Orientado a la estructuracion de archivos y componentes, asi tambien el manejo de enrutamientos, eventos y creacion de formularios, manejo de modulos e importacion de paquetes.
 
-## Gestion del proyecto
+### Estilos (_Encargado **Jorge**_)
 
-Se han creado 2 carpetas en las cuales, se gestionaran los archivos del sistema , los cuales son:
+Todo aspecto visual entre el usuario y el sistema, optando por la metodologia BEM utilizando Sass.
+El cual nos permite tener todos los componentes, plantillas y vistas mas organizadas. Englobando todos los estilos en un solo directorio y modularizando su funcionamiento
 
-```
-Templates
-```
-_y tambien_
+### Servicios y Modelado (_Encargado **Henry**_)
 
-```
-Pages
-```
+Refiere a los objetos y clases que utilizaremos dentro del sistema, como los usuarios, salas, etc.
+Utilizando Reactivex de su libreria rjxs, para crear los servicios, los mismos que se comunicaran con el Back-end mediante las Api's Rest Full
 
-modularizando el proyecto lo mas que se pueda
+## Gestion del proyecto :open_file_folder:
 
-## Templates (carpeta)
+El sistema esta subdivido en 2 carpetas:
 
-Dentro estara el dashobard y/o template para los siguientes tipos de usuario:
+###### Templates
 
-- :heavy_check_mark: Operador
-- :heavy_check_mark: Administrador 
+Dentro estara el dashobard correspondiente para cada tipo de usuario y el entorno en el cual navegara por el sistema
+
+- Operador
+   - Html del operador
+   - Rutas del operador
+   - Modulos del operador
+   - Componente del operador
+- Administrador
+   - Html del administrador
+   - Rutas del administrador
+   - Modulos del administrador
+   - Componente del administrador
 
 las mismas mediante sus modulos llaman a todos los componentes pertenecientes al tipo de usuario
 
-## Pages (Carpeta)
+###### Pages 
 
-Aqui estara distribuido igual segun los tipos de usuario:
+Dentro se encuentran los componentes y plantillas Html, donde se puede manipular la pagina mediante typescript y lenguaje de etiquetado.
 
-- :heavy_check_mark: Operador 
-- :heavy_check_mark: Administrador 
-- :heavy_check_mark: Login 
+- Inicio
+   - Login
+- Operador
+   - agenda
+   - historial_llamadas
+   - grabaciones
+   - dialpad
+   - tracking
+   - sala
+   - panel
+   - notificacion
+- Administrador
+   - Contactos
+   - Agregar_contactos
+   - Editar_contactos
+   - historial_llamadas
+   - grabaciones
+   - Salas
+   - tracking
 
 el diseño es intuitivo, cada componente funciona de manera independiente a otro, estos componentes son llamados desde el template correspondiente para ser utilizado. a su vez se le asigna una ruta en el siguiente archivo  de cada template
 -[Operador-template.routing.ts](https://github.com/edsonarios/Sistema-Integrador-de-Llamadas-VoIP/blob/master/front_angular/src/app/components/templates/operador-template/operador-template.routing.ts).
 -[administrador-template.routing.ts](https://github.com/edsonarios/Sistema-Integrador-de-Llamadas-VoIP/blob/master/front_angular/src/app/components/templates/administrador-template/administrador-template.routing.ts)
 
-## Tipos de Usuario 
-### Operador
+**Todos** estos componentes y plantillas Html ya estan implementados y en funcionamiento.
 
-para el operador se tienen los siguientes componentes
+## Tabla de Tareas del proyecto 
 
-- :heavy_check_mark: agenda
-- :heavy_check_mark: historial_llamadas
-- :heavy_check_mark: grabaciones
-- :heavy_check_mark: dialpad
-- :heavy_check_mark: tracking
-- :heavy_check_mark: sala
-- :heavy_check_mark: Panel
-- :heavy_check_mark: notificacion
+- [x] Prueba de tarea concluida
+- [ ] Prueba tarea pendiente 1
+- [ ] prueb tarea pendiente 2
 
-### Administrador
-
-para el Administrador se tienen los siguientes componentes
-
-- :heavy_check_mark: Contactos
-- :heavy_check_mark: Agregar_contactos
-- :heavy_check_mark: Editar_contactos
-- :heavy_check_mark: historial_llamadas
-- :heavy_check_mark: grabaciones
-- :heavy_check_mark: Salas
-- :heavy_check_mark: tracking
-
-con **Todos** sus componentes dirigidos a la carpeta con los estilos Sass.
-
-
-
-## Tareas del proyecto (Noviembre 2019)
-
-
-```
-**TEMPLATES**
-- (Listo) Crear el template del operador
-- (Listo) Crear el componente de Salas
-- (Listo) Crear el componente para Agenda
-- (Listo) Crear el componente para Notificaciones
-- (Listo) Crear el componente Historial de llamadas
-- (Listo) Crear el componente Grabaciones
-- (Listo) Crear el enrutamiento entre componentes
-- (Listo) Enlazar en tablas los componentes (notificaciones,salas,agenda) a la columna Lateral
-- (Listo) Crear el template de llamada SIP (Notificaciones)
-- (Listo) Crear modelos locales para los componentes (notificaciones,salas,agenda)
-- (Listo) Agregar Nabvar para Historial de llamadas
-- (Listo) Agregar Nabvar para grabaciones
-- (Listo) Crear modelo de Grabaciones
-- (Listo) Crear un template de reproductor de audio
-- (Listo) Agregar un gestor de opciones para salir del sistema
-- (Listo) Añadir el Template de Administrador
-- (Listo) Crear Dashboard para el Administrador (solo 2 columnas)
-- (Listo) Crear el Componente de Contactos-Operadores
-- (Listo) Crear el componente de Añadir Contactos
-- (Listo) Crear el componente de Grabaciones
-- (Listo) incorporar el modulo de reproductor de audio
-- (Listo) Crear el componente de Tracking
-- (Listo) Crear el componente de Historial de llamadas
-- (Listo) Crear modelos locales para el escritorio
-- (Listo) Hacer interactuable el escritorio con las salas
-- (Listo) Hacer interactuable el escritorio con las Notificaciones
-- (Listo) Hacer interactuable el escritorio con el panel
-- (En curso) Incorporar funcionalidades al reproductor de audio con sonido
-- Probar descargas
-- Importar las animaciones faltantes de transicion
-- Desplegar datos mediante servicio al template-operador
-- Desplegar datos mediante servicio al template-administrador
-- Optimizar metodos por componente
-- Realizacion de pruebas
-- Mandar a produccion
-```
-
-```
-**ESTILOS**
-
-	_OPERADOR_
-- (Listo) Añadir estilos al componente de Agenda
-- (Listo) Añadir estilos al componente de panel de estados
-- (Listo) Añadir estilos al componente de notificaciones
-- (Listo) Añadir estilos al componente de salas
-- (Listo) Añadir estilos al componente de contactos
-- (Listo) Añadir estilos al componente del escritorio para llamadas 
-- (En curso) Estandarizar colores
-	_ADMINISTRADOR_
-- añadir estilos a el dashboard-administrador
-- Añadir estilos grid para el template del adminsitrador
-- incorporar estilos a los formularios de añadir y editar contactos
-- añadir estilos al componente de Contactos
-- añadir estilos al componente de historial de llamadas
-- añadir estilos al componente de tracking
-- añadir estilos al componente de grabaciones
-- añadir animaciones
-
-```
-
-```
-**SERVICIOS**
-- (Listo) Crear los modelos de usuarios
-- (Listo) Crear los modelos de Salas
-- (Listo) crear los modelos de Sip
-- (Listo) Añadir servicio de Login
-- (Listo) Añadir servicio para Agregar usuario
-- (En curso) Añadir servicio para editar usuario
-- Añadir servicio para dar de alta un usuario
-- Añadir servicio para crear una sala
-- Añadir servicio para editar una sala
-- Añadir servicio para dar de alta una sala
-- Añadir servicio para obtener el historial de llamadas
-- Añadir servicio para obtener las grabaciones
-```
+- :heavy_check_mark: prueba tarea 3
+- :heavy_check_mark: preuba tarea 4
 
 ## Resumen General Front-End
 
