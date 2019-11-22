@@ -4,7 +4,7 @@
 		<div class="c1-logo">
 			<button type="button" (click)="LoaderPage('operational')">Logo</button>
 		</div>
-		<div class="c1-options-top">
+		<div class="c1-options">
 			<button
 				[routerLink]="['/Operador/Historial']"
 				tooltip="Historial de Llamada"
@@ -21,9 +21,9 @@
 			>
 				<i class="v-icon-microphone1" placement="right"></i>
 			</button>
-		</div>
+		<!-- </div>
 
-		<div class="c1-options-bottom">
+		<div class="c1-options-bottom"> -->
 			<button
 				[routerLink]="['/Operador/Tracking']"
 				(click)="LoaderPage('page')"
@@ -149,7 +149,7 @@
 
 	<!-- ********Componentes******** -->
 	<ng-template #elseBlock>
-		<div class="col3" [@SladeIn] style="border-bottom: 5px solid black;">
+		<div class="desplegables" [@SladeIn] style="border-bottom: 5px solid black;">
 			<!-- ********contenido******** -->
 			<router-outlet></router-outlet>
 			<!-- *********footer********   -->
