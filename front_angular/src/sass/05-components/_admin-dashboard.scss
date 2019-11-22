@@ -5,14 +5,9 @@
 	grid-template-areas: 'sidebar contenido';
 	height: 100vh;
 	overflow: hidden;
-	button {
-		border: none;
-		width: 80%;
-		height: 60px;
-		font-size: 25px;
-	}
 }
 .sidebar {
+	background: var(--color-seis);
 	grid-area: sidebar;
 	display: grid;
 	grid-template-rows: 10% 60% 30%;
@@ -22,13 +17,30 @@
 		'sidebar-options-bottom';
 }
 .sidebar-logo {
-	grid-area: sidebar-logo;
-	padding-top: 10px;
 	button {
-		background: var(--color-cuatro);
+		margin: 10px;
+		border: none;
+		width: 95%;
+		height: 95%;
+		font-size: 25px;
+		background: var(--color-cinco);
 	}
+	grid-area: sidebar-logo;
+
 }
 .sidebar-options-top {
+	li{
+		display: grid;
+		align-content: center;
+		list-style: none;
+		//border: solid 2px red;
+		margin: 6px;
+		height: 50px;
+		background: var(--color-cuatro);
+		span{
+			color: var(--color-dos);
+		}
+	}
 	grid-area: sidebar-options-top;
 	padding-top: 20px;
 	button {
