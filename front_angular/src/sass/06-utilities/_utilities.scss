@@ -6,6 +6,36 @@
 	top: 0;
 }
 
+
+//ESTILOS INICIALES PARA TODAS LAS TABLAS DEL SISTEMA/////////////////////////
+.table {
+	width: 100%;
+	max-width: 100%;
+	margin-bottom: 2rem;
+	thead,
+	tbody,
+	tfoot {
+		tr {
+			th,
+			td {
+				text-align: center;
+				padding: 0.8rem;
+				vertical-align: top;
+				border-top: 0;
+			}
+		}
+	}
+}
+thead{
+    color: var(--color-uno);
+    background: var(--color-seis);
+}
+td{
+    text-align: center;
+    border-bottom: 2px solid var(--color-uno);
+}
+///////////////////////////////////////////////////////////////////////////////
+
 //$color-uno, $color-dos, $color-tres, $color-cuatro, $color-cinco, $color-seis
 :root {
     //AZUL-VERDE-CAFE
@@ -37,9 +67,9 @@
     --color-cinco: #005F6B;
     --color-cuatro: #008C9E;
     --color-tres: #00B4CC;
-    --color-dos: #00DFFC;
+    //--color-dos: #00DFFC;
     --color-uno: white;
-    
+    --color-dos: rgb(169, 236, 245);
 
 
     //negro-cafe

@@ -1,24 +1,7 @@
+
 .Historial {
-	background: var(--color-uno);
-	margin: 20px auto;
+	margin: 30px;
 	max-width: 100%;
-	
-	.table {
-		width: 100%;
-		max-width: 100%;
-		margin-bottom: 2rem;
-		thead,
-		tbody,
-		tfoot {
-			tr {
-				th,
-				td {
-					text-align: left;
-					padding: 0.8rem;
-					vertical-align: top;
-					border-top: 0;
-				}
-			}
-		}
-	}
+	background: var(--color-dos);
+	border-radius: 15px;
 }
