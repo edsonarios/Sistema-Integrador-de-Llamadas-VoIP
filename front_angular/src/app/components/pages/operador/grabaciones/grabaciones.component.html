@@ -1,96 +1,102 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+	<button
+		class="navbar-toggler"
+		type="button"
+		data-toggle="collapse"
+		data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent"
+		aria-expanded="false"
+		aria-label="Toggle navigation"
+	>
+		<span class="navbar-toggler-icon"></span>
+	</button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link">
-              <i class="v-icon-microphone1" placement="right"></i> Grabaciones<span class="sr-only">(current)</span>
-            </a>
-          </li>
-        </ul>
-           <div class="form-inline my-2 my-lg-0">
-           	<input type="text"
-           placeholder="Datepicker"
-           class="form-control"
-           bsDatepicker
-           [bsConfig]="{ isAnimated: true }">
-           <a class="nav-link">
-           <i class="v-icon-funnel" placement="right"></i>
-       		</a>
-           </div>
-       		 <div class="form-inline my-2 my-lg-0">
-            <div class="search">
-            <input type="text" class="form-control" placeholder="Contacto">
-            <button type="submit" class="searchButton">
-              <i class="v-icon-magnifying-glass"></i>
-           </button>
-         </div>
-           </div>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link">
+					<i class="v-icon-microphone1" placement="right"></i> Grabaciones<span class="sr-only"
+						>(current)</span
+					>
+				</a>
+			</li>
+		</ul>
+		<div class="form-inline my-2 my-lg-0">
+			<input
+				type="text"
+				placeholder="Datepicker"
+				class="form-control"
+				bsDatepicker
+				[bsConfig]="{ isAnimated: true }"
+			/>
+			<a class="nav-link">
+				<i class="v-icon-funnel" placement="right"></i>
+			</a>
+		</div>
+		<div class="form-inline my-2 my-lg-0">
+			<div class="search">
+				<input type="text" class="form-control" placeholder="Contacto" />
+				<button type="submit" class="searchButton">
+					<i class="v-icon-magnifying-glass"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+</nav>
 
-      </div>
-    </nav>
-
- <h1>grabaciones-records</h1>
+<header class="panel__header">
+	Grabaciones
+</header>
 <div class="Historial">
-  <div class="table-responsive-vertical shadow-z-1">
-    <!-- Table starts here -->
-    <table id="table" class="table table-hover table-mc-light-blue">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre de Usuario</th>
-          <th>Tipo</th>
-          <th>Origen</th>
-          <th>Destino</th>
-          <th>Duracion</th>
-          <th>Fecha</th>
-          <th>Acciones</th>
-          <th>Descargar Audio</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let n of Historial; let i = index">
-          <td data-title="ID">{{ i + 1 }}</td>
-          <td data-title="Name">< {{ Historial[i]['Numero'] }} > {{ Historial[i]['Nombre'] }}</td>
-          <td data-title="Status">
-            <span *ngIf="Historial[i]['Tipo'] == 'Perdida'" style="color: red"
-              ><i class="v-icon-phone"></i> {{ Historial[i]['Tipo'] }}</span
-            >
-            <span *ngIf="Historial[i]['Tipo'] == 'Entrante'" style="color: blue"
-              ><i class="v-icon-incoming-call"></i> {{ Historial[i]['Tipo'] }}</span
-            >
-            <span *ngIf="Historial[i]['Tipo'] == 'Saliente'" style="color: green"
-              ><i class="v-icon-telephone-receiver-with-up-arrow"></i> {{ Historial[i]['Tipo'] }}</span
-            >
-          </td>
-          <td data-title="Link">
-            <i class="v-icon-walkie-talkie"></i>
-            {{ Historial[i]['Origen'] }}
-          </td>
-          <td data-title="Link">
-            <i class="v-icon-ambulance-side-view"></i> {{ Historial[i]['Destino'] }}
-          </td>
-          <td data-title="Link">{{ Historial[i]['Duracion'] }}</td>
-          <td data-title="Link">{{ Historial[i]['Fecha'] }}</td>
-          <td data-title="Link"><audio-player></audio-player></td>
-          <td>
-            <span class="download">
-              <i class="v-icon-download-to-storage-drive" tooltip="Descargar Audio"></i>
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+	<div class="table-responsive-vertical shadow-z-1">
+		<!-- Table starts here -->
+		<table id="table" class="table table-hover table-mc-light-blue">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nombre de Usuario</th>
+					<th>Tipo</th>
+					<th>Origen</th>
+					<th>Destino</th>
+					<th>Duracion</th>
+					<th>Fecha</th>
+					<th>Acciones</th>
+					<th>Descargar Audio</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let n of Historial; let i = index">
+					<td data-title="ID">{{ i + 1 }}</td>
+					<td data-title="Name">< {{ Historial[i]['Numero'] }} > {{ Historial[i]['Nombre'] }}</td>
+					<td data-title="Status">
+						<span *ngIf="Historial[i]['Tipo'] == 'Perdida'" style="color: red"
+							><i class="v-icon-phone"></i> {{ Historial[i]['Tipo'] }}</span
+						>
+						<span *ngIf="Historial[i]['Tipo'] == 'Entrante'" style="color: blue"
+							><i class="v-icon-incoming-call"></i> {{ Historial[i]['Tipo'] }}</span
+						>
+						<span *ngIf="Historial[i]['Tipo'] == 'Saliente'" style="color: green"
+							><i class="v-icon-telephone-receiver-with-up-arrow"></i>
+							{{ Historial[i]['Tipo'] }}</span
+						>
+					</td>
+					<td data-title="Link">
+						<i class="v-icon-walkie-talkie"></i>
+						{{ Historial[i]['Origen'] }}
+					</td>
+					<td data-title="Link">
+						<i class="v-icon-ambulance-side-view"></i> {{ Historial[i]['Destino'] }}
+					</td>
+					<td data-title="Link">{{ Historial[i]['Duracion'] }}</td>
+					<td data-title="Link">{{ Historial[i]['Fecha'] }}</td>
+					<td data-title="Link"><audio-player></audio-player></td>
+					<td>
+						<span class="download">
+							<i class="v-icon-download-to-storage-drive" tooltip="Descargar Audio"></i>
+						</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>
