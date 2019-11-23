@@ -1,5 +1,4 @@
-# Sistema Integrador de Llamadas VoIp
-# FONT END
+# Sistema Integrador de Llamadas VoIp (Front-End)
 
 ## Responsables :busts_in_silhouette:	
 ### Templates (_Encargado **Richard**_)
