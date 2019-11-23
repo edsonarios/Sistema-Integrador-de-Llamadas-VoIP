@@ -42,15 +42,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let n of Contactos; let i=index">
-          <td data-title="ID">{{i+1}}</td>
-          <td data-title="Name">{{Contactos[i]['Nombre']}}</td>
+        <tr *ngFor="let n of contactos; let i=index">
+          <td data-title="ID">{{contactos[i]['id']}}</td>
+          <td data-title="Name">{{contactos[i]['nombre']}}</td>
           <td data-title="Status">
-          	<span style="color: green" *ngIf='Contactos[i]["Estado"]=="Conectado"'>{{Contactos[i]['Estado']}}</span>
-          	<span style="color: red" *ngIf='Contactos[i]["Estado"]=="Desconectado"'>{{Contactos[i]['Estado']}}</span>
+          	<span style="color: green" *ngIf='contactos[i]["conectado"]==true'>Conectado</span>
+          	<span style="color: red" *ngIf='contactos[i]["conectado"]==false'>Desconectado</span>
           </td>
           <td data-title="Link">
-            {{Contactos[i]['Numero']}}
+            {{contactos[i]['telefono']}}
           </td>
           <td> 
 			 <i class=" v-icon-call"  tooltip="Llamar" placement="top" style="color: #70F047;cursor: pointer;"></i>

@@ -5,17 +5,17 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
 import { User } from '../models/user';
-import { Sip } from '../models/sip';
 import { GLOBAL } from './global';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SipService {
+export class SalaService {
   public idUser = localStorage.getItem('idUser');
   public url: string;
   public user: User;
-  public sip: Sip;
+  
+  
   constructor(private http: HttpClient) {
     this.url = GLOBAL.url;
   }
@@ -27,26 +27,36 @@ export class SipService {
     })
   };
 
-  addSIP( obj): Observable<any> {
-      this.sip = new Sip(obj.alias, obj.telnumero, obj.telnumero, this.idUser);
 
-    return this.http.post<any>(this.url + 'addSip',  this.sip,
-         this.httpOptions).pipe(
-      retry(1),
-      catchError(this.errorHandl)
+
+ 
+ addSala(sala): Observable<any> {
+    return this.http.post<any>(this.url + 'addSala', sala, this.httpOptions).pipe(
+     retry(1),
+     catchError(this.errorHandl)
     );
-  }
-
-  updateSip(obj): Observable<any> {
-    this.sip = new Sip(obj.alias, obj.telnumero, obj.telnumero, this.idUser);
-
-  return this.http.post<any>(this.url + 'updateSip',  this.sip,
-       this.httpOptions).pipe(
+   }
+  
+  listarSalas(): Observable<any> {
+   return this.http.get<any>(this.url + 'findAllSala').pipe(
     retry(1),
     catchError(this.errorHandl)
-  );
-}
+   );
+  }
 
+  buscarSala(): Observable<any> {
+    return this.http.post<any>(this.url + 'findByIdSala', "ID sala", this.httpOptions).pipe(
+     retry(1),
+     catchError(this.errorHandl)
+    );
+   }
+   
+   updateSala(): Observable<any> {
+    return this.http.put<any>(this.url + 'updateSala', "ID sala", this.httpOptions).pipe(
+     retry(1),
+     catchError(this.errorHandl)
+    );
+   }
 
 
    // Error handling

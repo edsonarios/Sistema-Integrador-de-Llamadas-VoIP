@@ -9,12 +9,13 @@
 <div class="modal-body">
 	<div class="container ">
 		<form class="añadir_contact" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+
 			<div class="row">
-				<div class="col-sm-6 form-group">
+				<div class="col-md-6 form-group">
 					<label for="nombre">NOMBRE</label>
 					<input type="text" formControlName="nombre" class="form-control" />
 				</div>
-				<div class="col-sm-6 form-group">
+				<div class="col-md-6 form-group">
 					<label for="apellido">APELLIDO</label>
 					<input type="text" formControlName="apellido" class="form-control" />
 				</div>
@@ -37,6 +38,8 @@
 					</select>
 				</div>
 			</div>
+			
+
 			<div class="row form-group">
 				<label for="descripcion">DESCRIPCIÓN</label>
 				<input type="text" formControlName="descripcion" class="form-control" />
@@ -46,7 +49,7 @@
 </div>
 <div class="modal-footer form-group">
 	<button type="button" class="btn btn-danger btn-block" (click)="modalRef.hide()">Cancelar</button>
-	<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" (click)="crearcontacto()">
+	<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" [disabled]="addForm.invalid" (click)="crearcontacto()">
 		Crear contacto
 	</button>
 </div>

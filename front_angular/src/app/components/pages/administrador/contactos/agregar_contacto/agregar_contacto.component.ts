@@ -18,7 +18,7 @@ export class AgregarContactosComponent implements OnInit {
 	public submitted: boolean;
 	returnUrl: string;
 	formato: [User];
-
+	
 	
 
 	constructor(

@@ -62,17 +62,33 @@ export class UserService {
     );
   }
 
-  // POST
-  addSala(sala): Observable<any> {
-    return this.http.post<any>(this.url + 'addSala', sala, this.httpOptions).pipe(
+ 
+
+  addUsuario( user): Observable<any> {
+    this.user = user;
+    return this.http.post<any>(this.url + 'addUsuario',  this.user , this.httpOptions).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
 
-  addUsuario( user): Observable<any> {
+  updateUser( user): Observable<any> {
     this.user = user;
-    return this.http.post<any>(this.url + 'addUsuario',  this.user , this.httpOptions).pipe(
+    return this.http.put<any>(this.url + 'updateUsuario',  this.user , this.httpOptions).pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+
+  findByIdUsuario( id): Observable<any> {
+    return this.http.post<any>(this.url + 'findByIdUsuario',  id , this.httpOptions).pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+  
+  listarContactos(): Observable<any> {
+    return this.http.get<any>(this.url + 'findAllUsuario').pipe(
       retry(1),
       catchError(this.errorHandl)
     );
