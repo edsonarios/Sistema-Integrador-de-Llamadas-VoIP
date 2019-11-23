@@ -126,35 +126,91 @@ Dentro del directorio se encuentran los metodos que hacen de puente para la cone
 
  **Todos** estos archivos ya estan implementados, importados y en funcionamiento.
 
+## Resumen General Front-End :scroll:
+
+- Templates _80% terminado_
+- Estilos _70% terminado_
+- Servicios y Modelos _40% terminado_
+
 ## Tabla de Tareas del proyecto :pencil:
 
-###### Templates 
-
-###### Estilos 
-
-
-###### Servicios y Modelos
-
-Se tiene los siguientes simbolos como:
+Para una mejor control y panorama del avance del sistema se tiene el  manejo de los siguientes simbolos respecto a cada tarea :
 
 >- :ballot_box_with_check: Terminado
 >- :clock3: En pausa
 >- :point_right: En progreso
 >- :black_square_button: Pendiente
+
+###### Templates 
+- :ballot_box_with_check: Generar el nuevo proyecto con Angular 
+- :ballot_box_with_check: Crear el template del operador
+- :ballot_box_with_check: Crear el componente de Salas
+- :ballot_box_with_check: Crear el componente para Agenda
+- :ballot_box_with_check: Crear el componente para Notificaciones
+- :ballot_box_with_check: Crear el componente Historial de llamadas
+- :ballot_box_with_check: Crear el componente Grabaciones
+- :ballot_box_with_check: Crear el enrutamiento entre componentes para el operador
+- :ballot_box_with_check: Enlazar en tabs los componentes: notificaciones, salas y agenda a la columna Lateral
+- :ballot_box_with_check: Crear el componente de llamada SIP (Notificaciones)
+- :ballot_box_with_check: Crear modelos locales para los componentes (notificaciones,salas,agenda)
+- :ballot_box_with_check: Agregar Nabvar para Historial de llamadas
+- :ballot_box_with_check: Agregar Nabvar para grabaciones
+- :ballot_box_with_check: Crear modelo de Grabaciones
+- :ballot_box_with_check: Crear un componente de reproductor de audio
+- :ballot_box_with_check: Agregar un gestor de opciones para salir del sistema
+- :ballot_box_with_check: Crear el Template de Administrador
+- :ballot_box_with_check: Crear el Componente de Contactos-Operadores
+- :ballot_box_with_check: Crear el componente de Añadir Contactos
+- :ballot_box_with_check: Crear el componente de Grabaciones
+- :ballot_box_with_check: incorporar el modulo de reproductor de audio
+- :ballot_box_with_check: Crear el componente de Tracking
+- :ballot_box_with_check: Crear el componente de Historial de llamadas
+- :ballot_box_with_check: Crear modelos locales para el escritorio
+- :ballot_box_with_check: Hacer interactuable el escritorio con las salas
+- :ballot_box_with_check: Hacer interactuable el escritorio con las Notificaciones
+- :ballot_box_with_check: Hacer interactuable el escritorio con el panel
+- :clock3: 				Incorporar funcionalidades al reproductor de audio con sonido
+- :clock3: 				Probar descargas
+- :point_right: 		las animaciones faltantes de transicion
+- :black_square_button: Desplegar datos mediante servicio al template-operador
+- :black_square_button: Desplegar datos mediante servicio al template-administrador
+- :black_square_button: Optimizar metodos por componente
+- :black_square_button: Realizacion de pruebas
+- :black_square_button: Mandar a produccion
+
+###### Estilos 
+
+- :ballot_box_with_check: Añadir estilos al componente de Agenda
+- :ballot_box_with_check: Añadir estilos al componente de panel de estados
+- :ballot_box_with_check: Añadir estilos al componente de notificaciones
+- :ballot_box_with_check: Añadir estilos al componente de salas
+- :ballot_box_with_check: Añadir estilos al componente de contactos
+- :ballot_box_with_check: Añadir estilos al componente del escritorio para llamadas 
+- :point_right:  		Estandarizar colores
+- :black_square_button: Añadir estilos a el dashboard-administrador
+- :black_square_button: Añadir estilos grid para el template del adminsitrador
+- :black_square_button: incorporar estilos a los formularios de añadir y editar contactos
+- :black_square_button: Añadir estilos al componente de Contactos
+- :black_square_button: Añadir estilos al componente de historial de llamadas
+- :black_square_button: Añadir estilos al componente de tracking
+- :black_square_button: Añadir estilos al componente de grabaciones
+- :black_square_button: Añadir animaciones
+
+
+###### Servicios y Modelos
+
+- :Ballot_box_with_check: Crear los modelos de usuarios
+- :Ballot_box_with_check: Crear los modelos de Salas
+- :Ballot_box_with_check: crear los modelos de Sip
+- :Ballot_box_with_check: Añadir servicio de Login
+- :Ballot_box_with_check: Añadir servicio para Agregar usuario
+- :point_right:   	    Añadir servicio para editar usuario
+- :black_square_button: Añadir servicio para dar de alta un usuario
+- :black_square_button: Añadir servicio para crear una sala
+- :black_square_button: Añadir servicio para editar una sala
+- :black_square_button: Añadir servicio para dar de alta una sala
+- :black_square_button: Añadir servicio para obtener el historial de llamadas
+- :black_square_button: Añadir servicio para obtener las grabaciones
+
  
-_prueba_
 
-- :ballot_box_with_check: Tarea 1
-- :ballot_box_with_check: Tarea 2
-- :clock3: Tarea 3
-- :ballot_box_with_check: Tarea 4
-- :point_right: Tarea 5
-- :black_square_button: Tarea 6
-- :black_square_button:	Tarea 7
-
-
-## Resumen General Front-End
-
-- Templates _80% terminado_
-- Estilos _70% terminado_
-- Servicios _40% terminado_
