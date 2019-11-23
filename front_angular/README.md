@@ -1,6 +1,6 @@
 # SISTEMA INTEGRADOR DE LLAMADAS VOIP (Front - End)
 
-## Responsables
+## Responsables :busts_in_silhouette:	
 ### Templates (_Encargado **Richard**_)
 
 Orientado a la estructuracion de archivos y componentes, asi tambien el manejo de enrutamientos, eventos y creacion de formularios, manejo de modulos e importacion de paquetes.
@@ -17,9 +17,9 @@ Utilizando Reactivex de su libreria rjxs, para crear los servicios, los mismos q
 
 ## Gestion del proyecto :open_file_folder:
 
-El sistema esta subdivido en 2 carpetas:
+El sistema esta subdivido en 2 carpetas dentro del directorio **app/components**:
 
-###### Templates
+### Templates
 
 Dentro estara el dashobard correspondiente para cada tipo de usuario y el entorno en el cual navegara por el sistema
 
@@ -36,7 +36,7 @@ Dentro estara el dashobard correspondiente para cada tipo de usuario y el entorn
 
 las mismas mediante sus modulos llaman a todos los componentes pertenecientes al tipo de usuario
 
-###### Pages 
+### Pages 
 
 Dentro se encuentran los componentes y plantillas Html, donde se puede manipular la pagina mediante typescript y lenguaje de etiquetado.
 
@@ -60,20 +60,94 @@ Dentro se encuentran los componentes y plantillas Html, donde se puede manipular
    - Salas
    - tracking
 
-el diseño es intuitivo, cada componente funciona de manera independiente a otro, estos componentes son llamados desde el template correspondiente para ser utilizado. a su vez se le asigna una ruta en el siguiente archivo  de cada template
--[Operador-template.routing.ts](https://github.com/edsonarios/Sistema-Integrador-de-Llamadas-VoIP/blob/master/front_angular/src/app/components/templates/operador-template/operador-template.routing.ts).
--[administrador-template.routing.ts](https://github.com/edsonarios/Sistema-Integrador-de-Llamadas-VoIP/blob/master/front_angular/src/app/components/templates/administrador-template/administrador-template.routing.ts)
+**Todos** estos componentes y plantillas Html ya estan implementados, importados  y en funcionamiento.
 
-**Todos** estos componentes y plantillas Html ya estan implementados y en funcionamiento.
+### Sass :art:
 
-## Tabla de Tareas del proyecto 
+Dentro de este directorio se encuentran todos los estilos que modifican y componen al sistema. Siguiento la metodologia BEM los cuales son:
 
-- [x] Prueba de tarea concluida
-- [ ] Prueba tarea pendiente 1
-- [ ] prueb tarea pendiente 2
+- settings
+   - colors.scss
+   - dimensions.scss
+   - fonts.scss
+   - settings.scss
+- tools
+   - functions.scss
+   - mixins.scss
+   - tools.scss
+- generic
+   - generic.scss
+- elements
+   - elements.scss
+- objects
+   - objects.scss
+- components
+   - admin-dashboard.scss
+   - Agenda.scss
+   - components.scss
+   - dashboard.scss
+   - escritorio.scss
+   - historial.scss
+   - login.scss
+   - navbar.scss
+   - notificaciones.scss
+   - panelEstados.scss
+   - salas.scss
+   - modaladdcontact.scss
+- Utilities
+   - utilities.scss
+ 
+ **Todos** estos archivos ya estan implementados, importados y en funcionamiento.
 
-- :heavy_check_mark: prueba tarea 3
-- :heavy_check_mark: preuba tarea 4
+### Models :clamp:
+
+Dentro de este directorio se encuentran los modelos con sus respectivos atributos para poder manipularlos mejor en el sistema.
+
+ - contacto.ts
+ - crd.ts
+ - extension.ts
+ - iax.tx
+ - sala.ts
+ - sip.ts
+ - user.ts
+ - voicemail.ts
+ 
+**Todos** estos archivos ya estan implementados, importados y en funcionamiento.
+  
+
+### Services :space_invader:
+
+Dentro del directorio se encuentran los metodos que hacen de puente para la conexion con el back-end y comunicacion del front-end.
+
+ - animations.tx
+ - global.ts
+ - sip.service.ts
+ - user.service.ts
+
+ **Todos** estos archivos ya estan implementados, importados y en funcionamiento.
+
+## Tabla de Tareas del proyecto :pencil:
+
+###### Templates 
+
+###### Estilos 
+
+
+###### Servicios y Modelos
+
+
+:ballot_box_with_check: Tarea 1
+:clock3: Tarea 2
+:point_right: Tarea 3
+:arrow_right: tarea 4
+:heavy_check_mark: tarea 5
+:black_square_button: Tarea 6
+:black_square_button: Tarea 7
+:ballot_box_with_check: Tarea 8
+:ballot_box_with_check: Tarea 9
+:black_square_button: Tarea 10
+:white_square_button:white_square_button:
+
 
 ## Resumen General Front-End
 
