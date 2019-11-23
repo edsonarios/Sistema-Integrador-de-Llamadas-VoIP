@@ -198,7 +198,7 @@ Para una mejor control sobre el avance del sistema se tiene el  manejo de los si
 - :black_square_button: Fusion del template del operador con la libreria para realizar llamadas
 - :black_square_button: Ejecucion de Pruebas con la libreria
 - :black_square_button: Pruebas generales
-- :black_square_button: Mandar a produccion
+- :black_square_button: Mandar a produccion 
 
 ###### Estilos 
 
