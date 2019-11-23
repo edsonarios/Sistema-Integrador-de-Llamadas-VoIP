@@ -128,9 +128,12 @@ Dentro del directorio se encuentran los metodos que hacen de puente para la cone
 
 ## Resumen General Front-End :scroll:
 
-- Templates _80% terminado_
-- Estilos _70% terminado_
-- Servicios y Modelos _40% terminado_
+| **Modulo** | **Progreso**| 
+| Templates | _80% Terminado_ | 
+| Estilos | _70% Terminado_ | 
+| Servicios y Modelos | _80% Terminado_ | 
+
+
 
 ## Tabla de Tareas del proyecto :pencil:
 
@@ -199,11 +202,11 @@ Para una mejor control y panorama del avance del sistema se tiene el  manejo de 
 
 ###### Servicios y Modelos
 
-- :Ballot_box_with_check: Crear los modelos de usuarios
-- :Ballot_box_with_check: Crear los modelos de Salas
-- :Ballot_box_with_check: crear los modelos de Sip
-- :Ballot_box_with_check: Añadir servicio de Login
-- :Ballot_box_with_check: Añadir servicio para Agregar usuario
+- :ballot_box_with_check: Crear los modelos de usuarios
+- :ballot_box_with_check: Crear los modelos de Salas
+- :ballot_box_with_check: crear los modelos de Sip
+- :ballot_box_with_check: Añadir servicio de Login
+- :ballot_box_with_check: Añadir servicio para Agregar usuario
 - :point_right:   	    Añadir servicio para editar usuario
 - :black_square_button: Añadir servicio para dar de alta un usuario
 - :black_square_button: Añadir servicio para crear una sala
