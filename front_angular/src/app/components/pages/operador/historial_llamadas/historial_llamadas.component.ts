@@ -101,6 +101,8 @@ export class HistorialLlamadasComponent implements OnInit {
 			}
 		];
 	}
-
 	ngOnInit() {}
+	cssch(){
+	   document.getElementById('nav').style.cssText = 'background: red;';
+	}
 }

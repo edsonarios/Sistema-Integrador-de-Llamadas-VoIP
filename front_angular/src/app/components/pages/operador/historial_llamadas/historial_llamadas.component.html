@@ -1,15 +1,15 @@
 
-<div class="navbar-horiz">
+<header class="navbar-horiz">
 	<div class="nav-ini">
 		<i class="v-icon-phone-call" placement="right"></i>
 		Historial de Llamadas
 	</div>
 	<nav>
 		<ul class="nav-mid">
-			<li class="li-active">
-				<a>Todos</a>
+			<li id="nav" class="li-active">
+				<a (click)="cssch()">Todos</a>
 			</li>
-			<li class="li-active">
+			<li>
 				<a>Salientes</a>
 			</li>
 			<li>
@@ -33,7 +33,7 @@
 			<i class="v-icon-magnifying-glass"></i>
 		</button>
 	</div>
-</div>
+</header>
 
 <div class="Historial">
 	<div class="table-responsive-vertical shadow-z-1">

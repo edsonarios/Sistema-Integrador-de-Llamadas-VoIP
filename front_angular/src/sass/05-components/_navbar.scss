@@ -1,15 +1,15 @@
 .navbar-horiz {
 	display: grid;
-	grid-template-columns: 15% 45% 40%;
+	grid-template-columns: 20% 40% 40%;
 	align-content: center;
 	align-items: center;
 	background: var(--color-seis);
 	text-transform: uppercase;
 	color: var(--color-uno);
-	border: 3px solid white;
 }
 
 .nav-ini {
+	
 }
 
 .nav-mid {
@@ -26,6 +26,14 @@
 		padding-right: 15px;
 	}
 	li:hover {
+		display: grid;
+		align-content: center;
+		background: var(--color-cinco);
+		color: var(--color-dos);
+		height: 65px;
+		cursor: pointer;
+	}
+	li:active {
 		display: grid;
 		align-content: center;
 		background: var(--color-cinco);
