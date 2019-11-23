@@ -130,19 +130,21 @@ Dentro del directorio se encuentran los metodos que hacen de puente para la cone
 
 | Modulo | Progreso |
 | --- | --- |
-| Templates | 80% Terminado |
-| Estilos | 70% Terminado |
+| Templates | _80% Terminado_ |
+| Estilos | _70% Terminado_ |
 | Servicios y Modelos | _40% Terminado_ |
 
 
 ## Tabla de Tareas del proyecto :pencil:
 
-Para una mejor control y panorama del avance del sistema se tiene el  manejo de los siguientes simbolos respecto a cada tarea :
+Para una mejor control sobre el avance del sistema se tiene el  manejo de los siguientes simbolos respecto a cada tarea :
 
->- :ballot_box_with_check: Terminado
->- :clock3: En pausa
->- :point_right: En progreso
->- :black_square_button: Pendiente
+| Simbolo | Significado |
+| --- | --- |
+| :ballot_box_with_check: | _Terminado_ |
+| :clock3: | _En Pausa_ |
+| :point_right: | _En Progreso_ |
+| :black_square_button: | _Pendiente_ |
 
 ###### Templates 
 - :ballot_box_with_check: Generar el nuevo proyecto con Angular 
