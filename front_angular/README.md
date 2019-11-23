@@ -106,7 +106,7 @@ Dentro de este directorio se encuentran los modelos con sus respectivos atributo
  - contacto.ts
  - crd.ts
  - extension.ts
- - iax.tx
+ - iax.ts
  - sala.ts
  - sip.ts
  - user.ts
@@ -119,7 +119,7 @@ Dentro de este directorio se encuentran los modelos con sus respectivos atributo
 
 Dentro del directorio se encuentran los metodos que hacen de puente para la conexion con el back-end y comunicacion del front-end.
 
- - animations.tx
+ - animations.ts
  - global.ts
  - sip.service.ts
  - user.service.ts
@@ -130,13 +130,14 @@ Dentro del directorio se encuentran los metodos que hacen de puente para la cone
 
 | Modulo | Progreso |
 | :---: | --- |
-| Templates | _80% Terminado_ |
-| Estilos | _70% Terminado_ |
-| Servicios y Modelos | _40% Terminado_ |
+| Templates | _52.9% Terminado_ |
+| Estilos | _44.4% Terminado_ |
+| Servicios y Modelos | _23.4% Terminado_ |
+
+(_Actualizado 23 de noviembre_)
 
 
 ## Tabla de Tareas del proyecto :pencil:
-
 Para una mejor control sobre el avance del sistema se tiene el  manejo de los siguientes simbolos respecto a cada tarea :
 
 | Simbolo | Significado |
@@ -174,15 +175,23 @@ Para una mejor control sobre el avance del sistema se tiene el  manejo de los si
 - :ballot_box_with_check: Crear modelos locales para el escritorio
 - :ballot_box_with_check: Hacer interactuable el escritorio con las salas
 - :ballot_box_with_check: Hacer interactuable el escritorio con las Notificaciones
-- :ballot_box_with_check: Hacer interactuable el escritorio con el panel
-- :clock3: 				Incorporar funcionalidades al reproductor de audio con sonido
-- :clock3: 				Probar descargas
-- :point_right: 		las animaciones faltantes de transicion al operador
+- :clock3: Hacer interactuable el escritorio con el panel
+- :point_right: añadir animacion faltant de transicion (entrada y salida) a las notificaciones
+- :black_square_button: añadir animacion faltant de transicion (entrada y salida) a las Salas
+- :black_square_button: añadir animacion de transicion (entrada y salida) al escritorio por evento
+- :black_square_button: Añadir Scroll en los componentes para no pasarse del rango
+- :black_square_button: añadir metodo a la barra de busqueda por agenda
+- :black_square_button: crear componente donde ira el pipe de busqueda
+- :black_square_button: adicionar metodos al template - operador para configuracion de microfono, audio y red(señal)
+- :black_square_button: Añadir metodos al componente audio_player
+- :black_square_button: Agregar metodos al componente para realizar descargas
 - :black_square_button: Desplegar datos mediante servicio al template-operador
 - :black_square_button: Desplegar datos mediante servicio al template-administrador
 - :black_square_button: Adicionar las opciones restantes al Administrador
-- :black_square_button: Adicionar componentes para dar de Alta un usuario
+- :black_square_button: Adicionar componentes para dar de Alta un contacto
+- :black_square_button: adicionar modal de verificacion para contactos
 - :black_square_button: Adicionar componentes para dar de Alta una Sala
+- :black_square_button: adicionar modal de verificacion para Salas
 - :black_square_button: Optimizar metodos por componente
 - :black_square_button: Realizacion de pruebas al operador
 - :black_square_button: Realizacion de pruebas al administrador
@@ -222,18 +231,47 @@ Para una mejor control sobre el avance del sistema se tiene el  manejo de los si
 - :ballot_box_with_check: Crear el modelo sip
 - :ballot_box_with_check: Crear el modelo user
 - :ballot_box_with_check: Crear el modelo voicemail
-- :ballot_box_with_check: Importar los modelos en el componente Login.
 - :ballot_box_with_check: Añadir servicio con la ip del servidor
 - :ballot_box_with_check: Añadir servicio para iniciar sesion (login)
-- :ballot_box_with_check: Añadir servicio para Agregar usuario
-- :point_right:   	    Añadir servicio para editar usuario
-- :black_square_button: Añadir servicio para dar de alta un usuario
-- :black_square_button: Añadir servicio para crear una sala
-- :black_square_button: Añadir servicio para editar una sala
-- :black_square_button: Añadir servicio para dar de alta una sala
-- :black_square_button: Añadir servicio para obtener el historial de llamadas
-- :black_square_button: Añadir servicio para obtener las grabaciones
-- :black_square_button: Añadir servicio ...(completar)
+- :ballot_box_with_check: Servicio por rol (administrador y operador)
+- :ballot_box_with_check: Añadir servicio para Agregar contacto como administrador
+- :black_square_button: Seguridad en el manejo de rutas por URL
+- :black_square_button: Añadir configuraciones adicionales, cuando se selecciona SIP o IAX
+- :black_square_button: Añadir servicio al administrador para crear una sala
+- :black_square_button: Añadir servicio al administrador para editar contacto
+- :black_square_button: Añadir servicio al administrador para eliminar contacto
+- :black_square_button: Añadir servicio al administrador para dar de alta un usuario
+- :black_square_button: Añadir servicio al administrador para listar las salas existentes
+- :black_square_button: Añadir servicio al administrador para crear una sala
+- :black_square_button: Añadir servicio al administrador para editar una sala
+- :black_square_button: Añadir servicio al administrador para dar de alta una sala
+- :black_square_button: Añadir servicio al administrador para agregar participantes a una sala
+- :black_square_button: Añadir servicio al administrador para expulsar a un participante de una sala 
+- :black_square_button: Añadir servicio al administrador para obtener el historial de llamadas
+- :black_square_button: Añadir servicio al administrador para filtrar por fecha el historial de llamadas
+- :black_square_button: Añadir servicio al administrador para obtener el historial de llamadas Salientes
+- :black_square_button: Añadir servicio al administrador para obtener el historial de llamadas Entrantes
+- :black_square_button: Añadir servicio al administrador para obtener el historial de llamadas Perdidas
+- :black_square_button: Añadir servicio al administrador para obtener las grabaciones
+- :black_square_button: Añadir servicio al administrador para filtrar las grabaciones por fecha
+- :black_square_button: Añadir servicio al administrador para obtener el tracking
+- :black_square_button: Añadir configuracion del operador para Microfono
+- :black_square_button: Añadir configuracion del operador para Audio
+- :black_square_button: Añadir configuracion del operador para Red(señal)
+- :black_square_button: Añadir servicio al operador servicio para obtener las salas disponibles
+- :black_square_button: Añadir servicio al operador servicio para obtener los contactos
+- :black_square_button: Añadir servicio al operador servicio para obtener un evento de llamada
+- :black_square_button: Añadir servicio al operador para obtener el historial de llamadas
+- :black_square_button: Añadir servicio al operador para filtrar por fecha el historial de llamadas
+- :black_square_button: Añadir servicio al operador para obtener el historial de llamadas Salientes
+- :black_square_button: Añadir servicio al operador para obtener el historial de llamadas Entrantes
+- :black_square_button: Añadir servicio al operador para obtener el historial de llamadas Perdidas
+- :black_square_button: Añadir servicio al operador para obtener las grabaciones
+- :black_square_button: Añadir servicio al operador para filtrar las grabaciones por fecha
+- :black_square_button: Añadir servicio al operador para reproducir llamada
+- :black_square_button: Añadir servicio al operador para descargar audio de llamada
+- :black_square_button: Añadir servicio al operador para obtener el tracking
+
 
  
 ---
