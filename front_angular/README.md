@@ -203,17 +203,22 @@ Para una mejor control sobre el avance del sistema se tiene el  manejo de los si
 ###### Estilos 
 
 - :ballot_box_with_check: Estructuracion y creacion de los archivos de Sass por BEM
-- :ballot_box_with_check: Añadir estilos a el template-administrador
+- :ballot_box_with_check: Añadir estilos a el template-operador
 - :ballot_box_with_check: Añadir estilos al componente de Agenda del operador
 - :ballot_box_with_check: Añadir estilos al componente de panel de estados del operador
 - :ballot_box_with_check: Añadir estilos al componente de notificaciones del operador
 - :ballot_box_with_check: Añadir estilos al componente de salas del operador
 - :ballot_box_with_check: Añadir estilos al componente de contactos del operador
+- :ballot_box_with_check: Añadir estilos al dialpad
 - :ballot_box_with_check: Añadir estilos al componente del escritorio para llamadas del operador 
-- :point_right:  		Estandarizar colores globales al sistema
-- :black_square_button: Añadir estilos a el template-administrador
-- :black_square_button: Añadir estilos grid para el template del adminsitrador
-- :black_square_button: incorporar estilos a los formularios de añadir y editar contactos del administrador
+- :ballot_box_with_check:  Estandarizar colores globales al sistema
+- :point_right:            Añadir estilos al historial de llamadas del operador
+- :point_right:            Añadir estilos a las grabaciones del operador
+- :black_square_button:    Añadir estilos al tracking del operador
+- :black_square_button:    Añadir estilos a los ajustes del operador
+- :black_square_button:    Añadir estilos a el template-administrador
+- :ballot_box_with_check:  Añadir estilos grid para el template del adminsitrador
+- :black_square_button:    incorporar estilos a los formularios de añadir y editar contactos del administrador
 - :black_square_button: Añadir estilos al componente de Contactos del administrador
 - :black_square_button: Añadir estilos al componente de historial de llamadas del administrador
 - :black_square_button: Añadir estilos al componente de tracking del administrador
