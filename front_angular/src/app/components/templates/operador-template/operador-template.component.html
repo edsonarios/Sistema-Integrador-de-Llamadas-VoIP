@@ -69,13 +69,14 @@
 						Escritorio
 					</header>
 				<section class="e-responsive">
-				<div class="escritorio"  *ngFor="let n of Llamada; let i = index">
+				<div class="escritorio"  *ngFor="let n of Llamada; let i = index" [@FadeIn]>
 				<llamada (llamadaClose)="CerrarLlamada($event)"
 				Nombre="{{Llamada[i]['nombre']}}"
 				Numero="{{Llamada[i]['numero']}}"
 				Tipo="{{Llamada[i]['Tipo']}}"
 				Id="{{Llamada[i]['id']}}"
 				Estado="{{Llamada[i]['Estado']}}"
+				
 				></llamada>
 				</div>
 				</section>
@@ -97,7 +98,7 @@
 			<div class="c2-body">
 				<tabset [justified]="true">
 					<tab heading="Notificaciones">
-				  	<div *ngFor="let n of Notificaciones; let i = index">
+				  	<div *ngFor="let n of Notificaciones; let i = index" [@flyIn]>
 					  	<Notificacion
 					  	(ContestaLlamada)="ContestarLlamada($event)"
 					  	(CancelaLlamada)="ColgarLlamada($event)"
@@ -111,7 +112,7 @@
 						<Agenda></Agenda>
 					</tab>
 					 <tab heading="Salas" >
-					  	<div *ngFor="let n of Salas; let i = index">
+					  	<div *ngFor="let n of Salas; let i = index" [@flyIn]>
 					  	<Sala (DatoSala)="RegistraSala($event)"
 					  	Nombre="{{Salas[i]['nombre']}}"
 					  	Ocupado="{{Salas[i]['Ocupando']}}"

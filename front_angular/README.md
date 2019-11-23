@@ -130,7 +130,7 @@ Dentro del directorio se encuentran los metodos que hacen de puente para la cone
 
 | Modulo | Progreso |
 | :---: | --- |
-| Templates | _52.9% Terminado_ |
+| Templates | _60.7% Terminado_ |
 | Estilos | _50% Terminado_ |
 | Servicios y Modelos | _23.4% Terminado_ |
 
@@ -176,12 +176,12 @@ Para una mejor control sobre el avance del sistema se tiene el  manejo de los si
 - :ballot_box_with_check: Hacer interactuable el escritorio con las salas
 - :ballot_box_with_check: Hacer interactuable el escritorio con las Notificaciones
 - :clock3: Hacer interactuable el escritorio con el panel
-- :point_right: añadir animacion faltant de transicion (entrada y salida) a las notificaciones
-- :black_square_button: añadir animacion faltant de transicion (entrada y salida) a las Salas
-- :black_square_button: añadir animacion de transicion (entrada y salida) al escritorio por evento
-- :black_square_button: Añadir Scroll en los componentes para no pasarse del rango
-- :black_square_button: añadir metodo a la barra de busqueda por agenda
-- :black_square_button: crear componente donde ira el pipe de busqueda
+- :ballot_box_with_check: añadir animacion faltante de transicion (entrada y salida) a las notificaciones
+- :ballot_box_with_check: añadir animacion faltante de transicion (entrada y salida) a las Salas
+- :ballot_box_with_check: añadir animacion de transicion (entrada y salida) al escritorio por evento
+- :clock3: Añadir Scroll en los componentes para no pasarse del rango
+- :ballot_box_with_check: añadir metodo a la barra de busqueda por agenda
+- :point_right: crear componente donde ira el pipe de busqueda
 - :black_square_button: adicionar metodos al template - operador para configuracion de microfono, audio y red(señal)
 - :black_square_button: Añadir metodos al componente audio_player
 - :black_square_button: Agregar metodos al componente para realizar descargas

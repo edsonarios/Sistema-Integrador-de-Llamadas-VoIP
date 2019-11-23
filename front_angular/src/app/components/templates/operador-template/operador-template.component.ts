@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { User } from 'models/user';
 // import { Sala } from '../../../../models/sala';
-import { Entrance, Quit } from 'services/animations';
+import { Entrance, Quit, DesktopAnimation, EnterLeave } from 'services/animations';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -13,7 +13,7 @@ import {interval, timer } from 'rxjs';
 @Component({
 	selector: 'operador-template',
 	templateUrl: './operador-template.component.html',
-	animations: [Entrance,Quit]
+	animations: [Entrance,Quit, DesktopAnimation, EnterLeave]
 })
 export class OperadorTemplateComponent implements OnInit {
 
