@@ -131,7 +131,7 @@ Dentro del directorio se encuentran los metodos que hacen de puente para la cone
 | Modulo | Progreso |
 | :---: | --- |
 | Templates | _52.9% Terminado_ |
-| Estilos | _44.4% Terminado_ |
+| Estilos | _50% Terminado_ |
 | Servicios y Modelos | _23.4% Terminado_ |
 
 (_Actualizado 23 de noviembre_)
@@ -222,9 +222,6 @@ Para una mejor control sobre el avance del sistema se tiene el  manejo de los si
 - :black_square_button: Añadir estilos al componente de Contactos del administrador
 - :black_square_button: Añadir estilos al componente de historial de llamadas del administrador
 - :black_square_button: Añadir estilos al componente de tracking del administrador
-- :black_square_button: Añadir estilos al componente de grabaciones del administrador
-- :black_square_button: Añadir estilos.... (completar)
-- :black_square_button: Añadir animaciones 
 
 
 ###### Servicios y Modelos
