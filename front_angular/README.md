@@ -1,4 +1,5 @@
-# SISTEMA INTEGRADOR DE LLAMADAS VOIP (Front - End)
+# Sistema Integrador de Llamadas VoIp
+# FONT END
 
 ## Responsables :busts_in_silhouette:	
 ### Templates (_Encargado **Richard**_)
@@ -129,7 +130,7 @@ Dentro del directorio se encuentran los metodos que hacen de puente para la cone
 ## Resumen General Front-End :scroll:
 
 | Modulo | Progreso |
-| --- | --- |
+| :---: | --- |
 | Templates | _80% Terminado_ |
 | Estilos | _70% Terminado_ |
 | Servicios y Modelos | _40% Terminado_ |
@@ -170,44 +171,61 @@ Para una mejor control sobre el avance del sistema se tiene el  manejo de los si
 - :ballot_box_with_check: incorporar el modulo de reproductor de audio
 - :ballot_box_with_check: Crear el componente de Tracking
 - :ballot_box_with_check: Crear el componente de Historial de llamadas
+- :ballot_box_with_check: Crear el enrutamiento entre componentes para el administrador
 - :ballot_box_with_check: Crear modelos locales para el escritorio
 - :ballot_box_with_check: Hacer interactuable el escritorio con las salas
 - :ballot_box_with_check: Hacer interactuable el escritorio con las Notificaciones
 - :ballot_box_with_check: Hacer interactuable el escritorio con el panel
 - :clock3: 				Incorporar funcionalidades al reproductor de audio con sonido
 - :clock3: 				Probar descargas
-- :point_right: 		las animaciones faltantes de transicion
+- :point_right: 		las animaciones faltantes de transicion al operador
 - :black_square_button: Desplegar datos mediante servicio al template-operador
 - :black_square_button: Desplegar datos mediante servicio al template-administrador
+- :black_square_button: Adicionar las opciones restantes al Administrador
+- :black_square_button: Adicionar componentes para dar de Alta un usuario
+- :black_square_button: Adicionar componentes para dar de Alta una Sala
 - :black_square_button: Optimizar metodos por componente
-- :black_square_button: Realizacion de pruebas
+- :black_square_button: Realizacion de pruebas al operador
+- :black_square_button: Realizacion de pruebas al administrador
+- :black_square_button: Fusion del template del operador con la libreria para realizar llamadas
+- :black_square_button: Ejecucion de Pruebas con la libreria
+- :black-square_button: Pruebas generales
 - :black_square_button: Mandar a produccion
 
 ###### Estilos 
 
-- :ballot_box_with_check: Añadir estilos al componente de Agenda
-- :ballot_box_with_check: Añadir estilos al componente de panel de estados
-- :ballot_box_with_check: Añadir estilos al componente de notificaciones
-- :ballot_box_with_check: Añadir estilos al componente de salas
-- :ballot_box_with_check: Añadir estilos al componente de contactos
-- :ballot_box_with_check: Añadir estilos al componente del escritorio para llamadas 
-- :point_right:  		Estandarizar colores
-- :black_square_button: Añadir estilos a el dashboard-administrador
+- :ballot_box_with_check: Estructuracion y creacion de los archivos de Sass por BEM
+- :ballot_box_with_check: Añadir estilos a el template-administrador
+- :ballot_box_with_check: Añadir estilos al componente de Agenda del operador
+- :ballot_box_with_check: Añadir estilos al componente de panel de estados del operador
+- :ballot_box_with_check: Añadir estilos al componente de notificaciones del operador
+- :ballot_box_with_check: Añadir estilos al componente de salas del operador
+- :ballot_box_with_check: Añadir estilos al componente de contactos del operador
+- :ballot_box_with_check: Añadir estilos al componente del escritorio para llamadas del operador 
+- :point_right:  		Estandarizar colores globales al sistema
+- :black_square_button: Añadir estilos a el template-administrador
 - :black_square_button: Añadir estilos grid para el template del adminsitrador
-- :black_square_button: incorporar estilos a los formularios de añadir y editar contactos
-- :black_square_button: Añadir estilos al componente de Contactos
-- :black_square_button: Añadir estilos al componente de historial de llamadas
-- :black_square_button: Añadir estilos al componente de tracking
-- :black_square_button: Añadir estilos al componente de grabaciones
-- :black_square_button: Añadir animaciones
+- :black_square_button: incorporar estilos a los formularios de añadir y editar contactos del administrador
+- :black_square_button: Añadir estilos al componente de Contactos del administrador
+- :black_square_button: Añadir estilos al componente de historial de llamadas del administrador
+- :black_square_button: Añadir estilos al componente de tracking del administrador
+- :black_square_button: Añadir estilos al componente de grabaciones del administrador
+- :black_square_button: Añadir estilos.... (completar)
+- :black_square_button: Añadir animaciones 
 
 
 ###### Servicios y Modelos
 
-- :ballot_box_with_check: Crear los modelos de usuarios
-- :ballot_box_with_check: Crear los modelos de Salas
-- :ballot_box_with_check: crear los modelos de Sip
-- :ballot_box_with_check: Añadir servicio de Login
+- :ballot_box_with_check: Crear el modelo Contacto
+- :ballot_box_with_check: Crear el modelo crd
+- :ballot_box_with_check: Crear el modelo extension
+- :ballot_box_with_check: Crear el modelo sala
+- :ballot_box_with_check: Crear el modelo sip
+- :ballot_box_with_check: Crear el modelo user
+- :ballot_box_with_check: Crear el modelo voicemail
+- :ballot_box_with_check: Importar los modelos en el componente Login.
+- :ballot_box_with_check: Añadir servicio con la ip del servidor
+- :ballot_box_with_check: Añadir servicio para iniciar sesion (login)
 - :ballot_box_with_check: Añadir servicio para Agregar usuario
 - :point_right:   	    Añadir servicio para editar usuario
 - :black_square_button: Añadir servicio para dar de alta un usuario
@@ -216,6 +234,8 @@ Para una mejor control sobre el avance del sistema se tiene el  manejo de los si
 - :black_square_button: Añadir servicio para dar de alta una sala
 - :black_square_button: Añadir servicio para obtener el historial de llamadas
 - :black_square_button: Añadir servicio para obtener las grabaciones
+- :black_square_button: Añadir servicio ...(completar)
 
  
-
+---
+© Copyright 2019 _Team Patelecom Developers_
