@@ -1,27 +1,25 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<button
-		class="navbar-toggler"
-		type="button"
-		data-toggle="collapse"
-		data-target="#navbarSupportedContent"
-		aria-controls="navbarSupportedContent"
-		aria-expanded="false"
-		aria-label="Toggle navigation"
-	>
-		<span class="navbar-toggler-icon"></span>
-	</button>
-
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				<a class="nav-link">
-					<i class="v-icon-microphone1" placement="right"></i> Grabaciones<span class="sr-only"
-						>(current)</span
-					>
-				</a>
-			</li>
-		</ul>
-		<div class="form-inline my-2 my-lg-0">
+<div class="navbar-horiz">
+		<div class="nav-ini">
+			<i class="v-icon-microphone1" placement="right"></i>
+			Grabaciones
+		</div>
+		<nav>
+			<ul class="nav-mid">
+				<li class="li-active">
+					<a>Todos</a>
+				</li>
+				<li class="li-active">
+					<a>Salientes</a>
+				</li>
+				<li>
+					<a>Entrantes</a>
+				</li>
+				<li>
+					<a>Perdidas</a>
+				</li>
+			</ul>
+		</nav>
+		<div class="nav-fin">
 			<input
 				type="text"
 				placeholder="Datepicker"
@@ -29,24 +27,14 @@
 				bsDatepicker
 				[bsConfig]="{ isAnimated: true }"
 			/>
-			<a class="nav-link">
-				<i class="v-icon-funnel" placement="right"></i>
-			</a>
-		</div>
-		<div class="form-inline my-2 my-lg-0">
-			<div class="search">
-				<input type="text" class="form-control" placeholder="Contacto" />
-				<button type="submit" class="searchButton">
-					<i class="v-icon-magnifying-glass"></i>
-				</button>
-			</div>
+			<input type="text" class="form-control" placeholder="Contacto" />
+			<button type="submit">
+				<i class="v-icon-magnifying-glass"></i>
+			</button>
 		</div>
 	</div>
-</nav>
 
-<header class="panel__header">
-	Grabaciones
-</header>
+
 <div class="Historial">
 	<div class="table-responsive-vertical shadow-z-1">
 		<!-- Table starts here -->
