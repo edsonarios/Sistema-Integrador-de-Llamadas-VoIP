@@ -135,18 +135,22 @@ Dentro del directorio se encuentran los metodos que hacen de puente para la cone
 
 ###### Servicios y Modelos
 
+Se tiene los siguientes simbolos como:
 
-:ballot_box_with_check: Tarea 1
-:clock3: Tarea 2
-:point_right: Tarea 3
-:arrow_right: tarea 4
-:heavy_check_mark: tarea 5
-:black_square_button: Tarea 6
-:black_square_button: Tarea 7
-:ballot_box_with_check: Tarea 8
-:ballot_box_with_check: Tarea 9
-:black_square_button: Tarea 10
-:white_square_button:white_square_button:
+>- :ballot_box_with_check: Terminado
+>- :clock3: En pausa
+>- :point_right: En progreso
+>- :black_square_button: Pendiente
+ 
+_prueba_
+
+- :ballot_box_with_check: Tarea 1
+- :ballot_box_with_check: Tarea 2
+- :clock3: Tarea 3
+- :ballot_box_with_check: Tarea 4
+- :point_right: Tarea 5
+- :black_square_button: Tarea 6
+- :black_square_button:	Tarea 7
 
 
 ## Resumen General Front-End
