@@ -128,11 +128,11 @@ Dentro del directorio se encuentran los metodos que hacen de puente para la cone
 
 ## Resumen General Front-End :scroll:
 
-| **Modulo** | **Progreso**| 
-| Templates | _80% Terminado_ | 
-| Estilos | _70% Terminado_ | 
-| Servicios y Modelos | _80% Terminado_ | 
-
+| Modulo | Progreso |
+| --- | --- |
+| Templates | 80% Terminado |
+| Estilos | 70% Terminado |
+| Servicios y Modelos | _40% Terminado_ |
 
 
 ## Tabla de Tareas del proyecto :pencil:
