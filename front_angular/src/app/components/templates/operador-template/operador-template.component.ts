@@ -74,19 +74,26 @@ public Panel=[];
 		}
 	}
 	AgregarEventoNotificacion(){
+		// Metodo donde se asigna de forma aleatorea en el panel de notificaciones
+
 		var numero= Math.round((Math.random() * (3020 - 3000) + 3000));
 		var id= Math.round((Math.random()*(20-11)+11));
 		this.Notificaciones.push({'nombre':'Alias','numero':numero,'estado':'entrante','id':id});
 	}
 	AgregarEventoPanel(numero,fecha,tiempo,tipo){
+		//metodo en el que agregamos una nueva tupla en el panel de estados
+
 		this.Panel.push({'tipo':tipo,'Numero':numero,'fecha':fecha,'tiempo':tiempo});
 	}
 	RegistraSala(Sala) {
+		// Metodo del escritorio donde se crea una ventana y se elimina de la salas
+
   	this.Llamada.push({'nombre':Sala['nombre'],'id':Sala['id'],'numero':Sala['numero'],'Tipo':'Sala','Estado':'Inactiva'});
   	this.EliminaItemSalas(Sala['id']);
   		
 	}
 	CerrarLlamada(llamada){
+		// Metodo en el escritorio para cerrar la llamada del escritorio
 
 		this.EliminaItemLlamadas(llamada['Id']);
 		if (llamada['Tipo']=='Sala') {
@@ -95,7 +102,14 @@ public Panel=[];
 		
 
 	}
+	AgendaLlamada(ContactoAgenda){
+		// metodo donde se llama a un contacto mediante la agenda
+
+		this.Llamada.push({'nombre':ContactoAgenda['Nombre'],'id':ContactoAgenda['Id'],'numero':ContactoAgenda['Numero'],'Tipo':'Llamada','Estado':'Inactiva'});
+		this.AgregarEventoPanel(ContactoAgenda['Numero'],'15/11/2019','false','entrante');
+	}
 	ContestarLlamada(Notificacion){
+		
 		this.Llamada.push({'nombre':Notificacion['Nombre'],'id':Notificacion['Id'],'numero':Notificacion['Numero'],'Tipo':'Llamada','Estado':'Inactiva'});
 		this.EliminaItemNotificacion(Notificacion['Id']);
 		this.AgregarEventoPanel(Notificacion['Numero'],'15/11/2019','false','entrante');
@@ -153,5 +167,14 @@ public Panel=[];
 		}
 			var Timer= Hora+':'+minutos+':'+segundos;
 		return Timer;*/
+	}
+	MicrophoneOption(){
+		// Aqui viene las opciones para el microfono del operador
+	}
+	AudioOption(){
+		// Aqui viene las opciones para el audio del operador
+	}
+	NetworkSignalOption(){
+		// Aqui viene las opciones para la red del operador
 	}
 }

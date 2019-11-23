@@ -109,7 +109,9 @@
 				 	 </div>
 				  </tab>
 					<tab heading="Agenda">
-						<Agenda></Agenda>
+						<Agenda (AgendaLlamada)="AgendaLlamada($event)">
+							
+						</Agenda>
 					</tab>
 					 <tab heading="Salas" >
 					  	<div *ngFor="let n of Salas; let i = index" [@flyIn]>
@@ -135,15 +137,15 @@
 					</div>
 				</div>
 				<div class="c2-footer-btn">
-					<button>
+					<button (click)="MicrophoneOption()">
 						<i class="v-icon-microphone-black-shape"></i>
 					</button>
 
-					<button>
+					<button (click)="AudioOption()">
 						<i class="v-icon-support"></i>
 					</button>
 
-					<button>
+					<button (click)="NetworkSignalOption()">
 						<i class="v-icon-wifi"></i>
 					</button>
 				</div>
