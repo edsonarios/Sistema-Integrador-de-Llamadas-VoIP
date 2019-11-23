@@ -1,161 +1,240 @@
-# Cambios Front-End Noviembre 2019
+# Sistema Integrador de Llamadas VoIp (Front-End)
 
-Se han realizado varios avances y muchos cambios en su mayoria la estructura y contenido respecto a modulos y enrutamientos.
-Asi tambien se asignaron los siguientes roles:
-- TEMPLATES  -_Richard_-
-- ESTILOS  -_Jorge_-
-- SERVICIOS  -_Henry_-
+## Responsables :busts_in_silhouette:	
+### Templates (_Encargado **Richard**_)
 
+Orientado a la estructuracion de archivos y componentes, asi tambien el manejo de enrutamientos, eventos y creacion de formularios, manejo de modulos e importacion de paquetes.
 
-## Gestion del proyecto
+### Estilos (_Encargado **Jorge**_)
 
-Se han creado 2 carpetas en las cuales, se gestionaran los archivos del sistema , los cuales son:
+Todo aspecto visual entre el usuario y el sistema, optando por la metodologia BEM utilizando Sass.
+El cual nos permite tener todos los componentes, plantillas y vistas mas organizadas. Englobando todos los estilos en un solo directorio y modularizando su funcionamiento
 
-```
-Templates
-```
-_y tambien_
+### Servicios y Modelado (_Encargado **Henry**_)
 
-```
-Pages
-```
+Refiere a los objetos y clases que utilizaremos dentro del sistema, como los usuarios, salas, etc.
+Utilizando Reactivex de su libreria rjxs, para crear los servicios, los mismos que se comunicaran con el Back-end mediante las Api's Rest Full
 
-modularizando el proyecto lo mas que se pueda
+## Gestion del proyecto :open_file_folder:
 
-## Templates (carpeta)
+El sistema esta subdivido en 2 carpetas dentro del directorio **app/components**:
 
-Dentro estara el dashobard y/o template para los siguientes tipos de usuario:
+### Templates
 
-- :heavy_check_mark: Operador
-- :heavy_check_mark: Administrador 
+Dentro estara el dashobard correspondiente para cada tipo de usuario y el entorno en el cual navegara por el sistema
+
+- Operador
+   - Html del operador
+   - Rutas del operador
+   - Modulos del operador
+   - Componente del operador
+- Administrador
+   - Html del administrador
+   - Rutas del administrador
+   - Modulos del administrador
+   - Componente del administrador
 
 las mismas mediante sus modulos llaman a todos los componentes pertenecientes al tipo de usuario
 
-## Pages (Carpeta)
+### Pages 
 
-Aqui estara distribuido igual segun los tipos de usuario:
+Dentro se encuentran los componentes y plantillas Html, donde se puede manipular la pagina mediante typescript y lenguaje de etiquetado.
 
-- :heavy_check_mark: Operador 
-- :heavy_check_mark: Administrador 
-- :heavy_check_mark: Login 
+- Inicio
+   - Login
+- Operador
+   - agenda
+   - historial_llamadas
+   - grabaciones
+   - dialpad
+   - tracking
+   - sala
+   - panel
+   - notificacion
+- Administrador
+   - Contactos
+   - Agregar_contactos
+   - Editar_contactos
+   - historial_llamadas
+   - grabaciones
+   - Salas
+   - tracking
 
-el diseño es intuitivo, cada componente funciona de manera independiente a otro, estos componentes son llamados desde el template correspondiente para ser utilizado. a su vez se le asigna una ruta en el siguiente archivo  de cada template
--[Operador-template.routing.ts](https://github.com/edsonarios/Sistema-Integrador-de-Llamadas-VoIP/blob/master/front_angular/src/app/components/templates/operador-template/operador-template.routing.ts).
--[administrador-template.routing.ts](https://github.com/edsonarios/Sistema-Integrador-de-Llamadas-VoIP/blob/master/front_angular/src/app/components/templates/administrador-template/administrador-template.routing.ts)
+**Todos** estos componentes y plantillas Html ya estan implementados, importados  y en funcionamiento.
 
-## Tipos de Usuario 
-### Operador
+### Sass :art:
 
-para el operador se tienen los siguientes componentes
+Dentro de este directorio se encuentran todos los estilos que modifican y componen al sistema. Siguiento la metodologia BEM los cuales son:
 
-- :heavy_check_mark: agenda
-- :heavy_check_mark: historial_llamadas
-- :heavy_check_mark: grabaciones
-- :heavy_check_mark: dialpad
-- :heavy_check_mark: tracking
-- :heavy_check_mark: sala
-- :heavy_check_mark: Panel
-- :heavy_check_mark: notificacion
+- settings
+   - colors.scss
+   - dimensions.scss
+   - fonts.scss
+   - settings.scss
+- tools
+   - functions.scss
+   - mixins.scss
+   - tools.scss
+- generic
+   - generic.scss
+- elements
+   - elements.scss
+- objects
+   - objects.scss
+- components
+   - admin-dashboard.scss
+   - Agenda.scss
+   - components.scss
+   - dashboard.scss
+   - escritorio.scss
+   - historial.scss
+   - login.scss
+   - navbar.scss
+   - notificaciones.scss
+   - panelEstados.scss
+   - salas.scss
+   - modaladdcontact.scss
+- Utilities
+   - utilities.scss
+ 
+ **Todos** estos archivos ya estan implementados, importados y en funcionamiento.
 
-### Administrador
+### Models :clamp:
 
-para el Administrador se tienen los siguientes componentes
+Dentro de este directorio se encuentran los modelos con sus respectivos atributos para poder manipularlos mejor en el sistema.
 
-- :heavy_check_mark: Contactos
-- :heavy_check_mark: Agregar_contactos
-- :heavy_check_mark: Editar_contactos
-- :heavy_check_mark: historial_llamadas
-- :heavy_check_mark: grabaciones
-- :heavy_check_mark: Salas
-- :heavy_check_mark: tracking
+ - contacto.ts
+ - crd.ts
+ - extension.ts
+ - iax.tx
+ - sala.ts
+ - sip.ts
+ - user.ts
+ - voicemail.ts
+ 
+**Todos** estos archivos ya estan implementados, importados y en funcionamiento.
+  
 
-con **Todos** sus componentes dirigidos a la carpeta con los estilos Sass.
+### Services :space_invader:
+
+Dentro del directorio se encuentran los metodos que hacen de puente para la conexion con el back-end y comunicacion del front-end.
+
+ - animations.tx
+ - global.ts
+ - sip.service.ts
+ - user.service.ts
+
+ **Todos** estos archivos ya estan implementados, importados y en funcionamiento.
+
+## Resumen General Front-End :scroll:
+
+| Modulo | Progreso |
+| :---: | --- |
+| Templates | _80% Terminado_ |
+| Estilos | _70% Terminado_ |
+| Servicios y Modelos | _40% Terminado_ |
 
 
+## Tabla de Tareas del proyecto :pencil:
 
-## Tareas del proyecto (Noviembre 2019)
+Para una mejor control sobre el avance del sistema se tiene el  manejo de los siguientes simbolos respecto a cada tarea :
+
+| Simbolo | Significado |
+| --- | --- |
+| :ballot_box_with_check: | _Terminado_ |
+| :clock3: | _En Pausa_ |
+| :point_right: | _En Progreso_ |
+| :black_square_button: | _Pendiente_ |
+
+###### Templates 
+- :ballot_box_with_check: Generar el nuevo proyecto con Angular 
+- :ballot_box_with_check: Crear el template del operador
+- :ballot_box_with_check: Crear el componente de Salas
+- :ballot_box_with_check: Crear el componente para Agenda
+- :ballot_box_with_check: Crear el componente para Notificaciones
+- :ballot_box_with_check: Crear el componente Historial de llamadas
+- :ballot_box_with_check: Crear el componente Grabaciones
+- :ballot_box_with_check: Crear el enrutamiento entre componentes para el operador
+- :ballot_box_with_check: Enlazar en tabs los componentes: notificaciones, salas y agenda a la columna Lateral
+- :ballot_box_with_check: Crear el componente de llamada SIP (Notificaciones)
+- :ballot_box_with_check: Crear modelos locales para los componentes (notificaciones,salas,agenda)
+- :ballot_box_with_check: Agregar Nabvar para Historial de llamadas
+- :ballot_box_with_check: Agregar Nabvar para grabaciones
+- :ballot_box_with_check: Crear modelo de Grabaciones
+- :ballot_box_with_check: Crear un componente de reproductor de audio
+- :ballot_box_with_check: Agregar un gestor de opciones para salir del sistema
+- :ballot_box_with_check: Crear el Template de Administrador
+- :ballot_box_with_check: Crear el Componente de Contactos-Operadores
+- :ballot_box_with_check: Crear el componente de Añadir Contactos
+- :ballot_box_with_check: Crear el componente de Grabaciones
+- :ballot_box_with_check: incorporar el modulo de reproductor de audio
+- :ballot_box_with_check: Crear el componente de Tracking
+- :ballot_box_with_check: Crear el componente de Historial de llamadas
+- :ballot_box_with_check: Crear el enrutamiento entre componentes para el administrador
+- :ballot_box_with_check: Crear modelos locales para el escritorio
+- :ballot_box_with_check: Hacer interactuable el escritorio con las salas
+- :ballot_box_with_check: Hacer interactuable el escritorio con las Notificaciones
+- :ballot_box_with_check: Hacer interactuable el escritorio con el panel
+- :clock3: 				Incorporar funcionalidades al reproductor de audio con sonido
+- :clock3: 				Probar descargas
+- :point_right: 		las animaciones faltantes de transicion al operador
+- :black_square_button: Desplegar datos mediante servicio al template-operador
+- :black_square_button: Desplegar datos mediante servicio al template-administrador
+- :black_square_button: Adicionar las opciones restantes al Administrador
+- :black_square_button: Adicionar componentes para dar de Alta un usuario
+- :black_square_button: Adicionar componentes para dar de Alta una Sala
+- :black_square_button: Optimizar metodos por componente
+- :black_square_button: Realizacion de pruebas al operador
+- :black_square_button: Realizacion de pruebas al administrador
+- :black_square_button: Fusion del template del operador con la libreria para realizar llamadas
+- :black_square_button: Ejecucion de Pruebas con la libreria
+- :black_square_button: Pruebas generales
+- :black_square_button: Mandar a produccion
+
+###### Estilos 
+
+- :ballot_box_with_check: Estructuracion y creacion de los archivos de Sass por BEM
+- :ballot_box_with_check: Añadir estilos a el template-administrador
+- :ballot_box_with_check: Añadir estilos al componente de Agenda del operador
+- :ballot_box_with_check: Añadir estilos al componente de panel de estados del operador
+- :ballot_box_with_check: Añadir estilos al componente de notificaciones del operador
+- :ballot_box_with_check: Añadir estilos al componente de salas del operador
+- :ballot_box_with_check: Añadir estilos al componente de contactos del operador
+- :ballot_box_with_check: Añadir estilos al componente del escritorio para llamadas del operador 
+- :point_right:  		Estandarizar colores globales al sistema
+- :black_square_button: Añadir estilos a el template-administrador
+- :black_square_button: Añadir estilos grid para el template del adminsitrador
+- :black_square_button: incorporar estilos a los formularios de añadir y editar contactos del administrador
+- :black_square_button: Añadir estilos al componente de Contactos del administrador
+- :black_square_button: Añadir estilos al componente de historial de llamadas del administrador
+- :black_square_button: Añadir estilos al componente de tracking del administrador
+- :black_square_button: Añadir estilos al componente de grabaciones del administrador
+- :black_square_button: Añadir estilos.... (completar)
+- :black_square_button: Añadir animaciones 
 
 
-```
-**TEMPLATES**
-- (Listo) Crear el template del operador
-- (Listo) Crear el componente de Salas
-- (Listo) Crear el componente para Agenda
-- (Listo) Crear el componente para Notificaciones
-- (Listo) Crear el componente Historial de llamadas
-- (Listo) Crear el componente Grabaciones
-- (Listo) Crear el enrutamiento entre componentes
-- (Listo) Enlazar en tablas los componentes (notificaciones,salas,agenda) a la columna Lateral
-- (Listo) Crear el template de llamada SIP (Notificaciones)
-- (Listo) Crear modelos locales para los componentes (notificaciones,salas,agenda)
-- (Listo) Agregar Nabvar para Historial de llamadas
-- (Listo) Agregar Nabvar para grabaciones
-- (Listo) Crear modelo de Grabaciones
-- (Listo) Crear un template de reproductor de audio
-- (Listo) Agregar un gestor de opciones para salir del sistema
-- (Listo) Añadir el Template de Administrador
-- (Listo) Crear Dashboard para el Administrador (solo 2 columnas)
-- (Listo) Crear el Componente de Contactos-Operadores
-- (Listo) Crear el componente de Añadir Contactos
-- (Listo) Crear el componente de Grabaciones
-- (Listo) incorporar el modulo de reproductor de audio
-- (Listo) Crear el componente de Tracking
-- (Listo) Crear el componente de Historial de llamadas
-- (Listo) Crear modelos locales para el escritorio
-- (Listo) Hacer interactuable el escritorio con las salas
-- (Listo) Hacer interactuable el escritorio con las Notificaciones
-- (Listo) Hacer interactuable el escritorio con el panel
-- (En curso) Incorporar funcionalidades al reproductor de audio con sonido
-- Probar descargas
-- Importar las animaciones faltantes de transicion
-- Desplegar datos mediante servicio al template-operador
-- Desplegar datos mediante servicio al template-administrador
-- Optimizar metodos por componente
-- Realizacion de pruebas
-- Mandar a produccion
-```
+###### Servicios y Modelos
 
-```
-**ESTILOS**
+- :ballot_box_with_check: Crear el modelo Contacto
+- :ballot_box_with_check: Crear el modelo crd
+- :ballot_box_with_check: Crear el modelo extension
+- :ballot_box_with_check: Crear el modelo sala
+- :ballot_box_with_check: Crear el modelo sip
+- :ballot_box_with_check: Crear el modelo user
+- :ballot_box_with_check: Crear el modelo voicemail
+- :ballot_box_with_check: Importar los modelos en el componente Login.
+- :ballot_box_with_check: Añadir servicio con la ip del servidor
+- :ballot_box_with_check: Añadir servicio para iniciar sesion (login)
+- :ballot_box_with_check: Añadir servicio para Agregar usuario
+- :point_right:   	    Añadir servicio para editar usuario
+- :black_square_button: Añadir servicio para dar de alta un usuario
+- :black_square_button: Añadir servicio para crear una sala
+- :black_square_button: Añadir servicio para editar una sala
+- :black_square_button: Añadir servicio para dar de alta una sala
+- :black_square_button: Añadir servicio para obtener el historial de llamadas
+- :black_square_button: Añadir servicio para obtener las grabaciones
+- :black_square_button: Añadir servicio ...(completar)
 
-	_OPERADOR_
-- (Listo) Añadir estilos al componente de Agenda
-- (Listo) Añadir estilos al componente de panel de estados
-- (Listo) Añadir estilos al componente de notificaciones
-- (Listo) Añadir estilos al componente de salas
-- (Listo) Añadir estilos al componente de contactos
-- (Listo) Añadir estilos al componente del escritorio para llamadas 
-- (En curso) Estandarizar colores
-	_ADMINISTRADOR_
-- añadir estilos a el dashboard-administrador
-- Añadir estilos grid para el template del adminsitrador
-- incorporar estilos a los formularios de añadir y editar contactos
-- añadir estilos al componente de Contactos
-- añadir estilos al componente de historial de llamadas
-- añadir estilos al componente de tracking
-- añadir estilos al componente de grabaciones
-- añadir animaciones
-
-```
-
-```
-**SERVICIOS**
-- (Listo) Crear los modelos de usuarios
-- (Listo) Crear los modelos de Salas
-- (Listo) crear los modelos de Sip
-- (Listo) Añadir servicio de Login
-- (Listo) Añadir servicio para Agregar usuario
-- (En curso) Añadir servicio para editar usuario
-- Añadir servicio para dar de alta un usuario
-- Añadir servicio para crear una sala
-- Añadir servicio para editar una sala
-- Añadir servicio para dar de alta una sala
-- Añadir servicio para obtener el historial de llamadas
-- Añadir servicio para obtener las grabaciones
-```
-
-## Resumen General Front-End
-
-- Templates _80% terminado_
-- Estilos _70% terminado_
-- Servicios _40% terminado_
+ 
+---
+© Copyright 2019 _Team Patelecom Developers_
