@@ -2,7 +2,7 @@
 
 .sala {
 	display: grid;
-	grid-template-columns: 15% 55% 30%;
+	grid-template-columns: 25% 45% 30%;
 	grid-template-areas: 'flecha sala detalle';
 	height: 80px;
 	margin: 10px;
@@ -18,7 +18,7 @@
 		width: 100%;
 	}
 	button:hover {
-		background: var(--color-seis);
+		background: var(--color-cinco);
 		color: var(--color-uno);
 		animation-name: initial;
 	}
@@ -36,5 +36,5 @@
 	display: grid;
 	align-content: center;
 	grid-area: detalle;
-	background: var(--color-cinco);
+	background: var(--color-seis);
 }

@@ -96,7 +96,7 @@ var(--color-uno), var(--color-dos), var(--color-tres), var(--color-cuatro), var(
 .c2-lateral {
 	grid-area: c2-lateral;
 	display: grid;
-	grid-template-rows: 8% 83% 9%;
+	grid-template-rows: 80px 84vh 80px;
 	grid-template-areas:
 		'c2-header'
 		'c2-body'
@@ -161,11 +161,11 @@ var(--color-uno), var(--color-dos), var(--color-tres), var(--color-cuatro), var(
 	background: var(--color-cinco);
 	grid-area: c2-footer;
 	display: grid;
-	grid-template-columns: 63px auto 38px 38px 38px;
-	grid-template-areas: 'c2-logo c2-nombre c2-microfono c2-audio c2-señal';
+	grid-template-columns: 63px auto 150px;
+	grid-template-areas: 'c2-logo c2-nombre c2-icon';
 	button {
 		padding: 0%;
-		height: 50px;
+		height: 60px;
 		margin: 0%;
 		padding-top: 17px;
 		background: var(--color-cinco);
@@ -177,21 +177,27 @@ var(--color-uno), var(--color-dos), var(--color-tres), var(--color-cuatro), var(
 .c2-footer-btn {
 	display: flex;
 	button {
+		font-size: 30px;
 		margin: 0px 5px;
+		i{
+			color: var(--color-tres);
+		}
 	}
 }
 .c2-logo {
 	grid-area: c2-logo;
 	background: green;
 	vertical-align: middle;
-	height: 63px;
+	height: 80px;
+	width: 80px;
 	background-image: url(assets/avatar.png);
 	background-size: cover;
 	border-radius: 50%;
 }
 .c2-nombre {
+	display: grid;
+	align-content: center;
 	grid-area: c2-nombre;
-	padding-top: 8px;
 	color: var(--color-dos);
 	font-weight: bold;
 	&__sip {
