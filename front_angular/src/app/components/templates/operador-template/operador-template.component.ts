@@ -80,16 +80,18 @@ public Panel=[];
 		var id= Math.round((Math.random()*(20-11)+11));
 		this.Notificaciones.push({'nombre':'Alias','numero':numero,'estado':'entrante','id':id});
 	}
-	AgregarEventoPanel(numero,fecha,tiempo,tipo){
+	AgregarEventoPanel(numero,fecha,duracion,tipo){
 		//metodo en el que agregamos una nueva tupla en el panel de estados
 
-		this.Panel.push({'tipo':tipo,'Numero':numero,'fecha':fecha,'tiempo':tiempo});
+		var horaNow = this.ObtenerTiempo();
+		this.Panel.push({'tipo':tipo,'Numero':numero,'fecha':fecha,'Hora':horaNow,'tiempo':duracion});
 	}
+
 	RegistraSala(Sala) {
 		// Metodo del escritorio donde se crea una ventana y se elimina de la salas
 
-  	this.Llamada.push({'nombre':Sala['nombre'],'id':Sala['id'],'numero':Sala['numero'],'Tipo':'Sala','Estado':'Inactiva'});
-  	this.EliminaItemSalas(Sala['id']);
+	  	this.Llamada.push({'nombre':Sala['nombre'],'id':Sala['id'],'numero':Sala['numero'],'Tipo':'Sala','Estado':'Inactiva'});
+	  	this.EliminaItemSalas(Sala['id']);
   		
 	}
 	CerrarLlamada(llamada){
@@ -179,5 +181,11 @@ public Panel=[];
 	}
 	Busqueda(){
 		//Aqui viene los metodos y/o contenido de la busqueda
+	}
+	ObtenerTiempo(){
+		//Aqui viene los metodos y/o contenido de la busqueda
+		var date= new Date();
+		//console.log('El dato es :'+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds());
+		return date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
 	}
 }
