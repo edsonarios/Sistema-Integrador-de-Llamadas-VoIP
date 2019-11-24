@@ -177,4 +177,7 @@ public Panel=[];
 	NetworkSignalOption(){
 		// Aqui viene las opciones para la red del operador
 	}
+	Busqueda(){
+		//Aqui viene los metodos y/o contenido de la busqueda
+	}
 }

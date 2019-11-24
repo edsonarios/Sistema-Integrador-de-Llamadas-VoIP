@@ -16,6 +16,7 @@ export class AudioPlayerComponent implements OnInit {
 	ngOnInit() {}
 
 	Play(){
+		// Metodo donde inicia el reproductor
 		this.valor=0;
 //Prueba en un intervalo de 10 segundos
 		const contador=interval(1000);

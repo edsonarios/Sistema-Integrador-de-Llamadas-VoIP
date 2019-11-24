@@ -87,10 +87,12 @@ var(--color-uno), var(--color-dos), var(--color-tres), var(--color-cuatro), var(
 
 	.c2-desktop {
 		grid-area: c2-desktop;
+		overflow-y: scroll;
 	}
 	.c2-panel {
 		grid-area: c2-panel;
 		background: var(--color-uno);
+		overflow-y: scroll;
 	}
 }
 .c2-lateral {

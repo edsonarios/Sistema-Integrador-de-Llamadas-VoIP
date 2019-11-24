@@ -103,4 +103,8 @@ export class GrabacionesComponent implements OnInit {
 	}
 
 	ngOnInit() {}
+	DescargarAudio(){
+		//Metodo de descarga
+		console.log('Descargando...')
+	}
 }
