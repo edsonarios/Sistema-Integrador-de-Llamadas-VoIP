@@ -12,7 +12,7 @@ import { GLOBAL } from './global';
   providedIn: 'root'
 })
 export class SipService {
-  public idUser = localStorage.getItem('idUser');
+  
   public url: string;
   public user: User;
   public sip: Sip;
@@ -27,9 +27,10 @@ export class SipService {
     })
   };
 
-  addSIP( obj): Observable<any> {
-      this.sip = new Sip(obj.alias, obj.telnumero, obj.telnumero, this.idUser);
-
+  addSIP( name, callerId, idu): Observable<any> {
+      this.sip = new Sip(name, callerId, callerId, idu);
+      console.log('Datos obtenido para la extension SIP......');
+      console.log(this.sip);
     return this.http.post<any>(this.url + 'addSip',  this.sip,
          this.httpOptions).pipe(
       retry(1),
@@ -37,15 +38,15 @@ export class SipService {
     );
   }
 
-  updateSip(obj): Observable<any> {
-    this.sip = new Sip(obj.alias, obj.telnumero, obj.telnumero, this.idUser);
+  // updateSip(obj): Observable<any> {
+  //   this.sip = new Sip(obj.alias, obj.telnumero, obj.telnumero);
 
-  return this.http.post<any>(this.url + 'updateSip',  this.sip,
-       this.httpOptions).pipe(
-    retry(1),
-    catchError(this.errorHandl)
-  );
-}
+  // return this.http.post<any>(this.url + 'updateSip',  this.sip,
+  //      this.httpOptions).pipe(
+  //   retry(1),
+  //   catchError(this.errorHandl)
+  // );
+  // }
 
 
 

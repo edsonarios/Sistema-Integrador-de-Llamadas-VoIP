@@ -66,6 +66,8 @@ export class UserService {
 
   addUsuario( user): Observable<any> {
     this.user = user;
+    console.log('Datos registrados de Contacto ...   ');
+    console.log(this.user);
     return this.http.post<any>(this.url + 'addUsuario',  this.user , this.httpOptions).pipe(
       retry(1),
       catchError(this.errorHandl)

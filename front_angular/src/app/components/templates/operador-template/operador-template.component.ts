@@ -52,6 +52,7 @@ public Panel=[];
 	ngOnInit() {
 	
 		this.user = {
+			id: '10',
 			nombre: 'usuario',
 			apPaterno: 'userPat',
 			apMaterno: 'userMat',

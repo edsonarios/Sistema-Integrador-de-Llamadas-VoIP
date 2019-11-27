@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
 			return;
 		}
 		this.user = new User(
-			
+			'',
 			'',
 			'',
 			'',

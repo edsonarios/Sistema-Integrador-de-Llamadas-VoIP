@@ -15,36 +15,61 @@
 					<label for="nombre">NOMBRE</label>
 					<input type="text" formControlName="nombre" class="form-control" />
 				</div>
-				<div class="col-md-6 form-group">
-					<label for="apellido">APELLIDO</label>
-					<input type="text" formControlName="apellido" class="form-control" />
-				</div>
 			</div>
 
 			<div class="row">
-				<div class="col-md-4 form-group">
-					<label for="alias">ALIAS</label>
-					<input type="text" formControlName="alias" class="form-control" />
+				<div class="col-md-6 form-group">
+					<label for="paterno">APELLIDO PATERNO</label>
+					<input type="text" formControlName="paterno" class="form-control" />
 				</div>
-				<div class="col-md-4 form-group">
+				<div class="col-md-6 form-group">
+					<label for="materno">APELLIDO MATERNO</label>
+					<input type="text" formControlName="materno" class="form-control" />
+				</div>
+			</div>	
+			
+
+			<div class="row">
+				<div class="col-md-6 form-group">
+					<label for="direccion">DIRECCIÓN</label>
+					<input type="text" formControlName="direccion" class="form-control" />
+				</div>
+				<div class="col-md-6 form-group">
 					<label for="telnumero">#/TELÉFONO</label>
 					<input type="text" formControlName="telnumero" class="form-control" />
 				</div>
-				<div class="col-md-4 form-group">
+				<!-- <div class="col-md-4 form-group">
 					<label for="telnumero">TIPO</label>
 					<select class="form-control" id="inputGroupSelect01" formControlName="tipo">
 						<option value="SIP">SIP</option>
 						<option value="IAX">IAX</option>
 					</select>
-				</div>
+				</div> -->
+				
 			</div>
-			
 
-			<div class="row form-group">
-				<label for="descripcion">DESCRIPCIÓN</label>
-				<input type="text" formControlName="descripcion" class="form-control" />
+			<div class="row">
+					<label for="correo">CORREO</label>
+					<input type="text" formControlName="correo" class="form-control" />
+			</div>	
+			<div class="row">	
+					<label for="contrase">CONTRASEÑA</label>
+					<input type="password" formControlName="contrase" class="form-control" />
 			</div>
 		</form>
+
+		<form  [formGroup]="addFormSip">
+			<div class="row">
+				<label for="name">ALIAS</label>
+				<input type="text" formControlName="name" class="form-control" />
+		</div>	
+		<div class="row">	
+				<label for="callerId">CALLER ID</label>
+				<input type="text" formControlName="callerId" class="form-control" />
+		</div>
+		</form>
+
+		
 	</div>
 </div>
 <div class="modal-footer form-group">
