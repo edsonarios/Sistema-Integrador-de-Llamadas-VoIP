@@ -1,0 +1,19 @@
+.tracking{
+    display: grid;
+    grid-template-columns: 80% 20%;
+    grid-template-areas: "mapa opciones";
+    height: 100vh;
+}
+
+.t-mapa{
+    grid-area: mapa;
+    background: url(https://media.wired.com/photos/59269cd37034dc5f91bec0f1/master/pass/GoogleMapTA.jpg);
+    background-size: cover;
+    margin: 1px;
+}
+
+.t-opciones{
+    grid-area: opciones;
+    display: grid;
+    background: var(--color-cuatro);
+}

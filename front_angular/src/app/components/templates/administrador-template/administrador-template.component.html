@@ -1,0 +1,53 @@
+<section class="admin-dashboard">
+	<!-- *******primera columna******* -->
+	<div class="sidebar">
+		<div class="sidebar-logo">
+			<button type="button" >Logo</button>
+		</div>
+		<div class="sidebar-options-top">
+			<ul>
+				<li>
+					<button [routerLink]="['/Administrador/Contactos']">
+		  			<span align="right">Contactos</span>
+					</button>
+				</li>
+				<li>
+					<button [routerLink]="['/Administrador/Salas']">
+		  			<span align="right">Salas</span>
+					</button>
+				</li>
+				<li>
+					<button [routerLink]="['/Administrador/Historial']">
+  					<span align="right">Historial de llamadas</span>
+					</button>
+				</li>
+				<li>
+					<button [routerLink]="['/Administrador/Grabaciones']">
+  					<span align="right">Grabaciones</span>
+					</button>
+				</li>
+				<li>
+					<button [routerLink]="['/Administrador/Tracking']">
+  					<span align="right">Tracking</span>
+					</button>
+				</li>
+				<li>
+					<button [routerLink]="['/Login']">
+		  			<span align="right">Salir</span>
+					</button>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+
+
+
+<div class="contenido" >
+	<router-outlet></router-outlet>
+</div>
+
+	
+	
+	
+</section>

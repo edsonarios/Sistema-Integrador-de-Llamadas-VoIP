@@ -1,4 +1,4 @@
-export class Extension{
+export class Extension {
     constructor(
         public context: string,
         public exten: string,
@@ -6,5 +6,5 @@ export class Extension{
         public app: string,
         public appdata: string,
         public usuarioId: string
-    ){}
+    ) {}
 }

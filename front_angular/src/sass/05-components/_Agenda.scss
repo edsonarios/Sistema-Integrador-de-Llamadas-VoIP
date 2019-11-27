@@ -1,0 +1,33 @@
+//var(--color-uno), var(--color-dos), var(--color-tres), var(--color-cuatro), var(--color-cinco), var(--color-seis)
+
+.Agenda {
+
+	margin: 10px;
+	background: var(--color-dos);
+	.table {
+		color: var(--color-seis);
+		width: 100%;
+		max-width: 100%;
+		margin-bottom: 2rem;
+
+		thead,
+		tbody,
+		tfoot {
+			tr {
+				th,
+				td {
+					margin: 0px;
+					text-align: left;
+					padding: 0.8rem;
+					vertical-align: top;
+				}
+			}
+		}
+
+		tr:hover td{
+			background: var(--color-tres);
+			color: white;
+		}
+	}
+}
+

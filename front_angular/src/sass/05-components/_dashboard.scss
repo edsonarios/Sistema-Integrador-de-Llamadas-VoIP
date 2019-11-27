@@ -1,0 +1,215 @@
+.dashboard {
+	text-align: center;
+	display: grid;
+	grid-template-columns: minmax(80px, 4%) minmax(700px, 96%);
+	grid-template-areas: 'colum1 colum2';
+	height: 100vh;
+	overflow: hidden;
+	button {
+		border: none;
+		width: 80%;
+		height: 60px;
+		font-size: 25px;
+	}
+}
+/*
+colores
+var(--color-uno), var(--color-dos), var(--color-tres), var(--color-cuatro), var(--color-cinco), var(--color-seis)
+*/
+//-----------------------------------------------
+//primera columna
+.col1 {
+	grid-area: colum1;
+	display: grid;
+	grid-template-rows: 40vh 60vh;
+	grid-template-areas:
+		'c1-logo'
+		'c1-options';
+	background: var(--color-seis);
+	button {
+		border-radius: 10%;
+	}
+	button:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 5px 20px var(--color-cuatro);
+	}
+
+	button:active {
+		transform: translateY(-1px);
+		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	}
+}
+.c1-logo {
+	grid-area: c1-logo;
+	padding-top: 10px;
+	button {
+		background: var(--color-cuatro);
+		color: var(--color-dos);
+	}
+}
+.c1-options {
+	grid-area: c1-options;
+	padding-top: 20px;
+	button {
+		font-size: 40px;
+		background: var(--color-cuatro);
+		color: var(--color-dos);
+		margin-bottom: 30px;
+	}
+}
+.c1-options-bottom {
+	grid-area: c1-options-bottom;
+	padding-left: 6px;
+	button {
+		font-size: 40px;
+		background: var(--color-cuatro);
+		color: var(--color-dos);
+		margin-left: 5px;
+		margin-bottom: 10px;
+	}
+}
+//segunda columna
+.col2 {
+	grid-area: colum2;
+	display: grid;
+	grid-template-columns: minmax(150px, 75%) minmax(300px, 25%);
+	grid-template-areas: 'c2-escritorio c2-lateral ';
+	background: var(--color-uno);
+}
+.c2-escritorio {
+	grid-area: c2-escritorio;
+	display: grid;
+	//grid-template-rows: minmax(120px, 75vh) minmax(200px, 25vh);
+	grid-template-rows: 75vh 25vh;
+	grid-template-areas:
+		'c2-desktop'
+		'c2-panel';
+
+	.c2-desktop {
+		grid-area: c2-desktop;
+		overflow-y: scroll;
+	}
+	.c2-panel {
+		grid-area: c2-panel;
+		background: var(--color-uno);
+		overflow-y: scroll;
+	}
+}
+.c2-lateral {
+	grid-area: c2-lateral;
+	display: grid;
+	grid-template-rows: 80px 84vh 80px;
+	grid-template-areas:
+		'c2-header'
+		'c2-body'
+		'c2-footer';
+	background: var(--color-cuatro);
+}
+.c2-header {
+	grid-area: c2-header;
+	background: var(--color-seis);
+
+	.search {
+		width: 80%;
+		position: relative;
+		margin: auto;
+		display: flex;
+	}
+	.searchTerm {
+		width: 100%;
+		border: 3px solid var(--color-cuatro);
+		border-right: none;
+		padding: 5px;
+		height: 40px;
+		border-radius: 5px 0 0 3px;
+		outline: none;
+		background: var(--color-dos);
+	}
+	.searchTerm:focus {
+		color: var(--color-cuatro);
+	}
+	.searchButton {
+		width: 40px;
+		height: 40px;
+		border: 1px solid var(--color-cuatro);
+		text-align: center;
+		color: var(--color-dos);
+		border-radius: 0 5px 5px 0;
+		cursor: pointer;
+		font-size: 20px;
+		background: var(--color-cuatro);
+	}
+}
+.c2-body {
+	grid-area: c2-body;
+	overflow-y: scroll;
+	max-height: 85vh;
+	a {
+		color: var(--color-dos);
+		background: var(--color-cinco);
+	}
+	a:hover {
+		border: none;
+	}
+	.nav-link.active {
+		color: var(--color-dos);
+		background: var(--color-cuatro);
+		border: none;
+	}
+}
+
+//inicio columna 2 footer__________________________________
+.c2-footer {
+	background: var(--color-cinco);
+	grid-area: c2-footer;
+	display: grid;
+	grid-template-columns: 63px auto 150px;
+	grid-template-areas: 'c2-logo c2-nombre c2-icon';
+	button {
+		padding: 0%;
+		height: 60px;
+		margin: 0%;
+		padding-top: 17px;
+		background: var(--color-cinco);
+	}
+	i {
+		color: var(--color-dos);
+	}
+}
+.c2-footer-btn {
+	display: flex;
+	button {
+		font-size: 30px;
+		margin: 0px 5px;
+		i{
+			color: var(--color-tres);
+		}
+	}
+}
+.c2-logo {
+	grid-area: c2-logo;
+	background: green;
+	vertical-align: middle;
+	height: 80px;
+	width: 80px;
+	background-image: url(assets/avatar.png);
+	background-size: cover;
+	border-radius: 50%;
+}
+.c2-nombre {
+	display: grid;
+	align-content: center;
+	grid-area: c2-nombre;
+	color: var(--color-dos);
+	font-weight: bold;
+	&__sip {
+		font-weight: normal;
+		color: var(--color-tres);
+	}
+}
+
+//fin columna 2 footer__________________________________
+.desplegables {
+	grid-area: colum2;
+	overflow-y: scroll;
+}

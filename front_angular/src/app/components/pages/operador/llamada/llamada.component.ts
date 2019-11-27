@@ -1,17 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
-  selector: 'llamada',
-  templateUrl: './llamada.component.html',
-  styleUrls: ['../../../../sass/main.scss']
+	selector: 'llamada',
+	templateUrl: './llamada.component.html'
 })
 export class LlamadaComponent implements OnInit {
-  constructor(private router: Router,
-  	private  bsModalRef: BsModalRef,) {
-    
-  }
+	 @Input() Nombre: string;
+	 @Input() Numero: string;
+	 @Input() Tipo: string;
+	 @Input() Id: string;
+	 @Input() Estado: string;
 
-  ngOnInit() {}
+	 @Output() llamadaClose = new EventEmitter<string>();
+	 public llamada;
+
+	constructor(private router: Router) {
+
+	}
+
+	ngOnInit() {}
+	CerrarLlamada(nombre:string,numero:string,id_llamada:string,tipo:string) {
+		this.llamada={'Nombre':nombre,'Numero':numero,'Id':id_llamada,'Tipo':tipo};
+		this.llamadaClose.emit(this.llamada);
+  }
 }

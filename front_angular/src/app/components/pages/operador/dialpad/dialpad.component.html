@@ -3,77 +3,82 @@
     <h1>DIALPAD</h1>
   </div>
   <div class="d-logo">
-		<i class="fa fa-tty" aria-hidden="true"></i>
+    <i class="fa fa-tty" aria-hidden="true"></i>
   </div>
-  <div class="d-vista">AAAAAAAAA</div>
+  <div class="d-vista">{{dialNumber}}</div>
+  <div class="d-borrar" (click)="Limpiar()">
+   <button >
+      <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    </button>
+  </div>
   <div class="d-uno">
-    <button>
+    <button (click)="DialNum('1')">
       1
     </button>
   </div>
   <div class="d-dos">
-    <button>
+    <button  (click)="DialNum('2')">
       2
     </button>
   </div>
   <div class="d-tres">
-    <button>
+    <button  (click)="DialNum('3')">
       3
     </button>
   </div>
   <div class="d-cuatro">
-    <button>
+    <button  (click)="DialNum('4')">
       4
     </button>
   </div>
   <div class="d-cinco">
-    <button>
+    <button  (click)="DialNum('5')">
       5
     </button>
   </div>
   <div class="d-seis">
-    <button>
+    <button  (click)="DialNum('6')">
       6
     </button>
   </div>
   <div class="d-siete">
-    <button>
+    <button  (click)="DialNum('7')">
       7
     </button>
   </div>
   <div class="d-ocho">
-    <button>
+    <button  (click)="DialNum('8')">
       8
     </button>
   </div>
   <div class="d-nueve">
-    <button>
+    <button (click)="DialNum('9')">
       9
-    </button>
+    </button >
   </div>
   <div class="d-mas">
-    <button>
+    <button (click)="DialNum('+')">
       +
     </button>
   </div>
   <div class="d-cero">
-    <button>
+    <button (click)="DialNum('0')">
       0
     </button>
   </div>
   <div class="d-numeral">
-    <button>
+    <button (click)="DialNum('#')">
       #
     </button>
   </div>
-  <div class="d-cancelar">
+  <!-- <div class="d-cancelar">
     <button>
       CANCELAR
     </button>
-  </div>
+  </div> -->
   <div class="d-llamar">
-    <button>
-      LLAMAR
+    <button (click)="Llamada()" >
+      <i class="fa fa-phone" aria-hidden="true"></i>
     </button>
   </div>
 </section>

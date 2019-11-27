@@ -1,0 +1,39 @@
+<section class="panel">
+	<header class="panel__header">
+		Panel de Estados
+	</header>
+
+	<div>
+		<!-- Table starts here -->
+		<table id="table" class="table table-hover table-mc-light-blue">
+			<thead>
+				<tr>
+					<th>Icon</th>
+					<th>Numero</th>
+					<th>Fecha</th>
+					<th>Hora</th>
+					<th>Duracion</th>
+				</tr>
+			</thead>
+			<tbody >
+				<tr *ngFor="let n of Panel; let i = index">
+					<td data-title="Link">
+						<i class="v-icon-incoming-call" tooltip="Entrante" style="color: green"></i>
+					</td>
+					<td data-title="Link">
+						{{Panel[i]['Numero']}}
+					</td>
+					<td data-title="Link">
+						{{Panel[i]['fecha']}}
+					</td>
+					<td data-title="Link">
+						{{Panel[i]['Hora']}}
+					</td>
+					<td data-title="Link">
+						- - : - - : - -
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>

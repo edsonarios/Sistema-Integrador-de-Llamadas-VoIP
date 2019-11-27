@@ -1,0 +1,60 @@
+//var(--color-dos), var(--color-tres), var(--color-cuatro), var(--color-cinco), var(--color-seis)
+
+.notificaciones {
+    
+	margin: 8px;
+	background: var(--color-dos);
+	display: grid;
+	grid-template-columns: 20% 35% 45%;
+	grid-template-areas: 'nombre tipo accion';
+    height: 80px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.n-nombre {
+    display: grid;
+    grid-area: nombre;
+    color: var(--color-dos);
+    background-image: url(assets/avatar.png);
+    background-size: cover;
+    align-items: center;
+}
+.n-tipo {
+	grid-area: tipo;
+	&--entrante {
+		padding-top: 15%;
+		background: var(--color-tres);
+	}
+	&--espera {
+		padding-top: 15%;
+		background: #efffc0;
+	}
+}
+.n-accion {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--color-tres);
+    i{
+        color: black;
+        font-size: 30px;
+    }
+	button {
+        border-radius: 50%;
+		width: 65px;
+        height: 65px;
+        margin-top:10%;
+        font-size: 13px;
+        color: var(--color-seis);
+        text-transform: uppercase;
+    }
+    button:hover{
+        transition: all 0.4s ease 0s;
+        letter-spacing: 1px;
+    }
+    grid-area: accion;
+    &--contestar{
+        background: #2ecc71;
+    }
+    &--colgar{
+        background: #e74c3c;
+    }
+}

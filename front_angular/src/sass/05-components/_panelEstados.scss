@@ -1,0 +1,24 @@
+//var(--color-dos), var(--color-tres), var(--color-cuatro), var(--color-cinco), var(--color-seis)
+.panel{
+    &__header{
+        background: var(--color-seis);
+        color: var(--color-dos);
+    }
+    table{
+        background: var(--color-dos);
+        text-align: left;
+    }
+    th,td{
+        border: none;
+        padding: 10px;
+    }
+    thead{
+        background: var(--color-cinco);
+        color: var(--color-dos);
+        border-bottom:solid 5px #223A59;
+    }
+    tr:hover td{
+        background: var(--color-tres);
+        color: white;
+    }
+}

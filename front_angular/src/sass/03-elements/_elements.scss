@@ -1,0 +1,8 @@
+/* Configuración de los elementos de HTML por defecto */
+html,
+body {
+	font-family: $fontPrimary;
+	font-weight: 400;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
