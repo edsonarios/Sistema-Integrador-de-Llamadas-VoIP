@@ -6,14 +6,15 @@
         - Colas de llamadas         [LISTO]
         - IVR                       [LISTO]
         - Conferencias              [LISTO]
-        - Interceptar llamadas      
+        - Interceptar llamadas, silencionamente, participando solo con el operador, participando con todos      
         - Calendario de llamadas para horas laborales sino enviar a IVR [LISTO]
         - personalizar musichold    [LISTO]
         - descargar audios
-        - troncal
+        - troncal                   "Se necesita un gatwey sip, de bolivia"
         - Modificar archivo asterisk desde api
-        - Socket
-        - Reload por api
+        - Socket                    
+        - Reload de asterisk por apis           
+        - Error, las llamadas por usuarios de sip de db, solo duran 30 sec
 
         - prioridad de llamadas, para cola de llamadas
         - incorporar usuarios a una conferencia
