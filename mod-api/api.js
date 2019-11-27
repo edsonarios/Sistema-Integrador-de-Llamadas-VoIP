@@ -795,6 +795,18 @@ api.get('/findAllSip', async (req, res, next) => {
   res.send(obj)
 })
 
+
+api.get('/findLastSip', async (req, res, next) => {
+  var params = req.body
+
+  const lastSip = await Sip.findOne(
+    {
+      order: [ [ 'id', 'DESC' ]],
+    }
+  );
+  
+    res.send(lastSip)
+});
 /// EXTENSION /////////////////////////////////////////////////////////////////////
 
 api.post('/addExtension', async (req, res, next) => {
