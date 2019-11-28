@@ -52,12 +52,8 @@ export class LoginComponent implements OnInit {
 			'',
 			'',
 			'',
-			'',
-			'',
 			this.f.username.value,
-			this.f.password.value,
-			false,
-			''
+			this.f.password.value
 		);
 		this.loading = true;
 		this.userService

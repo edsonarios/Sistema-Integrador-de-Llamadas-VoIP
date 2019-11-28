@@ -37,12 +37,12 @@ export class AgregarContactosComponent implements OnInit {
 	ngOnInit(){
 		this.addForm = this.formBuilder.group({
 			nombre: ['', Validators.required],
-			paterno:['',Validators.required],
-			materno:['',Validators.required],
+			apPaterno:['',Validators.required],
+			apMaterno:['',Validators.required],
 			direccion:['',Validators.required],
-			telnumero:['',Validators.required],
+			telefono:['',Validators.required],
 			correo:['',Validators.required],
-			contrase:['',Validators.required],
+			password:['',Validators.required],
 
 		})
 		this.addFormSip = this.formBuilder2.group({
@@ -87,6 +87,8 @@ export class AgregarContactosComponent implements OnInit {
 		.subscribe(
 		rt => {	
 			console.log(rt);
+			console.log(rt.id);
+			this.adjuntarSip(rt.id);
 		},
 		er => console.log(er),
 		() => console.log('terminado')

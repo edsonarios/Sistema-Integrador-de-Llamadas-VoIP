@@ -14,7 +14,7 @@ import { GLOBAL } from './global';
 export class UserService {
   public idUser = localStorage.getItem('idUser');
   public url: string;
-  public user: User;
+  public user;
   public sip: Sip;
   constructor(private http: HttpClient) {
     this.url = GLOBAL.url;
@@ -61,11 +61,11 @@ export class UserService {
       catchError(this.errorHandl)
     );
   }
-
  
 
   addUsuario( user): Observable<any> {
-    this.user = user;
+    this.user = new User(user.nombre, user.apPaterno, user.apMaterno, user.direccion, user.telefono, user.correo, user.password);
+  
     console.log('Datos registrados de Contacto ...   ');
     console.log(this.user);
     return this.http.post<any>(this.url + 'addUsuario',  this.user , this.httpOptions).pipe(
