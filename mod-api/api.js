@@ -492,6 +492,21 @@ api.get('/datosPrueba', async (req, res) => {
       app: "hangup",
       appdata: ""
     })
+    //Numero para conferencia, numero al llamar exten:3, sala conferencia, appdata:3
+    const obj110 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "3",
+      priority: 1,
+      app: "answer",
+      appdata: ""
+    })
+    const obj111 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "3",
+      priority: 2,
+      app: "confbridge",
+      appdata: "3"
+    })
   
 
   res.send({ message: obj, obj2, obj21, obj3,obj31, obj4, obj41, obj5, obj51, obj52,obj53,obj22 });
@@ -598,6 +613,22 @@ api.get('/findAllSala', async (req, res, next) => {
   res.send(obj)
 })
 
+api.post('/getUsuariosPorSala', async (req, res, next) => {
+  var params = req.body
+
+  const usuariosTodos = await Usuario.findAll();
+  var usuariosSala = []
+
+  usuariosTodos.forEach(usuario => {
+            
+          if(usuario.salaId == params.salaId){
+                 
+              usuariosSala.push(usuario)
+          }
+  })
+
+  res.send(usuariosSala)
+});
 /// USUARIO /////////////////////////////////////////////////////////////////////
 
 api.post('/addUsuario', async (req, res, next) => {
@@ -779,6 +810,18 @@ api.get('/findAllSip', async (req, res, next) => {
   res.send(obj)
 })
 
+
+api.get('/findLastSip', async (req, res, next) => {
+  var params = req.body
+
+  const lastSip = await Sip.findOne(
+    {
+      order: [ [ 'id', 'DESC' ]],
+    }
+  );
+  
+    res.send(lastSip)
+});
 /// EXTENSION /////////////////////////////////////////////////////////////////////
 
 api.post('/addExtension', async (req, res, next) => {
@@ -946,4 +989,16 @@ api.get('/findAllIax', async (req, res, next) => {
 
   res.send(obj)
 })
+
+api.get('/prueba', async (req, res, next) => {
+  moment.locale('es');
+  moment.defineLocale
+  console.log(moment.locale());
+  console.log(moment(1572566609).format("MM ddd, YYYY hh:mm:ss"))
+  //console.log(moment(1517522296902).format("MM ddd, YYYY hh:mm:ss a"));
+
+  res.send("algo")
+
+})
 module.exports = api
+//moment(m.createdAt).format("YYYY-MM-DD")

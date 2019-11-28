@@ -93,7 +93,8 @@ cd etc-asterisk && cp * /etc/asterisk -rf
 Crear `DB` para **Asterisk** y configurar un usuario con password
 
 ```bash
-sudo -u postgres psql
+sudo su postgres
+psql
 CREATE ROLE asterisk WITH LOGIN PASSWORD 'asterisk'; 
 CREATE DATABASE asterisk; 
 GRANT ALL PRIVILEGES ON DATABASE asterisk TO asterisk;

@@ -1,15 +1,37 @@
 [PENDIENTES]
     - WebRTC                        [LISTO]
     - apis cdr                      [LISTO]
-    - apis queue
+    - apis queue                    [LISTO]
     - Funcionalidades asterisk
         - Colas de llamadas         [LISTO]
         - IVR                       [LISTO]
-        - Conferencias
-        - Interceptar llamada
+        - Conferencias              [LISTO]
+        - Interceptar llamadas, silencionamente, participando solo con el operador, participando con todos      
         - Calendario de llamadas para horas laborales sino enviar a IVR [LISTO]
         - personalizar musichold    [LISTO]
         - descargar audios
+        - troncal                   "Se necesita un gatwey sip, de bolivia"
+        - Modificar archivo asterisk desde api
+        - Socket                    
+        - Reload de asterisk por apis           
+        - Error, las llamadas por usuarios de sip de db, solo duran 30 sec
+
+        - prioridad de llamadas, para cola de llamadas
+        - incorporar usuarios a una conferencia
+        - intervernir silencionamente, o participando
+        - ingresar a otro agente a mi llamada
+        - libera automaticamente de un ptt despues de 3 min
+        - Ficha para reportar el incidente
+
+
+
+
+
+
+
+
+
+
 [FUNCIONES]
     - Crear Sips
     - Llamar entre sips 
@@ -22,6 +44,15 @@
     - Llamar a cola de llamadas 
     - WebRTC
     
+    
+
+
+
+
+
+
+
+
 
 [REUNION 21-10-19]
     - Mockups terminados
