@@ -71,6 +71,7 @@
 				<section class="e-responsive">
 				<div class="escritorio"  *ngFor="let n of Llamada; let i = index" [@FadeIn]>
 				<llamada (llamadaClose)="CerrarLlamada($event)"
+				(Participantes)="VerParticipantes($event)"
 				Nombre="{{Llamada[i]['nombre']}}"
 				Numero="{{Llamada[i]['numero']}}"
 				Tipo="{{Llamada[i]['Tipo']}}"
@@ -95,7 +96,7 @@
 				</div>
 			</div>
 			<!-- ********contenido******** -->
-			<div class="c2-body">
+			<div class="c2-body" *ngIf="HideLateral == true; else ParticipantesTemplate" >
 				<tabset [justified]="true">
 					<tab heading="Notificaciones">
 				  	<div *ngFor="let n of Notificaciones; let i = index" [@flyIn]>
@@ -126,6 +127,24 @@
 				  </tab>
 				</tabset>
 			</div>
+			<ng-template #ParticipantesTemplate>
+				<div class="c2-body">
+					<header class="panel__header"> 
+						Lista de Participantes
+					</header>
+					<button (click)="CambiaHideLateral()">Ocultar Panel</button>
+					<div *ngFor="let n of ParticipantesSala; let i = index" >
+					<Participante
+					Nombre="{{ParticipantesSala[i]['Nombre']}}"
+					Paterno="{{ParticipantesSala[i]['ApPaterno']}}"
+					Materno="{{ParticipantesSala[i]['ApMaterno']}}"
+					[Sip]="ParticipantesSala[i]['Sip']"
+					[Iax]="ParticipantesSala[i]['Iax']"
+					></Participante>
+					</div>
+				</div>
+			</ng-template>
+			
 			<!-- *********footer********   -->
 			<div class="c2-footer">
 				<div class="c2-logo"></div>

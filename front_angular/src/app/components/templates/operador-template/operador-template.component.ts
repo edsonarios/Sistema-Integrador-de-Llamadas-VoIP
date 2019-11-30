@@ -18,36 +18,121 @@ import {interval, timer } from 'rxjs';
 export class OperadorTemplateComponent implements OnInit {
 
 public Llamada=[];
-public Salas;
+public Salas=[];
 public Notificaciones=[];
 public Panel=[];
-	public Hide:boolean= true;
-	private datoNumber;
-	user: User;
+public ParticipantesSala=[];
+
+public Hide:boolean= true;
+public HideLateral:boolean=true;
+user: User;
 
 	modalRef: BsModalRef;
 	constructor(private modalService: BsModalService, private formBuilder: FormBuilder) {
 		this.Salas=[
-		{'nombre':'Sala 1','id':'1','Dimesions':'10','Ocupando':'2','Numero':'3001'},
-		{'nombre':'Sala 2','id':'2','Dimesions':'5','Ocupando':'1','Numero':'3002'},
-		{'nombre':'Emergencias 1','id':'3','Dimesions':'5','Ocupando':'3','Numero':'3003'},
-		{'nombre':'Emergencias 2','id':'4','Dimesions':'5','Ocupando':'0','Numero':'3004'},
-		{'nombre':'Emergencia 3','id':'5','Dimesions':'5','Ocupando':'1','Numero':'3005'},
-		{'nombre':'Radio 1','id':'6','Dimesions':'4','Ocupando':'4','Numero':'3006'},
-		{'nombre':'Radio 2','id':'7','Dimesions':'2','Ocupando':'0','Numero':'3007'}
+		{
+			'nombre':'Sala 1',
+			'id':'1',
+			'Dimesions':'10',
+			'Ocupando':'2',
+			'Numero':'3001'
+		},
+		{
+			'nombre':'Sala 2',
+			'id':'2',
+			'Dimesions':'5',
+			'Ocupando':'1',
+			'Numero':'3002'
+		},
+		{
+			'nombre':'Emergencias 1',
+			'id':'3',
+			'Dimesions':'5',
+			'Ocupando':'3',
+			'Numero':'3003'
+		},
+		{
+			'nombre':'Emergencias 2',
+			'id':'4',
+			'Dimesions':'5',
+			'Ocupando':'0',
+			'Numero':'3004'
+		},
+		{
+			'nombre':'Emergencia 3',
+			'id':'5',
+			'Dimesions':'5',
+			'Ocupando':'1',
+			'Numero':'3005'
+		},
+		{
+			'nombre':'Radio 1',
+			'id':'6',
+			'Dimesions':'4',
+			'Ocupando':'4',
+			'Numero':'3006'
+		},
+		{
+			'nombre':'Radio 2',
+			'id':'7',
+			'Dimesions':'2',
+			'Ocupando':'0',
+			'Numero':'3007'
+		}
 		];
-
-	/*this.Llamada=[{'nombre':'Daniel','id':'1','numero':'3001','Tipo':'Llamada','Estado':'Inactiva'},
-				{'nombre':'Prueba Sala','id':'2','numero':'3002','Tipo':'Sala','Estado':'Inactiva'}];*/
-
-		//console.log(this.Salas)
-		//const contador=interval(1000);
-
-		/*contador.subscribe((n)=>{
-			this.datoNumber=this.ConvertirTiempo(n);
-			//console.log('Dato Number :'+n);
-		});*/
-
+ this.ParticipantesSala=[
+				{	
+					'Id':'1',
+					'Nombre':'Nelson Richard',
+					'ApPaterno':'Cori',
+					'ApMaterno':'Sirpa',
+					'Sip':[
+						{
+						'Numero':'3001',
+						'Alias':'3001',
+						'context':'default'
+						},
+						{
+						'Numero':'3002',
+						'Alias':'3002',
+						'context':'default'
+						}],
+					'Iax':[
+						{
+						'Numero':'3003',
+						'Alias':'3003',
+						'context':'default'
+						}]
+				},
+				{	
+					'Id':'2',
+					'Nombre':'Edson',
+					'ApPaterno':'Añawaya',
+					'ApMaterno':'Rios',
+					'Sip':[
+						{
+						'Numero':'3003',
+						'Alias':'3003',
+						'context':'default'
+						},
+						{
+						'Numero':'3004',
+						'Alias':'3004',
+						'context':'default'
+						}],
+					'Iax':[
+						{
+						'Numero':'3005',
+						'Alias':'3005',
+						'context':'default'
+						},
+						{
+						'Numero':'3006',
+						'Alias':'3006',
+						'context':'default'
+						}]
+				}
+				];
 	}
 	ngOnInit() {
 	
@@ -74,6 +159,7 @@ public Panel=[];
 			}
 		}
 	}
+	
 	AgregarEventoNotificacion(){
 		// Metodo donde se asigna de forma aleatorea en el panel de notificaciones
 
@@ -104,6 +190,11 @@ public Panel=[];
 		}
 		
 
+	}
+	VerParticipantes(event){
+		//console.log('Llega el evento y debe de cambiar los componentes')
+		this.CambiaHideLateral();
+		console.log(this.ParticipantesSala);
 	}
 	AgendaLlamada(ContactoAgenda){
 		// metodo donde se llama a un contacto mediante la agenda
@@ -188,5 +279,13 @@ public Panel=[];
 		var date= new Date();
 		//console.log('El dato es :'+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds());
 		return date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+	}
+	CambiaHideLateral(){
+		if (this.HideLateral==true) {
+			this.HideLateral=false;
+		}
+		else{
+			this.HideLateral=true;
+		}
 	}
 }

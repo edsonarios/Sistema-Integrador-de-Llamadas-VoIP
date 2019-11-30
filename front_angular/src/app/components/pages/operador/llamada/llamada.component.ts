@@ -13,6 +13,7 @@ export class LlamadaComponent implements OnInit {
 	 @Input() Estado: string;
 
 	 @Output() llamadaClose = new EventEmitter<string>();
+	 @Output() Participantes = new EventEmitter<string>();
 	 public llamada;
 
 	constructor(private router: Router) {
@@ -23,5 +24,8 @@ export class LlamadaComponent implements OnInit {
 	CerrarLlamada(nombre:string,numero:string,id_llamada:string,tipo:string) {
 		this.llamada={'Nombre':nombre,'Numero':numero,'Id':id_llamada,'Tipo':tipo};
 		this.llamadaClose.emit(this.llamada);
+  }
+  VerParticipantes(){
+  	this.Participantes.emit('Ver Participantes');
   }
 }

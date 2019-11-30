@@ -25,6 +25,9 @@ var DialPadComponent = /** @class */ (function () {
     DialPadComponent.prototype.Llamada = function () {
         window.alert('Llamando al : ' + this.dialNumber);
     };
+    DialPadComponent.prototype.Limpiar = function () {
+        this.dialNumber = '';
+    };
     DialPadComponent = __decorate([
         core_1.Component({
             selector: 'dialpad',

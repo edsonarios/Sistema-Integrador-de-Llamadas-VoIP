@@ -6,16 +6,31 @@
 		</div>
 		<div class="sidebar-options-top">
 			<ul>
+				<span style="color:white;font-size: 24px;">Contactos</span>
 				<li>
 					<button [routerLink]="['/Administrador/Contactos']">
-		  			<span align="right">Contactos</span>
+		  			<span align="right">Lista de Contactos</span>
+					</button>
+				
+				</li>
+					<li>
+					<button [routerLink]="['/Administrador/AgregarContacto']">
+		  			<span align="right">Agregar Contacto</span>
+					</button>
+				
+				</li>
+				<span style="color:white;font-size: 24px;">Salas</span>
+				<li>
+					<button [routerLink]="['/Administrador/Salas']">
+		  			<span align="right">Lista de Salas</span>
 					</button>
 				</li>
 				<li>
-					<button [routerLink]="['/Administrador/Salas']">
-		  			<span align="right">Salas</span>
+					<button [routerLink]="['/Administrador/AgregarSala']">
+		  			<span align="right">Agregar Sala</span>
 					</button>
 				</li>
+				<span style="color:white;font-size: 24px;">____________</span>
 				<li>
 					<button [routerLink]="['/Administrador/Historial']">
   					<span align="right">Historial de llamadas</span>

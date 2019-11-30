@@ -27,7 +27,6 @@ var LoginComponent = /** @class */ (function () {
         this.submitted = false;
     }
     LoginComponent.prototype.ngOnInit = function () {
-        console.log('Componente formulario cargado');
         // this.mostrar()
         this.loginForm = this.formBuilder.group({
             username: ['', forms_1.Validators.required],
@@ -49,7 +48,7 @@ var LoginComponent = /** @class */ (function () {
         if (this.loginForm.invalid) {
             return;
         }
-        this.user = new user_1.User('', '', '', '', '', '', this.f.username.value, this.f.password.value, false, '');
+        this.user = new user_1.User('', '', '', '', '', this.f.username.value, this.f.password.value);
         this.loading = true;
         this.userService
             .login(this.user)
@@ -57,13 +56,23 @@ var LoginComponent = /** @class */ (function () {
             .subscribe(function (data) {
             _this.identity = data;
             console.log(_this.identity);
+            // >>>>>>>>>HEAD
             console.log(data.result.id);
+            localStorage.setItem("idUser", data.result.id);
             if (data.result.tipo == 'root') {
-                _this.router.navigate(['/Operador/Historial']);
+                _this.router.navigate(['/Operador/Contactos']);
                 console.log('entramos !!!' + data.status);
+            }
+            //=======
+            //console.log(data.result.id);
+            if (data.result.tipo == 'admin') {
+                _this.router.navigate(['/Administrador/Contactos']);
+                console.log('entramos como admin!!!' + data.status);
+                //>>>>>>> origin/master
             }
             if (data.result.tipo == 'standard') {
                 _this.router.navigate(['/Operador/Historial']);
+                console.log('entramos  como operador!!!' + data.status);
             }
             else {
             }
@@ -75,26 +84,8 @@ var LoginComponent = /** @class */ (function () {
                 _this.wrong = true;
             }
         });
-        /* this.username = 'root@root';
-    this.password = '1234';
-    this.user = new User('', '', '', '', '', '', 'root@root', '1234', false, '');
-    this.userService.login(this.user).subscribe(
-      result => {
-        this.identity = result;
-        console.log(this.identity);
-        console.log(result.result.id);
-        if (result.result.tipo == 'root') {
-          this.router.navigate(['/Operador/Contactos']);
-        }
-
-        //this.router.navigate(['/Operador/Contactos']);
-      },
-      error => {
-        this.status = 'denied';
-        console.log('error...' + error);
-      }
-    ); */
     };
+    ;
     // Issues list
     LoginComponent.prototype.mostrar = function () {
         return this.userService.datosPrueba().subscribe(function (res) {

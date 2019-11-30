@@ -1,9 +1,6 @@
 
 <div class="modal-header">
 	<h6 class="modal-title">AÑADIR CONTACTO</h6>
-	<button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="modalRef.hide()">
-		&times;
-	</button>
 </div>
 
 <div class="modal-body">
@@ -73,7 +70,7 @@
 	</div>
 </div>
 <div class="modal-footer form-group">
-	<button type="button" class="btn btn-danger btn-block" (click)="modalRef.hide()">Cancelar</button>
+	<button type="button" class="btn btn-danger btn-block" >Cancelar</button>
 	<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" [disabled]="addForm.invalid" (click)="crearcontacto()">
 		Crear contacto
 	</button>

@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from '@models/user';
 import { UserService } from '@services/user.service';
 import { SipService } from '@services/sip.service';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+
 @Component({
 	selector: 'agregar-cotacto',
 	templateUrl: './agregar_contacto.component.html',
@@ -28,7 +28,6 @@ export class AgregarContactosComponent implements OnInit {
 		private formBuilder2: FormBuilder,
 		private serviceUser: UserService,
 		private serviceSip: SipService,
-		public modalRef: BsModalRef
 	) {
 		this.submitted = true;
 

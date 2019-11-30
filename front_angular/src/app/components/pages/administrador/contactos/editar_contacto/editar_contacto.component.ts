@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap/modal';
 import { User } from '@models/user';
 //import { UserService } from '@services/user.service';
 //import { SipService } from '@services/sip.service';
@@ -25,7 +24,6 @@ export class EditarContactoComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private formBuilder: FormBuilder,
-		public modalRef: BsModalRef,
 		//private serviceUser: UserService,
 		//private serviceSip: SipService
 	) {

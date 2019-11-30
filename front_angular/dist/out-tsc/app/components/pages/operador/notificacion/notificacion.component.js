@@ -14,8 +14,42 @@ var router_1 = require("@angular/router");
 var NotificacionComponent = /** @class */ (function () {
     function NotificacionComponent(router) {
         this.router = router;
+        this.ContestaLlamada = new core_1.EventEmitter();
+        this.CancelaLlamada = new core_1.EventEmitter();
     }
     NotificacionComponent.prototype.ngOnInit = function () { };
+    NotificacionComponent.prototype.ContestarLlamada = function (nombre, numero, id) {
+        this.notificacion = { 'Nombre': nombre, 'Numero': numero, 'Id': id };
+        this.ContestaLlamada.emit(this.notificacion);
+    };
+    NotificacionComponent.prototype.ColgarLlamada = function (nombre, numero, id) {
+        this.notificacion = { 'Nombre': nombre, 'Numero': numero, 'Id': id };
+        this.CancelaLlamada.emit(this.notificacion);
+    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], NotificacionComponent.prototype, "Nombre", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], NotificacionComponent.prototype, "Numero", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], NotificacionComponent.prototype, "Estado", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], NotificacionComponent.prototype, "Id", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], NotificacionComponent.prototype, "ContestaLlamada", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], NotificacionComponent.prototype, "CancelaLlamada", void 0);
     NotificacionComponent = __decorate([
         core_1.Component({
             selector: 'Notificacion',

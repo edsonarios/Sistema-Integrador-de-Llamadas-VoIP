@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var rxjs_1 = require("rxjs");
+var operators_1 = require("rxjs/operators");
 var AudioPlayerComponent = /** @class */ (function () {
     function AudioPlayerComponent(router) {
         this.router = router;
@@ -21,15 +22,13 @@ var AudioPlayerComponent = /** @class */ (function () {
     AudioPlayerComponent.prototype.ngOnInit = function () { };
     AudioPlayerComponent.prototype.Play = function () {
         var _this = this;
+        // Metodo donde inicia el reproductor
+        this.valor = 0;
+        //Prueba en un intervalo de 10 segundos
         var contador = rxjs_1.interval(1000);
-        contador.subscribe(function (n) {
-            if (_this.valor <= 100) {
-                _this.valor = _this.valor + 10;
-            }
-            console.log('sigue dentro del intervalo');
-        });
-        // this.valor= (Math.random()*100+1);
-        //console.log(this.valor);
+        var max = rxjs_1.timer(11000);
+        var example = contador.pipe(operators_1.takeUntil(max));
+        var subscribe = example.subscribe(function (n) { _this.valor = _this.valor + 10; });
     };
     AudioPlayerComponent = __decorate([
         core_1.Component({

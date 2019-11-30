@@ -108,6 +108,9 @@ var HistorialLlamadasComponent = /** @class */ (function () {
         ];
     }
     HistorialLlamadasComponent.prototype.ngOnInit = function () { };
+    HistorialLlamadasComponent.prototype.cssch = function () {
+        document.getElementById('nav').style.cssText = 'background: red;';
+    };
     HistorialLlamadasComponent = __decorate([
         core_1.Component({
             selector: 'Historial-Llamadas',

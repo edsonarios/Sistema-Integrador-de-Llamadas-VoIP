@@ -1,9 +1,8 @@
 import { Routes } from '@angular/router';
 
-import { HistorialLlamadasComponent } from '../../pages/operador/historial_llamadas/historial_llamadas.component';
-import { TrackingComponent } from '../../pages/operador/tracking/tracking.component';
-import { GrabacionesComponent } from '../../pages/operador/grabaciones/grabaciones.component';
-
+import { HistorialLlamadasComponent } from '@administrador/historial_llamadas/historial_llamadas.component';
+import { GrabacionesComponent } from '@administrador/grabaciones/grabaciones.component';
+import { TrackingComponent } from '@administrador/tracking/tracking.component';
 export const OperadorTemplateRoutes: Routes = [
   { path: 'Historial', component: HistorialLlamadasComponent },
   { path: 'Grabaciones', component: GrabacionesComponent },

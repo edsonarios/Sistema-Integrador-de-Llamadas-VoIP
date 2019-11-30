@@ -14,8 +14,45 @@ var router_1 = require("@angular/router");
 var LlamadaComponent = /** @class */ (function () {
     function LlamadaComponent(router) {
         this.router = router;
+        this.llamadaClose = new core_1.EventEmitter();
+        this.Participantes = new core_1.EventEmitter();
     }
     LlamadaComponent.prototype.ngOnInit = function () { };
+    LlamadaComponent.prototype.CerrarLlamada = function (nombre, numero, id_llamada, tipo) {
+        this.llamada = { 'Nombre': nombre, 'Numero': numero, 'Id': id_llamada, 'Tipo': tipo };
+        this.llamadaClose.emit(this.llamada);
+    };
+    LlamadaComponent.prototype.VerParticipantes = function () {
+        this.Participantes.emit('Ver Participantes');
+    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], LlamadaComponent.prototype, "Nombre", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], LlamadaComponent.prototype, "Numero", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], LlamadaComponent.prototype, "Tipo", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], LlamadaComponent.prototype, "Id", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], LlamadaComponent.prototype, "Estado", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], LlamadaComponent.prototype, "llamadaClose", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], LlamadaComponent.prototype, "Participantes", void 0);
     LlamadaComponent = __decorate([
         core_1.Component({
             selector: 'llamada',

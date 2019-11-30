@@ -19,6 +19,9 @@
 			<div>
 				{{ Numero }}
 			</div>
+			<div *ngIf="Tipo=='Sala'">
+			<a style="color: blue;cursor: pointer;" (click)="VerParticipantes()"> Ver Participantes </a>
+			</div>
 			<div>
 				00:30
 			</div>

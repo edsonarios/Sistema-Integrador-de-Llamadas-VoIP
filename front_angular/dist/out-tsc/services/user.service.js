@@ -13,10 +13,12 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
 var rxjs_1 = require("rxjs");
 var operators_1 = require("rxjs/operators");
+var user_1 = require("../models/user");
 var global_1 = require("./global");
 var UserService = /** @class */ (function () {
     function UserService(http) {
         this.http = http;
+        this.idUser = localStorage.getItem('idUser');
         // Http Headers
         this.httpOptions = {
             headers: new http_1.HttpHeaders({
@@ -40,12 +42,21 @@ var UserService = /** @class */ (function () {
     UserService.prototype.login = function (user) {
         return this.http.post(this.url + 'login', JSON.stringify(user), this.httpOptions).pipe(operators_1.retry(1), operators_1.catchError(this.errorHandl));
     };
-    // POST
-    UserService.prototype.addSala = function (sala) {
-        return this.http.post(this.url + 'addSala', sala, this.httpOptions).pipe(operators_1.retry(1), operators_1.catchError(this.errorHandl));
-    };
     UserService.prototype.addUsuario = function (user) {
-        return this.http.post(this.url + 'addUsuario', user, this.httpOptions).pipe(operators_1.retry(1), operators_1.catchError(this.errorHandl));
+        this.user = new user_1.User(user.nombre, user.apPaterno, user.apMaterno, user.direccion, user.telefono, user.correo, user.password);
+        console.log('Datos registrados de Contacto ...   ');
+        console.log(this.user);
+        return this.http.post(this.url + 'addUsuario', this.user, this.httpOptions).pipe(operators_1.retry(1), operators_1.catchError(this.errorHandl));
+    };
+    UserService.prototype.updateUser = function (user) {
+        this.user = user;
+        return this.http.put(this.url + 'updateUsuario', this.user, this.httpOptions).pipe(operators_1.retry(1), operators_1.catchError(this.errorHandl));
+    };
+    UserService.prototype.findByIdUsuario = function (id) {
+        return this.http.post(this.url + 'findByIdUsuario', id, this.httpOptions).pipe(operators_1.retry(1), operators_1.catchError(this.errorHandl));
+    };
+    UserService.prototype.listarContactos = function () {
+        return this.http.get(this.url + 'findAllUsuario').pipe(operators_1.retry(1), operators_1.catchError(this.errorHandl));
     };
     // Error handling
     UserService.prototype.errorHandl = function (error) {

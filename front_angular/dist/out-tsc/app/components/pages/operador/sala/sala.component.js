@@ -14,8 +14,37 @@ var router_1 = require("@angular/router");
 var SalaComponent = /** @class */ (function () {
     function SalaComponent(router) {
         this.router = router;
+        this.DatoSala = new core_1.EventEmitter();
     }
     SalaComponent.prototype.ngOnInit = function () { };
+    SalaComponent.prototype.EntrarSala = function (Nombre, id_sala, numero) {
+        this.sala = { 'nombre': Nombre, 'id': id_sala, 'numero': numero };
+        this.DatoSala.emit(this.sala);
+    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], SalaComponent.prototype, "Nombre", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], SalaComponent.prototype, "Ocupado", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], SalaComponent.prototype, "Dimensions", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], SalaComponent.prototype, "Numero", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], SalaComponent.prototype, "Id", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], SalaComponent.prototype, "DatoSala", void 0);
     SalaComponent = __decorate([
         core_1.Component({
             selector: 'Sala',

@@ -12,13 +12,18 @@ var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
 var app_routing_module_1 = require("./app-routing.module");
 var app_component_1 = require("./app.component");
-var operador_template_component_1 = require("./components/templates/operador-template/operador-template.component");
 var login_component_1 = require("./components/pages/inicio/login/login.component");
+//fontawesome
+var angular_font_awesome_1 = require("angular-font-awesome");
+// Templates
+var operador_template_component_1 = require("./components/templates/operador-template/operador-template.component");
+var administrador_template_component_1 = require("./components/templates/administrador-template/administrador-template.component");
 // Modal Components
 var dialpad_component_1 = require("./components/pages/operador/dialpad/dialpad.component");
 var agenda_component_1 = require("@operador/agenda/agenda.component");
 var notificacion_component_1 = require("@operador/notificacion/notificacion.component");
 var sala_component_1 = require("@operador/sala/sala.component");
+var panel_component_1 = require("@operador/panel/panel.component");
 var llamada_component_1 = require("@operador/llamada/llamada.component");
 var accordion_1 = require("ngx-bootstrap/accordion");
 var dropdown_1 = require("ngx-bootstrap/dropdown");
@@ -40,12 +45,15 @@ var AppModule = /** @class */ (function () {
                 login_component_1.LoginComponent,
                 dialpad_component_1.DialPadComponent,
                 operador_template_component_1.OperadorTemplateComponent,
+                administrador_template_component_1.AdministradorTemplateComponent,
                 agenda_component_1.AgendaComponent,
                 notificacion_component_1.NotificacionComponent,
                 sala_component_1.SalaComponent,
-                llamada_component_1.LlamadaComponent
+                llamada_component_1.LlamadaComponent,
+                panel_component_1.PanelComponent
             ],
             imports: [
+                angular_font_awesome_1.AngularFontAwesomeModule,
                 forms_1.ReactiveFormsModule,
                 forms_2.FormsModule,
                 http_1.HttpClientModule,

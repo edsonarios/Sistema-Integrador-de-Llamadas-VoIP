@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
 })
 export class TrackingComponent implements OnInit {
 	constructor(private router: Router) {
+		console.log('El tracking se cargo correctamente');
 	}
 
 	ngOnInit() {}
-	
 }

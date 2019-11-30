@@ -1,7 +1,40 @@
 
-<header class="panel__header">
-    HISTORIAL DE LLAMADAS
+<header class="navbar-horiz">
+  <div class="nav-ini">
+    <i class="v-icon-phone-call" placement="right"></i>
+    Historial de Llamadas
+  </div>
+  <nav>
+    <ul class="nav-mid">
+      <li id="nav" class="li-active">
+        <a (click)="cssch()">Todos</a>
+      </li>
+      <li>
+        <a>Salientes</a>
+      </li>
+      <li>
+        <a>Entrantes</a>
+      </li>
+      <li>
+        <a>Perdidas</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="nav-fin">
+    <input
+      type="text"
+      placeholder="Datepicker"
+      class="form-control"
+      bsDatepicker
+      [bsConfig]="{ isAnimated: true }"
+    />
+    <input type="text" class="form-control" placeholder="Contacto" />
+    <button type="submit">
+      <i class="v-icon-magnifying-glass"></i>
+    </button>
+  </div>
 </header>
+
 <div class="Historial">
   <div class="table-responsive-vertical shadow-z-1">
     <!-- Table starts here -->
@@ -29,7 +62,8 @@
               ><i class="v-icon-incoming-call"></i> {{ Historial[i]['Tipo'] }}</span
             >
             <span *ngIf="Historial[i]['Tipo'] == 'Saliente'" style="color: green"
-              ><i class="v-icon-telephone-receiver-with-up-arrow"></i> {{ Historial[i]['Tipo'] }}</span
+              ><i class="v-icon-telephone-receiver-with-up-arrow"></i>
+              {{ Historial[i]['Tipo'] }}</span
             >
           </td>
           <td data-title="Link">

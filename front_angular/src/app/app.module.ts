@@ -25,6 +25,7 @@ import { AgendaComponent } from '@operador/agenda/agenda.component';
 import { NotificacionComponent } from '@operador/notificacion/notificacion.component';
 import { SalaComponent } from '@operador/sala/sala.component';
 import { PanelComponent } from '@operador/panel/panel.component';
+import { ParticipanteComponent } from '@operador/participante/participante.component';
 
 import { LlamadaComponent } from '@operador/llamada/llamada.component';
 
@@ -53,7 +54,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		NotificacionComponent,
 		SalaComponent,
 		LlamadaComponent,
-		PanelComponent
+		PanelComponent,
+		ParticipanteComponent
 		
 	],
 	imports: [

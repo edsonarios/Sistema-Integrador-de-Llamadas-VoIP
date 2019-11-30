@@ -108,6 +108,10 @@ var GrabacionesComponent = /** @class */ (function () {
         ];
     }
     GrabacionesComponent.prototype.ngOnInit = function () { };
+    GrabacionesComponent.prototype.DescargarAudio = function () {
+        //Metodo de descarga
+        console.log('Descargando...');
+    };
     GrabacionesComponent = __decorate([
         core_1.Component({
             selector: 'grabaciones',

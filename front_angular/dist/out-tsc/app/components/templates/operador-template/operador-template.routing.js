@@ -7,5 +7,5 @@ exports.OperadorTemplateRoutes = [
     { path: 'Historial', component: historial_llamadas_component_1.HistorialLlamadasComponent },
     { path: 'Grabaciones', component: grabaciones_component_1.GrabacionesComponent },
     { path: 'Tracking', component: tracking_component_1.TrackingComponent },
-    { path: '', redirectTo: 'Contactos', pathMatch: 'full' }
+    { path: '', redirectTo: 'Historial', pathMatch: 'full' }
 ];
