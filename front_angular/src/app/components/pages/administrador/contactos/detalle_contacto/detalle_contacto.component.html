@@ -1,0 +1,80 @@
+<h1>Detalle del Contacto</h1>
+<input type="button" value="Volver" [routerLink]="['/Administrador/Contactos']">
+<input type="button" value="Editar Contacto" [routerLink]="['/Administrador/EditarContacto']">
+<br>
+<input type="button" value="Agregar Numero" [routerLink]="['/Administrador/AgregarNumero']">
+
+<hr>
+
+<section class="detalle-Contacto">
+
+	<div>
+		<!-- Table starts here -->
+		<table id="table" class="table table-hover">
+			<tbody >
+				<tr >
+					<td data-title="Link">
+						<b>Nombre Completo</b>
+					</td>
+					<td data-title="Link">
+						{{Contacto['Nombre']}} {{Contacto['ApPaterno']}} {{Contacto['ApMaterno']}}
+					</td>
+				</tr>
+					<tr >
+					<td data-title="Link">
+						<b>Correo Electronico</b>
+					</td>
+					<td data-title="Link">
+						{{Contacto['correo']}}
+					</td>
+				</tr>
+					<tr >
+					<td data-title="Link">
+						<b>Direccion</b>
+					</td>
+					<td data-title="Link">
+						{{Contacto['Direccion']}}
+					</td>
+				</tr>
+					<tr >
+					<td data-title="Link">
+						<b>Telefono</b>
+					</td>
+					<td data-title="Link">
+						{{Contacto['Nro_Telefono']}}
+					</td>
+				</tr>
+					<tr >
+					<td data-title="Link">
+						<b>Tipo</b>
+					</td>
+					<td data-title="Link">
+						{{Contacto['Tipo']}}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+<hr>
+<br>
+<section class="Lista-Sip">
+	<h1>Sips</h1>
+	<div *ngFor="let n of Contacto['Sip']; let i=index">
+		<sip
+		Alias="{{Contacto['Sip'][i]['Alias']}}"
+		Numero="{{Contacto['Sip'][i]['Numero']}}"
+		Context="{{Contacto['Sip'][i]['context']}}"
+		></sip>
+	</div>
+</section>
+<section class="Lista-Iax">
+	<h1>Iax</h1>
+	<div *ngFor="let n of Contacto['Iax']; let i=index">
+		<iax
+		Alias="{{Contacto['Iax'][i]['Alias']}}"
+		Numero="{{Contacto['Iax'][i]['Numero']}}"
+		Context="{{Contacto['Iax'][i]['context']}}"
+		></iax>
+	</div>
+</section>

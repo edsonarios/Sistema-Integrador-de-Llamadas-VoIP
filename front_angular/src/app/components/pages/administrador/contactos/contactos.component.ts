@@ -51,7 +51,7 @@ export class ContactosComponent implements OnInit {
     this.modalRef = this.modalService.show(AgregarContactosComponent);
   }
   EditarContacto (){
-    this.modalRef= this.modalService.show(EditarContactoComponent);
+  this.router.navigate(['/Administrador/EditarContacto']);
   }
 	 openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);

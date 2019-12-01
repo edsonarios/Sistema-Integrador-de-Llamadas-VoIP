@@ -2,7 +2,10 @@ button{
 	border: 0;
 }
 
-
+.c-responsive {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
 .admin-dashboard {
 	text-align: center;
 	display: grid;
@@ -58,7 +61,128 @@ button{
 .contenido {
 	grid-area: contenido;
 	background: var(--color-uno);
+	overflow-y: scroll;
 }
+
+.user-card {
+	width: 90%;
+	max-width: 620px;
+	height: 280px;
+	border-radius: 8px;
+	margin-bottom: 20px;
+	box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.25), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+	.content {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: space-between;
+		border-radius: inherit;
+
+		.img-wrapper,
+		img {
+			border-top-left-radius: inherit;
+			border-bottom-left-radius: inherit;
+		}
+
+		.img-wrapper {
+			position: relative;
+			height: 250px;
+			width: 220px;
+
+			img {
+				max-width: 100%;
+				max-height: 100%;
+				padding-right: 5px;
+			}
+		}
+
+		.user-informacion {
+			position: relative;
+			flex: 1;
+			padding: 20px 15px 30px 0;
+			color: #B4AAAA;
+			.btn-detalles{
+				appearance: none;
+		        outline: 0;
+		        background-color: white;
+		        border: 0;
+		        padding: 10px 15px;
+		        color: #53e3a6;
+		        border-radius: 3px;
+		        width: 250px;
+		        cursor: pointer;
+		        font-size: 18px;
+		        transition-duration: 0.25s;
+		        
+		        &:hover{
+		            background-color: rgb(245, 247, 249);
+		        }
+			}
+			.estadoConectado{
+				float: right;
+				padding: 5px 10px;
+				border-radius: 20px;
+				text-transform: uppercase;
+				font-weight: bold;
+				background-color: green;
+			}
+			.estadoDesconectado{
+				float: right;
+				padding: 5px 10px;
+				border-radius: 20px;
+				text-transform: uppercase;
+				font-weight: bold;
+				background-color: red;
+			}
+
+			.username {
+				clear: both;
+
+				.nombre {
+					color: #000000;
+					font-weight: bold;
+					font-size: 1.2em;
+				}
+
+			}
+
+			.direccion {
+				font-style: italic;
+				color: grey;
+
+				&::before {
+					color: skyblue;
+					padding-right: 5px;
+				}
+			}
+
+			.user-stats {
+				padding-top: 10px;
+				padding-left: 20%;
+
+				.stat {
+					padding: 10px;
+					display: inline-block;
+					text-align: center;
+
+					&.telefono .stat-titulo {
+						color: darkblue;
+					}
+
+					&.tipo .stat-titulo {
+						color: darkblue;
+					}
+				}
+			}
+		}
+
+	
+	}
+}
+
+
+
 
 
 

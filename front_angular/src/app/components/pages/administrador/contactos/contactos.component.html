@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">
       <button
         class="navbar-toggler"
         type="button"
@@ -18,19 +18,37 @@
               <i class="v-icon-phone-call" placement="right"></i> Historial de Llamadas <span class="sr-only">(current)</span>
             </a>
           </li>
-          <!--<li class="nav-item" (click)="AgregarContacto()">
+          <li class="nav-item" (click)="AgregarContacto()">
             <a class="nav-link">Agregar Contacto</a>
-          </li>-->
+          </li>
         </ul>
       
       </div>
-    </nav>
+    </nav>-->
+    <br>
 <header>
     <h2>LISTA DE CONTACTOS</h2>
 </header>
+<hr>
+
+  <section class="c-responsive">
+    <div *ngFor="let n of contactos; let i=index">
+  <contacto-card
+  Nombre="{{contactos[i]['nombre']}}"
+  Paterno="{{contactos[i]['apMaterno']}}"
+  Materno="{{contactos[i]['apPaterno']}}"
+  Correo="{{contactos[i]['correo']}}"
+  Direccion="{{contactos[i]['direccion']}}"
+  Telefono="{{contactos[i]['telefono']}}"
+  Tipo="{{contactos[i]['tipo']}}"
+  Conectado="{{contactos[i]['conectado']}}"
+  ></contacto-card>
+</div>
+  </section>
+
+<!--
 <div class="Contactos">
 	<div class="table-responsive-vertical shadow-z-1">
-  <!-- Table starts here -->
   <table id="table" class="table table-hover table-mc-light-blue">
       <thead>
         <tr>
@@ -64,7 +82,7 @@
       </tbody>
     </table>
   </div>
-</div>
+</div>-->
 
 
 <ng-template #EliminarTemplate>

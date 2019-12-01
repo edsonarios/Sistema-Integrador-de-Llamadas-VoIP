@@ -87,7 +87,7 @@ export class AgregarContactosComponent implements OnInit {
 		rt => {	
 			console.log(rt);
 			console.log(rt.id);
-			this.adjuntarSip(rt.id);
+			//this.adjuntarSip(rt.id);
 		},
 		er => console.log(er),
 		() => console.log('terminado')

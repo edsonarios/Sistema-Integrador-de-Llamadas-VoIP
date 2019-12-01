@@ -1,0 +1,28 @@
+
+	<div class="user-card">
+		<div class="content">
+			<div class="img-wrapper">
+				<img src="assets/avatar.png" class="user-avatar">
+			</div>
+			<div class="user-informacion">
+				<div class="estadoConectado" *ngIf="Conectado=='true'">Conectado</div>
+				<div class="estadoDesconectado" *ngIf="Conectado=='false'">Desconectado</div>
+				<div class="username">
+					<div class="nombre">{{Nombre}} {{Paterno}} {{Materno}}</div>
+					<div class="Correo">{{Correo}}</div>
+				</div>
+				<div class="direccion">Direccion: {{Direccion}}</div>
+				<div class="user-stats">
+					<div class="stat telefono">
+						<div class="stat-titulo">Telefono</div>
+						<div>{{Telefono}}</div>
+					</div>
+					<div class="stat tipo">
+						<div class="stat-titulo">Tipo</div>
+						<div>{{Tipo}}</div>
+					</div>
+				</div>
+				<button class="btn-detalles" (click)="Detalles()">Ver detalles</button>
+			</div>
+		</div>
+	</div>
