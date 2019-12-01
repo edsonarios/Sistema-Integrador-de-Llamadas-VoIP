@@ -130,7 +130,7 @@ Dentro del directorio se encuentran los metodos que hacen de puente para la cone
 
 | Modulo | Progreso |
 | :---: | --- |
-| Templates | _70.5% Terminado_ |
+| Templates | _76.4% Terminado_ |
 | Estilos | _50% Terminado_ |
 | Servicios y Modelos | _23.4% Terminado_ |
 
@@ -187,13 +187,13 @@ Para una mejor control sobre el avance del sistema se tiene el  manejo de los si
 - :point_right: crear componente donde ira el pipe de busqueda
 - :black_square_button: Desplegar datos mediante servicio al template-operador
 - :black_square_button: Desplegar datos mediante servicio al template-administrador
-- :black_square_button: Adicionar las opciones restantes al Administrador
-- :black_square_button: Adicionar componentes para dar de Alta un contacto
+- :ballot_box_with_check: Adicionar las opciones restantes al Administrador
+- :clock3:               Adicionar componentes para dar de Alta un contacto
 - :black_square_button: adicionar modal de verificacion para contactos
-- :black_square_button: Adicionar componentes para dar de Alta una Sala
+- :clock3:             Adicionar componentes para dar de Alta una Sala
 - :black_square_button: adicionar modal de verificacion para Salas
-- :black_square_button: Optimizar metodos por componente
-- :black_square_button: Realizacion de pruebas al operador
+- :ballot_box_with_check: Optimizar metodos por componente
+- :ballot_box_with_check: Realizacion de pruebas al operador
 - :black_square_button: Realizacion de pruebas al administrador
 - :black_square_button: Fusion del template del operador con la libreria para realizar llamadas
 - :black_square_button: Ejecucion de Pruebas con la libreria
