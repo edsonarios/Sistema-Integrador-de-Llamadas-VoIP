@@ -46,7 +46,7 @@ export class AgregarContactosComponent implements OnInit {
 		})
 		this.addFormSip = this.formBuilder2.group({
 			name: ['', Validators.required],
-    		callerId: ['',Validators.required]
+    		callerid: ['',Validators.required]
 		})
 
 	  }
@@ -68,7 +68,7 @@ export class AgregarContactosComponent implements OnInit {
 
 	adjuntarSip(idu){	
 		
-		 this.serviceSip.addSIP( this.addFormSip.value.name,this.addForm.value.callerId, idu)
+		 this.serviceSip.addSIP( this.addFormSip.value.name, this.addFormSip.value.callerid, idu)
 		.subscribe(
 		rt => {
 			
@@ -87,7 +87,7 @@ export class AgregarContactosComponent implements OnInit {
 		rt => {	
 			console.log(rt);
 			console.log(rt.id);
-			//this.adjuntarSip(rt.id);
+			this.adjuntarSip(rt.id);
 		},
 		er => console.log(er),
 		() => console.log('terminado')

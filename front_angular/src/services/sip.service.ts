@@ -27,8 +27,8 @@ export class SipService {
     })
   };
 
-  addSIP( name, callerId, idu): Observable<any> {
-      this.sip = new Sip(name, callerId, callerId, idu);
+  addSIP( name, callerid, idu): Observable<any> {
+      this.sip = new Sip(name, callerid, callerid, idu);
       console.log('Datos obtenido para la extension SIP......');
       console.log(this.sip);
     return this.http.post<any>(this.url + 'addSip',  this.sip,

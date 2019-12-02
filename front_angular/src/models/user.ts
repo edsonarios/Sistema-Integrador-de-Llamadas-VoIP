@@ -15,7 +15,7 @@ export class User {
 		
 	) { 
 		this.conectado = false;
-		this.salaId = '9';
+		this.salaId = '2';
 		this.tipo = 'standard';
 	}
 
