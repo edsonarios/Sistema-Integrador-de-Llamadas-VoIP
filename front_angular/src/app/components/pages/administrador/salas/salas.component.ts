@@ -6,59 +6,62 @@ import { Router } from '@angular/router';
 	templateUrl: './salas.component.html'
 })
 export class SalasComponent implements OnInit {
-	public ParticipantesSala=[
-				{	
-					'Id':'1',
-					'Nombre':'Nelson Richard',
-					'ApPaterno':'Cori',
-					'ApMaterno':'Sirpa',
-					'Sip':[
-						{
-						'Numero':'3001',
-						'Alias':'3001',
-						'context':'default'
-						},
-						{
-						'Numero':'3002',
-						'Alias':'3002',
-						'context':'default'
-						}],
-					'Iax':[
-						{
-						'Numero':'3003',
-						'Alias':'3003',
-						'context':'default'
-						}]
-				},
-				{	
-					'Id':'2',
-					'Nombre':'Edson',
-					'ApPaterno':'Añawaya',
-					'ApMaterno':'Rios',
-					'Sip':[
-						{
-						'Numero':'3003',
-						'Alias':'3003',
-						'context':'default'
-						},
-						{
-						'Numero':'3004',
-						'Alias':'3004',
-						'context':'default'
-						}],
-					'Iax':[
-						{
-						'Numero':'3005',
-						'Alias':'3006',
-						'context':'default'
-						}]
-				}];
-
+	public Salas=[
+		{
+			'nombre':'Sala 1',
+			'id':'1',
+			'Dimesions':'10',
+			'Ocupando':'2',
+			'Numero':'3001'
+		},
+		{
+			'nombre':'Sala 2',
+			'id':'2',
+			'Dimesions':'5',
+			'Ocupando':'1',
+			'Numero':'3002'
+		},
+		{
+			'nombre':'Emergencias 1',
+			'id':'3',
+			'Dimesions':'5',
+			'Ocupando':'3',
+			'Numero':'3003'
+		},
+		{
+			'nombre':'Emergencias 2',
+			'id':'4',
+			'Dimesions':'5',
+			'Ocupando':'0',
+			'Numero':'3004'
+		},
+		{
+			'nombre':'Emergencia 3',
+			'id':'5',
+			'Dimesions':'5',
+			'Ocupando':'1',
+			'Numero':'3005'
+		},
+		{
+			'nombre':'Radio 1',
+			'id':'6',
+			'Dimesions':'4',
+			'Ocupando':'4',
+			'Numero':'3006'
+		},
+		{
+			'nombre':'Radio 2',
+			'id':'7',
+			'Dimesions':'2',
+			'Ocupando':'0',
+			'Numero':'3007'
+		}
+		];
 	constructor(private router: Router) {
 	}
 
 	ngOnInit() {
-		console.log(this.ParticipantesSala);
+		console.log(this.Salas);
 	}
 	
 }

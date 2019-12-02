@@ -21,6 +21,7 @@ import { SalasComponent } from '@administrador/salas/salas.component'
 import { AgregarSalaComponent } from '@administrador/salas/agregar_sala/agregar_sala.component';
 import { AgregarNumeroComponent } from '@administrador/caller_number/agregar_numero/agregar_numero.component';
 import { ContactoCardComponent } from '@administrador/contactos/contacto_card/contacto_card.component';
+import { SalaCardComponent } from '@administrador/salas/sala_card/sala_card.component';
 
 import { SipComponent } from '@administrador/caller_number/sip/sip.component';
 import { IaxComponent } from '@administrador/caller_number/iax/iax.component';
@@ -58,7 +59,8 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 		AgregarNumeroComponent,
 		ContactoCardComponent,
 		SipComponent,
-		IaxComponent
+		IaxComponent,
+		SalaCardComponent
 
 	],
 	//entryComponents: [AgregarContactosComponent,EditarContactoComponent]

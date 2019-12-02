@@ -1,1 +1,11 @@
 <h1>Salas</h1>
+<hr>
+<section class="sala-responsive">
+	<div *ngFor="let n of Salas; let i=index">
+		<sala-card
+		Nombre="{{Salas[i]['nombre']}}"
+		Descripcion="{{Salas[i]['Numero']}}"
+		Ocupando="{{Salas[i]['Ocupando']}}/{{Salas[i]['Dimesions']}}"
+		></sala-card>
+	</div>
+</section>
