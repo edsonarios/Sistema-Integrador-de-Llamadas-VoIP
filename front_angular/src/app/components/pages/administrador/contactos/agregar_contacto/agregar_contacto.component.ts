@@ -95,9 +95,10 @@ export class AgregarContactosComponent implements OnInit {
 
 		console.log("Eh aqui los datos susodichos...   ");
 		console.log(this.addForm.value);
-
-		console.log('Tambien los datos para el envio de los datos SIP..   ');
-		console.log(this.addFormSip.value);
+		window.alert("Usuario Creado");
+		this.router.navigate(['/Administrador/Contactos']);
+		//console.log('Tambien los datos para el envio de los datos SIP..   ');
+		//console.log(this.addFormSip.value);
 	}
 	cerrar(e) {
 		e.close();

@@ -1,9 +1,9 @@
 <h1>Detalle del Contacto</h1>
-<input type="button" value="Volver" [routerLink]="['/Administrador/Contactos']">
-<input type="button" value="Editar Contacto" [routerLink]="['/Administrador/EditarContacto']">
-<br>
-<input type="button" value="Agregar Numero" [routerLink]="['/Administrador/AgregarNumero']">
-
+<div class="modal-footer ">
+	<button type="button" class="btn btn-secondary btn-block" [routerLink]="['/Administrador/Contactos']">Volver</button>
+	<button type="button" class="btn btn-success btn-block" [routerLink]="['/Administrador/EditarContacto']">Editar Contacto</button>
+	<button type="button" class="btn btn-primary btn-block" [routerLink]="['/Administrador/AgregarNumero']">Agregar Numero</button>
+</div>
 <hr>
 
 <section class="detalle-Contacto">
@@ -58,8 +58,8 @@
 </section>
 <hr>
 <br>
-<section class="Lista-Sip">
-	<h1>Sips</h1>
+<h1>Sips</h1>
+<section class="lista-sip">
 	<div *ngFor="let n of Contacto['Sip']; let i=index">
 		<sip
 		Alias="{{Contacto['Sip'][i]['Alias']}}"
@@ -68,8 +68,9 @@
 		></sip>
 	</div>
 </section>
-<section class="Lista-Iax">
-	<h1>Iax</h1>
+<br>
+<h1>Iax</h1>
+<section class="lista-iax">
 	<div *ngFor="let n of Contacto['Iax']; let i=index">
 		<iax
 		Alias="{{Contacto['Iax'][i]['Alias']}}"

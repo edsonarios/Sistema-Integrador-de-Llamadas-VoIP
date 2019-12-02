@@ -55,7 +55,7 @@
 			</div>
 		</form>
 
-		<form  [formGroup]="addFormSip">
+		<!--<form  [formGroup]="addFormSip">
 			<div class="row">
 				<label for="name">ALIAS</label>
 				<input type="text" formControlName="name" class="form-control" />
@@ -64,13 +64,12 @@
 				<label for="callerId">CALLER ID</label>
 				<input type="text" formControlName="callerId" class="form-control" />
 		</div>
-		</form>
+		</form>-->
 
 		
 	</div>
 </div>
 <div class="modal-footer form-group">
-	<button type="button" class="btn btn-danger btn-block" >Cancelar</button>
 	<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" [disabled]="addForm.invalid" (click)="crearcontacto()">
 		Crear contacto
 	</button>
