@@ -12,10 +12,7 @@
 		font-size: 25px;
 	}
 }
-/*
-colores
-var(--color-uno), var(--color-dos), var(--color-tres), var(--color-cuatro), var(--color-cinco), var(--color-seis)
-*/
+
 //-----------------------------------------------
 //primera columna
 .col1 {
@@ -39,6 +36,7 @@ var(--color-uno), var(--color-dos), var(--color-tres), var(--color-cuatro), var(
 		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 	}
 }
+
 .c1-logo {
 	grid-area: c1-logo;
 	padding-top: 10px;
@@ -68,6 +66,7 @@ var(--color-uno), var(--color-dos), var(--color-tres), var(--color-cuatro), var(
 		margin-bottom: 10px;
 	}
 }
+
 //segunda columna
 .col2 {
 	grid-area: colum2;
@@ -98,7 +97,7 @@ var(--color-uno), var(--color-dos), var(--color-tres), var(--color-cuatro), var(
 .c2-lateral {
 	grid-area: c2-lateral;
 	display: grid;
-	grid-template-rows: 80px 84vh 80px;
+	grid-template-rows: 8vh 84vh 80px;
 	grid-template-areas:
 		'c2-header'
 		'c2-body'
@@ -212,4 +211,32 @@ var(--color-uno), var(--color-dos), var(--color-tres), var(--color-cuatro), var(
 .desplegables {
 	grid-area: colum2;
 	overflow-y: scroll;
+}
+
+@media screen and (max-width:1280px){
+	.col1{
+		grid-template-rows: 30vh 80vh;
+	}
+	.col2 {
+		grid-template-columns: 70% 30%;
+	}
+	.c2-footer{
+		button{
+			padding-top: 5px;
+		}
+		i{
+			font-size: x-large;
+		}
+	}
+	.c2-logo {
+		vertical-align: middle;
+		height: 60px;
+		width: 60px;
+	}
+	.c2-nombre {
+		&__sip {
+			font-weight: normal;
+			padding-bottom: 15px;
+		}
+	}
 }

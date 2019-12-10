@@ -47,25 +47,5 @@
 	}
 }
 
-.e-responsive {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-}
 
-@media screen and (max-width: 1700px) {
-	.e-responsive {
-		grid-template-columns: 1fr 1fr 1fr;
-	}
-}
 
-@media screen and (max-width: 1400px) {
-	.e-responsive {
-		grid-template-columns: 1fr 1fr;
-	}
-}
-@media screen and (max-width: 1000px) {
-	.e-responsive {
-		grid-template-columns: 1fr;
-		padding: 0% 15%;
-	}
-}
