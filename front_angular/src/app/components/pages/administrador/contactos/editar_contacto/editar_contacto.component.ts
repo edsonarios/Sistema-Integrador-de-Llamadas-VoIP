@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from '@models/user';
 //import { UserService } from '@services/user.service';
@@ -11,6 +11,7 @@ import { User } from '@models/user';
 //	providers: [UserService],
 })
 export class EditarContactoComponent implements OnInit {
+	public identy;
 	wrong = false;
 	public identity: Object;
 	addForm: FormGroup;
@@ -22,6 +23,7 @@ export class EditarContactoComponent implements OnInit {
 	
 
 	constructor(
+		private route: ActivatedRoute,
 		private router: Router,
 		private formBuilder: FormBuilder,
 		//private serviceUser: UserService,
@@ -32,6 +34,9 @@ export class EditarContactoComponent implements OnInit {
 	}
 	
 	ngOnInit(){
+		this.identy = this.route.snapshot.paramMap.get('id');
+		console.log(this.route.snapshot.paramMap.get('id'));
+
 		this.addForm = this.formBuilder.group({
 			nombre: ['', Validators.required],
 			apellido:['',Validators.required],

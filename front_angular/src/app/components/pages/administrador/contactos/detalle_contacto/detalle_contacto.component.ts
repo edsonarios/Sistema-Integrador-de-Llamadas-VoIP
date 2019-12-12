@@ -1,14 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UserService } from '@services/user.service';
 
 @Component({
 	selector: 'DetalleContacto',
-	templateUrl: './detalle_contacto.component.html'
+	templateUrl: './detalle_contacto.component.html',
+	providers: [UserService]
 })
 export class DetalleContactoComponent implements OnInit {
 	public Contacto;
+	public contact;
+	public kind;
+	public identy;
 
-	constructor(private router: Router) {
+	constructor(
+		private route: ActivatedRoute,
+		private router: Router,
+		private serviceUser: UserService) {
 		this.Contacto={
 				
 					'Id':'1',
@@ -56,6 +64,20 @@ export class DetalleContactoComponent implements OnInit {
 
 	ngOnInit() {
 		console.log(this.Contacto);
+		this.identy = this.route.snapshot.paramMap.get('id');
+		this.llenarform(this.route.snapshot.paramMap.get('id'));
+	}
+
+	llenarform( identy){
+		this.serviceUser.findByIdUsuario(identy)
+		.subscribe(
+		rt => {	
+			console.log(rt);
+			this.kind = rt;
+		},
+		er => console.log(er),
+		() => console.log('terminado')
+		);
 	}
 	
 }

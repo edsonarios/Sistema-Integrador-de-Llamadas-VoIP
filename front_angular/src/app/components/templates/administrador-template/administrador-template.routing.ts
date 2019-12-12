@@ -14,8 +14,11 @@ import { AgregarSalaComponent } from '@administrador/salas/agregar_sala/agregar_
 export const AdministradorTemplateRoutes: Routes = [
   { path: 'Contactos', component: ContactosComponent },
   { path: 'AgregarContacto', component: AgregarContactosComponent },
+  { path: 'AgregarContacto/:id', component: AgregarContactosComponent },
   { path: 'EditarContacto', component: EditarContactoComponent },
+  { path: 'EditarContacto/:id', component: EditarContactoComponent },
   { path: 'DetalleContacto', component: DetalleContactoComponent },
+  { path: 'DetalleContacto/:id', component: DetalleContactoComponent },
   { path: 'Historial', component: HistorialLlamadasComponent },
   { path: 'Grabaciones', component: GrabacionesComponent },
   { path: 'Tracking', component: TrackingComponent },

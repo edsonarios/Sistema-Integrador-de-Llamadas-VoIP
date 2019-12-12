@@ -82,8 +82,8 @@ export class UserService {
     );
   }
 
-  findByIdUsuario( id): Observable<any> {
-    return this.http.post<any>(this.url + 'findByIdUsuario',  id , this.httpOptions).pipe(
+  findByIdUsuario( identy): Observable<any> {
+    return this.http.post<any>(this.url + 'findByIdUsuario',  {id : identy} , this.httpOptions).pipe(
       retry(1),
       catchError(this.errorHandl)
     );

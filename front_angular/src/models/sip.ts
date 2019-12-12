@@ -1,5 +1,5 @@
 export class Sip {
-    public type: string ;
+    
     public context: string ;
     public host: string ;
     public disallow: string ;
@@ -11,8 +11,8 @@ export class Sip {
         public secret: string,
         public callerid: string,
         public usuarioId: string ,
+        public type: string,
     ) {
-         this.type  = 'friend',
          this.context = 'default',
          this.host = 'dynamic',
          this.disallow = 'disallow',

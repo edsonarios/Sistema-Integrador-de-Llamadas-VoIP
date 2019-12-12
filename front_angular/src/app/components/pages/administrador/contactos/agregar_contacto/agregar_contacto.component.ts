@@ -66,20 +66,20 @@ export class AgregarContactosComponent implements OnInit {
 		return this.addForm.controls;
 	}
 
-	adjuntarSip(idu){	
+	// adjuntarSip(idu){	
 		
-		 this.serviceSip.addSIP( this.addFormSip.value.name, this.addFormSip.value.callerid, idu)
-		.subscribe(
-		rt => {
+	// 	 this.serviceSip.addSIP( this.addFormSip.value.name, this.addFormSip.value.callerid, idu)
+	// 	.subscribe(
+	// 	rt => {
 			
-			console.log('added SIP Extension... ');
-			console.log(rt);
-		},
-		er => console.log(er),
-		() => console.log('terminado')
-		);
-		console.log(this.addForm.value);		
-	}
+	// 		console.log('added SIP Extension... ');
+	// 		console.log(rt);
+	// 	},
+	// 	er => console.log(er),
+	// 	() => console.log('terminado')
+	// 	);
+	// 	console.log(this.addForm.value);		
+	// }
 
 	crearcontacto() {
 		this.serviceUser.addUsuario( this.addForm.value)
@@ -87,7 +87,7 @@ export class AgregarContactosComponent implements OnInit {
 		rt => {	
 			console.log(rt);
 			console.log(rt.id);
-			this.adjuntarSip(rt.id);
+			//this.adjuntarSip(rt.id);
 		},
 		er => console.log(er),
 		() => console.log('terminado')

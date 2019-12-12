@@ -7,16 +7,16 @@
 
 <div class="modal-body">
 	<div class="container ">
-		<form class="añadir_contact">
+		<form class="añadir_contact" [formGroup]="addForm">
 
 			<div class="row">
 				<div class="col-md-6 ">
-					<label for="nombre">Alias :</label>
-					<input type="text"  class="form-control" />
+					<label for="alias">Alias :</label>
+					<input type="text" formControlName="alias" class="form-control" />
 				</div>
 				<div class="col-md-6 ">
-					<label for="telnumero">TIPO</label>
-					<select class="form-control" >
+					<label for="tipo">TIPO</label>
+					<select class="form-control" formControlName="tipo">
 						<option value="SIP">SIP</option>
 						<option value="IAX">IAX</option>
 					</select>
@@ -25,12 +25,12 @@
 
 			<div class="row">
 				<div class="col-md-6 ">
-					<label for="apPaterno">Numero</label>
-					<input type="text"  class="form-control" />
+					<label for="numero">Numero</label>
+					<input type="text"  class="form-control" formControlName="numero" />
 				</div>
 				<div class="col-md-6 ">
-					<label for="apMaterno">Contraseña</label>
-					<input type="text"  class="form-control" />
+					<label for="password">Contraseña</label>
+					<input type="text"  class="form-control" formControlName="password" />
 				</div>
 			</div>	
 		</form>
@@ -39,8 +39,8 @@
 	</div>
 </div>
 <div class="modal-footer ">
-	<button type="button" class="btn btn-danger btn-block" [routerLink]="['/Administrador/DetalleContacto']">Volver</button>
-	<button type="button" class="btn btn-primary btn-block" >
+	<button type="button" class="btn btn-danger btn-block" [routerLink]="['/Administrador/DetalleContacto', {id: identy}]">Volver</button>
+	<button type="button" class="btn btn-primary btn-block" (click)="addnumero()">
 		Crear cNumero
 	</button>
 </div>

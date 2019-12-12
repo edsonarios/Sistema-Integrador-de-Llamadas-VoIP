@@ -1,5 +1,6 @@
 import { Component, OnInit , Input} from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '@services/user.service';
 
 @Component({
 	selector: 'contacto-card',
@@ -14,6 +15,7 @@ export class ContactoCardComponent implements OnInit {
 	@Input() Telefono:string;
 	@Input() Tipo:string;
 	@Input() Conectado:string;
+	@Input() Id:string;
 
 	constructor(private router: Router) {
 	}
@@ -22,7 +24,8 @@ export class ContactoCardComponent implements OnInit {
 		
 	}
 	Detalles(){
-		this.router.navigate(['/Administrador/DetalleContacto']);
+		console.log(this.Id);
+		this.router.navigate(['/Administrador/DetalleContacto', {id : this.Id}]);
 	}
 	
 	
