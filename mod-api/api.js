@@ -795,46 +795,7 @@ api.post('/getUsuariosWithSipsAndIaxs', async(req, res, next) => {
    
 })
 
-api.delete('/deleteUsuarioWithAll', async(req, res, next) => {
-  const params = req.body 
-  const usuariosSala1 = await Usuario.findAll();
-  let usuariosSala3 = []
-  const sipsAll = await Sip.findAll();
-  const iaxsAll = await Iax.findAll();
-           
-  usuariosSala1.forEach(usuario => {
-            
-    if(usuario.salaId == params.salaId){
-       usuariosSala3.push(usuario.id)
-    }
-  })
 
-  for (let i = 0; i < usuariosSala3.length; i++) {
-    sipsAll.forEach(obj => {
-      console.log(obj.id)
-      if(obj.usuarioId == usuariosSala3[i]){
-        Sip.destroy1(obj.id)
-    }
-    })
-  } 
-  console.log("--------------------------------------")
-  //res.send()
-  /*
-  for (let i = 0; i < usuariosSala3.length; i++) {
-    iaxsAll.forEach(obj => {
-      
-      if(obj.usuarioId == usuariosSala3[i]){
-        Iax.destroy1(obj.id)
-    }
-    })
-  } 
-  for (let i = 0; i < usuariosSala3.length; i++) {
-    await Usuario.destroy(usuariosSala3[i])
-  }
-  */
-  //await Usuario.destroy(params.usuarioId)
-  //res.send({message: 'Se elimino Usuario'})   
-})
 
 //LOGIN
 api.post('/login', async(req, res, next) => {
