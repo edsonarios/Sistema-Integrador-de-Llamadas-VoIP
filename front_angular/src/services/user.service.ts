@@ -74,9 +74,13 @@ export class UserService {
     );
   }
 
-  updateUser( user): Observable<any> {
-    this.user = user;
-    return this.http.put<any>(this.url + 'updateUsuario',  this.user , this.httpOptions).pipe(
+  updateUser( user, dd): Observable<any> {
+    return this.http.put<any>(this.url + 'updateUsuario',  {
+      nombre: user.nombre, apPaterno: user.apPaterno,
+       apMaterno: user.apMaterno, tipo: user.tipo, direccion: user.direccion,
+       telefono: user.telefono, correo: user.correo, password: user.password,
+       conectado: user.conectado, id: dd
+      } , this.httpOptions).pipe(
       retry(1),
       catchError(this.errorHandl)
     );

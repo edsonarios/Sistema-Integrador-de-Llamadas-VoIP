@@ -41,12 +41,9 @@ export class AgregarContactosComponent implements OnInit {
 			direccion:['',Validators.required],
 			telefono:['',Validators.required],
 			correo:['',Validators.required],
-			password:['',Validators.required]
+			password:['',Validators.required],
+			tipo:['',Validators.required]
 
-		})
-		this.addFormSip = this.formBuilder2.group({
-			name: ['', Validators.required],
-    		callerid: ['',Validators.required]
 		})
 
 	  }
