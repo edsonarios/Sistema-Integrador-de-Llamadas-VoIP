@@ -49,10 +49,11 @@ api.use('*', async (req, res, next) => {
     Voicemail = services.Voicemail
 
 
-  }
+  }  
+  
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
   next()
 })
 
