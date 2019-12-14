@@ -41,7 +41,7 @@ export class AgregarContactosComponent implements OnInit {
 			direccion:['',Validators.required],
 			telefono:['',Validators.required],
 			correo:['',Validators.required],
-			password:['',Validators.required],
+			password:['',Validators.required]
 
 		})
 		this.addFormSip = this.formBuilder2.group({
@@ -66,20 +66,7 @@ export class AgregarContactosComponent implements OnInit {
 		return this.addForm.controls;
 	}
 
-	// adjuntarSip(idu){	
-		
-	// 	 this.serviceSip.addSIP( this.addFormSip.value.name, this.addFormSip.value.callerid, idu)
-	// 	.subscribe(
-	// 	rt => {
-			
-	// 		console.log('added SIP Extension... ');
-	// 		console.log(rt);
-	// 	},
-	// 	er => console.log(er),
-	// 	() => console.log('terminado')
-	// 	);
-	// 	console.log(this.addForm.value);		
-	// }
+	
 
 	crearcontacto() {
 		this.serviceUser.addUsuario( this.addForm.value)
@@ -87,18 +74,14 @@ export class AgregarContactosComponent implements OnInit {
 		rt => {	
 			console.log(rt);
 			console.log(rt.id);
-			//this.adjuntarSip(rt.id);
 		},
 		er => console.log(er),
 		() => console.log('terminado')
 		);
 
-		console.log("Eh aqui los datos susodichos...   ");
 		console.log(this.addForm.value);
 		window.alert("Usuario Creado");
 		this.router.navigate(['/Administrador/Contactos']);
-		//console.log('Tambien los datos para el envio de los datos SIP..   ');
-		//console.log(this.addFormSip.value);
 	}
 	cerrar(e) {
 		e.close();

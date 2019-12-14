@@ -40,7 +40,7 @@
 </div>
 <div class="modal-footer ">
 	<button type="button" class="btn btn-danger btn-block" [routerLink]="['/Administrador/DetalleContacto', {id: identy}]">Volver</button>
-	<button type="button" class="btn btn-primary btn-block" (click)="addnumero()">
+	<button type="button" class="btn btn-primary btn-block" [disabled]="addForm.invalid" (click)="addnumero()">
 		Crear cNumero
 	</button>
 </div>

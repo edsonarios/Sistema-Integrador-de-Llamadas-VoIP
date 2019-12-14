@@ -7,43 +7,47 @@
 
 <div class="modal-body">
 	<div class="container ">
-		<form class="añadir_contact">
+		<form class="añadir_contact" [formGroup]="addForm" (ngSubmit)="onSubmit()">
 
 			<div class="row">
-				<div class="col-md-6 ">
-					<label for="nombre">Nombre :</label>
-					<input type="text"  class="form-control" value="Nelson Richard" />
+				<div class="col-md-6 form-group">
+					<label for="nombre">NOMBRE</label>
+					<input type="text" formControlName="nombre" class="form-control" />
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col-md-6 ">
-					<label for="apPaterno">Apellido Paterno</label>
-					<input type="text"  class="form-control" value="Cori" />
+				<div class="col-md-6 form-group">
+					<label for="apPaterno">APELLIDO PATERNO</label>
+					<input type="text" formControlName="apPaterno" class="form-control" />
 				</div>
-				<div class="col-md-6 ">
-					<label for="apMaterno">Apellido Materno</label>
-					<input type="text"  class="form-control" value="Sirpa" />
+				<div class="col-md-6 form-group">
+					<label for="apMaterno">APELLIDO MATERNO</label>
+					<input type="text" formControlName="apMaterno" class="form-control" />
 				</div>
 			</div>	
-				<div class="row">
-				<div class="col-md-6 ">
-					<label for="apPaterno">Direccion</label>
-					<input type="text"  class="form-control" value="Calle X, Zona Y #9999" />
+			
+
+			<div class="row">
+				<div class="col-md-6 form-group">
+					<label for="direccion">DIRECCIÓN</label>
+					<input type="text" formControlName="direccion" class="form-control" />
 				</div>
-				<div class="col-md-6 ">
-					<label for="apMaterno">Nro. telefono</label>
-					<input type="text"  class="form-control" value="78839131" />
+				<div class="col-md-6 form-group">
+					<label for="telefono">#/TELÉFONO</label>
+					<input type="text" formControlName="telefono" class="form-control" />
 				</div>
+				
 			</div>
+
+			<div class="row">
+					<label for="correo">CORREO</label>
+					<input type="text" formControlName="correo" class="form-control" />
+			</div>	
 			<div class="row">	
-				<label for="callerId">Correo Electronico</label>
-				<input type="text" class="form-control" value="richard@usuario.com" />
-		</div>	
-		<div class="row">	
-				<label for="callerId">Contraseña</label>
-				<input type="text" class="form-control" value="Pru3b4c0ntr4s3ñ4" />
-		</div>	
+					<label for="password">CONTRASEÑA</label>
+					<input type="password" formControlName="password" class="form-control" />
+			</div>
 		</form>
 
 		
@@ -51,7 +55,7 @@
 </div>
 <div class="modal-footer ">
 	<button type="button" class="btn btn-danger btn-block" [routerLink]="['/Administrador/DetalleContacto', {id: identy}]">Volver</button>
-	<button type="button" class="btn btn-primary btn-block" >
+	<button type="button" class="btn btn-primary btn-block" (click)="crearcontacto()">
 		Editar
 	</button>
 </div>

@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from '@models/user';
-//import { UserService } from '@services/user.service';
-//import { SipService } from '@services/sip.service';
+import { UserService } from '@services/user.service';
+
 
 @Component({
 	selector: 'editar-cotacto',
 	templateUrl: './editar_contacto.component.html',
-//	providers: [UserService],
+	providers: [UserService],
 })
 export class EditarContactoComponent implements OnInit {
 	public identy;
@@ -18,7 +18,7 @@ export class EditarContactoComponent implements OnInit {
 	loading = false;
 	public submitted: boolean;
 	returnUrl: string;
-	formato: [User];
+	formato: User;
 
 	
 
@@ -26,8 +26,8 @@ export class EditarContactoComponent implements OnInit {
 		private route: ActivatedRoute,
 		private router: Router,
 		private formBuilder: FormBuilder,
-		//private serviceUser: UserService,
-		//private serviceSip: SipService
+		private serviceUser: UserService,
+		
 	) {
 		this.submitted = true;
 		
@@ -39,11 +39,13 @@ export class EditarContactoComponent implements OnInit {
 
 		this.addForm = this.formBuilder.group({
 			nombre: ['', Validators.required],
-			apellido:['',Validators.required],
-			alias:['',Validators.required],
-			telnumero:['',Validators.required],
-			tipo:['',Validators.required],
-			descripcion:['',Validators.required]	
+			apPaterno:['',Validators.required],
+			apMaterno:['',Validators.required],
+			direccion:['',Validators.required],
+			telefono:['',Validators.required],
+			correo:['',Validators.required],
+			password:['',Validators.required]
+	
 		})
 	  }
 	
@@ -56,8 +58,8 @@ export class EditarContactoComponent implements OnInit {
 		return this.addForm.controls;
 	}
 
-	crearcontacto() {
-	
+	editarcontacto() {
+		
 	}
 	cerrar(e) {
 		e.close();

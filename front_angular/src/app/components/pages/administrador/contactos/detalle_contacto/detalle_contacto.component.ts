@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '@services/user.service';
+import { User } from '@models/user';
 
 @Component({
 	selector: 'DetalleContacto',
@@ -9,14 +10,17 @@ import { UserService } from '@services/user.service';
 })
 export class DetalleContactoComponent implements OnInit {
 	public Contacto;
-	public contact;
-	public kind;
+	public Contact: User;
 	public identy;
 
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router,
 		private serviceUser: UserService) {
+
+			this.identy = this.route.snapshot.paramMap.get('id');
+			this.llenarform(this.route.snapshot.paramMap.get('id'));
+			
 		this.Contacto={
 				
 					'Id':'1',
@@ -63,9 +67,8 @@ export class DetalleContactoComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log(this.Contacto);
-		this.identy = this.route.snapshot.paramMap.get('id');
-		this.llenarform(this.route.snapshot.paramMap.get('id'));
+		console.log(this.Contacto);	
+		console.log(this.Contact);
 	}
 
 	llenarform( identy){
@@ -73,11 +76,11 @@ export class DetalleContactoComponent implements OnInit {
 		.subscribe(
 		rt => {	
 			console.log(rt);
-			this.kind = rt;
+			this.Contact = rt;
 		},
 		er => console.log(er),
 		() => console.log('terminado')
-		);
+		);	
 	}
 	
 }
