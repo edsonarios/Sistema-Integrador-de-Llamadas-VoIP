@@ -615,20 +615,60 @@ api.get('/findAllSala', async (req, res, next) => {
 
 api.post('/getUsuariosPorSala', async (req, res, next) => {
   var params = req.body
-
   const usuariosTodos = await Usuario.findAll();
   var usuariosSala = []
 
   usuariosTodos.forEach(usuario => {
             
           if(usuario.salaId == params.salaId){
-                 
-              usuariosSala.push(usuario)
+             usuariosSala.push(usuario)
           }
   })
 
   res.send(usuariosSala)
 });
+
+api.delete('/deleteSalaWithAll', async(req, res, next) => {
+  const params = req.body 
+  const usuariosSala1 = await Usuario.findAll();
+  let usuariosSala2 = []
+  const sipsAll = await Sip.findAll();
+  const iaxsAll = await Iax.findAll();
+           
+  usuariosSala1.forEach(usuario => {
+            
+    if(usuario.salaId == params.salaId){
+       usuariosSala2.push(usuario.id)
+    }
+  })
+
+  for (let i = 0; i < usuariosSala2.length; i++) {
+    sipsAll.forEach(obj => {
+      
+      if(obj.usuarioId == usuariosSala2[i]){
+        Sip.destroy(obj.usuarioId)
+    }
+    })
+  } 
+  
+  for (let i = 0; i < usuariosSala2.length; i++) {
+    iaxsAll.forEach(obj => {
+      
+      if(obj.usuarioId == usuariosSala2[i]){
+        Iax.destroy(obj.usuarioId)
+    }
+    })
+  } 
+  
+  for (let i = 0; i < usuariosSala2.length; i++) {
+    await Usuario.destroy(usuariosSala2[i])
+  }
+   
+  await Sala.destroy(params.salaId)
+  res.send({message : 'se borro la sala'})
+   
+})
+
 /// USUARIO /////////////////////////////////////////////////////////////////////
 
 api.post('/addUsuario', async (req, res, next) => {
@@ -704,6 +744,73 @@ api.get('/findAllUsuario', async (req, res, next) => {
   
   res.send(obj)
 })
+
+api.post('/findUsuByNomSalaAndContext', async (req, res, next) => {
+  var params = req.body
+  let results = {}
+  const sipsAll = await Sip.findAll();
+  const iaxsAll = await Iax.findAll();
+            
+  for (let i = 0; i < sipsAll.length; i++) {
+    if(sipsAll[i]["context"] == params.context){
+       results[sipsAll[i]['usuarioId']] = {}
+       results[sipsAll[i]['usuarioId']]["sips"] = []
+       results[sipsAll[i]['usuarioId']]["iaxs"] = []
+    }  
+  } 
+
+  for (let i = 0; i < iaxsAll.length; i++) {
+    if(iaxsAll[i]["context"] == params.context){
+       results[iaxsAll[i]['usuarioId']] = {}
+       results[iaxsAll[i]['usuarioId']]["sips"] = []
+       results[iaxsAll[i]['usuarioId']]["iaxs"] = []
+    }  
+  } 
+  
+  for (let i = 0; i < sipsAll.length; i++) {
+    if(sipsAll[i]["context"] == params.context){
+        let x = results[sipsAll[i]['usuarioId']]["sips"]
+        results[sipsAll[i]['usuarioId']]["sips"].push(sipsAll[i]['id']) 
+     }  
+  }   
+  
+  for (let i = 0; i < iaxsAll.length; i++) {
+    if(iaxsAll[i]["context"] == params.context){
+        let x = results[iaxsAll[i]['usuarioId']]["iaxs"]
+        results[iaxsAll[i]['usuarioId']]["iaxs"].push(iaxsAll[i]['id']) 
+     }  
+  }    
+    res.send(results)
+    
+});
+
+api.post('/getUsuariosWithSipsAndIaxs', async(req, res, next) => {
+  const params = req.body 
+  let getsips = []
+  let getiaxs = []
+  let todos = []
+  const sipsAll = await Sip.findAll();
+  const iaxsAll = await Iax.findAll();
+
+    sipsAll.forEach(obj => {
+      
+      if(obj.usuarioId == params.id){
+        getsips.push(obj)
+    }
+    })
+    iaxsAll.forEach(obj => {
+      
+      if(obj.usuarioId == params.id){
+        getiaxs.push(obj)
+    }
+    })
+    todos.push(getsips)
+    todos.push(getiaxs)
+  res.send(todos)
+   
+})
+
+
 
 //LOGIN
 api.post('/login', async(req, res, next) => {
@@ -810,7 +917,6 @@ api.get('/findAllSip', async (req, res, next) => {
   res.send(obj)
 })
 
-
 api.get('/findLastSip', async (req, res, next) => {
   var params = req.body
 
@@ -822,6 +928,13 @@ api.get('/findLastSip', async (req, res, next) => {
   
     res.send(lastSip)
 });
+
+api.delete('/deleteSip', async(req, res, next) => {
+  const params = req.body
+  await Sip.destroy1(params.id)
+ 
+  res.send({message: 'se borro el sip'})
+})
 /// EXTENSION /////////////////////////////////////////////////////////////////////
 
 api.post('/addExtension', async (req, res, next) => {
@@ -990,15 +1103,11 @@ api.get('/findAllIax', async (req, res, next) => {
   res.send(obj)
 })
 
-api.get('/prueba', async (req, res, next) => {
-  moment.locale('es');
-  moment.defineLocale
-  console.log(moment.locale());
-  console.log(moment(1572566609).format("MM ddd, YYYY hh:mm:ss"))
-  //console.log(moment(1517522296902).format("MM ddd, YYYY hh:mm:ss a"));
-
-  res.send("algo")
-
+api.delete('/deleteIax', async(req, res, next) => {
+  const params = req.body
+  await Iax.destroy1(params.id)
+ 
+  res.send({message: 'se borro el iax'})
 })
 module.exports = api
 //moment(m.createdAt).format("YYYY-MM-DD")

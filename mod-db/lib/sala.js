@@ -28,6 +28,10 @@ module.exports = function setupSala(SalaModel) {
   async function findAll() {
     return SalaModel.findAll()
   }
+  
+  async function findAllQuery(query) {
+    return SalaModel.findAll(query)
+  }
 
   async function destroyAll(id) {
     return await SalaModel.destroy({
@@ -50,6 +54,7 @@ module.exports = function setupSala(SalaModel) {
     findById,
     findAll,
     destroyAll,
+    findAllQuery,
     destroy
   }
 }

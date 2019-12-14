@@ -46,7 +46,15 @@ module.exports = function setupIax(IaxModel, UsuarioModel) {
     })
   }
 
-  async function destroy(id) {
+  async function destroy(usuarioId) {
+    return await IaxModel.destroy({
+      where: {
+        usuarioId
+      }
+    })
+  }
+
+  async function destroy1(id) {
     return await IaxModel.destroy({
       where: {
         id
@@ -59,6 +67,7 @@ module.exports = function setupIax(IaxModel, UsuarioModel) {
     findById,
     findAll,
     destroyAll,
-    destroy
+    destroy,
+    destroy1
   }
 }
