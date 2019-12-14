@@ -50,7 +50,15 @@ module.exports = function setupSip(SipModel, UsuarioModel) {
     })
   }
 
-  async function destroy(id) {
+  async function destroy(usuarioId) {
+    return await SipModel.destroy({
+      where: {
+        usuarioId
+      }
+    })
+  }
+
+  async function destroy1(id) {
     return await SipModel.destroy({
       where: {
         id
@@ -64,6 +72,7 @@ module.exports = function setupSip(SipModel, UsuarioModel) {
     findOne,
     findAll,
     destroyAll,
-    destroy
+    destroy,
+    destroy1
   }
 }
