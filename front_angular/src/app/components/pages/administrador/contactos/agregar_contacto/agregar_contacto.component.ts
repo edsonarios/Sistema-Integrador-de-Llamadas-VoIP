@@ -25,9 +25,7 @@ export class AgregarContactosComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private formBuilder: FormBuilder,
-		private formBuilder2: FormBuilder,
 		private serviceUser: UserService,
-		private serviceSip: SipService,
 	) {
 		this.submitted = true;
 
@@ -43,7 +41,6 @@ export class AgregarContactosComponent implements OnInit {
 			correo:['',Validators.required],
 			password:['',Validators.required],
 			tipo:['',Validators.required]
-
 		})
 
 	  }

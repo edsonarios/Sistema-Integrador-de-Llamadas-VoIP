@@ -1,11 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { Sala } from '@models/sala';
+import { SalaService } from '../../../../../services/sala.service';
+
 @Component({
 	selector: 'salas',
-	templateUrl: './salas.component.html'
+	templateUrl: './salas.component.html',
+	providers: [SalaService]
 })
 export class SalasComponent implements OnInit {
+	public sala;
+	
+
 	public Salas=[
 		{
 			'nombre':'Sala 1',
@@ -57,11 +64,31 @@ export class SalasComponent implements OnInit {
 			'Numero':'3007'
 		}
 		];
-	constructor(private router: Router) {
+	constructor(private router: Router,
+		private serviceSala: SalaService) {
+			
 	}
 
 	ngOnInit() {
 		console.log(this.Salas);
+		this.recibirSalas();
+		
+	}
+
+ 
+
+	recibirSalas(){
+		this.serviceSala.listarSalas()
+		.subscribe(
+		response => {
+			console.log(response);
+			this.sala = response;
+			
+
+		},
+		er => console.log(er),
+		() => console.log('terminado')
+		);
 	}
 	
 }
