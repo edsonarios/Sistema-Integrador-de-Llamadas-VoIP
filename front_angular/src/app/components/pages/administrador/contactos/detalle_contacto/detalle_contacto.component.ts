@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '@services/user.service';
+import { SipService } from '@services/sip.service';
 import { User } from '@models/user';
 
 @Component({
 	selector: 'DetalleContacto',
 	templateUrl: './detalle_contacto.component.html',
-	providers: [UserService]
+	providers: [UserService, SipService]
 })
 export class DetalleContactoComponent implements OnInit {
 	public Contacto;
@@ -16,10 +17,12 @@ export class DetalleContactoComponent implements OnInit {
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router,
-		private serviceUser: UserService) {
+		private serviceUser: UserService,
+		private serviceSip: SipService) {
 
 			this.identy = this.route.snapshot.paramMap.get('id');
 			this.llenarform(this.route.snapshot.paramMap.get('id'));
+			this.llenarSIPsYIAX(this.route.snapshot.paramMap.get('id'));
 			
 		this.Contacto={
 				
@@ -74,13 +77,25 @@ export class DetalleContactoComponent implements OnInit {
 	llenarform( identy){
 		this.serviceUser.findByIdUsuario(identy)
 		.subscribe(
-		rt => {	
-			console.log(rt);
-			this.Contact = rt;
+		response => {	
+			console.log(response);
+			this.Contact = response;
 		},
 		er => console.log(er),
 		() => console.log('terminado')
 		);	
 	}
 	
+	llenarSIPsYIAX( identy){
+		this.serviceSip.llenarSIPsYIAX(identy)
+		.subscribe(
+		response => {	
+			console.log('los sips y iax son:    ');
+			console.log(response);
+		},
+		er => console.log(er),
+		() => console.log('terminado')
+		);	
+	}
+
 }

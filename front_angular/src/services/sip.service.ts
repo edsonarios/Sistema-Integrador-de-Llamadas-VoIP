@@ -38,15 +38,14 @@ export class SipService {
     );
   }
 
-  // updateSip(obj): Observable<any> {
-  //   this.sip = new Sip(obj.alias, obj.telnumero, obj.telnumero);
-
-  // return this.http.post<any>(this.url + 'updateSip',  this.sip,
-  //      this.httpOptions).pipe(
-  //   retry(1),
-  //   catchError(this.errorHandl)
-  // );
-  // }
+  llenarSIPsYIAX( idu): Observable<any> {
+    
+  return this.http.post<any>(this.url + 'getUsuariosWithSipsAndIaxs',  { id: idu },
+       this.httpOptions).pipe(
+    retry(1),
+    catchError(this.errorHandl)
+  );
+}
 
 
 
