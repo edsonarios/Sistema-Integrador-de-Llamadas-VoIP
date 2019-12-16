@@ -17,8 +17,7 @@
 						<b>Nombre Completo</b>
 					</td>
 					<td data-title="Link">
-						
-						{{Contacto['Nombre']}} {{Contacto['ApPaterno']}} {{Contacto['ApMaterno']}}
+						{{Contact['nombre']}} {{Contact['apPaterno']}} {{Contact['apMaterno']}}
 					</td>
 				</tr>
 					<tr >
@@ -26,7 +25,7 @@
 						<b>Correo Electronico</b>
 					</td>
 					<td data-title="Link">
-						{{Contacto['correo']}}
+						{{Contact['correo']}}
 					</td>
 				</tr>
 					<tr >
@@ -34,7 +33,7 @@
 						<b>Direccion</b>
 					</td>
 					<td data-title="Link">
-						{{Contacto['Direccion']}}
+						{{Contact['direccion']}}
 					</td>
 				</tr>
 					<tr >
@@ -42,7 +41,7 @@
 						<b>Telefono</b>
 					</td>
 					<td data-title="Link">
-						{{Contacto['Nro_Telefono']}}
+						{{Contact['telefono']}}
 					</td>
 				</tr>
 					<tr >
@@ -50,7 +49,7 @@
 						<b>Tipo</b>
 					</td>
 					<td data-title="Link">
-						{{Contacto['Tipo']}}
+						{{Contact['tipo']}}
 					</td>
 				</tr>
 			</tbody>
@@ -61,22 +60,22 @@
 <br>
 <h1>Sips</h1>
 <section class="lista-sip">
-	<div *ngFor="let n of Contacto['Sip']; let i=index">
+	<div *ngFor="let n of Sip_Iax[0]; let i=index">
 		<sip
-		Alias="{{Contacto['Sip'][i]['Alias']}}"
-		Numero="{{Contacto['Sip'][i]['Numero']}}"
-		Context="{{Contacto['Sip'][i]['context']}}"
+		Alias="{{Sip_Iax[0][i]['name']}}"
+		Numero="{{Sip_Iax[0][i]['callerid']}}"
+		Context="{{Sip_Iax[0][i]['context']}}"
 		></sip>
 	</div>
 </section>
 <br>
 <h1>Iax</h1>
 <section class="lista-iax">
-	<div *ngFor="let n of Contacto['Iax']; let i=index">
+	<div *ngFor="let n of Sip_Iax[1]; let i=index">
 		<iax
-		Alias="{{Contacto['Iax'][i]['Alias']}}"
-		Numero="{{Contacto['Iax'][i]['Numero']}}"
-		Context="{{Contacto['Iax'][i]['context']}}"
+		Alias="{{Sip_Iax[1][i]['name']}}"
+		Numero="{{Sip_Iax[1][i]['callerid']}}"
+		Context="{{Sip_Iax[1][i]['context']}}"
 		></iax>
 	</div>
 </section>

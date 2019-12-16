@@ -10,8 +10,8 @@ import { User } from '@models/user';
 	providers: [UserService, SipService]
 })
 export class DetalleContactoComponent implements OnInit {
-	public Contacto;
-	public Contact: User;
+	public Contact= User;
+	public Sip_Iax=[];
 	public identy;
 
 	constructor(
@@ -20,57 +20,14 @@ export class DetalleContactoComponent implements OnInit {
 		private serviceUser: UserService,
 		private serviceSip: SipService) {
 
+
 			this.identy = this.route.snapshot.paramMap.get('id');
 			this.llenarform(this.route.snapshot.paramMap.get('id'));
 			this.llenarSIPsYIAX(this.route.snapshot.paramMap.get('id'));
 			
-		this.Contacto={
-				
-					'Id':'1',
-					'Nombre':'Nelson Richard',
-					'ApPaterno':'Cori',
-					'ApMaterno':'Sirpa',
-					'correo':'Richard@usuario.com',
-					'Direccion':'Zona X, Calle Y #2235',
-					'Nro_Telefono':'78839131',
-					'Tipo':'Standar',
-					'Sip':[
-						{
-						'Numero':'3001',
-						'Alias':'3001',
-						'context':'default'
-						},
-						{
-						'Numero':'3002',
-						'Alias':'3002',
-						'context':'default'
-						},
-						{
-						'Numero':'3004',
-						'Alias':'3004',
-						'context':'default'
-						},
-						{
-						'Numero':'3005',
-						'Alias':'3005',
-						'context':'default'
-						}],
-					'Iax':[
-						{
-						'Numero':'3003',
-						'Alias':'3003',
-						'context':'default'
-						},
-						{
-						'Numero':'3006',
-						'Alias':'3006',
-						'context':'default'
-						}]
-		};
 	}
 
 	ngOnInit() {
-		console.log(this.Contacto);	
 		console.log(this.Contact);
 	}
 
@@ -92,6 +49,7 @@ export class DetalleContactoComponent implements OnInit {
 		response => {	
 			console.log('los sips y iax son:    ');
 			console.log(response);
+			this.Sip_Iax=response;
 		},
 		er => console.log(er),
 		() => console.log('terminado')

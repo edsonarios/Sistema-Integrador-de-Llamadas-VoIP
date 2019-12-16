@@ -22,9 +22,9 @@ export class User {
 	// public get getUsuarioId() {
     //     return this.usuarioId;
     // }
-    // public set setUsuarioId(value) {
-    //     this.usuarioId = value;
-	// }
+    //public set setUsuarioId(value) {
+    ///    this.usuarioId = value;
+	///}
 
 	// public get getConectado() {
     //     return this.conectado;

@@ -30,6 +30,7 @@ export class EditarContactoComponent implements OnInit {
 
 	) {
 		this.submitted = true;
+		 this.identy = this.route.snapshot.paramMap.get('id');
 
 	}
 
@@ -44,7 +45,7 @@ export class EditarContactoComponent implements OnInit {
 				password:['',Validators.required],
 				tipo:['',Validators.required]
 			})
-		 this.identy = this.route.snapshot.paramMap.get('id');
+		
 		console.log(this.route.snapshot.paramMap.get('id'));
 
 		this.inicializar(this.route.snapshot.paramMap.get('id'));
@@ -56,7 +57,7 @@ export class EditarContactoComponent implements OnInit {
 		this.serviceUser.findByIdUsuario( dd)
 		.subscribe(
 		rt => {
-			console.log(rt);
+			//console.log(rt);
 			this.addForm = this.formBuilder.group({
 				nombre: [rt.nombre, Validators.required],
 				apPaterno:[rt.apPaterno,Validators.required],
@@ -78,7 +79,8 @@ export class EditarContactoComponent implements OnInit {
 	}
 
 	editarcontacto() {
-		this.serviceUser.updateUser( this.addForm.value, this.identy)
+
+		this.serviceUser.updateUser( this.addForm.value, this.route.snapshot.paramMap.get('id'))
 		.subscribe(
 		rt => {
 			console.log(rt);
