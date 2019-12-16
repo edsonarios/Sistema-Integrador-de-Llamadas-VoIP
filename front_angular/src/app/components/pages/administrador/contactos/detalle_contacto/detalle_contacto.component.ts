@@ -21,6 +21,7 @@ export class DetalleContactoComponent implements OnInit {
 		private serviceSip: SipService) {
 
 
+			
 			this.identy = this.route.snapshot.paramMap.get('id');
 			this.llenarform(this.route.snapshot.paramMap.get('id'));
 			this.llenarSIPsYIAX(this.route.snapshot.paramMap.get('id'));

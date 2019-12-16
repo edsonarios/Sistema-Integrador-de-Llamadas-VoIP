@@ -1,5 +1,7 @@
 import { Component, OnInit ,Input} from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { IaxService } from '@services/iax.service';
+
 
 @Component({
 	selector: 'iax',
@@ -9,12 +11,31 @@ export class IaxComponent implements OnInit {
 	@Input() Alias:string;
 	@Input() Numero:string;
 	@Input() Context:string;
+	@Input() Id:string;
 
-	constructor(private router: Router) {
+	public identy
+
+	constructor(private route: ActivatedRoute,
+		private router: Router,
+		private serviceIax: IaxService) {
 	}
 
 	ngOnInit() {
 		
 	}
 	
+	eliminariax(){
+		this.identy = this.route.snapshot.paramMap.get('id');
+		console.log(this.identy);
+		
+		this.serviceIax.deleteIax( this.identy)
+		.subscribe(
+		rt => {	
+			console.log(rt);
+			
+		},
+		er => console.log(er),
+		() => console.log('terminado')
+		);
+	}
 }

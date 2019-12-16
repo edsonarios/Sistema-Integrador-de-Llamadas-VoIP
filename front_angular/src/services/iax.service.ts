@@ -5,17 +5,17 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
 import { User } from '../models/user';
-import { Sip } from '../models/sip';
+import { Iax } from '../models/iax';
 import { GLOBAL } from './global';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SipService {
+export class IaxService {
   
   public url: string;
   public user: User;
-  public sip: Sip;
+  public iax: Iax;
   constructor(private http: HttpClient) {
     this.url = GLOBAL.url;
   }
@@ -27,21 +27,29 @@ export class SipService {
     })
   };
 
-  addSIP( alias, numero, tipo, password, idu): Observable<any> {
-      this.sip = new Sip(alias, password, numero, idu, tipo);
+//   this.addForm.value.alias,
+//   this.addForm.value.numero,
+//   'friend',  
+//   this.addForm.value.password, 
+//   this.identy
+
+
+  addIAX( alias, numero, tipo, password, idu): Observable<any> {
+      this.iax = new Iax(alias, password, numero, idu, tipo);
       console.log('Datos obtenido para la extension SIP......');
-      console.log(this.sip);
-    return this.http.post<any>(this.url + 'addSip',  this.sip,
+      console.log(this.iax);
+    return this.http.post<any>(this.url + 'addIax',  this.iax,
          this.httpOptions).pipe(
       retry(1),
       catchError(this.errorHandl)
     );
   }
 
-  deleteSip( idd): Observable<any> {
-      return this.http.delete<any>(this.url + 'deleteSip'+ {id: idd}
-      );    
-}
+  deleteIax(idd): Observable<any> {
+
+  return this.http.delete<any>(this.url + 'deleteIax'+ {id: idd}
+         );
+  }
 
   llenarSIPsYIAX( idu): Observable<any> {
     
