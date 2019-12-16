@@ -22,14 +22,11 @@ button{
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
-.c-responsive {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-}
+
 .admin-dashboard {
 	text-align: center;
 	display: grid;
-	grid-template-columns: 20% 80%;
+	grid-template-columns: minmax(230px, 20%) minmax(500px, 80%);
 	grid-template-areas: 'sidebar contenido';
 	height: 100vh;
 	overflow: hidden;

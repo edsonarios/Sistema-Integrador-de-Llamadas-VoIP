@@ -1,83 +1,57 @@
+<section class="añadir-contact">
+	<div class="añadir-contact--header">
+		<h6>AÑADIR CONTACTO</h6>
+	</div>
 
-<div class="modal-header">
-	<h6 class="modal-title">AÑADIR CONTACTO</h6>
-</div>
-
-<div class="modal-body">
-	<div class="container ">
-		<form class="añadir_contact" [formGroup]="addForm" (ngSubmit)="onSubmit()">
-
-			<div class="row">
-				<div class="col-md-6 form-group">
-					<label for="nombre">NOMBRE</label>
-					<input type="text" formControlName="nombre" class="form-control" />
-				</div>
-				<div class="col-md-6 form-group">
-					<label for="tipo">TIPO</label>
-					<select class="form-control" formControlName="tipo">
-						<option value="SIP">Standard</option>
-						<option value="IAX">Administrador</option>
-					</select>
-				</div>
+	<div class="añadir-contact--body">
+		<form class="a-form" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+			<div class="añadir-form">
+				<label for="nombre">NOMBRE *</label>
+				<input type="text" formControlName="nombre" class="form-control" />
+			</div>
+			<div class="añadir-form">
+				<label for="tipo">TIPO</label>
+				<select class="form-control" formControlName="tipo">
+					<option value="SIP">Standard</option>
+					<option value="IAX">Administrador</option>
+				</select>
+			</div>
+			<div class="añadir-form">
+				<label for="apPaterno">APELLIDO PATERNO</label>
+				<input type="text" formControlName="apPaterno" class="form-control" />
+			</div>
+			<div class="añadir-form">
+				<label for="apMaterno">APELLIDO MATERNO</label>
+				<input type="text" formControlName="apMaterno" class="form-control" />
 			</div>
 
-			<div class="row">
-				<div class="col-md-6 form-group">
-					<label for="apPaterno">APELLIDO PATERNO</label>
-					<input type="text" formControlName="apPaterno" class="form-control" />
-				</div>
-				<div class="col-md-6 form-group">
-					<label for="apMaterno">APELLIDO MATERNO</label>
-					<input type="text" formControlName="apMaterno" class="form-control" />
-				</div>
-			</div>	
-			
-
-			<div class="row">
-				<div class="col-md-6 form-group">
-					<label for="direccion">DIRECCIÓN</label>
-					<input type="text" formControlName="direccion" class="form-control" />
-				</div>
-				<div class="col-md-6 form-group">
-					<label for="telefono">#/TELÉFONO</label>
-					<input type="text" formControlName="telefono" class="form-control" />
-				</div>
-				<!-- <div class="col-md-4 form-group">
-					<label for="telnumero">TIPO</label>
-					<select class="form-control" id="inputGroupSelect01" formControlName="tipo">
-						<option value="SIP">SIP</option>
-						<option value="IAX">IAX</option>
-					</select>
-				</div> -->
-				
+			<div class="añadir-form">
+				<label for="direccion">DIRECCIÓN</label>
+				<input type="text" formControlName="direccion" class="form-control" />
 			</div>
-
-			<div class="row">
-					<label for="correo">CORREO</label>
-					<input type="text" formControlName="correo" class="form-control" />
-			</div>	
-			<div class="row">	
-					<label for="password">CONTRASEÑA</label>
-					<input type="password" formControlName="password" class="form-control" />
+			<div class="añadir-form">
+				<label for="telefono">#/TELÉFONO</label>
+				<input type="text" formControlName="telefono" class="form-control" />
+			</div>
+			<div class="añadir-form">
+				<label for="correo">CORREO</label>
+				<input type="text" formControlName="correo" class="form-control" />
+			</div>
+			<div class="añadir-form">
+				<label for="password">CONTRASEÑA</label>
+				<input type="password" formControlName="password" class="form-control" />
 			</div>
 		</form>
 
-		<!--<form  [formGroup]="addFormSip">
-			<div class="row">
-				<label for="name">CALLER ID</label>
-				<input type="text" formControlName="name" class="form-control" />
-		</div>	
-		<div class="row">	
-				<label for="callerid">ALIAS</label>
-				<input type="text" formControlName="callerid" class="form-control" />
-		</div>
-		</form>-->
-
-		
 	</div>
-</div>
-<div class="modal-footer form-group">
-	<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" [disabled]="addForm.invalid" (click)="crearcontacto()">
-		Crear contacto
-	</button>
-</div>
+	<div class="añadir-contact--footer">
+		<button
+			type="button"
+			data-dismiss="modal"
+			[disabled]="addForm.invalid"
+			(click)="crearcontacto()"
+		>
+			Crear contacto
+		</button>
+	</div>
+</section>
