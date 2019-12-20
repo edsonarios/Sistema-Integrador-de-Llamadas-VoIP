@@ -1,0 +1,21 @@
+<div class="app">
+  <audio src="" id="audio-local"></audio>
+  <audio src="" id="audio-remote"></audio>
+  <h1>DEMO LLAMADAS</h1>
+  <div class="btns">
+    <h1>WS EVENTS</h1>
+    <h2>{{ msg }}</h2>
+    <button (click)="conectar()">Conectar</button>
+    <button (click)="desconectar()">Desconectar</button>
+    <button (click)="registrar()">Registrar</button>
+  </div>
+  <br />
+  <input type="text" [(ngModel)]="sip" />
+  <button (click)="call(sip)">Llamar</button>
+  <button (click)="responder()">Contestar</button>
+  <button (click)="mute()">Mute</button>
+  <button (click)="unmute()">UnMute</button>
+  <button (click)="terminar()">Colgar</button>
+  <h3>{{ sip }}</h3>
+</div>
+<router-outlet></router-outlet>
