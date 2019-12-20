@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ConfigWSService } from "./service/config-ws.service";
+import { ConfigWSService } from "./config-ws.service";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
