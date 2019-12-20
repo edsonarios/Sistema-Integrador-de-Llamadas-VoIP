@@ -25,6 +25,8 @@ public ParticipantesSala=[];
 
 public Hide:boolean= true;
 public HideLateral:boolean=true;
+public OptionLateral=0;
+
 user: User;
 
 	modalRef: BsModalRef;
@@ -158,6 +160,13 @@ user: User;
 				this.Hide=true;
 			}
 		}
+	}
+	LateralOpcion(page){
+	// 0 = Notificaciones
+	// 1 = Mi Agenda
+	// 2 = Salas
+	// 3 = Mi Pefil (puede cambiar de numeros)
+	this.OptionLateral=page;
 	}
 	
 	AgregarEventoNotificacion(){

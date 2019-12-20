@@ -11,32 +11,36 @@
 		height: 60px;
 		font-size: 25px;
 	}
+	background: #e2e1e0;
 }
 
-//-----------------------------------------------
-//primera columna
+
+//	primera columna
 .col1 {
+	//background: #fff;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	border-radius: 4px;
+	margin: 5px 5px 5px 0px;
 	grid-area: colum1;
 	display: grid;
-	grid-template-rows: 40vh 60vh;
+	grid-template-rows: 10 40 50;
 	grid-template-areas:
 		'c1-logo'
-		'c1-options';
+		'c1-options'
+		'c1-options-bottom';
 	background: var(--color-seis);
-	button {
-		border-radius: 10%;
-	}
-	button:hover {
+	
+	
+	/*button:hover {
 		transform: translateY(-3px);
 		box-shadow: 0 5px 20px var(--color-cuatro);
-	}
+	}*/
 
-	button:active {
+	/*button:active {
 		transform: translateY(-1px);
 		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	}
+	}*/
 }
-
 .c1-logo {
 	grid-area: c1-logo;
 	padding-top: 10px;
@@ -46,23 +50,24 @@
 	}
 }
 .c1-options {
+
 	grid-area: c1-options;
 	padding-top: 20px;
 	button {
+		border-bottom:1px solid gray;
 		font-size: 40px;
-		background: var(--color-cuatro);
-		color: var(--color-dos);
+		background: var(--color-seis);
+		color: var(--color-uno);
 		margin-bottom: 30px;
 	}
 }
 .c1-options-bottom {
 	grid-area: c1-options-bottom;
-	padding-left: 6px;
 	button {
+		border-bottom:1px solid gray;
 		font-size: 40px;
-		background: var(--color-cuatro);
-		color: var(--color-dos);
-		margin-left: 5px;
+		background: var(--color-seis);
+		color: var(--color-uno);
 		margin-bottom: 10px;
 	}
 }
@@ -71,9 +76,9 @@
 .col2 {
 	grid-area: colum2;
 	display: grid;
-	grid-template-columns: minmax(150px, 75%) minmax(300px, 25%);
-	grid-template-areas: 'c2-escritorio c2-lateral ';
-	background: var(--color-uno);
+	grid-template-columns: minmax(300px, 25%) minmax(150px, 75%);
+	grid-template-areas: 'c2-lateral c2-escritorio ';
+	//background: var(--color-uno);
 }
 .c2-escritorio {
 	grid-area: c2-escritorio;
@@ -85,30 +90,117 @@
 		'c2-panel';
 
 	.c2-desktop {
+		background: #fff;
+		box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+		border-radius: 4px;
+		margin: 5px;
 		grid-area: c2-desktop;
 		overflow-y: scroll;
 	}
+	.c2-desktop::-webkit-scrollbar-track
+	{
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		background-color: #F5F5F5;
+	}
+
+	.c2-desktop::-webkit-scrollbar
+	{
+		width: 6px;
+		background-color: #F5F5F5;
+	}
+
+	.c2-desktop::-webkit-scrollbar-thumb
+	{
+		background-color: #000000;
+	}
+
 	.c2-panel {
 		grid-area: c2-panel;
-		background: var(--color-uno);
-		overflow-y: scroll;
+		display: grid;
+		grid-template-columns: 50 50;
+		grid-template-areas: 'c2-panel-historial c2-panel-sockets';
+		
+		.c2-panel-historial{
+			background: #fff;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+			border-radius: 4px;
+			margin: 5px;
+			grid-area: c2-panel-historial;
+			overflow-y: scroll;
+		}
+		.c2-panel-sockets{
+			background: #fff;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+			border-radius: 4px;
+			margin: 5px;
+			grid-area: c2-panel-sockets;
+			overflow-y: scroll;
+		}
+
 	}
 }
+	.c2-panel-historial::-webkit-scrollbar-track
+	{
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		background-color: #F5F5F5;
+	}
+
+	.c2-panel-historial::-webkit-scrollbar
+	{
+		width: 6px;
+		background-color: #F5F5F5;
+	}
+
+	.c2-panel-historial::-webkit-scrollbar-thumb
+	{
+		background-color: #000000;
+	}
+	.c2-panel-sockets::-webkit-scrollbar-track
+	{
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		background-color: #F5F5F5;
+	}
+
+	.c2-panel-sockets::-webkit-scrollbar
+	{
+		width: 6px;
+		background-color: #F5F5F5;
+	}
+
+	.c2-panel-sockets::-webkit-scrollbar-thumb
+	{
+		background-color: #000000;
+	}
 .c2-lateral {
 	grid-area: c2-lateral;
 	display: grid;
-	grid-template-rows: 8vh 84vh 80px;
+	grid-template-rows: 90vh 10vh;
 	grid-template-areas:
-		'c2-header'
 		'c2-body'
 		'c2-footer';
-	background: var(--color-cuatro);
+	//background: var(--color-cuatro);
 }
-.c2-header {
-	grid-area: c2-header;
-	background: var(--color-seis);
-
-	.search {
+.c2-body {
+	background: #fff;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	border-radius: 4px;
+	margin:5px;
+	grid-area: c2-body;
+	overflow-y: scroll;
+	max-height: 90vh;
+	a {
+		color: var(--color-dos);
+		background: var(--color-cinco);
+	}
+	a:hover {
+		border: none;
+	}
+	.nav-link.active {
+		color: var(--color-dos);
+		background: var(--color-cuatro);
+		border: none;
+	}
+		.search {
 		width: 80%;
 		position: relative;
 		margin: auto;
@@ -138,27 +230,31 @@
 		font-size: 20px;
 		background: var(--color-cuatro);
 	}
+
 }
-.c2-body {
-	grid-area: c2-body;
-	overflow-y: scroll;
-	max-height: 85vh;
-	a {
-		color: var(--color-dos);
-		background: var(--color-cinco);
+.c2-body::-webkit-scrollbar-track
+	{
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		background-color: #F5F5F5;
 	}
-	a:hover {
-		border: none;
+
+	.c2-body::-webkit-scrollbar
+	{
+		width: 6px;
+		background-color: #F5F5F5;
 	}
-	.nav-link.active {
-		color: var(--color-dos);
-		background: var(--color-cuatro);
-		border: none;
+
+	.c2-body::-webkit-scrollbar-thumb
+	{
+		background-color: #000000;
 	}
-}
 
 //inicio columna 2 footer__________________________________
 .c2-footer {
+	//background: #fff;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	border-radius: 4px;
+	margin: 5px;
 	background: var(--color-cinco);
 	grid-area: c2-footer;
 	display: grid;
@@ -172,7 +268,7 @@
 		background: var(--color-cinco);
 	}
 	i {
-		color: var(--color-dos);
+		//color: var(--color-dos);
 	}
 }
 .c2-footer-btn {
@@ -209,6 +305,10 @@
 
 //fin columna 2 footer__________________________________
 .desplegables {
+	margin: 5px;
+	background: #fff;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	border-radius: 4px;
 	grid-area: colum2;
 	overflow-y: scroll;
 }
@@ -218,7 +318,7 @@
 		grid-template-rows: 30vh 80vh;
 	}
 	.col2 {
-		grid-template-columns: 70% 30%;
+		grid-template-columns: 30% 70%;
 	}
 	.c2-footer{
 		button{

@@ -9,38 +9,49 @@
 				[routerLink]="['/Operador/Historial']"
 				tooltip="Historial de Llamada"
 				placement="right"
-				(click)="LoaderPage('page')"
-			>
+				(click)="LoaderPage('page')">
 				<i class="v-icon-phone-call" placement="right"></i>
 			</button>
 			<button
 				[routerLink]="['/Operador/Grabaciones']"
 				tooltip="Grabaciones"
 				placement="right"
-				(click)="LoaderPage('page')"
-			>
+				(click)="LoaderPage('page')">
 				<i class="v-icon-microphone1" placement="right"></i>
 			</button>
-		<!-- </div>
-
-		<div class="c1-options-bottom"> -->
 			<button
 				[routerLink]="['/Operador/Tracking']"
 				(click)="LoaderPage('page')"
 				tooltip="Tracking"
-				placement="right"
-			>
+				placement="right">
 				<i class="v-icon-pin"></i>
 			</button>
+		 </div>
+		<div class="c1-options-bottom"> 
+			
 			<button (click)="DialPadComponent()" tooltip="DialPad" placement="right">
-				<i class="v-icon-phone"></i>
+				<i class="v-icon-dial"></i>
+			</button>
+			<button (click)="LateralOpcion(0)" tooltip="Notificaciones" placement="right">
+				<i class="v-icon-walkie-talkie"></i>
+			</button>
+			<button (click)="LateralOpcion(1)" tooltip="Mi Agenda" placement="right">
+				<i class="v-icon-users"></i>
+			</button>
+			<button (click)="LateralOpcion(2)" tooltip="Salas" placement="right">
+				<i class="v-icon-record"></i>
+			</button>
+			<button tooltip="Mi perfil" placement="right">
+				<i class="v-icon-identification"></i>
+			</button>
+			<button tooltip="Salir" placement="right" [routerLink]="['/Login']">
+				<i class="v-icon-cancel" ></i>
 			</button>
 			<button
 				tooltip="Opciones"
 				placement="right"
 				[popover]="popTemplate"
-				popoverTitle="     Opciones      "
-			>
+				popoverTitle="Opciones">
 				<i class="v-icon-settings1"></i>
 			</button>
 		</div>
@@ -83,21 +94,66 @@
 				</section>
 			</div>
 			<div class="c2-panel">
-				<panel [Objeto]="Panel"></panel>
+				<div class="c2-panel-historial">
+					<header class="panel__header">
+						Historial
+					</header>
+				</div>
+				<div class="c2-panel-sockets">
+					<panel [Objeto]="Panel"></panel>
+				</div>
+				
 			</div>
 		</div>
 		<div class="c2-lateral">
 			<div class="btn-group c2-header">
-				<div class="search">
+				
+			</div>
+			<!-- ********contenido******** -->
+			<div class="c2-body" *ngIf="HideLateral == true; else ParticipantesTemplate" >
+				<div *ngIf="OptionLateral == 0">
+					<header class="panel__header">
+						Notificaciones
+					</header>
+					<div *ngFor="let n of Notificaciones; let i = index" [@flyIn]>
+					  	<Notificacion
+					  	(ContestaLlamada)="ContestarLlamada($event)"
+					  	(CancelaLlamada)="ColgarLlamada($event)"
+					  	Nombre="{{Notificaciones[i]['nombre']}}"
+					  	Numero="{{Notificaciones[i]['numero']}}"
+					  	Estado="{{Notificaciones[i]['estado']}}"
+					  	Id="{{Notificaciones[i]['id']}}"></Notificacion>
+				 	 </div>
+				</div>
+				<div *ngIf="OptionLateral == 1">
+					<header class="panel__header">
+						Mi Agenda
+					</header>
+					<div class="search">
 					<input type="text" class="searchTerm" placeholder="Busque en la Agenda" />
 					<button type="submit" class="searchButton" (click)="Busqueda()">
 						<i class="v-icon-magnifying-glass"></i>
 					</button>
 				</div>
-			</div>
-			<!-- ********contenido******** -->
-			<div class="c2-body" *ngIf="HideLateral == true; else ParticipantesTemplate" >
-				<tabset [justified]="true">
+					<Agenda (AgendaLlamada)="AgendaLlamada($event)">	
+					</Agenda>
+				</div>
+				<div *ngIf="OptionLateral == 2">
+					<header class="panel__header">
+						Salas
+					</header>
+					<div *ngFor="let n of Salas; let i = index" [@flyIn]>
+					  	<Sala (DatoSala)="RegistraSala($event)"
+					  	Nombre="{{Salas[i]['nombre']}}"
+					  	Ocupado="{{Salas[i]['Ocupando']}}"
+					  	Dimensions="{{Salas[i]['Dimesions']}}"
+					  	Numero="{{Salas[i]['Numero']}}"
+					  	Id="{{Salas[i]['id']}}">
+					  	</Sala>
+					  	</div>
+				</div>
+
+				<!--<tabset [justified]="true">
 					<tab heading="Notificaciones">
 				  	<div *ngFor="let n of Notificaciones; let i = index" [@flyIn]>
 					  	<Notificacion
@@ -126,7 +182,9 @@
 					  	</div>
 				  </tab>
 				</tabset>
+			-->
 			</div>
+
 			<ng-template #ParticipantesTemplate>
 				<div class="c2-body">
 					<header class="panel__header"> 
