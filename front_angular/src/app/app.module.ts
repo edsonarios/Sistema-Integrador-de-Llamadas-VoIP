@@ -7,7 +7,9 @@ import { AppRoutes } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { LoginComponent } from './components/pages/inicio/login/login.component';
+
 import { PruebaComponent } from './components/pages/inicio/Pruebas_Llamada/prueba.component';
+import { Prueba2Component } from './components/pages/inicio/Prueba_Llamada2/prueba2.component';
 
 //fontawesome
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -41,6 +43,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
 	declarations: [
+		Prueba2Component,
 		PruebaComponent,
 		AppComponent,
 		LoginComponent,
