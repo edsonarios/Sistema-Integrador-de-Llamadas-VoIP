@@ -12,29 +12,48 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
-var modal_1 = require("ngx-bootstrap/modal");
-//import { UserService } from '@services/user.service';
-//import { SipService } from '@services/sip.service';
+var user_service_1 = require("@services/user.service");
 var EditarContactoComponent = /** @class */ (function () {
-    function EditarContactoComponent(router, formBuilder, modalRef) {
+    function EditarContactoComponent(route, router, formBuilder, serviceUser) {
+        this.route = route;
         this.router = router;
         this.formBuilder = formBuilder;
-        this.modalRef = modalRef;
+        this.serviceUser = serviceUser;
         this.wrong = false;
         this.loading = false;
         this.submitted = true;
+        this.identy = this.route.snapshot.paramMap.get('id');
     }
     EditarContactoComponent.prototype.ngOnInit = function () {
         this.addForm = this.formBuilder.group({
             nombre: ['', forms_1.Validators.required],
-            apellido: ['', forms_1.Validators.required],
-            alias: ['', forms_1.Validators.required],
-            telnumero: ['', forms_1.Validators.required],
-            tipo: ['', forms_1.Validators.required],
-            descripcion: ['', forms_1.Validators.required]
+            apPaterno: ['', forms_1.Validators.required],
+            apMaterno: ['', forms_1.Validators.required],
+            direccion: ['', forms_1.Validators.required],
+            telefono: ['', forms_1.Validators.required],
+            correo: ['', forms_1.Validators.required],
+            password: ['', forms_1.Validators.required],
+            tipo: ['', forms_1.Validators.required]
         });
+        console.log(this.route.snapshot.paramMap.get('id'));
+        this.inicializar(this.route.snapshot.paramMap.get('id'));
     };
-    EditarContactoComponent.prototype.onSubmit = function () {
+    EditarContactoComponent.prototype.inicializar = function (dd) {
+        var _this = this;
+        this.serviceUser.findByIdUsuario(dd)
+            .subscribe(function (rt) {
+            //console.log(rt);
+            _this.addForm = _this.formBuilder.group({
+                nombre: [rt.nombre, forms_1.Validators.required],
+                apPaterno: [rt.apPaterno, forms_1.Validators.required],
+                apMaterno: [rt.apMaterno, forms_1.Validators.required],
+                direccion: [rt.direccion, forms_1.Validators.required],
+                telefono: [rt.telefono, forms_1.Validators.required],
+                correo: [rt.correo, forms_1.Validators.required],
+                password: [rt.password, forms_1.Validators.required],
+                tipo: [rt.tipo, forms_1.Validators.required]
+            });
+        }, function (er) { return console.log(er); }, function () { return console.log('terminado'); });
     };
     Object.defineProperty(EditarContactoComponent.prototype, "f", {
         get: function () {
@@ -43,7 +62,11 @@ var EditarContactoComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    EditarContactoComponent.prototype.crearcontacto = function () {
+    EditarContactoComponent.prototype.editarcontacto = function () {
+        this.serviceUser.updateUser(this.addForm.value, this.route.snapshot.paramMap.get('id'))
+            .subscribe(function (rt) {
+            console.log(rt);
+        }, function (er) { return console.log(er); }, function () { return console.log('terminado'); });
     };
     EditarContactoComponent.prototype.cerrar = function (e) {
         e.close();
@@ -52,10 +75,12 @@ var EditarContactoComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'editar-cotacto',
             templateUrl: './editar_contacto.component.html',
+            providers: [user_service_1.UserService],
         }),
-        __metadata("design:paramtypes", [router_1.Router,
+        __metadata("design:paramtypes", [router_1.ActivatedRoute,
+            router_1.Router,
             forms_1.FormBuilder,
-            modal_1.BsModalRef])
+            user_service_1.UserService])
     ], EditarContactoComponent);
     return EditarContactoComponent;
 }());

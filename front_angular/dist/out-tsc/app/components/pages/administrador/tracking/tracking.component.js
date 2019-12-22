@@ -14,6 +14,7 @@ var router_1 = require("@angular/router");
 var TrackingComponent = /** @class */ (function () {
     function TrackingComponent(router) {
         this.router = router;
+        console.log('El tracking se cargo correctamente');
     }
     TrackingComponent.prototype.ngOnInit = function () { };
     TrackingComponent = __decorate([

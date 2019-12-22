@@ -24,6 +24,7 @@ var agenda_component_1 = require("@operador/agenda/agenda.component");
 var notificacion_component_1 = require("@operador/notificacion/notificacion.component");
 var sala_component_1 = require("@operador/sala/sala.component");
 var panel_component_1 = require("@operador/panel/panel.component");
+var participante_component_1 = require("@operador/participante/participante.component");
 var llamada_component_1 = require("@operador/llamada/llamada.component");
 var accordion_1 = require("ngx-bootstrap/accordion");
 var dropdown_1 = require("ngx-bootstrap/dropdown");
@@ -50,7 +51,8 @@ var AppModule = /** @class */ (function () {
                 notificacion_component_1.NotificacionComponent,
                 sala_component_1.SalaComponent,
                 llamada_component_1.LlamadaComponent,
-                panel_component_1.PanelComponent
+                panel_component_1.PanelComponent,
+                participante_component_1.ParticipanteComponent
             ],
             imports: [
                 angular_font_awesome_1.AngularFontAwesomeModule,

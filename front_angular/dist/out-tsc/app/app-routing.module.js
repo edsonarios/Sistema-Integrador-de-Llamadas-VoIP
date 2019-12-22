@@ -1,5 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+dsaimport;
+{
+    NgModule;
+}
+from;
+'@angular/core';
 var login_component_1 = require("./components/pages/inicio/login/login.component");
 // import { LoginComponent } from '@component/login.component';
 var operador_template_component_1 = require("./components/templates/operador-template/operador-template.component");

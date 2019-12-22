@@ -10,49 +10,42 @@
 				tooltip="Historial de Llamada"
 				placement="right"
 				(click)="LoaderPage('page')">
-				<i class="v-icon-phone-call" placement="right"></i>
+				<i class="v-icon-phone1" placement="right"></i>
 			</button>
 			<button
 				[routerLink]="['/Operador/Grabaciones']"
 				tooltip="Grabaciones"
 				placement="right"
 				(click)="LoaderPage('page')">
-				<i class="v-icon-microphone1" placement="right"></i>
+				<i class="v-icon-cassette" placement="right"></i>
 			</button>
 			<button
 				[routerLink]="['/Operador/Tracking']"
 				(click)="LoaderPage('page')"
 				tooltip="Tracking"
 				placement="right">
-				<i class="v-icon-pin"></i>
+				<i class="v-icon-location"></i>
 			</button>
-		 </div>
-		<div class="c1-options-bottom"> 
-			
 			<button (click)="DialPadComponent()" tooltip="DialPad" placement="right">
 				<i class="v-icon-dial"></i>
 			</button>
+		 </div>
+		<div class="c1-options-bottom" *ngIf="Hide == true; else elsePanel" [@FadeIn]> 
+			
 			<button (click)="LateralOpcion(0)" tooltip="Notificaciones" placement="right">
-				<i class="v-icon-walkie-talkie"></i>
+				<i class="v-icon-bell"></i>
 			</button>
 			<button (click)="LateralOpcion(1)" tooltip="Mi Agenda" placement="right">
-				<i class="v-icon-users"></i>
+				<i class="v-icon-address-book"></i>
 			</button>
 			<button (click)="LateralOpcion(2)" tooltip="Salas" placement="right">
-				<i class="v-icon-record"></i>
+				<i class="v-icon-bubbles4"></i>
 			</button>
-			<button tooltip="Mi perfil" placement="right">
-				<i class="v-icon-identification"></i>
+			<button tooltip="Mi perfil" placement="right" [popover]="popTemplate">
+				<i class="v-icon-switch_account"></i>
 			</button>
 			<button tooltip="Salir" placement="right" [routerLink]="['/Login']">
-				<i class="v-icon-cancel" ></i>
-			</button>
-			<button
-				tooltip="Opciones"
-				placement="right"
-				[popover]="popTemplate"
-				popoverTitle="Opciones">
-				<i class="v-icon-settings1"></i>
+				<i class="v-icon-enter" ></i>
 			</button>
 		</div>
 	</div>
@@ -60,51 +53,24 @@
 			<ul>
 			<li >
 				<a (click)="AgregarEventoNotificacion()" style="cursor: pointer;">
-				  <span align="right"> < Evento Notificacion > </span>
+				  <span align="center"> <h6>-- Evento Notificacion --</h6> </span>
 				</a>
+				
 			</li>
 			<hr>
 			<li>
-				<a [routerLink]="['/Login']">
-				  <span align="right">Salir</span>
-				</a>
+				<a (click)="LateralOpcion(3)" style="cursor: pointer;">
+				<span align="center"><h6>-- Mi perfil -- </h6> </span>
+			  </a>
 			</li>
+			
 	</ul>
 	</ng-template>
+
 	<!-- *******segunda columna******* -->
 	<div class="col2" *ngIf="Hide == true; else elseBlock" [@SladeOff]>
 		<!-- ********menu desplegable******** -->
-		<div class="c2-escritorio">
-			<div class="c2-desktop">
-					<header class="panel__header">
-						Escritorio
-					</header>
-				<section class="e-responsive">
-				<div class="escritorio"  *ngFor="let n of Llamada; let i = index" [@FadeIn]>
-				<llamada (llamadaClose)="CerrarLlamada($event)"
-				(Participantes)="VerParticipantes($event)"
-				Nombre="{{Llamada[i]['nombre']}}"
-				Numero="{{Llamada[i]['numero']}}"
-				Tipo="{{Llamada[i]['Tipo']}}"
-				Id="{{Llamada[i]['id']}}"
-				Estado="{{Llamada[i]['Estado']}}"
-				
-				></llamada>
-				</div>
-				</section>
-			</div>
-			<div class="c2-panel">
-				<div class="c2-panel-historial">
-					<header class="panel__header">
-						Historial
-					</header>
-				</div>
-				<div class="c2-panel-sockets">
-					<panel [Objeto]="Panel"></panel>
-				</div>
-				
-			</div>
-		</div>
+		
 		<div class="c2-lateral">
 			<div class="btn-group c2-header">
 				
@@ -152,37 +118,12 @@
 					  	</Sala>
 					  	</div>
 				</div>
-
-				<!--<tabset [justified]="true">
-					<tab heading="Notificaciones">
-				  	<div *ngFor="let n of Notificaciones; let i = index" [@flyIn]>
-					  	<Notificacion
-					  	(ContestaLlamada)="ContestarLlamada($event)"
-					  	(CancelaLlamada)="ColgarLlamada($event)"
-					  	Nombre="{{Notificaciones[i]['nombre']}}"
-					  	Numero="{{Notificaciones[i]['numero']}}"
-					  	Estado="{{Notificaciones[i]['estado']}}"
-					  	Id="{{Notificaciones[i]['id']}}"></Notificacion>
-				 	 </div>
-				  </tab>
-					<tab heading="Agenda">
-						<Agenda (AgendaLlamada)="AgendaLlamada($event)">
-							
-						</Agenda>
-					</tab>
-					 <tab heading="Salas" >
-					  	<div *ngFor="let n of Salas; let i = index" [@flyIn]>
-					  	<Sala (DatoSala)="RegistraSala($event)"
-					  	Nombre="{{Salas[i]['nombre']}}"
-					  	Ocupado="{{Salas[i]['Ocupando']}}"
-					  	Dimensions="{{Salas[i]['Dimesions']}}"
-					  	Numero="{{Salas[i]['Numero']}}"
-					  	Id="{{Salas[i]['id']}}">
-					  	</Sala>
-					  	</div>
-				  </tab>
-				</tabset>
-			-->
+				<div *ngIf="OptionLateral == 3">
+					<header class="panel__header">
+						Mi Perfil
+					</header>
+					
+				</div>
 			</div>
 
 			<ng-template #ParticipantesTemplate>
@@ -215,7 +156,7 @@
 				</div>
 				<div class="c2-footer-btn">
 					<button (click)="MicrophoneOption()">
-						<i class="v-icon-microphone-black-shape"></i>
+						<i class="v-icon-microphone"></i>
 					</button>
 
 					<button (click)="AudioOption()">
@@ -223,9 +164,41 @@
 					</button>
 
 					<button (click)="NetworkSignalOption()">
-						<i class="v-icon-wifi"></i>
+						<i class="v-icon-wifi-full"></i>
 					</button>
 				</div>
+			</div>
+		</div>
+
+		<div class="c2-escritorio">
+			<div class="c2-desktop">
+					<header class="panel__header">
+						Escritorio
+					</header>
+				<section class="e-responsive">
+				<div class="escritorio"  *ngFor="let n of Llamada; let i = index" [@FadeIn]>
+				<llamada (llamadaClose)="CerrarLlamada($event)"
+				(Participantes)="VerParticipantes($event)"
+				Nombre="{{Llamada[i]['nombre']}}"
+				Numero="{{Llamada[i]['numero']}}"
+				Tipo="{{Llamada[i]['Tipo']}}"
+				Id="{{Llamada[i]['id']}}"
+				Estado="{{Llamada[i]['Estado']}}"
+				
+				></llamada>
+				</div>
+				</section>
+			</div>
+			<div class="c2-panel">
+				<div class="c2-panel-historial">
+					<header class="panel__header">
+						Historial
+					</header>
+				</div>
+				<div class="c2-panel-sockets">
+					<panel [Objeto]="Panel"></panel>
+				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -233,14 +206,15 @@
 	<!-- ********Componentes******** -->
 	<ng-template #elseBlock>
 		<div class="desplegables" [@SladeIn] style="border-bottom: 5px solid black;">
-			<!-- ********contenido******** -->
 			<router-outlet></router-outlet>
-			<!-- *********footer********   -->
+		</div>
+	</ng-template>
+	<ng-template #elsePanel>
+		<div class="c1-options-bottom"  [@FadeIn]> 
+			<button tooltip="Salir" placement="right" [routerLink]="['/Login']">
+				<i class="v-icon-enter" ></i>
+			</button>
 		</div>
 	</ng-template>
 
-	<!-- tercera columna -->
-	<!--<div class="dashboard__3col col3">
-		<router-outlet></router-outlet>
-	</div>-->
 </section>

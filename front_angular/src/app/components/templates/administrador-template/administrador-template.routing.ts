@@ -10,6 +10,8 @@ import { HistorialLlamadasComponent } from '@administrador/historial_llamadas/hi
 import { TrackingComponent } from '@administrador/tracking/tracking.component';
 import { SalasComponent } from '@administrador/salas/salas.component';
 import { AgregarSalaComponent } from '@administrador/salas/agregar_sala/agregar_sala.component';
+import { RadiosComponent } from '@administrador/radios/radios.component';
+import { AgregarRadioComponent } from '@administrador/radios/agregar_radio/agregar_radio.component';
 
 export const AdministradorTemplateRoutes: Routes = [
   { path: 'Contactos', component: ContactosComponent },
@@ -25,5 +27,7 @@ export const AdministradorTemplateRoutes: Routes = [
   { path: 'Salas', component: SalasComponent },
   { path: 'AgregarSala', component: AgregarSalaComponent },
   { path: 'AgregarNumero', component: AgregarNumeroComponent },
+  { path: 'Radios', component: RadiosComponent },
+  { path: 'AgregarRadio', component: AgregarRadioComponent },
   { path: '', redirectTo: 'Contactos', pathMatch: 'full' }
 ];

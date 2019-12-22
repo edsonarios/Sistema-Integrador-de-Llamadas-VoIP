@@ -13,16 +13,23 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/common/http");
 var administrador_template_routing_1 = require("./administrador-template.routing");
 var contactos_component_1 = require("@administrador/contactos/contactos.component");
+var agregar_contacto_component_1 = require("@administrador/contactos/agregar_contacto/agregar_contacto.component");
+var editar_contacto_component_1 = require("@administrador/contactos/editar_contacto/editar_contacto.component");
+var detalle_contacto_component_1 = require("@administrador/contactos/detalle_contacto/detalle_contacto.component");
 var grabaciones_component_1 = require("@administrador/grabaciones/grabaciones.component");
 var audio_player_component_1 = require("@administrador/grabaciones/audio_player/audio_player.component");
 var historial_llamadas_component_1 = require("@administrador/historial_llamadas/historial_llamadas.component");
 var tracking_component_1 = require("@administrador/tracking/tracking.component");
 var salas_component_1 = require("@administrador/salas/salas.component");
-var agregar_contacto_component_1 = require("@administrador/contactos/agregar_contacto/agregar_contacto.component");
-var editar_contacto_component_1 = require("@administrador/contactos/editar_contacto/editar_contacto.component");
-//import { TooltipModule } from 'ngx-bootstrap/tooltip';
+var agregar_sala_component_1 = require("@administrador/salas/agregar_sala/agregar_sala.component");
+var agregar_numero_component_1 = require("@administrador/caller_number/agregar_numero/agregar_numero.component");
+var contacto_card_component_1 = require("@administrador/contactos/contacto_card/contacto_card.component");
+var sala_card_component_1 = require("@administrador/salas/sala_card/sala_card.component");
+var sip_component_1 = require("@administrador/caller_number/sip/sip.component");
+var iax_component_1 = require("@administrador/caller_number/iax/iax.component");
+var tooltip_1 = require("ngx-bootstrap/tooltip");
 var modal_1 = require("ngx-bootstrap/modal");
-//import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+var datepicker_1 = require("ngx-bootstrap/datepicker");
 var progressbar_1 = require("ngx-bootstrap/progressbar");
 var AdministradorTemplateModule = /** @class */ (function () {
     function AdministradorTemplateModule() {
@@ -35,9 +42,9 @@ var AdministradorTemplateModule = /** @class */ (function () {
                 forms_1.FormsModule,
                 http_1.HttpClientModule,
                 forms_1.ReactiveFormsModule,
-                //TooltipModule.forRoot(),
+                tooltip_1.TooltipModule.forRoot(),
                 modal_1.ModalModule.forRoot(),
-                //BsDatepickerModule.forRoot(),
+                datepicker_1.BsDatepickerModule.forRoot(),
                 progressbar_1.ProgressbarModule.forRoot(),
             ],
             declarations: [
@@ -48,9 +55,15 @@ var AdministradorTemplateModule = /** @class */ (function () {
                 salas_component_1.SalasComponent,
                 audio_player_component_1.AudioPlayerComponent,
                 agregar_contacto_component_1.AgregarContactosComponent,
-                editar_contacto_component_1.EditarContactoComponent
+                editar_contacto_component_1.EditarContactoComponent,
+                agregar_sala_component_1.AgregarSalaComponent,
+                detalle_contacto_component_1.DetalleContactoComponent,
+                agregar_numero_component_1.AgregarNumeroComponent,
+                contacto_card_component_1.ContactoCardComponent,
+                sip_component_1.SipComponent,
+                iax_component_1.IaxComponent,
+                sala_card_component_1.SalaCardComponent
             ],
-            entryComponents: [agregar_contacto_component_1.AgregarContactosComponent, editar_contacto_component_1.EditarContactoComponent]
         })
     ], AdministradorTemplateModule);
     return AdministradorTemplateModule;

@@ -22,6 +22,9 @@ import { AgregarSalaComponent } from '@administrador/salas/agregar_sala/agregar_
 import { AgregarNumeroComponent } from '@administrador/caller_number/agregar_numero/agregar_numero.component';
 import { ContactoCardComponent } from '@administrador/contactos/contacto_card/contacto_card.component';
 import { SalaCardComponent } from '@administrador/salas/sala_card/sala_card.component';
+import { RadiosComponent } from '@administrador/radios/radios.component';
+import { AgregarRadioComponent } from '@administrador/radios/agregar_radio/agregar_radio.component';
+import { RadioCardComponent } from '@administrador/radios/radio_card/radio_card.component';
 
 import { SipComponent } from '@administrador/caller_number/sip/sip.component';
 import { IaxComponent } from '@administrador/caller_number/iax/iax.component';
@@ -45,7 +48,6 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 		// NgbModule
 	],
 	declarations: [
-
 		ContactosComponent,
 		GrabacionesComponent,
 		HistorialLlamadasComponent,
@@ -60,9 +62,17 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 		ContactoCardComponent,
 		SipComponent,
 		IaxComponent,
-		SalaCardComponent
+		SalaCardComponent,
+		RadiosComponent,
+		AgregarRadioComponent,
+		RadioCardComponent
 
 	],
+	exports:  [ 
+		HistorialLlamadasComponent, 
+		GrabacionesComponent, 
+		TrackingComponent
+	]
 	//entryComponents: [AgregarContactosComponent,EditarContactoComponent]
 })
 export class AdministradorTemplateModule {}

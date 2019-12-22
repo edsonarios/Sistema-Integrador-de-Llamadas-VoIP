@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Sip = /** @class */ (function () {
-    function Sip(name, secret, callerid, usuarioId) {
+    function Sip(name, secret, callerid, usuarioId, type) {
         this.name = name;
         this.secret = secret;
         this.callerid = callerid;
         this.usuarioId = usuarioId;
-        this.type = 'friend',
-            this.context = 'default',
+        this.type = type;
+        this.context = 'default',
             this.host = 'dynamic',
             this.disallow = 'disallow',
             this.allow = 'ulaw',

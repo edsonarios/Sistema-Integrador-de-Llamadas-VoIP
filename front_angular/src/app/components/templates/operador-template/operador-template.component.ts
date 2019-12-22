@@ -171,7 +171,7 @@ user: User;
 	
 	AgregarEventoNotificacion(){
 		// Metodo donde se asigna de forma aleatorea en el panel de notificaciones
-
+		this.OptionLateral=0;
 		var numero= Math.round((Math.random() * (3020 - 3000) + 3000));
 		var id= Math.round((Math.random()*(20-11)+11));
 		this.Notificaciones.push({'nombre':'Alias','numero':numero,'estado':'entrante','id':id});

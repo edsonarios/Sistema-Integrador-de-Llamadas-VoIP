@@ -9,12 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 // import { UserService } from '../../../../services/user.service';
 
 import { OperadorTemplateRoutes } from './operador-template.routing';
-
-
-import { HistorialLlamadasComponent } from '@administrador/historial_llamadas/historial_llamadas.component';
-import { GrabacionesComponent } from '@administrador/grabaciones/grabaciones.component';
-import { AudioPlayerComponent } from '@administrador/grabaciones/audio_player/audio_player.component'
-import { TrackingComponent } from '@administrador/tracking/tracking.component';
+import { AdministradorTemplateModule } from '../administrador-template/administrador-template.module';
 
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -33,16 +28,11 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 		TooltipModule.forRoot(),
 		ModalModule.forRoot(),
 		BsDatepickerModule.forRoot(),
-		ProgressbarModule.forRoot()
+		ProgressbarModule.forRoot(),
+		AdministradorTemplateModule
 
-		//HistorialLlamadasComponent,
-		// NgbModule
 	],
 	declarations: [
-		HistorialLlamadasComponent,
-		TrackingComponent,
-		GrabacionesComponent,
-		AudioPlayerComponent
 
 	]
 })

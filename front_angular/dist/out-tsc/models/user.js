@@ -10,7 +10,7 @@ var User = /** @class */ (function () {
         this.correo = correo;
         this.password = password;
         this.conectado = false;
-        this.salaId = '9';
+        this.salaId = '2';
         this.tipo = 'standard';
     }
     return User;

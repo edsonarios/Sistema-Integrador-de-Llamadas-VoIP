@@ -7,7 +7,7 @@ import { AppRoutes } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { LoginComponent } from './components/pages/inicio/login/login.component';
-
+import { PruebaComponent } from './components/pages/inicio/Pruebas_Llamada/prueba.component';
 
 //fontawesome
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -15,10 +15,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { OperadorTemplateComponent } from './components/templates/operador-template/operador-template.component';
 import { AdministradorTemplateComponent } from './components/templates/administrador-template/administrador-template.component';
 
-
 // Modal Components
 import { DialPadComponent } from './components/pages/operador/dialpad/dialpad.component';
-
 
 
 import { AgendaComponent } from '@operador/agenda/agenda.component';
@@ -28,8 +26,6 @@ import { PanelComponent } from '@operador/panel/panel.component';
 import { ParticipanteComponent } from '@operador/participante/participante.component';
 
 import { LlamadaComponent } from '@operador/llamada/llamada.component';
-
-
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -45,6 +41,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
 	declarations: [
+		PruebaComponent,
 		AppComponent,
 		LoginComponent,
 		DialPadComponent,

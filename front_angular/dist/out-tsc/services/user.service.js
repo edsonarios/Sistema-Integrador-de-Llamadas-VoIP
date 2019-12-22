@@ -48,12 +48,16 @@ var UserService = /** @class */ (function () {
         console.log(this.user);
         return this.http.post(this.url + 'addUsuario', this.user, this.httpOptions).pipe(operators_1.retry(1), operators_1.catchError(this.errorHandl));
     };
-    UserService.prototype.updateUser = function (user) {
-        this.user = user;
-        return this.http.put(this.url + 'updateUsuario', this.user, this.httpOptions).pipe(operators_1.retry(1), operators_1.catchError(this.errorHandl));
+    UserService.prototype.updateUser = function (user, dd) {
+        return this.http.put(this.url + 'updateUsuario', {
+            nombre: user.nombre, apPaterno: user.apPaterno,
+            apMaterno: user.apMaterno, tipo: user.tipo, direccion: user.direccion,
+            telefono: user.telefono, correo: user.correo, password: user.password,
+            conectado: user.conectado, id: dd
+        }, this.httpOptions).pipe(operators_1.retry(1), operators_1.catchError(this.errorHandl));
     };
-    UserService.prototype.findByIdUsuario = function (id) {
-        return this.http.post(this.url + 'findByIdUsuario', id, this.httpOptions).pipe(operators_1.retry(1), operators_1.catchError(this.errorHandl));
+    UserService.prototype.findByIdUsuario = function (identy) {
+        return this.http.post(this.url + 'findByIdUsuario', { id: identy }, this.httpOptions).pipe(operators_1.retry(1), operators_1.catchError(this.errorHandl));
     };
     UserService.prototype.listarContactos = function () {
         return this.http.get(this.url + 'findAllUsuario').pipe(operators_1.retry(1), operators_1.catchError(this.errorHandl));

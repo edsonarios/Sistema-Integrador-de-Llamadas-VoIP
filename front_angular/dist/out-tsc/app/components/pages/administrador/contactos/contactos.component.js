@@ -14,7 +14,6 @@ var router_1 = require("@angular/router");
 var modal_1 = require("ngx-bootstrap/modal");
 var user_service_1 = require("@services/user.service");
 var agregar_contacto_component_1 = require("./agregar_contacto/agregar_contacto.component");
-var editar_contacto_component_1 = require("./editar_contacto/editar_contacto.component");
 var ContactosComponent = /** @class */ (function () {
     function ContactosComponent(router, modalService, userservice) {
         this.router = router;
@@ -52,7 +51,7 @@ var ContactosComponent = /** @class */ (function () {
         this.modalRef = this.modalService.show(agregar_contacto_component_1.AgregarContactosComponent);
     };
     ContactosComponent.prototype.EditarContacto = function () {
-        this.modalRef = this.modalService.show(editar_contacto_component_1.EditarContactoComponent);
+        this.router.navigate(['/Administrador/EditarContacto']);
     };
     ContactosComponent.prototype.openModal = function (template) {
         this.modalRef = this.modalService.show(template);

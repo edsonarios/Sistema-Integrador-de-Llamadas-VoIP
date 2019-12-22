@@ -13,16 +13,11 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var forms_1 = require("@angular/forms");
 var user_service_1 = require("@services/user.service");
-var sip_service_1 = require("@services/sip.service");
-var modal_1 = require("ngx-bootstrap/modal");
 var AgregarContactosComponent = /** @class */ (function () {
-    function AgregarContactosComponent(router, formBuilder, formBuilder2, serviceUser, serviceSip, modalRef) {
+    function AgregarContactosComponent(router, formBuilder, serviceUser) {
         this.router = router;
         this.formBuilder = formBuilder;
-        this.formBuilder2 = formBuilder2;
         this.serviceUser = serviceUser;
-        this.serviceSip = serviceSip;
-        this.modalRef = modalRef;
         this.wrong = false;
         this.loading = false;
         this.submitted = true;
@@ -36,10 +31,7 @@ var AgregarContactosComponent = /** @class */ (function () {
             telefono: ['', forms_1.Validators.required],
             correo: ['', forms_1.Validators.required],
             password: ['', forms_1.Validators.required],
-        });
-        this.addFormSip = this.formBuilder2.group({
-            name: ['', forms_1.Validators.required],
-            callerId: ['', forms_1.Validators.required]
+            tipo: ['', forms_1.Validators.required]
         });
     };
     AgregarContactosComponent.prototype.onSubmit = function () {
@@ -56,26 +48,15 @@ var AgregarContactosComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    AgregarContactosComponent.prototype.adjuntarSip = function (idu) {
-        this.serviceSip.addSIP(this.addFormSip.value.name, this.addForm.value.callerId, idu)
-            .subscribe(function (rt) {
-            console.log('added SIP Extension... ');
-            console.log(rt);
-        }, function (er) { return console.log(er); }, function () { return console.log('terminado'); });
-        console.log(this.addForm.value);
-    };
     AgregarContactosComponent.prototype.crearcontacto = function () {
-        var _this = this;
         this.serviceUser.addUsuario(this.addForm.value)
             .subscribe(function (rt) {
             console.log(rt);
             console.log(rt.id);
-            _this.adjuntarSip(rt.id);
         }, function (er) { return console.log(er); }, function () { return console.log('terminado'); });
-        console.log("Eh aqui los datos susodichos...   ");
         console.log(this.addForm.value);
-        console.log('Tambien los datos para el envio de los datos SIP..   ');
-        console.log(this.addFormSip.value);
+        window.alert("Usuario Creado");
+        this.router.navigate(['/Administrador/Contactos']);
     };
     AgregarContactosComponent.prototype.cerrar = function (e) {
         e.close();
@@ -88,10 +69,7 @@ var AgregarContactosComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [router_1.Router,
             forms_1.FormBuilder,
-            forms_1.FormBuilder,
-            user_service_1.UserService,
-            sip_service_1.SipService,
-            modal_1.BsModalRef])
+            user_service_1.UserService])
     ], AgregarContactosComponent);
     return AgregarContactosComponent;
 }());

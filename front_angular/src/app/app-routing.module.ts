@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
+import { PruebaComponent } from './components/pages/inicio/Pruebas_Llamada/prueba.component';
 import { LoginComponent } from './components/pages/inicio/login/login.component';
 // import { LoginComponent } from '@component/login.component';
 import { OperadorTemplateComponent } from './components/templates/operador-template/operador-template.component';
@@ -10,6 +11,10 @@ export const AppRoutes: Routes = [
 	{
 		path: 'Login',
 		component: LoginComponent
+	},
+	{
+		path: 'Prueba',
+		component: PruebaComponent
 	},
 	{
 		path: 'Operador',

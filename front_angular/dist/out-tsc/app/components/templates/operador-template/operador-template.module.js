@@ -15,10 +15,10 @@ var dropdown_1 = require("ngx-bootstrap/dropdown");
 var http_1 = require("@angular/common/http");
 // import { UserService } from '../../../../services/user.service';
 var operador_template_routing_1 = require("./operador-template.routing");
-var historial_llamadas_component_1 = require("@operador/historial_llamadas/historial_llamadas.component");
-var tracking_component_1 = require("@operador/tracking/tracking.component");
-var grabaciones_component_1 = require("@operador/grabaciones/grabaciones.component");
-var audio_player_component_1 = require("@operador/grabaciones/audio_player/audio_player.component");
+var historial_llamadas_component_1 = require("@administrador/historial_llamadas/historial_llamadas.component");
+var grabaciones_component_1 = require("@administrador/grabaciones/grabaciones.component");
+var audio_player_component_1 = require("@administrador/grabaciones/audio_player/audio_player.component");
+var tracking_component_1 = require("@administrador/tracking/tracking.component");
 var tooltip_1 = require("ngx-bootstrap/tooltip");
 var modal_1 = require("ngx-bootstrap/modal");
 var datepicker_1 = require("ngx-bootstrap/datepicker");
@@ -40,6 +40,7 @@ var OperadorTemplateModule = /** @class */ (function () {
                 modal_1.ModalModule.forRoot(),
                 datepicker_1.BsDatepickerModule.forRoot(),
                 progressbar_1.ProgressbarModule.forRoot()
+                //HistorialLlamadasComponent,
                 // NgbModule
             ],
             declarations: [

@@ -58,7 +58,7 @@
           <td data-title="Name">< {{ Historial[i]['Numero'] }} > {{ Historial[i]['Nombre'] }}</td>
           <td data-title="Status">
             <span *ngIf="Historial[i]['Tipo'] == 'Perdida'" style="color: red"
-              ><i class="v-icon-phone"></i> {{ Historial[i]['Tipo'] }}</span
+              ><i class="v-icon-phone_missed"></i> {{ Historial[i]['Tipo'] }}</span
             >
             <span *ngIf="Historial[i]['Tipo'] == 'Entrante'" style="color: blue"
               ><i class="v-icon-incoming-call"></i> {{ Historial[i]['Tipo'] }}</span

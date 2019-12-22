@@ -26,20 +26,18 @@ var SipService = /** @class */ (function () {
         };
         this.url = global_1.GLOBAL.url;
     }
-    SipService.prototype.addSIP = function (name, callerId, idu) {
-        this.sip = new sip_1.Sip(name, callerId, callerId, idu);
+    SipService.prototype.addSIP = function (alias, numero, tipo, password, idu) {
+        this.sip = new sip_1.Sip(alias, password, numero, idu, tipo);
         console.log('Datos obtenido para la extension SIP......');
         console.log(this.sip);
         return this.http.post(this.url + 'addSip', this.sip, this.httpOptions).pipe(operators_1.retry(1), operators_1.catchError(this.errorHandl));
     };
-    // updateSip(obj): Observable<any> {
-    //   this.sip = new Sip(obj.alias, obj.telnumero, obj.telnumero);
-    // return this.http.post<any>(this.url + 'updateSip',  this.sip,
-    //      this.httpOptions).pipe(
-    //   retry(1),
-    //   catchError(this.errorHandl)
-    // );
-    // }
+    SipService.prototype.deleteSip = function (idd) {
+        return this.http.delete(this.url + 'deleteSip' + { id: idd });
+    };
+    SipService.prototype.llenarSIPsYIAX = function (idu) {
+        return this.http.post(this.url + 'getUsuariosWithSipsAndIaxs', { id: idu }, this.httpOptions).pipe(operators_1.retry(1), operators_1.catchError(this.errorHandl));
+    };
     // Error handling
     SipService.prototype.errorHandl = function (error) {
         var errorMessage = '';
