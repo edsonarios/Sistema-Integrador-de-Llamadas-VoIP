@@ -5,71 +5,57 @@
 			<button type="button" >Logo</button>
 		</div>
 		<div class="sidebar-options-top">
-			<ul>
-				<span style="color:white;font-size: 24px;">Contactos</span>
-				<li>
-					<button [routerLink]="['/Administrador/Contactos']">
-		  			<span align="right">Lista de Contactos</span>
-					</button>
-				
-				</li>
-					<li>
-					<button [routerLink]="['/Administrador/AgregarContacto']">
-		  			<span align="right">Agregar Contacto</span>
-					</button>
-				
-				</li>
-				<span style="color:white;font-size: 24px;">Salas</span>
-				<li>
-					<button [routerLink]="['/Administrador/Salas']">
-		  			<span align="right">Lista de Salas</span>
-					</button>
-				</li>
-				<li>
-					<button [routerLink]="['/Administrador/AgregarSala']">
-		  			<span align="right">Agregar Sala</span>
-					</button>
-				</li>
-				<span style="color:white;font-size: 24px;">Radios</span>
-				<li>
-					<button [routerLink]="['/Administrador/Radios']">
-		  			<span align="right">Listar Radios</span>
-					</button>
-				</li>
-				<li>
-					<button [routerLink]="['/Administrador/AgregarRadio']">
-		  			<span align="right">Crear Radio</span>
-					</button>
-				</li>
-				<span style="color:white;font-size: 24px;">____________</span>
-				<li>
-					<button [routerLink]="['/Administrador/AgregarNumero']">
-		  			<span align="right">Crear Sip Independiente</span>
-					</button>
-				</li>
-				<span style="color:white;font-size: 24px;">____________</span>
-				<li>
-					<button [routerLink]="['/Administrador/Historial']">
-  					<span align="right">Historial de llamadas</span>
-					</button>
-				</li>
-				<li>
-					<button [routerLink]="['/Administrador/Grabaciones']">
-  					<span align="right">Grabaciones</span>
-					</button>
-				</li>
-				<li>
-					<button [routerLink]="['/Administrador/Tracking']">
-  					<span align="right">Tracking</span>
-					</button>
-				</li>
-				<li>
-					<button [routerLink]="['/Login']">
-		  			<span align="right">Salir</span>
-					</button>
-				</li>
-			</ul>
-		</div>
+					<ul>
+						<li>
+							<a class="Item"><i class="v-icon-group"></i>Contactos</a>
+						</li>
+						<li>
+								<a [routerLink]="['/Administrador/Contactos']" class="subItem">Lista de Contactos</a>
+						</li>
+						<li>
+							  <a [routerLink]="['/Administrador/AgregarContacto']" class="subItem">Agregar Contacto</a>
+						</li>
+						<li>
+							<a class="Item"><i class="v-icon-bubbles4"></i>Salas</a>
+						</li>
+						<li>
+							<a [routerLink]="['/Administrador/Salas']" class="subItem">Lista de Salas</a>
+						</li>
+						<li>
+							<a [routerLink]="['/Administrador/AgregarSala']" class="subItem">Agregar Sala</a>
+						</li>
+						<li>
+							<a class="Item"><i class="v-icon-radio"></i>Radios</a>
+						</li>
+						<li>
+							<a [routerLink]="['/Administrador/Radios']" class="subItem">Listar Radios</a>
+						</li>
+						<li>
+							<a [routerLink]="['/Administrador/AgregarRadio']" class="subItem">Crear Radio</a>
+						</li>
+						<li>
+							<a [routerLink]="['/Administrador/AgregarNumero']">
+								<i class="v-icon-phone"></i>Crear Sip Independiente</a>
+						</li>
+						<li>
+							<a [routerLink]="['/Administrador/Historial']">
+								<i class="v-icon-phone1"></i>Historial de Llamadas</a>
+						</li>
+						<li>
+							<a [routerLink]="['/Administrador/Grabaciones']">
+								<i class="v-icon-cassette"></i>Grabaciones</a>
+						</li>
+						<li>
+							<a [routerLink]="['/Administrador/Tracking']">
+								<i class="v-icon-location"></i>Tracking</a>
+						</li>
+						<li>
+							<a [routerLink]="['/Login']">
+								<i class="v-icon-enter" ></i>Salir</a>
+						</li>
+					</ul>
+				</div>
+			
 
 	</div>
 

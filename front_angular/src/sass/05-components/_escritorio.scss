@@ -1,4 +1,5 @@
 .escritorio {
+	animation: swing-in-bottom-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
 	border-radius: 10px;
 	 box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 	background:  linear-gradient(45deg, #F4EBE5, #E3D4CA);
@@ -46,6 +47,18 @@
 		color: #223a59;
 	}
 }
-
-
+//Animations
+  @keyframes swing-in-bottom-fwd {
+	0% {
+	  transform: rotateX(100deg);
+	  transform-origin: bottom;
+	  opacity: 0;
+	}
+	100% {
+	  transform: rotateX(0);
+	  transform-origin: bottom;
+	  opacity: 1;
+	}
+  }
+  
 

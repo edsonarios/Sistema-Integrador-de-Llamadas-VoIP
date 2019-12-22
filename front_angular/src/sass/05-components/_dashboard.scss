@@ -50,21 +50,23 @@
 	}
 }
 .c1-options {
-
+	animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 	grid-area: c1-options;
 	padding-top: 20px;
 	button {
-		border-bottom:1px solid gray;
+		border-bottom: 1px solid rgba(255,255,255,.08);
 		font-size: 40px;
 		background: var(--color-seis);
 		color: var(--color-uno);
 		margin-bottom: 30px;
 	}
+	
 }
 .c1-options-bottom {
+	animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 	grid-area: c1-options-bottom;
 	button {
-		border-bottom:1px solid gray;
+		border-bottom: 1px solid rgba(255,255,255,.08);
 		font-size: 40px;
 		background: var(--color-seis);
 		color: var(--color-uno);
@@ -312,6 +314,22 @@
 	grid-area: colum2;
 	overflow-y: scroll;
 }
+.desplegables::-webkit-scrollbar-track
+	{
+		box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+		background-color: #F5F5F5;
+	}
+
+	.desplegables::-webkit-scrollbar
+	{
+		width: 6px;
+		background-color: #F5F5F5;
+	}
+
+	.desplegables::-webkit-scrollbar-thumb
+	{
+		background-color: #000000;
+	}
 
 @media screen and (max-width:1280px){
 	.col1{
@@ -340,3 +358,13 @@
 		}
 	}
 }
+//Animations
+@keyframes scale-up-center {
+	0% {
+	  transform: scale(0.5);
+	}
+	100% {
+	  transform: scale(1);
+	}
+  }
+  

@@ -29,8 +29,11 @@
 			<button (click)="DialPadComponent()" tooltip="DialPad" placement="right">
 				<i class="v-icon-dial"></i>
 			</button>
+			<button tooltip="Salir" placement="right" [routerLink]="['/Login']" *ngIf="Hide == false">
+				<i class="v-icon-enter" ></i>
+			</button>
 		 </div>
-		<div class="c1-options-bottom" *ngIf="Hide == true; else elsePanel" [@FadeIn]> 
+		<div class="c1-options-bottom" *ngIf="Hide == true" [@FadeIn]> 
 			
 			<button (click)="LateralOpcion(0)" tooltip="Notificaciones" placement="right">
 				<i class="v-icon-bell"></i>
@@ -81,7 +84,7 @@
 					<header class="panel__header">
 						Notificaciones
 					</header>
-					<div *ngFor="let n of Notificaciones; let i = index" [@flyIn]>
+					<div class="notificacionEffect" *ngFor="let n of Notificaciones; let i = index" [@flyIn]>
 					  	<Notificacion
 					  	(ContestaLlamada)="ContestarLlamada($event)"
 					  	(CancelaLlamada)="ColgarLlamada($event)"
@@ -108,8 +111,8 @@
 					<header class="panel__header">
 						Salas
 					</header>
-					<div *ngFor="let n of Salas; let i = index" [@flyIn]>
-					  	<Sala (DatoSala)="RegistraSala($event)"
+					<div class="SalaEffect" *ngFor="let n of Salas; let i = index" [@flyIn]>
+					  	<Sala  (DatoSala)="RegistraSala($event)"
 					  	Nombre="{{Salas[i]['nombre']}}"
 					  	Ocupado="{{Salas[i]['Ocupando']}}"
 					  	Dimensions="{{Salas[i]['Dimesions']}}"
@@ -207,13 +210,6 @@
 	<ng-template #elseBlock>
 		<div class="desplegables" [@SladeIn] style="border-bottom: 5px solid black;">
 			<router-outlet></router-outlet>
-		</div>
-	</ng-template>
-	<ng-template #elsePanel>
-		<div class="c1-options-bottom"  [@FadeIn]> 
-			<button tooltip="Salir" placement="right" [routerLink]="['/Login']">
-				<i class="v-icon-enter" ></i>
-			</button>
 		</div>
 	</ng-template>
 
