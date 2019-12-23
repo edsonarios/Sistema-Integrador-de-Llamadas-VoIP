@@ -41,8 +41,11 @@ import { UserService } from '../services/user.service';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { DemoLlamadaComponent } from '../services/WebRTC/ex_imp';
+
 @NgModule({
 	declarations: [
+		DemoLlamadaComponent,
 		Prueba2Component,
 		PruebaComponent,
 		AppComponent,

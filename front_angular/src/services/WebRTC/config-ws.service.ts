@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import JsSIP from "jssip";
+//import JsSIP from "jssip";
+import JsSIP from '../../../node_modules/jssip';
 import { config } from "./config";
 @Injectable({
   providedIn: "root"

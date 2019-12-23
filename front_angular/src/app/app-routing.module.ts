@@ -16,11 +16,11 @@ export const AppRoutes: Routes = [
 	},
 	{
 		path: 'Prueba',
-		component: Prueba2Component
+		component: PruebaComponent
 	},
 	{
 		path: 'Prueba2',
-		component: PruebaComponent
+		component: Prueba2Component
 	},
 	{
 		path: 'Operador',

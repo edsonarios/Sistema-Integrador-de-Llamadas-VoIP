@@ -1,13 +1,39 @@
 <!-- Plantilla HTML para realizar pruebas de las llamadas-->
+
+<div style="margin-left:40px;border: 1px solid black; padding: 20px;">
+    
+<br>
+<demo-llamada></demo-llamada>
+<hr>
 <br>
 <br>
-<hr>
-<span align="center"><h1> Components > Pages > Inicio> Pruebas_Llamada (html & ts)</h1></span>
-<span align="center"><h4> (Ruta de la carpeta)</h4></span>
-<hr>
-<br>
-<br>
-<hr>
-<span align="center"><h1> Services > WebRTC</h1></span>
-<span align="center"><h4> (Ruta del servicio)</h4></span>
-<hr>
+<label><h3>Prueba 1</h3></label>
+    <table class="table" style="width: 500px;margin-left: 25%;">
+        <tr style="border: 3px solid grey;">
+            <td><b>Numero :</b></td>
+            <td>{{SIP['Numero']}}</td>
+        </tr>
+        <tr style="border: 3px solid grey;">
+            <td><b>Password :</b></td>
+            <td>{{SIP['Password']}}</td>
+        </tr>
+        <tr style="border: 3px solid grey;">
+            <td><b>Dominio :</b></td>
+            <td>{{SIP['Dominio']}}</td>
+        </tr>
+        <tr><br>
+            <button style="padding: 10px;margin-left: 50%; width: 200px;">Llamar</button>
+        </tr>
+    </table>
+    <b>Result :</b> unndefined
+    <hr>
+    <label><h3>Prueba 2</h3></label>
+    <br>
+    <input type="tex" placeholder="Number SIP" style="margin-left:20px;margin-right: 20px;">  
+    <button style="padding: 10px; width: 200px;"> Llamar</button>
+    <br>
+    <b>Result :</b> unndefined
+    <hr>
+
+</div>
+

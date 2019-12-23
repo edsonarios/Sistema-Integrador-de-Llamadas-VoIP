@@ -1,11 +1,11 @@
 import { Component } from "@angular/core";
 import { ConfigWSService } from "./config-ws.service";
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"]
+  selector: "demo-llamada",
+  templateUrl: "./ex_imp.html",
+  //styleUrls: ["./app.component.scss"]
 })
-export class AppComponent {
+export class DemoLlamadaComponent {
   msg: String = "Events";
   events: any;
   service: any;
