@@ -2,19 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-	selector: 'Pruebas',
-	templateUrl: './prueba.component.html'
+    selector: 'Pruebas',
+    templateUrl: './prueba.component.html'
 })
-// componente para realizar todas las pruebas respecto a las llamadas
-export class PruebaComponent implements OnInit {
-	constructor()
-	{
-        
-    }
-	ngOnInit() {
-	
+export class PruebaComponent {
+	public Numero;
+	public Password;
+	public Dominio;
+	constructor() {
+		this.Numero = '7000';
+		this.Password = '7000';
+		this.Dominio = '18.216.202.26';
 	}
-
-	
-
 }

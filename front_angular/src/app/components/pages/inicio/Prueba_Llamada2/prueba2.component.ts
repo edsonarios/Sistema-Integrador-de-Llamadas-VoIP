@@ -15,6 +15,8 @@ export class Prueba2Component implements OnInit {
 	public SIP;
 	constructor()
 	{
+		//Evolution: Creo que el dominio de aca abajo esta mal 
+		
         this.SIP={'Numero':'7001','Password':'7001','Dominio':'18.215.202.26'}
     }
 	ngOnInit() {
