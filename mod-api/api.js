@@ -49,12 +49,13 @@ api.use('*', async (req, res, next) => {
     Voicemail = services.Voicemail
 
 
-  }  
+  }
   
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-  next()
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Authorization, X-API-Key, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
+  res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+  next();
 })
 
 api.get('/datosPrueba', async (req, res) => {
@@ -812,7 +813,40 @@ api.post('/getUsuariosWithSipsAndIaxs', async(req, res, next) => {
    
 })
 
-
+api.delete('/deleteUsuarioWithAll', async(req, res, next) => {
+  const params = req.body 
+  const usuariosSala1 = await Usuario.findAll();
+  let usuariosSala3 = []
+  const sipsAll = await Sip.findAll();
+  const iaxsAll = await Iax.findAll();
+           
+  usuariosSala1.forEach(usuario => {
+            
+    if(usuario.id == params.id){
+       usuariosSala3.push(usuario.id)
+    }
+  })
+  for (let i = 0; i < usuariosSala3.length; i++) {
+    sipsAll.forEach(obj => {
+      
+      if(obj.usuarioId == usuariosSala3[i]){
+        Sip.destroy1(obj.id)
+    }
+    })
+  } 
+  
+  for (let i = 0; i < usuariosSala3.length; i++) {
+    iaxsAll.forEach(obj => {
+      
+      if(obj.usuarioId == usuariosSala3[i]){
+        Iax.destroy1(obj.id)
+    }
+    })
+  } 
+  
+  await Usuario.destroy(params.id)
+  res.send({message: 'Se elimino Usuario'})   
+})
 
 //LOGIN
 api.post('/login', async(req, res, next) => {
