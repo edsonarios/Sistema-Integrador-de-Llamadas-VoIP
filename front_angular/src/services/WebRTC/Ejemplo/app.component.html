@@ -7,15 +7,18 @@
     <h2>{{ msg }}</h2>
     <button (click)="conectar()">Conectar</button>
     <button (click)="desconectar()">Desconectar</button>
-    <button (click)="registrar()">Registrar</button>
   </div>
   <br />
   <input type="text" [(ngModel)]="sip" />
-  <button (click)="call(sip)">Llamar</button>
+  <button (click)="sipCall(sip)">Llamar</button>
+  <button (click)="endCall()">Terminar</button>
+  <br />
+  <p>Llamada entrante</p>
   <button (click)="responder()">Contestar</button>
   <button (click)="mute()">Mute</button>
-  <button (click)="unmute()">UnMute</button>
-  <button (click)="terminar()">Colgar</button>
-  <h3>{{ sip }}</h3>
+  <button (click)="unmute()">unmute</button>
+  <h3>{{ alert }}</h3>
+  <h1>Events SIP Call</h1>
+  <p>{{ call }}</p>
 </div>
 <router-outlet></router-outlet>
