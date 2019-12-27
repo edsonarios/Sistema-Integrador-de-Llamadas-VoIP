@@ -40,7 +40,7 @@ export class AgregarNumeroComponent implements OnInit {
 			this.serviceSip.addSIP( 
 				this.addForm.value.alias,
 				this.addForm.value.numero,
-				{ type: 'friend'},  
+				'friend',  
 				this.addForm.value.password, 
 				this.identy)
 		   .subscribe(

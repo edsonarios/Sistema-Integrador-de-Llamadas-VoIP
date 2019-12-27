@@ -65,10 +65,9 @@ export class ContactosComponent implements OnInit {
 			this.contactos = rt;
 			console.log(this.contactos);
 		},
-		er => console.log(er),
-		() => console.log('terminado')
+		er => console.log(er)
 		);
 		
-		}	
+  }	
   
 }

@@ -53,6 +53,13 @@ export class SipService {
 }
 
 
+findAllSip(): Observable<any> {
+  return this.http.get<any>(this.url + 'findAllSip').pipe(
+    retry(1),
+    catchError(this.errorHandl)
+  );
+}
+
 
    // Error handling
    errorHandl(error) {

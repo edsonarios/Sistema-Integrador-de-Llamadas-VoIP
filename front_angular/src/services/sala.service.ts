@@ -59,6 +59,8 @@ export class SalaService {
    }
 
 
+
+   
    // Error handling
    errorHandl(error) {
     let errorMessage = '';

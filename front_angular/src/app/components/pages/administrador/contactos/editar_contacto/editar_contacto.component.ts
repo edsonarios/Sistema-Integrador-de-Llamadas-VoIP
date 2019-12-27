@@ -82,8 +82,8 @@ export class EditarContactoComponent implements OnInit {
 
 		this.serviceUser.updateUser( this.addForm.value, this.route.snapshot.paramMap.get('id'))
 		.subscribe(
-		rt => {
-			console.log(rt);
+		response => {
+			console.log(response);
 		},
 		er => console.log(er),
 		() => console.log('terminado')
