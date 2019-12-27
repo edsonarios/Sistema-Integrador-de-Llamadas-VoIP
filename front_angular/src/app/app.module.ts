@@ -8,8 +8,8 @@ import { AppComponent } from './app.component';
 
 import { LoginComponent } from './components/pages/inicio/login/login.component';
 
-import { PruebaComponent } from './components/pages/inicio/Pruebas_Llamada/prueba.component';
-import { Prueba2Component } from './components/pages/inicio/Prueba_Llamada2/prueba2.component';
+// import { PruebaComponent } from './components/pages/inicio/Pruebas_Llamada/prueba.component';
+// import { Prueba2Component } from './components/pages/inicio/Prueba_Llamada2/prueba2.component';
 
 //fontawesome
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -19,7 +19,6 @@ import { AdministradorTemplateComponent } from './components/templates/administr
 
 // Modal Components
 import { DialPadComponent } from './components/pages/operador/dialpad/dialpad.component';
-
 
 import { AgendaComponent } from '@operador/agenda/agenda.component';
 import { NotificacionComponent } from '@operador/notificacion/notificacion.component';
@@ -41,13 +40,13 @@ import { UserService } from '../services/user.service';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { DemoLlamadaComponent } from '../services/WebRTC/ex_imp';
+// import { DemoLlamadaComponent } from '../services/WebRTC/ex_imp';
 
 @NgModule({
 	declarations: [
-		DemoLlamadaComponent,
-		Prueba2Component,
-		PruebaComponent,
+		// DemoLlamadaComponent,
+		// Prueba2Component,
+		// PruebaComponent,
 		AppComponent,
 		LoginComponent,
 		DialPadComponent,
@@ -59,7 +58,6 @@ import { DemoLlamadaComponent } from '../services/WebRTC/ex_imp';
 		LlamadaComponent,
 		PanelComponent,
 		ParticipanteComponent
-		
 	],
 	imports: [
 		AngularFontAwesomeModule,
