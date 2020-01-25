@@ -3,22 +3,17 @@
 const Sequelize = require('sequelize')
 const setupDatabase = require('../lib/db')
 
-module.exports = function setupContactoModel (config) {
+module.exports = function setupAgendaModel (config) {
   const sequelize = setupDatabase(config)
 
-  return sequelize.define('contacto', {
-    nombre: {
-      type: Sequelize.STRING,
-      allowNull: true
-    },
-    numero: {
+  return sequelize.define('agenda', {
+    nombreAgenda: {
       type: Sequelize.STRING,
       allowNull: true
     },
     descripcion: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
       allowNull: true
     }
-
   })
 }
