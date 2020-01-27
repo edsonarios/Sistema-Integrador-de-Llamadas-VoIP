@@ -1,14 +1,15 @@
 <div class="notificaciones">
-	<div class="n-nombre">
-	</div>
+	<div class="n-nombre"></div>
 	<div class="n-tipo--entrante">{{ Nombre }} {{ Numero }}</div>
 	<div class="n-accion">
-		<button class="n-accion--contestar" (click)="ContestarLlamada(Nombre, Numero, Id)" tooltip="Contestar">
-			
+		<button
+			class="n-accion--contestar"
+			(click)="ContestarLlamada(Nombre, Numero, Id)"
+			tooltip="Contestar"
+		>
 			<i class="v-icon-phone2" aria-hidden="true"></i>
 		</button>
 		<button class="n-accion--colgar" (click)="ColgarLlamada(Nombre, Numero, Id)" tooltip="Colgar">
-
 			<i class="v-icon-phone-hang-up" aria-hidden="true"></i>
 		</button>
 	</div>

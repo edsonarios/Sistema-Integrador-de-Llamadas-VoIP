@@ -13,12 +13,14 @@ export class DialPadComponent implements OnInit {
 	dialNumber: string = '';
 	constructor(private router: Router, private modalService: BsModalService) {}
 
+	mute: boolean = false;
+
 	DialNum(Num) {
 		this.dialNumber = this.dialNumber + Num;
 	}
 	Llamada() {
-		window.alert('Llamando al : ' + this.dialNumber);
 		this.sipCall(this.dialNumber);
+		this.Limpiar();
 	}
 	Limpiar() {
 		this.dialNumber = '';
@@ -29,6 +31,7 @@ export class DialPadComponent implements OnInit {
 	event: RTCSession;
 	call: any;
 	arr: Array<RTCSession> = [];
+
 	ngOnInit() {
 		this.session = new WebRTCService();
 		this.session.sessionEvents();
@@ -50,5 +53,14 @@ export class DialPadComponent implements OnInit {
 	}
 	endCall() {
 		this.session.terminate();
+	}
+
+	callMute() {
+		this.session.mute();
+		this.mute = true;
+	}
+	callUnmute() {
+		this.session.unmute();
+		this.mute = false;
 	}
 }

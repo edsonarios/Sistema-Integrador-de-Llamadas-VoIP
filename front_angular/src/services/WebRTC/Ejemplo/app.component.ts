@@ -35,6 +35,7 @@ export class AppComponent {
 	endCall() {
 		this.session.terminate();
 	}
+
 	responder() {
 		this.session.remoteAnswer();
 	}

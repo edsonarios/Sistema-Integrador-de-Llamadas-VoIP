@@ -85,5 +85,13 @@
 		<button (click)="endCall()">
 			Colgar
 		</button>
+
+		<button *ngIf="!mute" (click)="callMute()">
+			mute
+		</button>
+
+		<button *ngIf="mute" (click)="callUnmute()">
+			ummute
+		</button>
 	</div>
 </section>

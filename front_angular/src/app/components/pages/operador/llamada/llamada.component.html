@@ -1,49 +1,41 @@
-
-	<!-- Llamada SIP Inactivo -->
-		<div class="escritorio__header">
-			{{ Tipo }} {{ Estado }}
-			<span (click)="CerrarLlamada(Nombre,Numero,Id,Tipo)" style="cursor: pointer;">
-				<i class="v-icon-cancel" tooltip="Cerrar" style="color: #f04747"></i>
-			</span>
+<!-- Llamada SIP Inactivo -->
+<div class="escritorio__header">
+	{{ Tipo }} {{ Estado }}
+	<span (click)="CerrarLlamada(Nombre, Numero, Id, Tipo)" style="cursor: pointer;">
+		<i class="v-icon-cancel" tooltip="Cerrar" style="color: #f04747"></i>
+	</span>
+</div>
+<div class="escritorio__body">
+	<div>
+		<div>{{ Nombre }} - {{ Tipo }}</div>
+		<div>
+			<i class="v-icon-users" aria-hidden="true" *ngIf="Tipo == 'Llamada'"></i>
+			<i class="v-icon-radio" aria-hidden="true" *ngIf="Tipo == 'Sala'"></i>
 		</div>
-		<div class="escritorio__body">
-			<div>
-				<div>
-					{{ Nombre }} - {{Tipo}}
-				</div>
-				<div>
-					<i class="v-icon-users" aria-hidden="true" *ngIf="Tipo=='Llamada'"></i>
-					<i class="v-icon-radio" aria-hidden="true" *ngIf="Tipo=='Sala'"></i>
-				</div>
-			</div>
-			<div>
-				{{ Numero }}
-			</div>
-			<div *ngIf="Tipo=='Sala'">
-			<a style="color: blue;cursor: pointer;" (click)="VerParticipantes()"> Ver Participantes </a>
-			</div>
-			<div>
-				00:30
-			</div>
-		</div>
-		<div class="escritorio__footer-normal" *ngIf="Tipo=='Llamada'">
-			<button>
-				<i class="v-icon-pause" aria-hidden="true"></i>
-				PAUSA
-			</button>
-			<button class="escritorio__footer--play">
-				<i class="v-icon-play-button" aria-hidden="true"></i>
-				PLAY
-			</button>
-		</div>
-		<div class="escritorio__footer-ptt" *ngIf="Tipo=='Sala'">
-			<button class="escritorio__footer--play">
-				<i class="v-icon-microphone-black-shape" aria-hidden="true"></i>
-				HABLAR
-			</button>
-		</div>
-
-
-
-
-
+	</div>
+	<div>
+		{{ Numero }}
+	</div>
+	<div *ngIf="Tipo == 'Sala'">
+		<a style="color: blue;cursor: pointer;" (click)="VerParticipantes()"> Ver Participantes </a>
+	</div>
+	<div>
+		00:30
+	</div>
+</div>
+<div class="escritorio__footer-normal" *ngIf="Tipo == 'Llamada'">
+	<button>
+		<i class="v-icon-pause" aria-hidden="true"></i>
+		PAUSA
+	</button>
+	<button class="escritorio__footer--play">
+		<i class="v-icon-play-button" aria-hidden="true"></i>
+		PLAY
+	</button>
+</div>
+<div class="escritorio__footer-ptt" *ngIf="Tipo == 'Sala'">
+	<button class="escritorio__footer--play">
+		<i class="v-icon-microphone-black-shape" aria-hidden="true"></i>
+		HABLAR
+	</button>
+</div>
