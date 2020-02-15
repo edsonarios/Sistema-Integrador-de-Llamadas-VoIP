@@ -43,6 +43,7 @@ api.use('*', async (req, res, next) => {
       return next(e)
     }
 
+    //Agenda = services.Agenda
     Cdr = services.Cdr
     Extension = services.Extension
     Iax = services.Iax
@@ -1119,6 +1120,39 @@ api.post('/listar', function(req, res, next){
   //res.download("/var/spool/asterisk/monitor/1577308318-SIP-7001-00000006-out.wav");
   //res.send("obj")
 });
+
+api.post('/ListarHistorial', async(req, res, next) => {
+  const params = req.body 
+  const cdrsAll = await Cdr.findAll();
+  let getentrantes = [];
+  let getsalientes = [];
+  let getperdidas = [];
+  let todos = [];
+  let f = [];
+  var ojbAr=[]
+  cdrsAll.forEach(obj => {
+    
+    if(moment(moment(obj.calldate).format("YYYY-MM-DD")).isSame(params.fecha)){
+        if(obj.usuarioId == params.usuarioId){
+          
+            getentrantes.push(obj.src)
+            getsalientes.push(obj.dst)
+            getperdidas.push(obj.disposition)
+        }
+        ojbAr.push(f)
+    }  
+    })
+
+    todos.push(getentrantes)
+    todos.push(getsalientes)
+    todos.push(getperdidas)
+  res.send(todos)
+  
+})
+
+/// AGENDA /////////////////////////////////////////////////////////////////////
+
+
 
 /// IAX /////////////////////////////////////////////////////////////////////
 

@@ -7,11 +7,11 @@ module.exports = function setupAgendaModel (config) {
   const sequelize = setupDatabase(config)
 
   return sequelize.define('agenda', {
-    nombreAgenda: {
+    Contactos: {
       type: Sequelize.STRING,
       allowNull: true
     },
-    descripcion: {
+    UsuarioId: {
       type: Sequelize.STRING,
       allowNull: true
     }

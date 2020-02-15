@@ -52,10 +52,6 @@ module.exports = async function (config) {
   const VoicemailModel = setupVoicemailModel(config)
   const SalaModel = setupSalaModel(config)
   
-  
-
-  UsuarioModel.hasMany(ContactoModel)
-  ContactoModel.belongsTo(UsuarioModel, {onDelete: 'CASCADE'})
 
   UsuarioModel.hasMany(VoicemailModel)
   VoicemailModel.belongsTo(UsuarioModel, {onDelete: 'CASCADE'})
@@ -67,7 +63,7 @@ module.exports = async function (config) {
   IaxModel.belongsTo(UsuarioModel, {onDelete: 'CASCADE'})
 
   UsuarioModel.hasMany(AgendaModel)
-  AgendaModel.hasMany(UsuarioModel, {onDelete: 'CASCADE'})
+  AgendaModel.belongsTo(UsuarioModel, {onDelete: 'CASCADE'})
 
   UsuarioModel.hasMany(CdrModel)
   CdrModel.belongsTo(UsuarioModel, {onDelete: 'CASCADE'})
