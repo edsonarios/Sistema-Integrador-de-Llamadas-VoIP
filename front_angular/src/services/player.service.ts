@@ -7,7 +7,9 @@ export class Track {
   cover: string;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PlayerService {
   current: number;
   playlist: Track[] = [
