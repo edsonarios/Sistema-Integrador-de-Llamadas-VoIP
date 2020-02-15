@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+/*import { Injectable } from "@angular/core";
 import { SoundPlayer } from "./SoundPlayer";
 import { config } from "./config";
 import { RTCConfig } from "./RegisterRTC";
@@ -169,3 +169,4 @@ export class WebRTCService {
     return this.ua;
   }
 }
+*/

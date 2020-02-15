@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+/*import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { WebRTCService } from "./service/WebRTC/WebRTC.service";
 import { RTCSession } from "jssip";
 
@@ -47,3 +47,4 @@ export class AppComponent {
     this.session.unmute();
   }
 }
+*/

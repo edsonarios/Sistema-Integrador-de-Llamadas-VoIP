@@ -1,6 +1,6 @@
 // const AUDIOS = require("./sonidos.json");
-import AUDIOS from "./sonidos.json";
-
+//import AUDIOS from "./sonidos.json";
+/*
 export class SoundPlayer {
   SOUNDS: any = new Map([
     ["ringback", { audio: new Audio(AUDIOS["ringback"]), volume: 1.0 }],
@@ -54,3 +54,4 @@ export class SoundPlayer {
     sound.audio.currentTime = 0.0;
   }
 }
+*/
