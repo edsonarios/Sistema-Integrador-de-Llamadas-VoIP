@@ -29,6 +29,8 @@ export class LoginComponent implements OnInit {
 
 	ngOnInit() {
 		// this.mostrar()
+		localStorage.clear();
+		
 		this.loginForm = this.formBuilder.group({
 			username: ['', Validators.required],
 			password: ['', Validators.required]
@@ -68,6 +70,11 @@ export class LoginComponent implements OnInit {
 // >>>>>>>>>HEAD
 					console.log(data.result.id);
 					localStorage.setItem("idUser", data.result.id);
+					localStorage.setItem("nombre",data.result.nombre);
+					localStorage.setItem("apPaterno",data.result.apPaterno);
+					localStorage.setItem("apMaterno",data.result.apMaterno);
+					localStorage.setItem("correo",data.result.correo);
+					localStorage.setItem("salaId",data.result.salaId);
 					if (data.result.tipo == 'root') {
 						this.router.navigate(['/Operador/Contactos']);
 						console.log('entramos !!!' + data.status);

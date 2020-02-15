@@ -17,6 +17,8 @@ import {interval, timer } from 'rxjs';
 })
 export class OperadorTemplateComponent implements OnInit {
 
+public correoOperador= localStorage.getItem('correo');
+
 public Llamada=[];
 public Salas=[];
 public Notificaciones=[];
@@ -297,4 +299,5 @@ user: User;
 			this.HideLateral=true;
 		}
 	}
+	
 }
