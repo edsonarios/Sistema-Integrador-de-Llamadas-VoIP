@@ -11,9 +11,6 @@ module.exports = function setupAgendaModel (config) {
       type: Sequelize.STRING,
       allowNull: true
     },
-    UsuarioId: {
-      type: Sequelize.STRING,
-      allowNull: true
-    }
+    
   })
 }

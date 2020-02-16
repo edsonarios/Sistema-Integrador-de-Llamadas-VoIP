@@ -32,7 +32,7 @@ var shell = require('shelljs')
 api.use(bodyParser.urlencoded({ extended: false }))
 api.use(bodyParser.json())
 
-let services, Cdr, Extension, Iax, Queue, Sala, Sip, Usuario, Voicemail
+let services, Cdr, Extension, Iax, Queue, Sala, Sip, Usuario, Voicemail, Agenda
 
 api.use('*', async (req, res, next) => {
   if (!services) {
@@ -43,7 +43,7 @@ api.use('*', async (req, res, next) => {
       return next(e)
     }
 
-    //Agenda = services.Agenda
+    Agenda = services.Agenda
     Cdr = services.Cdr
     Extension = services.Extension
     Iax = services.Iax
@@ -1141,7 +1141,7 @@ api.post('/ListarHistorial', async(req, res, next) => {
         }
         ojbAr.push(f)
     }  
-    })
+  })
 
     todos.push(getentrantes)
     todos.push(getsalientes)
@@ -1152,6 +1152,71 @@ api.post('/ListarHistorial', async(req, res, next) => {
 
 /// AGENDA /////////////////////////////////////////////////////////////////////
 
+api.post('/addAgenda', async (req, res, next) => {
+  const params = req.body
+
+  let obj
+  try{
+    obj= await Agenda.create(params.usuarioId, {
+      Contactos: params.Contactos
+    })
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
+
+api.post('/ListarContactos', async(req, res, next) => {
+  const params = req.body 
+  const AgendaAll = await Agenda.findAll();
+  const usuarioAll = await Usuario.findAll();
+  const sipsAll = await Sip.findAll();
+  const iaxsAll = await Iax.findAll();
+  let getcontactos = [];
+  let getusuarios = [];
+  let getiaxs = [];
+  let getsips = [];
+  let todos = [];
+
+  AgendaAll.forEach(obj => {
+     if(obj.Contactos == params.Contactos){
+      getcontactos.push(obj.Contactos)
+    }
+  })
+  
+  usuarioAll.forEach(usuario => {
+     if(usuario.id == params.Contactos){
+      getusuarios.push(usuario.nombre, usuario.apPaterno, usuario.apMaterno)
+     }
+  })
+    
+  sipsAll.forEach(sips => {
+    
+    if(sips.usuarioId == params.Contactos){
+      getsips.push(sips.name)
+  }
+  })
+
+  iaxsAll.forEach(iaxs => {
+    
+    if(iaxs.usuarioId == params.Contactos){
+      getiaxs.push(iaxs.name)
+  }
+  })
+  
+  todos.push(getusuarios)
+  todos.push(getsips)
+  todos.push(getiaxs)
+  res.send(todos)
+})
+
+api.delete('/deleteAgenda', async(req, res, next) => {
+  const params = req.body
+  await Agenda.destroy(params.id)
+ 
+  res.send({message: 'se borro la Agenda'})
+})
 
 
 /// IAX /////////////////////////////////////////////////////////////////////
