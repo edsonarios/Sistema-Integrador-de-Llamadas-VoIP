@@ -568,7 +568,7 @@ api.get('/datosOperador', async (req, res) => {
 
 api.post('/addSala', async (req, res, next) => {
   const params = req.body
-
+  //creamos una sala con todos sus atributos
   let obj 
   try{
     obj= await Sala.create({
@@ -584,7 +584,7 @@ api.post('/addSala', async (req, res, next) => {
 })
 api.put('/updateSala', async (req, res, next) => {
   const params = req.body
-
+  //editamos cualquier atriburo de una sala buscandolo por su id
   let obj 
   try{
     obj= await Sala.update(params.id, {
@@ -600,7 +600,7 @@ api.put('/updateSala', async (req, res, next) => {
 
 api.post('/findByIdSala', async (req, res, next) => {
   const params = req.body
-
+  //buscamos un sala por su id y devolvemos esa sala
   let obj 
   try{
     obj= await Sala.findById(params.id)
@@ -615,7 +615,7 @@ api.post('/findByIdSala', async (req, res, next) => {
 })
 
 api.get('/findAllSala', async (req, res, next) => {
-
+  //buscamos y devolvemos a todas las salas
   const obj = await Sala.findAll()
 
   res.send(obj)
@@ -623,33 +623,35 @@ api.get('/findAllSala', async (req, res, next) => {
 
 api.post('/getUsuariosPorSala', async (req, res, next) => {
   var params = req.body
+  //obtenemos todos los usuarios
   const usuariosTodos = await Usuario.findAll();
   var usuariosSala = []
-
+  //iteramos a todos los usuario y preguntamos si la sala de un usuario es igual a la q le mandamos por postman
+  //si es asi guardamos al usuario y lo devolvemos
   usuariosTodos.forEach(usuario => {
             
           if(usuario.salaId == params.salaId){
              usuariosSala.push(usuario)
           }
   })
-
   res.send(usuariosSala)
 });
 
 api.delete('/deleteSalaWithAll', async(req, res, next) => {
   const params = req.body 
+  //obtenemos todos los usuarios, sips e iaxs con sus atributos
   const usuariosSala1 = await Usuario.findAll();
-  let usuariosSala2 = []
   const sipsAll = await Sip.findAll();
   const iaxsAll = await Iax.findAll();
-           
+  let usuariosSala2 = []
+  //itero sobre el usuario y obtenemos los usuarios por su id         
   usuariosSala1.forEach(usuario => {
             
     if(usuario.salaId == params.salaId){
        usuariosSala2.push(usuario.id)
     }
   })
-
+  //iteramos a todos los usuarios y borramos su sip de un usuario
   for (let i = 0; i < usuariosSala2.length; i++) {
     sipsAll.forEach(obj => {
       
@@ -658,7 +660,7 @@ api.delete('/deleteSalaWithAll', async(req, res, next) => {
     }
     })
   } 
-  
+  //iteramos a todos los ususarios y borramos sus iaxs de un usuario
   for (let i = 0; i < usuariosSala2.length; i++) {
     iaxsAll.forEach(obj => {
       
@@ -667,12 +669,13 @@ api.delete('/deleteSalaWithAll', async(req, res, next) => {
     }
     })
   } 
-  
+  //iteramos a todos los usuarios y borramos al usuario de una sala
   for (let i = 0; i < usuariosSala2.length; i++) {
     await Usuario.destroy(usuariosSala2[i])
   }
-   
+  //borramos la sala 
   await Sala.destroy(params.salaId)
+
   res.send({message : 'se borro la sala'})
    
 })
@@ -681,7 +684,7 @@ api.delete('/deleteSalaWithAll', async(req, res, next) => {
 
 api.post('/addUsuario', async (req, res, next) => {
   const params = req.body
-
+  //creamos un usuario con todos sus atributos atraves del id de la sala 
   let obj 
   try{
     obj= await Usuario.create(params.salaId, {
@@ -703,7 +706,7 @@ api.post('/addUsuario', async (req, res, next) => {
 })
 api.put('/updateUsuario', async (req, res, next) => {
   const params = req.body
-
+  //editamos un usuario atraves de su id
   let obj 
   try{
     obj= await Usuario.update(params.id, {
@@ -726,7 +729,7 @@ api.put('/updateUsuario', async (req, res, next) => {
 
 api.post('/findByIdUsuario', async (req, res, next) => {
   const params = req.body
-
+  //buscamos al usuario atraves de su id y lo devolvemos
   let obj 
   try{
     obj= await Usuario.findById(params.id)
@@ -742,8 +745,8 @@ api.post('/findByIdUsuario', async (req, res, next) => {
 })
 
 api.get('/findAllUsuario', async (req, res, next) => {
-
   let obj 
+  //buscamos y devolvemos a todos los usuarios
   try{
     obj= await Usuario.findAll()
   }catch(e){
@@ -755,10 +758,12 @@ api.get('/findAllUsuario', async (req, res, next) => {
 
 api.post('/findUsuByNomSalaAndContext', async (req, res, next) => {
   var params = req.body
-  let results = {}
+  //Obtengo todos los sips e iaxs
   const sipsAll = await Sip.findAll();
   const iaxsAll = await Iax.findAll();
-            
+  let results = {}
+  //iteramos sobre los sips y preguntamos si el atributo contexto es igual al contexto q enviamos por postman
+  //si es igual guardamos sus sips e iaxs en results y luego vaciamos el vector results       
   for (let i = 0; i < sipsAll.length; i++) {
     if(sipsAll[i]["context"] == params.context){
        results[sipsAll[i]['usuarioId']] = {}
@@ -766,7 +771,8 @@ api.post('/findUsuByNomSalaAndContext', async (req, res, next) => {
        results[sipsAll[i]['usuarioId']]["iaxs"] = []
     }  
   } 
-
+  //iteramos sobre los iaxs y preguntamos si el atributo contexto es igual al contexto q enviamos por postman
+  //si es igual guardamos sus sips e iaxs en results y luego vaciamos el vector results   
   for (let i = 0; i < iaxsAll.length; i++) {
     if(iaxsAll[i]["context"] == params.context){
        results[iaxsAll[i]['usuarioId']] = {}
@@ -774,14 +780,16 @@ api.post('/findUsuByNomSalaAndContext', async (req, res, next) => {
        results[iaxsAll[i]['usuarioId']]["iaxs"] = []
     }  
   } 
-  
+  //iteramos sobre los sips y preguntamos si el atributo contexto es igual al contexto q enviamos por postman
+  //si es igual guardamos sus id del usuario en results  
   for (let i = 0; i < sipsAll.length; i++) {
     if(sipsAll[i]["context"] == params.context){
         let x = results[sipsAll[i]['usuarioId']]["sips"]
         results[sipsAll[i]['usuarioId']]["sips"].push(sipsAll[i]['id']) 
      }  
   }   
-  
+  //iteramos sobre los iaxs y preguntamos si el atributo contexto es igual al contexto q enviamos por postman
+  //si es igual guardamos sus id del usuario en results 
   for (let i = 0; i < iaxsAll.length; i++) {
     if(iaxsAll[i]["context"] == params.context){
         let x = results[iaxsAll[i]['usuarioId']]["iaxs"]
@@ -794,12 +802,13 @@ api.post('/findUsuByNomSalaAndContext', async (req, res, next) => {
 
 api.post('/getUsuariosWithSipsAndIaxs', async(req, res, next) => {
   const params = req.body 
+  //Obtengo todos los sips e iaxs
+  const sipsAll = await Sip.findAll();
+  const iaxsAll = await Iax.findAll();
   let getsips = []
   let getiaxs = []
   let todos = []
-  const sipsAll = await Sip.findAll();
-  const iaxsAll = await Iax.findAll();
-
+    //itero sobre los sips e iaxs 
     sipsAll.forEach(obj => {
       
       if(obj.usuarioId == params.id){
@@ -812,6 +821,7 @@ api.post('/getUsuariosWithSipsAndIaxs', async(req, res, next) => {
         getiaxs.push(obj)
     }
     })
+    //obtenemos los sips e iaxs de un usuario apartir de su id de usuario
     todos.push(getsips)
     todos.push(getiaxs)
   res.send(todos)
@@ -820,17 +830,19 @@ api.post('/getUsuariosWithSipsAndIaxs', async(req, res, next) => {
 
 api.delete('/deleteUsuarioWithAll', async(req, res, next) => {
   const params = req.body 
+  //Obtengo todos los usuario de la tabla usuarios. A todos sips e iaxs
   const usuariosSala1 = await Usuario.findAll();
-  let usuariosSala3 = []
   const sipsAll = await Sip.findAll();
   const iaxsAll = await Iax.findAll();
-           
+  let usuariosSala3 = []
+  //iteramos toda la tabla usuario para obtener el id del usuario y guardarlo en un vector         
   usuariosSala1.forEach(usuario => {
             
     if(usuario.id == params.id){
        usuariosSala3.push(usuario.id)
     }
   })
+  //recorremos el vector con los ids de los usuarios y borramos sus sips iaxs
   for (let i = 0; i < usuariosSala3.length; i++) {
     sipsAll.forEach(obj => {
       
@@ -848,7 +860,7 @@ api.delete('/deleteUsuarioWithAll', async(req, res, next) => {
     }
     })
   } 
-  
+  //borramos al usuario apartir de su id
   await Usuario.destroy(params.id)
   res.send({message: 'Se elimino Usuario'})   
 })
@@ -885,7 +897,7 @@ api.post('/login', async(req, res, next) => {
 
 api.post('/addSip', async (req, res, next) => {
   const params = req.body
-
+  //creo un sip con todos sus atributos apartir del id del usuario
   let obj
   try{
     obj= await Sip.create(params.usuarioId, {
@@ -908,7 +920,7 @@ api.post('/addSip', async (req, res, next) => {
 })
 api.put('/updateSip', async (req, res, next) => {
   const params = req.body
-
+  //edito un sip buscandolo por su id
   let obj
   try{
     obj= await Sip.update(params.id, {
@@ -932,7 +944,7 @@ api.put('/updateSip', async (req, res, next) => {
 
 api.post('/findByIdSip', async (req, res, next) => {
   const params = req.body
-
+  //obtebgo un sip buscondolo por el id del sip
   let obj
   try{
     obj= await Sip.findById(params.id)
@@ -947,8 +959,8 @@ api.post('/findByIdSip', async (req, res, next) => {
 })
 
 api.get('/findAllSip', async (req, res, next) => {
-
   let obj
+  //busco y devuelvo todos los atributos de la tabla sip
   try{
     obj= await Sip.findAll()
   }catch(e){
@@ -960,7 +972,7 @@ api.get('/findAllSip', async (req, res, next) => {
 
 api.get('/findLastSip', async (req, res, next) => {
   var params = req.body
-
+  //busco y listo el ultimo sip de la tabla ordenandolo descendentemente
   const lastSip = await Sip.findOne(
     {
       order: [ [ 'id', 'DESC' ]],
@@ -972,6 +984,7 @@ api.get('/findLastSip', async (req, res, next) => {
 
 api.delete('/deleteSip', async(req, res, next) => {
   const params = req.body
+  //borro un sip apartir del id del sip
   await Sip.destroy1(params.id)
  
   res.send({message: 'se borro el sip'})
@@ -980,7 +993,7 @@ api.delete('/deleteSip', async(req, res, next) => {
 
 api.post('/addExtension', async (req, res, next) => {
   const params = req.body
-
+  //creo una extension con todos sus atributos
   let obj
   try{
     obj= await Extension.create(params.salaId, {
@@ -998,7 +1011,7 @@ api.post('/addExtension', async (req, res, next) => {
 })
 api.put('/updateExtension', async (req, res, next) => {
   const params = req.body
-
+  //edito cualquier atributo de de la tabla extension buscando por el id de la extension
   let obj
   try{
     obj= await Extension.update(params.id, {
@@ -1017,7 +1030,7 @@ api.put('/updateExtension', async (req, res, next) => {
 
 api.post('/findByIdExtension', async (req, res, next) => {
   const params = req.body
-
+  //busco y devuelvo todos los atributos de la tabla extension buscando por el id de extension
   let obj
   try{
     obj= await Extension.findById(params.id)
@@ -1028,13 +1041,12 @@ api.post('/findByIdExtension', async (req, res, next) => {
     return next(new Error(`Extension not found with id ${params.id}`))
   }
   
-
   res.send(obj)
 })
 
 api.get('/findAllExtension', async (req, res, next) => {
-
   let obj
+  //busco y devuelvo todos los atributos de la tabla extension
   try{
     obj= await Extension.findAll()
   }catch(e){
@@ -1047,15 +1059,14 @@ api.get('/findAllExtension', async (req, res, next) => {
 /// CDR /////////////////////////////////////////////////////////////////////
 
 api.get('/findAllCdr', async (req, res, next) => {
-
+  //busco y devuelvo todos los atributos de la tabla cdrs
   const obj = await Cdr.findAll()
-
   res.send(obj)
 })
 
 api.post('/findByIdCdr', async (req, res, next) => {
   const params = req.body
-
+  //busco los cdrs apartir de su id de cdr
   let obj 
   try{
     obj= await Cdr.findById(params.id)
@@ -1123,6 +1134,7 @@ api.post('/listar', function(req, res, next){
 
 api.post('/ListarHistorial', async(req, res, next) => {
   const params = req.body 
+  //obtengo todos los atributos de la tabla cdrs
   const cdrsAll = await Cdr.findAll();
   let getentrantes = [];
   let getsalientes = [];
@@ -1130,8 +1142,9 @@ api.post('/ListarHistorial', async(req, res, next) => {
   let todos = [];
   let f = [];
   var ojbAr=[]
+  //empiezo a iterar sobre todos los atributos de cdrs
   cdrsAll.forEach(obj => {
-    
+    //transformo el obj.calldate en un formato "yyyy-mm-dd" y pregunto si es igual al parametro q le mando por postman
     if(moment(moment(obj.calldate).format("YYYY-MM-DD")).isSame(params.fecha)){
         if(obj.usuarioId == params.usuarioId){
           
@@ -1142,7 +1155,7 @@ api.post('/ListarHistorial', async(req, res, next) => {
         ojbAr.push(f)
     }  
   })
-
+    //guardo todos los atributos q necesito devolver
     todos.push(getentrantes)
     todos.push(getsalientes)
     todos.push(getperdidas)
@@ -1154,8 +1167,8 @@ api.post('/ListarHistorial', async(req, res, next) => {
 
 api.post('/addAgenda', async (req, res, next) => {
   const params = req.body
-
   let obj
+  //creo una agenda apartir del id de un usuario
   try{
     obj= await Agenda.create(params.usuarioId, {
       Contactos: params.Contactos
@@ -1169,6 +1182,7 @@ api.post('/addAgenda', async (req, res, next) => {
 
 api.post('/ListarContactos', async(req, res, next) => {
   const params = req.body 
+  //Obtengo todos los contactos de agenda. A todos los usuarios, sips e iaxs
   const AgendaAll = await Agenda.findAll();
   const usuarioAll = await Usuario.findAll();
   const sipsAll = await Sip.findAll();
@@ -1178,43 +1192,57 @@ api.post('/ListarContactos', async(req, res, next) => {
   let getiaxs = [];
   let getsips = [];
   let todos = [];
-
+  let todos2 = [];
+//obtengo los contactos de la tabla Agenda
   AgendaAll.forEach(obj => {
-     if(obj.Contactos == params.Contactos){
+     if(obj.usuarioId == params.usuarioId){
       getcontactos.push(obj.Contactos)
     }
   })
-  
+//empiezo a iterar sobre todos los contactos de un usuario
+getcontactos.forEach(contacto => {
+        
   usuarioAll.forEach(usuario => {
-     if(usuario.id == params.Contactos){
+    if(usuario.id == contacto){
       getusuarios.push(usuario.nombre, usuario.apPaterno, usuario.apMaterno)
-     }
-  })
+    }
     
+ })
+  
   sipsAll.forEach(sips => {
     
-    if(sips.usuarioId == params.Contactos){
+    if(sips.usuarioId == contacto){
       getsips.push(sips.name)
   }
   })
 
   iaxsAll.forEach(iaxs => {
     
-    if(iaxs.usuarioId == params.Contactos){
+    if(iaxs.usuarioId == contacto){
       getiaxs.push(iaxs.name)
   }
-  })
   
+  })
+  //guardo todos los usuarios, sips e iaxs
   todos.push(getusuarios)
   todos.push(getsips)
   todos.push(getiaxs)
-  res.send(todos)
+  
+  todos2.push(todos)
+  //vacio los vectores de usuarios, sips e iaxs
+  getusuarios=[]
+  getsips=[]
+  getiaxs=[]
+  todos=[]
+  
+})
+  res.send(todos2)
 })
 
 api.delete('/deleteAgenda', async(req, res, next) => {
   const params = req.body
+  //borro una genda apartir del id de agenda
   await Agenda.destroy(params.id)
- 
   res.send({message: 'se borro la Agenda'})
 })
 
@@ -1223,7 +1251,7 @@ api.delete('/deleteAgenda', async(req, res, next) => {
 
 api.post('/addIax', async (req, res, next) => {
   const params = req.body
-
+  //creo un iax apartir del id del usuario, con todos sus atributos
   let obj
   try{
     obj= await Iax.create(params.usuarioId, {
@@ -1245,7 +1273,7 @@ api.post('/addIax', async (req, res, next) => {
 
 api.put('/updateIax', async (req, res, next) => {
   const params = req.body
-
+  //edito el iax aportir del id de iax, con todos sus atributos
   let obj
   try{
     obj= await Iax.update(params.id, {
@@ -1267,8 +1295,8 @@ api.put('/updateIax', async (req, res, next) => {
 
 api.post('/findByIdIax', async (req, res, next) => {
   const params = req.body
-
   let obj
+  //busco un iax apartir del id del iax
   try{
     obj= await Iax.findById(params.id)
   }catch(e){
@@ -1282,8 +1310,8 @@ api.post('/findByIdIax', async (req, res, next) => {
 })
 
 api.get('/findAllIax', async (req, res, next) => {
-
   let obj
+  //busco y listo todos los iaxs
   try{
     obj= await Iax.findAll()
   }catch(e){
@@ -1295,8 +1323,8 @@ api.get('/findAllIax', async (req, res, next) => {
 
 api.delete('/deleteIax', async(req, res, next) => {
   const params = req.body
+  //borro todos los iaxs a partir del id del iax
   await Iax.destroy1(params.id)
- 
   res.send({message: 'se borro el iax'})
 })
 module.exports = api
