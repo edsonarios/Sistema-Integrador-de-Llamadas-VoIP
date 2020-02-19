@@ -6,11 +6,12 @@ const setupExtension = require('./lib/extension')
 const setupSip = require('./lib/sip')
 const setupCdr = require('./lib/cdr')
 const setupUsuario = require('./lib/usuario')
+const setupAgenda = require('./lib/agenda')
 const setupIax = require('./lib/iax')
 const setupQueue = require('./lib/queue')
 const setupSala = require('./lib/sala')
 const setupVoicemail = require('./lib/voicemail')
-const setupContacto = require('./lib/contacto')
+
 
 
 const defaults = require('defaults')
@@ -19,11 +20,12 @@ const setupExtensionModel = require('./models/extension')
 const setupSipModel = require('./models/sip')
 const setupCdrModel = require('./models/cdr')
 const setupUsuarioModel = require('./models/usuario')
+const setupAgendaModel = require('./models/agenda')
 const setupIaxModel = require('./models/iax')
 const setupQueueModel = require('./models/queue')
 const setupSalaModel = require('./models/sala')
 const setupVoicemailModel = require('./models/voicemail')
-const setupContactoModel = require('./models/contacto')
+
 
 module.exports = async function (config) {
   config = defaults(config, {
@@ -44,15 +46,12 @@ module.exports = async function (config) {
   const SipModel = setupSipModel(config)
   const CdrModel = setupCdrModel(config)
   const UsuarioModel = setupUsuarioModel(config)
+  const AgendaModel = setupAgendaModel(config)
   const IaxModel = setupIaxModel(config)
   const QueueModel = setupQueueModel(config)
   const VoicemailModel = setupVoicemailModel(config)
   const SalaModel = setupSalaModel(config)
-  const ContactoModel = setupContactoModel(config)
   
-
-  UsuarioModel.hasMany(ContactoModel)
-  ContactoModel.belongsTo(UsuarioModel, {onDelete: 'CASCADE'})
 
   UsuarioModel.hasMany(VoicemailModel)
   VoicemailModel.belongsTo(UsuarioModel, {onDelete: 'CASCADE'})
@@ -62,6 +61,9 @@ module.exports = async function (config) {
 
   UsuarioModel.hasMany(IaxModel)
   IaxModel.belongsTo(UsuarioModel, {onDelete: 'CASCADE'})
+
+  UsuarioModel.hasMany(AgendaModel)
+  AgendaModel.belongsTo(UsuarioModel, {onDelete: 'CASCADE'})
 
   UsuarioModel.hasMany(CdrModel)
   CdrModel.belongsTo(UsuarioModel, {onDelete: 'CASCADE'})
@@ -88,12 +90,13 @@ module.exports = async function (config) {
   const Extension = setupExtension(ExtensionModel,SalaModel)
   const Sip = setupSip(SipModel, UsuarioModel)
   const Cdr = setupCdr(CdrModel, UsuarioModel)
+  const Agenda = setupAgenda(AgendaModel, UsuarioModel)
   const Usuario = setupUsuario(UsuarioModel,SalaModel)
   const Iax = setupIax(IaxModel, UsuarioModel)
   const Queue = setupQueue(QueueModel, SalaModel)
   const Voicemail = setupVoicemail(VoicemailModel, UsuarioModel)
   const Sala = setupSala(SalaModel)
-  const Contacto = setupContacto(ContactoModel, UsuarioModel)
+  
   
   
   
@@ -101,11 +104,11 @@ module.exports = async function (config) {
     Extension,
     Sip,
     Cdr,
+    Agenda,
     Queue,
     Iax,
     Usuario,
     Voicemail,
-    Sala,
-    Contacto
+    Sala
   }
 }
