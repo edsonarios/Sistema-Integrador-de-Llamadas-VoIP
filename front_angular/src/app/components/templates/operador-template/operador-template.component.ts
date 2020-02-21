@@ -249,7 +249,6 @@ export class OperadorTemplateComponent implements OnInit {
 	}
 	CerrarLlamada(llamada) {
 		// Metodo en el escritorio para cerrar la llamada del escritorio
-
 		this.EliminaItemLlamadas(llamada['Id']);
 		if (llamada['Tipo'] == 'Sala') {
 			this.Salas.push({
@@ -261,6 +260,7 @@ export class OperadorTemplateComponent implements OnInit {
 			});
 		}
 	}
+
 	VerParticipantes(event) {
 		//console.log('Llega el evento y debe de cambiar los componentes')
 		this.CambiaHideLateral();
@@ -291,6 +291,7 @@ export class OperadorTemplateComponent implements OnInit {
 		this.EliminaItemNotificacion(Notificacion['Id']);
 		this.AgregarEventoPanel(Notificacion['Numero'], '15/11/2019', 'false', 'entrante');
 	}
+
 	ColgarLlamada(Notificacion) {
 		this.session.setSession(this.remote);
 		this.session.terminate();
@@ -301,6 +302,7 @@ export class OperadorTemplateComponent implements OnInit {
 	DialPadComponent() {
 		this.modalRef = this.modalService.show(DialPadComponent);
 	}
+
 	EliminaItemLlamadas(id_llamada) {
 		let aux = [];
 		for (var i = 0; i < this.Llamada.length; i++) {
@@ -310,6 +312,7 @@ export class OperadorTemplateComponent implements OnInit {
 		}
 		this.Llamada = aux;
 	}
+
 	EliminaItemSalas(id_Salas) {
 		let aux = [];
 		for (var i = 0; i < this.Salas.length; i++) {
@@ -319,6 +322,7 @@ export class OperadorTemplateComponent implements OnInit {
 		}
 		this.Salas = aux;
 	}
+
 	EliminaItemNotificacion(id_Notificacion) {
 		let aux = [];
 		for (var i = 0; i < this.Notificaciones.length; i++) {
@@ -328,6 +332,7 @@ export class OperadorTemplateComponent implements OnInit {
 		}
 		this.Notificaciones = aux;
 	}
+
 	ConvertirTiempo(tiempo) {
 		//  PENDIENTE
 		/*var Hora= parseInt((tiempo/3600),0);
