@@ -10,7 +10,6 @@ import { SipService } from '@services/sip.service';
 import { User } from '@models/user';
 import { Observable } from 'rxjs';
 import { stringify } from 'querystring';
-import { SipService } from '../../../../../services/sip.service';
 
 @Component({
 	selector: 'app-login',
