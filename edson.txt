@@ -61,3 +61,7 @@
         - Primera pantalla de salas
         - Falta Rutas
         - 
+
+[REUNION 20-02-20]
+    - Añadir atributo de WebRTC=true,false en tabla sips
+    
