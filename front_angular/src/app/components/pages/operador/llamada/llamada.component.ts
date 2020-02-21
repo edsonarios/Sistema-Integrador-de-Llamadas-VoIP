@@ -1,31 +1,38 @@
-import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { WebRTCService } from '@services/WebRTC/WebRTC.service';
+import { RTCSession } from 'jssip';
 
 @Component({
 	selector: 'llamada',
 	templateUrl: './llamada.component.html'
 })
 export class LlamadaComponent implements OnInit {
-	 @Input() Nombre: string;
-	 @Input() Numero: string;
-	 @Input() Tipo: string;
-	 @Input() Id: string;
-	 @Input() Estado: string;
+	@Input() Nombre: string;
+	@Input() Numero: string;
+	@Input() Tipo: string;
+	@Input() Id: string;
+	@Input() Estado: string;
+	@Input() Session: any;
 
-	 @Output() llamadaClose = new EventEmitter<string>();
-	 @Output() Participantes = new EventEmitter<string>();
-	 public llamada;
+	@Output() llamadaClose = new EventEmitter<string>();
+	@Output() Participantes = new EventEmitter<string>();
 
-	constructor(private router: Router) {
+	public llamada;
 
+	session: WebRTCService;
+
+	constructor(private router: Router) {}
+
+	ngOnInit() {
+		this.session = new WebRTCService();
 	}
 
-	ngOnInit() {}
-	CerrarLlamada(nombre:string,numero:string,id_llamada:string,tipo:string) {
-		this.llamada={'Nombre':nombre,'Numero':numero,'Id':id_llamada,'Tipo':tipo};
-		this.llamadaClose.emit(this.llamada);
-  }
-  VerParticipantes(){
-  	this.Participantes.emit('Ver Participantes');
-  }
+	CerrarLlamada(nombre: string, numero: string, id_llamada: string, tipo: string) {
+		this.llamada = { Nombre: nombre, Numero: numero, Id: id_llamada, Tipo: tipo };
+	}
+
+	VerParticipantes() {
+		this.Participantes.emit('Ver Participantes');
+	}
 }
