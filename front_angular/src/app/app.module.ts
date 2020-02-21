@@ -17,7 +17,6 @@ import { AdministradorTemplateComponent } from './components/templates/administr
 // Modal Components
 import { DialPadComponent } from './components/pages/operador/dialpad/dialpad.component';
 
-
 import { AgendaComponent } from '@operador/agenda/agenda.component';
 import { NotificacionComponent } from '@operador/notificacion/notificacion.component';
 import { SalaComponent } from '@operador/sala/sala.component';
@@ -38,12 +37,11 @@ import { UserService } from '../services/user.service';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-//import { DemoLlamadaComponent } from '../services/WebRTC/ex_imp';
-
 @NgModule({
 	declarations: [
-		//DemoLlamadaComponent,
-
+		// DemoLlamadaComponent,
+		// Prueba2Component,
+		// PruebaComponent,
 		AppComponent,
 		LoginComponent,
 		DialPadComponent,
@@ -55,7 +53,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		LlamadaComponent,
 		PanelComponent,
 		ParticipanteComponent
-		
 	],
 	imports: [
 		AngularFontAwesomeModule,

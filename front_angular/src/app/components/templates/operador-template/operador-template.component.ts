@@ -8,138 +8,153 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 // import { DialPadComponent } from '../../pages/operador/dialpad/dialpad.component';
 import { DialPadComponent } from '@operador/dialpad/dialpad.component';
 
+import { interval, timer } from 'rxjs';
 
-import {interval, timer } from 'rxjs';
+import { WebRTCService } from '@services/WebRTC/WebRTC.service';
+import { RTCSession, UA, UserAgentNewRtcSessionEvent, URI } from 'jssip';
+import { SoundPlayer } from '@services/WebRTC/SoundPlayer';
+
 @Component({
 	selector: 'operador-template',
 	templateUrl: './operador-template.component.html',
-	animations: [Entrance,Quit, DesktopAnimation, EnterLeave]
+	animations: [Entrance, Quit, DesktopAnimation, EnterLeave]
 })
 export class OperadorTemplateComponent implements OnInit {
+	public Llamada = [];
+	public Salas = [];
+	public Notificaciones = [];
+	public Panel = [];
+	public ParticipantesSala = [];
 
-public correoOperador= localStorage.getItem('correo');
+	public correoOperador = localStorage.getItem('correo');
 
-public Llamada=[];
-public Salas=[];
-public Notificaciones=[];
-public Panel=[];
-public ParticipantesSala=[];
+	public Hide: boolean = true;
+	public HideLateral: boolean = true;
+	public OptionLateral = 0;
 
-public Hide:boolean= true;
-public HideLateral:boolean=true;
-public OptionLateral=0;
-
-user: User;
+	user: User;
 
 	modalRef: BsModalRef;
+
+	alert: any;
+	session: WebRTCService;
+	rtc_event: RTCSession;
+	call: any;
+	ua: UA;
+	public remote: RTCSession;
+	public sound: SoundPlayer = new SoundPlayer();
 	constructor(private modalService: BsModalService, private formBuilder: FormBuilder) {
-		this.Salas=[
-		{
-			'nombre':'Sala 1',
-			'id':'1',
-			'Dimesions':'10',
-			'Ocupando':'2',
-			'Numero':'3001'
-		},
-		{
-			'nombre':'Sala 2',
-			'id':'2',
-			'Dimesions':'5',
-			'Ocupando':'1',
-			'Numero':'3002'
-		},
-		{
-			'nombre':'Emergencias 1',
-			'id':'3',
-			'Dimesions':'5',
-			'Ocupando':'3',
-			'Numero':'3003'
-		},
-		{
-			'nombre':'Emergencias 2',
-			'id':'4',
-			'Dimesions':'5',
-			'Ocupando':'0',
-			'Numero':'3004'
-		},
-		{
-			'nombre':'Emergencia 3',
-			'id':'5',
-			'Dimesions':'5',
-			'Ocupando':'1',
-			'Numero':'3005'
-		},
-		{
-			'nombre':'Radio 1',
-			'id':'6',
-			'Dimesions':'4',
-			'Ocupando':'4',
-			'Numero':'3006'
-		},
-		{
-			'nombre':'Radio 2',
-			'id':'7',
-			'Dimesions':'2',
-			'Ocupando':'0',
-			'Numero':'3007'
-		}
+		// 1 unmute, 0 mutear
+		this.Salas = [
+			{
+				nombre: 'Sala 1',
+				id: '1',
+				Dimesions: '10',
+				Ocupando: '2',
+				Numero: '3001'
+			},
+			{
+				nombre: 'Sala 2',
+				id: '2',
+				Dimesions: '5',
+				Ocupando: '1',
+				Numero: '3002'
+			},
+			{
+				nombre: 'Emergencias 1',
+				id: '3',
+				Dimesions: '5',
+				Ocupando: '3',
+				Numero: '3003'
+			},
+			{
+				nombre: 'Emergencias 2',
+				id: '4',
+				Dimesions: '5',
+				Ocupando: '0',
+				Numero: '3004'
+			},
+			{
+				nombre: 'Emergencia 3',
+				id: '5',
+				Dimesions: '5',
+				Ocupando: '1',
+				Numero: '3005'
+			},
+			{
+				nombre: 'Radio 1',
+				id: '6',
+				Dimesions: '4',
+				Ocupando: '4',
+				Numero: '3006'
+			},
+			{
+				nombre: 'Radio 2',
+				id: '7',
+				Dimesions: '2',
+				Ocupando: '0',
+				Numero: '3007'
+			}
 		];
- this.ParticipantesSala=[
-				{	
-					'Id':'1',
-					'Nombre':'Nelson Richard',
-					'ApPaterno':'Cori',
-					'ApMaterno':'Sirpa',
-					'Sip':[
-						{
-						'Numero':'3001',
-						'Alias':'3001',
-						'context':'default'
-						},
-						{
-						'Numero':'3002',
-						'Alias':'3002',
-						'context':'default'
-						}],
-					'Iax':[
-						{
-						'Numero':'3003',
-						'Alias':'3003',
-						'context':'default'
-						}]
-				},
-				{	
-					'Id':'2',
-					'Nombre':'Edson',
-					'ApPaterno':'Añawaya',
-					'ApMaterno':'Rios',
-					'Sip':[
-						{
-						'Numero':'3003',
-						'Alias':'3003',
-						'context':'default'
-						},
-						{
-						'Numero':'3004',
-						'Alias':'3004',
-						'context':'default'
-						}],
-					'Iax':[
-						{
-						'Numero':'3005',
-						'Alias':'3005',
-						'context':'default'
-						},
-						{
-						'Numero':'3006',
-						'Alias':'3006',
-						'context':'default'
-						}]
-				}
-				];
+		this.ParticipantesSala = [
+			{
+				Id: '1',
+				Nombre: 'Nelson Richard',
+				ApPaterno: 'Cori',
+				ApMaterno: 'Sirpa',
+				Sip: [
+					{
+						Numero: '3001',
+						Alias: '3001',
+						context: 'default'
+					},
+					{
+						Numero: '3002',
+						Alias: '3002',
+						context: 'default'
+					}
+				],
+				Iax: [
+					{
+						Numero: '3003',
+						Alias: '3003',
+						context: 'default'
+					}
+				]
+			},
+			{
+				Id: '2',
+				Nombre: 'Edson',
+				ApPaterno: 'Añawaya',
+				ApMaterno: 'Rios',
+				Sip: [
+					{
+						Numero: '3003',
+						Alias: '3003',
+						context: 'default'
+					},
+					{
+						Numero: '3004',
+						Alias: '3004',
+						context: 'default'
+					}
+				],
+				Iax: [
+					{
+						Numero: '3005',
+						Alias: '3005',
+						context: 'default'
+					},
+					{
+						Numero: '3006',
+						Alias: '3006',
+						context: 'default'
+					}
+				]
+			}
+		];
 	}
 	ngOnInit() {
-	
 		this.user = {
 			usuarioId: '10',
 			nombre: 'usuario',
@@ -153,110 +168,167 @@ user: User;
 			conectado: true,
 			salaId: '1'
 		};
+
+		this.session = new WebRTCService();
+		this.session.sessionEvents();
+		this.ua = this.session.getUA();
+		this.ua.on('sipEvent', e => {
+			console.log(e);
+		});
+		this.ua.on('newRTCSession', async (data: UserAgentNewRtcSessionEvent) => {
+			let session = data.session;
+			console.log('[ NEW RTC SESSION ]', data);
+			console.log('[ NEW RTC DATA ]', data.session.connection);
+			if (data.originator === 'local') {
+				console.log('LLAMADA LOCAL');
+			}
+			if (data.originator === 'remote') {
+				console.log('LLAMADA REMOTA');
+				await this.sound.play('ringing');
+				// @ts-ignore
+				let { _user } = data.request.from.uri;
+				console.log(_user);
+				this.AgregarEventoNotificacionRTC(_user, _user, _user);
+				this.remote = session;
+			}
+		});
 	}
+
 	LoaderPage(funtion) {
-		if (funtion=='page') {
-			this.Hide=false;	
-		}else{
-			if (funtion=='operational') {
-				this.Hide=true;
+		if (funtion == 'page') {
+			this.Hide = false;
+		} else {
+			if (funtion == 'operational') {
+				this.Hide = true;
 			}
 		}
 	}
-	LateralOpcion(page){
-	// 0 = Notificaciones
-	// 1 = Mi Agenda
-	// 2 = Salas
-	// 3 = Mi Pefil (puede cambiar de numeros)
-	this.OptionLateral=page;
+	LateralOpcion(page) {
+		// 0 = Notificaciones
+		// 1 = Mi Agenda
+		// 2 = Salas
+		// 3 = Mi Pefil (puede cambiar de numeros)
+		this.OptionLateral = page;
 	}
-	
-	AgregarEventoNotificacion(){
+
+	async AgregarEventoNotificacion() {
 		// Metodo donde se asigna de forma aleatorea en el panel de notificaciones
-		this.OptionLateral=0;
-		var numero= Math.round((Math.random() * (3020 - 3000) + 3000));
-		var id= Math.round((Math.random()*(20-11)+11));
-		this.Notificaciones.push({'nombre':'Alias','numero':numero,'estado':'entrante','id':id});
+		this.OptionLateral = 0;
+
+		// var numero = Math.round(Math.random() * (3020 - 3000) + 3000);
+		// var id = Math.round(Math.random() * (20 - 11) + 11);
+
+		this.Notificaciones.push({ nombre: 'Alias', numero: 11, estado: 'entrante', id: 10 });
 	}
-	AgregarEventoPanel(numero,fecha,duracion,tipo){
+
+	AgregarEventoNotificacionRTC(id, number, nombre) {
+		// Metodo donde se asigna de forma aleatorea en el panel de notificaciones
+		this.OptionLateral = 0;
+
+		this.Notificaciones.push({ id, numero: number, estado: 'entrante', nombre });
+	}
+
+	AgregarEventoPanel(numero, fecha, duracion, tipo) {
 		//metodo en el que agregamos una nueva tupla en el panel de estados
 
 		var horaNow = this.ObtenerTiempo();
-		this.Panel.push({'tipo':tipo,'Numero':numero,'fecha':fecha,'Hora':horaNow,'tiempo':duracion});
+		this.Panel.push({ tipo: tipo, Numero: numero, fecha: fecha, Hora: horaNow, tiempo: duracion });
 	}
 
 	RegistraSala(Sala) {
 		// Metodo del escritorio donde se crea una ventana y se elimina de la salas
 
-	  	this.Llamada.push({'nombre':Sala['nombre'],'id':Sala['id'],'numero':Sala['numero'],'Tipo':'Sala','Estado':'Inactiva'});
-	  	this.EliminaItemSalas(Sala['id']);
-  		
+		this.Llamada.push({
+			nombre: Sala['nombre'],
+			id: Sala['id'],
+			numero: Sala['numero'],
+			Tipo: 'Sala',
+			Estado: 'Inactiva'
+		});
+		this.EliminaItemSalas(Sala['id']);
 	}
-	CerrarLlamada(llamada){
+	CerrarLlamada(llamada) {
 		// Metodo en el escritorio para cerrar la llamada del escritorio
 
 		this.EliminaItemLlamadas(llamada['Id']);
-		if (llamada['Tipo']=='Sala') {
-			this.Salas.push({'nombre':llamada['Nombre'],'id':llamada['Id'],'Dimesions':'5','Ocupando':'1','Numero':llamada['Numero']});
+		if (llamada['Tipo'] == 'Sala') {
+			this.Salas.push({
+				nombre: llamada['Nombre'],
+				id: llamada['Id'],
+				Dimesions: '5',
+				Ocupando: '1',
+				Numero: llamada['Numero']
+			});
 		}
-		
-
 	}
-	VerParticipantes(event){
+	VerParticipantes(event) {
 		//console.log('Llega el evento y debe de cambiar los componentes')
 		this.CambiaHideLateral();
 		console.log(this.ParticipantesSala);
 	}
-	AgendaLlamada(ContactoAgenda){
+	AgendaLlamada(ContactoAgenda) {
 		// metodo donde se llama a un contacto mediante la agenda
 
-		this.Llamada.push({'nombre':ContactoAgenda['Nombre'],'id':ContactoAgenda['Id'],'numero':ContactoAgenda['Numero'],'Tipo':'Llamada','Estado':'Inactiva'});
-		this.AgregarEventoPanel(ContactoAgenda['Numero'],'15/11/2019','false','entrante');
+		this.Llamada.push({
+			nombre: ContactoAgenda['Nombre'],
+			id: ContactoAgenda['Id'],
+			numero: ContactoAgenda['Numero'],
+			Tipo: 'Llamada',
+			Estado: 'Inactiva'
+		});
+		this.AgregarEventoPanel(ContactoAgenda['Numero'], '15/11/2019', 'false', 'entrante');
 	}
-	ContestarLlamada(Notificacion){
-		
-		this.Llamada.push({'nombre':Notificacion['Nombre'],'id':Notificacion['Id'],'numero':Notificacion['Numero'],'Tipo':'Llamada','Estado':'Inactiva'});
+	ContestarLlamada(Notificacion) {
+		this.Llamada.push({
+			nombre: Notificacion['Nombre'],
+			id: Notificacion['Id'],
+			numero: Notificacion['Numero'],
+			Tipo: 'Llamada',
+			Estado: 'Inactiva'
+		});
+		this.session.setSession(this.remote);
+		this.session.remoteAnswer();
 		this.EliminaItemNotificacion(Notificacion['Id']);
-		this.AgregarEventoPanel(Notificacion['Numero'],'15/11/2019','false','entrante');
-
+		this.AgregarEventoPanel(Notificacion['Numero'], '15/11/2019', 'false', 'entrante');
 	}
-	ColgarLlamada(Notificacion){
+	ColgarLlamada(Notificacion) {
+		this.session.setSession(this.remote);
+		this.session.terminate();
 		this.EliminaItemNotificacion(Notificacion['Id']);
-		this.AgregarEventoPanel(Notificacion['Numero'],'15/11/2019','false','perdida');
-		
+		this.AgregarEventoPanel(Notificacion['Numero'], '15/11/2019', 'false', 'perdida');
 	}
 
 	DialPadComponent() {
 		this.modalRef = this.modalService.show(DialPadComponent);
 	}
-	EliminaItemLlamadas(id_llamada){
-		let aux=[];
-		for (var i = 0 ; i < this.Llamada.length; i++) {
+	EliminaItemLlamadas(id_llamada) {
+		let aux = [];
+		for (var i = 0; i < this.Llamada.length; i++) {
 			if (id_llamada != this.Llamada[i]['id']) {
 				aux.push(this.Llamada[i]);
 			}
 		}
-		this.Llamada=aux;
+		this.Llamada = aux;
 	}
-	EliminaItemSalas(id_Salas){
-		let aux=[];
-		for (var i = 0 ; i < this.Salas.length; i++) {
+	EliminaItemSalas(id_Salas) {
+		let aux = [];
+		for (var i = 0; i < this.Salas.length; i++) {
 			if (id_Salas != this.Salas[i]['id']) {
 				aux.push(this.Salas[i]);
 			}
 		}
-		this.Salas=aux;
+		this.Salas = aux;
 	}
-	EliminaItemNotificacion(id_Notificacion){
-		let aux=[];
-		for (var i = 0 ; i < this.Notificaciones.length; i++) {
+	EliminaItemNotificacion(id_Notificacion) {
+		let aux = [];
+		for (var i = 0; i < this.Notificaciones.length; i++) {
 			if (id_Notificacion != this.Notificaciones[i]['id']) {
 				aux.push(this.Notificaciones[i]);
 			}
 		}
-		this.Notificaciones=aux;
+		this.Notificaciones = aux;
 	}
-	ConvertirTiempo(tiempo){
+	ConvertirTiempo(tiempo) {
 		//  PENDIENTE
 		/*var Hora= parseInt((tiempo/3600),0);
 		var minutos=parseInt((tiempo-(Hora*3600))/60);
@@ -273,31 +345,29 @@ user: User;
 			var Timer= Hora+':'+minutos+':'+segundos;
 		return Timer;*/
 	}
-	MicrophoneOption(){
+	MicrophoneOption() {
 		// Aqui viene las opciones para el microfono del operador
 	}
-	AudioOption(){
+	AudioOption() {
 		// Aqui viene las opciones para el audio del operador
 	}
-	NetworkSignalOption(){
+	NetworkSignalOption() {
 		// Aqui viene las opciones para la red del operador
 	}
-	Busqueda(){
+	Busqueda() {
 		//Aqui viene los metodos y/o contenido de la busqueda
 	}
-	ObtenerTiempo(){
+	ObtenerTiempo() {
 		//Aqui viene los metodos y/o contenido de la busqueda
-		var date= new Date();
+		const date = new Date();
 		//console.log('El dato es :'+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds());
-		return date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+		return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
 	}
-	CambiaHideLateral(){
-		if (this.HideLateral==true) {
-			this.HideLateral=false;
-		}
-		else{
-			this.HideLateral=true;
+	CambiaHideLateral() {
+		if (this.HideLateral == true) {
+			this.HideLateral = false;
+		} else {
+			this.HideLateral = true;
 		}
 	}
-	
 }

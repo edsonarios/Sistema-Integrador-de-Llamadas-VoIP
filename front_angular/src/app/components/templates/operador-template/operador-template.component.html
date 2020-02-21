@@ -9,32 +9,34 @@
 				[routerLink]="['/Operador/Historial']"
 				tooltip="Historial de Llamada"
 				placement="right"
-				(click)="LoaderPage('page')">
+				(click)="LoaderPage('page')"
+			>
 				<i class="v-icon-phone1" placement="right"></i>
 			</button>
 			<button
 				[routerLink]="['/Operador/Grabaciones']"
 				tooltip="Grabaciones"
 				placement="right"
-				(click)="LoaderPage('page')">
+				(click)="LoaderPage('page')"
+			>
 				<i class="v-icon-cassette" placement="right"></i>
 			</button>
 			<button
 				[routerLink]="['/Operador/Tracking']"
 				(click)="LoaderPage('page')"
 				tooltip="Tracking"
-				placement="right">
+				placement="right"
+			>
 				<i class="v-icon-location"></i>
 			</button>
 			<button (click)="DialPadComponent()" tooltip="DialPad" placement="right">
 				<i class="v-icon-dial"></i>
 			</button>
 			<button tooltip="Salir" placement="right" [routerLink]="['/Login']" *ngIf="Hide == false">
-				<i class="v-icon-enter" ></i>
+				<i class="v-icon-enter"></i>
 			</button>
-		 </div>
-		<div class="c1-options-bottom" *ngIf="Hide == true" [@FadeIn]> 
-			
+		</div>
+		<div class="c1-options-bottom" *ngIf="Hide == true" [@FadeIn]>
 			<button (click)="LateralOpcion(0)" tooltip="Notificaciones" placement="right">
 				<i class="v-icon-bell"></i>
 			</button>
@@ -48,105 +50,102 @@
 				<i class="v-icon-switch_account"></i>
 			</button>
 			<button tooltip="Salir" placement="right" [routerLink]="['/Login']">
-				<i class="v-icon-enter" ></i>
+				<i class="v-icon-enter"></i>
 			</button>
 		</div>
 	</div>
 	<ng-template #popTemplate>
-			<ul>
-			<li >
+		<ul>
+			<li>
 				<a (click)="AgregarEventoNotificacion()" style="cursor: pointer;">
-				  <span align="center"> <h6>-- Evento Notificacion --</h6> </span>
+					<span align="center"> <h6>-- Evento Notificacion --</h6> </span>
 				</a>
-				
 			</li>
-			<hr>
+			<hr />
 			<li>
 				<a (click)="LateralOpcion(3)" style="cursor: pointer;">
-				<span align="center"><h6>-- Mi perfil -- </h6> </span>
-			  </a>
+					<span align="center"><h6>-- Mi perfil --</h6> </span>
+				</a>
 			</li>
-			
-	</ul>
+		</ul>
 	</ng-template>
 
 	<!-- *******segunda columna******* -->
 	<div class="col2" *ngIf="Hide == true; else elseBlock" [@SladeOff]>
 		<!-- ********menu desplegable******** -->
-		
+
 		<div class="c2-lateral">
-			<div class="btn-group c2-header">
-				
-			</div>
+			<div class="btn-group c2-header"></div>
 			<!-- ********contenido******** -->
-			<div class="c2-body" *ngIf="HideLateral == true; else ParticipantesTemplate" >
+			<div class="c2-body" *ngIf="HideLateral == true; else ParticipantesTemplate">
 				<div *ngIf="OptionLateral == 0">
 					<header class="panel__header">
 						Notificaciones
 					</header>
 					<div class="notificacionEffect" *ngFor="let n of Notificaciones; let i = index" [@flyIn]>
-					  	<Notificacion
-					  	(ContestaLlamada)="ContestarLlamada($event)"
-					  	(CancelaLlamada)="ColgarLlamada($event)"
-					  	Nombre="{{Notificaciones[i]['nombre']}}"
-					  	Numero="{{Notificaciones[i]['numero']}}"
-					  	Estado="{{Notificaciones[i]['estado']}}"
-					  	Id="{{Notificaciones[i]['id']}}"></Notificacion>
-				 	 </div>
+						<Notificacion
+							(ContestaLlamada)="ContestarLlamada($event)"
+							(CancelaLlamada)="ColgarLlamada($event)"
+							Nombre="{{ Notificaciones[i]['nombre'] }}"
+							Numero="{{ Notificaciones[i]['numero'] }}"
+							Estado="{{ Notificaciones[i]['estado'] }}"
+							Id="{{ Notificaciones[i]['id'] }}"
+						></Notificacion>
+					</div>
 				</div>
 				<div *ngIf="OptionLateral == 1">
 					<header class="panel__header">
 						Mi Agenda
 					</header>
 					<div class="search">
-					<input type="text" class="searchTerm" placeholder="Busque en la Agenda" />
-					<button type="submit" class="searchButton" (click)="Busqueda()">
-						<i class="v-icon-magnifying-glass"></i>
-					</button>
-				</div>
-					<Agenda (AgendaLlamada)="AgendaLlamada($event)">	
-					</Agenda>
+						<input type="text" class="searchTerm" placeholder="Busque en la Agenda" />
+						<button type="submit" class="searchButton" (click)="Busqueda()">
+							<i class="v-icon-magnifying-glass"></i>
+						</button>
+					</div>
+					<Agenda (AgendaLlamada)="AgendaLlamada($event)"> </Agenda>
 				</div>
 				<div *ngIf="OptionLateral == 2">
 					<header class="panel__header">
 						Salas
 					</header>
 					<div class="SalaEffect" *ngFor="let n of Salas; let i = index" [@flyIn]>
-					  	<Sala  (DatoSala)="RegistraSala($event)"
-					  	Nombre="{{Salas[i]['nombre']}}"
-					  	Ocupado="{{Salas[i]['Ocupando']}}"
-					  	Dimensions="{{Salas[i]['Dimesions']}}"
-					  	Numero="{{Salas[i]['Numero']}}"
-					  	Id="{{Salas[i]['id']}}">
-					  	</Sala>
-					  	</div>
+						<Sala
+							(DatoSala)="RegistraSala($event)"
+							Nombre="{{ Salas[i]['nombre'] }}"
+							Ocupado="{{ Salas[i]['Ocupando'] }}"
+							Dimensions="{{ Salas[i]['Dimesions'] }}"
+							Numero="{{ Salas[i]['Numero'] }}"
+							Id="{{ Salas[i]['id'] }}"
+						>
+						</Sala>
+					</div>
 				</div>
 				<div *ngIf="OptionLateral == 3">
 					<header class="panel__header">
 						Mi Perfil
 					</header>
-					
 				</div>
 			</div>
 
 			<ng-template #ParticipantesTemplate>
 				<div class="c2-body">
-					<header class="panel__header"> 
+					<header class="panel__header">
 						Lista de Participantes
 					</header>
 					<button (click)="CambiaHideLateral()">Ocultar Panel</button>
-					<div *ngFor="let n of ParticipantesSala; let i = index" >
-					<Participante
-					Nombre="{{ParticipantesSala[i]['Nombre']}}"
-					Paterno="{{ParticipantesSala[i]['ApPaterno']}}"
-					Materno="{{ParticipantesSala[i]['ApMaterno']}}"
-					[Sip]="ParticipantesSala[i]['Sip']"
-					[Iax]="ParticipantesSala[i]['Iax']"
-					></Participante>
+					<div *ngFor="let n of ParticipantesSala; let i = index">
+						<Participante
+							Nombre="{{ ParticipantesSala[i]['Nombre'] }}"
+							Paterno="{{ ParticipantesSala[i]['ApPaterno'] }}"
+							Materno="{{ ParticipantesSala[i]['ApMaterno'] }}"
+							[Sip]="ParticipantesSala[i]['Sip']"
+							[Iax]="ParticipantesSala[i]['Iax']"
+						></Participante>
 					</div>
 				</div>
 			</ng-template>
-			
+
 			<!-- *********footer********   -->
 			<div class="c2-footer">
 				<div class="c2-logo"></div>
@@ -175,21 +174,21 @@
 
 		<div class="c2-escritorio">
 			<div class="c2-desktop">
-					<header class="panel__header">
-						Escritorio
-					</header>
+				<header class="panel__header">
+					Escritorio
+				</header>
 				<section class="e-responsive">
-				<div class="escritorio"  *ngFor="let n of Llamada; let i = index" [@FadeIn]>
-				<llamada (llamadaClose)="CerrarLlamada($event)"
-				(Participantes)="VerParticipantes($event)"
-				Nombre="{{Llamada[i]['nombre']}}"
-				Numero="{{Llamada[i]['numero']}}"
-				Tipo="{{Llamada[i]['Tipo']}}"
-				Id="{{Llamada[i]['id']}}"
-				Estado="{{Llamada[i]['Estado']}}"
-				
-				></llamada>
-				</div>
+					<div class="escritorio" *ngFor="let n of Llamada; let i = index" [@FadeIn]>
+						<llamada
+							(llamadaClose)="CerrarLlamada($event)"
+							(Participantes)="VerParticipantes($event)"
+							Nombre="{{ Llamada[i]['nombre'] }}"
+							Numero="{{ Llamada[i]['numero'] }}"
+							Tipo="{{ Llamada[i]['Tipo'] }}"
+							Id="{{ Llamada[i]['id'] }}"
+							Estado="{{ Llamada[i]['Estado'] }}"
+						></llamada>
+					</div>
 				</section>
 			</div>
 			<div class="c2-panel">
@@ -201,7 +200,6 @@
 				<div class="c2-panel-sockets">
 					<panel [Objeto]="Panel"></panel>
 				</div>
-				
 			</div>
 		</div>
 	</div>
@@ -212,5 +210,4 @@
 			<router-outlet></router-outlet>
 		</div>
 	</ng-template>
-
 </section>

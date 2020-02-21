@@ -17,7 +17,8 @@ export const AppRoutes: Routes = [
 		children: [
 			{
 				path: '',
-				loadChildren: './components/templates/operador-template/operador-template.module#OperadorTemplateModule'
+				loadChildren:
+					'./components/templates/operador-template/operador-template.module#OperadorTemplateModule'
 			}
 		]
 	},
@@ -27,7 +28,8 @@ export const AppRoutes: Routes = [
 		children: [
 			{
 				path: '',
-				loadChildren: './components/templates/administrador-template/administrador-template.module#AdministradorTemplateModule'
+				loadChildren:
+					'./components/templates/administrador-template/administrador-template.module#AdministradorTemplateModule'
 			}
 		]
 	},
