@@ -4,10 +4,13 @@ import { UserService } from '@services/user.service';
 import { first } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { SipService } from '@services/sip.service';
+
 // import { Sala } from '../../../models/sala';
 import { User } from '@models/user';
 import { Observable } from 'rxjs';
 import { stringify } from 'querystring';
+import { SipService } from '../../../../../services/sip.service';
 
 @Component({
 	selector: 'app-login',
@@ -24,6 +27,7 @@ export class LoginComponent implements OnInit {
 	constructor(
 		private router: Router,
 		public userService: UserService,
+		public sipService: SipService,
 		private formBuilder: FormBuilder // public salamodel: Sala,
 	) {}
 
@@ -75,6 +79,7 @@ export class LoginComponent implements OnInit {
 					localStorage.setItem("apMaterno",data.result.apMaterno);
 					localStorage.setItem("correo",data.result.correo);
 					localStorage.setItem("salaId",data.result.salaId);
+					this.guardarSipsLocalStorage();
 					if (data.result.tipo == 'root') {
 						this.router.navigate(['/Operador/Contactos']);
 						console.log('entramos !!!' + data.status);
@@ -108,5 +113,19 @@ export class LoginComponent implements OnInit {
 		return this.userService.datosPrueba().subscribe(res => {
 			console.log(res);
 		});
+	}
+
+	guardarSipsLocalStorage(){
+			this.sipService.llenarSIPsYIAX(this.identity)
+			.subscribe(
+			response => {	
+				
+				console.log(response);
+				localStorage.setItem("sipsYiaxs",response);
+			},
+			er => console.log(er),
+			() => console.log('terminado')
+			);	
+		
 	}
 }
