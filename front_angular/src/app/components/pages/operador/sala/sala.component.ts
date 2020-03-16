@@ -29,8 +29,10 @@ export class SalaComponent implements OnInit {
 		this.sala = { nombre: Nombre, id: id_sala, numero: numero };
 		this.DatoSala.emit(this.sala);
 		// Llamando al SIP 1 😂
-		this.sipCall('7001');
-		console.log(this.sala);
+		// this.sipCall('7001');
+		this.sipCall('1');
+
+		// console.log(this.sala);
 	}
 
 	sipCall(sip) {

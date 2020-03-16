@@ -11,6 +11,7 @@ import {
 	EventHandler
 } from 'jssip';
 
+@Injectable()
 export class WebRTCService {
 	public sound: SoundPlayer = new SoundPlayer();
 	public settings: RTCConfig;
@@ -111,6 +112,21 @@ export class WebRTCService {
 			console.warn(error);
 		}
 	}
+	hold() {
+		try {
+			this.session.hold();
+		} catch (error) {
+			console.warn(error);
+		}
+	}
+
+	unhold() {
+		try {
+			this.session.unhold();
+		} catch (error) {
+			console.warn(error);
+		}
+	}
 
 	remoteAnswer() {
 		try {
@@ -176,5 +192,22 @@ export class WebRTCService {
 
 	getUA() {
 		return this.ua;
+	}
+
+	//test PTT simple **************
+	pttOn() {
+		this.audioLocal.muted = true;
+	}
+	pttOff() {
+		this.audioLocal.muted = false;
+	}
+	/*****************************/
+	remoteCall() {
+		this.session.answer();
+		this.session.connection.addEventListener('addstream', e => {
+			// @ts-ignore
+			this.audioRemote.srcObject = e.stream;
+			this.audioRemote.play();
+		});
 	}
 }
