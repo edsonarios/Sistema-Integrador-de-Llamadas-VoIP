@@ -24,7 +24,13 @@ export class WebRTCService {
 
 	public session: RTCSession;
 	public data: any;
+	static instace;
 	constructor() {
+		if (!!WebRTCService.instace) {
+			return WebRTCService.instace;
+		}
+		WebRTCService.instace = this;
+
 		this.settings = new RTCConfig('7010', '7010', config.HOST);
 		this.socket = new WebSocketInterface(`wss://${config.HOST}:8089/ws`);
 		this.createSession();
