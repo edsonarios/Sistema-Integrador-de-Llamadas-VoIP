@@ -918,6 +918,55 @@ api.post('/addSip', async (req, res, next) => {
 
   res.send(obj)
 })
+
+api.post('/addSipWebRtc', async (req, res, next) => {
+  const params = req.body
+  //creo un sip con todos sus atributos apartir del id del usuario
+  let obj
+  try{
+    obj= await Sip.create(params.usuarioId, {
+      name: params.name,
+      secret: params.secret,
+      callerid: params.callerid,
+      type: params.type,
+      context: params.context,
+      host: params.host,
+      disallow: params.disallow,
+      allow: params.allow,
+      qualify: params.qualify,
+      nat: params.nat,
+
+      qualifyfreq: params.qualifyfreq,
+      deny: params.deny,
+      dtnfnode: params.dtnfnode,
+      canreinvite: params.canreinvite,
+      trustrpid: params.trustrpid,
+      sendrpid: params.sendrpid,
+      transport: params.transport,
+      avpf: params.avpf,
+      force_avp: params.force_avp,
+      icesupport: params.icesupport,
+      encryption: params.encryption,
+      callgroup: params.callgroup,
+      pickupgroup: params.pickupgroup,
+      dial: params.dial,
+      permit: params.permit,
+      callcounter: params.callcounter,
+      faxdetect: params.faxdetect,
+      directmedia: params.directmedia,
+      dtlsenable: params.dtlsenable,
+      dtlsverify: params.dtlsverify,
+      dtlscertfile: params.dtlscertfile,
+      dtlscafile: params.dtlscafile ,
+      dtlssetup: params.dtlssetup,
+      rtcp_mux: params.rtcp_mux
+    })
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
 api.put('/updateSip', async (req, res, next) => {
   const params = req.body
   //edito un sip buscandolo por su id
@@ -1054,6 +1103,20 @@ api.get('/findAllExtension', async (req, res, next) => {
   }
 
   res.send(obj)
+})
+
+api.post('/findAllExtensionByIVR', async (req, res, next) => {
+  const params = req.body 
+  //obtengo todos los atributos de la tabla cdrs
+  const extensionsAll = await Extension.findAll();
+  let getcontextos = []
+  extensionsAll.forEach(obj => {
+      if (obj.context == params.context){
+        getcontextos.push(obj)
+      }
+  })
+
+  res.send(getcontextos)
 })
 
 /// CDR /////////////////////////////////////////////////////////////////////
