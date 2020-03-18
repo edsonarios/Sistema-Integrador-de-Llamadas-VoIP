@@ -20,10 +20,10 @@
 		</ul>
 	</nav>
 	<div class="nav-fin">
-		<input type="text" placeholder="Datepicker" class="form-control" bsDatepicker [bsConfig]="{ isAnimated: true }" />
-		<input type="text" class="form-control" placeholder="Contacto" />
+		<input type="text" [(ngModel)]="searchdate" placeholder="Datepicker" class="form-control" bsDatepicker [bsConfig]="{ isAnimated: true }" />
+		<input type="text" [(ngModel)]="searchcontact" class="form-control" placeholder="Contacto" />
 		<button type="submit">
-			<i class="v-icon-magnifying-glass"></i>
+			<i class="v-icon-magnifying-glass" (click)="buscar()"></i>
 		</button>
 	</div>
 </header>

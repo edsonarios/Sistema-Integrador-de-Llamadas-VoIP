@@ -1,57 +1,106 @@
 <section class="añadir-contact">
-	<div class="añadir-contact--header">
-		<h6>AÑADIR CONTACTO</h6>
-	</div>
+	<div class="container">
+		<h3>Añadir contacto</h3>
+		<form [formGroup]="addform">
+			<div class="row">
+				<div class="form-group col">
+					<label for="nombre">Nombre</label>
+					<input type="text" formControlName="nombre" class="form-control"
+						[ngClass]="{ 'is-invalid': submitted && f.nombre.errors }" />
+					<div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
+						<div *ngIf="f.nombre.errors.required">
+							Por favor, ingrese el nombre del contacto
+						</div>
+					</div>
+				</div>
+				<div class="form-group col">
+					<label for="tipo">Tipo</label>
+					<select class="form-control" formControlName="tipo">
+						<option value="standard">Standard</option>
+						<option value="admin">Administrador</option>
+					</select>
+					<div *ngIf="submitted && f.tipo.errors" class="invalid-feedback">
+						<div *ngIf="f.tipo.errors.required">
+							Por favor, seleccione el tipo
+						</div>
+					</div>
+				</div>
+			</div>
 
-	<div class="añadir-contact--body">
-		<form class="a-form" [formGroup]="addForm" (ngSubmit)="onSubmit()">
-			<div class="añadir-form">
-				<label for="nombre">NOMBRE *</label>
-				<input type="text" formControlName="nombre" class="form-control" />
-			</div>
-			<div class="añadir-form">
-				<label for="tipo">TIPO</label>
-				<select class="form-control" formControlName="tipo">
-					<option value="standard">Standard</option>
-					<option value="admin">Administrador</option>
-				</select>
-			</div>
-			<div class="añadir-form">
-				<label for="apPaterno">APELLIDO PATERNO</label>
-				<input type="text" formControlName="apPaterno" class="form-control" />
-			</div>
-			<div class="añadir-form">
-				<label for="apMaterno">APELLIDO MATERNO</label>
-				<input type="text" formControlName="apMaterno" class="form-control" />
+			<div class="row">
+				<div class="form-group col">
+					<label for="apPaterno">Apellido Paterno</label>
+					<input type="text" formControlName="apPaterno" class="form-control"
+						[ngClass]="{ 'is-invalid': submitted && f.apPaterno.errors }" />
+					<div *ngIf="submitted && f.apPaterno.errors" class="invalid-feedback">
+						<div *ngIf="f.apPaterno.errors.required">
+							Este campo es necesario
+						</div>
+					</div>
+				</div>
+				<div class="form-group col">
+					<label for="apMaterno">Apellido Materno</label>
+					<input type="text" formControlName="apMaterno" class="form-control"
+						[ngClass]="{ 'is-invalid': submitted && f.apMaterno.errors }" />
+					<div *ngIf="submitted && f.apMaterno.errors" class="invalid-feedback">
+						<div *ngIf="f.apMaterno.errors.required">
+							Este campo es necesario
+						</div>
+					</div>
+				</div>
 			</div>
 
-			<div class="añadir-form">
-				<label for="direccion">DIRECCIÓN</label>
-				<input type="text" formControlName="direccion" class="form-control" />
+			<div class="row">
+				<div class="form-group col">
+					<label for="direccion"> Dirección</label>
+					<input type="text" formControlName="direccion" class="form-control"
+						[ngClass]="{ 'is-invalid': submitted && f.direccion.errors }" />
+					<div *ngIf="submitted && f.direccion.errors" class="invalid-feedback">
+						<div *ngIf="f.direccion.errors.required">
+							Este campo es necesario
+						</div>
+					</div>
+				</div>
+				<div class="form-group col">
+					<label for="telefono"> #/ Teléfono</label>
+					<input type="text" formControlName="telefono" class="form-control"
+						[ngClass]="{ 'is-invalid': submitted && f.telefono.errors }" />
+					<div *ngIf="submitted && f.telefono.errors" class="invalid-feedback">
+						<div *ngIf="f.telefono.errors.required">
+							Este campo es necesario
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="añadir-form">
-				<label for="telefono">#/TELÉFONO</label>
-				<input type="text" formControlName="telefono" class="form-control" />
+
+			<div class="row">
+				<div class="form-group col">
+					<label for="correo"> Correo</label>
+					<input type="text" formControlName="correo" class="form-control"
+						[ngClass]="{ 'is-invalid': submitted && f.correo.errors }" />
+					<div *ngIf="submitted && f.correo.errors" class="invalid-feedback">
+						<div *ngIf="f.correo.errors.required">
+							Este campo es necesario
+						</div>
+					</div>
+				</div>
+				<div class="form-group col">
+					<label for="password"> Contraseña</label>
+					<input type="password" formControlName="password" class="form-control"
+						[ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+					<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+						<div *ngIf="f.password.errors.required">
+							Este campo es necesario
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="añadir-form">
-				<label for="correo">CORREO</label>
-				<input type="text" formControlName="correo" class="form-control" />
+
+			<div class="row  justify-content-center">
+				<button class="btn btn-danger" [disabled]="addform.invalid" (click)="addContact()">Crear Contacto</button>
 			</div>
-			<div class="añadir-form">
-				<label for="password">CONTRASEÑA</label>
-				<input type="password" formControlName="password" class="form-control" />
-			</div>
+
 		</form>
 
-	</div>
-	<div class="añadir-contact--footer">
-		<button
-			type="button"
-			data-dismiss="modal"
-			[disabled]="addForm.invalid"
-			(click)="crearcontacto()"
-		>
-			Crear contacto
-		</button>
 	</div>
 </section>

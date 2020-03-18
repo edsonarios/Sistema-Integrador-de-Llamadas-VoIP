@@ -1,31 +1,37 @@
-<h1></h1>
-<!--<input type="button" value="Volver" [routerLink]="['/Administrador/DetalleContacto']">-->
+<div class="container">
+	<h3>Añadir Sala</h3>
+	<form [formGroup]="addform">
 
-<div class="modal-header">
-	<h6 class="modal-title">Formulario para Agregar una Sala</h6>
-</div>
-
-<div class="modal-body">
-	<div class="container ">
-		<form class="añadir_contact" [formGroup]="addForm">
-			<div class="row">
-				<div class="col-md-8 offset-md-2 ">
-					<label for="nombreSala">Nombre de la sala:</label>
-					<input formControlName="nombreSala" type="text"  class="form-control"/>
-				</div>
-				<div class="col-md-8 offset-md-2 ">
-					<label for="descripcion">Descripcion de la sala:</label>
-					<input formControlName="descripcion" type="text"  class="form-control"/>
+		<div class="form-group row justify-content-center">
+			<div class="col-md-6">
+				<label for="nombreSala">Nombre de Sala</label>
+				<input type="text" formControlName="nombreSala" class="form-control"
+					[ngClass]="{ 'is-invalid': submitted && f.nombreSala.errors }" />
+				<div *ngIf="submitted && f.nombreSala.errors" class="invalid-feedback">
+					<div *ngIf="f.nombreSala.errors.required">
+						Este campo es necesario
+					</div>
 				</div>
 			</div>
+		</div>
+		<div class="form-group row justify-content-center">
+			<div class="col-md-6">
+				<label for="descripcion">Descripción de la Sala</label>
+				<input type="text" formControlName="descripcion" class="form-control"
+					[ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }" />
+				<div *ngIf="submitted && f.descripcion.errors" class="invalid-feedback">
+					<div *ngIf="f.descripcion.errors.required">
+						Este campo es necesario
+					</div>
+				</div>
+			</div>
+		</div>
 
-		</form>
 
-		
-	</div>
-</div>
-<div class="modal-footer ">
-	<button type="button" class="btn btn-success btn-block" [disabled]="addForm.invalid" (click)="addSala()">
-		Crear Sala
-	</button>
+		<div class="row  justify-content-center">
+			<button class="btn btn-danger" [disabled]="addform.invalid" (click)="addSala()">Añadir Sala</button>
+		</div>
+
+	</form>
+
 </div>

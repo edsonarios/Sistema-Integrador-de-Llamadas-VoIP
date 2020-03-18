@@ -5,79 +5,91 @@ import { User } from '@models/user';
 import { UserService } from '@services/user.service';
 import { SipService } from '@services/sip.service';
 
+import { debounceTime } from 'rxjs/operators';
+import Swal from 'sweetalert2';
+
 @Component({
 	selector: 'agregar-cotacto',
 	templateUrl: './agregar_contacto.component.html',
-	providers: [UserService],
+	providers: [UserService]
 })
 export class AgregarContactosComponent implements OnInit {
 	wrong = false;
 	public identity: Object;
-	addForm: FormGroup;
+	addform: FormGroup;
+	submitted = false;
+
 	addFormSip: FormGroup;
 	loading = false;
-	public submitted: boolean;
+
 	returnUrl: string;
 	formato: [User];
-
-
 
 	constructor(
 		private router: Router,
 		private formBuilder: FormBuilder,
-		private serviceUser: UserService,
+		private serviceUser: UserService
 	) {
-		this.submitted = true;
-
+		this.buildForm();
 	}
 
-	ngOnInit(){
-		this.addForm = this.formBuilder.group({
+	private buildForm() {
+		this.addform = this.formBuilder.group({
 			nombre: ['', Validators.required],
-			apPaterno:['',Validators.required],
-			apMaterno:['',Validators.required],
-			direccion:['',Validators.required],
-			telefono:['',Validators.required],
-			correo:['',Validators.required],
-			password:['',Validators.required],
-			tipo:['',Validators.required]
-		})
+			apPaterno: ['', Validators.required],
+			apMaterno: ['', Validators.required],
+			direccion: ['', Validators.required],
+			telefono: ['', Validators.required],
+			correo: ['', Validators.required],
+			password: ['', Validators.required],
+			tipo: ['', Validators.required]
+		});
 
-	  }
+		this.addform.valueChanges.pipe(debounceTime(500)).subscribe(value => {});
+	}
 
+	ngOnInit() {}
 
-	onSubmit(){
-
-		this.submitted = false;
-		if(!this.addForm.invalid){
-		  return;
+	onSubmit() {
+		this.submitted = true;
+		if (this.addform.invalid) {
+			return;
 		}
-		alert('Mensaje enviado...');
-
-	  }
+	}
 
 	get f() {
-		return this.addForm.controls;
+		return this.addform.controls;
 	}
 
-	
+	addContact() {
+		Swal.fire({
+			title: 'Esta seguro?',
+			text: 'Se añadirá, el contacto!',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Sí, añadirlo!'
+		}).then(result => {
+			if (result.value) {
+				Swal.fire('Añadido!');
+				this.crearcontacto();
+				this.buildForm();
+			}
+		});
+	}
 
 	crearcontacto() {
-		this.serviceUser.addUsuario( this.addForm.value)
-		.subscribe(
-		rt => {	
-			console.log(rt);
-			console.log(rt.id);
-		},
-		er => console.log(er),
-		() => console.log('terminado')
+		this.serviceUser.addUsuario(this.addform.value).subscribe(
+			rt => {
+				console.log(rt);
+			},
+			er => console.log(er),
+			() => console.log('terminado')
 		);
 
-		console.log(this.addForm.value);
-		window.alert("Usuario Creado");
+		console.log(this.addform.value);
+		window.alert('Usuario Creado');
 		this.router.navigate(['/Administrador/Contactos']);
-	}
-	cerrar(e) {
-		e.close();
 	}
 }

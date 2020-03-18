@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HistorialService } from '@services/historial.service';
 
 import * as moment from 'moment';
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'Historial-Llamadas',
@@ -11,11 +12,16 @@ import * as moment from 'moment';
 export class HistorialLlamadasComponent implements OnInit {
 	public Historial;
 
+	searchdate: string;
+	searchcontact: string;
+
 	public Todos = [];
 	public History = [];
 	public Ocupado = [];
 	public Entrante = [];
 	public Perdida = [];
+	public Xfecha = [];
+	public Xcontacto = [];
 
 	swH: Boolean;
 	swO: Boolean;
@@ -208,6 +214,54 @@ export class HistorialLlamadasComponent implements OnInit {
 			},
 			er => console.log(er)
 		);
+	}
+
+	buscar() {
+		this.Xfecha = [];
+		this.Xcontacto = [];
+		console.log(this.searchdate);
+
+		console.log(this.searchcontact);
+
+		this.Todos.forEach(element => {
+			if (
+				moment(element.calldate)
+					.subtract(10, 'days')
+					.calendar() ==
+				moment(this.searchdate)
+					.subtract(10, 'days')
+					.calendar()
+			)
+				this.Xfecha.push(element);
+
+			var aux = element.clid + '';
+
+			// console.log(aux.indexOf('<'));
+			// console.log(aux.indexOf('>'));
+
+			// console.log(aux.substring(aux.indexOf('<') + 1, aux.indexOf('>')));
+			var aux2 = aux.substring(aux.indexOf('<') + 1, aux.indexOf('>'));
+			if (aux2 == this.searchcontact) {
+				this.Xcontacto.push(element);
+			}
+		});
+
+		if (this.Xfecha.length == 0 || this.Xcontacto.length == 0) {
+			//alert --> No existe entradas para buscar
+			Swal.fire('Nada..!', "No se encontró entradas, para buscarlas", 'warning');
+		}
+
+		this.History = this.Xfecha;
+		this.swH = false;
+	}
+
+	notFound() {
+		Swal.fire('Hey user!', "I don't like you.", 'warning');
+		// Swal({
+		// 	title: 'Error!',
+		// 	text: 'Hola mundo.!',
+		// 	type: 'error'
+		// });
 	}
 
 	onChange(event) {
