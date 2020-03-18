@@ -515,6 +515,37 @@ api.get('/datosPrueba', async (req, res) => {
       app: "confbridge",
       appdata: "3"
     })
+    //111 y 112 Numeros para priorizar
+    //111 menos importante
+    const obj120 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "111",
+      priority: 1,
+      app: "Set",
+      appdata: "QUEUE_PRIO=5"
+    })
+    const obj121 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "111",
+      priority: 2,
+      app: "Queue",
+      appdata: "support,,,,60"
+    })
+    //112 mas importante
+    const obj130 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "112",
+      priority: 1,
+      app: "Set",
+      appdata: "QUEUE_PRIO=10"
+    })
+    const obj131 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "112",
+      priority: 2,
+      app: "Queue",
+      appdata: "support,,,,60"
+    })
   
 
   res.send({ message: obj, obj2, obj21, obj3,obj31, obj4, obj41, obj5, obj51, obj52,obj53,obj22 });

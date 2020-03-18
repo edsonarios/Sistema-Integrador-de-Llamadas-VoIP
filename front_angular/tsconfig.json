@@ -8,17 +8,21 @@
 			"@administrador/*": ["app/components/pages/administrador/*"],
 			"@services/*": ["services/*"]
 		},
-		"module": "commonjs",
+		"module": "esnext",
 		"preserveConstEnums": true,
 		"outDir": "./dist/out-tsc",
 		"sourceMap": false,
 		"declaration": false,
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
+		"resolveJsonModule": true,
 		"moduleResolution": "node",
 		"target": "es5",
+		"types": ["node"],
+		"allowSyntheticDefaultImports": true,
 		"typeRoots": ["node_modules/@types"],
-		"lib": ["es2017", "dom"]
+		"importHelpers": true,
+		"lib": ["es2018", "dom"]
 	},
 
 	"include": [
