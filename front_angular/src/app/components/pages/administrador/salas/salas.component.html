@@ -1,12 +1,11 @@
 <h1>Salas</h1>
-<hr>
+<hr />
 <section class="sala-responsive">
-	<div *ngFor="let n of sala; let i=index">
+	<div *ngFor="let n of sala; let i = index">
 		<sala-card
-		Nombre="{{sala[i]['nombreSala']}}"
-		Descripcion="{{sala[i]['descripcion']}}"
-		IdSala="{{sala[i]['id']}}"
-		
+			Nombre="{{ sala[i]['nombreSala'] }}"
+			Descripcion="{{ sala[i]['descripcion'] }}"
+			IdSala="{{ sala[i]['id'] }}"
 		></sala-card>
 	</div>
 </section>

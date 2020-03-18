@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SipService } from '@services/sip.service';
+import { SipService } from '../../../../../services/sip.service';
 
 @Component({
 	selector: 'radios',
@@ -8,28 +8,22 @@ import { SipService } from '@services/sip.service';
 	providers: [SipService]
 })
 export class RadiosComponent implements OnInit {
+	public radios;
 
-	public radios ;
-
-	constructor(private router: Router,
-		private sipservice: SipService) {
-		
-	}
+	constructor(private router: Router, private sipservice: SipService) {}
 
 	ngOnInit() {
 		this.listarRadios();
 	}
 
-	listarRadios(){
-		this.sipservice.findAllSip()
-	   .subscribe(
-	   response	 => {
-		   console.log('Estos son los Sips existentes... \n'); 
-		   this.radios = response;  
-		   console.log(this.radios);
-	   },
-	   er => console.log(er)
-	   );
-	   
- }	
+	listarRadios() {
+		this.sipservice.findAllSip().subscribe(
+			response => {
+				console.log('Estos son los Sips existentes... \n');
+				this.radios = response;
+				console.log(this.radios);
+			},
+			er => console.log(er)
+		);
+	}
 }

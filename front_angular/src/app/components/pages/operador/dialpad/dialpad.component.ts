@@ -14,7 +14,8 @@ export class DialPadComponent implements OnInit {
 	constructor(private router: Router, private modalService: BsModalService) {}
 
 	mute: boolean = false;
-
+	hold: boolean = false;
+	ptt: boolean = false;
 	DialNum(Num) {
 		this.dialNumber = this.dialNumber + Num;
 	}
@@ -27,7 +28,7 @@ export class DialPadComponent implements OnInit {
 	}
 
 	alert: any;
-	session: WebRTCService;
+	session: any;
 	event: RTCSession;
 	call: any;
 	arr: Array<RTCSession> = [];
@@ -38,6 +39,9 @@ export class DialPadComponent implements OnInit {
 		this.event = this.session.newRTCSession();
 		this.alert = this.session.getMessage();
 		this.arr.push(this.event);
+		this.mute = false;
+		this.hold = false;
+		this.ptt = false;
 	}
 	conectar() {
 		this.session.connect();
@@ -62,5 +66,26 @@ export class DialPadComponent implements OnInit {
 	callUnmute() {
 		this.session.unmute();
 		this.mute = false;
+	}
+
+	callHold() {
+		this.session.hold();
+		this.hold = true;
+	}
+	callUnHold() {
+		this.session.unhold();
+		this.hold = false;
+	}
+	remote() {
+		this.session.remoteCall();
+	}
+	pttOn() {
+		this.session.pttOn();
+		this.ptt = true;
+	}
+
+	pttOff() {
+		this.session.pttOff();
+		this.ptt = false;
 	}
 }

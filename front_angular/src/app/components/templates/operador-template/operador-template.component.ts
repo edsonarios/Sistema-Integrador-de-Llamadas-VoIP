@@ -247,6 +247,7 @@ export class OperadorTemplateComponent implements OnInit {
 		});
 		this.EliminaItemSalas(Sala['id']);
 	}
+
 	CerrarLlamada(llamada) {
 		// Metodo en el escritorio para cerrar la llamada del escritorio
 		this.EliminaItemLlamadas(llamada['Id']);
@@ -287,7 +288,7 @@ export class OperadorTemplateComponent implements OnInit {
 			Estado: 'Inactiva'
 		});
 		this.session.setSession(this.remote);
-		this.session.remoteAnswer();
+		this.session.remoteCall();
 		this.EliminaItemNotificacion(Notificacion['Id']);
 		this.AgregarEventoPanel(Notificacion['Numero'], '15/11/2019', 'false', 'entrante');
 	}

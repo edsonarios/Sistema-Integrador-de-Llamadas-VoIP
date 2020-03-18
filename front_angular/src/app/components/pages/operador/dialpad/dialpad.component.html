@@ -1,6 +1,4 @@
 <section class="dialpad">
-	<audio src="" id="audio-local"></audio>
-	<audio src="" id="audio-remote"></audio>
 	<div class="d-titulo modal-title">
 		<h1>DIALPAD</h1>
 	</div>
@@ -68,11 +66,11 @@
 			0
 		</button>
 	</div>
-	<div class="d-numeral">
+	<!-- <div class="d-numeral">
 		<button (click)="DialNum('#')">
 			#
 		</button>
-	</div>
+	</div> -->
 	<!-- <div class="d-cancelar">
     <button>
       CANCELAR
@@ -85,13 +83,31 @@
 		<button (click)="endCall()">
 			Colgar
 		</button>
-
+		<!-- <button (click)="remote()">
+			responder
+		</button> -->
 		<button *ngIf="!mute" (click)="callMute()">
 			mute
 		</button>
 
 		<button *ngIf="mute" (click)="callUnmute()">
 			ummute
+		</button>
+
+		<!-- <button *ngIf="!hold" (click)="callHold()">
+			hold
+		</button>
+
+		<button *ngIf="hold" (click)="callUnHold()">
+			hold
+		</button> -->
+
+		<button *ngIf="!ptt" (click)="pttOn()">
+			PTT On
+		</button>
+
+		<button *ngIf="ptt" (click)="pttOff()">
+			PTT off
 		</button>
 	</div>
 </section>
