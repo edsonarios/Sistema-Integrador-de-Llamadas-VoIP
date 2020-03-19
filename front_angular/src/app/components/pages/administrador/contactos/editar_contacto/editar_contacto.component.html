@@ -7,7 +7,7 @@
 
 <div class="modal-body">
 	<div class="container">
-		<form class="añadir_contact" [formGroup]="addForm" >
+		<form class="añadir_contact" [formGroup]="addForm">
 
 			<div class="row">
 				<div class="col-md-6 form-group">
@@ -32,8 +32,8 @@
 					<label for="apMaterno">APELLIDO MATERNO</label>
 					<input type="text" formControlName="apMaterno" class="form-control" />
 				</div>
-			</div>	
-			
+			</div>
+
 
 			<div class="row">
 				<div class="col-md-6 form-group">
@@ -44,25 +44,26 @@
 					<label for="telefono">#/TELÉFONO</label>
 					<input type="text" formControlName="telefono" class="form-control" />
 				</div>
-				
+
 			</div>
 
 			<div class="row form-group">
-					<label for="correo">CORREO</label>
-					<input type="text" formControlName="correo" class="form-control" />
-			</div>	
-			<div class="row form-group">	
-					<label for="password">CONTRASEÑA</label>
-					<input type="password" formControlName="password" class="form-control" />
+				<label for="correo">CORREO</label>
+				<input type="text" formControlName="correo" class="form-control" />
+			</div>
+			<div class="row form-group">
+				<label for="password">CONTRASEÑA</label>
+				<input type="password" formControlName="password" class="form-control" />
 			</div>
 		</form>
 
-		
+
 	</div>
 </div>
 <div class="modal-footer ">
-	<button type="button" class="btn btn-danger btn-block" [routerLink]="['/Administrador/DetalleContacto', {id: identy}]">Volver</button>
-	<button type="button" class="btn btn-primary btn-block" (click)="editarcontacto()">
+	<button type="button" class="btn btn-danger btn-block"
+		[routerLink]="['/Administrador/DetalleContacto', {id: identy}]">Volver</button>
+	<button type="button" class="btn btn-primary btn-block" (click)="editContact()">
 		Editar
 	</button>
 </div>

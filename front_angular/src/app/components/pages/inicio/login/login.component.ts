@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 	ngOnInit() {
 		// this.mostrar()
 		localStorage.clear();
-		
+
 		this.loginForm = this.formBuilder.group({
 			username: ['', Validators.required],
 			password: ['', Validators.required]
@@ -52,16 +52,7 @@ export class LoginComponent implements OnInit {
 			return;
 		}
 
-		
-		this.user = new User(
-			'',
-			'',
-			'',
-			'',
-			'',
-			this.f.username.value,
-			this.f.password.value
-		);
+		this.user = new User('', '', '', '', '', this.f.username.value, this.f.password.value);
 		this.loading = true;
 		this.userService
 			.login(this.user)
@@ -69,30 +60,30 @@ export class LoginComponent implements OnInit {
 			.subscribe(
 				data => {
 					this.identity = data;
-					console.log(this.identity);
-// >>>>>>>>>HEAD
-					console.log(data.result.id);
-					localStorage.setItem("idUser", data.result.id);
-					localStorage.setItem("nombre",data.result.nombre);
-					localStorage.setItem("apPaterno",data.result.apPaterno);
-					localStorage.setItem("apMaterno",data.result.apMaterno);
-					localStorage.setItem("correo",data.result.correo);
-					localStorage.setItem("salaId",data.result.salaId);
+					// console.log(this.identity);
+					// >>>>>>>>>HEAD
+
+					localStorage.setItem('idUser', data.result.id);
+					localStorage.setItem('nombre', data.result.nombre);
+					localStorage.setItem('apPaterno', data.result.apPaterno);
+					localStorage.setItem('apMaterno', data.result.apMaterno);
+					localStorage.setItem('correo', data.result.correo);
+					localStorage.setItem('salaId', data.result.salaId);
 					this.guardarSipsLocalStorage();
 					if (data.result.tipo == 'root') {
 						this.router.navigate(['/Operador/Contactos']);
 						console.log('entramos !!!' + data.status);
 					}
-//=======
+					//=======
 					//console.log(data.result.id);
 					if (data.result.tipo == 'admin') {
 						this.router.navigate(['/Administrador/Contactos']);
 						console.log('entramos como admin!!!' + data.status);
-//>>>>>>> origin/master
+						//>>>>>>> origin/master
 					}
 					if (data.result.tipo == 'standard') {
 						this.router.navigate(['/Operador/Historial']);
-					console.log('entramos  como operador!!!' + data.status);
+						console.log('entramos  como operador!!!' + data.status);
 					} else {
 					}
 				},
@@ -105,8 +96,7 @@ export class LoginComponent implements OnInit {
 					}
 				}
 			);
-
-	};
+	}
 	// Issues list
 	mostrar() {
 		return this.userService.datosPrueba().subscribe(res => {
@@ -114,17 +104,23 @@ export class LoginComponent implements OnInit {
 		});
 	}
 
-	guardarSipsLocalStorage(){
-			this.sipService.llenarSIPsYIAX(this.identity)
-			.subscribe(
-			response => {	
-				
-				console.log(response);
-				localStorage.setItem("sipsYiaxs",response);
+	guardarSipsLocalStorage() {
+		var ii = localStorage.getItem('idUser');
+
+		this.sipService.llenarSIPsYIAX(ii).subscribe(
+			response => {
+				response[0].forEach(element => {
+					if (element.transport != null) {
+						localStorage.setItem('sipWebRtc', element);
+					}
+				});
+
+				console.log(response[0]);
+
+				localStorage.setItem('sipsYiaxs', response);
 			},
 			er => console.log(er),
 			() => console.log('terminado')
-			);	
-		
+		);
 	}
 }

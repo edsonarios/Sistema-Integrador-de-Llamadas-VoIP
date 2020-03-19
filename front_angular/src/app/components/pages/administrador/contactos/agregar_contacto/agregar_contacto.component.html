@@ -1,6 +1,8 @@
 <section class="añadir-contact">
 	<div class="container">
+
 		<h3>Añadir contacto</h3>
+		<hr>
 		<form [formGroup]="addform">
 			<div class="row">
 				<div class="form-group col">
@@ -96,11 +98,43 @@
 				</div>
 			</div>
 
+
+			<hr>
+			<h3>Configuraciones de Sip WebRTC</h3>
+			<hr>
+
+			<form [formGroup]="addSipWeb">
+
+				<div class="row justify-content-center">
+					<div class="col-md-6 ">
+						<label for="alias">Alias :</label>
+						<input type="text" formControlName="alias" class="form-control" />
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6 ">
+						<label for="numero">Numero</label>
+						<input type="text" class="form-control" formControlName="numero" />
+					</div>
+					<div class="col-md-6 ">
+						<label for="password">Contraseña</label>
+						<input type="password" class="form-control" formControlName="password" />
+					</div>
+				</div>
+			</form>
+
+			<br>
+
 			<div class="row  justify-content-center">
-				<button class="btn btn-danger" [disabled]="addform.invalid" (click)="addContact()">Crear Contacto</button>
+				<button class="btn btn-danger" [disabled]="addform.invalid" (click)="addContact();">Crear
+					Contacto</button>
 			</div>
 
 		</form>
+
+
+
 
 	</div>
 </section>

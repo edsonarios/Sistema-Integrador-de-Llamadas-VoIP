@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from '@models/user';
+import { SipWebRtc } from '@models/sipWebRtc';
 import { UserService } from '@services/user.service';
 import { SipService } from '@services/sip.service';
 
@@ -19,8 +20,9 @@ export class AgregarContactosComponent implements OnInit {
 	addform: FormGroup;
 	submitted = false;
 
-	addFormSip: FormGroup;
-	loading = false;
+	addSipWeb: FormGroup;
+	sipweb: SipWebRtc;
+	idparcial;
 
 	returnUrl: string;
 	formato: [User];
@@ -28,7 +30,9 @@ export class AgregarContactosComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private formBuilder: FormBuilder,
-		private serviceUser: UserService
+		private formBuilder1: FormBuilder,
+		private serviceUser: UserService,
+		private serviceSipweb: SipService
 	) {
 		this.buildForm();
 	}
@@ -45,7 +49,15 @@ export class AgregarContactosComponent implements OnInit {
 			tipo: ['', Validators.required]
 		});
 
+		this.addSipWeb = this.formBuilder1.group({
+			alias: ['', Validators.required],
+			tipo: ['', Validators.required],
+			numero: ['', Validators.required],
+			password: ['', Validators.required]
+		});
+
 		this.addform.valueChanges.pipe(debounceTime(500)).subscribe(value => {});
+		this.addSipWeb.valueChanges.pipe(debounceTime(500)).subscribe(value => {});
 	}
 
 	ngOnInit() {}
@@ -73,23 +85,40 @@ export class AgregarContactosComponent implements OnInit {
 		}).then(result => {
 			if (result.value) {
 				Swal.fire('Añadido!');
-				this.crearcontacto();
+
+				this.crearcontacto(
+					this.addSipWeb.value.alias,
+					this.addSipWeb.value.numero,
+					this.addSipWeb.value.numero
+				);
+
 				this.buildForm();
 			}
 		});
 	}
 
-	crearcontacto() {
+	crearcontacto(ali, numer, pass) {
 		this.serviceUser.addUsuario(this.addform.value).subscribe(
-			rt => {
-				console.log(rt);
+			response => {
+				this.veraddSipWeb(response.id, ali, numer, pass);
 			},
 			er => console.log(er),
 			() => console.log('terminado')
 		);
-
 		console.log(this.addform.value);
-		window.alert('Usuario Creado');
+
 		this.router.navigate(['/Administrador/Contactos']);
+	}
+
+	veraddSipWeb(id, ali, numer, pass) {
+		this.sipweb = new SipWebRtc(ali, numer, pass, id, 'friend');
+		// console.log(this.sipweb);
+		this.serviceSipweb.addSipWebRTC(this.sipweb).subscribe(
+			response => {
+				console.log(response);
+			},
+			er => console.log(er),
+			() => console.log('terminado')
+		);
 	}
 }
