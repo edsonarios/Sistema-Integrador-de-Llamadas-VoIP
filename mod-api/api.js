@@ -68,7 +68,8 @@ api.get('/datosPrueba', async (req, res) => {
   console.log(HoraYFecha)
   const obj = await Sala.create({ 
     nombreSala: "default",
-    descripcion: "sala por default"
+    descripcion: "sala por default",
+    switch: "1"
   })
   //Usuario1
   const obj2 = await Usuario.create(obj.id, {
@@ -83,22 +84,9 @@ api.get('/datosPrueba', async (req, res) => {
     conectado: false
   })
   const obj21 = await Sip.create(obj2.id, {
-    name: "7001",
-    secret: "7001",
-    callerid: "7001",
-    type: "friend",
-    context: "default",
-    host: "dynamic",
-    disallow: "all",
-    allow: "ulaw",
-    qualify:"yes",
-    nat:"force_rport,comedia"
-  })
-  //WEBRTC para usuario 1
-  const obj22 = await Sip.create(obj2.id, {
-    name: "7010",
-    secret: "7010",
-    callerid: "7010 <7010>",
+    name: "2001",
+    secret: "2001",
+    callerid: "2001",
     type: "friend",
     context: "default",
     host: "dynamic",
@@ -106,6 +94,21 @@ api.get('/datosPrueba', async (req, res) => {
     allow: "ulaw",
     qualify:"yes",
     nat:"force_rport,comedia",
+    switchsip:"1"
+  })
+  //WEBRTC para usuario 1
+  const obj22 = await Sip.create(obj2.id, {
+    name: "3010",
+    secret: "3010",
+    callerid: "3010 <3010>",
+    type: "friend",
+    context: "default",
+    host: "dynamic",
+    disallow: "all",
+    allow: "ulaw",
+    qualify:"yes",
+    nat:"force_rport,comedia",
+    switchsip:"1",
 
     qualifyfreq:"60",
     deny:"0.0.0.0/0.0.0.0",
@@ -132,12 +135,12 @@ api.get('/datosPrueba', async (req, res) => {
     dtlssetup:"actpass",
     rtcp_mux:"yes"
   })
-  //VOICEMAIL PARA 7001
+  //VOICEMAIL PARA 2001
   const obj23 = await Voicemail.create(obj2.id, {
     uniqueid:"1",
     customer_id:"1",
     context:"default",
-    mailbox:"7001",
+    mailbox:"2001",
     password:"1234",
     fullname:"Nombre y apellido",
     email:"edson.anawaya@patelecomsrl.com",
@@ -173,22 +176,23 @@ api.get('/datosPrueba', async (req, res) => {
     conectado: false
   })
   const obj31 = await Sip.create(obj3.id, {
-    name: "7002",
-    secret: "7002",
-    callerid: "7002",
+    name: "2002",
+    secret: "2002",
+    callerid: "2002",
     type: "friend",
     context: "default",
     host: "dynamic",
     disallow: "all",
     allow: "ulaw",
     qualify:"yes",
-    nat:"force_rport,comedia"
+    nat:"force_rport,comedia",
+    switchsip:"1"
   })
     //WEBRTC para usuario 1
     const obj33 = await Sip.create(obj2.id, {
-      name: "7011",
-      secret: "7011",
-      callerid: "7011 <7011>",
+      name: "3011",
+      secret: "3011",
+      callerid: "3011 <3011>",
       type: "friend",
       context: "default",
       host: "dynamic",
@@ -196,6 +200,7 @@ api.get('/datosPrueba', async (req, res) => {
       allow: "ulaw",
       qualify:"yes",
       nat:"force_rport,comedia",
+      switchsip:"1",
       
       qualifyfreq:"60",
       deny:"0.0.0.0/0.0.0.0",
@@ -222,12 +227,12 @@ api.get('/datosPrueba', async (req, res) => {
       dtlssetup:"actpass",
       rtcp_mux:"yes"
     })
-  //VOICEMAIL PARA 7002
+  //VOICEMAIL PARA 2002
   const obj32 = await Voicemail.create(obj2.id, {
     uniqueid:"1",
     customer_id:"1",
     context:"default",
-    mailbox:"7002",
+    mailbox:"2002",
     password:"1234",
     fullname:"Nombre y apellido",
     email:"otro@patelecomsrl.com",
@@ -269,21 +274,21 @@ api.get('/datosPrueba', async (req, res) => {
   //Añade para que puedan llamarse entre los 7XXX
   const obj5 = await Extension.create(obj.id, {
     context: "default",
-    exten: "_7XXX",
+    exten: "_XXXX",
     priority: "1",
     app: "Monitor",
     appdata: "wav,,b"
   })
   const obj51 = await Extension.create(obj.id, {
     context: "default",
-    exten: "_7XXX",
+    exten: "_XXXX",
     priority: "2",
     app: "Dial",
     appdata: "SIP/${EXTEN},10,Ttr"
   })
   const obj52 = await Extension.create(obj.id, {
     context: "default",
-    exten: "_7XXX",
+    exten: "_XXXX",
     priority: "3",
     app: "hangup",
     appdata: ""
@@ -291,7 +296,7 @@ api.get('/datosPrueba', async (req, res) => {
   //VOICEMAIL
   const obj53 = await Extension.create(obj.id, {
     context: "default",
-    exten: "_70XX",
+    exten: "_XXXX",
     priority: "3",
     app: "VoiceMail",
     appdata: "${EXTEN}@default"
@@ -555,7 +560,8 @@ api.get('/datosRoot', async (req, res) => {
   //añade un nuevo root
   const obj = await Sala.create({
     nombreSala: "root",
-    descripcion: "sala root"
+    descripcion: "sala root",
+    switch: "switch encendido-apagado"
   })
   const obj2 = await Usuario.create(obj.id,{
     nombre: "root",
@@ -577,7 +583,8 @@ api.get('/datosOperador', async (req, res) => {
   //añade un nuevo root
   const obj = await Sala.create({
     nombreSala: "Operador",
-    descripcion: "sala Operador"
+    descripcion: "sala Operador",
+    switch: "switch encendido-apagado"
   })
   const obj2 = await Usuario.create(obj.id,{
     nombre: "Operador",
@@ -604,8 +611,8 @@ api.post('/addSala', async (req, res, next) => {
   try{
     obj= await Sala.create({
       nombreSala: params.nombreSala,
-      descripcion: params.descripcion
-  
+      descripcion: params.descripcion,
+      switch: params.switch
     })
   }catch(e){
     return next(e)
@@ -620,7 +627,8 @@ api.put('/updateSala', async (req, res, next) => {
   try{
     obj= await Sala.update(params.id, {
       nombreSala: params.nombreSala,
-      descripcion: params.descripcion
+      descripcion: params.descripcion,
+      switch: params.switch
     })
   }catch(e){
     return next(e)
@@ -667,49 +675,6 @@ api.post('/getUsuariosPorSala', async (req, res, next) => {
   })
   res.send(usuariosSala)
 });
-
-api.delete('/deleteSalaWithAll', async(req, res, next) => {
-  const params = req.body 
-  //obtenemos todos los usuarios, sips e iaxs con sus atributos
-  const usuariosSala1 = await Usuario.findAll();
-  const sipsAll = await Sip.findAll();
-  const iaxsAll = await Iax.findAll();
-  let usuariosSala2 = []
-  //itero sobre el usuario y obtenemos los usuarios por su id         
-  usuariosSala1.forEach(usuario => {
-            
-    if(usuario.salaId == params.salaId){
-       usuariosSala2.push(usuario.id)
-    }
-  })
-  //iteramos a todos los usuarios y borramos su sip de un usuario
-  for (let i = 0; i < usuariosSala2.length; i++) {
-    sipsAll.forEach(obj => {
-      
-      if(obj.usuarioId == usuariosSala2[i]){
-        Sip.destroy(obj.usuarioId)
-    }
-    })
-  } 
-  //iteramos a todos los ususarios y borramos sus iaxs de un usuario
-  for (let i = 0; i < usuariosSala2.length; i++) {
-    iaxsAll.forEach(obj => {
-      
-      if(obj.usuarioId == usuariosSala2[i]){
-        Iax.destroy(obj.usuarioId)
-    }
-    })
-  } 
-  //iteramos a todos los usuarios y borramos al usuario de una sala
-  for (let i = 0; i < usuariosSala2.length; i++) {
-    await Usuario.destroy(usuariosSala2[i])
-  }
-  //borramos la sala 
-  await Sala.destroy(params.salaId)
-
-  res.send({message : 'se borro la sala'})
-   
-})
 
 /// USUARIO /////////////////////////////////////////////////////////////////////
 
@@ -941,7 +906,8 @@ api.post('/addSip', async (req, res, next) => {
       disallow: params.disallow,
       allow: params.allow,
       qualify: params.qualify,
-      nat: params.nat
+      nat: params.nat,
+      switchsip:params.switchsip
     })
   }catch(e){
     return next(e)
@@ -966,6 +932,7 @@ api.post('/addSipWebRtc', async (req, res, next) => {
       allow: params.allow,
       qualify: params.qualify,
       nat: params.nat,
+      switchsip:params.switchsip,
 
       qualifyfreq: params.qualifyfreq,
       deny: params.deny,
@@ -1013,7 +980,58 @@ api.put('/updateSip', async (req, res, next) => {
       disallow: params.disallow,
       allow: params.allow,
       qualify: params.qualify,
-      nat: params.nat
+      nat: params.nat,
+      switchsip: params.switchsip
+    })
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
+
+api.put('/updateSipWebRtc', async (req, res, next) => {
+  const params = req.body
+  //edito un sip buscandolo por su id
+  let obj
+  try{
+    obj= await Sip.update(params.id, {
+      name: params.name,
+      secret: params.secret,
+      callerid: params.callerid,
+      type: params.type,
+      context: params.context,
+      host: params.host,
+      disallow: params.disallow,
+      allow: params.allow,
+      qualify: params.qualify,
+      nat: params.nat,
+      switchsip: params.switchsip,
+
+      qualifyfreq: params.qualifyfreq,
+      deny: params.deny,
+      dtnfnode: params.dtnfnode,
+      canreinvite: params.canreinvite,
+      trustrpid: params.trustrpid,
+      sendrpid: params.sendrpid,
+      transport: params.transport,
+      avpf: params.avpf,
+      force_avp: params.force_avp,
+      icesupport: params.icesupport,
+      encryption: params.encryption,
+      callgroup: params.callgroup,
+      pickupgroup: params.pickupgroup,
+      dial: params.dial,
+      permit: params.permit,
+      callcounter: params.callcounter,
+      faxdetect: params.faxdetect,
+      directmedia: params.directmedia,
+      dtlsenable: params.dtlsenable,
+      dtlsverify: params.dtlsverify,
+      dtlscertfile: params.dtlscertfile,
+      dtlscafile: params.dtlscafile ,
+      dtlssetup: params.dtlssetup,
+      rtcp_mux: params.rtcp_mux
     })
   }catch(e){
     return next(e)
@@ -1136,7 +1154,7 @@ api.get('/findAllExtension', async (req, res, next) => {
   res.send(obj)
 })
 
-api.post('/findAllExtensionByIVR', async (req, res, next) => {
+api.post('/findAllExtensionByContext', async (req, res, next) => {
   const params = req.body 
   //obtengo todos los atributos de la tabla cdrs
   const extensionsAll = await Extension.findAll();
@@ -1428,7 +1446,8 @@ api.post('/addIax', async (req, res, next) => {
       context: params.context,
       host: params.host,
       disallow: params.disallow,
-      allow: params.allow
+      allow: params.allow,
+      switchiaxs: params.switchiaxs
     })
   }catch(e){
     return next(e)
@@ -1450,7 +1469,8 @@ api.put('/updateIax', async (req, res, next) => {
       context: params.context,
       host: params.host,
       disallow: params.disallow,
-      allow: params.allow
+      allow: params.allow,
+      switchiaxs: params.switchiaxs
     })
   }catch(e){
     return next(e)

@@ -47,6 +47,10 @@ module.exports = function setupSipModel (config) {
       type: Sequelize.STRING,
       allowNull: true
     },
+    switchsip: {
+      type: Sequelize.STRING,
+      allowNull: true
+    },
     //Nuevos
     qualifyfreq: {
       type: Sequelize.STRING,

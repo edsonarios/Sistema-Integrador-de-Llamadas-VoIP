@@ -27,6 +27,18 @@ module.exports = function setupSip(SipModel, UsuarioModel) {
     return updated
   }
 
+  async function update1(context) {
+    //return await SipModel.update({
+    const cond = {
+      where: {
+        context
+      }
+    }
+    const updated = await SipModel.update(context, cond)
+    return updated
+    //})
+  }
+
   async function findById(id) {
     return await SipModel.findOne({
       where: {
@@ -68,6 +80,7 @@ module.exports = function setupSip(SipModel, UsuarioModel) {
   return {
     create,
     update,
+    update1,
     findById,
     findOne,
     findAll,

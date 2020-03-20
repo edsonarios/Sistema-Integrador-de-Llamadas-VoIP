@@ -38,6 +38,10 @@ module.exports = function setupIaxModel (config) {
     allow: {
       type: Sequelize.STRING,
       allowNull: true
+    },
+    switchiaxs: {
+      type: Sequelize.STRING,
+      allowNull: true
     }
     
   })
