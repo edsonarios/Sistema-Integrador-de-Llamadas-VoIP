@@ -551,6 +551,56 @@ api.get('/datosPrueba', async (req, res) => {
       app: "Queue",
       appdata: "support,,,,60"
     })
+
+    //Intervenir llamadas en curso
+    //555X... Intervenir llamada silencionamente, ninguno de los 2 puede escucharte
+    const obj140 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "_555.",
+      priority: 1,
+      app: "ChanSpy",
+      appdata: "SIP/${EXTEN:3},qb"
+    })
+    const obj141 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "_555.",
+      priority: 2,
+      app: "hangup",
+      appdata: ""
+    })
+    //556X... Intervenir llamada, pero solo el numero que interveniste puede escucharte, no ambos
+    const obj150 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "_556.",
+      priority: 1,
+      app: "ChanSpy",
+      appdata: "SIP/${EXTEN:3},qw"
+    })
+    const obj151 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "_556.",
+      priority: 2,
+      app: "hangup",
+      appdata: ""
+    })
+    //557XXX... Intervenir llamada donde ambos pueden escucharte
+    const obj160 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "_557.",
+      priority: 1,
+      app: "ChanSpy",
+      appdata: "SIP/${EXTEN:3},qB"
+    })
+    const obj161 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "_557.",
+      priority: 2,
+      app: "hangup",
+      appdata: ""
+    })
+
+    
+
   
 
   res.send({ message: obj, obj2, obj21, obj3,obj31, obj4, obj41, obj5, obj51, obj52,obj53,obj22 });
