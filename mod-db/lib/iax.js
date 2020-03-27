@@ -27,6 +27,16 @@ module.exports = function setupIax(IaxModel, UsuarioModel) {
     return updated
   }
 
+  async function updateiaxCont(context, obj) {
+    const cond = {
+      where: {
+        context
+      }
+    }
+    const updated = await IaxModel.update(obj, cond)
+    return updated
+  }
+
   async function findById(id) {
     return await IaxModel.findOne({
       where: {
@@ -64,6 +74,7 @@ module.exports = function setupIax(IaxModel, UsuarioModel) {
   return {
     create,
     update,
+    updateiaxCont,
     findById,
     findAll,
     destroyAll,

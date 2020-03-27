@@ -676,6 +676,49 @@ api.post('/getUsuariosPorSala', async (req, res, next) => {
   res.send(usuariosSala)
 });
 
+api.post('/deleteSala', async(req, res, next) => {
+    const params = req.body 
+    const sipsAll = await Sip.findAll();
+    const iaxsAll = await Iax.findAll();
+    let sipsdeusuario = []
+    let iaxsdeusuario = []
+    let edit
+    
+    sipsAll.forEach(obj => {
+      if(obj.context == params.context){
+        sipsdeusuario.push(obj)
+      }
+    })  
+    
+    iaxsAll.forEach(obj => {
+      if(obj.context == params.context){
+        iaxsdeusuario.push(obj)
+      }
+    })
+    
+    sipsdeusuario.forEach(obj =>{
+      try{
+        edit = Sip.updatesipCont(obj.context, {
+          context: params.nuevaSala,
+        })
+      }catch(e){
+        return next(e)
+      }
+    })
+
+    iaxsdeusuario.forEach(obj =>{
+      try{
+        edit = Iax.updateiaxCont(obj.context, {
+          context: params.nuevaSala,
+        })
+      }catch(e){
+        return next(e)
+      }
+    })
+  
+  await Sala.destroynomSala(params.context)
+  res.send(edit)
+})
 /// USUARIO /////////////////////////////////////////////////////////////////////
 
 api.post('/addUsuario', async (req, res, next) => {

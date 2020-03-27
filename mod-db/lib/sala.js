@@ -48,6 +48,14 @@ module.exports = function setupSala(SalaModel) {
       }
     })
   }
+
+  async function destroynomSala(nombreSala) {
+    return await SalaModel.destroy({
+      where: {
+        nombreSala
+      }
+    })
+  }
   return {
     create,
     update,
@@ -55,6 +63,7 @@ module.exports = function setupSala(SalaModel) {
     findAll,
     destroyAll,
     findAllQuery,
-    destroy
+    destroy,
+    destroynomSala
   }
 }
