@@ -2,6 +2,7 @@ import { Component, OnInit ,Input} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IaxService } from '@services/iax.service';
 
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'iax',
@@ -24,6 +25,20 @@ export class IaxComponent implements OnInit {
 		
 	}
 	
+	eliminar() {
+		Swal.fire({
+			title: 'Esta seguro?',
+			text: 'Se eliminará, el número!',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Sí, añadirlo!'
+		}).then(result => {
+			this.eliminariax();
+		});
+	}
+
 	eliminariax(){
 		this.identy = this.route.snapshot.paramMap.get('id');
 		console.log(this.identy);

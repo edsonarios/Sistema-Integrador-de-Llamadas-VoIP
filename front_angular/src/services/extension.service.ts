@@ -4,16 +4,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
-import { User } from '../models/user';
 import { GLOBAL } from './global';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class SalaService {
-	public idUser = localStorage.getItem('idUser');
+export class ExtensionService {
 	public url: string;
-	public user: User;
 
 	constructor(private http: HttpClient) {
 		this.url = GLOBAL.url;
@@ -25,28 +22,6 @@ export class SalaService {
 			'Content-Type': 'application/json'
 		})
 	};
-
-	addSala(objsala): Observable<any> {
-		return this.http
-			.post<any>(this.url + 'addSala', objsala, this.httpOptions)
-			.pipe(retry(1), catchError(this.errorHandl));
-	}
-
-	listarSalas(): Observable<any> {
-		return this.http.get<any>(this.url + 'findAllSala').pipe(retry(1), catchError(this.errorHandl));
-	}
-
-	findByIdSala(idsala): Observable<any> {
-		return this.http
-			.post<any>(this.url + 'findByIdSala', idsala, this.httpOptions)
-			.pipe(retry(1), catchError(this.errorHandl));
-	}
-
-	updateSala(idsala): Observable<any> {
-		return this.http
-			.put<any>(this.url + 'updateSala', idsala, this.httpOptions)
-			.pipe(retry(1), catchError(this.errorHandl));
-	}
 
 	// Error handling
 	errorHandl(error) {
@@ -60,5 +35,29 @@ export class SalaService {
 		}
 		console.log(errorMessage);
 		return throwError(errorMessage);
+	}
+
+	addExtension(idsala): Observable<any> {
+		return this.http
+			.post<any>(this.url + 'addExtension', idsala, this.httpOptions)
+			.pipe(retry(1), catchError(this.errorHandl));
+	}
+
+	updateExetension(idextension): Observable<any> {
+		return this.http
+			.put<any>(this.url + 'updateExtension', idextension, this.httpOptions)
+			.pipe(retry(1), catchError(this.errorHandl));
+	}
+
+	findByIdExtension(idextension): Observable<any> {
+		return this.http
+			.post<any>(this.url + 'findByIdExtension', idextension, this.httpOptions)
+			.pipe(retry(1), catchError(this.errorHandl));
+	}
+
+	findAllExtension(): Observable<any> {
+		return this.http
+			.get<any>(this.url + 'findAllExtension')
+			.pipe(retry(1), catchError(this.errorHandl));
 	}
 }

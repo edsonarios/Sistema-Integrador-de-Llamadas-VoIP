@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SipService } from '@services/sip.service';
 import { IaxService } from '@services/iax.service';
 
+import Swal from 'sweetalert2';
+
 @Component({
 	selector: 'AgregarNumero',
 	templateUrl: './agregar_numero.component.html'
@@ -32,7 +34,22 @@ export class AgregarNumeroComponent implements OnInit {
 		});
 	}
 
+	add() {
+		Swal.fire({
+			title: 'Esta seguro?',
+			text: 'Se añadirá, el número!',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Sí, añadirlo!'
+		}).then(result => {
+			this.addnumero();
+		});
+	}
+
 	addnumero() {
+		
 		if (this.addForm.value.tipo == 'SIP') {
 			this.serviceSip
 				.addSIP(

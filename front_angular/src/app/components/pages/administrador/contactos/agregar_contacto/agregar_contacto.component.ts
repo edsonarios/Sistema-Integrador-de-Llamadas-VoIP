@@ -56,8 +56,12 @@ export class AgregarContactosComponent implements OnInit {
 			password: ['', Validators.required]
 		});
 
-		this.addform.valueChanges.pipe(debounceTime(500)).subscribe(value => {});
-		this.addSipWeb.valueChanges.pipe(debounceTime(500)).subscribe(value => {});
+		this.addform.valueChanges.pipe(debounceTime(500)).subscribe(value => {
+			console.log(value);
+		});
+		this.addSipWeb.valueChanges.pipe(debounceTime(500)).subscribe(value => {
+			console.log(value);
+		});
 	}
 
 	ngOnInit() {}

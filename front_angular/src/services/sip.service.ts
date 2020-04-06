@@ -42,8 +42,11 @@ export class SipService {
 			.pipe(retry(1), catchError(this.errorHandl));
 	}
 
-	deleteSip(idd): Observable<any> {
-		return this.http.delete<any>(this.url + 'deleteSip' + { id: idd });
+
+	deleteSip(idsip: number): Observable<any> {
+		return this.http
+			.delete(`${this.url}deleteSip?id=${idsip}`, this.httpOptions)
+			.pipe(retry(1), catchError(this.errorHandl));
 	}
 
 	llenarSIPsYIAX(idu): Observable<any> {
