@@ -19,9 +19,10 @@ export class RadiosComponent implements OnInit {
 	listarRadios() {
 		this.sipservice.findAllSip().subscribe(
 			response => {
-				console.log('Estos son los Sips existentes... \n');
-				this.radios = response;
-				console.log(this.radios);
+				response.forEach(element => {
+					var obj = element.name;
+					if (obj.toLowerCase.indexOf('radio') == 0) this.radios.push(obj);
+				});
 			},
 			er => console.log(er)
 		);

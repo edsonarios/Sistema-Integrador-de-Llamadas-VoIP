@@ -42,7 +42,6 @@ export class SipService {
 			.pipe(retry(1), catchError(this.errorHandl));
 	}
 
-
 	deleteSip(idsip: number): Observable<any> {
 		return this.http
 			.delete(`${this.url}deleteSip?id=${idsip}`, this.httpOptions)

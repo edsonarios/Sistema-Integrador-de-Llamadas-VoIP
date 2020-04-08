@@ -74,7 +74,14 @@ export class SalasComponent implements OnInit {
 		this.serviceSala.listarSalas().subscribe(
 			response => {
 				console.log(response);
-				this.sala = response;
+
+				response.forEach(element => {
+					console.log(element);
+					// var obj = element.name;
+					// if (obj.toLowerCase.indexOf('radio') == -1) {
+					// 	this.sala.push(element);
+					// }
+				});
 			},
 			er => console.log(er),
 			() => console.log('terminado')
