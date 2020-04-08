@@ -1,0 +1,13 @@
+<section style="background-color: white;margin-bottom: 10px;margin-top: 10px;">
+<div>
+	{{Nombre}} {{Paterno}} {{Materno}}
+</div>
+<div *ngFor="let n of Sip; let i = index" >
+	{{Sip[i]['Alias']}} -  {{Sip[i]['Numero']}} -
+	<i class="v-icon-phone" tooltip="Llamar" style="color: green"></i>
+</div>
+<div *ngFor="let n of Iax; let i = index" >
+		{{Iax[i]['Alias']}} -  {{Iax[i]['Numero']}} -
+	<i class="v-icon-phone" tooltip="Llamar" style="color: green"></i>
+</div>
+</section>

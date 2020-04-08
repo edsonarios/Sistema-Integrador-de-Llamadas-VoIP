@@ -1,0 +1,25 @@
+<h1> Agregar Una sala</h1>
+<div class="modal-body">
+	<div class="container ">
+		<form class="añadir_contact" [formGroup]="addForm">
+			<div class="row">
+				<div class="col-md-8 offset-md-2 ">
+					<label for="nombreSala">Nombre de la sala:</label>
+					<input formControlName="nombreSala" type="text"  class="form-control"/>
+				</div>
+				<div class="col-md-8 offset-md-2 ">
+					<label for="descripcion">Descripcion de la sala:</label>
+					<input formControlName="descripcion" type="text"  class="form-control"/>
+				</div>
+			</div>
+
+		</form>
+
+		
+	</div>
+</div>
+<div class="modal-footer ">
+	<button type="button" class="btn btn-success btn-block" [disabled]="addForm.invalid" (click)="addSala()">
+		Crear Sala
+	</button>
+</div>

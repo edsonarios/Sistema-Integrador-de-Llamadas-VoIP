@@ -1,0 +1,8 @@
+
+/////////////////ejemplo ventana Escritorio///////////////////
+
+<div class="bubble">
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem perspiciatis tempore incidunt, minima, sequi odio quia fugit, voluptatem quam explicabo earum id nam repudiandae porro soluta eveniet ea! Tenetur, dolores.</div>
+
+
+//////////////////ejemplo botones/////////////////////

@@ -1,0 +1,10 @@
+<h1>Lista de SIP'S and IAX'S</h1>
+
+<section class="sip_iax-responsive">
+<div *ngFor="let n of Sip; let i = index">
+	<sip_iax-card
+		Name = "{{ Sip[i]['name']}}">
+	</sip_iax-card>
+   
+</div>
+</section>

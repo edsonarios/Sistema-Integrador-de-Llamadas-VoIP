@@ -1,0 +1,45 @@
+<h1>Detalle de la Sala</h1>
+<div class="modal-footer ">
+	<button type="button" class="btn btn-secondary btn-block" [routerLink]="['/Administrador/Salas']">Volver</button>
+	<button type="button" class="btn btn-success btn-block" [routerLink]="['/Administrador/EditarSala']">Editar Sala</button>
+	<button type="button" class="btn btn-danger btn-block" (click)="eliminarSala()">Eliminar Sala</button>
+</div>
+<hr>
+
+<section class="detalle-Contacto">
+
+	<div>
+		<!-- Table starts here -->
+		<table id="table" class="table table-hover">
+			<tbody >
+				<tr >
+					<td data-title="Link">
+						<b>Nombre de la Sala</b>
+					</td>
+					<td data-title="Link">
+						{{Nombre}}
+					</td>
+				</tr>
+					<tr >
+					<td data-title="Link">
+						<b>Descripcion</b>
+					</td>
+					<td data-title="Link">
+						{{Descripcion}}
+					</td>
+				</tr>
+					<tr >
+					<td data-title="Link">
+						<b>Habilitar sala</b>
+					</td>
+					<td data-title="Link">
+						{{Habilitado}}
+					</td>
+				</tr>
+					
+			</tbody>
+		</table>
+	</div>
+</section>
+
+

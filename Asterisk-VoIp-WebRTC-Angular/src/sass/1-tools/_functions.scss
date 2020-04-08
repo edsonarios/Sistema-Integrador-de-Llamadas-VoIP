@@ -1,0 +1,29 @@
+//Responsive
+@media (max-width: 576px) {
+    .login__body {
+      padding: 43px 15px 57px 117px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .login__body {
+      padding: 43px 15px 57px 15px;
+    }
+  
+    .login__body--datos {
+      text-align: left;
+      position: unset;
+      top: unset;
+      left: unset;
+      width: 100%;
+      padding: 0 5px;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .alert-validate::before {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  

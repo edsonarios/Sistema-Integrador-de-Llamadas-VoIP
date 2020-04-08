@@ -1,0 +1,62 @@
+/*=============================================
+=                   SETTINGS                  =
+=============================================*/
+
+@import '0-settings/settings';
+
+/*=============================================
+=                   TOOLS                     =
+=============================================*/
+
+@import './1-tools/tools';
+@import './1-tools/functions';
+@import './1-tools/mixins';
+
+/*=============================================
+=                   GENERIC                   =
+=============================================*/
+/*El código genérico del proyecto, el reset de CSS, 
+el Normalize o tus propios estilos, son los que 
+incluiremos en esta carpeta.*/
+
+@import './2-generic/generic';
+
+
+/*=============================================
+=                   ELEMENTS                  =
+=============================================*/
+/*Para  los estilos que afectan a los elementos del HTML. 
+No incluiremos el estilo para las clases.*/
+
+@import './3-elements/elements';
+
+
+/*=============================================
+=                   OBJECTS                   =
+=============================================*/
+/*Aquí sí, incorporaríamos las clases y colocaríamos 
+todo lo relacionado con el layout.*/
+
+@import './4-objects/objects';
+
+
+
+/*=============================================
+=                   COMPONENTS                =
+=============================================*/
+/* Todo lo que afecte a los diferentes bloques de nuestro documento, 
+navegador, botones, recuadros de utilidades, cabecera, buscador,botones 
+sociales, etc., debería de ir en esta carpeta. Dendo de las necesidades 
+que tenga el proyecto,la carpeta Components tendrá más o menos ajustes, 
+como es lógico.*/
+
+@import './5-components/components.scss';
+
+/*=============================================
+=                   UTILITIES                 =
+=============================================*/
+/*Para finalizar, en esta carpeta colocaríamos utilidades que sobrescriban 
+estilos significativos (incompatibilidades con navegadores)*/
+
+@import './6-utilities/utilities';
+

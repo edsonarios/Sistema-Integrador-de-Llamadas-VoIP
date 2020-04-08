@@ -1,0 +1,136 @@
+@import 'buttons.scss';
+
+.bubble {
+  position: relative;
+  border-radius: 0.1em;
+  padding: 1em;
+  margin: 3em auto;
+  max-width: 20em;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
+  -webkit-filter: drop-shadow(0 0.1em 0.15em #000);
+          filter: drop-shadow(0 0.1em 0.15em #000);
+}
+@media screen and (min-width: 0\0) {
+  .bubble {
+    box-shadow: 0 0.1em 0.15em 0 #000;
+  }
+  .bubblebefore {
+    border-right-color: rgba(0,0,0,0.5);
+  }
+}
+.bubble:after,
+.bubble:before {
+  content: '';
+  position: absolute;
+  left: -0.5em;
+  top: 50%;
+  border-style: solid;
+  border-width: 0.5em 0.5em 0.5em 0;
+  border-color: transparent;
+  margin-top: -0.5em;
+  border-right-color: rgba(0,0,0,0.1);
+}
+.bubble:after {
+  border-right-color: #fff;
+  margin-left: 1px;
+}
+
+:host {
+  //position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+
+//ESTILOS INICIALES PARA TODAS LAS TABLAS DEL SISTEMA/////////////////////////
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 2rem;
+  thead,
+  tbody,
+  tfoot {
+    tr {
+      th,
+      td {
+        text-align: center;
+        padding: 0.8rem;
+        vertical-align: top;
+        border-top: 0;
+      }
+    }
+  }
+}
+thead{
+    color: var(--color-uno);
+    background: var(--color-seis);
+}
+td{
+    text-align: center;
+    border-bottom: 2px solid var(--color-uno);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+//$color-uno, $color-dos, $color-tres, $color-cuatro, $color-cinco, $color-seis
+:root {
+    //AZUL-VERDE-CAFE
+     
+    /*
+  --color-seis: #031634;
+  --color-cinco: #033649;
+  --color-cuatro: #036564;
+  --color-tres: #cdb380;
+  --color-dos: #e8ddcb;
+  --color-uno: #e8e3de;
+    */
+    
+    //ORANGE
+    /*
+    --color-seis: #413E4A;
+    --color-cinco: #73626E;
+    --color-cuatro: #B38184;
+    --color-tres: #F0B49E;
+    --color-dos: #F7E4BE;
+    --color-uno: #FFEFE4;    
+    */
+
+
+    //AZUL
+    
+    
+    --color-seis: #343838;
+    --color-cinco: #005F6B;
+    --color-cuatro: #008C9E;
+    --color-tres: #00B4CC;
+    //--color-dos: #00DFFC;
+    --color-uno: white;
+    --color-dos: rgb(169, 236, 245);
+
+/*
+    //negro-cafe
+    
+    --color-seis: #2b2b28;
+    --color-cinco: #e3b04b;
+    --color-cuatro: #f1d6ab;
+    --color-tres: #cdb380;
+    --color-dos: #f8f8f8;
+    --color-uno: white;
+    */
+
+
+    //nuevo
+    /*
+    --color-seis: #5D4157;
+    --color-cinco: #838689;
+    --color-cuatro: #A8CABA;
+    --color-tres: #CAD7B2;
+    --color-dos: #EBE3AA;
+    --color-uno: white;
+    */
+}
+
+

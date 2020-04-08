@@ -1,0 +1,272 @@
+/*.escritorio {
+	animation: swing-in-bottom-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+	border-radius: 10px;
+	 box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+	background:  linear-gradient(45deg, #F4EBE5, #E3D4CA);
+	margin: 10px;
+	button {
+		font-size: 15px;
+		width: 100%;
+		height: 30px;
+		color: #223a59;
+		background: #6bee17;
+	}
+	button:active {
+		background: #efffc0;
+	}
+	&__header {
+		border-radius: 10px 10px 0px 0px;
+		background: #eeeeee;
+		span{
+			float:right;
+			padding-right: 10px;
+			font-size: 18px;
+		}
+		&--ocupado {
+			background: #81dbe0;
+			span{
+			float:right;
+			padding-right: 10px;
+			font-size: 18px;
+		}
+		}
+	}
+
+	&__body {
+		color: black;
+		background: #ffffff;
+	}
+	&__footer-normal {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		background: #e3e5e8;
+		color: #223a59;
+	}
+	&__footer-ptt {
+		background: #e3e5e8;
+		color: #223a59;
+	}
+}
+*/
+.Escritorio{
+	margin: 8px;
+	display: grid;
+	grid-template-rows: 4vh 12vh 7vh;
+	background: #EEE;
+	grid-template-areas: 
+	'EscritorioHeader' 
+	'EscritorioContent' 
+	'EscritorioOptions';
+    height: auto;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    animation: swing-in-bottom-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+}
+.EscritorioHeader{
+    grid-area: EscritorioHeader;
+    border-radius: 4px 4px 0px 0px;
+   	padding-left: 10px;
+	background: white;
+	
+    span{
+			float:right;
+			padding-right: 5px;
+			padding-bottom: 2px;
+			font-size: 18px;
+		}
+}
+.EscritorioContentLlamada{
+    grid-area: EscritorioContent;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-areas:'ContentIzp ContentDer';
+    background-image: url(assets/fondo-login.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    opacity: 0.7;
+   	-moz-box-shadow: inset 10px 10px 50px #013162;
+ 	-webkit-box-shadow: inset 10px 10px 50px #013162;
+  	box-shadow: inset 10px 10px 50px #013162;
+}
+.EscritorioContentSala{
+	grid-area: EscritorioContent;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-areas:'ContentIzp ContentDer';
+    background-image: url(assets/sala.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    opacity: 0.7;
+   	-moz-box-shadow: inset 10px 10px 50px #013162;
+ 	-webkit-box-shadow: inset 10px 10px 50px #013162;
+  	box-shadow: inset 10px 10px 50px #000000;
+}
+.EscritorioContentRadio{
+    grid-area: EscritorioContent;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-areas:'ContentIzp ContentDer';
+    background-image: url(assets/radio.jpg) ;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    opacity: 0.7;
+   	-moz-box-shadow: inset 10px 10px 50px #013162;
+ 	-webkit-box-shadow: inset 10px 10px 50px #013162;
+  	box-shadow: inset 10px 10px 50px #013162;
+}
+.ContentIzp{
+    grid-area: ContentIzp;
+    .titulo {
+    text-align: center;
+    padding-top: 2%;
+    margin-bottom: -5%;
+    color: #FFE92E;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-shadow: 2px 4px 3px #000000;
+  }
+    .detalle {
+    text-align: center;
+    color: #C9FF2E;
+    font-size: 15px;
+    text-shadow: 2px 4px 3px #000000;
+  }
+}
+.ContentDer{
+    grid-area: ContentDer;
+    display: grid;
+    .icon{
+    	color:#1AFF28;
+    	 line-height: 50px;
+    	text-align: center;
+    	 font-size: 35px;
+    	 text-shadow: 0px 0px 15px #FFFFFF;
+
+    }
+    .timer{
+    	text-align: center;
+    	color: #1AFF28;
+    	text-shadow: 2px 4px 3px #000000;
+    }
+    .PTT{
+    	button {
+    	  opacity: 0.8;
+	      background: #1D976C;  /* fallback for old browsers */
+		  background: -webkit-linear-gradient(to right, #93F9B9, #1D976C);  /* Chrome 10-25, Safari 5.1-6 */
+		  background: linear-gradient(to right, #93F9B9, #1D976C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	      height: 80%;
+		  width: 70%;
+		  margin-top: 5%;
+		  margin-left: 5%;
+	      border-radius:50%;
+	      color: #ffffff;
+	      font-size: 40px;
+	      text-align: center;
+	}
+	button:hover {
+		background: #000;
+		color: var(--color-uno);
+		animation-name: initial;
+	}
+    }
+}
+.EscritorioOptions{
+    grid-area: EscritorioOptions;
+    //////////////////////////////
+    .OptionsLlamada{
+    	nav{
+  			width: 100%;
+  			height: 100%;
+  			background: #373B44;  
+			background: -webkit-linear-gradient(to top, #373B44, #4F4F4F);
+			background: linear-gradient(to top, #373B44, #4F4F4F); 
+  		//	border-radius: 8px;
+  			font-size: 0;
+  			box-shadow: 0 2px 3px 0 rgba(0,0,0,.1);
+  		}
+  		nav a{
+  			font-size: 10px;
+  			text-transform: uppercase;
+  			color:white;
+  			text-decoration: none;
+  			line-height: 50px;
+  			//position: relative;
+  			z-index: 1;
+  			display: inline-block;
+  			text-align: center;
+  			border-right: 1px solid gray;
+
+  			i{
+  				font-size: 10px;
+  				padding-right: 4px;
+
+
+  			}
+  		}
+  		a:nth-child(1){
+  			width: 33%;
+  		}
+  		a:nth-child(2){
+  			width: 34%;
+  		}
+  		a:nth-child(3){
+  			width: 33%;
+  			border-right: none;
+  		}
+    }
+    .OptionSala{
+    	nav{
+  			width: 100%;
+  			height: 100%;
+  			background: #373B44;  
+			background: -webkit-linear-gradient(to top, #373B44, #4F4F4F);
+			background: linear-gradient(to top, #373B44, #4F4F4F); 
+  			font-size: 0;
+  			box-shadow: 0 2px 3px 0 rgba(0,0,0,.1);
+  		}
+  		nav a{
+  			font-size: 10px;
+  			text-transform: uppercase;
+  			color:white;
+  			text-decoration: none;
+  			line-height: 50px;
+  			z-index: 1;
+  			display: inline-block;
+  			text-align: center;
+  			border-right: 1px solid gray;
+
+  			i{
+  				font-size: 10px;
+  				padding-right: 4px;
+
+
+  			}
+  		}
+  		a:nth-child(1){
+  			width: 50%;
+  		}
+  		a:nth-child(2){
+  			width: 50%;
+  		}
+    }
+  		
+
+  		
+//////////////////////////
+}
+
+
+//Animations
+  @keyframes swing-in-bottom-fwd {
+	0% {
+	  transform: rotateX(100deg);
+	  transform-origin: bottom;
+	  opacity: 0;
+	}
+	100% {
+	  transform: rotateX(0);
+	  transform-origin: bottom;
+	  opacity: 1;
+	}
+  }
+  

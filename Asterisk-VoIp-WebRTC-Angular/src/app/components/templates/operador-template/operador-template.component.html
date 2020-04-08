@@ -1,0 +1,185 @@
+
+<section class="operador-dashboard ">
+	<div class="Navegador">
+		<div class="Logo"><h1 style="color:cyan; padding-left: 20px;">  Logo</h1></div>
+			<div class="Options"> 
+			    <div class="navbar">
+			    <ul>
+			    	<li *ngIf="pages == false">
+			    		<a href="#">
+			    			<div class="icon">
+			    				<i class="asteriskIcon v-icon-bubbles4"></i>
+			    			</div>
+			    			<div class="name"><span data-text="Salas">Salas</span></div>
+			    		</a>
+			    	</li>
+			    	<li (click)="DialPadComponent()" *ngIf="pages == false"> 
+			    		<a>
+			    			<div class="icon">
+			    				<i class="asteriskIcon v-icon-dial"></i>
+			    			</div>
+			    			<div class="name"><span data-text="DialPad">DialPad</span></div>
+			    		</a>
+			    	</li>
+			    	<li *ngIf="pages == false">
+			    		<a href="#">
+			    			<div class="icon">
+			    				<i class="asteriskIcon v-icon-address-book"></i>
+			    			</div>
+			    			<div class="name"><span data-text="Mi_Agenda">Mi Agenda</span></div>
+			    		</a>
+			    	</li>
+			    	<li *ngIf="pages == true">
+			    		<a [routerLink]="['/Operador/Historial']" >
+			    			<div class="icon">
+			    				<i class="asteriskIcon v-icon-phone1" placement="right"></i>
+			    			</div>
+			    			<div class="name"><span data-text="DialPad">Historial de Llamadas</span></div>
+			    		</a>
+			    	</li>
+			    	<li *ngIf="pages == true">
+			    		<a [routerLink]="['/Operador/Grabaciones']">
+			    			<div class="icon">
+			    				<i class="asteriskIcon v-icon-cassette" placement="right"></i>
+			    			</div>
+			    			<div class="name"><span data-text="DialPad">Grabaciones</span></div>
+			    		</a>
+			    	</li>
+			    	<li *ngIf="pages == true">
+			    		<a [routerLink]="['/Operador/Tracking']">
+			    			<div class="icon">
+			    				<i class="asteriskIcon v-icon-location"></i>
+			    			</div>
+			    			<div class="name"><span data-text="DialPad">Tracking</span></div>
+			    		</a>
+			    	</li>
+			    	<li (click)="ChangeWindow()">
+			    		<a >
+			    			<div class="icon">
+			    				<i class="asteriskIcon v-icon-add"></i>
+			    			</div>
+			    			<div class="name"><span data-text="DialPad">Otros</span></div>
+			    		</a>
+			    	</li>
+			    </ul>
+			</div>
+		</div>
+		<div class="UserBar" style="color:white; padding-left: 20px;"> 
+			<div class="UserBar_logo"></div>
+			
+			<div class="UserBar_Option">
+				<div class="btn-group" dropdown>
+					<button 
+			  		id="button-animated" 
+			  		dropdownToggle  
+			  		type="button" 
+			  		class="btn_dropdown dropdown-toggle"
+			        aria-controls="dropdown-animated"
+			        >
+			    	<span class="caret"></span>
+			  		</button>
+			  		<ul id="dropdown-animated" *dropdownMenu class="dropdown-menu"
+				      role="menu" aria-labelledby="button-animated">
+				<div *ngFor="let n of Sip_Iax['0']; let i = index">
+		      	  <li role="menuitem" (click)="SeleccionarSip_Iax(Sip_Iax['0'][i]['name'])" class="Item_Dropdown">
+		      	  	<a class="dropdown-item" >{{ Sip_Iax['0'][i]['callerid'] }}</a></li>
+		      </div>
+		      		<li role="menuitem" class="Item_Dropdown" style="color:red;" *ngIf="Sip_Iax['0'].length==0">
+		      	  	<a class="dropdown-item" ><i class="v-icon-cancel"></i>No Hay Sips</a>
+		      	  </li>
+		      <li class="divider dropdown-divider" ></li>
+		       <div *ngFor="let n of Sip_Iax['1']; let j = index">
+		      	  <li role="menuitem" (click)="SeleccionarSip_Iax(Sip_Iax['0'][i]['name'])" class="Item_Dropdown">
+		      	  	<a class="dropdown-item" >{{ Sip_Iax['1'][j]['callerid'] }}</a>
+		      	  </li>
+		      </div>
+		      <li role="menuitem" class="Item_Dropdown" style="color:red;" *ngIf="Sip_Iax['1'].length==0">
+		      	  	<a class="dropdown-item" ><i class="v-icon-cancel"></i>No Hay Iaxs</a>
+		      	  </li>
+				    <li class="divider dropdown-divider"></li>
+				   		 <li role="menuitem" >
+				      	  	<a class="dropdown-item" style="cursor: pointer;" (click)="AgregarEventoNotificacion()"><i class="v-icon-wifi-low"></i><span>Evento Notificacion</span></a>
+				      	  </li>
+				      	  <li role="menuitem" class="Item_Dropdown" >
+				      	  	<a class="dropdown-item" [routerLink]="['/Login']"><i class="v-icon-enter"></i><span>Salir</span></a>
+				      	  </li>
+				  </ul>
+		  		</div>
+	  		</div>
+	  		<div class="UserBar_info"> 
+				<span>
+					{{user['correo']}}<br>
+					{{NumeroActual}}
+			</span>
+			</div>
+		</div>
+	</div>
+	<div class="Content" *ngIf="pages == false; else elseBlock" [@SladeOff]>
+		<div class="LateralIzq">
+			<div class="LateralIzq_Sup">
+				<header>Notificaciones</header>
+				<div class="notificacionEffect" *ngFor="let n of Notificaciones; let i = index" [@flyIn]>
+						<Notificacion
+							(ContestaLlamada)="ContestarLlamada($event)"
+							(CancelaLlamada)="ColgarLlamada($event)"
+							Nombre="{{ Notificaciones[i]['nombre'] }}"
+							Numero="{{ Notificaciones[i]['numero'] }}"
+							Estado="{{ Notificaciones[i]['estado'] }}"
+							Id="{{ Notificaciones[i]['id'] }}"></Notificacion>
+				</div>
+				<div class="empty" *ngIf="Notificaciones.length==0">
+					<p> No hay <br>Notificaciones </p>
+				</div>
+			</div>
+			<div class="LateralIzq_Inf"></div>
+		</div>
+		<div class="CenterContent">
+			<div class="CenterContent_Sup">
+			<header>Escritorio</header>
+				<section class="e-responsive">
+					<div *ngFor="let n of Llamada; let i = index">
+					 <llamada
+							(llamadaClose)="CerrarLlamada($event)"
+							(Participantes)="VerParticipantes($event)"
+							Nombre="{{ Llamada[i]['nombre'] }}"
+							Numero="{{ Llamada[i]['numero'] }}"
+							Tipo="{{ Llamada[i]['Tipo'] }}"
+							Id="{{ Llamada[i]['id'] }}"
+							Estado="{{ Llamada[i]['Estado'] }}"></llamada>
+					</div>
+				</section>
+			</div>
+			<div class="CenterContent_Inf">
+				<div class="CenterContent_InfPanel">
+					<header>Panel de Estados</header>
+				</div>
+				<div class="CenterContent_InfInfo">
+					<header>Info</header>
+				</div>
+			</div>
+		</div>
+		<div class="LateralDer">
+			<div class="LateralDer_Sup">
+				<header>Salas</header>
+				
+				<div class="SalaEffect" *ngFor="let n of Salas; let i = index" [@flyIn]>
+						<Sala
+							(DatoSala)="RegistraSala($event)"
+							Nombre="{{ Salas[i]['nombreSala'] }}"
+							Descripcion="{{ Salas[i]['descripcion'] }}"
+							Id="{{ Salas[i]['id'] }}">
+						</Sala>
+				</div>
+				<div class="empty" *ngIf="Salas.length==0">
+					<p> No hay Salas </p>
+				</div>
+			</div>
+			<div class="LateralDer_Inf"></div>
+		</div>
+	</div>
+	<ng-template #elseBlock>
+		<div class="pages" [@SladeIn] style="border-bottom: 5px solid black;">
+			<router-outlet></router-outlet>
+		</div>
+	</ng-template>
+</section>

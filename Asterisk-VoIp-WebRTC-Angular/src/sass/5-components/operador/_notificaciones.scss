@@ -1,0 +1,126 @@
+//var(--color-dos), var(--color-tres), var(--color-cuatro), var(--color-cinco), var(--color-seis)
+.notificacionEffect{
+    animation: slide-in-blurred-left 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+}
+.notificaciones {
+	margin: 8px;
+	display: grid;
+	grid-template-columns: 25% 45% 30%;
+	grid-template-areas: 'Image Info_Notif Botones';
+    height: auto;
+    //box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.Image{
+    grid-area: Image;
+    display: grid;
+    background-image: url(assets/avatar.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 50% 0px 0px 50%;
+}
+.Info_Notif{
+    grid-area: Info_Notif;
+    display: grid;
+    background: linear-gradient(to top, #275D71 0%, #3C7993 100%);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    .titulo {
+    padding-left: 10px;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+    .detalle {
+    padding: 5px 0 5px 10px;
+    color: #B7B7B7;
+    font-size: 15px;
+  }
+}
+.Botones{
+    grid-area: Botones;
+    display: grid;
+    grid-template-rows: 50% 50%;
+    grid-template-areas: 
+    'Boton_Sup'
+    'Boton_Inf';
+    button {
+      border: none;
+      height: 100%;
+      width: 100%;
+      color: #ffffff;
+      font-size: 20px;
+      text-align: center;
+    }
+   
+}
+.Boton_Sup{
+    grid-area: Boton_Sup;
+     padding-left: 2px;
+     padding-bottom: 1px;
+     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+     button{
+        background: #1D976C; 
+        background: -webkit-linear-gradient(to left, #93F9B9, #1D976C); 
+        background: linear-gradient(to left, #93F9B9, #1D976C); 
+
+     }
+      button:hover {
+        background: #1D976C;
+        color: black;
+        animation-name: initial;
+    }
+}
+.Boton_Inf{
+    grid-area: Boton_Inf;
+     padding-left: 2px;
+     padding-top: 1px;
+     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    button{
+        background: #8E0E00; 
+        background: -webkit-linear-gradient(to right, #ED213A, #8E0E00);  
+        background: linear-gradient(to right, #ED213A, #8E0E00);
+     }
+      button:hover {
+        background: #8E0E00;
+        color: black;
+        animation-name: initial;
+    }
+}
+.n-nombre {
+    display: grid;
+    grid-area: nombre;
+    color: var(--color-dos);
+    background-image: url(assets/avatar.png);
+    background-size: cover;
+    align-items: center;
+}
+.n-tipo {
+	grid-area: tipo;
+	&--entrante {
+		padding-top: 15%;
+		background: var(--color-tres);
+	}
+	&--espera {
+		padding-top: 15%;
+		background: #efffc0;
+	}
+}
+
+
+// Animation
+@keyframes slide-in-blurred-left {
+    0% {
+      transform: translateX(-1000px) scaleX(2.5) scaleY(0.2);
+      transform-origin: 100% 50%;
+      filter: blur(40px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0) scaleY(1) scaleX(1);
+      transform-origin: 50% 50%;
+      filter: blur(0);
+      opacity: 1;
+    }
+  }
+
+

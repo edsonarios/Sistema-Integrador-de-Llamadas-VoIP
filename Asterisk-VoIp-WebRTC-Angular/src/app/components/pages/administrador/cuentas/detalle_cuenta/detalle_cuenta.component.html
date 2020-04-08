@@ -1,0 +1,178 @@
+<h1>Detalle de la Cuenta</h1>
+
+
+<hr>
+
+<section class="detalle-Contacto">
+
+	<div>
+		<table id="table" class="table table-hover">
+			<tbody >
+				<tr >
+					<td data-title="Link">
+						<b>Nombre Completo</b>
+					</td>
+					<td data-title="Link">
+						{{Contact['nombre']}} {{Contact['apPaterno']}} {{Contact['apMaterno']}}
+					</td>
+				</tr>
+					<tr >
+					<td data-title="Link">
+						<b>Correo Electronico</b>
+					</td>
+					<td data-title="Link">
+						{{Contact['correo']}}
+					</td>
+				</tr>
+					<tr >
+					<td data-title="Link">
+						<b>Direccion</b>
+					</td>
+					<td data-title="Link">
+						{{Contact['direccion']}}
+					</td>
+				</tr>
+					<tr >
+					<td data-title="Link">
+						<b>Telefono</b>
+					</td>
+					<td data-title="Link">
+						{{Contact['telefono']}}
+					</td>
+				</tr>
+					<tr >
+					<td data-title="Link">
+						<b>Tipo</b>
+					</td>
+					<td data-title="Link">
+						{{Contact['tipo']}}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+<div class="col-md-12">
+	<div class="row">
+		<div class="col-md-3">
+			<button type="button" class="btn btn-primary btn-block" [routerLink]="['/Administrador/Cuentas']">Volver</button>
+		</div>
+		<div class="col-md-3">
+			<button type="button" class="btn btn-info btn-block" [routerLink]="['/Administrador/EditarCuenta']">Editar Contacto</button>
+		</div>
+		<div class="col-md-3">
+			<button type="button" class="btn btn-success btn-block"  disabled>Agregar Numero</button>
+		</div>
+		<div class="col-md-3">
+			<button type="button" class="btn btn-danger btn-block" (click)="EliminarCuenta()">Eliminar</button>
+		</div>
+	</div>
+</div>
+<hr>
+
+<tabset [justified]="true">
+	 <tab heading="SIP">
+		  <section class="sip_iax-responsive">
+			<div *ngFor="let n of Sip_Iax[0]; let i=index">
+				<sip_iax-card
+							Allow="{{Sip_Iax[0][i]['allow']}}"
+							Avpf="{{Sip_Iax[0][i]['avpf']}}"
+							CallCounter="{{Sip_Iax[0][i]['callcounter']}}"
+							CallerId="{{Sip_Iax[0][i]['callerid']}}"
+							CallGroup="{{Sip_Iax[0][i]['callgroup']}}"
+							CanReInvite="{{Sip_Iax[0][i]['canreinvite']}}"
+							Context="{{Sip_Iax[0][i]['context']}}"
+							Deny="{{Sip_Iax[0][i]['deny']}}"
+							Dial="{{Sip_Iax[0][i]['dial']}}"
+							DirectMedia="{{Sip_Iax[0][i]['directmedia']}}"
+							DisAllow="{{Sip_Iax[0][i]['disallow']}}"
+							Dtlscafile="{{Sip_Iax[0][i]['dtlscafile']}}"
+							Dtlscertfile="{{Sip_Iax[0][i]['dtlscertfile']}}"
+							Dtlsenable="{{Sip_Iax[0][i]['dtlsenable']}}"
+							Dtlssetup="{{Sip_Iax[0][i]['dtlssetup']}}"
+							Dtlverify="{{Sip_Iax[0][i]['dtlverify']}}"
+							Dtnfnode="{{Sip_Iax[0][i]['dtnfnode']}}"
+							Encryption="{{Sip_Iax[0][i]['encryption']}}"
+							Faxdetect="{{Sip_Iax[0][i]['faxdetect']}}"
+							Force_avp="{{Sip_Iax[0][i]['force_avp']}}"
+							Host="{{Sip_Iax[0][i]['host']}}"
+							Icesupport="{{Sip_Iax[0][i]['icesupport']}}"
+							Id="{{Sip_Iax[0][i]['id']}}"
+							Name="{{Sip_Iax[0][i]['name']}}"
+							Nat="{{Sip_Iax[0][i]['nat']}}"
+							Permit="{{Sip_Iax[0][i]['permit']}}"
+							PickupGroup="{{Sip_Iax[0][i]['pickupgroup']}}"
+							Qualify="{{Sip_Iax[0][i]['qualify']}}"
+							QualifyFreq="{{Sip_Iax[0][i]['qualifyfreg']}}"
+							Rtcp_Mux="{{Sip_Iax[0][i]['rtcp_mux']}}"
+							Secret="{{Sip_Iax[0][i]['secret']}}"
+							SendRpid="{{Sip_Iax[0][i]['sendrpid']}}"
+							SwitchSip="{{Sip_Iax[0][i]['switchsip']}}"
+							Transport="{{Sip_Iax[0][i]['transport']}}"
+							Trustrpid="{{Sip_Iax[0][i]['trustrpid']}}"
+							Type="{{Sip_Iax[0][i]['type']}}"
+							UsuarioID="{{Sip_Iax[0][i]['usuarioId']}}"
+							Sip_or_Iax="SIP"
+							>
+				</sip_iax-card>
+			</div>
+		</section>
+	</tab>
+	<tab heading="IAX">
+	  	NO SE ENCONTRARON IAX
+		<section class="sip_iax-responsive">
+			<div *ngFor="let n of Sip_Iax[1]; let i=index">
+				<sip_iax-card
+							Allow="{{Sip_Iax[1][i]['allow']}}"
+							Avpf="{{Sip_Iax[1][i]['avpf']}}"
+							CallCounter="{{Sip_Iax[1][i]['callcounter']}}"
+							CallerId="{{Sip_Iax[1][i]['callerid']}}"
+							CallGroup="{{Sip_Iax[1][i]['callgroup']}}"
+							CanReInvite="{{Sip_Iax[1][i]['canreinvite']}}"
+							Context="{{Sip_Iax[1][i]['context']}}"
+							Deny="{{Sip_Iax[1][i]['deny']}}"
+							Dial="{{Sip_Iax[1][i]['dial']}}"
+							DirectMedia="{{Sip_Iax[1][i]['directmedia']}}"
+							DisAllow="{{Sip_Iax[1][i]['disallow']}}"
+							Dtlscafile="{{Sip_Iax[1][i]['dtlscafile']}}"
+							Dtlscertfile="{{Sip_Iax[1][i]['dtlscertfile']}}"
+							Dtlsenable="{{Sip_Iax[1][i]['dtlsenable']}}"
+							Dtlssetup="{{Sip_Iax[1][i]['dtlssetup']}}"
+							Dtlverify="{{Sip_Iax[1][i]['dtlverify']}}"
+							Dtnfnode="{{Sip_Iax[1][i]['dtnfnode']}}"
+							Encryption="{{Sip_Iax[1][i]['encryption']}}"
+							Faxdetect="{{Sip_Iax[1][i]['faxdetect']}}"
+							Force_avp="{{Sip_Iax[1][i]['force_avp']}}"
+							Host="{{Sip_Iax[1][i]['host']}}"
+							Icesupport="{{Sip_Iax[1][i]['icesupport']}}"
+							Id="{{Sip_Iax[1][i]['id']}}"
+							Name="{{Sip_Iax[1][i]['name']}}"
+							Nat="{{Sip_Iax[1][i]['nat']}}"
+							Permit="{{Sip_Iax[1][i]['permit']}}"
+							PickupGroup="{{Sip_Iax[1][i]['pickupgroup']}}"
+							Qualify="{{Sip_Iax[1][i]['qualify']}}"
+							QualifyFreq="{{Sip_Iax[1][i]['qualifyfreg']}}"
+							Rtcp_Mux="{{Sip_Iax[1][i]['rtcp_mux']}}"
+							Secret="{{Sip_Iax[1][i]['secret']}}"
+							SendRpid="{{Sip_Iax[1][i]['sendrpid']}}"
+							SwitchSip="{{Sip_Iax[1][i]['switchsip']}}"
+							Transport="{{Sip_Iax[1][i]['transport']}}"
+							Trustrpid="{{Sip_Iax[1][i]['trustrpid']}}"
+							Type="{{Sip_Iax[1][i]['type']}}"
+							UsuarioID="{{Sip_Iax[1][i]['usuarioId']}}"
+							Sip_or_Iax="IAX"
+							>
+				</sip_iax-card>
+			</div>
+		</section>
+	</tab>
+</tabset>
+
+
+<hr>
+<br>
+<br>
+<br>
+<br>
+<br>
+

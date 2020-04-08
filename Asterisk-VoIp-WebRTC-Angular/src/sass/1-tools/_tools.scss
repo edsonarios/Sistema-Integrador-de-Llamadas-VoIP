@@ -1,0 +1,20 @@
+/* Aqui van los @mixin que se nos acurran en sass */
+@mixin colorChange($color : red) {
+	color : $color;
+}
+
+
+//responsive
+/*
+0-600px 		Phone
+600-900px		Tablet portrait
+900-1200px		Tablet landscape
+1200-1800px		Normal Desktop
+1800px			Big Desktop
+*/
+
+html{
+	@media (max-width: 600px){
+		font-size: 50%;
+	}
+}

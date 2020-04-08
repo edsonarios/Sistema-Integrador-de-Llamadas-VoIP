@@ -1,0 +1,105 @@
+<section class="login">
+
+	<div class="login__body ">
+		<form class="login__login" [formGroup]="loginForm" (ngSubmit)="enviar()" *ngIf="conected==false">
+			<div class="login__login--titulo">
+				<h2>INICIAR SESIÓN</h2>
+			</div>
+
+			<div class="login__login--form">
+				<div *ngIf="wrong" class="alert alert-danger" role="alert">
+					Error en password o usuario verifique sus datos
+				</div>
+				<div class="form-group">
+					<label class="login__login--label" for="username">Usuario/Email</label>
+					<input
+						type="text"
+						formControlName="username"
+						class="form-control"
+						[ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+					/>
+					<div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+						<div *ngIf="f.username.errors.required">Llenar este campo es obligatorio</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="login__login--label" for="password">Password</label>
+					<input
+						type="password"
+						formControlName="password"
+						class="form-control"
+						[ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+					/>
+					<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+						<div *ngIf="f.password.errors.required">Llenar este campo es obligatorio</div>
+					</div>
+					<label class="label-left">
+						Mantener Sesion 
+					</label>
+				</div>
+				<div class="form-group">
+					<button [disabled]="loading" class="btn btn-primary login__login--btn">
+						<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+						Login
+					</button>
+					<hr>
+				</div>
+			</div>
+		</form>
+
+	<form class="login__login" *ngIf="conected==true">
+	<div class="login__login--titulo">
+		<h2>Bienvenido a nuestro sistema</h2>
+	</div>
+	<div class="login__login--form">
+		<div *ngIf="Sip_Iax['0'].length!=0 || Sip_Iax['1'].length!=0">	
+		<span>Seleccione con que SIP/IAX se conectara:</span>
+		<div class="btn-group" dropdown>
+	  	<button 
+	  		id="button-basic" 
+	  		dropdownToggle 
+	  		type="button" 
+	  		class="btn btn-primary dropdown-toggle"
+	        aria-controls="dropdown-basic"
+	        > Sip / Iax
+	    	<span class="caret"></span>
+	  	</button>
+		  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+		      role="menu" aria-labelledby="button-basic">
+		      <div *ngFor="let n of Sip_Iax['0']; let i = index">
+		      	  <li role="menuitem" (click)="SeleccionarSip_Iax(Sip_Iax['0'][i]['name'])">
+		      	  	<a class="dropdown-item" >{{ Sip_Iax['0'][i]['callerid'] }}</a></li>
+		      </div>
+		    <li class="divider dropdown-divider"></li>
+		     <div *ngFor="let n of Sip_Iax['1']; let j = index">
+		      	  <li role="menuitem" (click)="SeleccionarSip_Iax(Sip_Iax['0'][i]['name'])">
+		      	  	<a class="dropdown-item" >{{ Sip_Iax['1'][j]['callerid'] }}</a></li>
+		      </div>
+		  </ul>
+		</div>
+		</div>
+
+		<div *ngIf="Sip_Iax['0'].length==0 && Sip_Iax['1'].length==0">
+		<span align="center" style="color:red;"><h6>Usted no posee ningun Numero SIP / Iax</h6></span>
+		<button type="button" class="btn btn-primary" [routerLink]="['/Operador/Historial']">
+		  Aceptar
+		</button>
+
+		</div>
+	</div>
+	</form>
+
+	</div>
+
+	<div class="login__footer">
+		<h6>&copy; 2020  PATELECOM S.R.L. Todos los derechos reservados</h6>
+	</div>
+</section>
+
+<!-- 
+0 al 1999 Operadores
+2000 al 2999 Sips Normales
+3000 al 3999 Sips Webrtc
+4000 al 4999 Iax
+5000 al 5999 Radios
+-->

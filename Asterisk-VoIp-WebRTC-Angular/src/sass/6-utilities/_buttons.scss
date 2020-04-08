@@ -1,0 +1,154 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700);
+
+/* Colours */
+$red:#c0392b;
+$green:#27ae60;
+$blue:#3498db;
+$yellow:#f1c40f;
+$pink:#e74c3c;
+$purple:#9b59b6;
+$brown:#e67e22;
+$orange:#d35400;
+$grey:#7f8c8d;
+$black:#2c3e50;
+$custom-color:#4F51D2;
+
+/* Generic button defaults */
+$padding:10px 20px;
+$margin:10px;
+$default-font: 'Source Sans Pro', sans-serif;
+$default-font-size: 13px;
+$button-depth:4px;
+$large-button-depth:$button-depth * 1.5;
+$shadow-amount:10;
+$hover-darken:$shadow-amount / 2;
+$default-font-color:#fff;
+
+/* Layout defaults */
+$background:whitesmoke;
+
+
+
+/* Mixins */
+@mixin depth($button-depth,$shadow-color) {
+  box-shadow: 0px $button-depth 0px darken($shadow-color, $shadow-amount);
+  &:hover{
+    background-color:darken($shadow-color,$hover-darken);
+  }
+  &:active{
+    box-shadow:none;
+    -webkit-transform:translateY($button-depth);
+  }
+  
+}
+
+/* Placeholders */
+
+%button{
+  display:inline-block;
+  cursor:pointer;
+  color:$default-font-color;
+  border-radius:2px;
+  padding:$padding;
+  margin:$margin;
+  font-family:$default-font;
+  font-size:$default-font-size;
+}
+
+.btn{
+  @extend %button;
+    i{
+      margin-right:10px;
+    }
+}
+
+.red{
+  background-color:$red;
+  @include depth($button-depth,$red);
+}
+.blue{
+  background-color:$blue;
+  @include depth($button-depth,$blue);
+}
+.yellow{
+  background-color:$yellow;
+  @include depth($button-depth,$yellow);
+}
+.pink{
+  background-color:$pink;
+  @include depth($button-depth,$pink);
+}
+.custom-color{
+  background-color:$custom-color;
+  @include depth($button-depth,$custom-color);
+}
+.green{
+  background-color:$green;
+  @include depth($button-depth,$green);
+}
+.purple{
+  background-color:$purple;
+  @include depth($button-depth,$purple);
+}
+.brown{
+  background-color:$brown;
+  @include depth($button-depth,$brown);
+}
+.orange{
+  background-color:$orange;
+  @include depth($button-depth,$orange);
+}
+.grey{
+  background-color:$grey;
+  @include depth($button-depth,$grey);
+}
+.black{
+  background-color:$black;
+  @include depth($button-depth,$black);
+}
+.l{
+  @extend %button;
+  padding:15px 30px;
+  font-size:$default-font-size * 1.2;
+}
+.s{
+  @extend %button;
+  padding:8px 20px;
+  font-size:$default-font-size * 0.9;
+}
+.xs{
+  @extend %button;
+  padding:6px 12px;
+  font-size:$default-font-size * 0.8;
+}
+.xl{
+  @extend %button;
+  padding:15px 40px;
+  font-size:$default-font-size * 1.4;
+}
+
+.btn.pill{
+  border-radius:200px;
+}
+
+.btn.nr{
+  border-radius:0px;
+}
+
+.shiny{
+  position:relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.21);
+}
+.shiny::before{
+  content: "";
+    width: 0px;
+  height: 0px;
+  border-style: solid;
+  position: absolute;
+  right:0;
+  top:0;
+  border-width: 0 70px 100px 0;
+  border-color: transparent rgba(255, 255, 255, 0.16) transparent transparent;
+}
+
+

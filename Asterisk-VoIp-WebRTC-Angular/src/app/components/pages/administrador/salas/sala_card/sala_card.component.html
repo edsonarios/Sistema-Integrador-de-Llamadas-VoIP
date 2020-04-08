@@ -1,0 +1,19 @@
+  <div class="card ">
+                <div class="card-header card-header-warning card-header-icon">
+                         <div class="card-icon">
+                              <i class="v-icon-group"></i>
+                            </div>
+                            <h1><p class="card-category">{{Nombre}}</p></h1>
+                          <h3 class="card-title">{{Descripcion}}
+                             <!--<small>Contactos</small>-->
+                            </h3>
+                            <span style="color: green" *ngIf="Switch==0">Habilitado</span>
+                            <span style="color: red" *ngIf="Switch==1"> Deshabilitado </span>
+                      </div>
+                       <div class="card-footer">
+                        <div class="stats">
+                              <button class="btn btn-primary btn-block" (click)="Detalles()">Detalles</button>
+                            </div>
+                       
+                      </div>
+      </div>
