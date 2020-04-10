@@ -1,0 +1,42 @@
+17 ':' 22 ':' 1
+{ Evento: 'Newchannel',
+  Numero: '6001',
+  Extension: '3',
+  Contexto: 'default' }
+17 ':' 22 ':' 1
+{ Evento: 'Newexten',
+  Numero: '6001',
+  Extension: '3',
+  Contexto: 'default',
+  Aplicacion: 'confbridge' }
+17 ':' 22 ':' 1
+{ Evento: 'BridgeEnter',
+  Numero: '6001',
+  Extension: '3',
+  Contexto: 'default' }
+17 ':' 22 ':' 5
+{ Evento: 'Newchannel',
+  Numero: '6002',
+  Extension: '3',
+  Contexto: 'default' }
+17 ':' 22 ':' 6
+{ Evento: 'Newexten',
+  Numero: '6002',
+  Extension: '3',
+  Contexto: 'default',
+  Aplicacion: 'confbridge' }
+17 ':' 22 ':' 9
+{ Evento: 'BridgeEnter',
+  Numero: '6002',
+  Extension: '3',
+  Contexto: 'default' }
+17 ':' 22 ':' 10
+{ Evento: 'Hangup',
+  Numero: '6001',
+  Extension: '3',
+  Contexto: 'default' }
+17 ':' 22 ':' 12
+{ Evento: 'Hangup',
+  Numero: '6002',
+  Extension: '3',
+  Contexto: 'default' }

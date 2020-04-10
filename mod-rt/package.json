@@ -1,0 +1,22 @@
+{
+  "name": "mod-rt",
+  "version": "1.0.0",
+  "description": "Modulo para datos en tiempo real",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "asterisk-ami-client": "^1.1.5",
+    "asyncify": "^2.1.2",
+    "chalk": "^4.0.0",
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "express-asyncify": "^1.0.1",
+    "http": "0.0.1-security",
+    "socketio": "^1.0.0"
+  }
+}
