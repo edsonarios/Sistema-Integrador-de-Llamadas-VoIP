@@ -22,7 +22,7 @@ export class RadiosComponent implements OnInit {
         response.forEach((element) => {
           var name = element.nombreSala;
           name = name.toLowerCase();
-          if (name.indexOf('radio') == 0) {
+          if (name.includes('radio')) {
             this.radios.push(element);
           }
         });

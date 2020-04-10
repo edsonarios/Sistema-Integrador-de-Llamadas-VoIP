@@ -9,6 +9,9 @@ import { HistorialService } from '@services/historial.service';
 	templateUrl: './historial_llamadas.component.html'
 })
 export class HistorialLlamadasComponent implements OnInit {
+	
+	
+	
 	public Historial;
 
 	public Todos = [];
@@ -209,6 +212,11 @@ export class HistorialLlamadasComponent implements OnInit {
 			er => console.log(er)
 		);
 	}
+
+
+
+
+
 
 	onChange(event) {
 		//console.log(event);
