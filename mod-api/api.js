@@ -845,49 +845,70 @@ api.get('/findAllUsuario', async (req, res, next) => {
   res.send(obj)
 })
 
-api.post('/findUsuByNomSalaAndContext', async (req, res, next) => {
+api.post('/getUsuByContextOfSip', async (req, res, next) => {
   var params = req.body
   //Obtengo todos los sips e iaxs
+  const usuariosAll = await Usuario.findAll();
   const sipsAll = await Sip.findAll();
   const iaxsAll = await Iax.findAll();
-  let results = {}
-  //iteramos sobre los sips y preguntamos si el atributo contexto es igual al contexto q enviamos por postman
-  //si es igual guardamos sus sips e iaxs en results y luego vaciamos el vector results       
-  for (let i = 0; i < sipsAll.length; i++) {
-    if(sipsAll[i]["context"] == params.context){
-       results[sipsAll[i]['usuarioId']] = {}
-       results[sipsAll[i]['usuarioId']]["sips"] = []
-       results[sipsAll[i]['usuarioId']]["iaxs"] = []
-    }  
-  } 
-  //iteramos sobre los iaxs y preguntamos si el atributo contexto es igual al contexto q enviamos por postman
-  //si es igual guardamos sus sips e iaxs en results y luego vaciamos el vector results   
-  for (let i = 0; i < iaxsAll.length; i++) {
-    if(iaxsAll[i]["context"] == params.context){
-       results[iaxsAll[i]['usuarioId']] = {}
-       results[iaxsAll[i]['usuarioId']]["sips"] = []
-       results[iaxsAll[i]['usuarioId']]["iaxs"] = []
-    }  
-  } 
-  //iteramos sobre los sips y preguntamos si el atributo contexto es igual al contexto q enviamos por postman
-  //si es igual guardamos sus id del usuario en results  
-  for (let i = 0; i < sipsAll.length; i++) {
-    if(sipsAll[i]["context"] == params.context){
-        let x = results[sipsAll[i]['usuarioId']]["sips"]
-        results[sipsAll[i]['usuarioId']]["sips"].push(sipsAll[i]['id']) 
-     }  
-  }   
-  //iteramos sobre los iaxs y preguntamos si el atributo contexto es igual al contexto q enviamos por postman
-  //si es igual guardamos sus id del usuario en results 
-  for (let i = 0; i < iaxsAll.length; i++) {
-    if(iaxsAll[i]["context"] == params.context){
-        let x = results[iaxsAll[i]['usuarioId']]["iaxs"]
-        results[iaxsAll[i]['usuarioId']]["iaxs"].push(iaxsAll[i]['id']) 
-     }  
-  }    
-    res.send(results)
+  //creo variables todos son vectores
+  let siptodos = []
+  let sipid = []
+  let iaxtodos = []
+  let iaxid = []
+  let usuariostodossips = []
+  let usuariostodosiaxs = []
+  let todos = []
+  //itero sobre los sips y obtengo los ids ademas de su id, name, callerid.
+  sipsAll.forEach(obj =>{
+    //preguntamos si el contexto del objeto es igual al parametro que enviamos por postman
+    if(obj.context == params.context){
+      //guardo solo los IDS
+      sipid.push(obj.usuarioId)
+      //guardo el id, name, y callerid para despues mostrarlos con el nombre de sus atributos
+      siptodos.push({"id":`${obj.id}`, "name":`${obj.name}`, "callerid":`${obj.callerid}`})
+    } 
+  })
+  //itero sobre los iaxs y obtengo los ids ademas de su id, name, callerid.
+  iaxsAll.forEach(obj =>{
+    //preguntamos si el contexto del objeto es igual al parametro que enviamos por postman
+    if(obj.context == params.context){
+      //guardo solo los IDS
+       iaxid.push(obj.usuarioId)
+       //guardo el id, name, y callerid para despues mostrarlos con el nombre de sus atributos
+       iaxtodos.push({"id":`${obj.id}`, "name":`${obj.name}`, "callerid":`${obj.callerid}`})
+    } 
+  })
+  //iteramos sobres los IDS de los sips obtenidos
+  sipid.forEach(sip =>{
+    //iteramos sobre los usuarios
+    usuariosAll.forEach(obj=>{
+      //preguntamos si id del usuario es igual a los IDS 
+      if(obj.id == sip){
+      //obtenemos el id, nombre, ap Paterno, ap Materno del usuario y lo guardamos en un vector
+      usuariostodossips.push({"id":`${obj.id}`, "nombre":`${obj.nombre}`, "apPaterno":`${obj.apPaterno}`, "apMaterno":`${obj.apMaterno}`})
+      }
+    })
+  })
+  //iteramos sobres los IDS de los iaxs obtenidos
+  iaxid.forEach(iax =>{
+    //iteramos sobre los usuarios
+    usuariosAll.forEach(obj=>{
+      //preguntamos si id del usuario es igual a los IDS 
+      if(obj.id == iax){
+      //obtenemos el id, nombre, ap Paterno, ap Materno del usuario y lo guardamos en un vector
+      usuariostodosiaxs.push({"id":`${obj.id}`, "nombre":`${obj.nombre}`, "apPaterno":`${obj.apPaterno}`, "apMaterno":`${obj.apMaterno}`})
+      }
+    })
+  })
+    //devolvemos a los usuarios y sips separados (vectores dentro de vectores)  
+    todos.push(usuariostodossips, siptodos)
+    //devolvemos a los usuarios y iaxs separados (vectores dentro de vectores)
+    todos.push(usuariostodosiaxs, iaxtodos)
+  //mostramos todo el vector
+  res.send(todos)
     
-});
+})
 
 api.post('/getUsuariosWithSipsAndIaxs', async(req, res, next) => {
   const params = req.body 
@@ -1402,7 +1423,6 @@ api.post('/ListarHistorialBetweenFechas', async(req, res, next) => {
   res.send(todos)
   
 })
-
 
 api.post('/ListarHistorialBySipsAndIaxs', async(req, res, next) => {
   const params = req.body 
