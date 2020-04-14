@@ -1,42 +1,231 @@
-17 ':' 22 ':' 1
+[mod-socket] server listening on port 8085
+22 ':' 52 ':' 54
+{ Evento: 'Newchannel',
+  Numero: '6001',
+  Extension: '201',
+  Contexto: 'default' }
+22 ':' 52 ':' 54
+{ Evento: 'Newexten',
+  Numero: '6001',
+  Extension: '201',
+  Contexto: 'default',
+  Aplicacion: 'Playback' }
+22 ':' 52 ':' 57
+{ Evento: 'Hangup',
+  Numero: '6001',
+  Extension: '201',
+  Contexto: 'default' }
+
+
+
+22 ':' 54 ':' 51
+{ Evento: 'Newchannel',
+  Numero: '6002',
+  Extension: '6001',
+  Contexto: 'default' }
+22 ':' 54 ':' 51
+{ Evento: 'Newexten',
+  Numero: '6002',
+  Extension: '6001',
+  Contexto: 'default',
+  Aplicacion: 'Dial' }
+22 ':' 54 ':' 51
+{ Evento: 'NewConnectedLine',
+  Numero: '6002',
+  Extension: '6001',
+  Contexto: 'default' }
+22 ':' 54 ':' 58
+{ Evento: 'BridgeEnter',
+  Numero: '6002',
+  Extension: '6001',
+  Contexto: 'default' }
+22 ':' 55 ':' 7
+{ Evento: 'Hangup',
+  Numero: '6002',
+  Extension: '6001',
+  Contexto: 'default' }
+
+
+22 ':' 56 ':' 23
+{ Evento: 'Newchannel',
+  Numero: '6002',
+  Extension: '6001',
+  Contexto: 'default' }
+22 ':' 56 ':' 23
+{ Evento: 'Newexten',
+  Numero: '6002',
+  Extension: '6001',
+  Contexto: 'default',
+  Aplicacion: 'Dial' }
+22 ':' 56 ':' 23
+{ Evento: 'NewConnectedLine',
+  Numero: '6002',
+  Extension: '6001',
+  Contexto: 'default' }
+22 ':' 56 ':' 28
+{ Evento: 'Hangup',
+  Numero: '6002',
+  Extension: '6001',
+  Contexto: 'default' }
+
+
+22 ':' 58 ':' 55
+{ Evento: 'Newchannel',
+  Numero: '6001',
+  Extension: '*500',
+  Contexto: 'default' }
+22 ':' 58 ':' 55
+{ Evento: 'Newexten',
+  Numero: '6001',
+  Extension: 's',
+  Contexto: 'ivr',
+  Aplicacion: 'Background' }
+22 ':' 59 ':' 6
+{ Evento: 'Newexten',
+  Numero: '6001',
+  Extension: '1',
+  Contexto: 'ivr',
+  Aplicacion: 'Playback' }
+22 ':' 59 ':' 11
+{ Evento: 'Hangup',
+  Numero: '6001',
+  Extension: '1',
+  Contexto: 'ivr' }
+
+
+
+23 ':' 1 ':' 46
+{ Evento: 'Newchannel',
+  Numero: '6001',
+  Extension: '*600',
+  Contexto: 'default' }
+23 ':' 1 ':' 46
+{ Evento: 'Hangup',
+  Numero: '6001',
+  Extension: '*600',
+  Contexto: 'default' }
+23 ':' 1 ':' 47
+{ Evento: 'Newchannel',
+  Numero: '6001',
+  Extension: '*201',
+  Contexto: 'default' }
+23 ':' 1 ':' 47
+{ Evento: 'Newexten',
+  Numero: '6001',
+  Extension: '*201',
+  Contexto: 'default',
+  Aplicacion: 'Playback' }
+23 ':' 1 ':' 48
+{ Evento: 'Hangup',
+  Numero: '6001',
+  Extension: '*201',
+  Contexto: 'default' }
+
+
+
+23 ':' 2 ':' 6
+{ Evento: 'Newchannel',
+  Numero: '6002',
+  Extension: '*600',
+  Contexto: 'default' }
+23 ':' 2 ':' 7
+{ Evento: 'Newexten',
+  Numero: '6002',
+  Extension: '*600',
+  Contexto: 'default',
+  Aplicacion: 'Queue' }
+23 ':' 2 ':' 7
+{ Evento: 'NewConnectedLine',
+  Numero: '6002',
+  Extension: 'SIP/6001',
+  Contexto: 'default' }
+23 ':' 2 ':' 24
+{ Evento: 'NewConnectedLine',
+  Numero: '6002',
+  Extension: 'SIP/6001',
+  Contexto: 'default' }
+23 ':' 2 ':' 26
+{ Evento: 'BridgeEnter',
+  Numero: '6002',
+  Extension: 'SIP/6001',
+  Contexto: 'default' }
+23 ':' 2 ':' 26
+{ Evento: 'BridgeEnter',
+  Numero: '6002',
+  Extension: '*600',
+  Contexto: 'default' }
+23 ':' 2 ':' 34
+{ Evento: 'Hangup',
+  Numero: '6002',
+  Extension: 'SIP/6001',
+  Contexto: 'default' }
+23 ':' 2 ':' 34
+{ Evento: 'Hangup',
+  Numero: '6002',
+  Extension: '*600',
+  Contexto: 'default' }
+
+
+
+23 ':' 5 ':' 52
 { Evento: 'Newchannel',
   Numero: '6001',
   Extension: '3',
   Contexto: 'default' }
-17 ':' 22 ':' 1
+23 ':' 5 ':' 52
 { Evento: 'Newexten',
   Numero: '6001',
   Extension: '3',
   Contexto: 'default',
   Aplicacion: 'confbridge' }
-17 ':' 22 ':' 1
+23 ':' 5 ':' 52
 { Evento: 'BridgeEnter',
   Numero: '6001',
   Extension: '3',
   Contexto: 'default' }
-17 ':' 22 ':' 5
+23 ':' 6 ':' 11
 { Evento: 'Newchannel',
   Numero: '6002',
   Extension: '3',
   Contexto: 'default' }
-17 ':' 22 ':' 6
+23 ':' 6 ':' 11
 { Evento: 'Newexten',
   Numero: '6002',
   Extension: '3',
   Contexto: 'default',
   Aplicacion: 'confbridge' }
-17 ':' 22 ':' 9
+23 ':' 6 ':' 15
 { Evento: 'BridgeEnter',
   Numero: '6002',
   Extension: '3',
   Contexto: 'default' }
-17 ':' 22 ':' 10
+23 ':' 6 ':' 24
+{ Evento: 'Hangup',
+  Numero: '6002',
+  Extension: '3',
+  Contexto: 'default' }
+23 ':' 6 ':' 30
 { Evento: 'Hangup',
   Numero: '6001',
   Extension: '3',
   Contexto: 'default' }
-17 ':' 22 ':' 12
+
+
+
+
+23 ':' 9 ':' 21
+{ Evento: 'Newchannel',
+  Numero: '6001',
+  Extension: '5556002',
+  Contexto: 'default' }
+23 ':' 9 ':' 21
+{ Evento: 'Newexten',
+  Numero: '6001',
+  Extension: '5556002',
+  Contexto: 'default',
+  Aplicacion: 'ChanSpy' }
+23 ':' 24 ':' 0
 { Evento: 'Hangup',
-  Numero: '6002',
-  Extension: '3',
+  Numero: '6001',
+  Extension: '5556002',
   Contexto: 'default' }

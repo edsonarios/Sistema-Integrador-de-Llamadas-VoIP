@@ -21,27 +21,6 @@ const AmiClient = require('asterisk-ami-client');
 let client = new AmiClient();
 const { parsePayload } = require('./utils')
 
-
-  
-
-
-// Socket.io / WebSockets
-io.on('connect', socket => {
-  
-  //recibe el mensaje de la pagina web
-  socket.on('message', payload => {
-    //publica mediante mqtt el objeto json
-    client.publish("actuador", payload)
-    console.log("este es socket")
-    console.log("\x1b[33m",payload)
-  })
-
-    
-  //pipe(agent, socket)
-})
-
-
-
 // Express Error Handler
 app.use((err, req, res, next) => {
   debug(`Error: ${err.message}`)
@@ -156,22 +135,59 @@ client.connect('realTime', '1234', {host: 'localhost', port: 5055})
           //console.log(event)
       }
 
-
+      console.log(event)
     })
     //client.on('data', chunk => console.log(chunk))
     //client.on('response', response => console.log(response))
     //client.on('disconnect', () => console.log('disconnect'))
     //client.on('reconnection', () => console.log('reconnection'))
     //client.on('Dial', error => console.log(error))
+    /*
+    var aux=""
+    //Realizar llamada
+    var action1= {
+      Action: 'Originate',
+      Channel: 'SIP/6001',
+      Context: 'default',
+      Exten: '201',
+      Priority: '1'
+    }
+    //Reload
+    var action2= {
+      Action: 'Reload',
+    }
+    //Añadir nuevo dial plan, pero solo es temporal y no persistente
+    var action3= {
+      Action: 'DialplanExtensionAdd',
+      Context: 'NuevoDialLargoParaEncontrar',
+      Extension: '6001',
+      Priority: '1',
+      Application: 'Dial(SIP/${EXTEN})'
+    }
     
-    //client.action({
-      //  Action: 'Ping'
-    //});
-     
-     
-     /*setTimeout(() => {
-         client.disconnect();
-     }, 5000);*/
+    setTimeout(() => {
+      client.action(action4);
+      console.log("algo2")
+  }, 5000);*/
+
+
+    
+
+
+
+
+    
+     // Socket.io / WebSockets
+    io.on('connect', socket => {
+      
+      //recibe el mensaje de la pagina web
+      socket.on('action', payload => {
+        //publica mediante mqtt el objeto json
+        client.action(payload);
+        console.log("\x1b[33m",payload)
+      })
+        //pipe(agent, socket)
+    })
  
  })
  .catch(error => console.log(error));
