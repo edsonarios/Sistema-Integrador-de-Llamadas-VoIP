@@ -71,6 +71,13 @@ api.get('/datosPrueba', async (req, res) => {
     descripcion: "sala por default",
     switch: "1"
   })
+  //Crea una cola de llamada para default, eso solo como ejemplo
+  const objj= await Queue.create(obj.id, {
+    name: "support",
+    musicclass: "default",
+    strategy: "ringall",
+    timeout: 20
+  })
   //Usuario1
   const obj2 = await Usuario.create(obj.id, {
     nombre: "nombre",
