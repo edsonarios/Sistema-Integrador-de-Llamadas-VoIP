@@ -655,6 +655,9 @@ api.get('/datosOperador', async (req, res) => {
 /// SALA /////////////////////////////////////////////////////////////////////
 
 api.post('/addSala', async (req, res, next) => {
+  //leemos el archivo extensions.conf, donde se añadira una nueva extension para la sala
+  let dat1=fs.readFileSync('/etc/asterisk/extensions.conf', 'utf8')
+
   const params = req.body
   //creamos una sala con todos sus atributos
   let obj 
@@ -664,6 +667,11 @@ api.post('/addSala', async (req, res, next) => {
       descripcion: params.descripcion,
       switch: params.switch
     })
+    //En el archivo extensions.conf de asterisk, creamos la nueva sala
+    dat1+=`\n[${params.nombreSala}]\nswitch = Realtime/@`
+    fs.writeFile('/etc/asterisk/extensions.conf', dat1, (err) => {
+      if (err) console.log(err);
+    });
   }catch(e){
     return next(e)
   }
@@ -673,13 +681,60 @@ api.post('/addSala', async (req, res, next) => {
 api.put('/updateSala', async (req, res, next) => {
   const params = req.body
   //editamos cualquier atriburo de una sala buscandolo por su id
-  let obj 
+  let obj,obj2
   try{
+    //obtenemos el nombre antiguo de la sala, antes del cambio
+    obj2= await Sala.findById(params.id)
+
     obj= await Sala.update(params.id, {
       nombreSala: params.nombreSala,
       descripcion: params.descripcion,
       switch: params.switch
     })
+    
+    //Actualizamos la sala de extensions.conf de asterisk
+    let dat1=fs.readFileSync('/etc/asterisk/extensions.conf', 'utf8')
+    var sw=0,sw2=-1, aux="", pos=-1, pos2=-1, final=""
+    //For para buscar la sala indicada
+    for (let i = 0; i < dat1.length; i++) {
+      //if para detectar el caracter [
+      if (dat1.charCodeAt(i)==91) {
+        sw=1
+        pos=i
+      }
+      //Concatena el nombre dentro del corchete
+      if(sw==1){
+        aux+=dat1[i]
+      }
+      //Detiene la concatenacion del nombre de la sala
+      if (dat1.charCodeAt(i)==93) {
+        sw=0
+        //compara el contexto con la sala, si es la sala indicada, sale del for
+        if(aux.substring(1,aux.length-1)==obj2.nombreSala){
+          pos2=i
+          sw2=1
+          break
+        }
+        aux=""
+      }
+    }
+    //switch para validar que si existe la sala
+    if(sw2==1){
+      //concatena de 0 a la primera posicion
+      final+=dat1.substring(0,pos+1)
+      //actualizamos el nombre de la sala
+      final+=params.nombreSala
+      //concatena el resto del archivo extensions.conf, exceptuando la sala 
+      final+=dat1.substring(pos2,dat1.length)
+      //if para confirmar que no haya un espacio extra despues de borrar la sala
+      if(final.charCodeAt(final.length-1)==10){
+        final=final.substring(0,final.length-1)
+      }
+      //escribe en el archivo extesions.conf
+      fs.writeFile('/etc/asterisk/extensions.conf', final, (err) => {
+        if (err) console.log(err);
+      });
+    }
   }catch(e){
     return next(e)
   }
@@ -767,6 +822,49 @@ api.post('/deleteSala', async(req, res, next) => {
     })
   
   await Sala.destroynomSala(params.context)
+
+  //Eliminamos la sala de extensions.conf de asterisk
+  let dat1=fs.readFileSync('/etc/asterisk/extensions.conf', 'utf8')
+  var sw=0,sw2=-1, aux="", pos=-1, pos2=-1, final=""
+  //For para buscar la sala indicada
+  for (let i = 0; i < dat1.length; i++) {
+    //if para detectar el caracter [
+    if (dat1.charCodeAt(i)==91) {
+      sw=1
+      pos=i
+    }
+    //Concatena el nombre dentro del corchete
+    if(sw==1){
+      aux+=dat1[i]
+    }
+    //Detiene la concatenacion del nombre de la sala
+    if (dat1.charCodeAt(i)==93) {
+      sw=0
+      //compara el contexto con la sala, si es la sala indicada, sale del for
+      if(aux.substring(1,aux.length-1)==params.context){
+        pos2=i
+        sw2=1
+        break
+      }
+      aux=""
+    }
+  }
+  //switch para validar que si existe la sala
+  if(sw2==1){
+    //concatena de 0 a la primera posicion
+    final+=dat1.substring(0,pos)
+    //concatena el resto del archivo extensions.conf, exceptuando la sala 
+    final+=dat1.substring(pos2+22,dat1.length)
+    //if para confirmar que no haya un espacio extra despues de borrar la sala
+    if(final.charCodeAt(final.length-1)==10){
+      final=final.substring(0,final.length-1)
+    }
+    //escribe en el archivo extesions.conf
+    fs.writeFile('/etc/asterisk/extensions.conf', final, (err) => {
+      if (err) console.log(err);
+    });
+  }
+
   res.send(edit)
 })
 /// USUARIO /////////////////////////////////////////////////////////////////////
@@ -1625,6 +1723,79 @@ api.delete('/deleteIax', async(req, res, next) => {
   //borro todos los iaxs a partir del id del iax
   await Iax.destroy1(params.id)
   res.send({message: 'se borro el iax'})
+})
+
+/// QUEUE /////////////////////////////////////////////////////////////////////
+
+api.post('/addQueue', async (req, res, next) => {
+  const params = req.body
+  //creo un queue apartir del id de la sala, con todos sus atributos
+  let obj
+  try{
+    obj= await Queue.create(params.salaId, {
+      name: params.name,
+      musicclass: params.musicclass,
+      strategy: params.strategy,
+      timeout: params.timeout
+    })
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
+
+api.put('/updateQueue', async (req, res, next) => {
+  const params = req.body
+  //edito el queue aportir del id de queue, con todos sus atributos
+  let obj
+  try{
+    obj= await Queue.update(params.id, {
+      name: params.name,
+      musicclass: params.musicclass,
+      strategy: params.strategy,
+      timeout: params.timeout
+    })
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
+
+api.post('/findByIdQueue', async (req, res, next) => {
+  const params = req.body
+  let obj
+  //busco un queue apartir del id del queue
+  try{
+    obj= await Queue.findById(params.id)
+  }catch(e){
+    return next(e)
+  }
+  if(!obj || obj.lenght==0){
+    return next(new Error(`Queue not found with id ${params.id}`))
+  }
+
+  res.send(obj)
+})
+
+api.get('/findAllQueue', async (req, res, next) => {
+  let obj
+  //busco y listo todos los queues
+  try{
+    obj= await Queue.findAll()
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
+
+api.delete('/deleteQueue', async(req, res, next) => {
+  const params = req.body
+  //borro todos los queues a partir del id del queue
+  await Queue.destroy(params.id)
+  res.send({message: 'se borro el queue'})
 })
 module.exports = api
 //moment(m.createdAt).format("YYYY-MM-DD")

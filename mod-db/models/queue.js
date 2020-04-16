@@ -7,7 +7,23 @@ module.exports = function setupQueueModel (config) {
   const sequelize = setupDatabase(config)
 
   return sequelize.define('queue', {
-    nombreQueue: {
+    name: {
+      type: Sequelize.STRING,
+      allowNull: true
+    },
+    musicclass: {
+      type: Sequelize.STRING,
+      allowNull: true
+    },
+    strategy: {
+      type: Sequelize.STRING,
+      allowNull: true
+    },
+    timeout: {
+      type: Sequelize.INTEGER,
+      allowNull: true
+    },
+    context: {
       type: Sequelize.STRING,
       allowNull: true
     }

@@ -142,14 +142,14 @@ client.connect('realTime', '1234', {host: 'localhost', port: 5055})
     //client.on('disconnect', () => console.log('disconnect'))
     //client.on('reconnection', () => console.log('reconnection'))
     //client.on('Dial', error => console.log(error))
-    /*
-    var aux=""
+    
+    /*var aux=""
     //Realizar llamada
     var action1= {
       Action: 'Originate',
-      Channel: 'SIP/6001',
+      Channel: 'SIP/2001',
       Context: 'default',
-      Exten: '201',
+      Exten: '3',
       Priority: '1'
     }
     //Reload
@@ -166,7 +166,7 @@ client.connect('realTime', '1234', {host: 'localhost', port: 5055})
     }
     
     setTimeout(() => {
-      client.action(action4);
+      client.action(action1);
       console.log("algo2")
   }, 5000);*/
 
