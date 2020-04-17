@@ -26,6 +26,7 @@ const api = asyncify(express.Router())
 const moment = require("moment")
 
 var shell = require('shelljs')
+const zip = require('express-zip')
 
 
 //parseado a json todos los bodys
@@ -1411,56 +1412,36 @@ api.post('/findByIdCdr', async (req, res, next) => {
   res.send(obj)
 })
 
-api.get('/download', function(req, res, next){
-
-  var file = __dirname + '/upload/monitor/1577308526-SIP-7001-00000000-in.wav';
-
-  var filename = path.basename(file);
-  var mimetype = mime.lookup(file);
-
-  res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-  res.setHeader('Content-type', mimetype);
-
-  var filestream = fs.createReadStream(file);
-  filestream.on("error",(e)=>{
-    if(e.code == "ENOENT"){
-      console.log("404")
-      //res.status(404).end()
-      return next(e)
-    }
-    console.log("500")
-    res.status(500).end()
-  })
-  console.log("200")
-  filestream.pipe(res);
-});
-
-api.post('/listar', function(req, res, next){
+api.get('/downloadCalls', function(req, res, next){
   const params = req.body
-  var id=params.id
+  var id=params.uniqueid
   var chanel=params.channel
-  let a=[]
-  let download=[]
+  let a=[], download=[]
+  var sw=-1
+  //lista todos los archivos en la carpeta uploads, q es un enlace referencial de var/spool/asterisk/monitor de asterisk
   a=shell.ls('-l',`${__dirname}/upload/monitor`)
-  //console.log(a)
-  //console.log(a.length)
+  //itera sobre todos los elementos de la carpeta
   for (let i = 0; i < a.length; i++) {
-    //console.log(a[i].name)
-    //console.log(a[i].name.substring(0,10))
+    //compara: sip, channel, uniqueid
     if((a[i].name.substring(11,14)==chanel.substring(0,3)) && (parseInt(id) <= parseInt(a[i].name.substring(0,10)) && (parseInt(id)+5) >= parseInt(a[i].name.substring(0,10))) && (a[i].name.substring(15,28)==chanel.substring(4,18))){
-      //console.log("si")
+      sw=1
       download.push(`/var/spool/asterisk/monitor/${a[i].name}`)
     }
   }
-  //console.log(download)
-  for (let i = 0; i < download.length; i++) {
-    //res.download(download[i]);
-    //console.log(i)
+  //si se encontro el archivo, se empaque los 2 (in,out) en un zip para descargarlo en el navegador
+  //otra forma de descargar, pero los navegadores solo admiten un archivo a la vez res.download(download[0]);
+  if(sw==1){
+    res.zip([
+      {path:`${download[0]}`,name:`${download[0].substring(28,download[0].length)}`},
+      {path:`${download[1]}`,name:`${download[1].substring(28,download[1].length)}`}
+    ],"audio.zip")
+  }else{
+    res.status(404).send({message: "error audio no encontrados"})
   }
-  res.download(download[1]);
-  //setTimeout(res.download(download[1]), 1000);
-  //res.download("/var/spool/asterisk/monitor/1577308318-SIP-7001-00000006-out.wav");
-  //res.send("obj")
+});
+
+api.get('/listar', function(req, res, next){
+  
 });
 
 api.post('/ListarHistorialByFechaBySipsAndIaxs', async(req, res, next) => {

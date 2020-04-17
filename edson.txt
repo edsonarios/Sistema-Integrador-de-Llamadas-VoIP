@@ -64,4 +64,8 @@
 
 [REUNION 20-02-20]
     - Añadir atributo de WebRTC=true,false en tabla sips
-    
+
+
+[Scripts para crear]
+- mod-api/upload/monitor
+    crear enlace referencial de /var/spool/asterisk/monitor a mod-api/upload/monitor
