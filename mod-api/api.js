@@ -1412,7 +1412,7 @@ api.post('/findByIdCdr', async (req, res, next) => {
   res.send(obj)
 })
 
-api.get('/downloadCalls', function(req, res, next){
+api.post('/downloadCalls', function(req, res, next){
   const params = req.body
   var id=params.uniqueid
   var chanel=params.channel
@@ -1436,12 +1436,33 @@ api.get('/downloadCalls', function(req, res, next){
       {path:`${download[1]}`,name:`${download[1].substring(28,download[1].length)}`}
     ],"audio.zip")
   }else{
-    res.status(404).send({message: "error audio no encontrados"})
+    return next(new Error(`Audio not found`))
   }
 });
 
-api.get('/listar', function(req, res, next){
-  
+api.post('/listenCalls', function(req, res, next){
+  const params = req.body
+  var id=params.uniqueid
+  var chanel=params.channel
+  let a=[], download=[]
+  var sw=-1
+  //lista todos los archivos en la carpeta uploads, q es un enlace referencial de var/spool/asterisk/monitor de asterisk
+  a=shell.ls('-l',`${__dirname}/upload/monitor`)
+  //itera sobre todos los elementos de la carpeta
+  for (let i = 0; i < a.length; i++) {
+    //compara: sip, channel, uniqueid
+    if((a[i].name.substring(11,14)==chanel.substring(0,3)) && (parseInt(id) <= parseInt(a[i].name.substring(0,10)) && (parseInt(id)+5) >= parseInt(a[i].name.substring(0,10))) && (a[i].name.substring(15,28)==chanel.substring(4,18))){
+      sw=1
+      download.push(`/var/spool/asterisk/monitor/${a[i].name}`)
+    }
+  }
+  //si se encontro el archivo, se empaque los 2 (in,out) en un zip para descargarlo en el navegador
+  //otra forma de descargar, pero los navegadores solo admiten un archivo a la vez res.download(download[0]);
+  if(sw==1){
+    res.send(download)
+  }else{
+    return next(new Error(`Audio not found`))
+  }
 });
 
 api.post('/ListarHistorialByFechaBySipsAndIaxs', async(req, res, next) => {
