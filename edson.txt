@@ -6,22 +6,22 @@
         - Colas de llamadas         [LISTO]
         - IVR                       [LISTO]
         - Conferencias              [LISTO]
-        - Interceptar llamadas, silencionamente, participando solo con el operador, participando con todos      
+        - Interceptar llamadas, silencionamente, participando solo con el operador, participando con todos      [LISTO]
         - Calendario de llamadas para horas laborales sino enviar a IVR [LISTO]
         - personalizar musichold    [LISTO]
-        - descargar audios
-        - troncal                   "Se necesita un gatwey sip, de bolivia"
-        - Modificar archivo asterisk desde api
-        - Socket                    
-        - Reload de asterisk por apis           
+        - descargar audios          [LISTO]
+        - Modificar archivo asterisk desde api      [LISTO]
+        - Socket                                    [LISTO]
+        - Reload de asterisk por apis               [LISTO]
         - Error, las llamadas por usuarios de sip de db, solo duran 30 sec
+        - incorporar usuarios a una conferencia         [LISTO]
+        - intervernir silencionamente, o participando   [LISTO]
+        - ingresar a otro agente a mi llamada           [LISTO]
+        - libera automaticamente de un ptt despues de 3 min     
+        - prioridad de llamadas, para cola de llamadas  [LISTO]
+        - Integrar gateway FXO a asterisk 
+        - Pruebas en servidor
 
-        - prioridad de llamadas, para cola de llamadas
-        - incorporar usuarios a una conferencia
-        - intervernir silencionamente, o participando
-        - ingresar a otro agente a mi llamada
-        - libera automaticamente de un ptt despues de 3 min
-        - Ficha para reportar el incidente
 
 
 

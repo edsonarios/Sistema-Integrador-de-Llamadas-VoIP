@@ -499,17 +499,34 @@ api.get('/datosPrueba', async (req, res) => {
       app: "Answer",
       appdata: ""
     })
+    //Pregunta para saber si es numero prioritario o es cualquier otro numero
     const obj102 = await Extension.create(obj.id, {
       context: "default",
       exten: "*600",
       priority: 2,
-      app: "Queue",
-      appdata: "support,,,,60"
+      app: "GotoIf",
+      appdata: "$[ $[ '${CHANNEL(peername)}' = '6001' ] | $[ '${CHANNEL(peername)}' = '6002' ] ]?3:4"
     })
+    //Si es numero prioritario se incrementa el atributo de prioridad y se coloca 1ro en la cola de llamadas, sino es prioritario, el atributo de prioridad se mantiene en 1
     const obj103 = await Extension.create(obj.id, {
       context: "default",
       exten: "*600",
       priority: 3,
+      app: "Set",
+      appdata: "QUEUE_PRIO=10"
+    })
+    //de acuerdo al atributo de prioridad se establece la llamada con la cola de llamadas
+    const obj104 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "*600",
+      priority: 4,
+      app: "Queue",
+      appdata: "support,,,,60"
+    })
+    const obj105 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "*600",
+      priority: 5,
       app: "hangup",
       appdata: ""
     })
@@ -528,38 +545,7 @@ api.get('/datosPrueba', async (req, res) => {
       app: "confbridge",
       appdata: "3"
     })
-    //111 y 112 Numeros para priorizar
-    //111 menos importante
-    const obj120 = await Extension.create(obj.id, {
-      context: "default",
-      exten: "111",
-      priority: 1,
-      app: "Set",
-      appdata: "QUEUE_PRIO=5"
-    })
-    const obj121 = await Extension.create(obj.id, {
-      context: "default",
-      exten: "111",
-      priority: 2,
-      app: "Queue",
-      appdata: "support,,,,60"
-    })
-    //112 mas importante
-    const obj130 = await Extension.create(obj.id, {
-      context: "default",
-      exten: "112",
-      priority: 1,
-      app: "Set",
-      appdata: "QUEUE_PRIO=10"
-    })
-    const obj131 = await Extension.create(obj.id, {
-      context: "default",
-      exten: "112",
-      priority: 2,
-      app: "Queue",
-      appdata: "support,,,,60"
-    })
-
+    
     //Intervenir llamadas en curso
     //555X... Intervenir llamada silencionamente, ninguno de los 2 puede escucharte
     const obj140 = await Extension.create(obj.id, {
