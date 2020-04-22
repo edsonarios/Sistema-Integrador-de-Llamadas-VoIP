@@ -18,7 +18,7 @@
 				<div class="form-group col" *ngIf="IdUsuario=='none'">
 					<label >Cuenta</label>
 					<select class="custom-select" formControlName="id">
-						<option selected value="null">Seleccione una Cuenta</option>
+						<!--<option selected value="null">Seleccione una Cuenta</option>-->
 							<option 
 							*ngFor="let n of Cuentas; let i = index" 
 							value="{{Cuentas[i]['id']}}" >

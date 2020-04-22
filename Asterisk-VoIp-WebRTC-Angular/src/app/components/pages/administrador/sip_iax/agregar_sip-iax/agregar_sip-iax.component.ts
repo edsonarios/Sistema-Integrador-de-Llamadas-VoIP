@@ -158,9 +158,11 @@ export class Agregar_Sip_IaxComponent implements OnInit {
 
 				if (this.IdUsuario=='none') {
 						this.Sip_Iax.usuarioId=this.Sip_Iax_form.value.id;
+
 					}
 					else{
 						this.Sip_Iax.usuarioId=localStorage.getItem('idCuenta');
+
 				}
 					this.Sip_Iax.name=this.Sip_Iax_form.value.name;
 					this.Sip_Iax.callerid=this.Sip_Iax_form.value.callerid;
