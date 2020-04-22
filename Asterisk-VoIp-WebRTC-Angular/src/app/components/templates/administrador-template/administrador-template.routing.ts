@@ -4,7 +4,7 @@ import { CuentasComponent } from '@administrador/cuentas/cuentas.component';
 import { AgregarCuentaComponent } from '@administrador/cuentas/agregar_cuenta/agregar_cuenta.component';
 import { EditarCuentaComponent } from '@administrador/cuentas/editar_cuenta/editar_cuenta.component';
 import { DetalleCuentaComponent } from '@administrador/cuentas/detalle_cuenta/detalle_cuenta.component';
-import { AgregarNumeroComponent } from '@administrador/caller_number/agregar_numero/agregar_numero.component';
+
 
 import { SIP_IaxDetalleComponent } from '@administrador/sip_iax/detalle-sip_iax/detalle-sip_iax.component';
 import { Sip_IaxComponent } from '@administrador/sip_iax/sip_iax.component';
@@ -32,7 +32,6 @@ export const AdministradorTemplateRoutes: Routes = [
 
   { path: 'SIP_IAX', component: Sip_IaxComponent },
   { path: 'DetalleSIP_IAX', component: SIP_IaxDetalleComponent },
-  { path: 'AgregarNumero', component: AgregarNumeroComponent },
   { path: 'AgregarSipIax', component: Agregar_Sip_IaxComponent },
 
   { path: 'Salas', component: SalasComponent },
