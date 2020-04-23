@@ -38,7 +38,7 @@ export class HistorialService {
     return throwError(errorMessage);
   }
 
-  HistorialLlamadas(): Observable<any> {
+  HistorialLlamadasAdministrador(): Observable<any> {
     return this.http
       .get<any>(this.url + 'findAllCdr')
       .pipe(retry(1), catchError(this.errorHandl));
