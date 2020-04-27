@@ -16,9 +16,8 @@ import { DetalleCuentaComponent } from '@administrador/cuentas/detalle_cuenta/de
 import { SIP_IaxCardComponent } from '@administrador/sip_iax/sip_iax-card/sip_iax-card.component';
 import { Sip_IaxComponent } from '@administrador/sip_iax/sip_iax.component';
 import { SIP_IaxDetalleComponent } from '@administrador/sip_iax/detalle-sip_iax/detalle-sip_iax.component';
-import { SipComponent } from '@administrador/caller_number/sip/sip.component';
-import { IaxComponent } from '@administrador/caller_number/iax/iax.component';
-import { AgregarNumeroComponent } from '@administrador/caller_number/agregar_numero/agregar_numero.component';
+import { Agregar_Sip_IaxComponent } from '@administrador/sip_iax/agregar_sip-iax/agregar_sip-iax.component';
+
 
 import { SalaCardComponent } from '@administrador/salas/sala_card/sala_card.component';
 import { SalasComponent } from '@administrador/salas/salas.component'
@@ -66,9 +65,7 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 		SIP_IaxCardComponent,
 		Sip_IaxComponent,
 		SIP_IaxDetalleComponent,
-		SipComponent,
-		IaxComponent,
-		AgregarNumeroComponent,
+		Agregar_Sip_IaxComponent,
 
 		SalaCardComponent,
 		SalasComponent,

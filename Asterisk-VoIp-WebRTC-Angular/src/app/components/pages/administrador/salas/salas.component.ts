@@ -17,10 +17,7 @@ export class SalasComponent implements OnInit {
     this.recibirSalas();
     localStorage.removeItem('Sala');
   }
-  prueba() {
-    //window.alert('Prueba');
-    Swal.fire('Hola Bonita <3');
-  }
+
   recibirSalas() {
     this.serviceSala.listarSalas().subscribe(
       (response) => {
