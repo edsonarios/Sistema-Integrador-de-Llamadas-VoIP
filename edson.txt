@@ -69,3 +69,42 @@
 [Scripts para crear]
 - mod-api/upload/monitor
     crear enlace referencial de /var/spool/asterisk/monitor a mod-api/upload/monitor
+
+
+[GATEWAY DINSTAR]
+    login: admin, admin
+    ip: 192.168.100.50
+
+    Configuracion Elastic
+
+    Troncales
+        Añadir linea troncal SIP
+            Add SIP Trunk
+            Nombre de linea troncal: DinstarFXO
+            Nombre de la linea troncal: fxo 
+            Detalles del par:
+                host=192.168.100.50
+                type=peer 
+                insecure=no 
+                qualify=no 
+            Contexto del usuario: 123123
+            Detalles del usuario:
+                host=dynamic
+                username=123123
+                secret=123123
+                type=friend
+                insecure=no
+                qualify=no
+    Rutas Entrantes
+            Añadir ruta entrante
+            Descripcion: entrantes
+            Numero DID:
+            Establecer destino:
+                Extensiones: 112
+    Rutas Salientes
+            Añadir ruta
+            Nombre de la ruta: DinstarFXO 
+            Dial Patterns that will use this Route:
+                XXXXXX
+            Trunk Sequence for Matched Routes
+                DinstarFXO
