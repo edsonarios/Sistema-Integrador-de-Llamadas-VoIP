@@ -15,6 +15,11 @@ module.exports = function setupSip(SipModel, UsuarioModel) {
       return result.toJSON()
     }
   }
+  
+  async function createRadio(obj) {
+    const result = await SipModel.create(obj)
+    return result.toJSON()
+  }
 
   async function update(id, obj) {
     const cond = {
@@ -77,6 +82,7 @@ module.exports = function setupSip(SipModel, UsuarioModel) {
   }
   return {
     create,
+    createRadio,
     update,
     updatesipCont,
     findById,
