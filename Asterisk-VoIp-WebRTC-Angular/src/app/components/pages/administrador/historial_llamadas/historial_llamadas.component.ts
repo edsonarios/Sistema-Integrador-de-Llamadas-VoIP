@@ -153,7 +153,6 @@ export class HistorialLlamadasComponent implements OnInit {
 				console.log('Historial de llamadas... \n');
 				this.History = response;
 				this.Todos = response;
-
 				this.History.forEach(element => {
 					var segun = element.billsec + '';
 					if (segun.length == 1) element.billsec = '0' + element.billsec;
@@ -165,11 +164,9 @@ export class HistorialLlamadasComponent implements OnInit {
 						moment(element.calldate).format('LTS') +
 						' )';
 				});
-
 				// this.History.forEach(element => {
 				// 	console.log(element);
 				// });
-
 				this.History.forEach(element => {
 					if (element.disposition == 'ANSWERED') this.Entrante.push(element);
 					if (element.disposition == 'NO ANSWERED') this.Perdida.push(element);

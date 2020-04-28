@@ -1,0 +1,8 @@
+[default]
+switch = Realtime/@
+[ivr]
+switch = Realtime/@
+[radio]
+switch = Realtime/@
+[emergencia]
+switch = Realtime/@

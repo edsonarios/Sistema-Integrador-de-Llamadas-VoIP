@@ -1,12 +1,17 @@
-
-<div class="radio">
-	<div>
-		{{Alias}}
+<div class="radio_card">
+	<div class="radio_card-img">
+		<!--<img src="assets/avatar.png" class="img">-->
 	</div>
-	<div>
-		{{Numero}}
-	</div>
-	<div>
-		<button type="button" class="btn btn-danger" (click)="eliminarsip()">Eliminar</button>
+	<div class="radio_card-details">
+		<div class="radio_card-header"></div>
+		<div class="radio_card-info">
+				{{Alias}}
+				<br>
+				{{Numero}}
+		</div>
+		<div class="radio_card-options">
+			<button type="button" class="btn btn-info" >Detalles</button>
+			<button type="button" class="btn btn-danger" >Eliminar</button>
+		</div>
 	</div>
 </div>

@@ -26,6 +26,7 @@ const api = asyncify(express.Router())
 const moment = require("moment")
 
 var shell = require('shelljs')
+const zip = require('express-zip')
 
 
 //parseado a json todos los bodys
@@ -70,6 +71,13 @@ api.get('/datosPrueba', async (req, res) => {
     nombreSala: "default",
     descripcion: "sala por default",
     switch: "1"
+  })
+  //Crea una cola de llamada para default, eso solo como ejemplo
+  const objj= await Queue.create(obj.id, {
+    name: "support",
+    musicclass: "default",
+    strategy: "ringall",
+    timeout: 20
   })
   //Usuario1
   const obj2 = await Usuario.create(obj.id, {
@@ -491,17 +499,34 @@ api.get('/datosPrueba', async (req, res) => {
       app: "Answer",
       appdata: ""
     })
+    //Pregunta para saber si es numero prioritario o es cualquier otro numero
     const obj102 = await Extension.create(obj.id, {
       context: "default",
       exten: "*600",
       priority: 2,
-      app: "Queue",
-      appdata: "support,,,,60"
+      app: "GotoIf",
+      appdata: "$[ $[ '${CHANNEL(peername)}' = '6001' ] | $[ '${CHANNEL(peername)}' = '6002' ] ]?3:4"
     })
+    //Si es numero prioritario se incrementa el atributo de prioridad y se coloca 1ro en la cola de llamadas, sino es prioritario, el atributo de prioridad se mantiene en 1
     const obj103 = await Extension.create(obj.id, {
       context: "default",
       exten: "*600",
       priority: 3,
+      app: "Set",
+      appdata: "QUEUE_PRIO=10"
+    })
+    //de acuerdo al atributo de prioridad se establece la llamada con la cola de llamadas
+    const obj104 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "*600",
+      priority: 4,
+      app: "Queue",
+      appdata: "support,,,,60"
+    })
+    const obj105 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "*600",
+      priority: 5,
       app: "hangup",
       appdata: ""
     })
@@ -520,38 +545,7 @@ api.get('/datosPrueba', async (req, res) => {
       app: "confbridge",
       appdata: "3"
     })
-    //111 y 112 Numeros para priorizar
-    //111 menos importante
-    const obj120 = await Extension.create(obj.id, {
-      context: "default",
-      exten: "111",
-      priority: 1,
-      app: "Set",
-      appdata: "QUEUE_PRIO=5"
-    })
-    const obj121 = await Extension.create(obj.id, {
-      context: "default",
-      exten: "111",
-      priority: 2,
-      app: "Queue",
-      appdata: "support,,,,60"
-    })
-    //112 mas importante
-    const obj130 = await Extension.create(obj.id, {
-      context: "default",
-      exten: "112",
-      priority: 1,
-      app: "Set",
-      appdata: "QUEUE_PRIO=10"
-    })
-    const obj131 = await Extension.create(obj.id, {
-      context: "default",
-      exten: "112",
-      priority: 2,
-      app: "Queue",
-      appdata: "support,,,,60"
-    })
-
+    
     //Intervenir llamadas en curso
     //555X... Intervenir llamada silencionamente, ninguno de los 2 puede escucharte
     const obj140 = await Extension.create(obj.id, {
@@ -655,6 +649,9 @@ api.get('/datosOperador', async (req, res) => {
 /// SALA /////////////////////////////////////////////////////////////////////
 
 api.post('/addSala', async (req, res, next) => {
+  //leemos el archivo extensions.conf, donde se añadira una nueva extension para la sala
+  let dat1=fs.readFileSync('/etc/asterisk/extensions.conf', 'utf8')
+
   const params = req.body
   //creamos una sala con todos sus atributos
   let obj 
@@ -664,6 +661,11 @@ api.post('/addSala', async (req, res, next) => {
       descripcion: params.descripcion,
       switch: params.switch
     })
+    //En el archivo extensions.conf de asterisk, creamos la nueva sala
+    dat1+=`\n[${params.nombreSala}]\nswitch = Realtime/@`
+    fs.writeFile('/etc/asterisk/extensions.conf', dat1, (err) => {
+      if (err) console.log(err);
+    });
   }catch(e){
     return next(e)
   }
@@ -673,13 +675,60 @@ api.post('/addSala', async (req, res, next) => {
 api.put('/updateSala', async (req, res, next) => {
   const params = req.body
   //editamos cualquier atriburo de una sala buscandolo por su id
-  let obj 
+  let obj,obj2
   try{
+    //obtenemos el nombre antiguo de la sala, antes del cambio
+    obj2= await Sala.findById(params.id)
+
     obj= await Sala.update(params.id, {
       nombreSala: params.nombreSala,
       descripcion: params.descripcion,
       switch: params.switch
     })
+    
+    //Actualizamos la sala de extensions.conf de asterisk
+    let dat1=fs.readFileSync('/etc/asterisk/extensions.conf', 'utf8')
+    var sw=0,sw2=-1, aux="", pos=-1, pos2=-1, final=""
+    //For para buscar la sala indicada
+    for (let i = 0; i < dat1.length; i++) {
+      //if para detectar el caracter [
+      if (dat1.charCodeAt(i)==91) {
+        sw=1
+        pos=i
+      }
+      //Concatena el nombre dentro del corchete
+      if(sw==1){
+        aux+=dat1[i]
+      }
+      //Detiene la concatenacion del nombre de la sala
+      if (dat1.charCodeAt(i)==93) {
+        sw=0
+        //compara el contexto con la sala, si es la sala indicada, sale del for
+        if(aux.substring(1,aux.length-1)==obj2.nombreSala){
+          pos2=i
+          sw2=1
+          break
+        }
+        aux=""
+      }
+    }
+    //switch para validar que si existe la sala
+    if(sw2==1){
+      //concatena de 0 a la primera posicion
+      final+=dat1.substring(0,pos+1)
+      //actualizamos el nombre de la sala
+      final+=params.nombreSala
+      //concatena el resto del archivo extensions.conf, exceptuando la sala 
+      final+=dat1.substring(pos2,dat1.length)
+      //if para confirmar que no haya un espacio extra despues de borrar la sala
+      if(final.charCodeAt(final.length-1)==10){
+        final=final.substring(0,final.length-1)
+      }
+      //escribe en el archivo extesions.conf
+      fs.writeFile('/etc/asterisk/extensions.conf', final, (err) => {
+        if (err) console.log(err);
+      });
+    }
   }catch(e){
     return next(e)
   }
@@ -767,6 +816,49 @@ api.post('/deleteSala', async(req, res, next) => {
     })
   
   await Sala.destroynomSala(params.context)
+
+  //Eliminamos la sala de extensions.conf de asterisk
+  let dat1=fs.readFileSync('/etc/asterisk/extensions.conf', 'utf8')
+  var sw=0,sw2=-1, aux="", pos=-1, pos2=-1, final=""
+  //For para buscar la sala indicada
+  for (let i = 0; i < dat1.length; i++) {
+    //if para detectar el caracter [
+    if (dat1.charCodeAt(i)==91) {
+      sw=1
+      pos=i
+    }
+    //Concatena el nombre dentro del corchete
+    if(sw==1){
+      aux+=dat1[i]
+    }
+    //Detiene la concatenacion del nombre de la sala
+    if (dat1.charCodeAt(i)==93) {
+      sw=0
+      //compara el contexto con la sala, si es la sala indicada, sale del for
+      if(aux.substring(1,aux.length-1)==params.context){
+        pos2=i
+        sw2=1
+        break
+      }
+      aux=""
+    }
+  }
+  //switch para validar que si existe la sala
+  if(sw2==1){
+    //concatena de 0 a la primera posicion
+    final+=dat1.substring(0,pos)
+    //concatena el resto del archivo extensions.conf, exceptuando la sala 
+    final+=dat1.substring(pos2+22,dat1.length)
+    //if para confirmar que no haya un espacio extra despues de borrar la sala
+    if(final.charCodeAt(final.length-1)==10){
+      final=final.substring(0,final.length-1)
+    }
+    //escribe en el archivo extesions.conf
+    fs.writeFile('/etc/asterisk/extensions.conf', final, (err) => {
+      if (err) console.log(err);
+    });
+  }
+
   res.send(edit)
 })
 /// USUARIO /////////////////////////////////////////////////////////////////////
@@ -1332,56 +1424,57 @@ api.post('/findByIdCdr', async (req, res, next) => {
   res.send(obj)
 })
 
-api.get('/download', function(req, res, next){
-
-  var file = __dirname + '/upload/monitor/1577308526-SIP-7001-00000000-in.wav';
-
-  var filename = path.basename(file);
-  var mimetype = mime.lookup(file);
-
-  res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-  res.setHeader('Content-type', mimetype);
-
-  var filestream = fs.createReadStream(file);
-  filestream.on("error",(e)=>{
-    if(e.code == "ENOENT"){
-      console.log("404")
-      //res.status(404).end()
-      return next(e)
-    }
-    console.log("500")
-    res.status(500).end()
-  })
-  console.log("200")
-  filestream.pipe(res);
-});
-
-api.post('/listar', function(req, res, next){
+api.post('/downloadCalls', function(req, res, next){
   const params = req.body
-  var id=params.id
+  var id=params.uniqueid
   var chanel=params.channel
-  let a=[]
-  let download=[]
+  let a=[], download=[]
+  var sw=-1
+  //lista todos los archivos en la carpeta uploads, q es un enlace referencial de var/spool/asterisk/monitor de asterisk
   a=shell.ls('-l',`${__dirname}/upload/monitor`)
-  //console.log(a)
-  //console.log(a.length)
+  //itera sobre todos los elementos de la carpeta
   for (let i = 0; i < a.length; i++) {
-    //console.log(a[i].name)
-    //console.log(a[i].name.substring(0,10))
+    //compara: sip, channel, uniqueid
     if((a[i].name.substring(11,14)==chanel.substring(0,3)) && (parseInt(id) <= parseInt(a[i].name.substring(0,10)) && (parseInt(id)+5) >= parseInt(a[i].name.substring(0,10))) && (a[i].name.substring(15,28)==chanel.substring(4,18))){
-      //console.log("si")
+      sw=1
       download.push(`/var/spool/asterisk/monitor/${a[i].name}`)
     }
   }
-  //console.log(download)
-  for (let i = 0; i < download.length; i++) {
-    //res.download(download[i]);
-    //console.log(i)
+  //si se encontro el archivo, se empaque los 2 (in,out) en un zip para descargarlo en el navegador
+  //otra forma de descargar, pero los navegadores solo admiten un archivo a la vez res.download(download[0]);
+  if(sw==1){
+    res.zip([
+      {path:`${download[0]}`,name:`${download[0].substring(28,download[0].length)}`},
+      {path:`${download[1]}`,name:`${download[1].substring(28,download[1].length)}`}
+    ],"audio.zip")
+  }else{
+    return next(new Error(`Audio not found`))
   }
-  res.download(download[1]);
-  //setTimeout(res.download(download[1]), 1000);
-  //res.download("/var/spool/asterisk/monitor/1577308318-SIP-7001-00000006-out.wav");
-  //res.send("obj")
+});
+
+api.post('/listenCalls', function(req, res, next){
+  const params = req.body
+  var id=params.uniqueid
+  var chanel=params.channel
+  let a=[], download=[]
+  var sw=-1
+  //lista todos los archivos en la carpeta uploads, q es un enlace referencial de var/spool/asterisk/monitor de asterisk
+  a=shell.ls('-l',`${__dirname}/upload/monitor`)
+  //itera sobre todos los elementos de la carpeta
+  for (let i = 0; i < a.length; i++) {
+    //compara: sip, channel, uniqueid
+    if((a[i].name.substring(11,14)==chanel.substring(0,3)) && (parseInt(id) <= parseInt(a[i].name.substring(0,10)) && (parseInt(id)+5) >= parseInt(a[i].name.substring(0,10))) && (a[i].name.substring(15,28)==chanel.substring(4,18))){
+      sw=1
+      download.push(`/var/spool/asterisk/monitor/${a[i].name}`)
+    }
+  }
+  //si se encontro el archivo, se empaque los 2 (in,out) en un zip para descargarlo en el navegador
+  //otra forma de descargar, pero los navegadores solo admiten un archivo a la vez res.download(download[0]);
+  if(sw==1){
+    res.send(download)
+  }else{
+    return next(new Error(`Audio not found`))
+  }
 });
 
 api.post('/ListarHistorialByFechaBySipsAndIaxs', async(req, res, next) => {
@@ -1651,6 +1744,79 @@ api.delete('/deleteIax', async(req, res, next) => {
   //borro todos los iaxs a partir del id del iax
   await Iax.destroy1(params.id)
   res.send({message: 'se borro el iax'})
+})
+
+/// QUEUE /////////////////////////////////////////////////////////////////////
+
+api.post('/addQueue', async (req, res, next) => {
+  const params = req.body
+  //creo un queue apartir del id de la sala, con todos sus atributos
+  let obj
+  try{
+    obj= await Queue.create(params.salaId, {
+      name: params.name,
+      musicclass: params.musicclass,
+      strategy: params.strategy,
+      timeout: params.timeout
+    })
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
+
+api.put('/updateQueue', async (req, res, next) => {
+  const params = req.body
+  //edito el queue aportir del id de queue, con todos sus atributos
+  let obj
+  try{
+    obj= await Queue.update(params.id, {
+      name: params.name,
+      musicclass: params.musicclass,
+      strategy: params.strategy,
+      timeout: params.timeout
+    })
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
+
+api.post('/findByIdQueue', async (req, res, next) => {
+  const params = req.body
+  let obj
+  //busco un queue apartir del id del queue
+  try{
+    obj= await Queue.findById(params.id)
+  }catch(e){
+    return next(e)
+  }
+  if(!obj || obj.lenght==0){
+    return next(new Error(`Queue not found with id ${params.id}`))
+  }
+
+  res.send(obj)
+})
+
+api.get('/findAllQueue', async (req, res, next) => {
+  let obj
+  //busco y listo todos los queues
+  try{
+    obj= await Queue.findAll()
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
+
+api.delete('/deleteQueue', async(req, res, next) => {
+  const params = req.body
+  //borro todos los queues a partir del id del queue
+  await Queue.destroy(params.id)
+  res.send({message: 'se borro el queue'})
 })
 module.exports = api
 //moment(m.createdAt).format("YYYY-MM-DD")

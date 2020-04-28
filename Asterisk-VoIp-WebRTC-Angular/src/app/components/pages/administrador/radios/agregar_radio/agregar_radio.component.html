@@ -1,35 +1,44 @@
-<div class="modal-header">
-	<h6 class="modal-title">Formulario Para Agregar Radio</h6>
-</div>
 
-<div class="modal-body">
+<h2>Formulario para agregar Radio</h2>
+<hr>
+<div class="col-md-8 offset-2">
 	<div class="container ">
 		<form class="añadir_contact" [formGroup]="addForm">
 
-			<div class="row">
-				<div class="col-md-4 ">
-					<label for="alias">Nombre de la Radio :</label>
-					<input type="text" formControlName="alias" class="form-control" />
-				</div>	
-			</div>
 
-			<div class="row">
-				<div class="col-md-4">
-					<label for="numero">Numero de la Radio</label>
-					<input type="text"  class="form-control" formControlName="numero" />
+				<div class="col-md-6 ">
+					<label for="NombreRadio">Nombre de la Radio :</label>
+					<input type="text" formControlName="NombreRadio" class="form-control" />
+				</div>	
+				<div class="col-md-6 ">
+					<label for="DescripcionRadio">Descripcion de la Radio :</label>
+					<input type="text" formControlName="DescripcionRadio" class="form-control" />
 				</div>
-				<div class="col-md-4 ">
-					<label for="password">Contraseña</label>
-					<input type="password"  class="form-control" formControlName="password" />
+				<br>
+			<p style="font-size: 12px;color:red;">*Los siguientes datos son para la comunicacion de la Radio</p>
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-4">
+							<label for="NumeroSip">Numero Sip</label>
+							<input type="text"  class="form-control" formControlName="NumeroSip" />
+						</div>
+						<div class="col-md-4 ">
+							<label for="CallerId">CallerId del Sip</label>
+							<input type="text"  class="form-control" formControlName="CallerId" />
+						</div>
+						<div class="col-md-4 ">
+							<label for="Secret">Secret del Sip</label>
+							<input type="text"  class="form-control" formControlName="Secret" />
+						</div>
+					</div>
 				</div>
-			</div>	
+				
 		</form>
+		<hr>
+		<button type="button" class="btn btn-success btn-block" [disabled]="addForm.invalid" (click)="addradio()">
+		Crear Radio
+	</button>
 
 		
 	</div>
-</div>
-<div class="modal-footer ">
-	<button type="button" class="btn btn-primary btn-block" [disabled]="addForm.invalid" (click)="addradio()">
-		Crear Radio
-	</button>
 </div>

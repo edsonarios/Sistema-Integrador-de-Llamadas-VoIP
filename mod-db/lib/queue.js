@@ -1,18 +1,18 @@
 'use strict'
 
-module.exports = function setupQueue (QueueModel, UsuarioModel) {
+module.exports = function setupQueue (QueueModel, SalaModel) {
   async function create (id, queue) {
-    const usuario = await QueueModel.findOne({
+    const sala = await SalaModel.findOne({
       where: { id }
     })
 
-    if (usuario) {
-      Object.assign(queue, { usuarioId: usuario.id })
+    if (sala) {
+      Object.assign(queue, { salaId: sala.id ,context:sala.nombreSala})
       const result = await QueueModel.create(queue)
       return result.toJSON()
     }
   }
-  async function updateQueue (id, queue) {
+  async function update (id, queue) {
     const cond = {
       where: {
         id
@@ -23,31 +23,21 @@ module.exports = function setupQueue (QueueModel, UsuarioModel) {
     return updated
   }
 
-  async function findById(usuarioId){
-    return await QueueModel.findAll({
+  async function findById(salaId){
+    return await QueueModel.findOne({
       where: {
-        usuarioId: usuarioId
+        salaId: salaId
       }
     }) 
   }
-  async function findOne(id){
-    return QueueModel.findAll({
-      where: {
-        id
-      }
-    })
-  }
-  async function findOne2(id){
-    return QueueModel.findOne({
-      where: {
-        id
-      }
-    })
+
+  async function findAll(id){
+    return QueueModel.findAll()
   }
   async function destroyAll(id){
     return await QueueModel.destroy({
       where: {
-        usuarioId: id
+        salaId: id
       }
     })
   }
@@ -61,10 +51,9 @@ module.exports = function setupQueue (QueueModel, UsuarioModel) {
   }
   return {
     create,
-    updateQueue,
+    update,
     findById,
-    findOne,
-    findOne2,
+    findAll,
     destroyAll,
     destroy
   }
