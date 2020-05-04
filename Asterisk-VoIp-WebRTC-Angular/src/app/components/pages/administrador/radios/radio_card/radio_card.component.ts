@@ -13,4 +13,7 @@ export class RadioCardComponent implements OnInit {
 	}
 
 	ngOnInit() {}
+	DetalleRadio(){
+		this.router.navigate(['/Administrador/DetalleRadio']);
+	}
 }

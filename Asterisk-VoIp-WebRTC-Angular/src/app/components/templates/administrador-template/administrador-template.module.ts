@@ -28,6 +28,7 @@ import { EditarSalaComponent } from '@administrador/salas/editar_sala/editar_sal
 import { RadioCardComponent } from '@administrador/radios/radio_card/radio_card.component';
 import { RadiosComponent } from '@administrador/radios/radios.component';
 import { AgregarRadioComponent } from '@administrador/radios/agregar_radio/agregar_radio.component';
+import { DetalleRadioComponent } from '@administrador/radios/detalle_radio/detalle_radio.component';
 
 import { HistorialLlamadasComponent } from '@administrador/historial_llamadas/historial_llamadas.component';
 import { AudioPlayerComponent } from '@administrador/grabaciones/audio_player/audio_player.component'
@@ -76,6 +77,7 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 		RadioCardComponent,
 		RadiosComponent,
 		AgregarRadioComponent,
+		DetalleRadioComponent,
 
 		HistorialLlamadasComponent,
 		GrabacionesComponent,
