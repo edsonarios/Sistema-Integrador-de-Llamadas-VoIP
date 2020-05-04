@@ -63,7 +63,7 @@ export class AgregarRadioComponent implements OnInit {
 			'dtlscafile':'',
 			'dtlssetup':'',
 			'rtcp_mux':'',
-			'switch':0
+			'switch':1
 		}
 	}
 
@@ -145,7 +145,7 @@ export class AgregarRadioComponent implements OnInit {
 		this.Sip_Iax.name=nombre;
 		this.Sip_Iax.callerid=C_id;
 		this.Sip_Iax.secret=Secrt;
-		this.Sip_Iax.secret='friend';
+		this.Sip_Iax.type='friend';
 		this.Sip_Iax.context=contexto;
 		this.Sip_Iax.host='dynamic';
 		this.Sip_Iax.disallow='disallow';
@@ -154,7 +154,7 @@ export class AgregarRadioComponent implements OnInit {
 		this.Sip_Iax.nat='force_rport,comedia';
 
 
-	this.serviceSipweb.addSipWebRTC(this.Sip_Iax).subscribe(
+	this.serviceSipweb.AddSipRadio(this.Sip_Iax).subscribe(
 						response => {
 							console.log(response);
 						},
