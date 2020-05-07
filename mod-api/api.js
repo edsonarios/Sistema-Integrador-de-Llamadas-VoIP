@@ -1171,6 +1171,32 @@ api.post('/addSipWebRtc', async (req, res, next) => {
 
   res.send(obj)
 })
+
+api.post('/addSipRadio', async (req, res, next) => {
+  const params = req.body
+  //creo un sip con todos sus atributos apartir del id del usuario
+  let obj
+  try{
+    obj= await Sip.createRadio({
+      name: params.name,
+      secret: params.secret,
+      callerid: params.callerid,
+      type: params.type,
+      context: params.context,
+      host: params.host,
+      disallow: params.disallow,
+      allow: params.allow,
+      qualify: params.qualify,
+      nat: params.nat,
+      switchsip:params.switchsip
+    })
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
+
 api.put('/updateSip', async (req, res, next) => {
   const params = req.body
   //edito un sip buscandolo por su id

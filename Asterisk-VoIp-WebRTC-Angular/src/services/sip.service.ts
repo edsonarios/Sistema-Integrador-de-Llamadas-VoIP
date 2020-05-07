@@ -44,6 +44,12 @@ addSipWebRTC(obj): Observable<any> {
     );
   }
 
+  AddSipRadio(obj): Observable<any> {
+    return this.http
+      .post<any>(this.url + 'addSipRadio', obj, this.httpOptions)
+      .pipe(retry(1), catchError(this.errorHandl));
+  }
+
   deleteSip( idd): Observable<any> {
       return this.http.delete<any>(this.url + 'deleteSip'+ {id: idd}
       );    

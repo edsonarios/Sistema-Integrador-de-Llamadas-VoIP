@@ -1,6 +1,6 @@
 <h2> Agregar Una sala</h2>
 <hr>
-<div class="modal-body">
+<div class="col-md-8 offset-2">
 	<div class="container ">
 		<form class="añadir_contact" [formGroup]="addForm">
 			<div class="row">
@@ -18,9 +18,9 @@
 
 		
 	</div>
-</div>
-<div class="modal-footer ">
+	<hr>
 	<button type="button" class="btn btn-success btn-block" [disabled]="addForm.invalid" (click)="addSala()">
 		Crear Sala
 	</button>
 </div>
+
