@@ -147,6 +147,10 @@ module.exports = function setupSipModel (config) {
     rtcp_mux: {
       type: Sequelize.STRING,
       allowNull: true
+    },
+    insecure: {
+      type: Sequelize.STRING,
+      allowNull: true
     }
     
     

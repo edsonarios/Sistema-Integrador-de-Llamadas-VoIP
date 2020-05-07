@@ -19,7 +19,7 @@
         - ingresar a otro agente a mi llamada           [LISTO]
         - libera automaticamente de un ptt despues de 3 min     
         - prioridad de llamadas, para cola de llamadas  [LISTO]
-        - Integrar gateway FXO a asterisk 
+        - Integrar gateway FXO a asterisk               [LISTO]
         - Pruebas en servidor
 
 
