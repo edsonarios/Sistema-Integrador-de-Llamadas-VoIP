@@ -18,6 +18,7 @@ import { EditarSalaComponent } from '@administrador/salas/editar_sala/editar_sal
 import { RadiosComponent } from '@administrador/radios/radios.component';
 import { AgregarRadioComponent } from '@administrador/radios/agregar_radio/agregar_radio.component';
 import { DetalleRadioComponent } from '@administrador/radios/detalle_radio/detalle_radio.component';
+import { EditarRadioComponent } from '@administrador/radios/editar_radio/editar_radio.component';
 
 import { HistorialLlamadasComponent } from '@administrador/historial_llamadas/historial_llamadas.component';
 import { GrabacionesComponent } from '@administrador/grabaciones/grabaciones.component';
@@ -43,6 +44,7 @@ export const AdministradorTemplateRoutes: Routes = [
   { path: 'Radios', component: RadiosComponent },
   { path: 'AgregarRadio', component: AgregarRadioComponent },
   { path: 'DetalleRadio', component: DetalleRadioComponent },
+  { path: 'EditarRadio', component: EditarRadioComponent },
   
   { path: 'Historial', component: HistorialLlamadasComponent },
   { path: 'Grabaciones', component: GrabacionesComponent },

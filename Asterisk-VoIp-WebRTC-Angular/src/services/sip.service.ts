@@ -79,6 +79,14 @@ EliminarSip_Iax(Identity) {
           });
   }
 
+  ObtenerUsuarioContexto(contexto){
+    return this.http.post<any>(this.url + 'getUsuByContextOfSip',  { context: contexto },
+       this.httpOptions).pipe(
+    retry(1),
+    catchError(this.errorHandl)
+  );
+  }
+
 
    // Error handling
    errorHandl(error) {

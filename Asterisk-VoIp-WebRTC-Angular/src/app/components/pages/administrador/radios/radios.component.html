@@ -3,8 +3,10 @@
 <section class="radio-responsive">
 <div *ngFor="let n of radios; let i = index">
     <radio-card
-        Alias ="{{ radios[i]['nombreSala']}}"
-        Numero ="{{ radios[i]['descripcion']}}" 
+        IdRadio="{{ radios[i]['id']}}"
+		NombreRadio="{{ radios[i]['nombreSala']}}"
+		DescripcionRadio="{{ radios[i]['descripcion']}}"
+		Switch="{{ radios[i]['switch']}}"
     ></radio-card>
 </div>
 </section>
