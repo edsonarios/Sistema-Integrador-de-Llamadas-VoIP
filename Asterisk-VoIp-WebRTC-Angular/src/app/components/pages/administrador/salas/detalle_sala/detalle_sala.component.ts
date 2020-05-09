@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SalaService } from '@services/sala.service';
 
+import Swal from 'sweetalert2';
+
 @Component({
 	selector: 'detalleSala',
 	templateUrl: './detalle_sala.component.html',
@@ -37,6 +39,27 @@ private Sala;
 		);
 	}
 	eliminarSala(){
+
+	Swal.fire({
+			title: 'Esta seguro de eliminar la Sala?',
+			text: 'Los datos desapareceran',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			cancelButtonText: 'Cancelar',
+			confirmButtonText: 'Si estoy seguro'
+		}).then(result => {
+			if (result.value) {
+				 Swal.fire({
+				 		icon: 'success',
+					  title: 'Sala Eliminada',
+					  showConfirmButton: false,
+					  timer: 1500,
+					 }
+				    )
+
+	 			
 			this.serviceSala.deleteSala(this.Nombre)
 			  .subscribe(
 	 			response => {
@@ -44,5 +67,11 @@ private Sala;
 	 			},
 	 			error => console.log(error));
 			  this.router.navigate(['/Administrador/Salas']);
+			
+				
+			}
+		});
+
+
 	}
 }
