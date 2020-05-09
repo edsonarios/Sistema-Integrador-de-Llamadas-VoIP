@@ -20,6 +20,10 @@ import { AgregarRadioComponent } from '@administrador/radios/agregar_radio/agreg
 import { DetalleRadioComponent } from '@administrador/radios/detalle_radio/detalle_radio.component';
 import { EditarRadioComponent } from '@administrador/radios/editar_radio/editar_radio.component';
 
+import { ExtensionIvrComponent } from '@administrador/extension_ivr/extension_ivr.component';
+import { ExtensionIvrAgregarComponent } from '@administrador/extension_ivr/agregar_extension_ivr/agregar_extension_ivr.component';
+import { ExtensionIvrEditarComponent } from '@administrador/extension_ivr/editar_extension_ivr/editar_extension_ivr.component';
+
 import { HistorialLlamadasComponent } from '@administrador/historial_llamadas/historial_llamadas.component';
 import { GrabacionesComponent } from '@administrador/grabaciones/grabaciones.component';
 import { TrackingComponent } from '@administrador/tracking/tracking.component';
@@ -46,6 +50,11 @@ export const AdministradorTemplateRoutes: Routes = [
   { path: 'DetalleRadio', component: DetalleRadioComponent },
   { path: 'EditarRadio', component: EditarRadioComponent },
   
+
+  { path: 'ExtensionIvr', component: ExtensionIvrComponent },
+  { path: 'AgregarExtensionIvr', component: ExtensionIvrAgregarComponent },
+  { path: 'EditarExtensionIvr', component: ExtensionIvrEditarComponent },
+
   { path: 'Historial', component: HistorialLlamadasComponent },
   { path: 'Grabaciones', component: GrabacionesComponent },
   { path: 'Tracking', component: TrackingComponent },
