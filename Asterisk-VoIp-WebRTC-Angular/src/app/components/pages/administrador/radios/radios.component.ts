@@ -14,6 +14,7 @@ export class RadiosComponent implements OnInit {
 
   ngOnInit() {
     this.recibirRadios();
+    console.log(this.radios);
   }
 
   recibirRadios() {

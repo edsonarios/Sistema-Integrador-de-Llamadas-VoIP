@@ -1,10 +1,8 @@
 .administrador-dashboard{
 	text-align: center;
 	display: grid;
-	grid-template-rows: 10vh 90vh;
-	grid-template-areas:
-		'navigation'
-		'content';
+	grid-template-columns: 20% 80%;
+	grid-template-areas:'navigation content';
 	height: 100vh;
 	overflow: hidden;
 	background: #89909F;
@@ -12,28 +10,54 @@
 .navigation{
 	grid-area: navigation;
 	display: grid;
-	//border: 1px solid grey;
+	grid-template-rows: 25vh 75vh;
+	grid-template-areas: 
+		'navigation-user' 
+		'navigation-menu';
 	border-radius: 4px;
 	margin: 1px;
+	
+}
+.navigation-user{
+	grid-area: navigation-user;
+	display: grid;
+	margin: 0px 5px 5px 5px;
+	border-radius: 4px;
 	background: #0B121B;
+	grid-template-rows: 75% 25%;
+	grid-template-areas: 
+		'navigation-user-img' 
+		'navigation-user-details';
 }
-.content{
-	grid-area: content;
-	display: grid;
-	grid-template-columns: 20% 80%;
-	grid-template-areas: 'content-menu content-pages';
-
-
+.navigation-user-img{
+	grid-area: navigation-user-img;
+	//display: grid;
+	border: 2px solid white;
+	vertical-align: middle;
+	height: 100px;
+	width: 100px;
+	padding-left: 20%;
+	margin: 10px 5px 0px 30%;
+	background-image: url(assets/avatar.png);
+	background-size: cover;
+	border-radius: 50%;
 }
-.content-menu{
-	grid-area: content-menu;
+.navigation-user-details{
+	grid-area: navigation-user-details;
 	display: grid;
-	//border: 1px solid grey;
+
+	p{
+	color: #fff;
+	}
+}
+.navigation-menu{
+	grid-area: navigation-menu;
+	display: grid;	
 	border-radius: 4px;
-	margin: 1px;
+	margin: 5px;
 	background: #0B121B;
 	overflow-y: scroll;
-		li{
+	li{
 			display: grid;
 			margin: 20px;
 			a{ 	
@@ -72,7 +96,26 @@
 			content: "> ";
 		}	
 }
-	.content-menu::-webkit-scrollbar-track
+.content{
+	grid-area: content;
+	display: grid;
+	grid-template-rows: 10vh 90vh;
+	grid-template-areas: 
+		'content-menu' 
+		'content-pages';
+
+
+}
+.content-menu{
+	grid-area: content-menu;
+	display: grid;
+	border-radius: 4px;
+	margin: 1px;
+	background: #0B121B;
+	
+		
+}
+	.navigation-menu::-webkit-scrollbar-track
 	{
 		
 	background-color: #ebebeb;
@@ -80,12 +123,12 @@
     border-radius: 5px;
 	}
 
-	.content-menu::-webkit-scrollbar
+	.navigation-menu::-webkit-scrollbar
 	{
 		 width: 7px;
 	}
 
-	.content-menu::-webkit-scrollbar-thumb
+	.navigation-menu::-webkit-scrollbar-thumb
 	{
 		-webkit-border-radius: 10px;
     border-radius: 3px;
@@ -97,8 +140,8 @@
 
 .content-pages{
 	grid-area: content-pages;
+	padding-top: 10px;
 	//display: grid;
-	//border: 1px solid grey;
 	border-radius: 4px;
 	margin: 5px;
 	overflow-y: scroll;

@@ -44,6 +44,12 @@ addSipWebRTC(obj): Observable<any> {
     );
   }
 
+  AddSipRadio(obj): Observable<any> {
+    return this.http
+      .post<any>(this.url + 'addSipRadio', obj, this.httpOptions)
+      .pipe(retry(1), catchError(this.errorHandl));
+  }
+
   deleteSip( idd): Observable<any> {
       return this.http.delete<any>(this.url + 'deleteSip'+ {id: idd}
       );    
@@ -73,6 +79,19 @@ EliminarSip_Iax(Identity) {
           });
   }
 
+ObtenerUsuarioContexto(contexto){
+    return this.http.post<any>(this.url + 'getUsuByContextOfSip',  { context: contexto },
+       this.httpOptions).pipe(
+    retry(1),
+    catchError(this.errorHandl)
+  );
+  }
+obtenerAllExtensions(){
+  return this.http.get<any>(this.url + 'findAllExtension').pipe(
+    retry(1),
+    catchError(this.errorHandl)
+  );
+}
 
    // Error handling
    errorHandl(error) {

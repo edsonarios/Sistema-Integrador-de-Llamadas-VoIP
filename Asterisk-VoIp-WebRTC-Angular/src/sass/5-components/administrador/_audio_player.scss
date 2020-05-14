@@ -1,0 +1,15 @@
+.mediaPlayer{
+	display: grid;
+	grid-template-columns: 20% 80%;
+	grid-template-areas:'icon progressbar';
+}
+.icon{
+	grid-area: icon;
+	
+	margin: 2px;
+}
+.progressbar{
+	grid-area: progressbar;
+
+	margin: 2px;
+}

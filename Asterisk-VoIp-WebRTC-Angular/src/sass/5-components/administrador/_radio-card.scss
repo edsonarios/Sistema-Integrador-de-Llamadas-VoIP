@@ -1,0 +1,49 @@
+.radio_card{
+	display: grid;
+	grid-template-columns: 25% 75% ;
+	grid-template-areas: 'radio_card-img radio_card-details';
+	width: 90%;
+	height: 200px;
+	margin: 10px;
+}
+.radio_card-img {
+	grid-area: radio_card-img;
+	display: grid;
+	border:1px solid black;
+	.img{
+			position: relative;
+			height: 250px;
+			width: 220px;
+
+			img {
+				max-width: 100%;
+				max-height: 100%;
+				padding-right: 5px;
+			}
+	}
+}
+.radio_card-details {
+ 	grid-area: radio_card-details;
+ 	display: grid;
+	grid-template-rows: 15% 60% 25%;
+	grid-template-areas: 
+		'radio_card-header' 
+		'radio_card-info'
+		'radio_card-options';
+	border:1px solid black;
+}
+.radio_card-header {
+	grid-area: radio_card-header;
+
+	
+}
+.radio_card-info {
+	grid-area: radio_card-info;
+	
+
+}
+.radio_card-options {
+	grid-area: radio_card-options;
+	
+
+}

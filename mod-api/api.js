@@ -279,7 +279,7 @@ api.get('/datosPrueba', async (req, res) => {
     app: "hangup",
     appdata: ""
   })
-  //Añade para que puedan llamarse entre los 7XXX
+  //Añade para que puedan llamarse entre los numeros con XXXX cantidad de digitos
   const obj5 = await Extension.create(obj.id, {
     context: "default",
     exten: "_XXXX",
@@ -301,6 +301,8 @@ api.get('/datosPrueba', async (req, res) => {
     app: "hangup",
     appdata: ""
   })
+
+
   //VOICEMAIL
   const obj53 = await Extension.create(obj.id, {
     context: "default",
@@ -592,6 +594,76 @@ api.get('/datosPrueba', async (req, res) => {
       app: "hangup",
       appdata: ""
     })
+
+    //Llamadas salientes hacia troncal FXO, en este caso para numeros a celular con 8 digitos XXXXXXXX
+    const obj531 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "_XXXXXXXX",
+      priority: "1",
+      app: "Monitor",
+      appdata: "wav,,b"
+    })
+    const obj532 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "_XXXXXXXX",
+      priority: "2",
+      app: "Dial",
+      appdata: "SIP/salientes/${EXTEN},30,Ttr"
+    })
+    const obj533 = await Extension.create(obj.id, {
+      context: "default",
+      exten: "_XXXXXXXX",
+      priority: "3",
+      app: "hangup",
+      appdata: ""
+    })
+    
+    //Crea troncales para interactuar con la troncal fxo, llamadas entrantes
+    //Usuario para sips varios
+    const obj171 = await Usuario.create(obj.id, {
+      nombre: "UsuarioNoexiste",
+      apPaterno: "UsuarioNoexiste",
+      apMaterno: "UsuarioNoexiste",
+      tipo: "standard",
+      direccion: "UsuarioNoexiste",
+      telefono: "123456",
+      correo: "UsuarioNoexiste@UsuarioNoexiste",
+      password: "1234",
+      conectado: false
+    })
+    //Sip para el puerto fxo
+    const obj172 = await Sip.create(obj171.id, {
+      name:"123123",
+      host:"dynamic",
+      secret:"123123",
+      callerid:"fxo",
+      type:"friend",
+      insecure:"no",
+      qualify:"no",
+      context:"default",
+      switchsip:"1"
+    })
+    //Troncal entrantes
+    const obj173 = await Sip.create(obj171.id, {
+      name:"fxo",
+      host:"192.168.100.146",
+      type:"peer",
+      insecure:"no",
+      qualify:"no",
+      context:"default",
+      switchsip:"1"
+    })
+    //Trocanl salientes
+    const obj174 = await Sip.create(obj171.id, {
+      name:"salientes",
+      host:"192.168.100.50",
+      type:"peer",
+      insecure:"no",
+      qualify:"no",
+      context:"default",
+      switchsip:"1"
+    })
+
 
     
 
@@ -1171,6 +1243,32 @@ api.post('/addSipWebRtc', async (req, res, next) => {
 
   res.send(obj)
 })
+
+api.post('/addSipRadio', async (req, res, next) => {
+  const params = req.body
+  //creo un sip con todos sus atributos apartir del id del usuario
+  let obj
+  try{
+    obj= await Sip.createRadio({
+      name: params.name,
+      secret: params.secret,
+      callerid: params.callerid,
+      type: params.type,
+      context: params.context,
+      host: params.host,
+      disallow: params.disallow,
+      allow: params.allow,
+      qualify: params.qualify,
+      nat: params.nat,
+      switchsip:params.switchsip
+    })
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
+
 api.put('/updateSip', async (req, res, next) => {
   const params = req.body
   //edito un sip buscandolo por su id

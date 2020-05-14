@@ -1,0 +1,61 @@
+<h2>Extensiones - IVR's</h2>
+<hr>
+<section class="Extension_ivr">
+	
+
+<div class="wrapper">
+  <div class="table">
+    
+    <div class="row header blue">
+      <div class="cell">
+        ID
+      </div>
+      <div class="cell">
+        Context
+      </div>
+      <div class="cell">
+        Exten
+      </div>
+      <div class="cell">
+        Priority
+      </div>
+      <div class="cell">
+        App
+      </div>
+      <div class="cell">
+        AppData
+      </div>
+       <div class="cell">
+        SalaID
+      </div>
+    </div>
+
+	    <div class="row" *ngFor="let n of Extensions; let i = index">
+	      <div class="cell" data-title="ID">
+	        {{Extensions[i]['id']}}
+	      </div>
+	      <div class="cell" data-title="Context">
+	        {{Extensions[i]['context']}}
+	      </div>
+	      <div class="cell" data-title="Exten">
+	        {{Extensions[i]['exten']}}
+	      </div>
+	      <div class="cell" data-title="Priority">
+	       {{Extensions[i]['priority']}}
+	      </div>
+	      <div class="cell" data-title="App">
+	        {{Extensions[i]['app']}}
+	      </div>
+	      <div class="cell" data-title="AppData">
+	        {{Extensions[i]['appdata']}}
+	      </div>
+	      <div class="cell" data-title="SalaID">
+	        {{Extensions[i]['salaId']}}
+	      </div>
+
+	    </div>
+    
+  </div>
+  
+</div>
+</section>
