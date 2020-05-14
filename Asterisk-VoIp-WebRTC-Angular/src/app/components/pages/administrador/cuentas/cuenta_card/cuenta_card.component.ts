@@ -22,10 +22,12 @@ export class CuentaCardComponent implements OnInit {
 
 	ngOnInit() {
 		localStorage.removeItem('idCuenta');
+		localStorage.removeItem('Correo');
 	}
 	Detalles(){
 
 		localStorage.setItem('idCuenta',this.Id);
+		localStorage.setItem('Correo',this.Correo);
 		this.router.navigate(['/Administrador/DetalleCuenta']);
 	}
 	

@@ -11,7 +11,7 @@ import { HistorialService } from '@services/historial.service';
 export class HistorialLlamadasComponent implements OnInit {
   public Historial;
 
-  //obtenemos los datos del usuario actual  
+  //obtenemos los datos del usuario actual
   public us = localStorage.getItem('Usuario');
   public obj = JSON.parse(this.us);
   // Aquí va el numero actual del operador
@@ -20,15 +20,11 @@ export class HistorialLlamadasComponent implements OnInit {
   public Historia = [];
 
   public HistAdmin = [];
-  
+
   public HistOper = [];
   public HistSaliente = [];
   public HistEntrante = [];
   public HistPerdida = [];
-
-
-  
-
 
   constructor(
     private historialService: HistorialService,
@@ -128,14 +124,9 @@ export class HistorialLlamadasComponent implements OnInit {
     ];
   }
 
-
-
-
-
   //funcion para llenar el array, dependiendo del tipo de usuario (admin, standard)
 
   preload() {
-    
     // Administradores
     if (this.obj.tipo == 'admin') {
       this.llenarCDRxAdmin();
@@ -150,6 +141,7 @@ export class HistorialLlamadasComponent implements OnInit {
     this.historialService.HistorialLlamadasAdministrador().subscribe(
       (response) => {
         this.HistAdmin = response;
+        console.log(response);
       },
       (er) => console.log(er)
     );
@@ -168,19 +160,18 @@ export class HistorialLlamadasComponent implements OnInit {
     this.Historia = this.HistOper;
   }
 
-  salientesHist() {  
-    if(this.obj.tipo == 'admin'){
+  salientesHist() {
+    if (this.obj.tipo == 'admin') {
       // Aca se compara con el atributo si fue saliente
-      this.HistAdmin.forEach(element => {
-        if(element){
+      this.HistAdmin.forEach((element) => {
+        if (element) {
           this.HistSaliente.push(element);
-        }   
+        }
       });
-    }
-    else{
-      this.HistOper.forEach(element => {
+    } else {
+      this.HistOper.forEach((element) => {
         // Aca se compara el atributo si fue saliente
-        if(element){
+        if (element) {
           this.HistSaliente.push(element);
         }
       });
@@ -188,18 +179,18 @@ export class HistorialLlamadasComponent implements OnInit {
     this.Historia = this.HistSaliente;
   }
 
-  entrantesHist(){
+  entrantesHist() {
     // Aca se compara con el atributo si fue entrante
-    if(this.obj.tipo == 'admin'){
-      this.HistAdmin.forEach(element => {
-        if(element){
+    if (this.obj.tipo == 'admin') {
+      this.HistAdmin.forEach((element) => {
+        if (element) {
           this.HistEntrante.push(element);
-        }   
+        }
       });
-    }else{
-      this.HistOper.forEach(element => {
+    } else {
+      this.HistOper.forEach((element) => {
         // Aca se compara el atributo si fue entrante
-        if(element){
+        if (element) {
           this.HistEntrante.push(element);
         }
       });
@@ -207,18 +198,18 @@ export class HistorialLlamadasComponent implements OnInit {
     this.Historia = this.HistEntrante;
   }
 
-  perdidasHist(){
+  perdidasHist() {
     // Aca se compara con el atributo si fue perdida
-    if(this.obj.tipo == 'admin'){
-      this.HistAdmin.forEach(element => {
-        if(element){
+    if (this.obj.tipo == 'admin') {
+      this.HistAdmin.forEach((element) => {
+        if (element) {
           this.HistPerdida.push(element);
-        }   
+        }
       });
-    }else{
-      this.HistOper.forEach(element => {
+    } else {
+      this.HistOper.forEach((element) => {
         // Aca se compara el atributo si fue perdida
-        if(element){
+        if (element) {
           this.HistPerdida.push(element);
         }
       });
@@ -226,10 +217,10 @@ export class HistorialLlamadasComponent implements OnInit {
     this.Historia = this.HistPerdida;
   }
 
-  defaultHistOpe(){
-    if(this.obj.tipo == 'admin'){
+  defaultHistOpe() {
+    if (this.obj.tipo == 'admin') {
       this.Historia = this.HistAdmin;
-    }else{
+    } else {
       this.Historia = this.HistOper;
     }
   }
