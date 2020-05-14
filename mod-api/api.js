@@ -1246,7 +1246,7 @@ api.post('/addSipWebRtc', async (req, res, next) => {
 
 api.post('/addSipRadio', async (req, res, next) => {
   const params = req.body
-  //creo un sip con todos sus atributos apartir del id del usuario
+  //creo un sip (Radio) con todos sus atributos 
   let obj
   try{
     obj= await Sip.createRadio({
@@ -1260,6 +1260,48 @@ api.post('/addSipRadio', async (req, res, next) => {
       allow: params.allow,
       qualify: params.qualify,
       nat: params.nat,
+      switchsip:params.switchsip
+    })
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
+
+api.post('/addSipTroncal', async (req, res, next) => {
+  const params = req.body
+  //creo un sip Troncal con todos sus atributos 
+  let obj
+  try{
+    obj= await Sip.createRadio({
+      name: params.name,
+      host: params.host,
+      type: params.type,
+      insecure: params.insecure,
+      qualify: params.qualify,
+      context: params.context,
+      switchsip:params.switchsip
+    })
+  }catch(e){
+    return next(e)
+  }
+
+  res.send(obj)
+})
+
+api.put('/updateSipTroncal', async (req, res, next) => {
+  const params = req.body
+  //creo un sip Troncal con todos sus atributos 
+  let obj
+  try{
+    obj= await Sip.update(params.id, {
+      name: params.name,
+      host: params.host,
+      type: params.type,
+      insecure: params.insecure,
+      qualify: params.qualify,
+      context: params.context,
       switchsip:params.switchsip
     })
   }catch(e){
@@ -1361,21 +1403,26 @@ api.post('/findByIdSip', async (req, res, next) => {
 })
 
 api.get('/findAllSip', async (req, res, next) => {
-  let obj
-  //busco y devuelvo todos los atributos de la tabla sip
-  try{
-    obj= await Sip.findAll()
-  }catch(e){
-    return next(e)
-  }
-
-  res.send(obj)
+  //obtengo todos los sips
+  const SipsAll = await Sip.findAll();
+  //creo un vector
+  let getsipsnot = []
+  //itero sobre todos los sips
+  SipsAll.forEach(obj => {
+    //preguntamos si sus atributos son distintos de null
+    if (obj.disallow != null && obj.nat != null){
+      //guardamos todos los sips q no tienen esos parametros con null
+      getsipsnot.push(obj)
+    }
+  })
+  //mostramos todos los sips no troncales
+  res.send(getsipsnot)
 })
 
 api.get('/findLastSip', async (req, res, next) => {
   var params = req.body
   //busco y listo el ultimo sip de la tabla ordenandolo descendentemente
-  const lastSip = await Sip.findOne(
+  const lastSip = await Sip.findLastSip(
     {
       order: [ [ 'id', 'DESC' ]],
     }
