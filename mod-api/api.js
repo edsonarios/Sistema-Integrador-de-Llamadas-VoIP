@@ -1420,15 +1420,20 @@ api.get('/findAllSip', async (req, res, next) => {
 })
 
 api.get('/findLastSip', async (req, res, next) => {
-  var params = req.body
-  //busco y listo el ultimo sip de la tabla ordenandolo descendentemente
-  const lastSip = await Sip.findLastSip(
-    {
-      order: [ [ 'id', 'DESC' ]],
+  //obtengo todos los sips
+  const SipsAll = await Sip.findAll();
+  //creo un vector
+  let getsipsnot = []
+  //itero sobre todos los sips
+  SipsAll.forEach(obj => {
+    //preguntamos si sus atributos son distintos de null
+    if (obj.disallow != null && obj.nat != null){
+      //guardamos todos los sips q no tienen esos parametros con null
+      getsipsnot.push(obj)
     }
-  );
-  
-    res.send(lastSip)
+  })
+  //mostramos el ultimo sip que no sea troncal
+  res.send(getsipsnot[getsipsnot.length-1])
 });
 
 api.delete('/deleteSip', async(req, res, next) => {
