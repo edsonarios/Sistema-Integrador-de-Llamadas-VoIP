@@ -382,14 +382,14 @@ api.get('/datosPrueba', async (req, res) => {
     exten: "s",
     priority: 2,
     app: "Background",
-    appdata: "/tmp/soundsasterisk/ivrejemplo"
+    appdata: "/tmp/soundsasterisk/recordejemplo"
   })
   const obj64 = await Extension.create(obj.id, {
     context: "ivr",
     exten: "s",
     priority: 3,
     app: "WaitExten",
-    appdata: ""
+    appdata: "5"
   })
   //NUMEROS DE IVR
   const obj65 = await Extension.create(obj.id, {
