@@ -19,18 +19,22 @@
 			</li>
 		</ul>
 	</nav>
-	<div class="nav-fin">
-		<input type="text" placeholder="Datepicker" class="form-control" bsDatepicker
-			[bsConfig]="{ isAnimated: true }" />
-		<input type="text" class="form-control" placeholder="Contacto" />
-		<button type="submit">
-			<i class="v-icon-magnifying-glass"></i>
-		</button>
-	</div>
+	<form [formGroup]="addform">
+		<div class="nav-fin">
+
+			<input type="text" formControlName="selectedDate" placeholder="Datepicker" class="form-control" bsDatepicker
+				[bsConfig]="{ isAnimated: true }" />
+			<input type="text" formControlName="nameContact" class="form-control" placeholder="Contacto" />
+			<button type="submit">
+				<a (click)="buscar()"><i class="v-icon-magnifying-glass"></i></a>
+			</button>
+
+		</div>
+	</form>
 </header>
 
 
-<div class="Historial" *ngIf="!swH">
+<div class="Historial">
 	<div class="table-responsive-vertical shadow-z-1">
 		<!-- Table starts here -->
 		<table id="table" class="table table-hover table-mc-light-blue">
@@ -46,28 +50,34 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let n of History; let i = index">
+				<tr *ngFor="let n of Historia; let i = index">
 					<td data-title="ID">{{ i + 1 }}</td>
-					<td data-title="Name">{{ History[i]['clid'] }} </td>
+					<td data-title="Name">{{ Historia[i]['clid'] }} </td>
 					<td data-title="Status">
-						<span *ngIf="History[i]['disposition'] == 'ANSWERED'" style="color: green"><i
-								class="v-icon-phone_missed"></i> ENTRANTE </span>
-						<span *ngIf="History[i]['disposition'] == 'NO ANSWERED'" style="color: red"><i
+						<span
+							*ngIf="Historia[i]['disposition'] == 'ANSWERED' && Historia[i]['clid'].includes(Historia[i]['src'])"
+							style="color: green"><i class="v-icon-phone_missed"></i> SALIENTE </span>
+
+						<span
+							*ngIf="Historia[i]['disposition'] == 'ANSWERED' && Historia[i]['clid'].includes(Historia[i]['dst'])"
+							style="color: blue"><i class="v-icon-telephone-receiver-with-up-arrow"></i>
+							ENTRANTE</span>
+
+						<span *ngIf="Historia[i]['disposition'] == 'NO ANSWERED'" style="color: red"><i
 								class="v-icon-incoming-call"></i> PERDIDA</span>
-						<span *ngIf="History[i]['disposition'] == 'BUSY'" style="color: blue"><i
-								class="v-icon-telephone-receiver-with-up-arrow"></i>
-							OCUPADO</span>
+
+
 					</td>
 					<td data-title="Link">
 						<i class="v-icon-walkie-talkie"></i><br>
-						<{{ History[i]['src'] }}>
+						<{{ Historia[i]['src'] }}>
 					</td>
 					<td data-title="Link">
 						<i class="v-icon-ambulance-side-view"></i><br>
-						<{{ History[i]['dst'] }}>
+						<{{ Historia[i]['dst'] }}>
 					</td>
-					<td data-title="Link">{{ History[i]['duration'] }}:{{History[i]['billsec']}} min</td>
-					<td data-title="Link">{{ History[i]['calldate'] }}</td>
+					<td data-title="Link">{{ Historia[i]['duration'] }}:{{Historia[i]['billsec']}} min</td>
+					<td data-title="Link">{{ Historia[i]['calldate'] }}</td>
 				</tr>
 			</tbody>
 		</table>

@@ -64,7 +64,7 @@ export class UserService {
  
 
   addUsuario( user): Observable<any> {
-    this.user = new User(user.nombre, user.apPaterno, user.apMaterno, user.direccion, user.telefono, user.correo, user.password);
+    this.user = new User(user.nombre, user.apPaterno, user.apMaterno, user.direccion, user.telefono, user.correo, user.password, user.tipo);
   
     console.log('Datos registrados de Contacto ...   ');
     console.log(this.user);

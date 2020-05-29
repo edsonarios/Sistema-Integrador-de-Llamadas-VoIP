@@ -24,7 +24,7 @@ export class SalasComponent implements OnInit {
         response.forEach((element) => {
           var name = element.nombreSala;
           name = name.toLowerCase();
-          console.log(name);
+          console.log(element);
           if (!name.includes('radio')) {
             this.sala.push(element);
           }

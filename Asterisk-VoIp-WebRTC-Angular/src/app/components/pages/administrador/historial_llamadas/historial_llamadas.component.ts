@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 import { HistorialService } from '@services/historial.service';
 
 //import * as moment from 'moment';
@@ -9,6 +11,8 @@ import { HistorialService } from '@services/historial.service';
   templateUrl: './historial_llamadas.component.html',
 })
 export class HistorialLlamadasComponent implements OnInit {
+  addform: FormGroup;
+
   public Historial;
 
   //obtenemos los datos del usuario actual
@@ -20,13 +24,14 @@ export class HistorialLlamadasComponent implements OnInit {
   public Historia = [];
 
   public HistAdmin = [];
-
   public HistOper = [];
+
   public HistSaliente = [];
   public HistEntrante = [];
   public HistPerdida = [];
 
   constructor(
+    private formBuilder: FormBuilder,
     private historialService: HistorialService,
     private router: Router
   ) {
@@ -122,18 +127,47 @@ export class HistorialLlamadasComponent implements OnInit {
         Audio: 'jfdsafdsajp1321.wmp',
       },
     ];
+
+    this.buildForm();
+  }
+
+  private buildForm() {
+    this.addform = this.formBuilder.group({
+      selectedDate: ['', Validators.required],
+      nameContact: ['', Validators.required],
+    });
+
+    this.addform.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
+      console.log(value);
+    });
+  }
+
+  filtrar(obj) {
+    console.log(obj);
+    var aux = [];
+    this.HistAdmin.forEach((element) => {
+      if (
+        element.clid.includes(obj.nameContact) &&
+        element.calldate.includes(obj.selectedDate)
+      ) {
+        console.log('lo incluye contacto');
+        aux.push(element);
+      }
+    });
+    this.Historia = aux;
   }
 
   //funcion para llenar el array, dependiendo del tipo de usuario (admin, standard)
 
   preload() {
-    // Administradores
-    if (this.obj.tipo == 'admin') {
-      this.llenarCDRxAdmin();
-    }
+    console.log(this.obj);
     // Standard
-    else {
+    if (this.obj.tipo == 'standard') {
       this.llenarHistorialOperador();
+    }
+    //Administradores
+    else {
+      this.llenarCDRxAdmin();
     }
   }
 
@@ -141,11 +175,30 @@ export class HistorialLlamadasComponent implements OnInit {
     this.historialService.HistorialLlamadasAdministrador().subscribe(
       (response) => {
         this.HistAdmin = response;
-        console.log(response);
+        this.Historia = response;
+        this.HistAdmin.forEach((element) => {
+          //salientes
+          if (
+            element.disposition == 'ANSWERED' &&
+            element.clid.includes(element.src)
+          ) {
+            this.HistSaliente.push(element);
+          }
+          //Entrantes
+          if (
+            element.disposition == 'ANSWERED' &&
+            element.clid.includes(element.dst)
+          ) {
+            this.HistEntrante.push(element);
+          }
+          //Perdidas
+          if (element.disposition == 'NO ANSWERED') {
+            this.HistPerdida.push(element);
+          }
+        });
       },
       (er) => console.log(er)
     );
-    this.Historia = this.HistAdmin;
   }
 
   llenarHistorialOperador() {
@@ -161,68 +214,40 @@ export class HistorialLlamadasComponent implements OnInit {
   }
 
   salientesHist() {
-    if (this.obj.tipo == 'admin') {
-      // Aca se compara con el atributo si fue saliente
-      this.HistAdmin.forEach((element) => {
-        if (element) {
-          this.HistSaliente.push(element);
-        }
-      });
+    if (this.obj.tipo == 'standard') {
     } else {
-      this.HistOper.forEach((element) => {
-        // Aca se compara el atributo si fue saliente
-        if (element) {
-          this.HistSaliente.push(element);
-        }
-      });
+      this.Historia = this.HistSaliente;
     }
-    this.Historia = this.HistSaliente;
   }
 
   entrantesHist() {
     // Aca se compara con el atributo si fue entrante
     if (this.obj.tipo == 'admin') {
-      this.HistAdmin.forEach((element) => {
-        if (element) {
-          this.HistEntrante.push(element);
-        }
-      });
+      this.Historia = this.HistEntrante;
     } else {
-      this.HistOper.forEach((element) => {
-        // Aca se compara el atributo si fue entrante
-        if (element) {
-          this.HistEntrante.push(element);
-        }
-      });
     }
-    this.Historia = this.HistEntrante;
   }
 
   perdidasHist() {
     // Aca se compara con el atributo si fue perdida
     if (this.obj.tipo == 'admin') {
-      this.HistAdmin.forEach((element) => {
-        if (element) {
-          this.HistPerdida.push(element);
-        }
-      });
+      this.Historia = this.HistPerdida;
     } else {
-      this.HistOper.forEach((element) => {
-        // Aca se compara el atributo si fue perdida
-        if (element) {
-          this.HistPerdida.push(element);
-        }
-      });
     }
-    this.Historia = this.HistPerdida;
   }
 
   defaultHistOpe() {
-    if (this.obj.tipo == 'admin') {
-      this.Historia = this.HistAdmin;
-    } else {
+    if (this.obj.tipo == 'standard') {
       this.Historia = this.HistOper;
+    } else {
+      console.log('todas las llamadas ');
+      this.Historia = this.HistAdmin;
     }
+  }
+
+  buscar() {
+    console.log('buscar!!!!');
+    this.filtrar(this.addform.value);
   }
 
   onChange(event) {
@@ -230,7 +255,7 @@ export class HistorialLlamadasComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.preload();
+    this.preload();
   }
   cssch() {
     document.getElementById('nav').style.cssText = 'background: red;';
