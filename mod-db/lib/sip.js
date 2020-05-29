@@ -53,10 +53,10 @@ module.exports = function setupSip(SipModel, UsuarioModel) {
     return SipModel.findAll()
   }
 
-  async function findOne(query) {
+  async function findLastSip(query) {
     return SipModel.findOne(query)
   }
-  
+
   async function destroyAll(id) {
     return await SipModel.destroy({
       where: {
@@ -86,7 +86,7 @@ module.exports = function setupSip(SipModel, UsuarioModel) {
     update,
     updatesipCont,
     findById,
-    findOne,
+    findLastSip,
     findAll,
     destroyAll,
     destroy,
