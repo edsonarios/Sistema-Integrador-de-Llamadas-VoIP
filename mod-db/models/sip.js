@@ -154,7 +154,7 @@ module.exports = function setupSipModel(config) {
     },
     /* ----------------------- Campos adicionales */
     ipaddr: {
-      type: Sequelize.STRING(45),
+      type: Sequelize.STRING,
       allowNull: true,
     },
     port: {
@@ -166,15 +166,15 @@ module.exports = function setupSipModel(config) {
       allowNull: true,
     },
     defaultuser: {
-      type: Sequelize.STRING(40),
+      type: Sequelize.STRING,
       allowNull: true,
     },
     fullcontact: {
-      type: Sequelize.STRING(80),
+      type: Sequelize.TEXT,
       allowNull: true,
     },
     regserver: {
-      type: Sequelize.STRING(20),
+      type: Sequelize.STRING,
       allowNull: true,
     },
     useragent: {
@@ -186,7 +186,7 @@ module.exports = function setupSipModel(config) {
       allowNull: true,
     },
     callbackextension: {
-      type: Sequelize.STRING(40),
+      type: Sequelize.STRING,
       allowNull: true,
     },
   });
