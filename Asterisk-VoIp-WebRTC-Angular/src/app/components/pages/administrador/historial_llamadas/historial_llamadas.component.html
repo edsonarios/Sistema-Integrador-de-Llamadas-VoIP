@@ -23,7 +23,7 @@
 		<div class="nav-fin">
 
 			<input type="text" formControlName="selectedDate" placeholder="Datepicker" class="form-control" bsDatepicker
-				[bsConfig]="{ isAnimated: true }" />
+				[bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-orange' }" />
 			<input type="text" formControlName="nameContact" class="form-control" placeholder="Contacto" />
 			<button type="submit">
 				<a (click)="buscar()"><i class="v-icon-magnifying-glass"></i></a>

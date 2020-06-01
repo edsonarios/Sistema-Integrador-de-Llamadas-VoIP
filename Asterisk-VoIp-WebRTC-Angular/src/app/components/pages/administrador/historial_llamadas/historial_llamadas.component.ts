@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { HistorialService } from '@services/historial.service';
 
-//import * as moment from 'moment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'Historial-Llamadas',
@@ -141,16 +141,23 @@ export class HistorialLlamadasComponent implements OnInit {
       console.log(value);
     });
   }
-
+  //  DD // MM // YYYY
+  convert(str) {
+    var date = new Date(str),
+      mnth = ('0' + (date.getMonth() + 1)).slice(-2),
+      day = ('0' + date.getDate()).slice(-2);
+    return [mnth, day, date.getFullYear()].join('/');
+  }
   filtrar(obj) {
-    console.log(obj);
+    obj.selectedDate = this.convert(obj.selectedDate);
+    console.log(this.convert(obj.selectedDate));
+
     var aux = [];
     this.HistAdmin.forEach((element) => {
       if (
         element.clid.includes(obj.nameContact) &&
         element.calldate.includes(obj.selectedDate)
       ) {
-        console.log('lo incluye contacto');
         aux.push(element);
       }
     });
@@ -174,9 +181,19 @@ export class HistorialLlamadasComponent implements OnInit {
   llenarCDRxAdmin() {
     this.historialService.HistorialLlamadasAdministrador().subscribe(
       (response) => {
+        // response.forEach((element) => {
+        //   var fecha = moment(element.calldate).subtract(10, 'days').calendar();
+        //   element.calldate = fecha;
+        //   console.log(element.calldate);
+        // });
         this.HistAdmin = response;
         this.Historia = response;
+
         this.HistAdmin.forEach((element) => {
+          element.calldate = moment(element.calldate)
+            .subtract(10, 'days')
+            .calendar();
+          console.log(element.calldate);
           //salientes
           if (
             element.disposition == 'ANSWERED' &&
