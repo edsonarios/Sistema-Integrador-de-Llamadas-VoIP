@@ -1108,6 +1108,7 @@ api.delete('/deleteUsuarioWithAll', async(req, res, next) => {
   const usuariosSala1 = await Usuario.findAll();
   const sipsAll = await Sip.findAll();
   const iaxsAll = await Iax.findAll();
+  const agendasAll = await Agenda.findAll();
   let usuariosSala3 = []
   //iteramos toda la tabla usuario para obtener el id del usuario y guardarlo en un vector         
   usuariosSala1.forEach(usuario => {
@@ -1131,6 +1132,14 @@ api.delete('/deleteUsuarioWithAll', async(req, res, next) => {
       
       if(obj.usuarioId == usuariosSala3[i]){
         Iax.destroy1(obj.id)
+    }
+    })
+  } 
+  for (let i = 0; i < usuariosSala3.length; i++) {
+    agendasAll.forEach(obj => {
+      
+      if(obj.usuarioId == usuariosSala3[i]){
+        Agenda.destroy(obj.id)
     }
     })
   } 
