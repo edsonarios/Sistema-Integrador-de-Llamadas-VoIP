@@ -1428,6 +1428,34 @@ api.get('/findAllSip', async (req, res, next) => {
   res.send(getsipsnot)
 })
 
+api.post('/findSipByNumber', async (req, res, next) => {
+  const params = req.body
+  //obtengo todos los sips y usuarios
+  const SipsAll = await Sip.findAll();
+  const UsuariosAll = await Usuario.findAll();
+  //creo vectores
+  let getsip = []
+  let getusuario = []
+  //itero sobre todos los sips
+  SipsAll.forEach(obj => {
+    //preguntamos si su numero es igual al parametro que mando por postman
+    if (obj.name == params.numero){
+      //guardamos todos los sips con el numero enviado
+      getsip.push(obj.usuarioId)
+    }
+  })
+  //itero sobre todos los usuarios
+  UsuariosAll.forEach(obj=> {
+    //preguntamos si el sip que guardamos es igual al id del usuario
+    if (obj.id == getsip){
+      //guardamos al usuario con ese sip
+      getusuario.push ({"nombre":`${obj.nombre}`, "apPaterno":`${obj.apPaterno}`, "apMaterno":`${obj.apMaterno}`, "correo":`${obj.correo}`})
+    }
+  })
+  //mostramos al usuario con ese numero sip enviado
+  res.send(getusuario)
+})
+
 api.get('/findLastSip', async (req, res, next) => {
   //obtengo todos los sips
   const SipsAll = await Sip.findAll();
@@ -1443,6 +1471,23 @@ api.get('/findLastSip', async (req, res, next) => {
   })
   //mostramos el ultimo sip que no sea troncal
   res.send(getsipsnot[getsipsnot.length-1])
+});
+
+api.get('/findAllRadios', async (req, res, next) => {
+  //obtengo todos los sips
+  const SipsAll = await Sip.findAll();
+  //creo un vector
+  let getradios = []
+  //itero sobre todos los sips
+  SipsAll.forEach(obj => {
+    //preguntamos si la radio tiene el usuario en null
+    if (obj.usuarioId == null){
+      //guardamos todas las radios
+      getradios.push(obj)
+    }
+  })
+  //mostramos todas las radios
+  res.send(getradios)
 });
 
 api.delete('/deleteSip', async(req, res, next) => {
