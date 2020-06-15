@@ -89,7 +89,7 @@ api.get("/datosPrueba", async (req, res) => {
     direccion: "direccion1234",
     telefono: "123456",
     correo: "usuario@usuario",
-    password: "1234",
+    password: bcrypt.hashSync("1234", 10),
     conectado: false,
   });
   const obj21 = await Sip.create(obj2.id, {
@@ -181,7 +181,7 @@ api.get("/datosPrueba", async (req, res) => {
     direccion: "2direccion1234",
     telefono: "22123456",
     correo: "usuario2@usuario2",
-    password: "1234",
+    password: bcrypt.hashSync("1234", 10),
     conectado: false,
   });
   const obj31 = await Sip.create(obj3.id, {
@@ -629,7 +629,7 @@ api.get("/datosPrueba", async (req, res) => {
     direccion: "UsuarioNoexiste",
     telefono: "123456",
     correo: "UsuarioNoexiste@UsuarioNoexiste",
-    password: "1234",
+    password: bcrypt.hashSync("1234", 10),
     conectado: false,
   });
   //Sip para el puerto fxo
