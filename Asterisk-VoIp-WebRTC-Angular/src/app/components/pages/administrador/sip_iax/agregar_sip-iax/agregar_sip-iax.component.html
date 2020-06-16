@@ -1,268 +1,341 @@
+<h2>Seleccione el Tipo</h2>
+<hr />
+<div class="col-md-10 offset-1" *ngIf="hiddenForm == true">
+  <form [formGroup]="Sip_Iax_form">
+    <div class="row">
+      <div class="form-group col">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          formControlName="name"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+        />
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+          <div *ngIf="f.name.errors.required">
+            Por favor, ingrese el nombre de la cuenta
+          </div>
+        </div>
+      </div>
+      <div class="form-group col" *ngIf="IdUsuario == 'none'">
+        <label>Cuenta</label>
+        <select class="custom-select" formControlName="id">
+          <!--<option selected value="null">Seleccione una Cuenta</option>-->
+          <option
+            *ngFor="let n of Cuentas; let i = index"
+            value="{{ Cuentas[i]['id'] }}"
+          >
+            {{ Cuentas[i]['correo'] }}</option
+          >
+        </select>
 
-	<h2>Seleccione el Tipo</h2>
-		<hr>
-	<div class="col-md-10 offset-1" *ngIf="hiddenForm=='1'">
-		<form [formGroup]="Sip_Iax_form">
-			<div class="row">
-				<div class="form-group col">
-					<label for="name">Name</label>
-					<input type="text" formControlName="name" class="form-control"
-						[ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
-					<div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-						<div *ngIf="f.name.errors.required">
-							Por favor, ingrese el nombre de la cuenta
-						</div>
-					</div>
-				</div>
-				<div class="form-group col" *ngIf="IdUsuario=='none'">
-					<label >Cuenta</label>
-					<select class="custom-select" formControlName="id">
-						<!--<option selected value="null">Seleccione una Cuenta</option>-->
-							<option 
-							*ngFor="let n of Cuentas; let i = index" 
-							value="{{Cuentas[i]['id']}}" >
-								{{Cuentas[i]['correo']}}</option>
-					</select>
-					
-					<div *ngIf="submitted && f.tipo.errors" class="invalid-feedback">
-						<div *ngIf="f.tipo.errors.required">
-							Por favor, seleccione el tipo
-						</div>
-					</div>
-				</div>
-				<div class="form-group col" *ngIf="IdUsuario!='none'">
-					<label > Vinculada a la cuenta:</label>
-						<input type="text" class="form-control" placeholder="{{correo}}" disabled />
-					
-					<div *ngIf="submitted && f.tipo.errors" class="invalid-feedback">
-						<div *ngIf="f.tipo.errors.required">
-							Por favor, seleccione el tipo
-						</div>
-					</div>
-				</div>
-			</div>
+        <div *ngIf="submitted && f.tipo.errors" class="invalid-feedback">
+          <div *ngIf="f.tipo.errors.required">
+            Por favor, seleccione el tipo
+          </div>
+        </div>
+      </div>
+      <div class="form-group col" *ngIf="IdUsuario != 'none'">
+        <label> Vinculada a la cuenta:</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="{{ correo }}"
+          disabled
+        />
 
-			<div class="row">
-				<div class="form-group col">
-					<label for="callerid">CallerID</label>
-					<input type="text" formControlName="callerid" class="form-control"
-						[ngClass]="{ 'is-invalid': submitted && f.callerid.errors }" />
-					<div *ngIf="submitted && f.callerid.errors" class="invalid-feedback">
-						<div *ngIf="f.callerid.errors.required">
-							Este campo es necesario
-						</div>
-					</div>
-				</div>
-				<div class="form-group col">
-					<label for="secret">Secret</label>
-					<input type="text" formControlName="secret" class="form-control"
-						[ngClass]="{ 'is-invalid': submitted && f.secret.errors }" />
-					<div *ngIf="submitted && f.secret.errors" class="invalid-feedback">
-						<div *ngIf="f.secret.errors.required">
-							Este campo es necesario
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="custom-control custom-checkbox">
-	  <input type="checkbox" class="custom-control-input" id="customCheck1" (change)="cambio()">
-	  <label class="custom-control-label" for="customCheck1">SIP Para WebRTC</label>
-	</div>
-	<hr>
-			<p style="font-size: 12px;color:red;">*Los siguientes campos son configuraciones con Asterisk se recomienda que deje los campos como estan</p>
-	
-	<div *ngIf="EnableWebRTC=='0'; else elseBlock">
-		<div class="row">
-			<div class="col-md-4">
-				<label >type</label>
-				<input type="text" formControlName="type" class="form-control"/>
-			</div>
-				<div class="col-md-4">
-				<label >context</label>
-				<input type="text" formControlName="context" class="form-control"/>
-			</div>
-				<div class="col-md-4">
-				<label >host</label>
-				<input type="text" formControlName="host" class="form-control"/>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-3">
-				<label >disallow</label>
-				<input type="text" formControlName="disallow" class="form-control"/>
-			</div>
-				<div class="col-md-3">
-				<label >allow</label>
-				<input type="text" formControlName="allow" class="form-control"/>
-			</div>
-				<div class="col-md-2">
-				<label >qualify</label>
-				<input type="text" formControlName="qualify" class="form-control"/>
-			</div>
-			<div class="col-md-4">
-				<label >nat</label>
-				<input type="text" formControlName="nat" class="form-control"/>
-			</div>
-		</div>
-	</div>
-	<ng-template #elseBlock>
-		<div class="row">
-			<div class="col-md-4">
-				<label >type</label>
-				<input type="text" formControlName="type" class="form-control"/>
-			</div>
-				<div class="col-md-4">
-				<label >context</label>
-				<input type="text" formControlName="context" class="form-control"/>
-			</div>
-				<div class="col-md-4">
-				<label >host</label>
-				<input type="text" formControlName="host" class="form-control"/>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-2">
-				<label for="secret">disallow</label>
-				<input type="text" formControlName="disallow" class="form-control"/>
-			</div>
-				<div class="col-md-2">
-				<label for="secret">allow</label>
-				<input type="text" formControlName="allow" class="form-control"/>
-			</div>
-			<div class="col-md-2">
-				<label for="secret">callcounter</label>
-				<input type="text" formControlName="callcounter" class="form-control"/>
-			</div>
-				<div class="col-md-2">
-				<label for="secret">qualify</label>
-				<input type="text" formControlName="qualify" class="form-control"/>
-			</div>
-			<div class="col-md-4">
-				<label for="secret">nat</label>
-				<input type="text" formControlName="nat" class="form-control"/>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-3">
-				<label for="secret">qualifyfreq</label>
-				<input type="text" formControlName="qualifyfreq" class="form-control"/>
-			</div>
-				<div class="col-md-6">
-				<label for="secret">deny</label>
-				<input type="text" formControlName="deny" class="form-control"/>
-			</div>
-				<div class="col-md-3">
-				<label for="secret">dtnfnode</label>
-				<input type="text" formControlName="dtnfnode" class="form-control"/>
-			</div>
-		
-		</div>
-		<div class="row">
-			<div class="col-md-2">
-				<label for="secret">canreinvite</label>
-				<input type="text" formControlName="canreinvite" class="form-control"/>
-			</div>
-				<div class="col-md-2">
-				<label for="secret">trustrpid</label>
-				<input type="text" formControlName="trustrpid" class="form-control"/>
-			</div>
-				<div class="col-md-2">
-				<label for="secret">sendrpid</label>
-				<input type="text" formControlName="sendrpid" class="form-control"/>
-			</div>
-			<div class="col-md-2">
-				<label for="secret">avpf</label>
-				<input type="text" formControlName="avpf" class="form-control"/>
-			</div>
-			<div class="col-md-2">
-				<label for="secret">force_avp</label>
-				<input type="text" formControlName="force_avp" class="form-control"/>
-			</div>
-			<div class="col-md-2">
-				<label for="secret">icesupport</label>
-				<input type="text" formControlName="icesupport" class="form-control"/>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-3">
-				<label for="secret">transport</label>
-				<input type="text" formControlName="transport" class="form-control"/>
-			</div>
-				
-				<div class="col-md-2">
-				<label for="secret">callgroup</label>
-				<input type="text" formControlName="callgroup" class="form-control"/>
-			</div>
-			<div class="col-md-2">
-				<label for="secret">encryption</label>
-				<input type="text" formControlName="encryption" class="form-control"/>
-			</div>
-			<div class="col-md-2">
-				<label for="secret">pickupgroup</label>
-				<input type="text" formControlName="pickupgroup" class="form-control"/>
-			</div>
-			<div class="col-md-3">
-				<label for="secret">dial</label>
-				<input type="text" formControlName="dial" class="form-control"/>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-5">
-				<label for="secret">permit</label>
-				<input type="text" formControlName="permit" class="form-control"/>
-			</div>
-				
-			<div class="col-md-2">
-				<label for="secret">faxdetect</label>
-				<input type="text" formControlName="faxdetect" class="form-control"/>
-			</div>
-			<div class="col-md-3">
-				<label for="secret">directmedia</label>
-				<input type="text" formControlName="directmedia" class="form-control"/>
-			</div>
-			<div class="col-md-2">
-				<label for="secret">dtlsenable</label>
-				<input type="text" formControlName="dtlsenable" class="form-control"/>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-2">
-				<label for="secret">faxdetect</label>
-				<input type="text" formControlName="faxdetect" class="form-control"/>
-			</div>
-			<div class="col-md-2">
-				<label for="secret">directmedia</label>
-				<input type="text" formControlName="directmedia" class="form-control"/>
-			</div>
-		
-			<div class="col-md-2">
-				<label for="secret">rtcp_mux</label>
-				<input type="text" formControlName="rtcp_mux" class="form-control"/>
-			</div>
-			<div class="col-md-6">
-				<label for="secret">dtlscertfile</label>
-				<input type="text" formControlName="dtlscertfile" class="form-control"/>
-			</div>
-		
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<label for="secret">dtlsverify</label>
-				<input type="text" formControlName="dtlsverify" class="form-control"/>
-			</div>
-			
-			<div class="col-md-4">
-				<label for="secret">dtlscafile</label>
-				<input type="text" formControlName="dtlscafile" class="form-control"/>
-			</div>
-			<div class="col-md-4">
-				<label for="secret">dtlssetup</label>
-				<input type="text" formControlName="dtlssetup" class="form-control"/>
-			</div>
-			
-		</div>
-	</ng-template>
-<!--
+        <div *ngIf="submitted && f.tipo.errors" class="invalid-feedback">
+          <div *ngIf="f.tipo.errors.required">
+            Por favor, seleccione el tipo
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col">
+        <label for="callerid">CallerID</label>
+        <input
+          type="text"
+          formControlName="callerid"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.callerid.errors }"
+        />
+        <div *ngIf="submitted && f.callerid.errors" class="invalid-feedback">
+          <div *ngIf="f.callerid.errors.required">
+            Este campo es necesario
+          </div>
+        </div>
+      </div>
+      <div class="form-group col">
+        <label for="secret">Secret</label>
+        <input
+          type="text"
+          formControlName="secret"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.secret.errors }"
+        />
+        <div *ngIf="submitted && f.secret.errors" class="invalid-feedback">
+          <div *ngIf="f.secret.errors.required">
+            Este campo es necesario
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="customCheck1"
+        (change)="cambio()"
+      />
+      <label class="custom-control-label" for="customCheck1"
+        >SIP Para WebRTC</label
+      >
+    </div>
+    <hr />
+    <p style="font-size: 12px; color: red;">
+      *Los siguientes campos son configuraciones con Asterisk se recomienda que
+      deje los campos como estan
+    </p>
+
+    <div *ngIf="EnableWebRTC == '0'; else elseBlock">
+      <div class="row">
+        <div class="col-md-4">
+          <label>type</label>
+          <input type="text" formControlName="type" class="form-control" />
+        </div>
+        <div class="col-md-4">
+          <label>context</label>
+          <input type="text" formControlName="context" class="form-control" />
+        </div>
+        <div class="col-md-4">
+          <label>host</label>
+          <input type="text" formControlName="host" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label>disallow</label>
+          <input type="text" formControlName="disallow" class="form-control" />
+        </div>
+        <div class="col-md-3">
+          <label>allow</label>
+          <input type="text" formControlName="allow" class="form-control" />
+        </div>
+        <div class="col-md-2">
+          <label>qualify</label>
+          <input type="text" formControlName="qualify" class="form-control" />
+        </div>
+        <div class="col-md-4">
+          <label>nat</label>
+          <input type="text" formControlName="nat" class="form-control" />
+        </div>
+      </div>
+    </div>
+    <ng-template #elseBlock>
+      <div class="row">
+        <div class="col-md-4">
+          <label>type</label>
+          <input type="text" formControlName="type" class="form-control" />
+        </div>
+        <div class="col-md-4">
+          <label>context</label>
+          <input type="text" formControlName="context" class="form-control" />
+        </div>
+        <div class="col-md-4">
+          <label>host</label>
+          <input type="text" formControlName="host" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <label for="secret">disallow</label>
+          <input type="text" formControlName="disallow" class="form-control" />
+        </div>
+        <div class="col-md-2">
+          <label for="secret">allow</label>
+          <input type="text" formControlName="allow" class="form-control" />
+        </div>
+        <div class="col-md-2">
+          <label for="secret">callcounter</label>
+          <input
+            type="text"
+            formControlName="callcounter"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-2">
+          <label for="secret">qualify</label>
+          <input type="text" formControlName="qualify" class="form-control" />
+        </div>
+        <div class="col-md-4">
+          <label for="secret">nat</label>
+          <input type="text" formControlName="nat" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label for="secret">qualifyfreq</label>
+          <input
+            type="text"
+            formControlName="qualifyfreq"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="secret">deny</label>
+          <input type="text" formControlName="deny" class="form-control" />
+        </div>
+        <div class="col-md-3">
+          <label for="secret">dtnfnode</label>
+          <input type="text" formControlName="dtnfnode" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <label for="secret">canreinvite</label>
+          <input
+            type="text"
+            formControlName="canreinvite"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-2">
+          <label for="secret">trustrpid</label>
+          <input type="text" formControlName="trustrpid" class="form-control" />
+        </div>
+        <div class="col-md-2">
+          <label for="secret">sendrpid</label>
+          <input type="text" formControlName="sendrpid" class="form-control" />
+        </div>
+        <div class="col-md-2">
+          <label for="secret">avpf</label>
+          <input type="text" formControlName="avpf" class="form-control" />
+        </div>
+        <div class="col-md-2">
+          <label for="secret">force_avp</label>
+          <input type="text" formControlName="force_avp" class="form-control" />
+        </div>
+        <div class="col-md-2">
+          <label for="secret">icesupport</label>
+          <input
+            type="text"
+            formControlName="icesupport"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label for="secret">transport</label>
+          <input type="text" formControlName="transport" class="form-control" />
+        </div>
+
+        <div class="col-md-2">
+          <label for="secret">callgroup</label>
+          <input type="text" formControlName="callgroup" class="form-control" />
+        </div>
+        <div class="col-md-2">
+          <label for="secret">encryption</label>
+          <input
+            type="text"
+            formControlName="encryption"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-2">
+          <label for="secret">pickupgroup</label>
+          <input
+            type="text"
+            formControlName="pickupgroup"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-3">
+          <label for="secret">dial</label>
+          <input type="text" formControlName="dial" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <label for="secret">permit</label>
+          <input type="text" formControlName="permit" class="form-control" />
+        </div>
+
+        <div class="col-md-2">
+          <label for="secret">faxdetect</label>
+          <input type="text" formControlName="faxdetect" class="form-control" />
+        </div>
+        <div class="col-md-3">
+          <label for="secret">directmedia</label>
+          <input
+            type="text"
+            formControlName="directmedia"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-2">
+          <label for="secret">dtlsenable</label>
+          <input
+            type="text"
+            formControlName="dtlsenable"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <label for="secret">faxdetect</label>
+          <input type="text" formControlName="faxdetect" class="form-control" />
+        </div>
+        <div class="col-md-2">
+          <label for="secret">directmedia</label>
+          <input
+            type="text"
+            formControlName="directmedia"
+            class="form-control"
+          />
+        </div>
+
+        <div class="col-md-2">
+          <label for="secret">rtcp_mux</label>
+          <input type="text" formControlName="rtcp_mux" class="form-control" />
+        </div>
+        <div class="col-md-6">
+          <label for="secret">dtlscertfile</label>
+          <input
+            type="text"
+            formControlName="dtlscertfile"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label for="secret">dtlsverify</label>
+          <input
+            type="text"
+            formControlName="dtlsverify"
+            class="form-control"
+          />
+        </div>
+
+        <div class="col-md-4">
+          <label for="secret">dtlscafile</label>
+          <input
+            type="text"
+            formControlName="dtlscafile"
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="secret">dtlssetup</label>
+          <input type="text" formControlName="dtlssetup" class="form-control" />
+        </div>
+      </div>
+    </ng-template>
+    <!--
 			<hr>
 			<h3>Configuraciones de Sip WebRTC</h3>
 			<hr>
@@ -290,62 +363,71 @@
 
 			<br>
 -->
-			<div class="row  justify-content-center">
-				<button class="btn btn-danger" [disabled]="Sip_Iax_form.invalid" (click)="addSip()">Crear
-					Numero SIP</button>
-			</div>
+    <div class="row justify-content-center">
+      <button
+        class="btn btn-danger"
+        [disabled]="Sip_Iax_form.invalid"
+        (click)="addSip()"
+      >
+        Crear Numero SIP
+      </button>
+    </div>
+  </form>
+</div>
 
-		</form>
-
-
-
-
-	</div>
-
-
-
-<form class="sip_iax-tipo" *ngIf="hiddenForm=='0'">   
-         <div class="container">
-      <div class="card-deck mb-3 ">
-        
-        <div class="card mb-4 shadow-sm">
-	          <div class="card-header">
-	            <h4 class="my-0 font-weight-normal">SIP</h4>
-	          </div>
-	          <div class="card-body">
-		           <div class="icon_select">
-	            	  <i class="v-icon-walkie-talkie"></i>
-	        		</div>
-	        		<div class="info">
-		              <li>Puede llamar a otros numeros</li>
-		              <li>Puede entrar en Salas</li>
-		              <li>Puede hablar a una Radio</li>
-		              <li>Puede Intervenir llamadas</li>
-		              <li>Permite el uso del ptt</li>
-		             
-	        		</div>
-		            
-	            <button type="button" class="btn btn-success btn-block" (click)="SelectSip()">Seleccionar</button>
-	          </div>
+<form class="sip_iax-tipo" *ngIf="hiddenForm == false">
+  <div class="container">
+    <div class="card-deck mb-3">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">SIP</h4>
         </div>
-        <div class="card mb-4 shadow-sm">
-	              <div class="card-header">
-	            <h4 class="my-0 font-weight-normal">IAX</h4>
-	          </div>
-	          <div class="card-body">
-		           <div class="icon_select">
-	            	  <i class="v-icon-walkie-talkie"></i>
-	        		</div>
-	        		<div class="info">
-		              <li>Pendiente ...</li>
-		              <li>Pendiente ...</li>
-		              <li>Pendiente ...</li>
-		              <li>Pendiente ...</li>
-		              <li>Pendiente ...</li>
-	        		</div>
-	            <button type="button" class="btn btn-success btn-block" disabled style="cursor: no-drop;">Seleccionar</button>
-	          </div>
+        <div class="card-body">
+          <div class="icon_select">
+            <i class="v-icon-walkie-talkie"></i>
+          </div>
+          <div class="info">
+            <li>Puede llamar a otros numeros</li>
+            <li>Puede entrar en Salas</li>
+            <li>Puede hablar a una Radio</li>
+            <li>Puede Intervenir llamadas</li>
+            <li>Permite el uso del ptt</li>
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-success btn-block"
+            (click)="SelectSip()"
+          >
+            Seleccionar
+          </button>
         </div>
       </div>
-</div>       
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">IAX</h4>
+        </div>
+        <div class="card-body">
+          <div class="icon_select">
+            <i class="v-icon-walkie-talkie"></i>
+          </div>
+          <div class="info">
+            <li>Pendiente ...</li>
+            <li>Pendiente ...</li>
+            <li>Pendiente ...</li>
+            <li>Pendiente ...</li>
+            <li>Pendiente ...</li>
+          </div>
+          <button
+            type="button"
+            class="btn btn-success btn-block"
+            disabled
+            style="cursor: no-drop;"
+          >
+            Seleccionar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </form>
