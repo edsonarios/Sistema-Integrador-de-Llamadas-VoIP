@@ -192,20 +192,30 @@
 		</div>
 		<div class="LateralDer">
 			<div class="LateralDer_Sup">
-				<header>Salas</header>
+				<header *ngIf="SalaActive">
+					Salas
+					<button (click)="SalaActive = !SalaActive">-></button>
+				</header>
 
-				<div class="SalaEffect" *ngFor="let n of Salas; let i = index" [@flyIn]>
-					<Sala
-						(DatoSala)="RegistraSala($event)"
-						Nombre="{{ Salas[i]['nombreSala'] }}"
-						Descripcion="{{ Salas[i]['descripcion'] }}"
-						Id="{{ Salas[i]['id'] }}"
-					>
-					</Sala>
-				</div>
-				<div class="empty" *ngIf="Salas.length == 0">
-					<p>No hay Salas</p>
-				</div>
+				<header *ngIf="!SalaActive">
+					<button (click)="SalaActive = !SalaActive"><-</button>
+					Agenda
+				</header>
+				<section *ngIf="SalaActive">
+					<div class="SalaEffect" *ngFor="let n of Salas; let i = index" [@flyIn]>
+						<Sala
+							(DatoSala)="RegistraSala($event)"
+							Nombre="{{ Salas[i]['nombreSala'] }}"
+							Descripcion="{{ Salas[i]['descripcion'] }}"
+							Id="{{ Salas[i]['id'] }}"
+						>
+						</Sala>
+					</div>
+					<div class="empty" *ngIf="Salas.length == 0">
+						<p>No hay Salas</p>
+					</div>
+				</section>
+				<Agenda *ngIf="!SalaActive"></Agenda>
 			</div>
 			<div class="LateralDer_Inf"></div>
 		</div>
