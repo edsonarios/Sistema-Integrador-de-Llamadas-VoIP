@@ -192,15 +192,22 @@
 		</div>
 		<div class="LateralDer">
 			<div class="LateralDer_Sup">
-				<header *ngIf="SalaActive">
-					Salas
-					<button (click)="SalaActive = !SalaActive">-></button>
-				</header>
+				<div class="LDSup-header">
+					<header class="animated fadeIn">
+						<button [ngStyle]="SalaActive && { 'font-weight': 'bold' }" (click)="SalaActive = true">
+							Salas
+						</button>
+					</header>
 
-				<header *ngIf="!SalaActive">
-					<button (click)="SalaActive = !SalaActive"><-</button>
-					Agenda
-				</header>
+					<header class="animated fadeIn">
+						<button
+							[ngStyle]="!SalaActive && { 'font-weight': 'bold' }"
+							(click)="SalaActive = false"
+						>
+							Agenda
+						</button>
+					</header>
+				</div>
 				<section *ngIf="SalaActive">
 					<div class="SalaEffect" *ngFor="let n of Salas; let i = index" [@flyIn]>
 						<Sala

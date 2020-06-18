@@ -20,16 +20,13 @@ el Normalize o tus propios estilos, son los que
 incluiremos en esta carpeta.*/
 
 @import './2-generic/generic';
-
-
+@import '2-generic/animation/animated.scss';
 /*=============================================
 =                   ELEMENTS                  =
 =============================================*/
 /*Para  los estilos que afectan a los elementos del HTML. 
 No incluiremos el estilo para las clases.*/
-
 @import './3-elements/elements';
-
 
 /*=============================================
 =                   OBJECTS                   =
@@ -38,8 +35,6 @@ No incluiremos el estilo para las clases.*/
 todo lo relacionado con el layout.*/
 
 @import './4-objects/objects';
-
-
 
 /*=============================================
 =                   COMPONENTS                =
@@ -59,4 +54,3 @@ como es lógico.*/
 estilos significativos (incompatibilidades con navegadores)*/
 
 @import './6-utilities/utilities';
-

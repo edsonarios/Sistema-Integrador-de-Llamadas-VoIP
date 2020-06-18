@@ -30,39 +30,46 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+
+// Prueba tracking con Firebase
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    OperadorTemplateComponent,
-    AdministradorTemplateComponent,
-    DialPadComponent,
-    AgendaComponent,
-    NotificacionComponent,
-    SalaComponent,
-    LlamadaComponent,
-    PanelComponent,
-    ParticipanteComponent
-    
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    RouterModule.forRoot(AppRoutes, {
+	declarations: [
+		AppComponent,
+		LoginComponent,
+		OperadorTemplateComponent,
+		AdministradorTemplateComponent,
+		DialPadComponent,
+		AgendaComponent,
+		NotificacionComponent,
+		SalaComponent,
+		LlamadaComponent,
+		PanelComponent,
+		ParticipanteComponent
+	],
+	imports: [
+		BrowserModule,
+		HttpClientModule,
+		FormsModule,
+		ReactiveFormsModule,
+		BrowserAnimationsModule,
+		RouterModule.forRoot(AppRoutes, {
 			useHash: false
 		}),
-    AccordionModule,
-    TooltipModule.forRoot(),
-    BsDropdownModule.forRoot(),
-    ModalModule.forRoot(),
-    TabsModule.forRoot(),
-    PopoverModule.forRoot(),
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [DialPadComponent]
+		AccordionModule,
+		TooltipModule.forRoot(),
+		BsDropdownModule.forRoot(),
+		ModalModule.forRoot(),
+		TabsModule.forRoot(),
+		PopoverModule.forRoot(),
+		AngularFireModule.initializeApp(environment.firebaseConfig),
+		AngularFirestoreModule
+	],
+	providers: [],
+	bootstrap: [AppComponent],
+	entryComponents: [DialPadComponent]
 })
-export class AppModule { }
+export class AppModule {}

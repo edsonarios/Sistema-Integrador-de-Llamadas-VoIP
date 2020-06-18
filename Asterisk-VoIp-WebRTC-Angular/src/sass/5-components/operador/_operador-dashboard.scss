@@ -195,12 +195,16 @@
 		'LateralDer_Inf';
 }
 .LateralDer_Sup {
-	header > button {
-		border: none;
-		color: white;
-		background: blue($color: #000000);
-		margin-left: 50px;
-		margin-right: 50px;
+	.LDSup-header {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+	}
+	header {
+		button {
+			border: none;
+			color: white;
+			background: blue($color: #000000);
+		}
 	}
 	grid-area: LateralDer_Sup;
 	//display: grid;
