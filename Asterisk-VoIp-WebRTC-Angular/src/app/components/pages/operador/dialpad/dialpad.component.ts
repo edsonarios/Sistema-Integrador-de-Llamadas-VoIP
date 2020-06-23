@@ -10,14 +10,20 @@ import { RTCSession } from 'jssip';
 	templateUrl: './dialpad.component.html'
 })
 export class DialPadComponent implements OnInit {
-	dialNumber: string = '';
 	constructor(private router: Router, private modalService: BsModalService) {}
 
-	mute: boolean = false;
+	public symbols: String[] = '123456789*0#'.split('');
 
-	DialNum(Num) {
-		this.dialNumber = this.dialNumber + Num;
+	dialNumber: String = '';
+
+	mute: boolean = false;
+	hold: boolean = false;
+	ptt: boolean = false;
+
+	setValue(num) {
+		this.dialNumber += num;
 	}
+
 	Llamada() {
 		this.sipCall(this.dialNumber);
 		this.Limpiar();

@@ -208,22 +208,30 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
 	}
+
 	header {
+		border-radius: 0px;
 		button {
+			width: 100%;
 			border: none;
 			color: white;
-			background: blue($color: #000000);
+			background: transparent;
+			outline: none;
+		}
+		&:first-child {
+			border-radius: 4px 0 0 0;
+		}
+		&:last-child {
+			border-radius: 0 4px 0 0;
 		}
 	}
 	grid-area: LateralDer_Sup;
 	//display: grid;
-	border-radius: 4px;
+	// border-radius: 4px;
 	margin: 10px;
 	background: #ffffff;
 	overflow-y: scroll;
-	-webkit-box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.35);
-	-moz-box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.35);
-	box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.35);
+	// box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.35);
 }
 .LateralDer_Sup::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -368,7 +376,7 @@ header {
 	width: auto;
 	color: white;
 	font-size: 15px;
-	padding-left: 10px;
+	// padding-left: 10px;
 	padding-top: 5px;
 	//position: absolute;
 	text-align: center;

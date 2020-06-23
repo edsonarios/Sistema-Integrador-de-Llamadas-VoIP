@@ -68,70 +68,35 @@
 
 			<div class="UserBar_Option">
 				<div class="btn-group" dropdown>
-					<button
-						id="button-animated"
-						dropdownToggle
-						type="button"
-						class="btn_dropdown dropdown-toggle"
-						aria-controls="dropdown-animated"
-					>
+					<button id="button-animated" dropdownToggle type="button" class="btn_dropdown dropdown-toggle" aria-controls="dropdown-animated">
 						<span class="caret"></span>
 					</button>
-					<ul
-						id="dropdown-animated"
-						*dropdownMenu
-						class="dropdown-menu"
-						role="menu"
-						aria-labelledby="button-animated"
-					>
+					<ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
 						<div *ngFor="let n of Sip_Iax['0']; let i = index">
-							<li
-								role="menuitem"
-								(click)="SeleccionarSip_Iax(Sip_Iax['0'][i]['name'])"
-								class="Item_Dropdown"
-							>
+							<li role="menuitem" (click)="SeleccionarSip_Iax(Sip_Iax['0'][i]['name'])" class="Item_Dropdown">
 								<a class="dropdown-item">{{ Sip_Iax['0'][i]['callerid'] }}</a>
 							</li>
 						</div>
-						<li
-							role="menuitem"
-							class="Item_Dropdown"
-							style="color: red;"
-							*ngIf="Sip_Iax['0'].length == 0"
-						>
+						<li role="menuitem" class="Item_Dropdown" style="color: red;" *ngIf="Sip_Iax['0'].length == 0">
 							<a class="dropdown-item"><i class="v-icon-cancel"></i>No Hay Sips</a>
 						</li>
 						<li class="divider dropdown-divider"></li>
 						<div *ngFor="let n of Sip_Iax['1']; let j = index">
-							<li
-								role="menuitem"
-								(click)="SeleccionarSip_Iax(Sip_Iax['0'][j]['name'])"
-								class="Item_Dropdown"
-							>
+							<li role="menuitem" (click)="SeleccionarSip_Iax(Sip_Iax['0'][j]['name'])" class="Item_Dropdown">
 								<a class="dropdown-item">{{ Sip_Iax['1'][j]['callerid'] }}</a>
 							</li>
 						</div>
-						<li
-							role="menuitem"
-							class="Item_Dropdown"
-							style="color: red;"
-							*ngIf="Sip_Iax['1'].length == 0"
-						>
+						<li role="menuitem" class="Item_Dropdown" style="color: red;" *ngIf="Sip_Iax['1'].length == 0">
 							<a class="dropdown-item"><i class="v-icon-cancel"></i>No Hay Iaxs</a>
 						</li>
 						<li class="divider dropdown-divider"></li>
 						<li role="menuitem">
-							<a
-								class="dropdown-item"
-								style="cursor: pointer;"
-								(click)="AgregarEventoNotificacion()"
+							<a class="dropdown-item" style="cursor: pointer;" (click)="AgregarEventoNotificacion()"
 								><i class="v-icon-wifi-low"></i><span>Evento Notificacion</span></a
 							>
 						</li>
 						<li role="menuitem" class="Item_Dropdown">
-							<a class="dropdown-item" [routerLink]="['/Login']"
-								><i class="v-icon-enter"></i><span>Salir</span></a
-							>
+							<a class="dropdown-item" [routerLink]="['/Login']"><i class="v-icon-enter"></i><span>Salir</span></a>
 						</li>
 					</ul>
 				</div>
@@ -229,12 +194,7 @@
 				</div>
 				<section *ngIf="Sala">
 					<div class="SalaEffect" *ngFor="let n of Salas; let i = index" [@flyIn]>
-						<Sala
-							(DatoSala)="RegistraSala($event)"
-							Nombre="{{ Salas[i]['nombreSala'] }}"
-							Descripcion="{{ Salas[i]['descripcion'] }}"
-							Id="{{ Salas[i]['id'] }}"
-						>
+						<Sala (DatoSala)="RegistraSala($event)" Nombre="{{ Salas[i]['nombreSala'] }}" Descripcion="{{ Salas[i]['descripcion'] }}" Id="{{ Salas[i]['id'] }}">
 						</Sala>
 					</div>
 					<div class="empty" *ngIf="Salas.length == 0">
