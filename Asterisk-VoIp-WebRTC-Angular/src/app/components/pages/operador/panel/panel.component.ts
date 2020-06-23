@@ -1,4 +1,4 @@
-import { Component, OnInit ,Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,17 +6,15 @@ import { Router } from '@angular/router';
 	templateUrl: './panel.component.html'
 })
 export class PanelComponent implements OnInit {
-	 @Input() Tiempo: string;
-	 @Input() Objeto: any; 
+	@Input() Tiempo: string;
+	@Input() Objeto: any;
 
-	 public eventoPanel;
+	public eventoPanel;
 
-	 public Panel=[];
-	constructor(private router: Router) {
-	}
+	public Panel = [];
+	constructor(private router: Router) {}
 
 	ngOnInit() {
-		this.Panel=this.Objeto;
+		this.Panel = this.Objeto;
 	}
-
 }

@@ -59,11 +59,7 @@ export class OperadorTemplateComponent implements OnInit {
 	public Sip_Iax = [[], []];
 
 	modalRef: BsModalRef;
-	constructor(
-		private modalService: BsModalService,
-		private formBuilder: FormBuilder,
-		public salaService: SalaService
-	) {
+	constructor(private modalService: BsModalService, private formBuilder: FormBuilder, public salaService: SalaService) {
 		this.ParticipantesSala = [
 			{
 				Id: '1',

@@ -1,97 +1,17 @@
 <section class="dialpad">
-	<audio src="" id="audio-local"></audio>
-	<audio src="" id="audio-remote"></audio>
-	<div class="d-titulo modal-title">
-		<h1>DIALPAD</h1>
-	</div>
-	<div class="d-logo">
-		<i class="fa fa-tty" aria-hidden="true"></i>
-	</div>
-	<div class="d-vista">{{ dialNumber }}</div>
-	<div class="d-borrar" (click)="Limpiar()">
-		<button>
+	<div class="dialpad__content">
+		<input class="dialpad__input" [(ngModel)]="dialNumber" type="text" maxlength="15" />
+		<div class="dialpad__clear" (click)="Limpiar()">
 			<i class="fa fa-arrow-left" aria-hidden="true"></i>
-		</button>
+		</div>
+		<button *ngFor="let item of symbols" (click)="setValue(item)">{{ item }}</button>
 	</div>
-	<div class="d-uno">
-		<button (click)="DialNum('1')">
-			1
-		</button>
-	</div>
-	<div class="d-dos">
-		<button (click)="DialNum('2')">
-			2
-		</button>
-	</div>
-	<div class="d-tres">
-		<button (click)="DialNum('3')">
-			3
-		</button>
-	</div>
-	<div class="d-cuatro">
-		<button (click)="DialNum('4')">
-			4
-		</button>
-	</div>
-	<div class="d-cinco">
-		<button (click)="DialNum('5')">
-			5
-		</button>
-	</div>
-	<div class="d-seis">
-		<button (click)="DialNum('6')">
-			6
-		</button>
-	</div>
-	<div class="d-siete">
-		<button (click)="DialNum('7')">
-			7
-		</button>
-	</div>
-	<div class="d-ocho">
-		<button (click)="DialNum('8')">
-			8
-		</button>
-	</div>
-	<div class="d-nueve">
-		<button (click)="DialNum('9')">
-			9
-		</button>
-	</div>
-	<div class="d-mas">
-		<button (click)="DialNum('+')">
-			+
-		</button>
-	</div>
-	<div class="d-cero">
-		<button (click)="DialNum('0')">
-			0
-		</button>
-	</div>
-	<div class="d-numeral">
-		<button (click)="DialNum('#')">
-			#
-		</button>
-	</div>
-	<!-- <div class="d-cancelar">
-    <button>
-      CANCELAR
-    </button>
-  </div> -->
-	<div class="d-llamar">
+	<div class="dialpad__events">
 		<button (click)="Llamada()">
-			<i class="fa fa-phone" aria-hidden="true"></i>
+			Llamar
 		</button>
 		<button (click)="endCall()">
 			Colgar
-		</button>
-
-		<button *ngIf="!mute" (click)="callMute()">
-			mute
-		</button>
-
-		<button *ngIf="mute" (click)="callUnmute()">
-			ummute
 		</button>
 	</div>
 </section>
