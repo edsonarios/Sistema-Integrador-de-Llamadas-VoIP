@@ -690,6 +690,22 @@ api.get("/datosPrueba", async (req, res) => {
     switchsip: "1",
   });
 
+  //Ejemplo para radio (la radio es un sip, q no esta vinculado a un usuario)
+
+  const obj181 = await Sip.createRadio({
+    name: "4001",
+    secret: "4001",
+    callerid: "4001",
+    type: "friend",
+    context: "default",
+    host: "dynamic",
+    disallow: "all",
+    allow: "ulaw",
+    qualify: "yes",
+    nat: "force_rport,comedia",
+    switchsip: "1",
+  });
+
   res.send({
     message: obj,
     obj2,
