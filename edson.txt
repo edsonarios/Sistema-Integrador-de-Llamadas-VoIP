@@ -70,7 +70,10 @@
 - mod-api/upload/monitor
     crear enlace referencial de /var/spool/asterisk/monitor a mod-api/upload/monitor
 
-
+[RO-IP]
+    login: admin, admin
+    WanPort ip: 192.168.100.60
+    dns: 200.87.100.21
 [GATEWAY DINSTAR]
     login: admin, admin
     ip: 192.168.100.50

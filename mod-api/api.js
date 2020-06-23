@@ -364,156 +364,156 @@ api.get("/datosPrueba", async (req, res) => {
   });
   //IVR
   const obj61 = await Extension.create(obj.id, {
-    context: 'default',
-    exten: '*500',
+    context: "default",
+    exten: "*500",
     priority: 1,
     app: "Goto",
     appdata: "ivr,s,1",
   });
   const obj62 = await Extension.create(obj.id, {
-    context: 'ivr',
-    exten: 's',
+    context: "ivr",
+    exten: "s",
     priority: 1,
     app: "Answer",
     appdata: "",
   });
   const obj63 = await Extension.create(obj.id, {
-    context: 'ivr',
-    exten: 's',
+    context: "ivr",
+    exten: "s",
     priority: 2,
     app: "Background",
     appdata: "/tmp/soundsasterisk/recordejemplo",
   });
   const obj64 = await Extension.create(obj.id, {
-    context: 'ivr',
-    exten: 's',
+    context: "ivr",
+    exten: "s",
     priority: 3,
     app: "WaitExten",
     appdata: "5",
   });
   //NUMEROS DE IVR
   const obj65 = await Extension.create(obj.id, {
-    context: 'ivr',
-    exten: '1',
+    context: "ivr",
+    exten: "1",
     priority: 1,
     app: "Playback",
     appdata: "demo-congrats",
   });
   const obj66 = await Extension.create(obj.id, {
-    context: 'ivr',
-    exten: '2',
+    context: "ivr",
+    exten: "2",
     priority: 1,
     app: "Playback",
     appdata: "hello-world",
   });
   const obj67 = await Extension.create(obj.id, {
-    context: 'ivr',
-    exten: '3',
+    context: "ivr",
+    exten: "3",
     priority: 1,
     app: "Playback",
     appdata: "tt-monkeys",
   });
   const obj68 = await Extension.create(obj.id, {
-    context: 'ivr',
-    exten: 't',
+    context: "ivr",
+    exten: "t",
     priority: 1,
     app: "Playback",
     appdata: "demo-thanks",
   });
   const obj69 = await Extension.create(obj.id, {
-    context: 'ivr',
-    exten: 't',
+    context: "ivr",
+    exten: "t",
     priority: 2,
     app: "hangup",
     appdata: "",
   });
   //Calendario de llamadas para horas laborales sino enviar a IVR
   const obj71 = await Extension.create(obj.id, {
-    context: 'default',
-    exten: '8000',
+    context: "default",
+    exten: "8000",
     priority: 1,
     app: "GotoIfTime",
     appdata: "8:30-19:20,mon-fri,*,*?ivr,s,1",
   });
   const obj72 = await Extension.create(obj.id, {
-    context: 'default',
-    exten: '8000',
+    context: "default",
+    exten: "8000",
     priority: 2,
     app: "Playback",
     appdata: "tt-monkeys",
   });
   const obj73 = await Extension.create(obj.id, {
-    context: 'default',
-    exten: '8000',
+    context: "default",
+    exten: "8000",
     priority: 3,
     app: "hangup",
     appdata: "",
   });
   //PARA COLAS DE LLAMADAS, LLAMANDO A ESTE NUMERO SE AÑADE AGENTES PARA RECIBIR LLAMADAS
   const obj81 = await Extension.create(obj.id, {
-    context: 'default',
-    exten: '*201',
+    context: "default",
+    exten: "*201",
     priority: 1,
     app: "AddQueueMember",
     appdata: "support,SIP/${CHANNEL(peername)}",
   });
   const obj82 = await Extension.create(obj.id, {
-    context: 'default',
-    exten: '*201',
+    context: "default",
+    exten: "*201",
     priority: 2,
     app: "Playback",
     appdata: "beep",
   });
   const obj83 = await Extension.create(obj.id, {
-    context: 'default',
-    exten: '*201',
+    context: "default",
+    exten: "*201",
     priority: 3,
     app: "hangup",
     appdata: "",
   });
   //PARA COLAS DE LLAMADAS, LLAMANDO A ESTE NUMERO SE ELIMINA AGENTES PARA RECIBIR LLAMADAS
   const obj91 = await Extension.create(obj.id, {
-    context: 'default',
-    exten: '*202',
+    context: "default",
+    exten: "*202",
     priority: 1,
     app: "RemoveQueueMember",
     appdata: "support,SIP/${CHANNEL(peername)}",
   });
   const obj92 = await Extension.create(obj.id, {
-    context: 'default',
-    exten: '*202',
+    context: "default",
+    exten: "*202",
     priority: 2,
     app: "Playback",
     appdata: "beep",
   });
   const obj93 = await Extension.create(obj.id, {
-    context: 'default',
-    exten: '*202',
+    context: "default",
+    exten: "*202",
     priority: 3,
-    app: 'hangup',
-    appdata: '',
+    app: "hangup",
+    appdata: "",
   });
   //AQUI SE LLAMA PARA USAR LAS COLAS DE LLAMADAS (SOPORTE)
   const obj101 = await Extension.create(obj.id, {
-    context: 'default',
-    exten: '*600',
+    context: "default",
+    exten: "*600",
     priority: 1,
-    app: 'Answer',
-    appdata: '',
+    app: "Answer",
+    appdata: "",
   });
   //Pregunta para saber si es numero prioritario o es cualquier otro numero
   const obj102 = await Extension.create(obj.id, {
-    context: 'default',
-    exten: '*600',
+    context: "default",
+    exten: "*600",
     priority: 2,
-    app: 'GotoIf',
+    app: "GotoIf",
     appdata:
       "$[ $[ '${CHANNEL(peername)}' = '6001' ] | $[ '${CHANNEL(peername)}' = '6002' ] ]?3:4",
   });
   //Si es numero prioritario se incrementa el atributo de prioridad y se coloca 1ro en la cola de llamadas, sino es prioritario, el atributo de prioridad se mantiene en 1
   const obj103 = await Extension.create(obj.id, {
-    context: 'default',
-    exten: '*600',
+    context: "default",
+    exten: "*600",
     priority: 3,
     app: "hangup",
     appdata: "",
@@ -659,35 +659,35 @@ api.get("/datosPrueba", async (req, res) => {
   });
   //Sip para el puerto fxo
   const obj172 = await Sip.create(obj171.id, {
-    name: '123123',
-    host: 'dynamic',
-    secret: '123123',
-    callerid: 'fxo',
-    type: 'friend',
-    insecure: 'no',
-    qualify: 'no',
-    context: 'default',
-    switchsip: '1',
+    name: "123123",
+    host: "dynamic",
+    secret: "123123",
+    callerid: "fxo",
+    type: "friend",
+    insecure: "no",
+    qualify: "no",
+    context: "default",
+    switchsip: "1",
   });
   //Troncal entrantes
   const obj173 = await Sip.create(obj171.id, {
-    name: 'fxo',
-    host: '192.168.100.146',
-    type: 'peer',
-    insecure: 'no',
-    qualify: 'no',
-    context: 'default',
-    switchsip: '1',
+    name: "fxo",
+    host: "192.168.100.146",
+    type: "peer",
+    insecure: "no",
+    qualify: "no",
+    context: "default",
+    switchsip: "1",
   });
   //Trocanl salientes
   const obj174 = await Sip.create(obj171.id, {
-    name: 'salientes',
-    host: '192.168.100.50',
-    type: 'peer',
-    insecure: 'no',
-    qualify: 'no',
-    context: 'default',
-    switchsip: '1',
+    name: "salientes",
+    host: "192.168.100.50",
+    type: "peer",
+    insecure: "no",
+    qualify: "no",
+    context: "default",
+    switchsip: "1",
   });
 
   res.send({
@@ -706,22 +706,22 @@ api.get("/datosPrueba", async (req, res) => {
   });
 });
 
-api.get('/datosRoot', async (req, res) => {
+api.get("/datosRoot", async (req, res) => {
   //añade un nuevo root
   const obj = await Sala.create({
-    nombreSala: 'root',
-    descripcion: 'sala root',
-    switch: 'switch encendido-apagado',
+    nombreSala: "root",
+    descripcion: "sala root",
+    switch: "switch encendido-apagado",
   });
   const obj2 = await Usuario.create(obj.id, {
-    nombre: 'root',
-    apPaterno: 'root',
-    apMaterno: 'root',
-    tipo: 'root',
-    direccion: 'root1234',
-    telefono: '654321',
-    correo: 'root@root',
-    password: '1234',
+    nombre: "root",
+    apPaterno: "root",
+    apMaterno: "root",
+    tipo: "root",
+    direccion: "root1234",
+    telefono: "654321",
+    correo: "root@root",
+    password: "1234",
     conectado: false,
   });
 
@@ -731,19 +731,19 @@ api.get('/datosRoot', async (req, res) => {
 api.get("/datosOperador", async (req, res) => {
   //añade un nuevo root
   const obj = await Sala.create({
-    nombreSala: 'Operador',
-    descripcion: 'sala Operador',
-    switch: 'switch encendido-apagado',
+    nombreSala: "Operador",
+    descripcion: "sala Operador",
+    switch: "switch encendido-apagado",
   });
   const obj2 = await Usuario.create(obj.id, {
-    nombre: 'Operador',
-    apPaterno: 'Operador',
-    apMaterno: 'Operador',
-    tipo: 'Operador',
-    direccion: 'Operador123',
-    telefono: '789456',
-    correo: 'operador@operador',
-    password: '1234',
+    nombre: "Operador",
+    apPaterno: "Operador",
+    apMaterno: "Operador",
+    tipo: "Operador",
+    direccion: "Operador123",
+    telefono: "789456",
+    correo: "operador@operador",
+    password: "1234",
     conectado: false,
   });
 
@@ -754,7 +754,7 @@ api.get("/datosOperador", async (req, res) => {
 
 api.post("/addSala", async (req, res, next) => {
   //leemos el archivo extensions.conf, donde se añadira una nueva extension para la sala
-  let dat1 = fs.readFileSync('/etc/asterisk/extensions.conf', 'utf8');
+  let dat1 = fs.readFileSync("/etc/asterisk/extensions.conf", "utf8");
 
   const params = req.body;
   //creamos una sala con todos sus atributos
@@ -767,7 +767,7 @@ api.post("/addSala", async (req, res, next) => {
     });
     //En el archivo extensions.conf de asterisk, creamos la nueva sala
     dat1 += `\n[${params.nombreSala}]\nswitch = Realtime/@`;
-    fs.writeFile('/etc/asterisk/extensions.conf', dat1, (err) => {
+    fs.writeFile("/etc/asterisk/extensions.conf", dat1, (err) => {
       if (err) console.log(err);
     });
   } catch (e) {
@@ -776,7 +776,7 @@ api.post("/addSala", async (req, res, next) => {
 
   res.send(obj);
 });
-api.put('/updateSala', async (req, res, next) => {
+api.put("/updateSala", async (req, res, next) => {
   const params = req.body;
   //editamos cualquier atriburo de una sala buscandolo por su id
   let obj, obj2;
@@ -791,13 +791,13 @@ api.put('/updateSala', async (req, res, next) => {
     });
 
     //Actualizamos la sala de extensions.conf de asterisk
-    let dat1 = fs.readFileSync('/etc/asterisk/extensions.conf', 'utf8');
+    let dat1 = fs.readFileSync("/etc/asterisk/extensions.conf", "utf8");
     var sw = 0,
       sw2 = -1,
-      aux = '',
+      aux = "",
       pos = -1,
       pos2 = -1,
-      final = '';
+      final = "";
     //For para buscar la sala indicada
     for (let i = 0; i < dat1.length; i++) {
       //if para detectar el caracter [
@@ -818,7 +818,7 @@ api.put('/updateSala', async (req, res, next) => {
           sw2 = 1;
           break;
         }
-        aux = '';
+        aux = "";
       }
     }
     //switch para validar que si existe la sala
@@ -845,7 +845,7 @@ api.put('/updateSala', async (req, res, next) => {
   res.send(obj);
 });
 
-api.post('/findByIdSala', async (req, res, next) => {
+api.post("/findByIdSala", async (req, res, next) => {
   const params = req.body;
   //buscamos un sala por su id y devolvemos esa sala
   let obj;
@@ -861,9 +861,6 @@ api.post('/findByIdSala', async (req, res, next) => {
   res.send(obj);
 });
 
-  res.send(obj);
-});
-
 api.get("/findAllSala", async (req, res, next) => {
   //buscamos y devolvemos a todas las salas
   const obj = await Sala.findAll();
@@ -871,7 +868,7 @@ api.get("/findAllSala", async (req, res, next) => {
   res.send(obj);
 });
 
-api.post('/getUsuariosPorSala', async (req, res, next) => {
+api.post("/getUsuariosPorSala", async (req, res, next) => {
   var params = req.body;
   //obtenemos todos los usuarios
   const usuariosTodos = await Usuario.findAll();
@@ -886,7 +883,7 @@ api.post('/getUsuariosPorSala', async (req, res, next) => {
   res.send(usuariosSala);
 });
 
-api.post('/deleteSala', async (req, res, next) => {
+api.post("/deleteSala", async (req, res, next) => {
   const params = req.body;
   const sipsAll = await Sip.findAll();
   const iaxsAll = await Iax.findAll();
@@ -929,13 +926,13 @@ api.post('/deleteSala', async (req, res, next) => {
   await Sala.destroynomSala(params.context);
 
   //Eliminamos la sala de extensions.conf de asterisk
-  let dat1 = fs.readFileSync('/etc/asterisk/extensions.conf', 'utf8');
+  let dat1 = fs.readFileSync("/etc/asterisk/extensions.conf", "utf8");
   var sw = 0,
     sw2 = -1,
-    aux = '',
+    aux = "",
     pos = -1,
     pos2 = -1,
-    final = '';
+    final = "";
   //For para buscar la sala indicada
   for (let i = 0; i < dat1.length; i++) {
     //if para detectar el caracter [
@@ -956,7 +953,7 @@ api.post('/deleteSala', async (req, res, next) => {
         sw2 = 1;
         break;
       }
-      aux = '';
+      aux = "";
     }
   }
   //switch para validar que si existe la sala
@@ -979,7 +976,7 @@ api.post('/deleteSala', async (req, res, next) => {
 });
 /// USUARIO /////////////////////////////////////////////////////////////////////
 
-api.post('/addUsuario', async (req, res, next) => {
+api.post("/addUsuario", async (req, res, next) => {
   const params = req.body;
   //creamos un usuario con todos sus atributos atraves del id de la sala
   let obj;
@@ -1001,7 +998,7 @@ api.post('/addUsuario', async (req, res, next) => {
 
   res.send(obj);
 });
-api.put('/updateUsuario', async (req, res, next) => {
+api.put("/updateUsuario", async (req, res, next) => {
   const params = req.body;
   //editamos un usuario atraves de su id
   let obj;
@@ -1024,7 +1021,7 @@ api.put('/updateUsuario', async (req, res, next) => {
   res.send(obj);
 });
 
-api.post('/findByIdUsuario', async (req, res, next) => {
+api.post("/findByIdUsuario", async (req, res, next) => {
   const params = req.body;
   //buscamos al usuario atraves de su id y lo devolvemos
   let obj;
@@ -1041,7 +1038,7 @@ api.post('/findByIdUsuario', async (req, res, next) => {
   res.send(obj);
 });
 
-api.get('/findAllUsuario', async (req, res, next) => {
+api.get("/findAllUsuario", async (req, res, next) => {
   let obj;
   //buscamos y devolvemos a todos los usuarios
   try {
@@ -1053,7 +1050,7 @@ api.get('/findAllUsuario', async (req, res, next) => {
   res.send(obj);
 });
 
-api.post('/getUsuByContextOfSip', async (req, res, next) => {
+api.post("/getUsuByContextOfSip", async (req, res, next) => {
   var params = req.body;
   //Obtengo todos los sips e iaxs
   const usuariosAll = await Usuario.findAll();
@@ -1135,7 +1132,7 @@ api.post('/getUsuByContextOfSip', async (req, res, next) => {
   res.send(todos);
 });
 
-api.post('/getUsuariosWithSipsAndIaxs', async (req, res, next) => {
+api.post("/getUsuariosWithSipsAndIaxs", async (req, res, next) => {
   const params = req.body;
   //Obtengo todos los sips e iaxs
   const sipsAll = await Sip.findAll();
@@ -1160,7 +1157,7 @@ api.post('/getUsuariosWithSipsAndIaxs', async (req, res, next) => {
   res.send(todos);
 });
 
-api.delete('/deleteUsuarioWithAll', async (req, res, next) => {
+api.delete("/deleteUsuarioWithAll", async (req, res, next) => {
   const params = req.body;
   //Obtengo todos los usuario de la tabla usuarios. A todos sips e iaxs
   const usuariosSala1 = await Usuario.findAll();
@@ -1199,17 +1196,17 @@ api.delete('/deleteUsuarioWithAll', async (req, res, next) => {
   }
   //borramos al usuario apartir de su id
   await Usuario.destroy(params.id);
-  res.send({ message: 'Se elimino Usuario' });
+  res.send({ message: "Se elimino Usuario" });
 });
 
 //LOGIN
-api.post('/login', async (req, res, next) => {
+api.post("/login", async (req, res, next) => {
   var params = req.body;
   var correo = params.correo;
   var pass = params.password;
   Usuario.findOneCorreo(correo).then(function (result, err) {
     if (err) {
-      res.status(500).send({ message: 'error al comprobar el usuario' });
+      res.status(500).send({ message: "error al comprobar el usuario" });
     } else {
       console.log(result);
       if (result) {
@@ -1218,10 +1215,10 @@ api.post('/login', async (req, res, next) => {
         } else {
           res
             .status(404)
-            .send({ message: 'error al introducir la contraseña' });
+            .send({ message: "error al introducir la contraseña" });
         }
       } else {
-        res.status(404).send({ message: 'el usuario no existe' });
+        res.status(404).send({ message: "el usuario no existe" });
       }
     }
   });
@@ -1229,7 +1226,7 @@ api.post('/login', async (req, res, next) => {
 
 /// SIP /////////////////////////////////////////////////////////////////////
 
-api.post('/addSip', async (req, res, next) => {
+api.post("/addSip", async (req, res, next) => {
   const params = req.body;
   //creo un sip con todos sus atributos apartir del id del usuario
   let obj;
@@ -1254,7 +1251,7 @@ api.post('/addSip', async (req, res, next) => {
   res.send(obj);
 });
 
-api.post('/addSipWebRtc', async (req, res, next) => {
+api.post("/addSipWebRtc", async (req, res, next) => {
   const params = req.body;
   //creo un sip con todos sus atributos apartir del id del usuario
   let obj;
