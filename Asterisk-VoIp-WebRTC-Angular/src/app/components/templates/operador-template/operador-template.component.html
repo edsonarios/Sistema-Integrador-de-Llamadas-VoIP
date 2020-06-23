@@ -194,21 +194,24 @@
 			<div class="LateralDer_Sup">
 				<div class="LDSup-header">
 					<header class="animated fadeIn">
-						<button [ngStyle]="SalaActive && { 'font-weight': 'bold' }" (click)="SalaActive = true">
+						<button [ngStyle]="Sala && { 'font-weight': 'bold' }" (click)="salaActive()">
 							Salas
 						</button>
 					</header>
 
 					<header class="animated fadeIn">
-						<button
-							[ngStyle]="!SalaActive && { 'font-weight': 'bold' }"
-							(click)="SalaActive = false"
-						>
+						<button [ngStyle]="!Sala && { 'font-weight': 'bold' }" (click)="agendaActive()">
 							Agenda
 						</button>
 					</header>
+
+					<header class="animated fadeIn">
+						<button [ngStyle]="!Sala && { 'font-weight': 'bold' }" (click)="dialpadActive()">
+							Dialpad
+						</button>
+					</header>
 				</div>
-				<section *ngIf="SalaActive">
+				<section *ngIf="Sala">
 					<div class="SalaEffect" *ngFor="let n of Salas; let i = index" [@flyIn]>
 						<Sala
 							(DatoSala)="RegistraSala($event)"
@@ -222,7 +225,8 @@
 						<p>No hay Salas</p>
 					</div>
 				</section>
-				<Agenda *ngIf="!SalaActive"></Agenda>
+				<Agenda *ngIf="Agenda"></Agenda>
+				<dialpad *ngIf="Dialpad"></dialpad>
 			</div>
 			<div class="LateralDer_Inf"></div>
 		</div>

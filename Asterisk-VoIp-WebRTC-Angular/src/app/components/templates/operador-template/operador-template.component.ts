@@ -17,7 +17,9 @@ import { interval, timer } from 'rxjs';
 	animations: [Entrance, Quit, DesktopAnimation, EnterLeave]
 })
 export class OperadorTemplateComponent implements OnInit {
-	public SalaActive = true;
+	public Sala = true;
+	public Agenda = false;
+	public Dialpad = false;
 	public Llamada = [];
 	/* public Llamada=[
 				{'nombre':'Prueba Llamada',
@@ -314,5 +316,22 @@ export class OperadorTemplateComponent implements OnInit {
 		} else {
 			this.HideLateral = true;
 		}
+	}
+
+	// funciones para ocultar y mostrar los elementos del lateral derecho "Salas"
+	salaActive() {
+		this.Sala = true;
+		this.Agenda = false;
+		this.Dialpad = false;
+	}
+	agendaActive() {
+		this.Agenda = true;
+		this.Sala = false;
+		this.Dialpad = false;
+	}
+	dialpadActive() {
+		this.Dialpad = true;
+		this.Agenda = false;
+		this.Sala = false;
 	}
 }
