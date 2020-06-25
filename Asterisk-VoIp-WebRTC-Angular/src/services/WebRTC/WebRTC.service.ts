@@ -14,10 +14,15 @@ export class WebRTCService {
 	public audioLocal: HTMLAudioElement = <HTMLAudioElement>document.getElementById('audio-local');
 	public audioRemote: HTMLAudioElement = <HTMLAudioElement>document.getElementById('audio-remote');
 
-	public session: any;
+	public session;
 	public data: any;
+	static instancia;
 	constructor() {
-		this.settings = new RTCConfig('7010', '7010', config.HOST);
+		if (!!WebRTCService.instancia) {
+			return WebRTCService.instancia;
+		}
+		WebRTCService.instancia = this;
+		this.settings = new RTCConfig(config.HOST);
 		this.socket = new WebSocketInterface(`wss://${config.HOST}:8089/ws`);
 		this.createSession();
 		this.connect();
@@ -65,8 +70,8 @@ export class WebRTCService {
 		return this.msg;
 	}
 
-	newRTCSession(): any {
-		this.ua.on('newRTCSession', async (data: any) => {
+	newRTCSession() {
+		this.ua.on('newRTCSession', async (data) => {
 			this.session = data.session;
 			console.log('[ NEW RTC SESSION ]', data);
 			console.log('[ NEW RTC DATA ]', data.session.connection);
@@ -104,6 +109,21 @@ export class WebRTCService {
 			console.warn(error);
 		}
 	}
+	hold() {
+		try {
+			this.session.hold();
+		} catch (error) {
+			console.warn(error);
+		}
+	}
+
+	unhold() {
+		try {
+			this.session.unhold();
+		} catch (error) {
+			console.warn(error);
+		}
+	}
 
 	remoteAnswer() {
 		try {
@@ -132,7 +152,7 @@ export class WebRTCService {
 			}
 		};
 
-		const options: any = {
+		const options = {
 			eventHandlers: eventHandlers,
 			mediaConstraints: {
 				audio: true,
@@ -149,14 +169,12 @@ export class WebRTCService {
 
 		if (sip != '') {
 			const session = this.ua.call(`sip:${sip}@${config.HOST}`, options);
-			// if (session) {
-			// 	session.connection.addTrack()
-			// 	session.connection.addEventListener('addstream', (e:) => {
-			// 		// ts-ingore
-			// 		this.audioLocal.srcObject = e.stream;
-			// 		this.audioLocal.play();
-			// 	});
-			// }
+			if (session) {
+				session.connection.addEventListener('addstream', (e) => {
+					this.audioLocal.srcObject = e.stream;
+					this.audioLocal.play();
+				});
+			}
 		}
 	}
 
@@ -166,8 +184,23 @@ export class WebRTCService {
 	getMessage() {
 		return this.msg;
 	}
-
+	//test PTT simple **************
+	pttOn() {
+		this.audioLocal.muted = true;
+	}
+	pttOff() {
+		this.audioLocal.muted = false;
+	}
+	/*****************************/
 	getUA() {
 		return this.ua;
+	}
+	remoteCall() {
+		this.session.answer();
+		this.session.connection.addEventListener('addstream', (e) => {
+			// @ts-ignore
+			this.audioRemote.srcObject = e.stream;
+			this.audioRemote.play();
+		});
 	}
 }
