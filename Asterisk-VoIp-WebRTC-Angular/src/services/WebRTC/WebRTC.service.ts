@@ -171,6 +171,7 @@ export class WebRTCService {
 			const session = this.ua.call(`sip:${sip}@${config.HOST}`, options);
 			if (session) {
 				session.connection.addEventListener('addstream', (e) => {
+					// @ts-ignore
 					this.audioLocal.srcObject = e.stream;
 					this.audioLocal.play();
 				});
