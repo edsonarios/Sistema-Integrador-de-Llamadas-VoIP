@@ -518,31 +518,6 @@ api.get("/datosPrueba", async (req, res) => {
     app: "hangup",
     appdata: "",
   });
-  //AQUI SE LLAMA PARA USAR LAS COLAS DE LLAMADAS (SOPORTE)
-  const obj101 = await Extension.create(obj.id, {
-    context: "default",
-    exten: "*600",
-    priority: 1,
-    app: "Answer",
-    appdata: "",
-  });
-  //Pregunta para saber si es numero prioritario o es cualquier otro numero
-  const obj102 = await Extension.create(obj.id, {
-    context: "default",
-    exten: "*600",
-    priority: 2,
-    app: "GotoIf",
-    appdata:
-      "$[ $[ '${CHANNEL(peername)}' = '6001' ] | $[ '${CHANNEL(peername)}' = '6002' ] ]?3:4",
-  });
-  //Si es numero prioritario se incrementa el atributo de prioridad y se coloca 1ro en la cola de llamadas, sino es prioritario, el atributo de prioridad se mantiene en 1
-  const obj103 = await Extension.create(obj.id, {
-    context: "default",
-    exten: "*600",
-    priority: 3,
-    app: "Set",
-    appdata: "QUEUE_PRIO=10",
-  });
   //de acuerdo al atributo de prioridad se establece la llamada con la cola de llamadas
   const obj104 = await Extension.create(obj.id, {
     context: "default",
