@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { WebRTCService } from '@services/WebRTC/WebRTC.service';
-import { RTCSession } from 'jssip';
 
 @Component({
 	selector: 'dialpad',
@@ -34,9 +33,9 @@ export class DialPadComponent implements OnInit {
 
 	alert: any;
 	session: WebRTCService;
-	event: RTCSession;
+	event: any;
 	call: any;
-	arr: Array<RTCSession> = [];
+	arr: Array<any> = [];
 
 	ngOnInit() {
 		this.session = new WebRTCService();

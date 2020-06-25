@@ -2,14 +2,7 @@ import { Injectable } from '@angular/core';
 import { SoundPlayer } from './SoundPlayer';
 import { config } from './config';
 import { RTCConfig } from './RegisterRTC';
-import {
-	WebSocketInterface,
-	UA,
-	RTCSession,
-	UserAgentNewRtcSessionEvent,
-	UserAgentCallOptions,
-	EventHandler
-} from 'jssip';
+import { WebSocketInterface, UA } from 'jssip';
 
 export class WebRTCService {
 	public sound: SoundPlayer = new SoundPlayer();
@@ -21,7 +14,7 @@ export class WebRTCService {
 	public audioLocal: HTMLAudioElement = <HTMLAudioElement>document.getElementById('audio-local');
 	public audioRemote: HTMLAudioElement = <HTMLAudioElement>document.getElementById('audio-remote');
 
-	public session: RTCSession;
+	public session: any;
 	public data: any;
 	constructor() {
 		this.settings = new RTCConfig('7010', '7010', config.HOST);
@@ -49,31 +42,31 @@ export class WebRTCService {
 	}
 
 	sessionEvents() {
-		this.ua.on('connected', e => {
+		this.ua.on('connected', (e) => {
 			console.log('[ CONECTADO ]', e);
 			this.msg = 'CONECTADO';
 		});
-		this.ua.on('disconnected', e => {
+		this.ua.on('disconnected', (e) => {
 			console.log('[ DESCONECTADO ]', e);
 			this.msg = 'DESCONECTADO';
 		});
-		this.ua.on('registered', e => {
+		this.ua.on('registered', (e) => {
 			console.log('[ REGISTRADO ]', e);
 			this.msg = 'REGISTRADO';
 		});
-		this.ua.on('unregistered', e => {
+		this.ua.on('unregistered', (e) => {
 			console.log('[ NO REGISTRADO ]', e);
 			this.msg = 'NO REGISTRADO';
 		});
-		this.ua.on('registrationFailed', e => {
+		this.ua.on('registrationFailed', (e) => {
 			console.log('[ NO REGISTRADO FALLANDO ]', e);
 			this.msg = 'NO REGISTRADO FALLANDO';
 		});
 		return this.msg;
 	}
 
-	newRTCSession(): RTCSession {
-		this.ua.on('newRTCSession', async (data: UserAgentNewRtcSessionEvent) => {
+	newRTCSession(): any {
+		this.ua.on('newRTCSession', async (data: any) => {
 			this.session = data.session;
 			console.log('[ NEW RTC SESSION ]', data);
 			console.log('[ NEW RTC DATA ]', data.session.connection);
@@ -115,9 +108,7 @@ export class WebRTCService {
 	remoteAnswer() {
 		try {
 			this.session.answer();
-			const remoteStream = new MediaStream(
-				this.session.connection.getReceivers().map(r => r.track)
-			);
+			const remoteStream = new MediaStream(this.session.connection.getReceivers().map((r) => r.track));
 			this.audioRemote.srcObject = remoteStream;
 			this.audioLocal.play();
 		} catch (error) {
@@ -127,21 +118,21 @@ export class WebRTCService {
 
 	sipCall(sip: string) {
 		const eventHandlers = {
-			progress: e => {
+			progress: (e) => {
 				console.log('Llamada en progreso');
 			},
-			failed: e => {
+			failed: (e) => {
 				console.log('Llamada fallida');
 			},
-			ended: e => {
+			ended: (e) => {
 				console.log('Llamada terminada');
 			},
-			confirmed: e => {
+			confirmed: (e) => {
 				console.log('Llamada confirmada');
 			}
 		};
 
-		const options: UserAgentCallOptions = {
+		const options: any = {
 			eventHandlers: eventHandlers,
 			mediaConstraints: {
 				audio: true,
@@ -158,12 +149,14 @@ export class WebRTCService {
 
 		if (sip != '') {
 			const session = this.ua.call(`sip:${sip}@${config.HOST}`, options);
-			if (session) {
-				session.connection.addEventListener('addstream', e => {
-					this.audioLocal.srcObject = e.stream;
-					this.audioLocal.play();
-				});
-			}
+			// if (session) {
+			// 	session.connection.addTrack()
+			// 	session.connection.addEventListener('addstream', (e:) => {
+			// 		// ts-ingore
+			// 		this.audioLocal.srcObject = e.stream;
+			// 		this.audioLocal.play();
+			// 	});
+			// }
 		}
 	}
 
