@@ -12,14 +12,14 @@
 							<div class="name"><span data-text="Salas">Salas</span></div>
 						</a>
 					</li>
-					<!-- <li (click)="DialPadComponent()" *ngIf="pages == false">
+					<li (click)="DialPadComponent()" *ngIf="pages == false">
 						<a>
 							<div class="icon">
 								<i class="asteriskIcon v-icon-dial"></i>
 							</div>
 							<div class="name"><span data-text="DialPad">DialPad</span></div>
 						</a>
-					</li> -->
+					</li>
 					<li *ngIf="pages == false">
 						<a href="#">
 							<div class="icon">
@@ -198,7 +198,7 @@
 				<dialpad *ngIf="Dialpad"></dialpad>
 			</div>
 			<div class="LateralDer_Inf">
-				lateral derecho inferior
+				<app-registro-llamadas></app-registro-llamadas>
 			</div>
 		</div>
 	</div>
