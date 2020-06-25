@@ -11,16 +11,37 @@ import { DialPadComponent } from '@operador/dialpad/dialpad.component';
 import { SalaService } from '@services/sala.service';
 
 import { interval, timer } from 'rxjs';
+
+// Fontawesome
+import { faMicrophone } from '@fortawesome/free-solid-svg-icons';
+import { faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons';
+import { faSignal } from '@fortawesome/free-solid-svg-icons';
+import { faPlug } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
 	selector: 'operador-template',
 	templateUrl: './operador-template.component.html',
 	animations: [Entrance, Quit, DesktopAnimation, EnterLeave]
 })
 export class OperadorTemplateComponent implements OnInit {
+	// variables para manejar el comportamiento del lateral derecho
 	public Sala = true;
 	public Agenda = false;
 	public Dialpad = false;
 	public Llamada = [];
+
+	// variables para guardar los iconos
+	faSenal = faSignal;
+	faMicro = faMicrophone;
+	faMicroActive = faMicrophoneSlash;
+	faSenalAsterisk = faPlug;
+	// colores en variables
+	Connection = 'black';
+	connectionAsterisk = 'black';
+	Microphone = 'black';
+	noConnection = '#d9534f';
+	lowConnection = '#f0ad4e';
+
 	/* public Llamada=[
 				{'nombre':'Prueba Llamada',
 				 'numero': '3002',
@@ -329,5 +350,33 @@ export class OperadorTemplateComponent implements OnInit {
 		this.Dialpad = true;
 		this.Agenda = false;
 		this.Sala = false;
+	}
+	// funciones lateral izquierdo inferior
+	muteMicrophone() {
+		if (this.faMicro === faMicrophone) {
+			this.faMicro = this.faMicroActive;
+			this.Microphone = this.noConnection;
+		} else {
+			this.faMicro = faMicrophone;
+			this.Microphone = 'black';
+		}
+	}
+	cambioSenal() {
+		if (this.Connection === 'black') {
+			this.Connection = this.lowConnection;
+		} else if (this.Connection === '#f0ad4e') {
+			this.Connection = this.noConnection;
+		} else {
+			this.Connection = 'black';
+		}
+	}
+	cambioAsterisk() {
+		if (this.connectionAsterisk === 'black') {
+			this.connectionAsterisk = this.lowConnection;
+		} else if (this.connectionAsterisk === '#f0ad4e') {
+			this.connectionAsterisk = this.noConnection;
+		} else {
+			this.connectionAsterisk = 'black';
+		}
 	}
 }

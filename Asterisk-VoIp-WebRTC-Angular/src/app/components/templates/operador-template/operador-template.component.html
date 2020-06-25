@@ -127,7 +127,23 @@
 					<p>No hay <br />Notificaciones</p>
 				</div>
 			</div>
-			<div class="LateralIzq_Inf"></div>
+			<div class="LateralIzq_Inf">
+				<fa-icon
+					[icon]="faMicro"
+					(click)="muteMicrophone()"
+					[ngStyle]="{ color: Microphone }"
+				></fa-icon>
+				<fa-icon
+					[icon]="faSenal"
+					(click)="cambioSenal()"
+					[ngStyle]="{ color: Connection }"
+				></fa-icon>
+				<fa-icon
+					[icon]="faSenalAsterisk"
+					(click)="cambioAsterisk()"
+					[ngStyle]="{ color: connectionAsterisk }"
+				></fa-icon>
+			</div>
 		</div>
 		<div class="CenterContent">
 			<div class="CenterContent_Sup">
@@ -188,7 +204,9 @@
 				<Agenda *ngIf="Agenda"></Agenda>
 				<dialpad *ngIf="Dialpad"></dialpad>
 			</div>
-			<div class="LateralDer_Inf"></div>
+			<div class="LateralDer_Inf">
+				lateral derecho inferior
+			</div>
 		</div>
 	</div>
 	<ng-template #elseBlock>

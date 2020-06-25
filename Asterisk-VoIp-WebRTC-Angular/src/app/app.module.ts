@@ -36,6 +36,9 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
+// Fontawesome
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -66,7 +69,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 		TabsModule.forRoot(),
 		PopoverModule.forRoot(),
 		AngularFireModule.initializeApp(environment.firebaseConfig),
-		AngularFirestoreModule
+		AngularFirestoreModule,
+		FontAwesomeModule
 	],
 	providers: [],
 	bootstrap: [AppComponent],
