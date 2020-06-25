@@ -12,14 +12,14 @@
 							<div class="name"><span data-text="Salas">Salas</span></div>
 						</a>
 					</li>
-					<li (click)="DialPadComponent()" *ngIf="pages == false">
+					<!-- <li (click)="DialPadComponent()" *ngIf="pages == false">
 						<a>
 							<div class="icon">
 								<i class="asteriskIcon v-icon-dial"></i>
 							</div>
 							<div class="name"><span data-text="DialPad">DialPad</span></div>
 						</a>
-					</li>
+					</li> -->
 					<li *ngIf="pages == false">
 						<a href="#">
 							<div class="icon">
@@ -128,21 +128,9 @@
 				</div>
 			</div>
 			<div class="LateralIzq_Inf">
-				<fa-icon
-					[icon]="faMicro"
-					(click)="muteMicrophone()"
-					[ngStyle]="{ color: Microphone }"
-				></fa-icon>
-				<fa-icon
-					[icon]="faSenal"
-					(click)="cambioSenal()"
-					[ngStyle]="{ color: Connection }"
-				></fa-icon>
-				<fa-icon
-					[icon]="faSenalAsterisk"
-					(click)="cambioAsterisk()"
-					[ngStyle]="{ color: connectionAsterisk }"
-				></fa-icon>
+				<fa-icon [icon]="faMicro" (click)="muteMicrophone()" [ngStyle]="{ color: Microphone }"></fa-icon>
+				<fa-icon [icon]="faSenal" (click)="cambioSenal()" [ngStyle]="{ color: Connection }"></fa-icon>
+				<fa-icon [icon]="faSenalAsterisk" (click)="cambioAsterisk()" [ngStyle]="{ color: connectionAsterisk }"></fa-icon>
 			</div>
 		</div>
 		<div class="CenterContent">
@@ -194,7 +182,12 @@
 				</div>
 				<section *ngIf="Sala">
 					<div class="SalaEffect" *ngFor="let n of Salas; let i = index" [@flyIn]>
-						<Sala (DatoSala)="RegistraSala($event)" Nombre="{{ Salas[i]['nombreSala'] }}" Descripcion="{{ Salas[i]['descripcion'] }}" Id="{{ Salas[i]['id'] }}">
+						<Sala
+							(DatoSala)="RegistraSala($event)"
+							Nombre="{{ Salas[i]['nombreSala'] }}"
+							Descripcion="{{ Salas[i]['descripcion'] }}"
+							Id="{{ Salas[i]['id'] }}"
+						>
 						</Sala>
 					</div>
 					<div class="empty" *ngIf="Salas.length == 0">

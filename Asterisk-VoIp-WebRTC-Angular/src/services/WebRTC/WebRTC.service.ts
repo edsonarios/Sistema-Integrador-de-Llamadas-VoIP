@@ -3,7 +3,6 @@ import { SoundPlayer } from './SoundPlayer';
 import { config } from './config';
 import { RTCConfig } from './RegisterRTC';
 import { WebSocketInterface, UA } from 'jssip';
-
 export class WebRTCService {
 	public sound: SoundPlayer = new SoundPlayer();
 	public settings: RTCConfig;
@@ -137,6 +136,7 @@ export class WebRTCService {
 	}
 
 	sipCall(sip: string) {
+		let statusCall = true;
 		const eventHandlers = {
 			progress: (e) => {
 				console.log('Llamada en progreso');
@@ -166,16 +166,15 @@ export class WebRTCService {
 				offerToReceiveVideo: false
 			}
 		};
-
 		if (sip != '') {
 			const session = this.ua.call(`sip:${sip}@${config.HOST}`, options);
 			if (session) {
-				session.connection.addEventListener('addstream', (e) => {
-					// @ts-ignore
-					this.audioLocal.srcObject = e.stream;
+				session.connection.ontrack = (e) => {
+					this.audioLocal.srcObject = e.streams[0];
 					this.audioLocal.play();
-				});
+				};
 			}
+			console.log(session.isEstablished());
 		}
 	}
 

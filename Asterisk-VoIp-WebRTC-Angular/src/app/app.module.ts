@@ -39,6 +39,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 // Fontawesome
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import { IconsModule } from './icons/icons.module';
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -70,9 +72,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 		PopoverModule.forRoot(),
 		AngularFireModule.initializeApp(environment.firebaseConfig),
 		AngularFirestoreModule,
-		FontAwesomeModule
+		FontAwesomeModule,
+		IconsModule,
+		SnotifyModule
 	],
-	providers: [],
+	providers: [{ provide: 'SnotifyToastConfig', useValue: ToastDefaults }, SnotifyService],
 	bootstrap: [AppComponent],
 	entryComponents: [DialPadComponent]
 })

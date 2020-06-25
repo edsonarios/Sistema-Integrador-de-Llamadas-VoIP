@@ -2,16 +2,16 @@
 	<div class="dialpad__content">
 		<input class="dialpad__input" [(ngModel)]="dialNumber" type="text" maxlength="15" />
 		<div class="dialpad__clear" (click)="Limpiar()">
-			<i class="fa fa-arrow-left" aria-hidden="true"></i>
+			<i-feather name="arrow-left" class="icon-left"></i-feather>
 		</div>
 		<button *ngFor="let item of symbols" (click)="setValue(item)">{{ item }}</button>
 	</div>
 	<div class="dialpad__events">
 		<button (click)="Llamada()">
-			Llamar
+			<i-feather name="phone-call"></i-feather>
 		</button>
 		<button (click)="endCall()">
-			Colgar
+			<i-feather name="phone-off"></i-feather>
 		</button>
 	</div>
 </section>

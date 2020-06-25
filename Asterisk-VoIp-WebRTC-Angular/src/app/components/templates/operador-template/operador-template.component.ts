@@ -19,6 +19,8 @@ import { faSignal } from '@fortawesome/free-solid-svg-icons';
 import { faPlug } from '@fortawesome/free-solid-svg-icons';
 
 import { WebRTCService } from '@services/WebRTC/WebRTC.service';
+import { UA } from 'jssip';
+import { RTCSession } from 'jssip/lib/RTCSession';
 
 @Component({
 	selector: 'operador-template',
@@ -32,6 +34,8 @@ export class OperadorTemplateComponent implements OnInit {
 	public Dialpad = false;
 	public Llamada = [];
 	public rtc: WebRTCService;
+	public ua: UA;
+	public remote: RTCSession;
 	// variables para guardar los iconos
 	faSenal = faSignal;
 	faMicro = faMicrophone;
@@ -148,6 +152,28 @@ export class OperadorTemplateComponent implements OnInit {
 		this.NumeroActual = localStorage.getItem('NumberSelected');
 		this.rtc = new WebRTCService();
 		console.log(this.rtc);
+		this.rtc.sessionEvents();
+		this.ua = this.rtc.getUA();
+		this.ua.on('sipEvent', (e) => {
+			console.log(e);
+		});
+		this.ua.on('newRTCSession', (data) => {
+			let session = data.session;
+			console.log('[ NEW RTC SESSION ]', data);
+			console.log('[ NEW RTC DATA ]', data.session.connection);
+			if (data.originator === 'local') {
+				console.log('LLAMADA LOCAL');
+			}
+			if (data.originator === 'remote') {
+				console.log('LLAMADA REMOTA');
+				// await this.sound.play('ringing');
+				// @ts-ignore
+				let { _user } = data.request.from.uri;
+				console.log(_user);
+				this.AgregarEventoNotificacionRTC(_user, _user, _user);
+				this.remote = session;
+			}
+		});
 		this.ObtenerSalas();
 		//console.log(this.user);
 	}
@@ -203,6 +229,12 @@ export class OperadorTemplateComponent implements OnInit {
 		var id = Math.round(Math.random() * (20 - 11) + 11);
 		this.Notificaciones.push({ nombre: 'Alias', numero: numero, estado: 'entrante', id: id });
 	}
+
+	AgregarEventoNotificacionRTC(id, number, nombre) {
+		this.OptionLateral = 0;
+		this.Notificaciones.push({ id, numero: number, estado: 'entrante', nombre });
+	}
+
 	AgregarEventoPanel(numero, fecha, duracion, tipo) {
 		//metodo en el que agregamos una nueva tupla en el panel de estados
 
@@ -226,6 +258,7 @@ export class OperadorTemplateComponent implements OnInit {
 		// Metodo en el escritorio para cerrar la llamada del escritorio
 
 		this.EliminaItemLlamadas(llamada['Id']);
+		this.rtc.terminate();
 		if (llamada['Tipo'] == 'Sala') {
 			this.Salas.push({
 				nombre: llamada['Nombre'],
@@ -261,6 +294,8 @@ export class OperadorTemplateComponent implements OnInit {
 			Tipo: 'Llamada',
 			Estado: 'Inactiva'
 		});
+		this.rtc.setSession(this.remote);
+		this.rtc.remoteCall();
 		this.AgregarEventoPanel(Notificacion['Numero'], '15/11/2019', 'false', 'entrante');
 		this.EliminaItemNotificacion(Notificacion['Id']);
 	}
@@ -363,9 +398,11 @@ export class OperadorTemplateComponent implements OnInit {
 		if (this.faMicro === faMicrophone) {
 			this.faMicro = this.faMicroActive;
 			this.Microphone = this.noConnection;
+			this.rtc.mute();
 		} else {
 			this.faMicro = faMicrophone;
 			this.Microphone = 'black';
+			this.rtc.unmute();
 		}
 	}
 	cambioSenal() {
