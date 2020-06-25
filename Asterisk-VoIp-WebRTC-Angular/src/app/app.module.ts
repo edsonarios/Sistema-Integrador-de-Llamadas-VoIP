@@ -38,6 +38,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 // Fontawesome
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RegistroLlamadasComponent } from './components/pages/operador/registro-llamadas/registro-llamadas.component';
 
 @NgModule({
 	declarations: [
@@ -51,7 +52,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 		SalaComponent,
 		LlamadaComponent,
 		PanelComponent,
-		ParticipanteComponent
+		ParticipanteComponent,
+		RegistroLlamadasComponent
 	],
 	imports: [
 		BrowserModule,
