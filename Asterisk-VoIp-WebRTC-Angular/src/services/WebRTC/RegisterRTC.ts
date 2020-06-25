@@ -1,3 +1,4 @@
+import { getLocalStorageData } from './Utils';
 import { WebSocketInterface } from 'jssip';
 
 export class RTCConfig {
@@ -7,8 +8,9 @@ export class RTCConfig {
 
 	public socket: any;
 
-	constructor(sip: string, secret: string, host: string) {
-		this.sip = sip;
+	constructor(host: string) {
+		const { name, secret } = getLocalStorageData();
+		this.sip = name;
 		this.secret = secret;
 		this.host = host;
 	}

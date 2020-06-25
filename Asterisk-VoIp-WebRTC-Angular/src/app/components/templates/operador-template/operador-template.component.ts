@@ -18,6 +18,8 @@ import { faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons';
 import { faSignal } from '@fortawesome/free-solid-svg-icons';
 import { faPlug } from '@fortawesome/free-solid-svg-icons';
 
+import { WebRTCService } from '@services/WebRTC/WebRTC.service';
+
 @Component({
 	selector: 'operador-template',
 	templateUrl: './operador-template.component.html',
@@ -29,7 +31,7 @@ export class OperadorTemplateComponent implements OnInit {
 	public Agenda = false;
 	public Dialpad = false;
 	public Llamada = [];
-
+	public rtc: WebRTCService;
 	// variables para guardar los iconos
 	faSenal = faSignal;
 	faMicro = faMicrophone;
@@ -144,6 +146,8 @@ export class OperadorTemplateComponent implements OnInit {
 	ngOnInit() {
 		this.user = JSON.parse(localStorage.getItem('Usuario'));
 		this.NumeroActual = localStorage.getItem('NumberSelected');
+		this.rtc = new WebRTCService();
+		console.log(this.rtc);
 		this.ObtenerSalas();
 		//console.log(this.user);
 	}
@@ -173,6 +177,9 @@ export class OperadorTemplateComponent implements OnInit {
 	SeleccionarSip_Iax(Sip_Iax) {
 		localStorage.setItem('NumberSelected', Sip_Iax);
 		this.NumeroActual = Sip_Iax;
+		this.rtc.disconnect();
+		this.rtc = new WebRTCService();
+		console.log(this.rtc);
 	}
 	ChangeWindow() {
 		if (this.pages == true) {
