@@ -25,4 +25,8 @@ export class SalaCardComponent implements OnInit {
 	// 			},
 	// 			error => console.log(error));
 	// }
+
+	/*daba problemas en el fron asi que se creo esta funcion vacia*/
+
+	deleteSala() {}
 }

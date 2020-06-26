@@ -1,0 +1,90 @@
+.dialpad {
+	font-size: 1rem;
+	font-weight: bold;
+	padding: 1rem;
+	&__clear {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-weight: bold;
+		border-radius: 4px;
+		background: #00b4cc;
+		color: #fff;
+		box-shadow: 0px 5px 0px darken(#00b4cc, 10);
+		background: linear-gradient(60deg, #00b4cc, darken(#00b4cc, 6));
+		height: 60px;
+		.icon-left {
+			width: 42px;
+			height: 42px;
+		}
+		&:active {
+			box-shadow: 0px 3px 0px darken(#00b4cc, 10);
+		}
+	}
+	&__content {
+		display: grid;
+		grid-template-rows: repeat(4, 1fr);
+		grid-template-columns: repeat(3, 1fr);
+		grid-gap: 0.8rem;
+		button {
+			font-weight: bold;
+			outline: none;
+			box-shadow: 0px 5px 0px darken(#f3f3f3, 10);
+			//   border-radius: 50%;
+			font-size: 1.2rem;
+			font-weight: bold;
+			border-radius: 4px;
+			background: linear-gradient(0deg, #f3f3f3, darken(#f3f3f3, 6));
+			color: var(--color-seis);
+			height: 60px;
+			border: none;
+			&:active {
+				box-shadow: 0px 3px 0px darken(#f3f3f3, 10);
+			}
+		}
+	}
+	&__input {
+		grid-area: 1 / span 2;
+		border-radius: 4px;
+		border: 0;
+		background: #f3f3f3;
+		font-size: 20px;
+		height: 60px;
+		font-weight: bold;
+		padding: 0 1rem;
+		box-shadow: 0px 5px 0px darken(#f3f3f3, 10);
+	}
+
+	&__events {
+		justify-content: space-between;
+		display: flex;
+		margin-top: 1.5rem;
+		button {
+			border: 0;
+			flex-grow: 1;
+			text-transform: uppercase;
+			font-size: 18px;
+			font-weight: bold;
+			padding: 0.5rem 0;
+			outline: none;
+			border-radius: 8px;
+			transition: 0.3s all ease;
+			&:nth-child(1) {
+				background-color: #72e300;
+				color: white;
+				margin-right: 0.5rem;
+				&:hover {
+					background-color: darken(#72e300, 5);
+				}
+			}
+			&:nth-child(2) {
+				background-color: #e30000;
+				margin-left: 0.5rem;
+				color: white;
+				&:hover {
+					background-color: darken(#e30000, 5);
+				}
+			}
+		}
+	}
+}

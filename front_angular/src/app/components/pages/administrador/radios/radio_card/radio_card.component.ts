@@ -6,11 +6,11 @@ import { Router } from '@angular/router';
 	templateUrl: './radio_card.component.html'
 })
 export class RadioCardComponent implements OnInit {
-	@Input() Alias:string;
-	@Input() Numero:string;
-	
-	constructor(private router: Router) {
-	}
+	@Input() Alias: string;
+	@Input() Numero: string;
+
+	constructor(private router: Router) {}
 
 	ngOnInit() {}
+	eliminarsip() {}
 }

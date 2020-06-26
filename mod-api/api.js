@@ -515,6 +515,31 @@ api.get("/datosPrueba", async (req, res) => {
     context: "default",
     exten: "*600",
     priority: 3,
+    app: "hangup",
+    appdata: "",
+  });
+  //AQUI SE LLAMA PARA USAR LAS COLAS DE LLAMADAS (SOPORTE)
+  const obj101 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "*600",
+    priority: 1,
+    app: "Answer",
+    appdata: "",
+  });
+  //Pregunta para saber si es numero prioritario o es cualquier otro numero
+  const obj102 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "*600",
+    priority: 2,
+    app: "GotoIf",
+    appdata:
+      "$[ $[ '${CHANNEL(peername)}' = '6001' ] | $[ '${CHANNEL(peername)}' = '6002' ] ]?3:4",
+  });
+  //Si es numero prioritario se incrementa el atributo de prioridad y se coloca 1ro en la cola de llamadas, sino es prioritario, el atributo de prioridad se mantiene en 1
+  const obj103 = await Extension.create(obj.id, {
+    context: "default",
+    exten: "*600",
+    priority: 3,
     app: "Set",
     appdata: "QUEUE_PRIO=10",
   });
@@ -662,6 +687,22 @@ api.get("/datosPrueba", async (req, res) => {
     insecure: "no",
     qualify: "no",
     context: "default",
+    switchsip: "1",
+  });
+
+  //Ejemplo para radio (la radio es un sip, q no esta vinculado a un usuario)
+
+  const obj181 = await Sip.createRadio({
+    name: "4001",
+    secret: "4001",
+    callerid: "4001",
+    type: "friend",
+    context: "default",
+    host: "dynamic",
+    disallow: "all",
+    allow: "ulaw",
+    qualify: "yes",
+    nat: "force_rport,comedia",
     switchsip: "1",
   });
 

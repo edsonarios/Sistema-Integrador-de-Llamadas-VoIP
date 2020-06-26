@@ -1,19 +1,35 @@
-.tracking{
-    display: grid;
-    grid-template-columns: 80% 20%;
-    grid-template-areas: "mapa opciones";
-    height: 100vh;
+.tracking {
+	display: grid;
+	grid-template-columns: 80% 20%;
+	grid-template-areas: 'mapa opciones';
+	height: 80vh;
 }
 
-.t-mapa{
-    grid-area: mapa;
-    background: url(https://media.wired.com/photos/59269cd37034dc5f91bec0f1/master/pass/GoogleMapTA.jpg);
-    background-size: cover;
-    margin: 1px;
+.t-mapa {
+	grid-area: mapa;
+
+	margin: 1px;
 }
 
-.t-opciones{
-    grid-area: opciones;
-    display: grid;
-    background: var(--color-cuatro);
+#mapa-mapbox {
+	background-color: red;
+	width: 100%;
+}
+
+.t-opciones {
+	grid-area: opciones;
+
+	background: var(--color-cuatro);
+	section {
+		background: white;
+
+		margin: 5px 15px;
+		height: 100px;
+		display: grid;
+		grid-template-rows: 1fr 1fr 1fr;
+	}
+}
+.t-opciones-boton {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
 }

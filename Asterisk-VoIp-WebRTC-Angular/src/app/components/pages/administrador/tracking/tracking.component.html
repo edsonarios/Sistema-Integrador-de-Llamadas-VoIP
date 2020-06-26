@@ -1,12 +1,21 @@
-<span><b><h1>Tracking</h1></b></span>
 <section class="tracking">
-    <div class="t-mapa">
-        <!-- <img
-            src="https://media.wired.com/photos/59269cd37034dc5f91bec0f1/master/pass/GoogleMapTA.jpg"
-            style="width: 80vh;height: auto;"
-        /> -->
-    </div>
-    <div class="t-opciones">
-        opciones
-    </div>
+	<div class="t-mapa" id="mapa-mapbox"></div>
+	<div class="t-opciones">
+		<h1>
+			Opciones
+		</h1>
+		<section *ngFor="let position of positions">
+			<div>Latitud: {{ position.lattitude }}</div>
+			<div>Longitud: {{ position.longitude }}</div>
+			<div class="t-opciones-boton">
+				<button class="btn btn-danger" (click)="eliminarPosition(position.id)">Borrar</button>
+				<button
+					class="btn btn-warning"
+					(click)="crearMarcador(position.longitude, position.lattitude)"
+				>
+					Mostrar
+				</button>
+			</div>
+		</section>
+	</div>
 </section>

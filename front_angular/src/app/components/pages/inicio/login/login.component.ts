@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
 		return this.loginForm.controls;
 	}
 
-	enviar(e) {
+	enviar() {
 		this.submitted = true;
 		// stop here if form is invalid
 		if (this.loginForm.invalid) {
