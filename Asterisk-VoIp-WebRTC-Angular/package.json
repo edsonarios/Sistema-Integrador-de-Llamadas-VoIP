@@ -4,7 +4,7 @@
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve -o",
-		"hmr": "ng serve --configuration hmr",
+		"hmr": "ng serve --configuration hmr -o",
 		"build": "ng build",
 		"test": "ng test",
 		"lint": "ng lint",
