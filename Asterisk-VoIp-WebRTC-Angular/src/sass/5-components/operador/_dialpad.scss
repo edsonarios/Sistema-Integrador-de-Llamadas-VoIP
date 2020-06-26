@@ -2,6 +2,25 @@
 	font-size: 1rem;
 	font-weight: bold;
 	padding: 1rem;
+	&__clear {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-weight: bold;
+		border-radius: 4px;
+		background: #00b4cc;
+		color: #fff;
+		box-shadow: 0px 5px 0px darken(#00b4cc, 10);
+		background: linear-gradient(60deg, #00b4cc, darken(#00b4cc, 6));
+		height: 60px;
+		.icon-left {
+			width: 42px;
+			height: 42px;
+		}
+		&:active {
+			box-shadow: 0px 3px 0px darken(#00b4cc, 10);
+		}
+	}
 	&__content {
 		display: grid;
 		grid-template-rows: repeat(4, 1fr);
@@ -35,17 +54,7 @@
 		padding: 0 1rem;
 		box-shadow: 0px 5px 0px darken(#f3f3f3, 10);
 	}
-	&__clear {
-		font-weight: bold;
-		border-radius: 4px;
-		background: var(--color-tres);
-		color: #031634;
-		box-shadow: 0px 5px 0px darken(#00b4cc, 10);
-		height: 60px;
-		&:active {
-			box-shadow: 0px 3px 0px darken(#00b4cc, 10);
-		}
-	}
+
 	&__events {
 		justify-content: space-between;
 		display: flex;

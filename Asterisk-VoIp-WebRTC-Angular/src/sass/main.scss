@@ -15,8 +15,8 @@
 /*=============================================
 =                   GENERIC                   =
 =============================================*/
-/*El código genérico del proyecto, el reset de CSS, 
-el Normalize o tus propios estilos, son los que 
+/*El código genérico del proyecto, el reset de CSS,
+el Normalize o tus propios estilos, son los que
 incluiremos en esta carpeta.*/
 
 @import './2-generic/generic';
@@ -24,14 +24,14 @@ incluiremos en esta carpeta.*/
 /*=============================================
 =                   ELEMENTS                  =
 =============================================*/
-/*Para  los estilos que afectan a los elementos del HTML. 
+/*Para  los estilos que afectan a los elementos del HTML.
 No incluiremos el estilo para las clases.*/
 @import './3-elements/elements';
 
 /*=============================================
 =                   OBJECTS                   =
 =============================================*/
-/*Aquí sí, incorporaríamos las clases y colocaríamos 
+/*Aquí sí, incorporaríamos las clases y colocaríamos
 todo lo relacionado con el layout.*/
 
 @import './4-objects/objects';
@@ -39,10 +39,10 @@ todo lo relacionado con el layout.*/
 /*=============================================
 =                   COMPONENTS                =
 =============================================*/
-/* Todo lo que afecte a los diferentes bloques de nuestro documento, 
-navegador, botones, recuadros de utilidades, cabecera, buscador,botones 
-sociales, etc., debería de ir en esta carpeta. Dendo de las necesidades 
-que tenga el proyecto,la carpeta Components tendrá más o menos ajustes, 
+/* Todo lo que afecte a los diferentes bloques de nuestro documento,
+navegador, botones, recuadros de utilidades, cabecera, buscador,botones
+sociales, etc., debería de ir en esta carpeta. Dendo de las necesidades
+que tenga el proyecto,la carpeta Components tendrá más o menos ajustes,
 como es lógico.*/
 
 @import './5-components/components.scss';
@@ -50,7 +50,9 @@ como es lógico.*/
 /*=============================================
 =                   UTILITIES                 =
 =============================================*/
-/*Para finalizar, en esta carpeta colocaríamos utilidades que sobrescriban 
+/*Para finalizar, en esta carpeta colocaríamos utilidades que sobrescriban
 estilos significativos (incompatibilidades con navegadores)*/
 
 @import './6-utilities/utilities';
+
+@import '~ng-snotify/styles/material';

@@ -100,7 +100,7 @@
 	margin: 10px;
 	background: #ffffff;
 	max-height: 90vh;
-	overflow-y: scroll;
+	overflow-y: auto;
 	-webkit-box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.35);
 	-moz-box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.35);
 	box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.35);
@@ -151,7 +151,7 @@
 	border-radius: 4px;
 	background: #eeeeee;
 	margin-top: 10px;
-	overflow-y: scroll;
+	overflow-y: auto;
 	-webkit-box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.35);
 	-moz-box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.35);
 	box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.35);
@@ -230,7 +230,7 @@
 	// border-radius: 4px;
 	margin: 10px;
 	background: #ffffff;
-	overflow-y: scroll;
+	overflow-y: auto;
 	// box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.35);
 }
 .LateralDer_Sup::-webkit-scrollbar-track {
@@ -426,3 +426,32 @@ header {
 		box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
 	}
 }
+
+.table-fixed tbody {
+	height: 600px;
+	overflow-y: auto;
+	width: 100%;
+}
+
+.table-fixed thead,
+.table-fixed tbody {
+	display: block;
+}
+
+// .Agenda {
+// 	height: 100%;
+// 	background-color: red;
+// 	overflow-y: scroll;
+// 	.ng-table {
+// 		tbody {
+// 			display: block;
+// 			height: 60%;
+// 		}
+// 		thead,
+// 		tbody tr {
+// 			display: table;
+// 			width: 100%;
+// 			table-layout: fixed;
+// 		}
+// 	}
+// }

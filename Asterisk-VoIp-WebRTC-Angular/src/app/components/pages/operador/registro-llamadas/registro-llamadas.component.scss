@@ -1,0 +1,64 @@
+$color-danger: #d9534f;
+$color-success: #5cb85c;
+$color-primary: #0275d8;
+
+.registro {
+    display: grid;
+    margin-top: 7px;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 90%;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        fa-icon {
+            font-size: 2em;
+        }
+        .r-tittle {
+            cursor: default;
+            font-weight: bold;
+            width: 100px;
+            background: #ffffff;
+            box-shadow: inset 2px 2px 0px #e0e0e0, inset -2px -2px 0px #ffffff;
+            border-radius: 12px;
+        }
+    }
+    .perdidas {
+        color: $color-danger;
+        fa-icon {
+            color: $color-danger;
+        }
+    }
+    .realizadas {
+        color: $color-primary;
+        fa-icon {
+            color: $color-primary;
+        }
+    }
+    .recibidas {
+        color: $color-success;
+        fa-icon {
+            color: $color-success;
+        }
+    }
+    .r-number {
+        cursor: default;
+        width: 45px;
+        height: 25px;
+        border-radius: 10px;
+        font-weight: bold;
+        color: white;
+        &--perdidas {
+            background-color: $color-danger;
+        }
+        &--recibidas {
+            background-color: $color-success;
+        }
+        &--realizadas {
+            background-color: $color-primary;
+        }
+    }
+}

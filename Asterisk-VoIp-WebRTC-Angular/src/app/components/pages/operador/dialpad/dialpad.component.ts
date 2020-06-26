@@ -3,18 +3,21 @@ import { Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { WebRTCService } from '@services/WebRTC/WebRTC.service';
-import { RTCSession } from 'jssip';
+
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
 	selector: 'dialpad',
 	templateUrl: './dialpad.component.html'
 })
 export class DialPadComponent implements OnInit {
-	constructor(private router: Router, private modalService: BsModalService) {}
+	constructor(private snotifyService: SnotifyService) {}
 
 	public symbols: String[] = '123456789*0#'.split('');
 
-	dialNumber: String = '';
+	public dialNumber: String = '';
+
+	public phone: boolean = false;
 
 	mute: boolean = false;
 	hold: boolean = false;
@@ -26,7 +29,6 @@ export class DialPadComponent implements OnInit {
 
 	Llamada() {
 		this.sipCall(this.dialNumber);
-		this.Limpiar();
 	}
 	Limpiar() {
 		this.dialNumber = '';
@@ -34,9 +36,9 @@ export class DialPadComponent implements OnInit {
 
 	alert: any;
 	session: WebRTCService;
-	event: RTCSession;
+	event: any;
 	call: any;
-	arr: Array<RTCSession> = [];
+	arr: Array<any> = [];
 
 	ngOnInit() {
 		this.session = new WebRTCService();
@@ -55,10 +57,14 @@ export class DialPadComponent implements OnInit {
 	}
 
 	sipCall(sip) {
+		this.phone = true;
 		this.session.sipCall(sip);
+		this.snotifyService.success('LLAMADA INICIADA', { showProgressBar: false });
 	}
 	endCall() {
+		this.phone = false;
 		this.session.terminate();
+		this.snotifyService.error('LLAMADA TERMINADA', { showProgressBar: false });
 	}
 
 	callMute() {
