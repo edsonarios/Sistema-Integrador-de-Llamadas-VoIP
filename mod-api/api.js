@@ -1606,6 +1606,21 @@ api.post("/findAllExtensionByContext", async (req, res, next) => {
   res.send(getcontextos);
 });
 
+api.post("/findAllExtensionByFunctions", async (req, res, next) => {
+  const params = req.body;
+  //obtengo todos los atributos de la tabla cdrs
+  const extensionsAll = await Extension.findAll();
+  let getcontextos = [];
+
+  extensionsAll.forEach((obj) => {
+    if (obj.exten == params.funcion && obj.context == params.sala) {
+      getcontextos.push(obj);
+    }
+  });
+
+  res.send(getcontextos);
+});
+
 /// CDR /////////////////////////////////////////////////////////////////////
 
 api.get("/findAllCdr", async (req, res, next) => {
@@ -1715,9 +1730,7 @@ api.post("/ListarHistorialByFechaBySipsAndIaxs", async (req, res, next) => {
   //empiezo a iterar sobre todos los atributos de cdrs
   cdrsAll.forEach((obj) => {
     //transformo el obj.calldate en un formato "yyyy-mm-dd" y pregunto si es igual al parametro q le mando por postman
-    if (
-      moment(moment(obj.calldate).format("YYYY-MM-DD")).isSame(params.fecha)
-    ) {
+    if (moment(moment(obj.start).format("YYYY-MM-DD")).isSame(params.fecha)) {
       if (obj.src == params.numero) {
         getsalientes.push(obj.dst);
         getperdidas.push(obj.disposition);
@@ -1745,9 +1758,9 @@ api.post("/ListarHistorialBetweenFechas", async (req, res, next) => {
   let todos = [];
   //empiezo a iterar sobre todos los atributos de cdrs
   cdrsAll.forEach((obj) => {
-    //transformo el obj.calldate en un formato "yyyy-mm-dd" y pregunto si es igual al parametro q le mando por postman
+    //transformo el obj.start en un formato "yyyy-mm-dd" y pregunto si es igual al parametro q le mando por postman
     if (
-      moment(moment(obj.calldate).format("YYYY-MM-DD")).isBetween(
+      moment(moment(obj.start).format("YYYY-MM-DD")).isBetween(
         params.fecha1,
         params.fecha2
       )
@@ -1760,9 +1773,9 @@ api.post("/ListarHistorialBetweenFechas", async (req, res, next) => {
   });
 
   cdrsAll.forEach((obj) => {
-    //transformo el obj.calldate en un formato "yyyy-mm-dd" y pregunto si es igual al parametro q le mando por postman
+    //transformo el obj.start en un formato "yyyy-mm-dd" y pregunto si es igual al parametro q le mando por postman
     if (
-      moment(moment(obj.calldate).format("YYYY-MM-DD")).isBetween(
+      moment(moment(obj.start).format("YYYY-MM-DD")).isBetween(
         params.fecha1,
         params.fecha2
       )
@@ -1827,6 +1840,33 @@ api.post("/addAgenda", async (req, res, next) => {
     obj = await Agenda.create(params.usuarioId, {
       Contactos: params.Contactos,
     });
+  } catch (e) {
+    return next(e);
+  }
+
+  res.send(obj);
+});
+
+api.put("/updateAgenda", async (req, res, next) => {
+  const params = req.body;
+  //edito cualquier atributo de de la tabla Agenda buscando por el id de la Agenda
+  let obj;
+  try {
+    obj = await Extension.update(params.id, {
+      Contactos: params.Contactos,
+    });
+  } catch (e) {
+    return next(e);
+  }
+
+  res.send(obj);
+});
+
+api.get("/findAllAgenda", async (req, res, next) => {
+  let obj;
+  //busco y devuelvo todos los atributos de la tabla Agenda
+  try {
+    obj = await Agenda.findAll();
   } catch (e) {
     return next(e);
   }
