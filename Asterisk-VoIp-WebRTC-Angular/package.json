@@ -4,7 +4,7 @@
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve -o",
-		"hmr": "ng serve --configuration hmr",
+		"hmr": "ng serve --configuration hmr -o",
 		"build": "ng build",
 		"test": "ng test",
 		"lint": "ng lint",
@@ -27,7 +27,7 @@
 		"angular-feather": "^6.0.10",
 		"angularfire2": "^5.4.2",
 		"bootstrap": "^4.4.1",
-		"firebase": "^7.15.1",
+		"firebase": "^7.15.5",
 		"jssip": "^3.5.1",
 		"mapbox-gl": "^1.2.1",
 		"moment": "^2.26.0",
