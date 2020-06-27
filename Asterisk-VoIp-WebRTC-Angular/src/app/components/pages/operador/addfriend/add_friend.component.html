@@ -1,0 +1,38 @@
+<section class="Agenda animated fadeIn">
+	<div class="table-responsive-vertical shadow-z-1">
+
+
+		<div>
+			<form action="">
+				<input type="text">
+				<a (click)="buscar()"><i class="v-icon-magnifying-glass"></i></a>
+			</form>
+		</div>
+
+
+		<!-- Table starts here -->
+		<table id="table" class="table table-hover table-mc-light-blue">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Numero</th>
+					<th>Opciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let n of Contacts; let i = index">
+					<td data-title="Name">{{ Contacts[i]['nombre'] }}</td>
+					<td data-title="Link">
+						{{ Contacts[i]['id'] }}
+					</td>
+					<td>
+						<i class="v-icon-dialer_sip" (click)="
+                        addAmigo(Contacts[i]['id'], Contacts[i]['nombre'])
+					" tooltip="Añadir" style="color: green;"></i>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</section>

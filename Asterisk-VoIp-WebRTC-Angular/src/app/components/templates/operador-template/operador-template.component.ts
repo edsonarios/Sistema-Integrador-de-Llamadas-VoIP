@@ -20,6 +20,7 @@ export class OperadorTemplateComponent implements OnInit {
 	public Sala = true;
 	public Agenda = false;
 	public Dialpad = false;
+	public AddFriend = false;
 	public Llamada = [];
 	/* public Llamada=[
 				{'nombre':'Prueba Llamada',
@@ -323,15 +324,26 @@ export class OperadorTemplateComponent implements OnInit {
 		this.Sala = true;
 		this.Agenda = false;
 		this.Dialpad = false;
+		this.AddFriend = false;
 	}
 	agendaActive() {
 		this.Agenda = true;
 		this.Sala = false;
 		this.Dialpad = false;
+		this.AddFriend = false;
 	}
 	dialpadActive() {
 		this.Dialpad = true;
 		this.Agenda = false;
 		this.Sala = false;
+		this.AddFriend = false;
+	}
+
+	addFriendActive() {
+		console.log('añadir amigo....');
+		this.Agenda = false;
+		this.Sala = false;
+		this.Dialpad = false;
+		this.AddFriend = true;
 	}
 }

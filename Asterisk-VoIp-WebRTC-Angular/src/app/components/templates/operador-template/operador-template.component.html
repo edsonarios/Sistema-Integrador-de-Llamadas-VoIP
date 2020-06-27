@@ -1,6 +1,8 @@
 <section class="operador-dashboard">
 	<div class="Navegador">
-		<div class="Logo"><h1 style="color: cyan; padding-left: 20px;">Logo</h1></div>
+		<div class="Logo">
+			<h1 style="color: cyan; padding-left: 20px;">Logo</h1>
+		</div>
 		<div class="Options">
 			<div class="navbar">
 				<ul>
@@ -68,70 +70,35 @@
 
 			<div class="UserBar_Option">
 				<div class="btn-group" dropdown>
-					<button
-						id="button-animated"
-						dropdownToggle
-						type="button"
-						class="btn_dropdown dropdown-toggle"
-						aria-controls="dropdown-animated"
-					>
+					<button id="button-animated" dropdownToggle type="button" class="btn_dropdown dropdown-toggle"
+						aria-controls="dropdown-animated">
 						<span class="caret"></span>
 					</button>
-					<ul
-						id="dropdown-animated"
-						*dropdownMenu
-						class="dropdown-menu"
-						role="menu"
-						aria-labelledby="button-animated"
-					>
+					<ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
 						<div *ngFor="let n of Sip_Iax['0']; let i = index">
-							<li
-								role="menuitem"
-								(click)="SeleccionarSip_Iax(Sip_Iax['0'][i]['name'])"
-								class="Item_Dropdown"
-							>
+							<li role="menuitem" (click)="SeleccionarSip_Iax(Sip_Iax['0'][i]['name'])" class="Item_Dropdown">
 								<a class="dropdown-item">{{ Sip_Iax['0'][i]['callerid'] }}</a>
 							</li>
 						</div>
-						<li
-							role="menuitem"
-							class="Item_Dropdown"
-							style="color: red;"
-							*ngIf="Sip_Iax['0'].length == 0"
-						>
+						<li role="menuitem" class="Item_Dropdown" style="color: red;" *ngIf="Sip_Iax['0'].length == 0">
 							<a class="dropdown-item"><i class="v-icon-cancel"></i>No Hay Sips</a>
 						</li>
 						<li class="divider dropdown-divider"></li>
 						<div *ngFor="let n of Sip_Iax['1']; let j = index">
-							<li
-								role="menuitem"
-								(click)="SeleccionarSip_Iax(Sip_Iax['0'][j]['name'])"
-								class="Item_Dropdown"
-							>
+							<li role="menuitem" (click)="SeleccionarSip_Iax(Sip_Iax['0'][j]['name'])" class="Item_Dropdown">
 								<a class="dropdown-item">{{ Sip_Iax['1'][j]['callerid'] }}</a>
 							</li>
 						</div>
-						<li
-							role="menuitem"
-							class="Item_Dropdown"
-							style="color: red;"
-							*ngIf="Sip_Iax['1'].length == 0"
-						>
+						<li role="menuitem" class="Item_Dropdown" style="color: red;" *ngIf="Sip_Iax['1'].length == 0">
 							<a class="dropdown-item"><i class="v-icon-cancel"></i>No Hay Iaxs</a>
 						</li>
 						<li class="divider dropdown-divider"></li>
 						<li role="menuitem">
-							<a
-								class="dropdown-item"
-								style="cursor: pointer;"
-								(click)="AgregarEventoNotificacion()"
-								><i class="v-icon-wifi-low"></i><span>Evento Notificacion</span></a
-							>
+							<a class="dropdown-item" style="cursor: pointer;" (click)="AgregarEventoNotificacion()"><i
+									class="v-icon-wifi-low"></i><span>Evento Notificacion</span></a>
 						</li>
 						<li role="menuitem" class="Item_Dropdown">
-							<a class="dropdown-item" [routerLink]="['/Login']"
-								><i class="v-icon-enter"></i><span>Salir</span></a
-							>
+							<a class="dropdown-item" [routerLink]="['/Login']"><i class="v-icon-enter"></i><span>Salir</span></a>
 						</li>
 					</ul>
 				</div>
@@ -149,14 +116,9 @@
 			<div class="LateralIzq_Sup">
 				<header>Notificaciones</header>
 				<div class="notificacionEffect" *ngFor="let n of Notificaciones; let i = index" [@flyIn]>
-					<Notificacion
-						(ContestaLlamada)="ContestarLlamada($event)"
-						(CancelaLlamada)="ColgarLlamada($event)"
-						Nombre="{{ Notificaciones[i]['nombre'] }}"
-						Numero="{{ Notificaciones[i]['numero'] }}"
-						Estado="{{ Notificaciones[i]['estado'] }}"
-						Id="{{ Notificaciones[i]['id'] }}"
-					></Notificacion>
+					<Notificacion (ContestaLlamada)="ContestarLlamada($event)" (CancelaLlamada)="ColgarLlamada($event)"
+						Nombre="{{ Notificaciones[i]['nombre'] }}" Numero="{{ Notificaciones[i]['numero'] }}"
+						Estado="{{ Notificaciones[i]['estado'] }}" Id="{{ Notificaciones[i]['id'] }}"></Notificacion>
 				</div>
 				<div class="empty" *ngIf="Notificaciones.length == 0">
 					<p>No hay <br />Notificaciones</p>
@@ -169,15 +131,9 @@
 				<header>Escritorio</header>
 				<section class="e-responsive">
 					<div *ngFor="let n of Llamada; let i = index">
-						<llamada
-							(llamadaClose)="CerrarLlamada($event)"
-							(Participantes)="VerParticipantes($event)"
-							Nombre="{{ Llamada[i]['nombre'] }}"
-							Numero="{{ Llamada[i]['numero'] }}"
-							Tipo="{{ Llamada[i]['Tipo'] }}"
-							Id="{{ Llamada[i]['id'] }}"
-							Estado="{{ Llamada[i]['Estado'] }}"
-						></llamada>
+						<llamada (llamadaClose)="CerrarLlamada($event)" (Participantes)="VerParticipantes($event)"
+							Nombre="{{ Llamada[i]['nombre'] }}" Numero="{{ Llamada[i]['numero'] }}" Tipo="{{ Llamada[i]['Tipo'] }}"
+							Id="{{ Llamada[i]['id'] }}" Estado="{{ Llamada[i]['Estado'] }}"></llamada>
 					</div>
 				</section>
 			</div>
@@ -200,9 +156,14 @@
 					</header>
 
 					<header class="animated fadeIn">
-						<button [ngStyle]="!Sala && { 'font-weight': 'bold' }" (click)="agendaActive()">
-							Agenda
-						</button>
+						<div>
+							<button [ngStyle]="!Sala && { 'font-weight': 'bold' }" (click)="agendaActive()">
+								Agenda
+							</button>
+							<button [ngStyle]="!Sala && { 'font-weight': 'bold' }" (click)="addFriendActive()">
+								<i class="v-icon-magnifying-glass"></i>
+							</button>
+						</div>
 					</header>
 
 					<header class="animated fadeIn">
@@ -213,12 +174,8 @@
 				</div>
 				<section *ngIf="Sala">
 					<div class="SalaEffect" *ngFor="let n of Salas; let i = index" [@flyIn]>
-						<Sala
-							(DatoSala)="RegistraSala($event)"
-							Nombre="{{ Salas[i]['nombreSala'] }}"
-							Descripcion="{{ Salas[i]['descripcion'] }}"
-							Id="{{ Salas[i]['id'] }}"
-						>
+						<Sala (DatoSala)="RegistraSala($event)" Nombre="{{ Salas[i]['nombreSala'] }}"
+							Descripcion="{{ Salas[i]['descripcion'] }}" Id="{{ Salas[i]['id'] }}">
 						</Sala>
 					</div>
 					<div class="empty" *ngIf="Salas.length == 0">
@@ -227,6 +184,7 @@
 				</section>
 				<Agenda *ngIf="Agenda"></Agenda>
 				<dialpad *ngIf="Dialpad"></dialpad>
+				<Addfriend *ngIf="AddFriend"></Addfriend>
 			</div>
 			<div class="LateralDer_Inf"></div>
 		</div>

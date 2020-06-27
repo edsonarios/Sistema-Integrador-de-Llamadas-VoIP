@@ -1853,7 +1853,7 @@ api.post("/addAgenda", async (req, res, next) => {
   //creo una agenda apartir del id de un usuario
   try {
     obj = await Agenda.create(params.usuarioId, {
-      Contactos: params.Contactos,
+      Contactos: params.contactos,
     });
   } catch (e) {
     return next(e);

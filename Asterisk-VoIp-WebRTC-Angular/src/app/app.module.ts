@@ -16,6 +16,7 @@ import { AdministradorTemplateComponent } from './components/templates/administr
 
 import { DialPadComponent } from './components/pages/operador/dialpad/dialpad.component';
 
+import { AddFriendComponent } from '@operador/addfriend/add_friend.component';
 import { AgendaComponent } from '@operador/agenda/agenda.component';
 import { NotificacionComponent } from '@operador/notificacion/notificacion.component';
 import { SalaComponent } from '@operador/sala/sala.component';
@@ -43,6 +44,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 		OperadorTemplateComponent,
 		AdministradorTemplateComponent,
 		DialPadComponent,
+		AddFriendComponent,
 		AgendaComponent,
 		NotificacionComponent,
 		SalaComponent,
