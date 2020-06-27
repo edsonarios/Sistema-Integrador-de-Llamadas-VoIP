@@ -33,11 +33,19 @@
               "./node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
               "src/styles.scss",
               "src/assets/fonts/fonts.css",
-              "src/assets/icons/icons.css",
+              "src/assets/icons/icons.css"
             ],
             "scripts": []
           },
           "configurations": {
+            "hmr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hmr.ts"
+                }
+              ]
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -73,6 +81,10 @@
             "browserTarget": "Asterisk-VoIp-WebRTC:build"
           },
           "configurations": {
+            "hmr": {
+              "hmr": true,
+              "browserTarget": "Asterisk-VoIp-WebRTC:build:hmr"
+            },
             "production": {
               "browserTarget": "Asterisk-VoIp-WebRTC:build:production"
             }
@@ -127,6 +139,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Asterisk-VoIp-WebRTC"
+    }
+  },
+  "defaultProject": "Asterisk-VoIp-WebRTC",
+  "cli": {
+    "analytics": "e58dd007-dc8b-4cf6-8e1e-0bbceb8c2b1a"
+  }
 }
