@@ -1,16 +1,15 @@
-'use strict'
+"use strict";
 
-const Sequelize = require('sequelize')
-const setupDatabase = require('../lib/db')
+const Sequelize = require("sequelize");
+const setupDatabase = require("../lib/db");
 
-module.exports = function setupAgendaModel (config) {
-  const sequelize = setupDatabase(config)
+module.exports = function setupAgendaModel(config) {
+  const sequelize = setupDatabase(config);
 
-  return sequelize.define('agenda', {
+  return sequelize.define("agenda", {
     Contactos: {
       type: Sequelize.STRING,
-      allowNull: true
+      allowNull: true,
     },
-    
-  })
-}
+  });
+};

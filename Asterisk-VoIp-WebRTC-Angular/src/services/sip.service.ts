@@ -56,7 +56,6 @@ addSipWebRTC(obj): Observable<any> {
 }
 
   llenarSIPsYIAX( idu): Observable<any> {
-    
   return this.http.post<any>(this.url + 'getUsuariosWithSipsAndIaxs',  { id: idu },
        this.httpOptions).pipe(
     retry(1),

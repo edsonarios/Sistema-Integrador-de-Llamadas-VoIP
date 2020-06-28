@@ -10,7 +10,7 @@ import { User } from '@models/user';
 	providers: [UserService],
 })
 export class CuentasComponent implements OnInit {
-
+	
 	contactos: [User];
 	
 	constructor(private router: Router,

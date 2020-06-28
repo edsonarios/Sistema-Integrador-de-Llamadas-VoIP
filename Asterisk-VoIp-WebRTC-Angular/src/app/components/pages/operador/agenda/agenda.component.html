@@ -10,22 +10,22 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let n of Contactos; let i = index">
-					<td data-title="Name">{{ Contactos[i]['Nombre'] }}</td>
-					<td data-title="Link">
-						{{ Contactos[i]['Numero'] }}
-					</td>
-					<td>
-						<i
-							class="v-icon-dialer_sip"
-							(click)="
+				<div *ngIf="Amigos.length != 0">
+					<tr *ngFor="let n of Amigos; let i = index">
+						<td data-title="Name">{{ Amigos[i]['Nombre'] }}</td>
+						<td data-title="Link">
+							{{ Contactos[i]['Numero'] }}
+						</td>
+						<td>
+							<i class="v-icon-dialer_sip" (click)="
 								LlamadaComponent(Contactos[i]['id'], Contactos[i]['Nombre'], Contactos[i]['Numero'])
-							"
-							tooltip="Llamar"
-							style="color: green;"
-						></i>
-					</td>
-				</tr>
+							" tooltip="Llamar" style="color: green;"></i>
+						</td>
+					</tr>
+				</div>
+				<div class="empty" *ngIf="Amigos.length == 0">
+					<p>No Tienes Contactos en tu agenda</p>
+				</div>
 			</tbody>
 		</table>
 	</div>

@@ -1,21 +1,28 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '@services/user.service';
 import { AgendaService } from '@services/agenda.service';
+import { SipService } from '@services/sip.service';
 
 @Component({
-	selector: 'Agenda',
-	templateUrl: './agenda.component.html',
-	providers: [AgendaService]
+	selector: 'Addfriend',
+	templateUrl: './add_friend.component.html',
+	providers: [UserService, AgendaService, SipService]
 })
-export class AgendaComponent implements OnInit {
+export class AddFriendComponent implements OnInit {
+	public Contacts;
+	public Amigos;
 	public Contactos;
-	public Amigos = [];
 	public llamada;
 	public us = localStorage.getItem('Usuario');
 	public usActual = JSON.parse(this.us);
 
-	//@Output() AgendaLlamada = new EventEmitter<string>();
-	constructor(private router: Router, private agendaservice: AgendaService) {
+	constructor(
+		private router: Router,
+		private userservice: UserService,
+		private agendaservice: AgendaService,
+		private sipservice: SipService
+	) {
 		this.Contactos = [
 			{ Nombre: 'Daniel', Estado: 'Conectado', Numero: '3001', id: '21' },
 			{ Nombre: 'Juan', Estado: 'Desconectado', Numero: '3002', id: '22' },
@@ -31,30 +38,38 @@ export class AgendaComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log(this.usActual);
-		this.listarAmigos(this.usActual.usuarioId);
-	}
-	LlamadaComponent(id, Nombre, numero) {
-		this.llamada = { Nombre: Nombre, Numero: numero, Id: id };
-		//this.AgendaLlamada.emit(this.llamada);
+		this.dataDeploy();
+		console.log('lista de amigos de este usuario');
 	}
 
-	vacio() {
-		var cantidad = this.Amigos[0];
-		if (cantidad == undefined) {
-			return true;
-		}
-		return false;
-	}
-
-	buscar() {}
-
-	listarAmigos(id) {
-		this.agendaservice.listarAmigos(id).subscribe(
+	dataDeploy() {
+		//llamar al servicio para listar todos los usuarios
+		this.userservice.findAllUsuario().subscribe(
 			(response) => {
-				this.Amigos = response;
-				console.log('Todos tus amigos');
+				console.log('Estos son los contactos existentes... \n');
+				this.Contacts = response;
+				console.log(this.Contacts);
+			},
+			(er) => console.log(er)
+		);
+	}
+
+	buscar() {
+		console.log('searching...');
+	}
+
+	addAmigo(id, name) {
+		this.sipservice.llenarSIPsYIAX(id).subscribe(
+			(response) => {
 				console.log(response);
+				
+				this.agendaservice.addAmigo(this.usActual.usuarioId, response.secret).subscribe(
+					(response) => {
+						this.Amigos = response;
+						console.log(this.Amigos);
+					},
+					(er) => console.log(er)
+				);
 			},
 			(er) => console.log(er)
 		);

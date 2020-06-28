@@ -19,7 +19,7 @@ export class HistorialLlamadasComponent implements OnInit {
   public us = localStorage.getItem('Usuario');
   public obj = JSON.parse(this.us);
   // Aquí va el numero actual del operador
-  public numero = 123;
+  public numero = localStorage.getItem('NumberSelected');
 
   public Historia = [];
 
@@ -168,6 +168,11 @@ export class HistorialLlamadasComponent implements OnInit {
 
   preload() {
     console.log(this.obj);
+    if (this.obj == null) {
+      console.log('el usuario es nulo');
+      return;
+    }
+
     // Standard
     if (this.obj.tipo == 'standard') {
       this.llenarHistorialOperador();
@@ -219,9 +224,11 @@ export class HistorialLlamadasComponent implements OnInit {
   }
 
   llenarHistorialOperador() {
+    console.log(this.numero);
     this.historialService.HistorialxSipoIax(this.numero).subscribe(
       (response) => {
         this.HistOper = response;
+        console.log(response);
       },
       (error) => {
         console.log(error);
