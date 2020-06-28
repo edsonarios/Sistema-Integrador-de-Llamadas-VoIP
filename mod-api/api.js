@@ -518,31 +518,6 @@ api.get("/datosPrueba", async (req, res) => {
     app: "hangup",
     appdata: "",
   });
-  //AQUI SE LLAMA PARA USAR LAS COLAS DE LLAMADAS (SOPORTE)
-  const obj101 = await Extension.create(obj.id, {
-    context: "default",
-    exten: "*600",
-    priority: 1,
-    app: "Answer",
-    appdata: "",
-  });
-  //Pregunta para saber si es numero prioritario o es cualquier otro numero
-  const obj102 = await Extension.create(obj.id, {
-    context: "default",
-    exten: "*600",
-    priority: 2,
-    app: "GotoIf",
-    appdata:
-      "$[ $[ '${CHANNEL(peername)}' = '6001' ] | $[ '${CHANNEL(peername)}' = '6002' ] ]?3:4",
-  });
-  //Si es numero prioritario se incrementa el atributo de prioridad y se coloca 1ro en la cola de llamadas, sino es prioritario, el atributo de prioridad se mantiene en 1
-  const obj103 = await Extension.create(obj.id, {
-    context: "default",
-    exten: "*600",
-    priority: 3,
-    app: "Set",
-    appdata: "QUEUE_PRIO=10",
-  });
   //de acuerdo al atributo de prioridad se establece la llamada con la cola de llamadas
   const obj104 = await Extension.create(obj.id, {
     context: "default",
@@ -1650,16 +1625,424 @@ api.post("/findAllExtensionByContext", async (req, res, next) => {
 api.post("/findAllExtensionByFunctions", async (req, res, next) => {
   const params = req.body;
   //obtengo todos los atributos de la tabla cdrs
-  const extensionsAll = await Extension.findAll();
-  let getcontextos = [];
-
-  extensionsAll.forEach((obj) => {
-    if (obj.exten == params.funcion && obj.context == params.sala) {
-      getcontextos.push(obj);
-    }
-  });
-
-  res.send(getcontextos);
+  if (params.funcion == "llamadasDemo") {
+    const obj = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "playback",
+      appdata: `${params.audio}`,
+    });
+    const obj2 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "hangup",
+      appdata: "",
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  } else {
+    res.send({ message: "Funcion no encontrada" });
+  }
+  //
+  if (params.funcion == "llamadaSip") {
+    const obj = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "Monitor",
+      appdata: `${params.audio}`,
+    });
+    const obj2 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "Dial",
+      appdata: `${params.audio}`,
+    });
+    const obj3 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "3",
+      app: "hangup",
+      appdata: "",
+    });
+    const obj4 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "3",
+      app: "VoiceMail",
+      appdata: `${params.audio}`,
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  } else {
+    res.send({ message: "Funcion no encontrada" });
+  }
+  //
+  if (params.funcion == "llamadasAlgo") {
+    const obj = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "VoiceMailMain",
+      appdata: `${params.audio}`,
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  } else {
+    res.send({ message: "Funcion no encontrada" });
+  }
+  //
+  if (params.funcion == "llamadaAlgo1") {
+    const obj = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "Answer",
+      appdata: "",
+    });
+    const obj2 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "Wait",
+      appdata: `${params.audio}`,
+    });
+    const obj3 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "3",
+      app: "Record",
+      appdata: `${params.audio}`,
+    });
+    const obj4 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "4",
+      app: "Wait",
+      appdata: `${params.audio}`,
+    });
+    const obj5 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "5",
+      app: "Playback",
+      appdata: `${params.audio}`,
+    });
+    const obj6 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "3",
+      app: "hangup",
+      appdata: "",
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  } else {
+    res.send({ message: "Funcion no encontrada" });
+  }
+  //
+  if (params.funcion == "llamadasAlgo2") {
+    const obj = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "Goto",
+      appdata: `${params.audio}`,
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  } else {
+    res.send({ message: "Funcion no encontrada" });
+  }
+  //
+  if (params.funcion == "llamadaIvr") {
+    const obj = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "Answer",
+      appdata: "",
+    });
+    const obj2 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "Background",
+      appdata: `${params.audio}`,
+    });
+    const obj3 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "3",
+      app: "WaitExten",
+      appdata: `${params.audio}`,
+    });
+    const obj4 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "Playback",
+      appdata: `${params.audio}`,
+    });
+    const obj5 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "Playback",
+      appdata: `${params.audio}`,
+    });
+    const obj6 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "Playback",
+      appdata: `${params.audio}`,
+    });
+    const obj7 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "Playback",
+      appdata: `${params.audio}`,
+    });
+    const obj8 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "hangup",
+      appdata: "",
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  } else {
+    res.send({ message: "Funcion no encontrada" });
+  }
+  //
+  if (params.funcion == "llamadas8000") {
+    const obj = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "GotoIfTime",
+      appdata: `${params.audio}`,
+    });
+    const obj2 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "Playback",
+      appdata: `${params.audio}`,
+    });
+    const obj3 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "3",
+      app: "hangup",
+      appdata: "",
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  } else {
+    res.send({ message: "Funcion no encontrada" });
+  }
+  //
+  if (params.funcion == "llamadas*201") {
+    const obj = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "AddQueueMember",
+      appdata: `${params.audio}`,
+    });
+    const obj2 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "Playback",
+      appdata: `${params.audio}`,
+    });
+    const obj3 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "3",
+      app: "hangup",
+      appdata: "",
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  } else {
+    res.send({ message: "Funcion no encontrada" });
+  }
+  //
+  if (params.funcion == "llamadas*202") {
+    const obj = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "RemoveQueueMember",
+      appdata: `${params.audio}`,
+    });
+    const obj2 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "Playback",
+      appdata: `${params.audio}`,
+    });
+    const obj3 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "3",
+      app: "hangup",
+      appdata: "",
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  } else {
+    res.send({ message: "Funcion no encontrada" });
+  }
+  //
+  if (params.funcion == "llamada*600") {
+    const obj = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "Answer",
+      appdata: "",
+    });
+    const obj2 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "GotoIf",
+      appdata: `${params.audio}`,
+    });
+    const obj3 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "3",
+      app: "Set",
+      appdata: `${params.audio}`,
+    });
+    const obj4 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "4",
+      app: "Queue",
+      appdata: `${params.audio}`,
+    });
+    const obj5 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "5",
+      app: "hangup",
+      appdata: "",
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  } else {
+    res.send({ message: "Funcion no encontrada" });
+  }
+  //
+  if (params.funcion == "llamadas3") {
+    const obj = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "answer",
+      appdata: "",
+    });
+    const obj2 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "confbridge",
+      appdata: `${params.audio}`,
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  } else {
+    res.send({ message: "Funcion no encontrada" });
+  }
+  //
+  if (params.funcion == "llamadas_555.") {
+    const obj = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "ChanSpy",
+      appdata: `${params.audio}`,
+    });
+    const obj2 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "hangup",
+      appdata: "",
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  } else {
+    res.send({ message: "Funcion no encontrada" });
+  }
+  //
+  if (params.funcion == "llamadas_556.") {
+    const obj = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "ChanSpy",
+      appdata: `${params.audio}`,
+    });
+    const obj2 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "hangup",
+      appdata: "",
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  } else {
+    res.send({ message: "Funcion no encontrada" });
+  }
+  //
+  if (params.funcion == "llamadas_557.") {
+    const obj = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "ChanSpy",
+      appdata: `${params.audio}`,
+    });
+    const obj2 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "hangup",
+      appdata: "",
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  } else {
+    res.send({ message: "Funcion no encontrada" });
+  }
+  //
+  if (params.funcion == "llamadas_XXXXXXX") {
+    const obj = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "Monitor",
+      appdata: `${params.audio}`,
+    });
+    const obj2 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "Dial",
+      appdata: `${params.audio}`,
+    });
+    const obj3 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "3",
+      app: "hangup",
+      appdata: "",
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  } else {
+    res.send({ message: "Funcion no encontrada" });
+  }
 });
 
 /// CDR /////////////////////////////////////////////////////////////////////

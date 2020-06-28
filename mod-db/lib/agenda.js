@@ -1,52 +1,59 @@
-'use strict'
+"use strict";
 
-module.exports = function setupAgenda(AgendaModel) {
+module.exports = function setupAgenda(AgendaModel, UsuarioModel) {
+  async function create(id, obj) {
+    const res = await UsuarioModel.findOne({
+      where: {
+        id,
+      },
+    });
 
-  async function create(obj) {
-    const result = await AgendaModel.create(obj)
-    return result.toJSON()
+    if (res) {
+      Object.assign(obj, { usuarioId: res.id });
+      const result = await AgendaModel.create(obj);
+      return result.toJSON();
+    }
   }
-
   async function update(id, obj) {
     const cond = {
       where: {
-        id
-      }
-    }
+        id,
+      },
+    };
 
-    const updated = await AgendaModel.update(obj, cond)
-    return updated
+    const updated = await AgendaModel.update(obj, cond);
+    return updated;
   }
 
   async function findById(id) {
     return await AgendaModel.findOne({
       where: {
-        id
-      }
-    })
+        id,
+      },
+    });
   }
   async function findAll() {
-    return AgendaModel.findAll()
+    return AgendaModel.findAll();
   }
-  
+
   async function findAllQuery(query) {
-    return AgendaModel.findAll(query)
+    return AgendaModel.findAll(query);
   }
 
   async function destroyAll(id) {
     return await AgendaModel.destroy({
       where: {
-        salaId: id
-      }
-    })
+        salaId: id,
+      },
+    });
   }
 
   async function destroy(id) {
     return await AgendaModel.destroy({
       where: {
-        id
-      }
-    })
+        id,
+      },
+    });
   }
   return {
     create,
@@ -55,6 +62,6 @@ module.exports = function setupAgenda(AgendaModel) {
     findAll,
     destroyAll,
     findAllQuery,
-    destroy
-  }
-}
+    destroy,
+  };
+};
