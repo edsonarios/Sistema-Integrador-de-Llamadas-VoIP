@@ -158,11 +158,11 @@ module.exports = function setupSipModel(config) {
       allowNull: true,
     },
     port: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.TEXT,
       allowNull: true,
     },
     regseconds: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.TEXT,
       allowNull: true,
     },
     defaultuser: {
@@ -182,7 +182,7 @@ module.exports = function setupSipModel(config) {
       allowNull: true,
     },
     lastms: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.TEXT,
       allowNull: true,
     },
     callbackextension: {
