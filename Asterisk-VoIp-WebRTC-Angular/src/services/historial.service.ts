@@ -59,10 +59,11 @@ export class HistorialService {
   // Historial x sip o iax
   // sip o iax
   HistorialxSipoIax(obj): Observable<any> {
+    console.log(obj);
     return this.http
       .post<any>(
         this.url + 'ListarHistorialBySipsAndIaxs',
-        obj,
+        { numero: obj },
         this.httpOptions
       )
       .pipe(retry(1), catchError(this.errorHandl));

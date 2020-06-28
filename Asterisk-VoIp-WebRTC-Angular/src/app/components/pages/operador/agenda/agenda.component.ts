@@ -1,16 +1,21 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { AgendaService } from '@services/agenda.service';
 
 @Component({
 	selector: 'Agenda',
-	templateUrl: './agenda.component.html'
+	templateUrl: './agenda.component.html',
+	providers: [AgendaService]
 })
 export class AgendaComponent implements OnInit {
 	public Contactos;
+	public Amigos = [];
 	public llamada;
+	public us = localStorage.getItem('Usuario');
+	public usActual = JSON.parse(this.us);
 
-	@Output() AgendaLlamada = new EventEmitter<string>();
-	constructor(private router: Router) {
+	//@Output() AgendaLlamada = new EventEmitter<string>();
+	constructor(private router: Router, private agendaservice: AgendaService) {
 		this.Contactos = [
 			{ Nombre: 'Daniel', Estado: 'Conectado', Numero: '3001', id: '21' },
 			{ Nombre: 'Juan', Estado: 'Desconectado', Numero: '3002', id: '22' },
@@ -25,9 +30,33 @@ export class AgendaComponent implements OnInit {
 		];
 	}
 
-	ngOnInit() {}
+	ngOnInit() {
+		console.log(this.usActual);
+		this.listarAmigos(this.usActual.usuarioId);
+	}
 	LlamadaComponent(id, Nombre, numero) {
 		this.llamada = { Nombre: Nombre, Numero: numero, Id: id };
-		this.AgendaLlamada.emit(this.llamada);
+		//this.AgendaLlamada.emit(this.llamada);
+	}
+
+	vacio() {
+		var cantidad = this.Amigos[0];
+		if (cantidad == undefined) {
+			return true;
+		}
+		return false;
+	}
+
+	buscar() {}
+
+	listarAmigos(id) {
+		this.agendaservice.listarAmigos(id).subscribe(
+			(response) => {
+				this.Amigos = response;
+				console.log('Todos tus amigos');
+				console.log(response);
+			},
+			(er) => console.log(er)
+		);
 	}
 }
