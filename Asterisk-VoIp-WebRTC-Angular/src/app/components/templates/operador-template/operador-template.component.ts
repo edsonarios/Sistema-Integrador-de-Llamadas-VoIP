@@ -31,6 +31,7 @@ export class OperadorTemplateComponent implements OnInit {
     // variables para manejar el comportamiento del lateral derecho
     public Sala = true;
     public Agenda = false;
+    public AddFriend = false;
     public Dialpad = false;
     public Llamada = [];
     public rtc: WebRTCService;
@@ -395,16 +396,25 @@ export class OperadorTemplateComponent implements OnInit {
         this.Sala = true;
         this.Agenda = false;
         this.Dialpad = false;
+        this.AddFriend = false;
     }
     agendaActive() {
         this.Agenda = true;
         this.Sala = false;
         this.Dialpad = false;
+        this.AddFriend = false;
+    }
+    addFriendActive() {
+        this.Agenda = false;
+        this.Sala = false;
+        this.Dialpad = false;
+        this.AddFriend = true;
     }
     dialpadActive() {
         this.Dialpad = true;
         this.Agenda = false;
         this.Sala = false;
+        this.AddFriend = false;
     }
     // funciones lateral izquierdo inferior
     muteMicrophone() {
