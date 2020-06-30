@@ -1624,8 +1624,10 @@ api.post("/findAllExtensionByContext", async (req, res, next) => {
 
 api.post("/findAllExtensionByFunctions", async (req, res, next) => {
   const params = req.body;
-  //obtengo todos los atributos de la tabla cdrs
+  let sw = "0";
+  //Creamos las entradas para la funcion LlamadasDemo
   if (params.funcion == "llamadasDemo") {
+    sw = "1";
     const obj = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
@@ -1641,11 +1643,10 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       appdata: "",
     });
     res.send({ message: "La funcion se creo correctamente" });
-  } else {
-    res.send({ message: "Funcion no encontrada" });
   }
-  //
-  if (params.funcion == "llamadaSip") {
+  //Creamos las entradas para la funcion llamada Entre Miembros De Una Sala con numeros De Cuatro Digitos
+  if (params.funcion == "llamadaEntreMiembrosDeUnaSalaDeCuatroDigitos") {
+    sw = "1";
     const obj = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
@@ -1675,11 +1676,10 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       appdata: `${params.audio}`,
     });
     res.send({ message: "La funcion se creo correctamente" });
-  } else {
-    res.send({ message: "Funcion no encontrada" });
   }
-  //
-  if (params.funcion == "llamadasAlgo") {
+  //Creamos las entradas para la funcion Llamada Al Correo De Voz
+  if (params.funcion == "llamadaAlCorreoDeVoz") {
+    sw = "1";
     const obj = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
@@ -1688,11 +1688,10 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       appdata: `${params.audio}`,
     });
     res.send({ message: "La funcion se creo correctamente" });
-  } else {
-    res.send({ message: "Funcion no encontrada" });
   }
-  //
-  if (params.funcion == "llamadaAlgo1") {
+  //Creamos las entradas para la funcion Llamada Para Grabar Audios
+  if (params.funcion == "llamadaParaGrabarAudios") {
+    sw = "1";
     const obj = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
@@ -1736,11 +1735,10 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       appdata: "",
     });
     res.send({ message: "La funcion se creo correctamente" });
-  } else {
-    res.send({ message: "Funcion no encontrada" });
   }
-  //
-  if (params.funcion == "llamadasAlgo2") {
+  //Creamos las entradas para la funcion Llamada Al Ivr
+  if (params.funcion == "llamadaAlIvr") {
+    sw = "1";
     const obj = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
@@ -1749,11 +1747,10 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       appdata: `${params.audio}`,
     });
     res.send({ message: "La funcion se creo correctamente" });
-  } else {
-    res.send({ message: "Funcion no encontrada" });
   }
-  //
-  if (params.funcion == "llamadaIvr") {
+  //Creamos las entradas para la funcion Llamada Funciones del Ivr
+  if (params.funcion == "llamadaFuncionesIvr") {
+    sw = "1";
     const obj = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
@@ -1811,11 +1808,10 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       appdata: "",
     });
     res.send({ message: "La funcion se creo correctamente" });
-  } else {
-    res.send({ message: "Funcion no encontrada" });
   }
-  //
-  if (params.funcion == "llamadas8000") {
+  //Creamos las entradas para la funcion Llamada Horario De Atencion
+  if (params.funcion == "llamadaHorarioDeAtencion") {
+    sw = "1";
     const obj = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
@@ -1838,11 +1834,10 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       appdata: "",
     });
     res.send({ message: "La funcion se creo correctamente" });
-  } else {
-    res.send({ message: "Funcion no encontrada" });
   }
-  //
-  if (params.funcion == "llamadas*201") {
+  //Creamos las entradas para la funcion Llamada Para Volverse Agente
+  if (params.funcion == "llamadaParaVolverseAgente") {
+    sw = "1";
     const obj = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
@@ -1865,11 +1860,10 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       appdata: "",
     });
     res.send({ message: "La funcion se creo correctamente" });
-  } else {
-    res.send({ message: "Funcion no encontrada" });
   }
-  //
-  if (params.funcion == "llamadas*202") {
+  //Creamos las entradas para la funcion Llamada Para Dejar de ser Agente
+  if (params.funcion == "llamadaParaDejarDeSerAgente") {
+    sw = "1";
     const obj = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
@@ -1892,11 +1886,10 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       appdata: "",
     });
     res.send({ message: "La funcion se creo correctamente" });
-  } else {
-    res.send({ message: "Funcion no encontrada" });
   }
-  //
-  if (params.funcion == "llamada*600") {
+  //Creamos las entradas para la funcion Llamada para la cola de llamadas
+  if (params.funcion == "llamadaColaDeLlamadas") {
+    sw = "1";
     const obj = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
@@ -1933,11 +1926,10 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       appdata: "",
     });
     res.send({ message: "La funcion se creo correctamente" });
-  } else {
-    res.send({ message: "Funcion no encontrada" });
   }
-  //
-  if (params.funcion == "llamadas3") {
+  //Creamos las entradas para la funcion Llamada de Conferencia
+  if (params.funcion == "llamadaConferencia") {
+    sw = "1";
     const obj = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
@@ -1953,11 +1945,10 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       appdata: `${params.audio}`,
     });
     res.send({ message: "La funcion se creo correctamente" });
-  } else {
-    res.send({ message: "Funcion no encontrada" });
   }
-  //
-  if (params.funcion == "llamadas_555.") {
+  //Creamos las entradas para la funcion Espiar llamadas silenciosamente
+  if (params.funcion == "llamadaEspiarLlamadaSilenciosamente") {
+    sw = "1";
     const obj = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
@@ -1973,11 +1964,10 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       appdata: "",
     });
     res.send({ message: "La funcion se creo correctamente" });
-  } else {
-    res.send({ message: "Funcion no encontrada" });
   }
-  //
-  if (params.funcion == "llamadas_556.") {
+  //Creamos las entradas para la funcion Espiar llamada solo a la persona que llamo
+  if (params.funcion == "llamadaEspiarLlamadaSoloConAgente") {
+    sw = "1";
     const obj = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
@@ -1993,11 +1983,10 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       appdata: "",
     });
     res.send({ message: "La funcion se creo correctamente" });
-  } else {
-    res.send({ message: "Funcion no encontrada" });
   }
-  //
-  if (params.funcion == "llamadas_557.") {
+  //Creamos las entradas para la funcion espiar llamada a ambas personas
+  if (params.funcion == "llamadaEspiarLlamadaConAmbos") {
+    sw = "1";
     const obj = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
@@ -2013,11 +2002,10 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       appdata: "",
     });
     res.send({ message: "La funcion se creo correctamente" });
-  } else {
-    res.send({ message: "Funcion no encontrada" });
   }
-  //
-  if (params.funcion == "llamadas_XXXXXXX") {
+  //Creamos las entradas para la funcion Llamada a celulares fuera del sistema
+  if (params.funcion == "llamadaHaciaCelularesExternos") {
+    sw = "1";
     const obj = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
@@ -2040,7 +2028,8 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       appdata: "",
     });
     res.send({ message: "La funcion se creo correctamente" });
-  } else {
+  }
+  if (sw == "0") {
     res.send({ message: "Funcion no encontrada" });
   }
 });
@@ -2153,14 +2142,17 @@ api.post("/ListarHistorialByFechaBySipsAndIaxs", async (req, res, next) => {
   let todos = [];
   //empiezo a iterar sobre todos los atributos de cdrs
   cdrsAll.forEach((obj) => {
+    console.log(obj.start);
     //transformo el obj.calldate en un formato "yyyy-mm-dd" y pregunto si es igual al parametro q le mando por postman
     if (moment(moment(obj.start).format("YYYY-MM-DD")).isSame(params.fecha)) {
+      //console.log(obj.start);
       if (obj.src == params.numero) {
-        getsalientes.push(obj.dst);
+        //console.log("holiiiiiii");
+        getsalientes.push(obj.dst, obj.start);
         getperdidas.push(obj.disposition);
       }
       if (obj.dst == params.numero) {
-        getentrantes.push(obj.src);
+        getentrantes.push(obj.src, obj.start);
         getperdidas.push(obj.disposition);
       }
     }
@@ -2262,7 +2254,7 @@ api.post("/addAgenda", async (req, res, next) => {
   //creo una agenda apartir del id de un usuario
   try {
     obj = await Agenda.create(params.usuarioId, {
-      Contactos: params.contactos,
+      Contactos: params.Contactos,
     });
   } catch (e) {
     return next(e);
@@ -2307,48 +2299,52 @@ api.post("/ListarContactos", async (req, res, next) => {
   const iaxsAll = await Iax.findAll();
   let getcontactos = [];
   let getusuarios = [];
+  let getid = [];
+  let getidusu = [];
   let getiaxs = [];
   let getsips = [];
+  let getsipsoriax = [];
+
   let todos = [];
-  let todos2 = [];
+  let sw = 0;
+
   //obtengo los contactos de la tabla Agenda
   AgendaAll.forEach((obj) => {
     if (obj.usuarioId == params.usuarioId) {
       getcontactos.push(obj.Contactos);
     }
   });
-  //empiezo a iterar sobre todos los contactos de un usuario
-  getcontactos.forEach((contacto) => {
-    usuarioAll.forEach((usuario) => {
-      if (usuario.id == contacto) {
-        getusuarios.push(usuario.nombre, usuario.apPaterno, usuario.apMaterno);
+  getcontactos.forEach((algo) => {
+    sipsAll.forEach((obj) => {
+      if (algo == obj.name) {
+        getidusu.push(obj.usuarioId);
+        getsips.push(obj.name);
+        //getsips.push({ numeroSip: `${obj.name}` });
       }
     });
-
-    sipsAll.forEach((sips) => {
-      if (sips.usuarioId == contacto) {
-        getsips.push(sips.name);
-      }
-    });
-
-    iaxsAll.forEach((iaxs) => {
-      if (iaxs.usuarioId == contacto) {
-        getiaxs.push(iaxs.name);
-      }
-    });
-    //guardo todos los usuarios, sips e iaxs
-    todos.push(getusuarios);
-    todos.push(getsips);
-    todos.push(getiaxs);
-
-    todos2.push(todos);
-    //vacio los vectores de usuarios, sips e iaxs
-    getusuarios = [];
-    getsips = [];
-    getiaxs = [];
-    todos = [];
   });
-  res.send(todos2);
+  getcontactos.forEach((algo) => {
+    iaxsAll.forEach((obj) => {
+      if (algo == obj.name) {
+        getidusu.push(obj.usuarioId);
+        getiaxs.push(obj.name);
+        //getiaxs.push({ numeroIax: `${obj.name}` });
+      }
+    });
+  });
+
+  getidusu.forEach((algo2) => {
+    usuarioAll.forEach((obj) => {
+      if (obj.id == algo2) {
+        getusuarios.push(obj.nombre);
+        getid.push(obj.id);
+      }
+    });
+  });
+  todos.push(getid);
+  todos.push(getusuarios);
+  todos.push(getsips, getiaxs);
+  res.send(todos);
 });
 
 api.delete("/deleteAgenda", async (req, res, next) => {
