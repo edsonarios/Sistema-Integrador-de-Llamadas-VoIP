@@ -1,32 +1,31 @@
-'use strict'
+"use strict";
 
-const Sequelize = require('sequelize')
-const setupDatabase = require('../lib/db')
+const Sequelize = require("sequelize");
+const setupDatabase = require("../lib/db");
 
-module.exports = function setupExtensionsModel (config) {
-  const sequelize = setupDatabase(config)
+module.exports = function setupExtensionsModel(config) {
+  const sequelize = setupDatabase(config);
 
-  return sequelize.define('extensions', {
+  return sequelize.define("extensions", {
     context: {
       type: Sequelize.STRING,
-      allowNull: true
+      allowNull: true,
     },
     exten: {
       type: Sequelize.STRING,
-      allowNull: true
+      allowNull: true,
     },
     priority: {
-      type: Sequelize.INTEGER,
-      allowNull: true
+      type: Sequelize.STRING,
+      allowNull: true,
     },
     app: {
       type: Sequelize.STRING,
-      allowNull: true
+      allowNull: true,
     },
     appdata: {
       type: Sequelize.STRING,
-      allowNull: true
-    }
-
-  })
-}
+      allowNull: true,
+    },
+  });
+};
