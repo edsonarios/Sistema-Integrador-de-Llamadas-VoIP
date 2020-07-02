@@ -15,10 +15,15 @@ const server = http.createServer(app);
 const io = socketio(server);
 //Variable para diferenciar el nombre de los sockets enviados
 const emit1 = "Llamadas";
+const emit2 = "asterisk";
+var astEst = 0;
 
 //Llamando librerias AMI para conectarno con asterisk
 const AmiClient = require("asterisk-ami-client");
-let client = new AmiClient();
+let client = new AmiClient({
+  reconnect: true,
+  keepAlive: true,
+});
 const { parsePayload } = require("./utils");
 
 // Express Error Handler
@@ -48,8 +53,20 @@ server.listen(port, () => {
 });
 
 client
-  .connect("realTime", "1234", { host: "localhost", port: 5055 })
+  .connect("realTime", "1234", {
+    host: "167.86.119.191",
+    port: 5055,
+  })
   .then((amiConnection) => {
+    if (client.isConnected) {
+      astEst = 0;
+      var evento = {
+        Evento: true,
+        Descripcion: `asterisk conectado`,
+      };
+      console.log(evento);
+      io.emit(`${emit2}`, evento);
+    }
     client.on("event", (event) => {
       var dat = new Date();
 
@@ -250,9 +267,75 @@ client
           console.log(evento);
           io.emit(`${emit1}`, evento);
         }
+        //console para ver todos los eventos y verificar si no se escapa alguno
         //console.log(event)
       }
-
+      //Indica si asterisk se detuvo, aveces falla asterisk en mostrar este evento
+      if (event.Event == "Shutdown") {
+        astEst = 1;
+        console.log(
+          dat.getHours(),
+          ":",
+          dat.getMinutes(),
+          ":",
+          dat.getSeconds()
+        );
+        var evento = {
+          Evento: false,
+          Descripcion: `asterisk desconectado`,
+        };
+        console.log(evento);
+        io.emit(`${emit2}`, evento);
+        //Descomentar para modo produccion
+        //checkConnectionAsterisk();
+      }
+      //Indica si ami se logueo correctamente a asterisk, no siempre se muestra este evento por parte de asterisk
+      if (
+        event.Event == "SuccessfulAuth" &&
+        event.AccountID == "realTime" &&
+        event.Service == "AMI"
+      ) {
+        astEst = 0;
+        console.log(
+          dat.getHours(),
+          ":",
+          dat.getMinutes(),
+          ":",
+          dat.getSeconds()
+        );
+        var evento = {
+          Evento: true,
+          Descripcion: `asterisk conectado`,
+        };
+        console.log(evento);
+        io.emit(`${emit2}`, evento);
+      }
+      //funcion que comprobara cada 60 segundos si hay conectividad con asterisk, solo si hubo un evento de desconeccion automaticamente, si llega por peticion del front, igual entraria en este bucle, desactivado mientras no este en modo produccion
+      function checkConnectionAsterisk() {
+        if (astEst == 1) {
+          setTimeout(() => {
+            if (client.isConnected) {
+              var evento = {
+                Evento: true,
+                Descripcion: `asterisk conectado`,
+              };
+              astEst = 0;
+              console.log(evento);
+              io.emit(`${emit2}`, evento);
+            } else {
+              var evento = {
+                Evento: false,
+                Descripcion: `asterisk desconectado`,
+              };
+              console.log(evento);
+              io.emit(`${emit2}`, evento);
+              checkConnectionAsterisk();
+            }
+            console.log("algo2");
+          }, 60000);
+        }
+      }
+      //console para ver todo los eventos del sistema asterisk
       //console.log(event);
     });
     //client.on('data', chunk => console.log(chunk))
@@ -292,10 +375,26 @@ client
     io.on("connect", (socket) => {
       //recibe el mensaje de la pagina web
       socket.on("action", (payload) => {
-        //publica mediante mqtt el objeto json
+        //inicia accion que viene en el payload
         client.action(payload);
         console.log("\x1b[33m", payload);
       });
+
+      //socket que por peticion del front, envia el estado de ami hacia asterisk, si esta conectado o no, y si no estuviera conectado, entonces entra en un bucle de 60 segundos, preguntando constantemente si esta conectado, hasta que vuelva a conectarse
+      socket.on("asteriskEstado", (payload) => {
+        if (!client.isConnected) {
+          //Descomentar para modo produccion
+          astEst = 1;
+          //checkConnectionAsterisk();
+        }
+        var evento = {
+          Evento: client.isConnected,
+          Descripcion: `asterisk estado`,
+        };
+        io.emit(`${emit2}`, evento);
+        console.log("\x1b[33m", evento);
+      });
+
       //pipe(agent, socket)
     });
   })
