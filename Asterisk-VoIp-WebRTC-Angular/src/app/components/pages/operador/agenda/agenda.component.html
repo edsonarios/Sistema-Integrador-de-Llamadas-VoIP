@@ -1,37 +1,30 @@
 <section class="Agenda animated fadeIn">
     <div class="table-responsive-vertical shadow-z-1">
-        <!-- Table starts here -->
-        <table id="table" class="table table-hover table-mc-light-blue">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Numero</th>
-                    <th>Opciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <div *ngIf="Amigos.length != 0">
-                    <tr *ngFor="let n of Amigos; let i = index">
-                        <td data-title="Name">{{ Amigos[i]['nombre'] }}</td>
-                        <td data-title="Link">
-                            {{ Amigos[i]['numero'] }}
-                        </td>
-                        <td>
-                            <i class="v-icon-dialer_sip" (click)="
-								LlamadaComponent(Contactos[i]['id'], Contactos[i]['Nombre'], Contactos[i]['Numero'])
-							" tooltip="Llamar" style="color: green;"></i>
-                        </td>
-                        <td>
-                            <i-feather name="minus" (click)="
-                            deletearAmigo(Amigos[i]['id'])
-                        " tooltip="Eliminar" style="color: red;"></i-feather>
-                        </td>
-                    </tr>
+        <div class="agenda-content">
+            <div class="agenda-header">
+                <h6>Nombre</h6>
+                <h6>Numero</h6>
+                <h6>Opciones</h6>
+            </div>
+            <div *ngIf="Amigos.length != 0">
+                <div *ngFor="let n of Amigos; let i = index" class="agenda-body">
+                    <div data-title="Name">{{ Amigos[i]['nombre'] }}</div>
+                    <div data-title="Link">
+                        {{ Amigos[i]['numero'] }}
+                    </div>
+                    <div class="agenda-options">
+                        <i
+                            class="v-icon-dialer_sip"
+                            (click)="LlamadaComponent(Contactos[i]['id'], Contactos[i]['Nombre'], Contactos[i]['Numero'])"
+                            tooltip="Llamar"
+                        ></i>
+                        <i-feather name="minus" (click)="deletearAmigo(Amigos[i]['id'])" tooltip="Eliminar"></i-feather>
+                    </div>
                 </div>
-                <div *ngIf="Amigos.length == 0">
-                    <p>No Tienes Contactos en tu agenda</p>
-                </div>
-            </tbody>
-        </table>
+            </div>
+            <div *ngIf="Amigos.length == 0">
+                <p>No Tienes Contactos en tu agenda</p>
+            </div>
+        </div>
     </div>
 </section>

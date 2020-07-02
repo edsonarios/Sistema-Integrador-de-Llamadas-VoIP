@@ -5,7 +5,8 @@ import { AgendaService } from '@services/agenda.service';
 @Component({
     selector: 'Agenda',
     templateUrl: './agenda.component.html',
-    providers: [AgendaService]
+    providers: [AgendaService],
+    styleUrls: ['./agenda.component.scss']
 })
 export class AgendaComponent implements OnInit {
     public Contactos;

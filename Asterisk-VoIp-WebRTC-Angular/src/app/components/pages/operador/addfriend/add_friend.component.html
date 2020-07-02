@@ -1,51 +1,23 @@
 <section class="Agenda animated fadeIn">
-    <div class="table-responsive-vertical shadow-z-1">
-
-
-
-        <table class="table table-hover table-mc-light-blue">
-            <thead>
-                <tr>
-                    <th>
-                        <div>
-                            <input type="text" class="form-control" placeholder="Contacto" />
-                        </div>
-                    </th>
-                    <th>
-                        <i-feather name="search" tooltip="Buscar">
-                        </i-feather>
-
-                    </th>
-                </tr>
-            </thead>
-        </table>
-
-
-        <!-- Table starts here -->
-        <table id="table" class="table table-hover table-mc-light-blue">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Numero</th>
-                    <th>Opciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let n of Friend; let i = index">
-                    <td data-title="Name">{{ Friend[i]['nombre'] }}</td>
-                    <td data-title="Link">
-                        {{ Friend[i]['numero'] }}
-                    </td>
-                    <td>
-                        <i class="v-icon-dialer_sip" tooltip="Llamar" style="color: green;"></i>
-                    </td>
-                    <td>
-                        <i-feather name="plus" (click)="
-                        addAmigo(Friend[i]['nombre'], Friend[i]['numero'])
-					" tooltip="Añadir" style="color: green;"></i-feather>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="add-buscar">
+        <input type="text" class="form-control" placeholder="Contacto" />
+        <i-feather name="search" tooltip="Buscar"> </i-feather>
+    </div>
+    <div class="add-content">
+        <div class="add-header">
+            <h6>Nombre</h6>
+            <h6>Numero</h6>
+            <h6>Opciones</h6>
+        </div>
+        <div class="add-body" *ngFor="let n of Friend; let i = index">
+            <div data-title="Name">{{ Friend[i]['nombre'] }}</div>
+            <div data-title="Link">
+                {{ Friend[i]['numero'] }}
+            </div>
+            <div class="add-options">
+                <i class="v-icon-dialer_sip" tooltip="Llamar"></i>
+                <i-feather name="plus" (click)="addAmigo(Friend[i]['nombre'], Friend[i]['numero'])" tooltip="Añadir"></i-feather>
+            </div>
+        </div>
     </div>
 </section>

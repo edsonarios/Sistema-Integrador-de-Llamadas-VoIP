@@ -15,11 +15,12 @@ $color-primary: #0275d8;
         align-content: center;
         align-items: center;
         fa-icon {
-            font-size: 2em;
+            font-size: 20px;
         }
         .r-tittle {
             cursor: default;
             font-weight: bold;
+            font-size: small;
             width: 100px;
             background: #ffffff;
             box-shadow: inset 2px 2px 0px #e0e0e0, inset -2px -2px 0px #ffffff;
@@ -50,6 +51,7 @@ $color-primary: #0275d8;
         height: 25px;
         border-radius: 10px;
         font-weight: bold;
+        font-size: small;
         color: white;
         &--perdidas {
             background-color: $color-danger;

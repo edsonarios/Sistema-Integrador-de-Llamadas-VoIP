@@ -7,6 +7,7 @@ import { SipService } from '@services/sip.service';
 @Component({
     selector: 'Addfriend',
     templateUrl: './add_friend.component.html',
+    styleUrls: ['./add_friend.component.scss'],
     providers: [UserService, AgendaService, SipService]
 })
 export class AddFriendComponent implements OnInit {

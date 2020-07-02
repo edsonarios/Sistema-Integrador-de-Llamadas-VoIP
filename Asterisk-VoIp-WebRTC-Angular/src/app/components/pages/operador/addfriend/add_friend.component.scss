@@ -1,0 +1,37 @@
+$color: #353939;
+$color2: #eeeeee;
+.add-buscar {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    background-color: $color;
+    padding: 10px;
+    i-feather {
+        margin-left: 30px;
+        margin-top: 7px;
+        color: white;
+        cursor: pointer;
+    }
+}
+.add-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: $color;
+    color: white;
+    font-weight: bolder;
+    text-align: center;
+}
+.add-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    background: $color2;
+    border: 2px solid white;
+    div {
+        padding: 10px 3px;
+    }
+    .add-options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        color: green;
+    }
+}
