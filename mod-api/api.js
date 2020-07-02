@@ -2138,29 +2138,31 @@ api.post("/ListarHistorialByFechaBySipsAndIaxs", async (req, res, next) => {
   const cdrsAll = await Cdr.findAll();
   let getentrantes = [];
   let getsalientes = [];
-  let getperdidas = [];
   let todos = [];
   //empiezo a iterar sobre todos los atributos de cdrs
   cdrsAll.forEach((obj) => {
-    console.log(obj.start);
     //transformo el obj.calldate en un formato "yyyy-mm-dd" y pregunto si es igual al parametro q le mando por postman
     if (moment(moment(obj.start).format("YYYY-MM-DD")).isSame(params.fecha)) {
-      //console.log(obj.start);
       if (obj.src == params.numero) {
-        //console.log("holiiiiiii");
-        getsalientes.push(obj.dst, obj.start);
-        getperdidas.push(obj.disposition);
+        getsalientes.push({
+          numeroSaliente: `${obj.dst}`,
+          estado: `${obj.disposition}`,
+          fechayhora: `${obj.start}`,
+        });
       }
+
       if (obj.dst == params.numero) {
-        getentrantes.push(obj.src, obj.start);
-        getperdidas.push(obj.disposition);
+        getentrantes.push({
+          numeroEntrante: `${obj.src}`,
+          estado: `${obj.disposition}`,
+          fechayhora: `${obj.start}`,
+        });
       }
     }
   });
   //guardo todos los atributos q necesito devolver
-  todos.push(getentrantes);
   todos.push(getsalientes);
-  todos.push(getperdidas);
+  todos.push(getentrantes);
   res.send(todos);
 });
 
@@ -2215,34 +2217,34 @@ api.post("/ListarHistorialBySipsAndIaxs", async (req, res, next) => {
   const cdrsAll = await Cdr.findAll();
   let getentrantes = [];
   let getsalientes = [];
-  let getperdidas = [];
-  let getminutos = [];
-  let getsegundos = [];
   let todos = [];
   //empiezo a iterar sobre todos los atributos de cdrs para las llamadas salientes
   cdrsAll.forEach((obj) => {
     if (obj.src == params.numero) {
-      getsalientes.push(obj.dst);
-      getperdidas.push(obj.disposition);
-      getminutos.push(obj.duration);
-      getsegundos.push(obj.billsec);
+      getsalientes.push({
+        numeroSaliente: `${obj.dst}`,
+        estado: `${obj.disposition}`,
+        fechayhora: `${obj.start}`,
+        minutos: `${obj.duration}`,
+        segundos: `${obj.billsec}`,
+      });
     }
   });
   //empiezo a iterar sobre todos los atributos de cdrs para las llamadas entrantes
   cdrsAll.forEach((obj) => {
     if (obj.dst == params.numero) {
-      getentrantes.push(obj.src);
-      getperdidas.push(obj.disposition);
-      getminutos.push(obj.duration);
-      getsegundos.push(obj.billsec);
+      getentrantes.push({
+        numeroEntrante: `${obj.src}`,
+        estado: `${obj.disposition}`,
+        fechayhora: `${obj.start}`,
+        minutos: `${obj.duration}`,
+        segundos: `${obj.billsec}`,
+      });
     }
   });
   //guardo todos los atributos q necesito devolver
   todos.push(getentrantes);
   todos.push(getsalientes);
-  todos.push(getperdidas);
-  todos.push(getminutos);
-  todos.push(getsegundos);
   res.send(todos);
 });
 
