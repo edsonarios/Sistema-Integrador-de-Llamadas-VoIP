@@ -1,38 +1,51 @@
 <section class="Agenda animated fadeIn">
-	<div class="table-responsive-vertical shadow-z-1">
+    <div class="table-responsive-vertical shadow-z-1">
 
 
-		<div>
-			<form action="">
-				<input type="text">
-				<a (click)="buscar()"><i class="v-icon-magnifying-glass"></i></a>
-			</form>
-		</div>
+
+        <table class="table table-hover table-mc-light-blue">
+            <thead>
+                <tr>
+                    <th>
+                        <div>
+                            <input type="text" class="form-control" placeholder="Contacto" />
+                        </div>
+                    </th>
+                    <th>
+                        <i-feather name="search" tooltip="Buscar">
+                        </i-feather>
+
+                    </th>
+                </tr>
+            </thead>
+        </table>
 
 
-		<!-- Table starts here -->
-		<table id="table" class="table table-hover table-mc-light-blue">
-			<thead>
-				<tr>
-					<th>Nombre</th>
-					<th>Numero</th>
-					<th>Opciones</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let n of Contacts; let i = index">
-					<td data-title="Name">{{ Contacts[i]['nombre'] }}</td>
-					<td data-title="Link">
-						{{ Contacts[i]['id'] }}
-					</td>
-					<td>
-						<i class="v-icon-dialer_sip" (click)="
-                        addAmigo(Contacts[i]['id'], Contacts[i]['nombre'])
-					" tooltip="Añadir" style="color: green;"></i>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-
-	</div>
+        <!-- Table starts here -->
+        <table id="table" class="table table-hover table-mc-light-blue">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Numero</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let n of Friend; let i = index">
+                    <td data-title="Name">{{ Friend[i]['nombre'] }}</td>
+                    <td data-title="Link">
+                        {{ Friend[i]['numero'] }}
+                    </td>
+                    <td>
+                        <i class="v-icon-dialer_sip" tooltip="Llamar" style="color: green;"></i>
+                    </td>
+                    <td>
+                        <i-feather name="plus" (click)="
+                        addAmigo(Friend[i]['nombre'], Friend[i]['numero'])
+					" tooltip="Añadir" style="color: green;"></i-feather>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </section>

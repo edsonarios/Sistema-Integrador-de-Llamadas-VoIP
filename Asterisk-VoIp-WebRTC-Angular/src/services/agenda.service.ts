@@ -9,45 +9,55 @@ import { Iax } from '../models/iax';
 import { GLOBAL } from './global';
 
 @Injectable({
-	providedIn: 'root'
+    providedIn: 'root'
 })
 export class AgendaService {
-	public url: string;
+    public url: string;
 
-	constructor(private http: HttpClient) {
-		this.url = GLOBAL.url;
-	}
+    constructor(private http: HttpClient) {
+        this.url = GLOBAL.url;
+    }
 
-	// Http Headers
-	httpOptions = {
-		headers: new HttpHeaders({
-			'Content-Type': 'application/json'
-		})
-	};
+    // Http Headers
+    httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+        })
+    };
 
-	addAmigo(id, name): Observable<any> {
-		return this.http
-			.post<any>(this.url + 'addAgenda', { usuarioId: id, Contactos: name }, this.httpOptions)
-			.pipe(retry(1), catchError(this.errorHandl));
-	}
+    addAmigo(id, name): Observable<any> {
+        return this.http.post<any>(this.url + 'addAgenda', { usuarioId: id, Contactos: name }, this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
+    }
 
-	listarAmigos(id): Observable<any> {
-		return this.http
-			.post<any>(this.url + 'ListarContactos', { usuarioId: id }, this.httpOptions)
-			.pipe(retry(1), catchError(this.errorHandl));
-	}
+    listarAmigos(id): Observable<any> {
+        return this.http.post<any>(this.url + 'ListarContactos', { usuarioId: id }, this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
+    }
 
-	// Error handling
-	errorHandl(error) {
-		let errorMessage = '';
-		if (error.error instanceof ErrorEvent) {
-			// Get client-side error
-			errorMessage = error.error.message;
-		} else {
-			// Get server-side error
-			errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-		}
-		console.log(errorMessage);
-		return throwError(errorMessage);
-	}
+    // deletearAmigo(idfriend) {
+    //     return this.http.delete(this.url + 'deleteAgenda' + '/' + idfriend).pipe(retry(1), catchError(this.errorHandl));
+    // }
+
+    // deletearAmigo(idfriend) {
+    //     return this.http.delete(this.url + 'deleteAgenda/' + idfriend, this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
+    // }
+
+    deleteAmigo(idfriend) {
+        this.http.request('delete', this.url + 'deleteAgenda', { body: { id: idfriend } }).subscribe((data) => {
+            console.log(data);
+        });
+    }
+
+    // Error handling
+    errorHandl(error) {
+        let errorMessage = '';
+        if (error.error instanceof ErrorEvent) {
+            // Get client-side error
+            errorMessage = error.error.message;
+        } else {
+            // Get server-side error
+            errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        }
+        console.log(errorMessage);
+        return throwError(errorMessage);
+    }
 }
