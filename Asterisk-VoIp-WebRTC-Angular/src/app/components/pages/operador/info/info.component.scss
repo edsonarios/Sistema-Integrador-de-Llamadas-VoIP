@@ -1,0 +1,22 @@
+$color-danger: #d9534f;
+$color-success: #5cb85c;
+$color-primary: #0275d8;
+$color2: #eeeeee;
+
+.info-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    background-color: $color2;
+    border: 1px solid white;
+    border-radius: 2px;
+}
+.realizada {
+    color: $color-primary;
+}
+.recibida {
+    color: $color-success;
+}
+.perdida {
+    color: $color-danger;
+}

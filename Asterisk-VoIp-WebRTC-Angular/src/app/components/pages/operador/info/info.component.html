@@ -1,0 +1,21 @@
+<div class="info-content" *ngFor="let item of arrayEntrantes">
+    <div>
+        <fa-icon class="recibida" [icon]="iconPhone" *ngIf="item.estado === 'ANSWERED' || item.estado === 'BUSY'"> </fa-icon>
+        <fa-icon class="recibida" [icon]="iconEntrante" *ngIf="item.estado === 'ANSWERED' || item.estado === 'BUSY'"> </fa-icon>
+        <fa-icon class="perdida" [icon]="iconSaliente" *ngIf="item.estado === 'NO ANSWER'"> </fa-icon>
+        <fa-icon class="perdida" [icon]="iconPhone" *ngIf="item.estado === 'NO ANSWER'"> </fa-icon>
+
+        {{ item.numeroEntrante }}
+    </div>
+    <div>
+        {{ item.fechayhora | date: 'shortTime' }}
+    </div>
+</div>
+<div class="info-content" *ngFor="let item of arraySalientes">
+    <div>
+        <fa-icon class="realizada" [icon]="iconSaliente"> </fa-icon>
+        <fa-icon class="realizada" [icon]="iconPhone"> </fa-icon>
+        {{ item.numeroSaliente }}
+    </div>
+    <div>{{ item.fechayhora | date: 'shortTime' }}</div>
+</div>

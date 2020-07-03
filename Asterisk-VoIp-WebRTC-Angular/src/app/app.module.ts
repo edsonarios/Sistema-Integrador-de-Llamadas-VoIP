@@ -43,6 +43,7 @@ import { RegistroLlamadasComponent } from './components/pages/operador/registro-
 
 import { IconsModule } from './icons/icons.module';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+import { InfoComponent } from './components/pages/operador/info/info.component';
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -57,7 +58,8 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 		LlamadaComponent,
 		PanelComponent,
 		ParticipanteComponent,
-		RegistroLlamadasComponent
+		RegistroLlamadasComponent,
+		InfoComponent
 	],
 	imports: [
 		BrowserModule,
