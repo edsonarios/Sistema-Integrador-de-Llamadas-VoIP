@@ -1159,8 +1159,12 @@ api.get("/getUsuariosTodos", async (req, res, next) => {
   usuariosAll.forEach((obj) => {
     sipsAll.forEach((obj1) => {
       if (obj.id == obj1.usuarioId && obj1.nat != null) {
-        getusuarios.push({ usuarioId: `${obj.id}`, nombre: `${obj.nombre}` });
-        getusuarios.push({ numeroSip: `${obj1.name}` });
+        getusuarios.push({
+          usuarioId: `${obj.id}`,
+          nombre: `${obj.nombre}`,
+          numeroSip: `${obj1.name}`,
+        });
+        //getusuarios.push({ numeroSip: `${obj1.name}` });
       }
     });
   });
@@ -2329,7 +2333,7 @@ api.post("/ListarContactos", async (req, res, next) => {
   let getidusu = [];
   let getiaxs = [];
   let getsips = [];
-  let getsipsoriax = [];
+  let getidagenda = [];
 
   let todos = [];
   let sw = 0;
@@ -2338,6 +2342,7 @@ api.post("/ListarContactos", async (req, res, next) => {
   AgendaAll.forEach((obj) => {
     if (obj.usuarioId == params.usuarioId) {
       getcontactos.push(obj.Contactos);
+      getidagenda.push(obj.id);
     }
   });
   getcontactos.forEach((algo) => {
@@ -2363,11 +2368,11 @@ api.post("/ListarContactos", async (req, res, next) => {
     usuarioAll.forEach((obj) => {
       if (obj.id == algo2) {
         getusuarios.push(obj.nombre);
-        getid.push(obj.id);
+        //getid.push(obj.id);
       }
     });
   });
-  todos.push(getid);
+  todos.push(getidagenda);
   todos.push(getusuarios);
   todos.push(getsips, getiaxs);
   res.send(todos);
