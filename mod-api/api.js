@@ -1148,6 +1148,29 @@ api.post("/getUsuariosWithSipsAndIaxs", async (req, res, next) => {
   res.send(todos);
 });
 
+api.get("/getUsuariosTodos", async (req, res, next) => {
+  const params = req.body;
+  //Obtengo todos los sips e iaxs
+  const usuariosAll = await Usuario.findAll();
+  const sipsAll = await Sip.findAll();
+  const iaxsAll = await Iax.findAll();
+  let getusuarios = [];
+  //itero sobre los sips e iaxs
+  usuariosAll.forEach((obj) => {
+    sipsAll.forEach((obj1) => {
+      if (obj.id == obj1.usuarioId && obj1.nat != null) {
+        getusuarios.push({
+          usuarioId: `${obj.id}`,
+          nombre: `${obj.nombre}`,
+          numeroSip: `${obj1.name}`,
+        });
+        //getusuarios.push({ numeroSip: `${obj1.name}` });
+      }
+    });
+  });
+  res.send(getusuarios);
+});
+
 api.delete("/deleteUsuarioWithAll", async (req, res, next) => {
   const params = req.body;
   //Obtengo todos los usuario de la tabla usuarios. A todos sips e iaxs
@@ -2184,8 +2207,11 @@ api.post("/ListarHistorialBetweenFechas", async (req, res, next) => {
       )
     ) {
       if (obj.src == params.numero) {
-        getsalientes.push(obj.dst);
-        getperdidas.push(obj.disposition);
+        getsalientes.push({
+          numeroSaliente: `${obj.dst}`,
+          estado: `${obj.disposition}`,
+          fechayhora: `${obj.start}`,
+        });
       }
     }
   });
@@ -2199,15 +2225,17 @@ api.post("/ListarHistorialBetweenFechas", async (req, res, next) => {
       )
     ) {
       if (obj.dst == params.numero) {
-        getentrantes.push(obj.src);
-        getperdidas.push(obj.disposition);
+        getentrantes.push({
+          numeroEntrante: `${obj.src}`,
+          estado: `${obj.disposition}`,
+          fechayhora: `${obj.start}`,
+        });
       }
     }
   });
   //guardo todos los atributos q necesito devolver
-  todos.push(getentrantes);
   todos.push(getsalientes);
-  todos.push(getperdidas);
+  todos.push(getentrantes);
   res.send(todos);
 });
 
@@ -2305,7 +2333,7 @@ api.post("/ListarContactos", async (req, res, next) => {
   let getidusu = [];
   let getiaxs = [];
   let getsips = [];
-  let getsipsoriax = [];
+  let getidagenda = [];
 
   let todos = [];
   let sw = 0;
@@ -2314,6 +2342,7 @@ api.post("/ListarContactos", async (req, res, next) => {
   AgendaAll.forEach((obj) => {
     if (obj.usuarioId == params.usuarioId) {
       getcontactos.push(obj.Contactos);
+      getidagenda.push(obj.id);
     }
   });
   getcontactos.forEach((algo) => {
@@ -2339,11 +2368,11 @@ api.post("/ListarContactos", async (req, res, next) => {
     usuarioAll.forEach((obj) => {
       if (obj.id == algo2) {
         getusuarios.push(obj.nombre);
-        getid.push(obj.id);
+        //getid.push(obj.id);
       }
     });
   });
-  todos.push(getid);
+  todos.push(getidagenda);
   todos.push(getusuarios);
   todos.push(getsips, getiaxs);
   res.send(todos);
