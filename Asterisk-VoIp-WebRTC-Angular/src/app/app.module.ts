@@ -44,46 +44,55 @@ import { RegistroLlamadasComponent } from './components/pages/operador/registro-
 import { IconsModule } from './icons/icons.module';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { InfoComponent } from './components/pages/operador/info/info.component';
+
+// Socket IO
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+const config: SocketIoConfig = {
+    url: environment.asteriskUrl,
+    options: {}
+};
+
 @NgModule({
-	declarations: [
-		AppComponent,
-		LoginComponent,
-		OperadorTemplateComponent,
-		AdministradorTemplateComponent,
-		DialPadComponent,
-		AddFriendComponent,
-		AgendaComponent,
-		NotificacionComponent,
-		SalaComponent,
-		LlamadaComponent,
-		PanelComponent,
-		ParticipanteComponent,
-		RegistroLlamadasComponent,
-		InfoComponent
-	],
-	imports: [
-		BrowserModule,
-		HttpClientModule,
-		FormsModule,
-		ReactiveFormsModule,
-		BrowserAnimationsModule,
-		RouterModule.forRoot(AppRoutes, {
-			useHash: false
-		}),
-		AccordionModule,
-		TooltipModule.forRoot(),
-		BsDropdownModule.forRoot(),
-		ModalModule.forRoot(),
-		TabsModule.forRoot(),
-		PopoverModule.forRoot(),
-		AngularFireModule.initializeApp(environment.firebaseConfig),
-		AngularFirestoreModule,
-		FontAwesomeModule,
-		IconsModule,
-		SnotifyModule
-	],
-	providers: [{ provide: 'SnotifyToastConfig', useValue: ToastDefaults }, SnotifyService],
-	bootstrap: [AppComponent],
-	entryComponents: [DialPadComponent]
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        OperadorTemplateComponent,
+        AdministradorTemplateComponent,
+        DialPadComponent,
+        AddFriendComponent,
+        AgendaComponent,
+        NotificacionComponent,
+        SalaComponent,
+        LlamadaComponent,
+        PanelComponent,
+        ParticipanteComponent,
+        RegistroLlamadasComponent,
+        InfoComponent
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        RouterModule.forRoot(AppRoutes, {
+            useHash: false
+        }),
+        AccordionModule,
+        TooltipModule.forRoot(),
+        BsDropdownModule.forRoot(),
+        ModalModule.forRoot(),
+        TabsModule.forRoot(),
+        PopoverModule.forRoot(),
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFirestoreModule,
+        FontAwesomeModule,
+        IconsModule,
+        SnotifyModule,
+        SocketIoModule.forRoot(config)
+    ],
+    providers: [{ provide: 'SnotifyToastConfig', useValue: ToastDefaults }, SnotifyService],
+    bootstrap: [AppComponent],
+    entryComponents: [DialPadComponent]
 })
 export class AppModule {}

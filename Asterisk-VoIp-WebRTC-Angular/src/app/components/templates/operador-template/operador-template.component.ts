@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, OnDestroy } from '@angular/core';
 import { User } from 'models/user';
 // import { Sala } from '../../../../models/sala';
 import { Entrance, Quit, DesktopAnimation, EnterLeave } from 'services/animations';
@@ -18,6 +18,10 @@ import { faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons';
 import { faSignal } from '@fortawesome/free-solid-svg-icons';
 import { faPlug } from '@fortawesome/free-solid-svg-icons';
 
+// Sockets
+import { AsteriskConnectionService } from '../../../../services/asterisk-connection.service';
+import { Subscription } from 'rxjs';
+
 import { WebRTCService } from '@services/WebRTC/WebRTC.service';
 import { UA } from 'jssip';
 import { RTCSession } from 'jssip/lib/RTCSession';
@@ -27,7 +31,7 @@ import { RTCSession } from 'jssip/lib/RTCSession';
     templateUrl: './operador-template.component.html',
     animations: [Entrance, Quit, DesktopAnimation, EnterLeave]
 })
-export class OperadorTemplateComponent implements OnInit {
+export class OperadorTemplateComponent implements OnInit, OnDestroy {
     // variables para manejar el comportamiento del lateral derecho
     public Sala = true;
     public Agenda = false;
@@ -86,8 +90,17 @@ export class OperadorTemplateComponent implements OnInit {
 
     public Sip_Iax = [[], []];
 
+    // Socket
+    estadoSubscription: Subscription;
+    estado: any = [];
+
     modalRef: BsModalRef;
-    constructor(private modalService: BsModalService, private formBuilder: FormBuilder, public salaService: SalaService) {
+    constructor(
+        private modalService: BsModalService,
+        private formBuilder: FormBuilder,
+        public salaService: SalaService,
+        public estadoService: AsteriskConnectionService
+    ) {
         this.ParticipantesSala = [
             {
                 Id: '1',
@@ -177,7 +190,18 @@ export class OperadorTemplateComponent implements OnInit {
         });
         this.ObtenerSalas();
         //console.log(this.user);
+
+        // sockets
+        this.estadoSubscription = this.estadoService.getResponse().subscribe((data) => {
+            console.log('socket', data);
+            this.estado.push(data);
+        });
+        this.cambioAsterisk();
     }
+    ngOnDestroy() {
+        this.estadoSubscription.unsubscribe();
+    }
+
     LoaderPage(funtion) {
         if (funtion == 'page') {
             this.Hide = false;
@@ -438,12 +462,12 @@ export class OperadorTemplateComponent implements OnInit {
         }
     }
     cambioAsterisk() {
-        if (this.connectionAsterisk === 'black') {
+        this.connectionAsterisk = '#f0ad4e';
+        if (this.estado.Evento === true) {
             this.connectionAsterisk = this.lowConnection;
-        } else if (this.connectionAsterisk === '#f0ad4e') {
-            this.connectionAsterisk = this.noConnection;
+            // console.log(this.estado);
         } else {
-            this.connectionAsterisk = 'black';
+            this.connectionAsterisk = this.noConnection;
         }
     }
 }

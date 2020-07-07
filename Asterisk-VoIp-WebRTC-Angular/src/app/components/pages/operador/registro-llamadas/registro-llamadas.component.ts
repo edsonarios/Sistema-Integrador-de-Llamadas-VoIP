@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, DoCheck } from '@angular/core';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { HistorialService } from '../../../../../services/historial.service';
 import { LlamadasSalientes } from '../../../../../models/llamadasSalientes.interface';
@@ -26,11 +26,14 @@ export class RegistroLlamadasComponent implements OnInit, OnChanges {
     public llamadasRecibidas = 0;
     public llamadasPerdidas = 0;
 
-    constructor(private historialService: HistorialService) {}
+    constructor(private historialService: HistorialService) {
+        // this.HistorialNumeroFecha();
+    }
 
     ngOnInit() {
         this.HistorialNumeroFecha();
     }
+
     ngOnChanges() {
         this.getCantidadPerdidasRecibidas();
         this.getCantidadRealizadas();
@@ -49,6 +52,7 @@ export class RegistroLlamadasComponent implements OnInit, OnChanges {
     }
     HistorialNumeroFecha() {
         this.historialService.HistorialxSipoIaxxFecha(this.numero, this.fecha).subscribe(
+            // this.historialService.HistorialxSipoIaxxFecha(2001, '2020-07-03').subscribe(
             (response) => {
                 this.res = response;
                 this.arraySalientes = this.res[0];
