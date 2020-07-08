@@ -397,23 +397,24 @@ client
           shell.exec("pm2 restart socketA");
           console.log("socket asterisk reiniciado");
         }
+        //socket que por peticion del front, envia el estado de ami hacia asterisk, si esta conectado o no, y si no estuviera conectado, entonces entra en un bucle de 60 segundos, preguntando constantemente si esta conectado, hasta que vuelva a conectarse
+        if (payload.accion == "estado") {
+          if (!client.isConnected) {
+            //Descomentar para modo produccion
+            astEst = 1;
+            //checkConnectionAsterisk();
+          }
+          var evento = {
+            evento: client.isConnected,
+            descripcion: `asterisk estado`,
+          };
+          io.emit(`${emit2}`, evento);
+          console.log("\x1b[33m", evento);
+        }
         //console.log("\x1b[33m", payload);
       });
 
-      //socket que por peticion del front, envia el estado de ami hacia asterisk, si esta conectado o no, y si no estuviera conectado, entonces entra en un bucle de 60 segundos, preguntando constantemente si esta conectado, hasta que vuelva a conectarse
-      socket.on("asteriskEstado", (payload) => {
-        if (!client.isConnected) {
-          //Descomentar para modo produccion
-          astEst = 1;
-          //checkConnectionAsterisk();
-        }
-        var evento = {
-          Evento: client.isConnected,
-          Descripcion: `asterisk estado`,
-        };
-        io.emit(`${emit2}`, evento);
-        console.log("\x1b[33m", evento);
-      });
+      socket.on("asteriskEstado", (payload) => {});
 
       //pipe(agent, socket)
     });
