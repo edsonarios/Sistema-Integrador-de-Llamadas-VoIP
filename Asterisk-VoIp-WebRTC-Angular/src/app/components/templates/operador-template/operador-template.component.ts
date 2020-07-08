@@ -26,6 +26,8 @@ import { WebRTCService } from '@services/WebRTC/WebRTC.service';
 import { UA } from 'jssip';
 import { RTCSession } from 'jssip/lib/RTCSession';
 import { WebsocketService } from '../../../../services/websocket.service';
+import { Socket } from 'ngx-socket-io';
+import { EstadoAsterisk } from '../../../../models/estadoAsterisk';
 
 @Component({
     selector: 'operador-template',
@@ -95,13 +97,16 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     estadoSubscription: Subscription;
     estado: any = [];
 
+    ASTERISK;
+
     modalRef: BsModalRef;
     constructor(
         private modalService: BsModalService,
         private formBuilder: FormBuilder,
         public salaService: SalaService,
         public estadoService: AsteriskConnectionService,
-        public wsService: WebsocketService
+        public wsService: WebsocketService,
+        private socket: Socket
     ) {
         this.ParticipantesSala = [
             {
@@ -194,11 +199,17 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
         //console.log(this.user);
 
         // sockets
-        this.estadoSubscription = this.estadoService.getResponse().subscribe((data) => {
-            this.estado.push(data);
-            console.log('[data del socket]', this.estado);
-            this.cambioAsterisk(this.estado.Evento);
+        // this.estadoSubscription = this.estadoService.getResponse('asterisk').subscribe((data) => {
+        //     this.estado.push(data);
+        //     console.log('[data del socket]', this.estado);
+        //     //this.cambioAsterisk(this.estado.);
+        // });
+        this.estadoService.getResponse('asterisk').subscribe((msg: EstadoAsterisk) => {
+            this.ASTERISK = msg.evento;
+            console.log('ASTERISK', msg.evento);
+            this.cambioAsterisk();
         });
+        this.verificar();
     }
     ngOnDestroy() {
         this.estadoSubscription.unsubscribe();
@@ -463,15 +474,14 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
             this.Connection = 'black';
         }
     }
-    cambioAsterisk(evento: boolean) {
-        //console.log(this.wsService.estadoAsterisk.Evento);
-        //this.connectionAsterisk = '#f0ad4e';
-        console.log('evento del socket:', evento);
-        if (evento) {
+    cambioAsterisk() {
+        if (this.ASTERISK) {
             this.connectionAsterisk = this.Connection;
-            // console.log(this.estado);
         } else {
             this.connectionAsterisk = this.noConnection;
         }
+    }
+    verificar() {
+        this.estadoService.accionAsterisk('estado');
     }
 }
