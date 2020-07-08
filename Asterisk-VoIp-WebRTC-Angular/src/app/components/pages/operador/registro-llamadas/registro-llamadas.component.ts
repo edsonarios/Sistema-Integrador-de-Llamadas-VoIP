@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { HistorialService } from '../../../../../services/historial.service';
 import { LlamadasSalientes } from '../../../../../models/llamadasSalientes.interface';
@@ -10,7 +10,7 @@ import * as moment from 'moment';
     templateUrl: './registro-llamadas.component.html',
     styleUrls: ['./registro-llamadas.component.scss']
 })
-export class RegistroLlamadasComponent implements OnInit, OnChanges {
+export class RegistroLlamadasComponent implements OnInit {
     phoneIcon = faPhone;
     public res: any[];
     // numero actual del usuario en el sistema
@@ -26,15 +26,14 @@ export class RegistroLlamadasComponent implements OnInit, OnChanges {
     public llamadasRecibidas = 0;
     public llamadasPerdidas = 0;
 
-    constructor(private historialService: HistorialService) {}
+    constructor(private historialService: HistorialService) {
+        // this.HistorialNumeroFecha();
+    }
 
     ngOnInit() {
         this.HistorialNumeroFecha();
     }
-    ngOnChanges() {
-        this.getCantidadPerdidasRecibidas();
-        this.getCantidadRealizadas();
-    }
+
     prueba() {
         this.historialService.HistorialxSipoIaxEntreFecha('2001', '2020-01-01', '2020-07-02').subscribe(
             (response) => {
@@ -49,12 +48,12 @@ export class RegistroLlamadasComponent implements OnInit, OnChanges {
     }
     HistorialNumeroFecha() {
         this.historialService.HistorialxSipoIaxxFecha(this.numero, this.fecha).subscribe(
+            // this.historialService.HistorialxSipoIaxxFecha(2001, '2020-07-03').subscribe(
             (response) => {
                 this.res = response;
-                this.arraySalientes = this.res[0];
-                this.arrayEntrantes = this.res[1];
-                this.getCantidadPerdidasRecibidas();
-                this.getCantidadRealizadas();
+                // this.arraySalientes = this.res[0];
+                // this.arrayEntrantes = this.res[1];
+                this.getCantidadLlamadas();
                 console.log('exito', response);
                 console.log('fecha:', this.fecha);
             },
@@ -63,18 +62,15 @@ export class RegistroLlamadasComponent implements OnInit, OnChanges {
             }
         );
     }
-    getCantidadPerdidasRecibidas() {
-        for (const item of this.arrayEntrantes) {
-            if (item.estado === 'NO ANSWER') {
+    getCantidadLlamadas() {
+        for (const item of this.res) {
+            if (item.tipo === 'entrante' && item.estado === 'BUSY') {
                 this.llamadasPerdidas++;
+            } else if (item.tipo === 'saliente') {
+                this.llamadasRealizadas++;
             } else {
                 this.llamadasRecibidas++;
             }
-        }
-    }
-    getCantidadRealizadas() {
-        for (const item of this.arraySalientes) {
-            this.llamadasRealizadas++;
         }
     }
 }

@@ -20,15 +20,12 @@ export class InfoComponent implements OnInit {
     public iconPerdida = faPhoneSlash;
     public iconPhone = faPhone;
 
-    public res: any[];
+    public arrayLlamadas: any[];
     // numero  y fecha de eventos recibidos
     public number;
     public fecha: Date;
     // numero actual del usuario en el sistema
     public numero = localStorage.getItem('NumberSelected');
-    // array de llamadas
-    public arraySalientes: LlamadasSalientes[];
-    public arrayEntrantes: LlamadasEntrantes[];
     // fecha actual
     public fechaActual = moment(new Date()).format('YYYY-MM-DD');
     constructor(public historialService: HistorialService) {}
@@ -38,10 +35,9 @@ export class InfoComponent implements OnInit {
     }
     HistorialNumeroFecha() {
         this.historialService.HistorialxSipoIaxxFecha(this.numero, this.fechaActual).subscribe(
+            // this.historialService.HistorialxSipoIaxxFecha('2001', '2020-07-03').subscribe(
             (response) => {
-                this.res = response;
-                this.arraySalientes = this.res[0];
-                this.arrayEntrantes = this.res[1];
+                this.arrayLlamadas = response;
             },
             (error) => {
                 console.log('error', error);

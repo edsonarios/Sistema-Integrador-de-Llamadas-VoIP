@@ -32,6 +32,7 @@
         "moment": "^2.27.0",
         "ng-snotify": "^9.0.1",
         "ngx-bootstrap": "^5.6.1",
+        "ngx-socket-io": "^3.2.0",
         "popper.js": "^1.16.1",
         "rxjs": "~6.5.5",
         "sweetalert2": "^9.15.2",

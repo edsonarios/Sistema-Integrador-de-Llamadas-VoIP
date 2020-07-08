@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "express-asyncify": "^1.0.1",
     "http": "0.0.1-security",
+    "shelljs": "^0.8.4",
     "socketio": "^1.0.0"
   }
 }

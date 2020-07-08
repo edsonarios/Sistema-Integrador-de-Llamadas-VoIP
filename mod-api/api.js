@@ -28,6 +28,7 @@ const moment = require("moment");
 
 var shell = require("shelljs");
 const zip = require("express-zip");
+const { get } = require("http");
 
 //parseado a json todos los bodys
 api.use(bodyParser.urlencoded({ extended: false }));
@@ -1148,6 +1149,29 @@ api.post("/getUsuariosWithSipsAndIaxs", async (req, res, next) => {
   res.send(todos);
 });
 
+api.get("/getUsuariosTodos", async (req, res, next) => {
+  const params = req.body;
+  //Obtengo todos los sips e iaxs
+  const usuariosAll = await Usuario.findAll();
+  const sipsAll = await Sip.findAll();
+  const iaxsAll = await Iax.findAll();
+  let getusuarios = [];
+  //itero sobre los sips e iaxs
+  usuariosAll.forEach((obj) => {
+    sipsAll.forEach((obj1) => {
+      if (obj.id == obj1.usuarioId && obj1.nat != null) {
+        getusuarios.push({
+          usuarioId: `${obj.id}`,
+          nombre: `${obj.nombre}`,
+          numeroSip: `${obj1.name}`,
+        });
+        //getusuarios.push({ numeroSip: `${obj1.name}` });
+      }
+    });
+  });
+  res.send(getusuarios);
+});
+
 api.delete("/deleteUsuarioWithAll", async (req, res, next) => {
   const params = req.body;
   //Obtengo todos los usuario de la tabla usuarios. A todos sips e iaxs
@@ -2134,46 +2158,44 @@ api.post("/listenCalls", function (req, res, next) {
 
 api.post("/ListarHistorialByFechaBySipsAndIaxs", async (req, res, next) => {
   const params = req.body;
-  //obtengo todos los atributos de la tabla cdrs
-  const cdrsAll = await Cdr.findAll();
-  let getentrantes = [];
-  let getsalientes = [];
-  let todos = [];
-  //empiezo a iterar sobre todos los atributos de cdrs
+  //obtengo todos los atributos de la tabla cdrs ordenados por fecha
+  const cdrsAll = await Cdr.findAllOrder();
+  let gethistorial = [];
+  //empiezo a iterar sobre todos los atributos de cdrs ordenados por fecha
   cdrsAll.forEach((obj) => {
     //transformo el obj.calldate en un formato "yyyy-mm-dd" y pregunto si es igual al parametro q le mando por postman
     if (moment(moment(obj.start).format("YYYY-MM-DD")).isSame(params.fecha)) {
+      //preguntamos si el numero es igual al numero que nos envian por postman
       if (obj.src == params.numero) {
-        getsalientes.push({
-          numeroSaliente: `${obj.dst}`,
+        //guardamos los numeros en un vector(vector con objetos)
+        gethistorial.push({
+          numero: `${obj.dst}`,
           estado: `${obj.disposition}`,
           fechayhora: `${obj.start}`,
+          tipo: "saliente",
         });
       }
-
+      //preguntamos si el numero es igual al numero que nos envian por postman
       if (obj.dst == params.numero) {
-        getentrantes.push({
-          numeroEntrante: `${obj.src}`,
+        //guardamos los numeros en un vector(vector con objetos)
+        gethistorial.push({
+          numero: `${obj.src}`,
           estado: `${obj.disposition}`,
           fechayhora: `${obj.start}`,
+          tipo: "entrante",
         });
       }
     }
   });
-  //guardo todos los atributos q necesito devolver
-  todos.push(getsalientes);
-  todos.push(getentrantes);
-  res.send(todos);
+  //devolvemos el vector con objetos dentro
+  res.send(gethistorial);
 });
 
 api.post("/ListarHistorialBetweenFechas", async (req, res, next) => {
   const params = req.body;
-  //obtengo todos los atributos de la tabla cdrs
-  const cdrsAll = await Cdr.findAll();
-  let getentrantes = [];
-  let getsalientes = [];
-  let getperdidas = [];
-  let todos = [];
+  //obtengo todos los atributos de la tabla cdrs ordenados por fecha
+  const cdrsAll = await Cdr.findAllOrder();
+  let gethistorial = [];
   //empiezo a iterar sobre todos los atributos de cdrs
   cdrsAll.forEach((obj) => {
     //transformo el obj.start en un formato "yyyy-mm-dd" y pregunto si es igual al parametro q le mando por postman
@@ -2183,69 +2205,73 @@ api.post("/ListarHistorialBetweenFechas", async (req, res, next) => {
         params.fecha2
       )
     ) {
+      //preguntamos si el numero es igual al numero que nos envian por postman
       if (obj.src == params.numero) {
-        getsalientes.push(obj.dst);
-        getperdidas.push(obj.disposition);
+        //guardamos los numeros en un vector(vector con objetos)
+        gethistorial.push({
+          numero: `${obj.dst}`,
+          estado: `${obj.disposition}`,
+          fechayhora: `${obj.start}`,
+          tipo: "saliente",
+        });
       }
     }
-  });
-
-  cdrsAll.forEach((obj) => {
-    //transformo el obj.start en un formato "yyyy-mm-dd" y pregunto si es igual al parametro q le mando por postman
     if (
       moment(moment(obj.start).format("YYYY-MM-DD")).isBetween(
         params.fecha1,
         params.fecha2
       )
     ) {
+      //preguntamos si el numero es igual al numero que nos envian por postman
       if (obj.dst == params.numero) {
-        getentrantes.push(obj.src);
-        getperdidas.push(obj.disposition);
+        //guardamos los numeros en un vector(vector con objetos)
+        gethistorial.push({
+          numero: `${obj.src}`,
+          estado: `${obj.disposition}`,
+          fechayhora: `${obj.start}`,
+          tipo: "entrante",
+        });
       }
     }
   });
-  //guardo todos los atributos q necesito devolver
-  todos.push(getentrantes);
-  todos.push(getsalientes);
-  todos.push(getperdidas);
-  res.send(todos);
+  //devolvemos el vector con objetos dentro
+  res.send(gethistorial);
 });
 
 api.post("/ListarHistorialBySipsAndIaxs", async (req, res, next) => {
   const params = req.body;
-  //obtengo todos los atributos de la tabla cdrs
-  const cdrsAll = await Cdr.findAll();
-  let getentrantes = [];
-  let getsalientes = [];
-  let todos = [];
-  //empiezo a iterar sobre todos los atributos de cdrs para las llamadas salientes
+  //obtengo todos los atributos de la tabla cdrs ordenado por fechas
+  const cdrsAll = await Cdr.findAllOrder();
+  let gethistorial = [];
+  //empiezo a iterar sobre todos los atributos de cdrs para las llamadas
   cdrsAll.forEach((obj) => {
+    //preguntamos si el numero es igual al numero que nos envian por postman
     if (obj.src == params.numero) {
-      getsalientes.push({
-        numeroSaliente: `${obj.dst}`,
+      //guardamos los numeros en un vector(vector con objetos)
+      gethistorial.push({
+        numero: `${obj.dst}`,
         estado: `${obj.disposition}`,
         fechayhora: `${obj.start}`,
+        tipo: "saliente",
         minutos: `${obj.duration}`,
         segundos: `${obj.billsec}`,
       });
     }
-  });
-  //empiezo a iterar sobre todos los atributos de cdrs para las llamadas entrantes
-  cdrsAll.forEach((obj) => {
+    //preguntamos si el numero es igual al numero que nos envian por postman
     if (obj.dst == params.numero) {
-      getentrantes.push({
-        numeroEntrante: `${obj.src}`,
+      //guardamos los numeros en un vector(vector con objetos)
+      gethistorial.push({
+        numero: `${obj.src}`,
         estado: `${obj.disposition}`,
         fechayhora: `${obj.start}`,
+        tipo: "entrante",
         minutos: `${obj.duration}`,
         segundos: `${obj.billsec}`,
       });
     }
   });
-  //guardo todos los atributos q necesito devolver
-  todos.push(getentrantes);
-  todos.push(getsalientes);
-  res.send(todos);
+  //devolvemos el vector con objetos dentro
+  res.send(gethistorial);
 });
 
 /// AGENDA /////////////////////////////////////////////////////////////////////
@@ -2301,19 +2327,17 @@ api.post("/ListarContactos", async (req, res, next) => {
   const iaxsAll = await Iax.findAll();
   let getcontactos = [];
   let getusuarios = [];
-  let getid = [];
   let getidusu = [];
   let getiaxs = [];
   let getsips = [];
-  let getsipsoriax = [];
-
+  let getidagenda = [];
   let todos = [];
-  let sw = 0;
 
   //obtengo los contactos de la tabla Agenda
   AgendaAll.forEach((obj) => {
     if (obj.usuarioId == params.usuarioId) {
       getcontactos.push(obj.Contactos);
+      getidagenda.push(obj.id);
     }
   });
   getcontactos.forEach((algo) => {
@@ -2321,7 +2345,6 @@ api.post("/ListarContactos", async (req, res, next) => {
       if (algo == obj.name) {
         getidusu.push(obj.usuarioId);
         getsips.push(obj.name);
-        //getsips.push({ numeroSip: `${obj.name}` });
       }
     });
   });
@@ -2330,7 +2353,6 @@ api.post("/ListarContactos", async (req, res, next) => {
       if (algo == obj.name) {
         getidusu.push(obj.usuarioId);
         getiaxs.push(obj.name);
-        //getiaxs.push({ numeroIax: `${obj.name}` });
       }
     });
   });
@@ -2339,11 +2361,10 @@ api.post("/ListarContactos", async (req, res, next) => {
     usuarioAll.forEach((obj) => {
       if (obj.id == algo2) {
         getusuarios.push(obj.nombre);
-        getid.push(obj.id);
       }
     });
   });
-  todos.push(getid);
+  todos.push(getidagenda);
   todos.push(getusuarios);
   todos.push(getsips, getiaxs);
   res.send(todos);
