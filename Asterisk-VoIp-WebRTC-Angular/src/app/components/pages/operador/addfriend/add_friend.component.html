@@ -1,6 +1,6 @@
 <section class="Agenda animated fadeIn">
     <div class="add-buscar">
-        <input type="text" class="form-control" placeholder="Contacto" />
+        <input type="text" class="form-control" placeholder="Contacto" [formControl]="search" />
         <i-feather name="search" tooltip="Buscar"> </i-feather>
     </div>
     <div class="add-content">
@@ -9,15 +9,25 @@
             <h6>Numero</h6>
             <h6>Opciones</h6>
         </div>
-        <div class="add-body" *ngFor="let n of Friend; let i = index">
-            <div data-title="Name">{{ Friend[i]['nombre'] }}</div>
-            <div data-title="Link">
-                {{ Friend[i]['numero'] }}
-            </div>
-            <div class="add-options">
-                <i class="v-icon-dialer_sip" tooltip="Llamar"></i>
-                <i-feather name="plus" (click)="addAmigo(Friend[i]['nombre'], Friend[i]['numero'])" tooltip="Añadir"></i-feather>
-            </div>
-        </div>
+        <ul class="list-group">
+            <li *ngFor="let friend of Contacts | filtrobusqueda:filtroValue" class="list-group-item list-group-item-action">
+                <div class="row">
+                    <div class="col-md-5">
+                        {{ friend.nombre }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ friend.numeroSip }}
+                    </div>
+                    <div class="col-md-1">
+                        <i class="v-icon-dialer_sip" style="color: green;" tooltip="Llamar"></i>
+                    </div>
+                    <div class="col-md-1" style="color: green;">
+                        <i-feather name="plus" style="color: green;" (click)="addAmigo(friend.numeroSip)"
+                            tooltip="Añadir">
+                        </i-feather>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
 </section>

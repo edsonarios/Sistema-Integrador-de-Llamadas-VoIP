@@ -7,20 +7,27 @@
                 <h6>Opciones</h6>
             </div>
             <div *ngIf="Amigos.length != 0">
-                <div *ngFor="let n of Amigos; let i = index" class="agenda-body">
-                    <div data-title="Name">{{ Amigos[i]['nombre'] }}</div>
-                    <div data-title="Link">
-                        {{ Amigos[i]['numero'] }}
-                    </div>
-                    <div class="agenda-options">
-                        <i
-                            class="v-icon-dialer_sip"
-                            (click)="LlamadaComponent(Contactos[i]['id'], Contactos[i]['Nombre'], Contactos[i]['Numero'])"
-                            tooltip="Llamar"
-                        ></i>
-                        <i-feather name="minus" (click)="deletearAmigo(Amigos[i]['id'])" tooltip="Eliminar"></i-feather>
-                    </div>
-                </div>
+                <ul class="list-group">
+                    <li *ngFor="let friend of Amigos" class="list-group-item list-group-item-action">
+                        <div class="row">
+                            <div class="col-md-5">
+                                {{ friend.nombre }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ friend.numero }}
+                            </div>
+                            <div class="col-md-1">
+                                <i class="v-icon-dialer_sip"
+                                    (click)="LlamadaComponent(friend.id, friend.nombre, friend.numero)"
+                                    style="color: green;" tooltip="Llamar"></i>
+                            </div>
+                            <div class="col-md-1" style="color: green;">
+                                <i-feather name="minus" style="color: red;"
+                                    (click)="deletearAmigo(friend.id, friend.numero)" tooltip="Eliminar"></i-feather>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
             <div *ngIf="Amigos.length == 0">
                 <p>No Tienes Contactos en tu agenda</p>

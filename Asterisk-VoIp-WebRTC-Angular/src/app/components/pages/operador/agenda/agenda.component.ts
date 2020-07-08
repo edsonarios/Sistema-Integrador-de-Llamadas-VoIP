@@ -15,7 +15,7 @@ export class AgendaComponent implements OnInit {
     public us = localStorage.getItem('Usuario');
     public usActual = JSON.parse(this.us);
 
-    //@Output() AgendaLlamada = new EventEmitter<string>();
+    @Output() AgendaLlamada = new EventEmitter<string>();
     constructor(private router: Router, private agendaservice: AgendaService) {
         this.Contactos = [
             { Nombre: 'Daniel', Estado: 'Conectado', Numero: '3001', id: '21' },
@@ -37,7 +37,7 @@ export class AgendaComponent implements OnInit {
     }
     LlamadaComponent(id, Nombre, numero) {
         this.llamada = { Nombre: Nombre, Numero: numero, Id: id };
-        //this.AgendaLlamada.emit(this.llamada);
+        this.AgendaLlamada.emit(this.llamada);
     }
 
     vacio() {
@@ -48,37 +48,21 @@ export class AgendaComponent implements OnInit {
         return false;
     }
 
-    buscar() {}
-
     listarAmigos() {
         this.agendaservice.listarAmigos(this.usActual.usuarioId).subscribe(
             (response) => {
                 var count = 0;
                 for (var i = 0; i < response[0].length; i++) {
                     this.Amigos.push({ id: response[0][i], nombre: response[1][i], numero: response[2][i] });
-                    // this.deletearAmigo(this.Amigos[0][i]);
                 }
             },
             (er) => console.log(er)
         );
-    }
+    }  
 
-    // deletearAmigo(idamigo) {
-    //     this.agendaservice.deleteAmigo(idamigo).subscribe(
-    //         (response) => {
-    //             console.log(response);
-    //         },
-    //         (er) => console.log(er)
-    //     );
-    // }
-
-    deletearAmigo(idamigo) {
+    deletearAmigo(idamigo, numero) {
+        
         this.agendaservice.deleteAmigo(idamigo);
-    }
-
-    borrarTodo() {
-        for (var i = 0; i < this.Amigos[0].length; i++) {
-            this.deletearAmigo(this.Amigos[0][i]);
-        }
+        this.Amigos = this.Amigos.filter((user) => user.numero != numero);
     }
 }

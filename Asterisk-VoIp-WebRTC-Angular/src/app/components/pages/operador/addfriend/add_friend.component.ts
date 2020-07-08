@@ -1,8 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ɵɵelementContainerEnd } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '@services/user.service';
 import { AgendaService } from '@services/agenda.service';
 import { SipService } from '@services/sip.service';
+
+import { FormControl } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
     selector: 'Addfriend',
@@ -12,13 +15,17 @@ import { SipService } from '@services/sip.service';
 })
 export class AddFriendComponent implements OnInit {
     public Friend = [];
+    //variables para la busqueda
+    filtroValue = '';
+    search = new FormControl('');
 
-    public Contacts;
-    public Amigos;
+    public Contacts = [];
+    public Amigos = [];
     public Contactos;
     public llamada;
     public us = localStorage.getItem('Usuario');
     public usActual = JSON.parse(this.us);
+    public nroActual = localStorage.getItem('NumberSelected');
 
     constructor(private router: Router, private userservice: UserService, private agendaservice: AgendaService, private sipservice: SipService) {
         this.Contactos = [
@@ -36,42 +43,60 @@ export class AddFriendComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.dataDeploy();
+        this.listarAmigos();
+
+        this.search.valueChanges.pipe(debounceTime(300)).subscribe((value) => {
+            this.filtroValue = value;
+        });
     }
 
-    dataDeploy() {
-        //llamar al servicio para listar todos los usuarios
-        this.userservice.findAllUsuario().subscribe(
+    listarOperadores(listadeamigos) {
+        this.agendaservice.listarOperadores().subscribe(
             (response) => {
-                this.Contacts = response;
-
                 response.forEach((element) => {
-                    this.sipservice.llenarSIPsYIAX(element.id).subscribe(
-                        (response) => {
-                            this.Friend.push({ idus: element.id, numero: response[0][0].secret + '', nombre: element.nombre });
-                        },
-                        (er) => console.log(er)
-                    );
+                    var quedice: Boolean = this.contiene(listadeamigos, element.numeroSip);
+                    if (!quedice && element.numeroSip != this.nroActual) {
+                        this.Contacts.push(element);
+                    } else {
+                        // console.log(' no se añadio  ' + element.numeroSip);
+                    }
                 });
             },
             (er) => console.log(er)
         );
     }
 
+    contiene(vec, it): Boolean {
+        var aux = false;
+        vec.forEach((element) => {
+            if (element.numero == it) {
+                aux = true;
+            }
+        });
+        return aux;
+    }
+
     buscar() {
         console.log('searching...');
     }
 
-    addAmigo(name, number) {
-        this.sipservice.llenarSIPsYIAX(this.usActual.usuarioId).subscribe(
+    addAmigo(numero) {
+        this.Contacts = this.Contacts.filter((user) => user.numeroSip != numero);
+        this.agendaservice.addAmigo(this.usActual.usuarioId, numero).subscribe(
             (response) => {
-                this.agendaservice.addAmigo(this.usActual.usuarioId, number).subscribe(
-                    (response) => {
-                        this.Amigos = response;
-                        // console.log(this.Amigos);
-                    },
-                    (er) => console.log(er)
-                );
+                // console.log(response);
+            },
+            (er) => console.log(er)
+        );
+    }
+
+    listarAmigos() {
+        this.agendaservice.listarAmigos(this.usActual.usuarioId).subscribe(
+            (response) => {
+                for (let i = 0; i < response[0].length; i++) {
+                    this.Amigos.push({ id: response[0][i], nombre: response[1][i], numero: response[2][i] });
+                }
+                this.listarOperadores(this.Amigos);
             },
             (er) => console.log(er)
         );

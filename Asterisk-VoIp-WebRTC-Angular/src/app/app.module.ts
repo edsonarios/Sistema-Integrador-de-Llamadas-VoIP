@@ -44,6 +44,7 @@ import { RegistroLlamadasComponent } from './components/pages/operador/registro-
 import { IconsModule } from './icons/icons.module';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { InfoComponent } from './components/pages/operador/info/info.component';
+import { FiltrobusquedaPipe } from './pipes/filtrobusqueda.pipe';
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -59,7 +60,8 @@ import { InfoComponent } from './components/pages/operador/info/info.component';
 		PanelComponent,
 		ParticipanteComponent,
 		RegistroLlamadasComponent,
-		InfoComponent
+		InfoComponent,
+		FiltrobusquedaPipe
 	],
 	imports: [
 		BrowserModule,

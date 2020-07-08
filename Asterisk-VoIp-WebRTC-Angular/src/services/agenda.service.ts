@@ -25,6 +25,10 @@ export class AgendaService {
         })
     };
 
+    listarOperadores(): Observable<any> {
+        return this.http.get<any>(this.url + 'getUsuariosTodos').pipe(retry(1), catchError(this.errorHandl));
+    }
+
     addAmigo(id, name): Observable<any> {
         return this.http.post<any>(this.url + 'addAgenda', { usuarioId: id, Contactos: name }, this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
     }
@@ -32,14 +36,6 @@ export class AgendaService {
     listarAmigos(id): Observable<any> {
         return this.http.post<any>(this.url + 'ListarContactos', { usuarioId: id }, this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
     }
-
-    // deletearAmigo(idfriend) {
-    //     return this.http.delete(this.url + 'deleteAgenda' + '/' + idfriend).pipe(retry(1), catchError(this.errorHandl));
-    // }
-
-    // deletearAmigo(idfriend) {
-    //     return this.http.delete(this.url + 'deleteAgenda/' + idfriend, this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
-    // }
 
     deleteAmigo(idfriend) {
         this.http.request('delete', this.url + 'deleteAgenda', { body: { id: idfriend } }).subscribe((data) => {
