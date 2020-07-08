@@ -24,6 +24,7 @@
 .Logo {
     grid-area: Logo;
     display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 .Options {
     grid-area: Options;

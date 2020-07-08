@@ -47,6 +47,7 @@ import { InfoComponent } from './components/pages/operador/info/info.component';
 
 // Socket IO
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { AsteriskComponent } from './components/pages/operador/asterisk/asterisk.component';
 const config: SocketIoConfig = {
     url: environment.asteriskUrl,
     options: {}
@@ -67,7 +68,8 @@ const config: SocketIoConfig = {
         PanelComponent,
         ParticipanteComponent,
         RegistroLlamadasComponent,
-        InfoComponent
+        InfoComponent,
+        AsteriskComponent
     ],
     imports: [
         BrowserModule,

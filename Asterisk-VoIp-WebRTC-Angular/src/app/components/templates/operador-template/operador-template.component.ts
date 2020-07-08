@@ -25,6 +25,7 @@ import { Subscription } from 'rxjs';
 import { WebRTCService } from '@services/WebRTC/WebRTC.service';
 import { UA } from 'jssip';
 import { RTCSession } from 'jssip/lib/RTCSession';
+import { WebsocketService } from '../../../../services/websocket.service';
 
 @Component({
     selector: 'operador-template',
@@ -47,7 +48,7 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     faMicroActive = faMicrophoneSlash;
     faSenalAsterisk = faPlug;
     // colores en variables
-    Connection = 'black';
+    Connection = '#22bb33';
     connectionAsterisk = 'black';
     Microphone = 'black';
     noConnection = '#d9534f';
@@ -99,7 +100,8 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
         private modalService: BsModalService,
         private formBuilder: FormBuilder,
         public salaService: SalaService,
-        public estadoService: AsteriskConnectionService
+        public estadoService: AsteriskConnectionService,
+        public wsService: WebsocketService
     ) {
         this.ParticipantesSala = [
             {
@@ -193,10 +195,10 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
 
         // sockets
         this.estadoSubscription = this.estadoService.getResponse().subscribe((data) => {
-            console.log('socket', data);
             this.estado.push(data);
+            console.log('[data del socket]', this.estado);
+            this.cambioAsterisk(this.estado.Evento);
         });
-        this.cambioAsterisk();
     }
     ngOnDestroy() {
         this.estadoSubscription.unsubscribe();
@@ -461,10 +463,12 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
             this.Connection = 'black';
         }
     }
-    cambioAsterisk() {
-        this.connectionAsterisk = '#f0ad4e';
-        if (this.estado.Evento === true) {
-            this.connectionAsterisk = this.lowConnection;
+    cambioAsterisk(evento: boolean) {
+        //console.log(this.wsService.estadoAsterisk.Evento);
+        //this.connectionAsterisk = '#f0ad4e';
+        console.log('evento del socket:', evento);
+        if (evento) {
+            this.connectionAsterisk = this.Connection;
             // console.log(this.estado);
         } else {
             this.connectionAsterisk = this.noConnection;
