@@ -6,7 +6,7 @@ const express = require("express");
 const asyncify = require("express-asyncify");
 const socketio = require("socket.io");
 const chalk = require("chalk");
-
+var shell = require("shelljs");
 const { pipe } = require("./utils");
 
 const port = process.env.PORT || 8085;
@@ -378,15 +378,18 @@ client
         //inicia accion que viene en el payload
         //encender, apagar, reiniciar
         if (payload.accion == "encender") {
+          shell.exec("service asterisk start");
           console.log("encender");
         }
         if (payload.accion == "apagar") {
+          shell.exec("service asterisk stop");
           console.log("apagar");
         }
         if (payload.accion == "reiniciar") {
+          shell.exec("pm2 socketA restart");
           console.log("reiniciar");
         }
-        console.log("\x1b[33m", payload);
+        //console.log("\x1b[33m", payload);
       });
 
       //socket que por peticion del front, envia el estado de ami hacia asterisk, si esta conectado o no, y si no estuviera conectado, entonces entra en un bucle de 60 segundos, preguntando constantemente si esta conectado, hasta que vuelva a conectarse
