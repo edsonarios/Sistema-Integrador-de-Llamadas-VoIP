@@ -61,8 +61,8 @@ client
     if (client.isConnected) {
       astEst = 0;
       var evento = {
-        Evento: true,
-        Descripcion: `asterisk conectado`,
+        evento: true,
+        descripcion: `asterisk conectado`,
       };
       console.log(evento);
       io.emit(`${emit2}`, evento);
@@ -97,10 +97,10 @@ client
           event.Exten != "s"
         ) {
           var evento = {
-            Evento: `${event.Event}`,
-            Numero: `${event.CallerIDNum}`,
-            Extension: `${event.Exten}`,
-            Contexto: `${event.Context}`,
+            evento: `${event.Event}`,
+            numero: `${event.CallerIDNum}`,
+            extension: `${event.Exten}`,
+            contexto: `${event.Context}`,
           };
           console.log(
             dat.getHours(),
@@ -124,11 +124,11 @@ client
             event.Application == "confbridge")
         ) {
           var evento = {
-            Evento: `${event.Event}`,
-            Numero: `${event.CallerIDNum}`,
-            Extension: `${event.Exten}`,
-            Contexto: `${event.Context}`,
-            Aplicacion: `${event.Application}`,
+            evento: `${event.Event}`,
+            numero: `${event.CallerIDNum}`,
+            extension: `${event.Exten}`,
+            contexto: `${event.Context}`,
+            aplicacion: `${event.Application}`,
           };
 
           console.log(
@@ -147,10 +147,10 @@ client
           event.CallerIDNum != "<unknown>"
         ) {
           var evento = {
-            Evento: `${event.Event}`,
-            Numero: `${event.ConnectedLineNum}`,
-            Extension: `${event.CallerIDNum}`,
-            Contexto: `${event.Context}`,
+            evento: `${event.Event}`,
+            numero: `${event.ConnectedLineNum}`,
+            extension: `${event.CallerIDNum}`,
+            contexto: `${event.Context}`,
           };
 
           console.log(
@@ -170,10 +170,10 @@ client
           event.CallerIDNum != "<unknown>"
         ) {
           var evento = {
-            Evento: `${event.Event}`,
-            Numero: `${event.CallerIDNum}`,
-            Extension: `${event.Exten}`,
-            Contexto: `${event.Context}`,
+            evento: `${event.Event}`,
+            numero: `${event.CallerIDNum}`,
+            extension: `${event.Exten}`,
+            contexto: `${event.Context}`,
           };
 
           console.log(
@@ -189,10 +189,10 @@ client
 
         if (event.Event == "AgentCalled") {
           var evento = {
-            Evento: `NewConnectedLine`,
-            Numero: `${event.CallerIDNum}`,
-            Extension: `${event.MemberName}`,
-            Contexto: `${event.Context}`,
+            evento: `NewConnectedLine`,
+            numero: `${event.CallerIDNum}`,
+            extension: `${event.MemberName}`,
+            contexto: `${event.Context}`,
           };
 
           console.log(
@@ -208,10 +208,10 @@ client
 
         if (event.Event == "AgentConnect") {
           var evento = {
-            Evento: `BridgeEnter`,
-            Numero: `${event.CallerIDNum}`,
-            Extension: `${event.MemberName}`,
-            Contexto: `${event.Context}`,
+            evento: `BridgeEnter`,
+            numero: `${event.CallerIDNum}`,
+            extension: `${event.MemberName}`,
+            contexto: `${event.Context}`,
           };
 
           console.log(
@@ -227,10 +227,10 @@ client
 
         if (event.Event == "AgentComplete") {
           var evento = {
-            Evento: `Hangup`,
-            Numero: `${event.CallerIDNum}`,
-            Extension: `${event.MemberName}`,
-            Contexto: `${event.Context}`,
+            evento: `Hangup`,
+            numero: `${event.CallerIDNum}`,
+            extension: `${event.MemberName}`,
+            contexto: `${event.Context}`,
           };
 
           console.log(
@@ -251,10 +251,10 @@ client
           event.CallerIDNum != "<unknown>"
         ) {
           var evento = {
-            Evento: `${event.Event}`,
-            Numero: `${event.CallerIDNum}`,
-            Extension: `${event.Exten}`,
-            Contexto: `${event.Context}`,
+            evento: `${event.Event}`,
+            numero: `${event.CallerIDNum}`,
+            extension: `${event.Exten}`,
+            contexto: `${event.Context}`,
           };
 
           console.log(
@@ -281,8 +281,8 @@ client
           dat.getSeconds()
         );
         var evento = {
-          Evento: false,
-          Descripcion: `asterisk desconectado`,
+          evento: false,
+          descripcion: `asterisk desconectado`,
         };
         console.log(evento);
         io.emit(`${emit2}`, evento);
@@ -304,8 +304,8 @@ client
           dat.getSeconds()
         );
         var evento = {
-          Evento: true,
-          Descripcion: `asterisk conectado`,
+          evento: true,
+          descripcion: `asterisk conectado`,
         };
         console.log(evento);
         io.emit(`${emit2}`, evento);
@@ -316,16 +316,16 @@ client
           setTimeout(() => {
             if (client.isConnected) {
               var evento = {
-                Evento: true,
-                Descripcion: `asterisk conectado`,
+                evento: true,
+                descripcion: `asterisk conectado`,
               };
               astEst = 0;
               console.log(evento);
               io.emit(`${emit2}`, evento);
             } else {
               var evento = {
-                Evento: false,
-                Descripcion: `asterisk desconectado`,
+                evento: false,
+                descripcion: `asterisk desconectado`,
               };
               console.log(evento);
               io.emit(`${emit2}`, evento);
