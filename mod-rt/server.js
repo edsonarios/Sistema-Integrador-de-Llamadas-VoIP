@@ -373,21 +373,29 @@ client
 
     // Socket.io / WebSockets
     io.on("connect", (socket) => {
+      var dat = new Date();
+
       //recibe el mensaje de la pagina web
-      socket.on("asterisk", (payload) => {
+      socket.on("controlAsterisk", (payload) => {
         //inicia accion que viene en el payload
-        //encender, apagar, reiniciar
+        console.log(
+          dat.getHours(),
+          ":",
+          dat.getMinutes(),
+          ":",
+          dat.getSeconds()
+        );
         if (payload.accion == "encender") {
           shell.exec("service asterisk start");
-          console.log("encender");
+          console.log("asterisk activado");
         }
         if (payload.accion == "apagar") {
           shell.exec("service asterisk stop");
-          console.log("apagar");
+          console.log("asterisk apagado");
         }
         if (payload.accion == "reiniciar") {
-          shell.exec("pm2 socketA restart");
-          console.log("reiniciar");
+          shell.exec("pm2 restart socketA");
+          console.log("socket asterisk reiniciado");
         }
         //console.log("\x1b[33m", payload);
       });
