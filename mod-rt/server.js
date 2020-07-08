@@ -374,9 +374,18 @@ client
     // Socket.io / WebSockets
     io.on("connect", (socket) => {
       //recibe el mensaje de la pagina web
-      socket.on("action", (payload) => {
+      socket.on("asterisk", (payload) => {
         //inicia accion que viene en el payload
-        client.action(payload);
+        //encender, apagar, reiniciar
+        if (payload.accion == "encender") {
+          console.log("encender");
+        }
+        if (payload.accion == "apagar") {
+          console.log("apagar");
+        }
+        if (payload.accion == "reiniciar") {
+          console.log("reiniciar");
+        }
         console.log("\x1b[33m", payload);
       });
 

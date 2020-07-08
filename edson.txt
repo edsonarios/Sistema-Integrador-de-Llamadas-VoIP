@@ -76,7 +76,7 @@
     dns: 200.87.100.21
 [GATEWAY DINSTAR]
     login: admin, admin
-    ip: 192.168.100.50
+    lan ip: 192.168.100.50
 
     Configuracion Elastic
 
@@ -115,3 +115,4 @@
 [PRODUCCION]
     Alias para copiar front en produccion de git a servidor "frontA"
         echo "alias frontA='pushd /var/www/html/asterisk/ && rm * -rf && cd /$USER/Sistema-Integrador-de-Llamadas-VoIP/Asterisk-VoIp-WebRTC-Angular/dist/Asterisk-VoIp-WebRTC && cp * /var/www/html/asterisk/ -rf && popd'" >> ~/.bash_aliases
+    Se debe mejorar las contraseñas de la db asterisk, realtime asterisk 
