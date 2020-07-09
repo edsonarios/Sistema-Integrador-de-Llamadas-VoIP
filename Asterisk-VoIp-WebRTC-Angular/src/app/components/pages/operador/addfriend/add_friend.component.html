@@ -10,7 +10,11 @@
             <h6>Opciones</h6>
         </div>
         <ul class="list-group">
-            <li *ngFor="let friend of Contacts | filtrobusqueda:filtroValue" class="list-group-item list-group-item-action">
+<<<<<<< HEAD
+            <li *ngFor="let friend of Contacts | filtrobusqueda: 'filtroValue'" class="list-group-item list-group-item-action">
+=======
+            <li *ngFor="let friend of Contacts | filtro: filtroValue" class="list-group-item list-group-item-action">
+>>>>>>> 3c24ae5a7cccbfd5f83387467589e576c6bb827e
                 <div class="row">
                     <div class="col-md-5">
                         {{ friend.nombre }}
@@ -22,9 +26,7 @@
                         <i class="v-icon-dialer_sip" style="color: green;" tooltip="Llamar"></i>
                     </div>
                     <div class="col-md-1" style="color: green;">
-                        <i-feather name="plus" style="color: green;" (click)="addAmigo(friend.numeroSip)"
-                            tooltip="Añadir">
-                        </i-feather>
+                        <i-feather name="plus" style="color: green;" (click)="addAmigo(friend.numeroSip)" tooltip="Añadir"> </i-feather>
                     </div>
                 </div>
             </li>

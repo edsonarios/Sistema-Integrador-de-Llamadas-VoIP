@@ -17,6 +17,7 @@ export class WebsocketService {
         this.guardarStorage();
         return this.socket.fromEvent(evento);
     }
+
     guardarStorage() {
         localStorage.setItem('estadoA', JSON.stringify(this.estadoAsterisk));
     }
@@ -26,10 +27,6 @@ export class WebsocketService {
         }
     }
 
-    // emit1(estado: string, payload?: any) {
-    //     console.log('nombreSocket: ', estado, payload);
-    //     this.socket.emit(estado);
-    // }
     emit2(estado: string, payload?: any) {
         // var x = { saludo: 'hola' };
         // payload = x;

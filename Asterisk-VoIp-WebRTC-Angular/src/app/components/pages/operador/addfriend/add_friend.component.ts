@@ -15,7 +15,7 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class AddFriendComponent implements OnInit {
     public Friend = [];
-    //variables para la busqueda
+    // variables para la busqueda
     filtroValue = '';
     search = new FormControl('');
 
@@ -54,8 +54,8 @@ export class AddFriendComponent implements OnInit {
         this.agendaservice.listarOperadores().subscribe(
             (response) => {
                 response.forEach((element) => {
-                    var quedice: Boolean = this.contiene(listadeamigos, element.numeroSip);
-                    if (!quedice && element.numeroSip != this.nroActual) {
+                    const quedice = this.contiene(listadeamigos, element.numeroSip);
+                    if (!quedice && element.numeroSip !== this.nroActual) {
                         this.Contacts.push(element);
                     } else {
                         // console.log(' no se añadio  ' + element.numeroSip);
@@ -66,10 +66,10 @@ export class AddFriendComponent implements OnInit {
         );
     }
 
-    contiene(vec, it): Boolean {
-        var aux = false;
+    contiene(vec, it): boolean {
+        let aux = false;
         vec.forEach((element) => {
-            if (element.numero == it) {
+            if (element.numero === it) {
                 aux = true;
             }
         });
@@ -81,7 +81,7 @@ export class AddFriendComponent implements OnInit {
     }
 
     addAmigo(numero) {
-        this.Contacts = this.Contacts.filter((user) => user.numeroSip != numero);
+        this.Contacts = this.Contacts.filter((user) => user.numeroSip !== numero);
         this.agendaservice.addAmigo(this.usActual.usuarioId, numero).subscribe(
             (response) => {
                 // console.log(response);

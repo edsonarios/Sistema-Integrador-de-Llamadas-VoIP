@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AsteriskConnectionService } from '../../../../../services/asterisk-connection.service';
+import { EstadoAsterisk } from '@models/estadoAsterisk';
 
 @Component({
     selector: 'app-asterisk',
@@ -10,9 +11,18 @@ export class AsteriskComponent implements OnInit {
     public apagado = false;
     public estado = '';
 
-    constructor(public asteriskService: AsteriskConnectionService) {}
+    constructor(public estadoService: AsteriskConnectionService) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.estadoService.getResponse('asterisk').subscribe((msg: EstadoAsterisk) => {
+            if (msg.evento) {
+                this.apagado = true;
+            } else {
+                this.apagado = false;
+            }
+        });
+        this.estadoService.accionAsterisk('estado');
+    }
     verifica(dato: boolean) {
         if (dato === true) {
             this.estado = 'encender';
@@ -20,11 +30,9 @@ export class AsteriskComponent implements OnInit {
             this.estado = 'apagar';
         }
 
-        this.asteriskService.accionAsterisk(this.estado);
-        //this.asteriskService.encenderAsterisk(this.estado);
+        this.estadoService.accionAsterisk(this.estado);
     }
     reinicia(): void {
-        this.asteriskService.accionAsterisk('reiniciar');
-        //this.asteriskService.reiniciarAsterisk('reiniciar');
+        this.estadoService.accionAsterisk('reiniciar');
     }
 }

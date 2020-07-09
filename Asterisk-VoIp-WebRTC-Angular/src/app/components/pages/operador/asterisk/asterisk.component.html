@@ -1,5 +1,5 @@
 <section class="asterisk">
-    <button class="btn btn-danger" (click)="reinicia()">Reiniciar</button>
+    <button *ngIf="apagado" class="btn btn-danger" (click)="reinicia()">Reiniciar</button>
     <div class="encender custom-control custom-switch">
         <input (click)="verifica(!ctrl.value)" [(ngModel)]="apagado" #ctrl="ngModel" type="checkbox" class="custom-control-input" id="customSwitch1" />
         <label class="custom-control-label" for="customSwitch1">Encender </label>

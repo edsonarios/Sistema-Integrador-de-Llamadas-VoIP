@@ -1,8 +1,8 @@
 export class EstadoAsterisk {
-    public Evento: string;
-    public Descripcion: string;
+    public evento: string;
+    public descripcion: string;
     constructor(res: any) {
-        this.Evento = res.Evento;
-        this.Descripcion = res.Descripcion;
+        this.evento = res.evento;
+        this.descripcion = res.descripcion;
     }
 }
