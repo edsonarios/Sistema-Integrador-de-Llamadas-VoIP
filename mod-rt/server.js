@@ -375,7 +375,7 @@ client
       console.log("algo2")
   }, 5000);*/
   })
-  .catch((error) => console.log(error));
+  .catch((error) => console.log(error, (conexion = false)));
 
 console.log("aqui", conexion);
 
@@ -390,6 +390,9 @@ io.on("connect", (socket) => {
     if (payload.accion == "encender") {
       shell.exec("service asterisk start");
       console.log("asterisk activado");
+      setTimeout(function () {
+        shell.exec("pm2 restart socketA");
+      }, 5000);
     }
     if (payload.accion == "apagar") {
       shell.exec("service asterisk stop");
