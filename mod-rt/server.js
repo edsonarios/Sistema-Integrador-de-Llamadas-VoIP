@@ -17,6 +17,7 @@ const io = socketio(server);
 const emit1 = "Llamadas";
 const emit2 = "asterisk";
 var astEst = 0;
+var conexion = null;
 
 //Llamando librerias AMI para conectarno con asterisk
 const AmiClient = require("asterisk-ami-client");
@@ -59,6 +60,7 @@ client
   })
   .then((amiConnection) => {
     if (client.isConnected) {
+      conexion = true;
       astEst = 0;
       var evento = {
         evento: true,
@@ -272,6 +274,7 @@ client
       }
       //Indica si asterisk se detuvo, aveces falla asterisk en mostrar este evento
       if (event.Event == "Shutdown") {
+        conexion = false;
         astEst = 1;
         console.log(
           dat.getHours(),
@@ -295,6 +298,7 @@ client
         event.AccountID == "realTime" &&
         event.Service == "AMI"
       ) {
+        conexion = true;
         astEst = 0;
         console.log(
           dat.getHours(),
@@ -370,53 +374,47 @@ client
       client.action(action1);
       console.log("algo2")
   }, 5000);*/
-
-    // Socket.io / WebSockets
-    io.on("connect", (socket) => {
-      var dat = new Date();
-
-      //recibe el mensaje de la pagina web
-      socket.on("controlAsterisk", (payload) => {
-        //inicia accion que viene en el payload
-        console.log(
-          dat.getHours(),
-          ":",
-          dat.getMinutes(),
-          ":",
-          dat.getSeconds()
-        );
-        if (payload.accion == "encender") {
-          shell.exec("service asterisk start");
-          console.log("asterisk activado");
-        }
-        if (payload.accion == "apagar") {
-          shell.exec("service asterisk stop");
-          console.log("asterisk apagado");
-        }
-        if (payload.accion == "reiniciar") {
-          shell.exec("pm2 restart socketA");
-          console.log("socket asterisk reiniciado");
-        }
-        //socket que por peticion del front, envia el estado de ami hacia asterisk, si esta conectado o no, y si no estuviera conectado, entonces entra en un bucle de 60 segundos, preguntando constantemente si esta conectado, hasta que vuelva a conectarse
-        if (payload.accion == "estado") {
-          if (!client.isConnected) {
-            //Descomentar para modo produccion
-            astEst = 1;
-            //checkConnectionAsterisk();
-          }
-          var evento = {
-            evento: client.isConnected,
-            descripcion: `asterisk estado`,
-          };
-          io.emit(`${emit2}`, evento);
-          console.log("\x1b[33m", evento);
-        }
-        //console.log("\x1b[33m", payload);
-      });
-
-      socket.on("asteriskEstado", (payload) => {});
-
-      //pipe(agent, socket)
-    });
   })
   .catch((error) => console.log(error));
+
+console.log("aqui", conexion);
+
+// socket
+io.on("connect", (socket) => {
+  var dat = new Date();
+
+  //recibe el mensaje de la pagina web
+  socket.on("controlAsterisk", (payload) => {
+    //inicia accion que viene en el payload
+    console.log(dat.getHours(), ":", dat.getMinutes(), ":", dat.getSeconds());
+    if (payload.accion == "encender") {
+      shell.exec("service asterisk start");
+      console.log("asterisk activado");
+    }
+    if (payload.accion == "apagar") {
+      shell.exec("service asterisk stop");
+      console.log("asterisk apagado");
+    }
+    if (payload.accion == "reiniciar") {
+      shell.exec("pm2 restart socketA");
+      console.log("socket asterisk reiniciado");
+    }
+    //socket que por peticion del front, envia el estado de ami hacia asterisk, si esta conectado o no, y si no estuviera conectado, entonces entra en un bucle de 60 segundos, preguntando constantemente si esta conectado, hasta que vuelva a conectarse
+    if (payload.accion == "estado") {
+      if (!client.isConnected) {
+        //Descomentar para modo produccion
+        astEst = 1;
+        //checkConnectionAsterisk();
+      }
+      var evento = {
+        evento: conexion,
+        descripcion: `asterisk estado`,
+      };
+      io.emit(`${emit2}`, evento);
+      console.log("\x1b[33m", evento);
+    }
+    //console.log("\x1b[33m", payload);
+  });
+
+  //pipe(agent, socket)
+});
