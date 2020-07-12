@@ -195,6 +195,27 @@
     -moz-box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.35);
     box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.35);
 }
+.CenterPanel {
+    grid-area: CenterContent;
+    border-radius: 4px;
+    margin: 10px;
+    background: #ffffff;
+    -webkit-box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.35);
+    box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.35);
+}
+.CenterPanel::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+}
+
+.CenterPanel::-webkit-scrollbar {
+    width: 6px;
+    background-color: #f5f5f5;
+}
+
+.CenterPanel::-webkit-scrollbar-thumb {
+    background-color: #000000;
+}
 .LateralDer {
     grid-area: LateralDer;
     display: grid;

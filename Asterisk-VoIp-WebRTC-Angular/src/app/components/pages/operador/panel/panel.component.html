@@ -1,39 +1,45 @@
 <section class="panel">
-	<header class="panel__header">
-		Panel de Estados
-	</header>
-
-	<div>
-		<!-- Table starts here -->
-		<table id="table" class="table table-hover table-mc-light-blue">
-			<thead>
-				<tr>
-					<th>Icon</th>
-					<th>Numero</th>
-					<th>Fecha</th>
-					<th>Hora</th>
-					<th>Duracion</th>
-				</tr>
-			</thead>
-			<tbody >
-				<tr *ngFor="let n of Panel; let i = index">
-					<td data-title="Link">
-						<i class="v-icon-incoming-call" tooltip="Entrante" style="color: green"></i>
-					</td>
-					<td data-title="Link">
-						{{Panel[i]['Numero']}}
-					</td>
-					<td data-title="Link">
-						{{Panel[i]['fecha']}}
-					</td>
-					<td data-title="Link">
-						{{Panel[i]['Hora']}}
-					</td>
-					<td data-title="Link">
-						- - : - - : - -
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+    <div>
+        <!-- Table starts here -->
+        <table id="table" class="table table-hover table-mc-light-blue">
+            <thead>
+                <tr>
+                    <th *ngIf="hide == 'true'">Extension</th>
+                    <th>Numero</th>
+                    <th>Icon</th>
+                    <th>Duracion</th>
+                    <th>Evento</th>
+                    <th *ngIf="hide == 'true'">Contexto</th>
+                    <th *ngIf="hide == 'true'">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let n of VectorPaneles; let i = index">
+                    <td data-title="Link" *ngIf="hide == 'true'">
+                        {{ VectorPaneles[i]['extension'] }}
+                    </td>
+                    <td data-title="Link">
+                        {{ VectorPaneles[i]['numero'] }}
+                    </td>
+                    <td data-title="Link">
+                        <i class="v-icon-incoming-call" tooltip="Entrante" style="color: green;"></i>
+                    </td>
+                    <td data-title="Link">
+                        -- : -- : --
+                    </td>
+                    <td data-title="Link">
+                        {{ VectorPaneles[i]['evento'] }}
+                    </td>
+                    <td data-title="Link" *ngIf="hide == 'true'">
+                        {{ VectorPaneles[i]['contexto'] }}
+                    </td>
+                    <td data-title="Link" *ngIf="hide == 'true'">
+                        <button style="border-radius: 50%; padding: 4px; height: 34px;" (click)="Opcion1()">1</button>
+                        <button style="border-radius: 50%; padding: 4px; height: 34px;" (click)="Opcion2()">2</button>
+                        <button style="border-radius: 50%; padding: 4px; height: 34px;" (click)="Opcion3()">3</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </section>

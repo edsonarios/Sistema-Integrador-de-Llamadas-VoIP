@@ -40,6 +40,7 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     public Agenda = false;
     public AddFriend = false;
     public Dialpad = false;
+    public panel = false;
     public Llamada = [];
     public rtc: WebRTCService;
     public ua: UA;
@@ -169,6 +170,7 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
         this.AsignarSipsIax();
     }
     ngOnInit() {
+        localStorage.setItem('PanelHide', 'false');
         this.user = JSON.parse(localStorage.getItem('Usuario'));
         this.NumeroActual = localStorage.getItem('NumberSelected');
         this.rtc = new WebRTCService();
@@ -222,6 +224,15 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
             if (funtion == 'operational') {
                 this.Hide = true;
             }
+        }
+    }
+    LoaderPanel() {
+        if (this.panel == false) {
+            localStorage.setItem('PanelHide', 'true');
+            this.panel = true;
+        } else {
+            this.panel = false;
+            localStorage.setItem('PanelHide', 'false');
         }
     }
     ObtenerSalas() {

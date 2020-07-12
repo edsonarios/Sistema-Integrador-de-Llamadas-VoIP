@@ -7,6 +7,14 @@
         <div class="Options">
             <div class="navbar">
                 <ul>
+                    <li (click)="LoaderPanel()" *ngIf="pages == false">
+                        <a>
+                            <div class="icon">
+                                <i class="asteriskIcon v-icon-check-symbol"></i>
+                            </div>
+                            <div class="name"><span data-text="Salas">Panel</span></div>
+                        </a>
+                    </li>
                     <li *ngIf="pages == false">
                         <a href="#">
                             <div class="icon">
@@ -136,7 +144,7 @@
                 <fa-icon [icon]="faSenalAsterisk" (click)="verificar()" [ngStyle]="{ color: connectionAsterisk }"> </fa-icon>
             </div>
         </div>
-        <div class="CenterContent">
+        <div class="CenterContent" *ngIf="panel == false; else elseBlockPanel">
             <div class="CenterContent_Sup">
                 <header>Escritorio</header>
                 <section class="e-responsive">
@@ -156,6 +164,7 @@
             <div class="CenterContent_Inf">
                 <div class="CenterContent_InfPanel">
                     <header>Panel de Estados</header>
+                    <panel></panel>
                 </div>
                 <div class="CenterContent_InfInfo">
                     <header>Info</header>
@@ -163,6 +172,16 @@
                 </div>
             </div>
         </div>
+        <ng-template #elseBlockPanel>
+            <div class="CenterPanel" [@FadeIn]>
+                <header>Panel en tiempo real</header>
+                <!--<div *ngFor="let n of object; let i = index">
+                    ABCDFE
+                    <br />
+                </div>-->
+                <panel></panel>
+            </div>
+        </ng-template>
         <div class="LateralDer">
             <div class="LateralDer_Sup">
                 <div class="LDSup-header">
