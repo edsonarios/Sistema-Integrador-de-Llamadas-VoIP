@@ -1,73 +1,79 @@
-'use strict'
+"use strict";
 
 module.exports = function setupUsuario(UsuarioModel, SalaModel) {
-
   async function create(id, obj) {
     const res = await SalaModel.findOne({
       where: {
-        id
-      }
-    })
+        id,
+      },
+    });
 
     if (res) {
-      Object.assign(obj, { salaId: res.id })
-      const result = await UsuarioModel.create(obj)
-      return result.toJSON()
+      Object.assign(obj, { salaId: res.id });
+      const result = await UsuarioModel.create(obj);
+      return result.toJSON();
     }
   }
 
   async function update(id, obj) {
     const cond = {
       where: {
-        id
-      }
-    }
+        id,
+      },
+    };
 
-    const updated = await UsuarioModel.update(obj, cond)
-    return updated
+    const updated = await UsuarioModel.update(obj, cond);
+    return updated;
   }
 
   async function findById(id) {
     return await UsuarioModel.findOne({
       where: {
-        id
-      }
-    })
+        id,
+      },
+    });
   }
   async function findAll() {
-    return UsuarioModel.findAll()
+    return UsuarioModel.findAll();
+  }
+
+  async function findAllOrder() {
+    return UsuarioModel.findAll({
+      order: [["nombre", "ASC"]],
+    });
   }
 
   async function findOneCorreo(obj) {
     return await UsuarioModel.findOne({
       where: {
-        correo: obj
-      }
-    })
+        correo: obj,
+      },
+    });
   }
 
   async function destroyAll(id) {
     return await UsuarioModel.destroy({
       where: {
-        salaId: id
-      }
-    })
+        salaId: id,
+      },
+    });
   }
 
   async function destroy(id) {
     return await UsuarioModel.destroy({
       where: {
-        id
-      }
-    })
+        id,
+      },
+    });
   }
   return {
     create,
     update,
     findById,
+    findAllOrder,
     findAll,
     findOneCorreo,
     destroyAll,
-    destroy
-  }
-}
+    destroy,
+  };
+};

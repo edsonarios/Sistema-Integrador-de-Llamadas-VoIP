@@ -1152,14 +1152,17 @@ api.post("/getUsuariosWithSipsAndIaxs", async (req, res, next) => {
 api.get("/getUsuariosTodos", async (req, res, next) => {
   const params = req.body;
   //Obtengo todos los sips e iaxs
-  const usuariosAll = await Usuario.findAll();
+  const usuariosAll = await Usuario.findAllOrder();
   const sipsAll = await Sip.findAll();
   const iaxsAll = await Iax.findAll();
   let getusuarios = [];
-  //itero sobre los sips e iaxs
+  //itero sobre los usuarios ordenados por nombre
   usuariosAll.forEach((obj) => {
+    //itero sobre los sips
     sipsAll.forEach((obj1) => {
+      //preguntamos si el id del usuario es igual al id del sip y separamos a los sips troncales
       if (obj.id == obj1.usuarioId && obj1.nat != null) {
+        //guardamos en un vector los usuarios con su id nombre y su numero sip
         getusuarios.push({
           usuarioId: `${obj.id}`,
           nombre: `${obj.nombre}`,
@@ -1169,6 +1172,7 @@ api.get("/getUsuariosTodos", async (req, res, next) => {
       }
     });
   });
+  //mostramos a los usuarios
   res.send(getusuarios);
 });
 
