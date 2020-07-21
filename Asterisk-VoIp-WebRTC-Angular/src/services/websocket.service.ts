@@ -28,8 +28,6 @@ export class WebsocketService {
     }
 
     emit2(estado: string, payload?: any) {
-        // var x = { saludo: 'hola' };
-        // payload = x;
         console.log('nombreSocket: ', estado, 'payload: ', payload);
         this.socket.emit(estado, payload);
     }
