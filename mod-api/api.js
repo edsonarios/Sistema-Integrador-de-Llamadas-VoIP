@@ -266,6 +266,164 @@ api.get("/datosPrueba", async (req, res) => {
     stamp: HoraYFecha,
   });
 
+  //Usuario Jorge
+  const obj221 = await Usuario.create(obj.id, {
+    nombre: "Jorge",
+    apPaterno: "Castro",
+    apMaterno: "materno",
+    tipo: "standard",
+    direccion: "direccion1234",
+    telefono: "123456",
+    correo: "jorge@usuario",
+    password: bcrypt.hashSync("1234", 10),
+    conectado: false,
+  });
+
+  //WEBRTC para usuario 1
+  const obj222 = await Sip.create(obj221.id, {
+    name: "3015",
+    secret: "3015",
+    callerid: "3015 <3015>",
+    type: "friend",
+    context: "default",
+    host: "dynamic",
+    disallow: "all",
+    allow: "ulaw",
+    qualify: "yes",
+    nat: "force_rport,comedia",
+    switchsip: "1",
+
+    qualifyfreq: "60",
+    deny: "0.0.0.0/0.0.0.0",
+    dtnfnode: "rfc2833",
+    canreinvite: "no",
+    trustrpid: "yes",
+    sendrpid: "no",
+    transport: "udp,ws,wss",
+    avpf: "yes",
+    force_avp: "yes",
+    icesupport: "yes",
+    encryption: "yes",
+    callgroup: "",
+    pickupgroup: "",
+    dial: "SIP/3015",
+    permit: "0.0.0.0/0.0.0.0",
+    callcounter: "yes",
+    faxdetect: "no",
+    directmedia: "no",
+    dtlsenable: "yes",
+    dtlsverify: "fingerprint",
+    dtlscertfile: "/etc/asterisk/keys/asterisk.pem",
+    dtlscafile: "/etc/asterisk/keys/ca.crt",
+    dtlssetup: "actpass",
+    rtcp_mux: "yes",
+  });
+
+  //Usuario Richard
+  const obj223 = await Usuario.create(obj.id, {
+    nombre: "Richard",
+    apPaterno: "Cori",
+    apMaterno: "materno",
+    tipo: "standard",
+    direccion: "direccion1234",
+    telefono: "123456",
+    correo: "richard@usuario",
+    password: bcrypt.hashSync("1234", 10),
+    conectado: false,
+  });
+
+  //WEBRTC para usuario 1
+  const obj224 = await Sip.create(obj223.id, {
+    name: "3016",
+    secret: "3016",
+    callerid: "3016 <3016>",
+    type: "friend",
+    context: "default",
+    host: "dynamic",
+    disallow: "all",
+    allow: "ulaw",
+    qualify: "yes",
+    nat: "force_rport,comedia",
+    switchsip: "1",
+
+    qualifyfreq: "60",
+    deny: "0.0.0.0/0.0.0.0",
+    dtnfnode: "rfc2833",
+    canreinvite: "no",
+    trustrpid: "yes",
+    sendrpid: "no",
+    transport: "udp,ws,wss",
+    avpf: "yes",
+    force_avp: "yes",
+    icesupport: "yes",
+    encryption: "yes",
+    callgroup: "",
+    pickupgroup: "",
+    dial: "SIP/3016",
+    permit: "0.0.0.0/0.0.0.0",
+    callcounter: "yes",
+    faxdetect: "no",
+    directmedia: "no",
+    dtlsenable: "yes",
+    dtlsverify: "fingerprint",
+    dtlscertfile: "/etc/asterisk/keys/asterisk.pem",
+    dtlscafile: "/etc/asterisk/keys/ca.crt",
+    dtlssetup: "actpass",
+    rtcp_mux: "yes",
+  });
+
+  //Usuario Henry
+  const obj225 = await Usuario.create(obj.id, {
+    nombre: "Henry",
+    apPaterno: "Miranda",
+    apMaterno: "materno",
+    tipo: "standard",
+    direccion: "direccion1234",
+    telefono: "123456",
+    correo: "jorge@usuario",
+    password: bcrypt.hashSync("1234", 10),
+    conectado: false,
+  });
+
+  //WEBRTC para usuario 1
+  const obj226 = await Sip.create(obj225.id, {
+    name: "3017",
+    secret: "3017",
+    callerid: "3017 <3017>",
+    type: "friend",
+    context: "default",
+    host: "dynamic",
+    disallow: "all",
+    allow: "ulaw",
+    qualify: "yes",
+    nat: "force_rport,comedia",
+    switchsip: "1",
+
+    qualifyfreq: "60",
+    deny: "0.0.0.0/0.0.0.0",
+    dtnfnode: "rfc2833",
+    canreinvite: "no",
+    trustrpid: "yes",
+    sendrpid: "no",
+    transport: "udp,ws,wss",
+    avpf: "yes",
+    force_avp: "yes",
+    icesupport: "yes",
+    encryption: "yes",
+    callgroup: "",
+    pickupgroup: "",
+    dial: "SIP/3017",
+    permit: "0.0.0.0/0.0.0.0",
+    callcounter: "yes",
+    faxdetect: "no",
+    directmedia: "no",
+    dtlsenable: "yes",
+    dtlsverify: "fingerprint",
+    dtlscertfile: "/etc/asterisk/keys/asterisk.pem",
+    dtlscafile: "/etc/asterisk/keys/ca.crt",
+    dtlssetup: "actpass",
+    rtcp_mux: "yes",
+  });
   //Añade 201 para demo-congrats
   const obj4 = await Extension.create(obj.id, {
     context: "default",
@@ -2101,7 +2259,7 @@ api.post("/downloadCalls", function (req, res, next) {
     if (
       a[i].name.substring(11, 14) == chanel.substring(0, 3) &&
       parseInt(id) <= parseInt(a[i].name.substring(0, 10)) &&
-      parseInt(id) + 5 >= parseInt(a[i].name.substring(0, 10)) &&
+      parseInt(id) + 20 >= parseInt(a[i].name.substring(0, 10)) &&
       a[i].name.substring(15, 28) == chanel.substring(4, 18)
     ) {
       sw = 1;
@@ -2122,7 +2280,7 @@ api.post("/downloadCalls", function (req, res, next) {
           name: `${download[1].substring(28, download[1].length)}`,
         },
       ],
-      "audio.zip"
+      `${chanel}`
     );
   } else {
     return next(new Error(`Audio not found`));
@@ -2144,11 +2302,11 @@ api.post("/listenCalls", function (req, res, next) {
     if (
       a[i].name.substring(11, 14) == chanel.substring(0, 3) &&
       parseInt(id) <= parseInt(a[i].name.substring(0, 10)) &&
-      parseInt(id) + 5 >= parseInt(a[i].name.substring(0, 10)) &&
+      parseInt(id) + 20 >= parseInt(a[i].name.substring(0, 10)) &&
       a[i].name.substring(15, 28) == chanel.substring(4, 18)
     ) {
       sw = 1;
-      download.push(`/var/spool/asterisk/monitor/${a[i].name}`);
+      download.push(`/monitor/${a[i].name}`);
     }
   }
   //si se encontro el archivo, se empaque los 2 (in,out) en un zip para descargarlo en el navegador
