@@ -2415,8 +2415,10 @@ api.post("/ListarHistorialBySipsAndIaxs", async (req, res, next) => {
         estado: `${obj.disposition}`,
         fechayhora: `${obj.start}`,
         tipo: "saliente",
-        minutos: `${obj.duration}`,
-        segundos: `${obj.billsec}`,
+        segundos: `${obj.duration}`,
+        milisegundos: `${obj.billsec}`,
+        uniqueid: `${obj.uniqueid}`,
+        channel: `${obj.channel}`,
       });
     }
     //preguntamos si el numero es igual al numero que nos envian por postman
@@ -2427,8 +2429,10 @@ api.post("/ListarHistorialBySipsAndIaxs", async (req, res, next) => {
         estado: `${obj.disposition}`,
         fechayhora: `${obj.start}`,
         tipo: "entrante",
-        minutos: `${obj.duration}`,
-        segundos: `${obj.billsec}`,
+        segundos: `${obj.duration}`,
+        milisegundos: `${obj.billsec}`,
+        uniqueid: `${obj.uniqueid}`,
+        channel: `${obj.channel}`,
       });
     }
   });
