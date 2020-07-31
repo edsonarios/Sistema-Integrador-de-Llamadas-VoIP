@@ -68,7 +68,10 @@
 
 [Scripts para crear]
 - mod-api/upload/monitor
-    crear enlace referencial de /var/spool/asterisk/monitor a mod-api/upload/monitor
+    crear enlace referencial solo para api de /var/spool/asterisk/monitor a mod-api/upload/monitor
+    Pero para acceder a los audios se debe crear el enlace referencial de asterisk a apache
+    ln -s /var/spool/asterisk/monitor/ /var/www/html/
+    http://ip/monitor/aurdio.wav
 
 [RO-IP]
     login: admin, admin
