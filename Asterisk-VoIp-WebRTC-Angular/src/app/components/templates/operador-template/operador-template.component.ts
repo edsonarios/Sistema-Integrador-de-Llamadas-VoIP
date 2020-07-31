@@ -239,8 +239,12 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
         console.log('Esta son las salas');
         this.salaService.listarSalas().subscribe(
             (response) => {
-                //console.log(response);
-                this.Salas = response;
+                for (let i = 0; i < response.length; i++) {
+                    if (response[i]['nombreSala'] != 'default') {
+                        this.Salas.push(response[i]);
+                    }
+                }
+
                 console.log(this.Salas);
             },
             (er) => console.log(er)
@@ -309,26 +313,30 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
 
         this.Llamada.push({
             nombre: Sala['nombre'],
+            descripcion: Sala['descripcion'],
             id: Sala['id'],
-            numero: Sala['numero'],
             Tipo: 'Sala',
             Estado: 'Inactiva'
         });
         this.EliminaItemSalas(Sala['id']);
     }
-    CerrarLlamada(llamada) {
+    CerrarLlamada(CallInfo) {
         // Metodo en el escritorio para cerrar la llamada del escritorio
+        console.log('La llamada');
+        console.log(CallInfo);
 
-        this.EliminaItemLlamadas(llamada['Id']);
-        this.rtc.terminate();
-        if (llamada['Tipo'] == 'Sala') {
+        this.EliminaItemLlamadas(CallInfo['Id']);
+
+        //Termina la sesion !
+        // this.rtc.terminate();
+        if (CallInfo['Tipo'] == 'Sala') {
             this.Salas.push({
-                nombre: llamada['Nombre'],
-                id: llamada['Id'],
-                Dimesions: '5',
-                Ocupando: '1',
-                Numero: llamada['Numero']
+                nombreSala: CallInfo['Nombre'],
+                id: CallInfo['Id'],
+                descripcion: CallInfo['Descripcion']
             });
+            console.log('Las salas:');
+            console.log(this.Salas);
         }
     }
     VerParticipantes(event) {

@@ -39,12 +39,8 @@ export class PanelComponent implements OnInit {
     }
     async startRealtime() {
         this.socket.on('Llamadas', (payload) => {
-            //console.log('pasoo 1');
             console.log(payload);
             this.BusquedaExistente(payload);
-
-            //se actualiza segun actuador y update de mqtt para mostrar el estado de los botones en tiempo real
-            //this.variable++
         });
     }
     BusquedaExistente(Vector) {
@@ -59,8 +55,12 @@ export class PanelComponent implements OnInit {
     BusquedaExistentenEventoPanel(Vector) {
         // recorre todo el vecto en busqueda de los datos repetidos
         for (let j = 0; j < this.VectorPaneles.length; j++) {
-            if (this.VectorPaneles[j]['numero'] == Vector['numero'] && this.VectorPaneles[j]['extension'] == Vector['extension']) {
+            if (
+                (this.VectorPaneles[j]['numero'] == Vector['numero'] && this.VectorPaneles[j]['extension'] == Vector['extension']) ||
+                (this.VectorPaneles[j]['extension'] == Vector['numero'] && this.VectorPaneles[j]['numero'] == Vector['extension'])
+            ) {
                 return true;
+            } else {
             }
         }
         return false;
