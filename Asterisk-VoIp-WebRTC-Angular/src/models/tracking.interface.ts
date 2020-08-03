@@ -1,9 +1,9 @@
 export interface TrackingData {
     geometry: TrackingGeometry;
     type: string;
-    properties?: string;
+    properties?: any;
 }
 export interface TrackingGeometry {
-    coordinates: number[];
     type: string;
+    coordinates: number[];
 }

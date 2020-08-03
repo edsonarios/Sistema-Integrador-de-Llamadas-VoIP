@@ -72,7 +72,7 @@ export class RegistroLlamadasComponent implements OnInit {
         this.llamadasPerdidas = 0;
 
         for (const item of this.res) {
-            if (item.tipo === 'entrante' && item.estado === 'BUSY') {
+            if (item.tipo === 'entrante' && item.estado === 'NO ANSWER') {
                 this.llamadasPerdidas++;
             } else if (item.tipo === 'saliente') {
                 this.llamadasRealizadas++;
