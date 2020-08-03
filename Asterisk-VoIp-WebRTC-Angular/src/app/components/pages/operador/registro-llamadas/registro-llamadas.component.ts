@@ -4,6 +4,8 @@ import { HistorialService } from '../../../../../services/historial.service';
 import { LlamadasSalientes } from '../../../../../models/llamadasSalientes.interface';
 import { LlamadasEntrantes } from '../../../../../models/llamadasEntrantes.interface';
 import * as moment from 'moment';
+import { AsteriskConnectionService } from '../../../../../services/asterisk-connection.service';
+import { Llamadas } from '../../../../../models/llamada.interface';
 
 @Component({
     selector: 'app-registro-llamadas',
@@ -26,12 +28,17 @@ export class RegistroLlamadasComponent implements OnInit {
     public llamadasRecibidas = 0;
     public llamadasPerdidas = 0;
 
-    constructor(private historialService: HistorialService) {
+    constructor(private historialService: HistorialService, public estadoService: AsteriskConnectionService) {
         // this.HistorialNumeroFecha();
     }
 
     ngOnInit() {
         this.HistorialNumeroFecha();
+        this.estadoService.getResponse('Llamadas').subscribe((data: Llamadas) => {
+            if (data.evento === 'Hangup') {
+                this.HistorialNumeroFecha();
+            }
+        });
     }
 
     prueba() {
@@ -48,11 +55,8 @@ export class RegistroLlamadasComponent implements OnInit {
     }
     HistorialNumeroFecha() {
         this.historialService.HistorialxSipoIaxxFecha(this.numero, this.fecha).subscribe(
-            // this.historialService.HistorialxSipoIaxxFecha(2001, '2020-07-03').subscribe(
             (response) => {
                 this.res = response;
-                // this.arraySalientes = this.res[0];
-                // this.arrayEntrantes = this.res[1];
                 this.getCantidadLlamadas();
                 console.log('exito', response);
                 console.log('fecha:', this.fecha);
@@ -63,6 +67,10 @@ export class RegistroLlamadasComponent implements OnInit {
         );
     }
     getCantidadLlamadas() {
+        this.llamadasRealizadas = 0;
+        this.llamadasRecibidas = 0;
+        this.llamadasPerdidas = 0;
+
         for (const item of this.res) {
             if (item.tipo === 'entrante' && item.estado === 'BUSY') {
                 this.llamadasPerdidas++;

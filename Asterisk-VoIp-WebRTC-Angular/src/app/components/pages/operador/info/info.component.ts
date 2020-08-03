@@ -7,6 +7,8 @@ import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
 import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
 import { faPhoneSlash } from '@fortawesome/free-solid-svg-icons';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
+import { AsteriskConnectionService } from '../../../../../services/asterisk-connection.service';
+import { Llamadas } from '../../../../../models/llamada.interface';
 
 @Component({
     selector: 'app-info',
@@ -28,14 +30,18 @@ export class InfoComponent implements OnInit {
     public numero = localStorage.getItem('NumberSelected');
     // fecha actual
     public fechaActual = moment(new Date()).format('YYYY-MM-DD');
-    constructor(public historialService: HistorialService) {}
+    constructor(public historialService: HistorialService, public estadoService: AsteriskConnectionService) {}
 
     ngOnInit() {
         this.HistorialNumeroFecha();
+        this.estadoService.getResponse('Llamadas').subscribe((data: Llamadas) => {
+            if (data.evento === 'Hangup') {
+                this.HistorialNumeroFecha();
+            }
+        });
     }
     HistorialNumeroFecha() {
         this.historialService.HistorialxSipoIaxxFecha(this.numero, this.fechaActual).subscribe(
-            // this.historialService.HistorialxSipoIaxxFecha('2001', '2020-07-03').subscribe(
             (response) => {
                 this.arrayLlamadas = response;
             },

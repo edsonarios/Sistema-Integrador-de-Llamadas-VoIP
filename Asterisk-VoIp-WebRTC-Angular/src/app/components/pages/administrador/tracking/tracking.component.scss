@@ -1,0 +1,34 @@
+.tracking {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    grid-template-areas: 'mapa opciones';
+    height: 89vh;
+}
+
+.t-mapa {
+    grid-area: mapa;
+    margin: 1px;
+}
+
+#mapa-mapbox {
+    background-color: red;
+    width: 100%;
+}
+
+.t-opciones {
+    grid-area: opciones;
+    background: var(--color-cuatro);
+    display: grid;
+    grid-template-rows: 70px 70px auto;
+    section {
+        background: white;
+        margin: 5px 15px;
+        height: 100px;
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+}
+.t-opciones-boton {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

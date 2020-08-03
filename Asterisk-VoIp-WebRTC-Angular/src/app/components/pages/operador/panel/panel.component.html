@@ -28,15 +28,22 @@
                         -- : -- : --
                     </td>
                     <td data-title="Link">
-                        {{ VectorPaneles[i]['evento'] }}
+                        <span style="color: aqua;" *ngIf="VectorPaneles[i]['evento'] == 'Newchannel'">Conectando</span>
+                        <span style="color: blue;" *ngIf="VectorPaneles[i]['evento'] == 'Newexten'">Llamando</span>
+                        <span style="color: blue;" *ngIf="VectorPaneles[i]['evento'] == 'NewConnectedLine'">Llamando</span>
+                        <span style="color: chartreuse;" *ngIf="VectorPaneles[i]['evento'] == 'BridgeEnter'">Contestado</span>
+                        <span style="color: chartreuse;" *ngIf="VectorPaneles[i]['evento'] == 'Bridge'">Contestado</span>
+                        <span style="color: red;" *ngIf="VectorPaneles[i]['evento'] == 'Hangup'">Colgado</span>
                     </td>
                     <td data-title="Link" *ngIf="hide == 'true'">
                         {{ VectorPaneles[i]['contexto'] }}
                     </td>
                     <td data-title="Link" *ngIf="hide == 'true'">
-                        <button style="border-radius: 50%; padding: 4px; height: 34px;" (click)="Opcion1()">1</button>
-                        <button style="border-radius: 50%; padding: 4px; height: 34px;" (click)="Opcion2()">2</button>
-                        <button style="border-radius: 50%; padding: 4px; height: 34px;" (click)="Opcion3()">3</button>
+                        <div *ngIf="VectorPaneles[i]['evento'] == 'BridgeEnter' || VectorPaneles[i]['evento'] == 'Bridge'">
+                            <button style="border-radius: 50%; padding: 4px; height: 34px;" (click)="Opcion1()">1</button>
+                            <button style="border-radius: 50%; padding: 4px; height: 34px;" (click)="Opcion2()">2</button>
+                            <button style="border-radius: 50%; padding: 4px; height: 34px;" (click)="Opcion3()">3</button>
+                        </div>
                     </td>
                 </tr>
             </tbody>

@@ -16,7 +16,8 @@ export const environment = {
     },
     mapboxKey: 'pk.eyJ1IjoiZXZvbHV0aW9udjUiLCJhIjoiY2tibDliaTJvMTZ4eTJxbnpnazI1N3JhMyJ9.eiXflPcOdFpt436gJ9yPZQ',
     hmr: true,
-    asteriskUrl: 'http://167.86.119.191:8085'
+    asteriskUrl: 'http://167.86.119.191:8085',
+    flespiUrl: 'https://wanderdrone.appspot.com/'
 };
 
 /*
