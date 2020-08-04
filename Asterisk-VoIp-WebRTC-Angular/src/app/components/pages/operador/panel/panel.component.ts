@@ -51,6 +51,18 @@ export class PanelComponent implements OnInit {
             // si no existe solo lo adiciona en su ultimo estado
             this.AgregarEventoPanel(Vector);
         }
+        this.EliminaHangups(this.VectorPaneles);
+    }
+    EliminaHangups(VectorPaneles) {
+        let aux = [];
+        let long = 0;
+        for (let i = 0; i < VectorPaneles.length; i++) {
+            if (VectorPaneles[i]['evento'] != 'Hangup') {
+                aux[long] = VectorPaneles[i];
+                long = long + 1;
+            }
+        }
+        this.VectorPaneles = aux;
     }
     BusquedaExistentenEventoPanel(Vector) {
         // recorre todo el vecto en busqueda de los datos repetidos

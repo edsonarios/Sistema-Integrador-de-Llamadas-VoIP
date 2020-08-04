@@ -31,9 +31,9 @@
                         <span style="color: aqua;" *ngIf="VectorPaneles[i]['evento'] == 'Newchannel'">Conectando</span>
                         <span style="color: blue;" *ngIf="VectorPaneles[i]['evento'] == 'Newexten'">Llamando</span>
                         <span style="color: blue;" *ngIf="VectorPaneles[i]['evento'] == 'NewConnectedLine'">Llamando</span>
-                        <span style="color: chartreuse;" *ngIf="VectorPaneles[i]['evento'] == 'BridgeEnter'">Contestado</span>
-                        <span style="color: chartreuse;" *ngIf="VectorPaneles[i]['evento'] == 'Bridge'">Contestado</span>
-                        <span style="color: red;" *ngIf="VectorPaneles[i]['evento'] == 'Hangup'">Colgado</span>
+                        <span style="color: chartreuse;" *ngIf="VectorPaneles[i]['evento'] == 'BridgeEnter'">En curso</span>
+                        <span style="color: chartreuse;" *ngIf="VectorPaneles[i]['evento'] == 'Bridge'">En curso</span>
+                        <span style="color: red;" *ngIf="VectorPaneles[i]['evento'] == 'Hangup'">Finalizado</span>
                     </td>
                     <td data-title="Link" *ngIf="hide == 'true'">
                         {{ VectorPaneles[i]['contexto'] }}
