@@ -6,7 +6,7 @@ const asyncify = require("express-asyncify");
 const auth = require("express-jwt");
 //const guard = require('express-jwt-permissions')()
 const db = require("mod-db");
-//const request = require('request-promise-native')
+//const request = require("request-promise-native");
 var bodyParser = require("body-parser");
 
 const multipart = require("connect-multiparty");
@@ -2244,10 +2244,10 @@ api.post("/findByIdCdr", async (req, res, next) => {
   res.send(obj);
 });
 
-api.post("/downloadCalls", function (req, res, next) {
-  const params = req.body;
+api.get("/downloadCalls/:uniqueid/:SIP/:channel", async (req, res, next) => {
+  const params = req.params;
   var id = params.uniqueid;
-  var chanel = params.channel;
+  var chanel = params.SIP + "/" + params.channel;
   let a = [],
     download = [];
   var sw = -1;
@@ -2280,7 +2280,7 @@ api.post("/downloadCalls", function (req, res, next) {
           name: `${download[1].substring(28, download[1].length)}`,
         },
       ],
-      `${chanel}`
+      `${chanel}.zip`
     );
   } else {
     return next(new Error(`Audio not found`));
