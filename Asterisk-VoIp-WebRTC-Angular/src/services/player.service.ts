@@ -5,7 +5,10 @@ export class Track {
   artist: string;
   url: string;
   cover: string;
+
+  
 }
+
 
 @Injectable({
   providedIn: 'root'
