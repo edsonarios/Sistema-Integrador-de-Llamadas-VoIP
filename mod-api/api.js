@@ -2448,7 +2448,8 @@ api.post("/addAgenda", async (req, res, next) => {
   //creo una agenda apartir del id de un usuario
   try {
     obj = await Agenda.create(params.usuarioId, {
-      Contactos: params.Contactos,
+      numero: params.numero,
+      nombre: params.nombre,
     });
   } catch (e) {
     return next(e);
@@ -2457,13 +2458,30 @@ api.post("/addAgenda", async (req, res, next) => {
   res.send(obj);
 });
 
+/*api.post("/addAgendaDialpad", async (req, res, next) => {
+  const params = req.body;
+  let obj;
+  //creo una agenda apartir del id de un usuario
+  try {
+    obj = await Agenda.createWhithoutIdUsu({
+      contactos: params.contactos,
+      nombre: params.nombre,
+    });
+  } catch (e) {
+    return next(e);
+  }
+
+  res.send(obj);
+});*/
+
 api.put("/updateAgenda", async (req, res, next) => {
   const params = req.body;
   //edito cualquier atributo de de la tabla Agenda buscando por el id de la Agenda
   let obj;
   try {
-    obj = await Extension.update(params.id, {
-      Contactos: params.Contactos,
+    obj = await Agenda.update(params.id, {
+      contactos: params.contactos,
+      nombre: params.nombre,
     });
   } catch (e) {
     return next(e);
@@ -2491,7 +2509,8 @@ api.post("/ListarContactos", async (req, res, next) => {
   const usuarioAll = await Usuario.findAll();
   const sipsAll = await Sip.findAll();
   const iaxsAll = await Iax.findAll();
-  let getcontactos = [];
+  let getnumero = [];
+  let getnombre = [];
   let getusuarios = [];
   let getidusu = [];
   let getiaxs = [];
@@ -2502,11 +2521,13 @@ api.post("/ListarContactos", async (req, res, next) => {
   //obtengo los contactos de la tabla Agenda
   AgendaAll.forEach((obj) => {
     if (obj.usuarioId == params.usuarioId) {
-      getcontactos.push(obj.Contactos);
+      getnumero.push(obj.numero);
+      getnombre.push(obj.nombre);
       getidagenda.push(obj.id);
     }
   });
-  getcontactos.forEach((algo) => {
+
+  getnumero.forEach((algo) => {
     sipsAll.forEach((obj) => {
       if (algo == obj.name) {
         getidusu.push(obj.usuarioId);
@@ -2514,7 +2535,8 @@ api.post("/ListarContactos", async (req, res, next) => {
       }
     });
   });
-  getcontactos.forEach((algo) => {
+
+  getnumero.forEach((algo) => {
     iaxsAll.forEach((obj) => {
       if (algo == obj.name) {
         getidusu.push(obj.usuarioId);
@@ -2530,6 +2552,13 @@ api.post("/ListarContactos", async (req, res, next) => {
       }
     });
   });
+  AgendaAll.forEach((obj) => {
+    if (obj.nombre != null) {
+      getusuarios.push(obj.nombre);
+      getsips.push(obj.numero);
+    }
+  });
+
   todos.push(getidagenda);
   todos.push(getusuarios);
   todos.push(getsips, getiaxs);
