@@ -1,9 +1,10 @@
 <section class="tracking">
     <div class="t-mapa" id="mapa-mapbox"></div>
     <div class="t-opciones">
-        <button class="btn btn-info" (click)="seguimiento()">Seguimiento en tiempo real</button>
-        <button class="btn btn-warning" (click)="recorrido()">Ver recorrido</button>
-        <button class="btn btn-warning" (click)="seguimientoFake()">Ver recorrido Falso</button>
+        <button class="btn btn-info" (click)="construir()">Seguimiento en tiempo real</button>
+        <button class="btn btn-warning" (click)="getRecorrido()">Ver recorrido</button>
+        <button class="btn btn-danger" (click)="seguimiento()">Seguimiento Falso</button>
+        <button class="btn btn-danger" (click)="recorrido(ruta2)">Recorrido falso</button>
         <section *ngFor="let position of positions">
             <div>Latitud: {{ position.lattitude }}</div>
             <div>Longitud: {{ position.longitude }}</div>
