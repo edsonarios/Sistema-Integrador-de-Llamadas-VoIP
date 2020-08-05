@@ -37,6 +37,12 @@ module.exports = function setupAgenda(AgendaModel, UsuarioModel) {
     return AgendaModel.findAll();
   }
 
+  async function findAllOrder() {
+    return AgendaModel.findAll({
+      order: [["id", "ASC"]],
+    });
+  }
+
   async function findAllQuery(query) {
     return AgendaModel.findAll(query);
   }
@@ -59,6 +65,7 @@ module.exports = function setupAgenda(AgendaModel, UsuarioModel) {
   return {
     create,
     update,
+    findAllOrder,
     findById,
     findAll,
     destroyAll,
