@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { HistorialService } from '@services/historial.service';
 
@@ -13,13 +13,13 @@ import * as moment from 'moment';
 export class HistorialLlamadasComponent implements OnInit {
   addform: FormGroup;
 
-  public Historial;
+  search = new FormControl('');
 
   //obtenemos los datos del usuario actual
   public us = localStorage.getItem('Usuario');
   public obj = JSON.parse(this.us);
   // Aquí va el numero actual del operador
-  public numero = localStorage.getItem('NumberSelected');
+  public numberSelected = localStorage.getItem('NumberSelected');
 
   public Historia = [];
 
@@ -35,100 +35,8 @@ export class HistorialLlamadasComponent implements OnInit {
     private historialService: HistorialService,
     private router: Router
   ) {
-    this.Historial = [
-      {
-        Nombre: 'Daniel',
-        Numero: '3001',
-        Tipo: 'Entrante',
-        Origen: 'Caja',
-        Destino: 'Patrulla',
-        Duracion: '02:30 min',
-        Fecha: '05/02/2019',
-        Audio: 'jfdsafdsajp1321.wmp',
-      },
-      {
-        Nombre: 'Daniel',
-        Numero: '3001',
-        Tipo: 'Saliente',
-        Origen: 'Caja',
-        Destino: 'Patrulla',
-        Duracion: '02:30 min',
-        Fecha: '05/02/2019',
-        Audio: 'jfdsafdsajp1321.wmp',
-      },
-      {
-        Nombre: 'Daniel',
-        Numero: '3001',
-        Tipo: 'Entrante',
-        Origen: 'Caja',
-        Destino: 'Patrulla',
-        Duracion: '02:30 min',
-        Fecha: '05/02/2019',
-        Audio: 'jfdsafdsajp1321.wmp',
-      },
-      {
-        Nombre: 'Daniel',
-        Numero: '3001',
-        Tipo: 'Perdida',
-        Origen: 'Caja',
-        Destino: 'Patrulla',
-        Duracion: '02:30 min',
-        Fecha: '05/02/2019',
-        Audio: 'jfdsafdsajp1321.wmp',
-      },
-      {
-        Nombre: 'Daniel',
-        Numero: '3001',
-        Tipo: 'Entrante',
-        Origen: 'Caja',
-        Destino: 'Patrulla',
-        Duracion: '02:30 min',
-        Fecha: '05/02/2019',
-        Audio: 'jfdsafdsajp1321.wmp',
-      },
-      {
-        Nombre: 'Daniel',
-        Numero: '3001',
-        Tipo: 'Saliente',
-        Origen: 'Caja',
-        Destino: 'Patrulla',
-        Duracion: '02:30 min',
-        Fecha: '05/02/2019',
-        Audio: 'jfdsafdsajp1321.wmp',
-      },
-      {
-        Nombre: 'Daniel',
-        Numero: '3001',
-        Tipo: 'Saliente',
-        Origen: 'Caja',
-        Destino: 'Patrulla',
-        Duracion: '02:30 min',
-        Fecha: '05/02/2019',
-        Audio: 'jfdsafdsajp1321.wmp',
-      },
-      {
-        Nombre: 'Daniel',
-        Numero: '3001',
-        Tipo: 'Perdida',
-        Origen: 'Caja',
-        Destino: 'Patrulla',
-        Duracion: '02:30 min',
-        Fecha: '05/02/2019',
-        Audio: 'jfdsafdsajp1321.wmp',
-      },
-      {
-        Nombre: 'Daniel',
-        Numero: '3001',
-        Tipo: 'Entrante',
-        Origen: 'Caja',
-        Destino: 'Patrulla',
-        Duracion: '02:30 min',
-        Fecha: '05/02/2019',
-        Audio: 'jfdsafdsajp1321.wmp',
-      },
-    ];
+    
 
-    this.buildForm();
   }
 
   private buildForm() {
@@ -224,37 +132,51 @@ export class HistorialLlamadasComponent implements OnInit {
   }
 
   llenarHistorialOperador() {
-    console.log(this.numero);
-    this.historialService.HistorialxSipoIax(this.numero).subscribe(
+    console.log(this.numberSelected);
+    this.historialService.HistorialxSipoIax(this.numberSelected).subscribe(
       (response) => {
+        response.forEach((element) => {
+            var fecha = moment(element.fechayhora).subtract(10, 'days').calendar();
+            element.fechayhora = fecha;
+            if(element.tipo == 'entrante'){
+              this.HistEntrante.push(element);
+            }
+            if(element.tipo == 'saliente'){
+              this.HistSaliente.push(element);
+            }
+            if(element.tipo == 'perdida'){
+              this.HistPerdida.push(element);
+            }
+          });
         this.HistOper = response;
         console.log(response);
+        this.Historia = this.HistOper;
       },
       (error) => {
         console.log(error);
       }
     );
-    this.Historia = this.HistOper;
+    
   }
 
-  salientesHist() {
+  salientes() {
     if (this.obj.tipo == 'standard') {
-    } else {
       this.Historia = this.HistSaliente;
+    } else {
     }
   }
 
-  entrantesHist() {
+  entrantes() {
     // Aca se compara con el atributo si fue entrante
-    if (this.obj.tipo == 'admin') {
+    if (this.obj.tipo == 'standard') {
       this.Historia = this.HistEntrante;
     } else {
     }
   }
 
-  perdidasHist() {
+  perdidas() {
     // Aca se compara con el atributo si fue perdida
-    if (this.obj.tipo == 'admin') {
+    if (this.obj.tipo == 'standard') {
       this.Historia = this.HistPerdida;
     } else {
     }
@@ -274,12 +196,11 @@ export class HistorialLlamadasComponent implements OnInit {
     this.filtrar(this.addform.value);
   }
 
-  onChange(event) {
-    //console.log(event);
-  }
-
   ngOnInit() {
     this.preload();
+    this.search.valueChanges.pipe(debounceTime(300)).subscribe((value) => {
+      this.Historia = this.HistOper.filter((it) => it.numero.includes(value));
+  });
   }
   cssch() {
     document.getElementById('nav').style.cssText = 'background: red;';

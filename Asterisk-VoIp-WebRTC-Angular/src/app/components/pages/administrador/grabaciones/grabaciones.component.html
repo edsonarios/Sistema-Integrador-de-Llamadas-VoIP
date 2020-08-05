@@ -1,38 +1,38 @@
 <div class="navbar-horiz">
-    <div class="nav-ini">
-      <i class="v-icon-microphone1" placement="right"></i>
+  <div class="nav-ini">
+    <i class="v-icon-microphone1" placement="right"></i>
       Grabaciones
-    </div>
-    <nav>
-      <ul class="nav-mid">
-        <li class="li-active">
-          <a>Todos</a>
-        </li>
-        <li class="li-active">
-          <a>Salientes</a>
-        </li>
-        <li>
-          <a>Entrantes</a>
-        </li>
-        <li>
-          <a>Perdidas</a>
-        </li>
-      </ul>
-    </nav>
-    <div class="nav-fin">
-      <input
-        type="text"
-        placeholder="Datepicker"
-        class="form-control"
-        bsDatepicker
-        [bsConfig]="{ isAnimated: true }"
-      />
-      <input type="text" class="form-control" [formControl]="search" placeholder="Contacto" />
-      <button type="submit">
-        <i class="v-icon-magnifying-glass"></i>
-      </button>
-    </div>
   </div>
+  <nav>
+    <ul class="nav-mid">
+      <li >
+        <a (click)="defaultHistOpe()">Todos</a>
+      </li>
+      <li >
+        <a (click)="salientes()">Salientes</a>
+      </li>
+      <li>
+        <a (click)="entrantes()">Entrantes</a>
+      </li>
+      <li>
+        <a (click)="perdidas()">Perdidas</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="nav-fin">
+    <input
+      type="text"
+      placeholder="Datepicker"
+      class="form-control"
+      bsDatepicker
+      [bsConfig]="{ isAnimated: true }"
+    />
+    <input type="text" class="form-control" [formControl]="search" placeholder="Contacto" />
+    <button type="submit">
+      <i class="v-icon-magnifying-glass"></i>
+    </button>
+  </div>
+</div>
 
 
 <div class="Historial">
@@ -75,7 +75,7 @@
           <td data-title="Link">
             <i class="v-icon-ambulance-side-view"></i> {{ n.numero }}
           </td>
-          <td data-title="Link">{{ n.minutos }}:{{n.segundos}}</td>
+          <td data-title="Link">{{ n.segundos }}:{{n.milisegundos}}</td>
           <td data-title="Link">{{ n.fechayhora }}</td>
           <td data-title="Link"><audio-player [data]="n"></audio-player></td>
           <td>
