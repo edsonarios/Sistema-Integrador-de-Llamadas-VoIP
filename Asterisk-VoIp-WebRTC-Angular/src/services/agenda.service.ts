@@ -30,13 +30,13 @@ export class AgendaService {
     }
 
     addAmigo(id, name): Observable<any> {
-        return this.http.post<any>(this.url + 'addAgenda', { usuarioId: id, Contactos: name }, this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
+        return this.http.post<any>(this.url + 'addAgenda', { usuarioId: id, numero: name }, this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
     }
 
     listarAmigos(id): Observable<any> {
         return this.http.post<any>(this.url + 'ListarContactos', { usuarioId: id }, this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
     }
-
+    
     deleteAmigo(idfriend) {
         this.http.request('delete', this.url + 'deleteAgenda', { body: { id: idfriend } }).subscribe((data) => {
             console.log(data);
