@@ -2725,13 +2725,14 @@ api.get("/flespiParse", async (req, res, next) => {
 
   let result = [],
     result2 = [];
-
+  console.log(data);
+  console.log(data2.result);
   data2.properties.result.forEach((obj) => {
     if (
       obj["position.latitude"] != undefined &&
       obj["position.longitude"] != undefined
     ) {
-      result.push(obj["position.latitude"], obj["position.longitude"]);
+      result.push(obj["position.longitude"], obj["position.latitude"]);
       result2.push(result);
       result = [];
     }
