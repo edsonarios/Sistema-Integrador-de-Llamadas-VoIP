@@ -49,6 +49,9 @@ import { InfoComponent } from './components/pages/operador/info/info.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { AsteriskComponent } from './components/pages/operador/asterisk/asterisk.component';
 import { FiltroPipe } from './pipes/filtro.pipe';
+import { MapaComponent } from './components/pages/administrador/tracking/mapa/mapa.component';
+import { MapaRutasComponent } from './components/pages/administrador/tracking/mapa-rutas/mapa-rutas.component';
+import { MapaTiempoRealComponent } from './components/pages/administrador/tracking/mapa-tiempo-real/mapa-tiempo-real.component';
 const config: SocketIoConfig = {
     url: environment.asteriskUrl,
     options: {}
@@ -71,7 +74,10 @@ const config: SocketIoConfig = {
         RegistroLlamadasComponent,
         InfoComponent,
         AsteriskComponent,
-        FiltroPipe
+        FiltroPipe,
+        MapaComponent,
+        MapaRutasComponent,
+        MapaTiempoRealComponent
     ],
     imports: [
         BrowserModule,

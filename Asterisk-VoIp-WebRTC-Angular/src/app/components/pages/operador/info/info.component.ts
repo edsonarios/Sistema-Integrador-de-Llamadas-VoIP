@@ -44,6 +44,7 @@ export class InfoComponent implements OnInit {
         this.historialService.HistorialxSipoIaxxFecha(this.numero, this.fechaActual).subscribe(
             (response) => {
                 this.arrayLlamadas = response;
+                console.log(this.arrayLlamadas);
             },
             (error) => {
                 console.log('error', error);

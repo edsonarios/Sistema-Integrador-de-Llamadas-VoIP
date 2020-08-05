@@ -27,7 +27,7 @@
         bsDatepicker
         [bsConfig]="{ isAnimated: true }"
       />
-      <input type="text" class="form-control" placeholder="Contacto" />
+      <input type="text" class="form-control" [formControl]="search" placeholder="Contacto" />
       <button type="submit">
         <i class="v-icon-magnifying-glass"></i>
       </button>
@@ -53,31 +53,31 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let n of Historial; let i = index">
+        <tr *ngFor="let n of Historia; let i = index">
           <td data-title="ID">{{ i + 1 }}</td>
-          <td data-title="Name">< {{ Historial[i]['Numero'] }} > {{ Historial[i]['Nombre'] }}</td>
+          <td data-title="Name">< {{ numero }} > {{ obj.nombre }}</td>
           <td data-title="Status">
-            <span *ngIf="Historial[i]['Tipo'] == 'Perdida'" style="color: red"
-              ><i class="v-icon-phone_missed"></i> {{ Historial[i]['Tipo'] }}</span
+            <span *ngIf="n.tipo == 'perdida'" style="color: red"
+              ><i class="v-icon-phone_missed"></i> {{ n.tipo }}</span
             >
-            <span *ngIf="Historial[i]['Tipo'] == 'Entrante'" style="color: blue"
-              ><i class="v-icon-incoming-call"></i> {{ Historial[i]['Tipo'] }}</span
+            <span *ngIf="n.tipo == 'entrante'" style="color: blue"
+              ><i class="v-icon-incoming-call"></i> {{ n.tipo }}</span
             >
-            <span *ngIf="Historial[i]['Tipo'] == 'Saliente'" style="color: green"
+            <span *ngIf="n.tipo == 'saliente'" style="color: green"
               ><i class="v-icon-telephone-receiver-with-up-arrow"></i>
-              {{ Historial[i]['Tipo'] }}</span
+              {{ n.tipo }}</span
             >
           </td>
           <td data-title="Link">
             <i class="v-icon-walkie-talkie"></i>
-            {{ Historial[i]['Origen'] }}
+            {{ numero }}
           </td>
           <td data-title="Link">
-            <i class="v-icon-ambulance-side-view"></i> {{ Historial[i]['Destino'] }}
+            <i class="v-icon-ambulance-side-view"></i> {{ n.numero }}
           </td>
-          <td data-title="Link">{{ Historial[i]['Duracion'] }}</td>
-          <td data-title="Link">{{ Historial[i]['Fecha'] }}</td>
-          <td data-title="Link"><audio-player></audio-player></td>
+          <td data-title="Link">{{ n.minutos }}:{{n.segundos}}</td>
+          <td data-title="Link">{{ n.fechayhora }}</td>
+          <td data-title="Link"><audio-player [data]="n"></audio-player></td>
           <td>
             <a class="download" (click)="DescargarAudio()" href="/prueba/sound.mp3" download>
               <i class="v-icon-download-to-storage-drive" tooltip="Descargar Audio"></i>

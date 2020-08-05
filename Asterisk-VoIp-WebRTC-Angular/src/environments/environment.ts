@@ -16,7 +16,9 @@ export const environment = {
     },
     mapboxKey: 'pk.eyJ1IjoiZXZvbHV0aW9udjUiLCJhIjoiY2tibDliaTJvMTZ4eTJxbnpnazI1N3JhMyJ9.eiXflPcOdFpt436gJ9yPZQ',
     hmr: true,
-    asteriskUrl: 'http://167.86.119.191:8085'
+    asteriskUrl: 'http://167.86.119.191:8085',
+    flespiUrl: 'https://wanderdrone.appspot.com/',
+    flespiUrl2: 'https://flespi.io/gw/channels/30789/messages?data=%7B%22limit_count%22%3A100%2C%22limit_size%22%3A100000000%7D'
 };
 
 /*

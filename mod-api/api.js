@@ -6,7 +6,7 @@ const asyncify = require("express-asyncify");
 const auth = require("express-jwt");
 //const guard = require('express-jwt-permissions')()
 const db = require("mod-db");
-//const request = require('request-promise-native')
+const request = require("request-promise-native");
 var bodyParser = require("body-parser");
 
 const multipart = require("connect-multiparty");
@@ -29,6 +29,8 @@ const moment = require("moment");
 var shell = require("shelljs");
 const zip = require("express-zip");
 const { get } = require("http");
+
+const geojson = require("geojson");
 
 //parseado a json todos los bodys
 api.use(bodyParser.urlencoded({ extended: false }));
@@ -2244,10 +2246,10 @@ api.post("/findByIdCdr", async (req, res, next) => {
   res.send(obj);
 });
 
-api.post("/downloadCalls", function (req, res, next) {
-  const params = req.body;
+api.get("/downloadCalls/:uniqueid/:SIP/:channel", async (req, res, next) => {
+  const params = req.params;
   var id = params.uniqueid;
-  var chanel = params.channel;
+  var chanel = params.SIP + "/" + params.channel;
   let a = [],
     download = [];
   var sw = -1;
@@ -2280,7 +2282,7 @@ api.post("/downloadCalls", function (req, res, next) {
           name: `${download[1].substring(28, download[1].length)}`,
         },
       ],
-      `${chanel}`
+      `${chanel}.zip`
     );
   } else {
     return next(new Error(`Audio not found`));
@@ -2726,6 +2728,47 @@ api.delete("/deleteQueue", async (req, res, next) => {
   //borro todos los queues a partir del id del queue
   await Queue.destroy(params.id);
   res.send({ message: "se borro el queue" });
+});
+
+//api para parsear datos de flespi a geojson y enviar a front
+api.get("/flespiParse", async (req, res, next) => {
+  const options = {
+    method: "GET",
+    url: `https://flespi.io/gw/channels/30789/messages?data=%7B%22limit_count%22%3A100%2C%22limit_size%22%3A100000000%7D`,
+    json: true,
+    headers: {
+      Authorization:
+        "FlespiToken bxuB94VMd5VIn00dN5YVib943aluouOpP6OO0zr1saAD0oGBhskqtikkitEuLgHr",
+    },
+  };
+
+  let data;
+  try {
+    data = await request(options);
+  } catch (e) {
+    return next(new Error(`token expiration`));
+  }
+  let data2 = await geojson.parse(data, {
+    Point: ["position.latitude", "position.longitude"],
+  });
+
+  let result = [],
+    result2 = [];
+  console.log(data);
+  console.log(data2.result);
+  data2.properties.result.forEach((obj) => {
+    if (
+      obj["position.latitude"] != undefined &&
+      obj["position.longitude"] != undefined
+    ) {
+      result.push(obj["position.longitude"], obj["position.latitude"]);
+      result2.push(result);
+      result = [];
+    }
+  });
+  //console.log(result2);
+
+  res.send(result2);
 });
 module.exports = api;
 //moment(m.createdAt).format("YYYY-MM-DD")

@@ -1,8 +1,8 @@
 <div class="info-content" *ngFor="let item of arrayLlamadas">
     <div>
-        <fa-icon class="recibida" [icon]="iconEntrante" *ngIf="item.tipo === 'entrante' && item.estado !== 'BUSY'"> </fa-icon>
-        <fa-icon class="recibida" [icon]="iconPhone" *ngIf="item.tipo === 'entrante' && item.estado !== 'BUSY'"> </fa-icon>
-        <fa-icon class="perdida" [icon]="iconPerdida" *ngIf="item.tipo === 'entrante' && item.estado === 'BUSY'"> </fa-icon>
+        <fa-icon class="recibida" [icon]="iconEntrante" *ngIf="item.tipo === 'entrante' && item.estado !== 'NO ANSWER'"> </fa-icon>
+        <fa-icon class="recibida" [icon]="iconPhone" *ngIf="item.tipo === 'entrante' && item.estado !== 'NO ANSWER'"> </fa-icon>
+        <fa-icon class="perdida" [icon]="iconPerdida" *ngIf="item.tipo === 'entrante' && item.estado === 'NO ANSWER'"> </fa-icon>
         <fa-icon class="realizada" [icon]="iconPhone" *ngIf="item.tipo === 'saliente'"> </fa-icon>
         <fa-icon class="realizada" [icon]="iconSaliente" *ngIf="item.tipo === 'saliente'"> </fa-icon>
 

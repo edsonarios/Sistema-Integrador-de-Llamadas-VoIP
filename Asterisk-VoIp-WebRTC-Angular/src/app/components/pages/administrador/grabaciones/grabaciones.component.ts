@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HistorialService } from '@services/historial.service';
 import * as moment from 'moment';
+import { FormControl } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'grabaciones',
@@ -10,6 +12,9 @@ import * as moment from 'moment';
 export class GrabacionesComponent implements OnInit {
   public Historial;
 
+  filtroValue = '';
+  search = new FormControl('');
+  
   public Historia = [];
 
   public HistAdmin = [];
@@ -126,6 +131,10 @@ export class GrabacionesComponent implements OnInit {
 
   ngOnInit() {
     this.preload();
+
+    this.search.valueChanges.pipe(debounceTime(300)).subscribe((value) => {
+      this.Historia = this.HistOper.filter((it) => it.numero.includes(value));
+  });
   }
   DescargarAudio() {
     //Metodo de descarga
@@ -193,14 +202,19 @@ export class GrabacionesComponent implements OnInit {
     console.log(this.numero);
     this.historialService.HistorialxSipoIax(this.numero).subscribe(
       (response) => {
-        this.HistOper = response;
+        response.forEach(it => {
+          var fec = moment(it.fechayhora).subtract(10, 'days').calendar();
+          it.fechayhora = fec;
+        });
         console.log(response);
+        this.HistOper = response;
+        this.Historia = this.HistOper;
       },
       (error) => {
         console.log(error);
       }
     );
-    this.Historia = this.HistOper;
+    
   }
 
   salientesHist() {
