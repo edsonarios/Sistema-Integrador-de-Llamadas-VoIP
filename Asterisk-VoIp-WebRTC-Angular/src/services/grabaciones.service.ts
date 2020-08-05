@@ -44,4 +44,11 @@ export class GrabacionesService {
           )
           .pipe(catchError(this.errorHandl));
       }   
+
+    downloadFile(uni, chan) {
+        console.log(uni, chan);
+        return this.http.get(this.url+'downloadCalls/'+uni+'/'+chan, {
+          responseType: 'arraybuffer'
+        });
+    }
 }

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HistorialService } from '@services/historial.service';
+import { GrabacionesService } from '@services/grabaciones.service';
 import * as moment from 'moment';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'grabaciones',
@@ -11,7 +13,7 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class GrabacionesComponent implements OnInit {
   public Historial;
-
+  link = 'https//:167.86.119.191:3005/api/'; 
   filtroValue = '';
   search = new FormControl('');
   
@@ -33,6 +35,7 @@ export class GrabacionesComponent implements OnInit {
 
   constructor(
     private historialService: HistorialService,
+    private grabaservice: GrabacionesService,
     private router: Router
   ) {
     this.Historial = [
@@ -136,9 +139,19 @@ export class GrabacionesComponent implements OnInit {
       this.Historia = this.HistOper.filter((it) => it.numero.includes(value));
   });
   }
-  DescargarAudio() {
+  DescargarAudio(uni, cha) {
     //Metodo de descarga
     console.log('Descargando...');
+    console.log(uni);
+    console.log(cha);
+    
+    this.grabaservice.downloadFile(uni, cha).subscribe(data => {
+      const blob = new Blob([data], {
+        type: 'application/zip'
+      });
+      const url = window.URL.createObjectURL(blob);
+      window.open(url);
+    });
   }
  
   preload() {

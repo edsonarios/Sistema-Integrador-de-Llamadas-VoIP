@@ -34,11 +34,13 @@
     "express-zip": "^3.0.0",
     "fcm-node": "^1.5.1",
     "fcm-notification": "^2.0.0",
+    "geojson": "^0.5.0",
     "jsonwebtoken": "^8.1.0",
     "mod-db": "file:../mod-db",
     "moment": "^2.24.0",
     "path": "^0.12.7",
     "pg": "^7.11.0",
+    "request-promise-native": "^1.0.9",
     "retry": "^0.9.0",
     "shelljs": "^0.8.3"
   }

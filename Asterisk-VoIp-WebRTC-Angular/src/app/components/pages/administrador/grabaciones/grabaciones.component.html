@@ -79,7 +79,7 @@
           <td data-title="Link">{{ n.fechayhora }}</td>
           <td data-title="Link"><audio-player [data]="n"></audio-player></td>
           <td>
-            <a class="download" (click)="DescargarAudio()" href="/prueba/sound.mp3" download>
+            <a class="download" (click)="DescargarAudio(n.uniqueid, n.channel)">
               <i class="v-icon-download-to-storage-drive" tooltip="Descargar Audio"></i>
             </a>
           </td>

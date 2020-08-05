@@ -14,6 +14,7 @@ module.exports = function setupAgenda(AgendaModel, UsuarioModel) {
       return result.toJSON();
     }
   }
+
   async function update(id, obj) {
     const cond = {
       where: {

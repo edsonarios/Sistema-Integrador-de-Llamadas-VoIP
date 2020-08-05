@@ -6,7 +6,7 @@ const asyncify = require("express-asyncify");
 const auth = require("express-jwt");
 //const guard = require('express-jwt-permissions')()
 const db = require("mod-db");
-//const request = require("request-promise-native");
+const request = require("request-promise-native");
 var bodyParser = require("body-parser");
 
 const multipart = require("connect-multiparty");
@@ -29,6 +29,8 @@ const moment = require("moment");
 var shell = require("shelljs");
 const zip = require("express-zip");
 const { get } = require("http");
+
+const geojson = require("geojson");
 
 //parseado a json todos los bodys
 api.use(bodyParser.urlencoded({ extended: false }));
@@ -2448,7 +2450,8 @@ api.post("/addAgenda", async (req, res, next) => {
   //creo una agenda apartir del id de un usuario
   try {
     obj = await Agenda.create(params.usuarioId, {
-      Contactos: params.Contactos,
+      numero: params.numero,
+      nombre: params.nombre,
     });
   } catch (e) {
     return next(e);
@@ -2457,13 +2460,30 @@ api.post("/addAgenda", async (req, res, next) => {
   res.send(obj);
 });
 
+/*api.post("/addAgendaDialpad", async (req, res, next) => {
+  const params = req.body;
+  let obj;
+  //creo una agenda apartir del id de un usuario
+  try {
+    obj = await Agenda.createWhithoutIdUsu({
+      contactos: params.contactos,
+      nombre: params.nombre,
+    });
+  } catch (e) {
+    return next(e);
+  }
+
+  res.send(obj);
+});*/
+
 api.put("/updateAgenda", async (req, res, next) => {
   const params = req.body;
   //edito cualquier atributo de de la tabla Agenda buscando por el id de la Agenda
   let obj;
   try {
-    obj = await Extension.update(params.id, {
-      Contactos: params.Contactos,
+    obj = await Agenda.update(params.id, {
+      contactos: params.contactos,
+      nombre: params.nombre,
     });
   } catch (e) {
     return next(e);
@@ -2491,7 +2511,8 @@ api.post("/ListarContactos", async (req, res, next) => {
   const usuarioAll = await Usuario.findAll();
   const sipsAll = await Sip.findAll();
   const iaxsAll = await Iax.findAll();
-  let getcontactos = [];
+  let getnumero = [];
+  let getnombre = [];
   let getusuarios = [];
   let getidusu = [];
   let getiaxs = [];
@@ -2502,11 +2523,13 @@ api.post("/ListarContactos", async (req, res, next) => {
   //obtengo los contactos de la tabla Agenda
   AgendaAll.forEach((obj) => {
     if (obj.usuarioId == params.usuarioId) {
-      getcontactos.push(obj.Contactos);
+      getnumero.push(obj.numero);
+      getnombre.push(obj.nombre);
       getidagenda.push(obj.id);
     }
   });
-  getcontactos.forEach((algo) => {
+
+  getnumero.forEach((algo) => {
     sipsAll.forEach((obj) => {
       if (algo == obj.name) {
         getidusu.push(obj.usuarioId);
@@ -2514,7 +2537,8 @@ api.post("/ListarContactos", async (req, res, next) => {
       }
     });
   });
-  getcontactos.forEach((algo) => {
+
+  getnumero.forEach((algo) => {
     iaxsAll.forEach((obj) => {
       if (algo == obj.name) {
         getidusu.push(obj.usuarioId);
@@ -2530,6 +2554,13 @@ api.post("/ListarContactos", async (req, res, next) => {
       }
     });
   });
+  AgendaAll.forEach((obj) => {
+    if (obj.nombre != null) {
+      getusuarios.push(obj.nombre);
+      getsips.push(obj.numero);
+    }
+  });
+
   todos.push(getidagenda);
   todos.push(getusuarios);
   todos.push(getsips, getiaxs);
@@ -2697,6 +2728,47 @@ api.delete("/deleteQueue", async (req, res, next) => {
   //borro todos los queues a partir del id del queue
   await Queue.destroy(params.id);
   res.send({ message: "se borro el queue" });
+});
+
+//api para parsear datos de flespi a geojson y enviar a front
+api.get("/flespiParse", async (req, res, next) => {
+  const options = {
+    method: "GET",
+    url: `https://flespi.io/gw/channels/30789/messages?data=%7B%22limit_count%22%3A100%2C%22limit_size%22%3A100000000%7D`,
+    json: true,
+    headers: {
+      Authorization:
+        "FlespiToken bxuB94VMd5VIn00dN5YVib943aluouOpP6OO0zr1saAD0oGBhskqtikkitEuLgHr",
+    },
+  };
+
+  let data;
+  try {
+    data = await request(options);
+  } catch (e) {
+    return next(new Error(`token expiration`));
+  }
+  let data2 = await geojson.parse(data, {
+    Point: ["position.latitude", "position.longitude"],
+  });
+
+  let result = [],
+    result2 = [];
+  console.log(data);
+  console.log(data2.result);
+  data2.properties.result.forEach((obj) => {
+    if (
+      obj["position.latitude"] != undefined &&
+      obj["position.longitude"] != undefined
+    ) {
+      result.push(obj["position.longitude"], obj["position.latitude"]);
+      result2.push(result);
+      result = [];
+    }
+  });
+  //console.log(result2);
+
+  res.send(result2);
 });
 module.exports = api;
 //moment(m.createdAt).format("YYYY-MM-DD")
