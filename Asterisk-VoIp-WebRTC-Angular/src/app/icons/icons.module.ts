@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { FeatherModule } from 'angular-feather';
-import { Phone, PhoneCall, ArrowLeft, PhoneOff, Anchor, Search, ZoomIn, PlusSquare, Plus, Minus, PlusCircle } from 'angular-feather/icons';
+import { Phone, PhoneCall, ArrowLeft, PhoneOff, Anchor, Search, ZoomIn, PlusSquare, Plus, Minus, PlusCircle, UserPlus } from 'angular-feather/icons';
 
 const icons = {
     Phone,
@@ -14,7 +14,8 @@ const icons = {
     PlusSquare,
     Plus,
     Minus,
-    PlusCircle
+    PlusCircle,
+    UserPlus
 };
 
 @NgModule({

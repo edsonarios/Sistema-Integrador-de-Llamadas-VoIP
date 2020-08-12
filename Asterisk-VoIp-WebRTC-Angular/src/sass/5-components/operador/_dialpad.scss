@@ -87,4 +87,49 @@
 			}
 		}
 	}
+	&__row {
+		display: inline;
+		text-align: center;
+		.redondocall{
+			width: 70px;
+			height: 70px;
+			border-radius: 50%;
+			color: black;
+			position: relative;
+		}
+		.redondooff{
+			width: 70px;
+			height: 70px;
+			border-radius: 50%;
+			color: black;
+			position: relative;
+		}
+		.redondoplus{
+			width: 60px;
+			height: 50px;
+			text-align: left;
+			border-radius: 20%;
+			color: black;
+
+		}
+
+		.plus{
+			right: 10px;
+		}
+
+		.redondocall:hover {
+			background-color: darken(#72e300, 1);
+			color: white;
+		}
+		.redondooff:hover {
+			background-color: darken(#e30000, 1);
+			color: white;
+		}
+		.redondoplus:hover {
+			background-color: darken(#c9c7c7, 1);
+			color: white;
+		}
+	}
 }
+
+
