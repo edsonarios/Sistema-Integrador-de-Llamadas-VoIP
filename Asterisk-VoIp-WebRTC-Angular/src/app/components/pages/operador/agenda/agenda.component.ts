@@ -51,6 +51,7 @@ export class AgendaComponent implements OnInit {
     listarAmigos() {
         this.agendaservice.listarAmigos(this.usActual.usuarioId).subscribe(
             (response) => {
+                console.log(response);
                 var count = 0;
                 for (var i = 0; i < response[0].length; i++) {
                     this.Amigos.push({ id: response[0][i], nombre: response[1][i], numero: response[2][i] });

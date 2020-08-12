@@ -1,37 +1,38 @@
-<header class="navbar-horiz">
-	<div class="nav-ini">
-		<i class="v-icon-phone-call" placement="right"></i>
-		Historial de Llamadas
-	</div>
-	<nav>
-		<ul class="nav-mid">
-			<li id="nav" class="li-active">
-				<a (click)="defaultHistOpe()">Todos</a>
-			</li>
-			<li>
-				<a (click)="salientesHist()">Salientes</a>
-			</li>
-			<li>
-				<a (click)="entrantesHist()">Entrantes</a>
-			</li>
-			<li>
-				<a (click)="perdidasHist()">Perdidas</a>
-			</li>
-		</ul>
-	</nav>
-	<form [formGroup]="addform">
-		<div class="nav-fin">
-
-			<input type="text" formControlName="selectedDate" placeholder="Datepicker" class="form-control" bsDatepicker
-				[bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-orange' }" />
-			<input type="text" formControlName="nameContact" class="form-control" placeholder="Contacto" />
-			<button type="submit">
-				<a (click)="buscar()"><i class="v-icon-magnifying-glass"></i></a>
-			</button>
-
-		</div>
-	</form>
-</header>
+<div class="navbar-horiz">
+    <div class="nav-ini">
+      <i class="v-icon-microphone1" placement="right"></i>
+      Historial de Llamadas
+    </div>
+    <nav>
+      <ul class="nav-mid">
+        <li >
+          <a (click)="defaultHistOpe()">Todos</a>
+        </li>
+        <li >
+          <a (click)="salientes()">Salientes</a>
+        </li>
+        <li>
+          <a (click)="entrantes()">Entrantes</a>
+        </li>
+        <li>
+          <a (click)="perdidas()">Perdidas</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="nav-fin">
+      <input
+        type="text"
+        placeholder="Datepicker"
+        class="form-control"
+        bsDatepicker
+        [bsConfig]="{ isAnimated: true }"
+      />
+      <input type="text" class="form-control" [formControl]="search" placeholder="Contacto" />
+      <button type="submit">
+        <i class="v-icon-magnifying-glass"></i>
+      </button>
+    </div>
+  </div>
 
 
 <div class="Historial">
@@ -52,33 +53,29 @@
 			<tbody>
 				<tr *ngFor="let n of Historia; let i = index">
 					<td data-title="ID">{{ i + 1 }}</td>
-					<td data-title="Name">{{ Historia[i]['clid'] }} </td>
+					<td data-title="Name">< {{ numberSelected }} > {{ obj.nombre }}</td>
 					<td data-title="Status">
-						<span
-							*ngIf="Historia[i]['disposition'] == 'ANSWERED' && Historia[i]['clid'].includes(Historia[i]['src'])"
-							style="color: green"><i class="v-icon-phone_missed"></i> SALIENTE </span>
-
-						<span
-							*ngIf="Historia[i]['disposition'] == 'ANSWERED' && Historia[i]['clid'].includes(Historia[i]['dst'])"
-							style="color: blue"><i class="v-icon-telephone-receiver-with-up-arrow"></i>
-							ENTRANTE</span>
-
-						<span *ngIf="Historia[i]['disposition'] == 'NO ANSWERED'" style="color: red"><i
-								class="v-icon-incoming-call"></i> PERDIDA</span>
-
-
+					  <span *ngIf="n.tipo == 'perdida'" style="color: red"
+						><i class="v-icon-phone_missed"></i> {{ n.tipo }}</span
+					  >
+					  <span *ngIf="n.tipo == 'entrante'" style="color: blue"
+						><i class="v-icon-incoming-call"></i> {{ n.tipo }}</span
+					  >
+					  <span *ngIf="n.tipo == 'saliente'" style="color: green"
+						><i class="v-icon-telephone-receiver-with-up-arrow"></i>
+						{{ n.tipo }}</span
+					  >
 					</td>
 					<td data-title="Link">
-						<i class="v-icon-walkie-talkie"></i><br>
-						<{{ Historia[i]['src'] }}>
+					  <i class="v-icon-walkie-talkie"></i>
+					  {{ numberSelected }}
 					</td>
 					<td data-title="Link">
-						<i class="v-icon-ambulance-side-view"></i><br>
-						<{{ Historia[i]['dst'] }}>
+					  <i class="v-icon-ambulance-side-view"></i> {{ n.numero }}
 					</td>
-					<td data-title="Link">{{ Historia[i]['duration'] }}:{{Historia[i]['billsec']}} min</td>
-					<td data-title="Link">{{ Historia[i]['calldate'] }}</td>
-				</tr>
+					<td data-title="Link">{{ n.segundos }}:{{n.milisegundos}}</td>
+					<td data-title="Link">{{ n.fechayhora }}</td>
+				  </tr>
 			</tbody>
 		</table>
 	</div>

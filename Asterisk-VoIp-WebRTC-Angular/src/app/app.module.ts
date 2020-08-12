@@ -52,6 +52,7 @@ import { FiltroPipe } from './pipes/filtro.pipe';
 import { MapaComponent } from './components/pages/administrador/tracking/mapa/mapa.component';
 import { MapaRutasComponent } from './components/pages/administrador/tracking/mapa-rutas/mapa-rutas.component';
 import { MapaTiempoRealComponent } from './components/pages/administrador/tracking/mapa-tiempo-real/mapa-tiempo-real.component';
+
 const config: SocketIoConfig = {
     url: environment.asteriskUrl,
     options: {}

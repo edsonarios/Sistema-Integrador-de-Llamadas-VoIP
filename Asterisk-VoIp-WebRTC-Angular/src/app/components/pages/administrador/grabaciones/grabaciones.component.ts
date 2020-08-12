@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HistorialService } from '@services/historial.service';
+import { GrabacionesService } from '@services/grabaciones.service';
 import * as moment from 'moment';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'grabaciones',
@@ -11,7 +13,7 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class GrabacionesComponent implements OnInit {
   public Historial;
-
+  
   filtroValue = '';
   search = new FormControl('');
   
@@ -33,100 +35,10 @@ export class GrabacionesComponent implements OnInit {
 
   constructor(
     private historialService: HistorialService,
+    private grabaservice: GrabacionesService,
     private router: Router
   ) {
-    this.Historial = [
-      {
-        Nombre: 'Daniel',
-        Numero: '3001',
-        Tipo: 'Entrante',
-        Origen: 'Caja',
-        Destino: 'Patrulla',
-        Duracion: '02:30 min',
-        Fecha: '05/02/2019',
-        Audio: 'jfdsafdsajp1321.wmp',
-      },
-      {
-        Nombre: 'Daniel',
-        Numero: '3001',
-        Tipo: 'Saliente',
-        Origen: 'Caja',
-        Destino: 'Patrulla',
-        Duracion: '02:30 min',
-        Fecha: '05/02/2019',
-        Audio: 'jfdsafdsajp1321.wmp',
-      },
-      {
-        Nombre: 'Daniel',
-        Numero: '3001',
-        Tipo: 'Entrante',
-        Origen: 'Caja',
-        Destino: 'Patrulla',
-        Duracion: '02:30 min',
-        Fecha: '05/02/2019',
-        Audio: 'jfdsafdsajp1321.wmp',
-      },
-      {
-        Nombre: 'Daniel',
-        Numero: '3001',
-        Tipo: 'Perdida',
-        Origen: 'Caja',
-        Destino: 'Patrulla',
-        Duracion: '02:30 min',
-        Fecha: '05/02/2019',
-        Audio: 'jfdsafdsajp1321.wmp',
-      },
-      {
-        Nombre: 'Daniel',
-        Numero: '3001',
-        Tipo: 'Entrante',
-        Origen: 'Caja',
-        Destino: 'Patrulla',
-        Duracion: '02:30 min',
-        Fecha: '05/02/2019',
-        Audio: 'jfdsafdsajp1321.wmp',
-      },
-      {
-        Nombre: 'Daniel',
-        Numero: '3001',
-        Tipo: 'Saliente',
-        Origen: 'Caja',
-        Destino: 'Patrulla',
-        Duracion: '02:30 min',
-        Fecha: '05/02/2019',
-        Audio: 'jfdsafdsajp1321.wmp',
-      },
-      {
-        Nombre: 'Daniel',
-        Numero: '3001',
-        Tipo: 'Saliente',
-        Origen: 'Caja',
-        Destino: 'Patrulla',
-        Duracion: '02:30 min',
-        Fecha: '05/02/2019',
-        Audio: 'jfdsafdsajp1321.wmp',
-      },
-      {
-        Nombre: 'Daniel',
-        Numero: '3001',
-        Tipo: 'Perdida',
-        Origen: 'Caja',
-        Destino: 'Patrulla',
-        Duracion: '02:30 min',
-        Fecha: '05/02/2019',
-        Audio: 'jfdsafdsajp1321.wmp',
-      },
-      {
-        Nombre: 'Daniel',
-        Numero: '3001',
-        Tipo: 'Entrante',
-        Origen: 'Caja',
-        Destino: 'Patrulla',
-        Duracion: '02:30 min',
-        Fecha: '05/02/2019',
-        Audio: 'jfdsafdsajp1321.wmp',
-      },
-    ];
+    
   }
 
   ngOnInit() {
@@ -136,9 +48,19 @@ export class GrabacionesComponent implements OnInit {
       this.Historia = this.HistOper.filter((it) => it.numero.includes(value));
   });
   }
-  DescargarAudio() {
+  DescargarAudio(uni, cha) {
     //Metodo de descarga
     console.log('Descargando...');
+    console.log(uni);
+    console.log(cha);
+    
+    this.grabaservice.downloadFile(uni, cha).subscribe(data => {
+      const blob = new Blob([data], {
+        type: 'application/zip'
+      });
+      const url = window.URL.createObjectURL(blob);
+      window.open(url);
+    });
   }
  
   preload() {
@@ -205,6 +127,15 @@ export class GrabacionesComponent implements OnInit {
         response.forEach(it => {
           var fec = moment(it.fechayhora).subtract(10, 'days').calendar();
           it.fechayhora = fec;
+          if(it.tipo == 'entrante'){
+            this.HistEntrante.push(it);
+          }
+          if(it.tipo == 'saliente'){
+            this.HistSaliente.push(it);
+          }
+          if(it.tipo == 'perdida'){
+            this.HistPerdida.push(it);
+          }
         });
         console.log(response);
         this.HistOper = response;
@@ -217,35 +148,35 @@ export class GrabacionesComponent implements OnInit {
     
   }
 
-  salientesHist() {
-    if (this.obj.tipo == 'admin') {
+  salientes() {
+    if (this.obj.tipo == 'standard') {
       this.Historia = this.HistSaliente;
     } else {
     }
   }
 
-  entrantesHist() {
+  entrantes() {
     // Aca se compara con el atributo si fue entrante
-    if (this.obj.tipo == 'admin') {
+    if (this.obj.tipo == 'standard') {
       this.Historia = this.HistEntrante;
     } else {
     }
   }
 
-  perdidasHist() {
+  perdidas() {
     // Aca se compara con el atributo si fue perdida
-    if (this.obj.tipo == 'admin') {
+    if (this.obj.tipo == 'standard') {
       this.Historia = this.HistPerdida;
     } else {
     }
   }
 
-  todos(){
-    if(this.obj.tipo == 'admin'){
-      this.Historia = this.HistAdmin;
-    }
-    else{
+  defaultHistOpe() {
+    if (this.obj.tipo == 'standard') {
       this.Historia = this.HistOper;
+    } else {
+      console.log('todas las llamadas ');
+      this.Historia = this.HistAdmin;
     }
   }
 }

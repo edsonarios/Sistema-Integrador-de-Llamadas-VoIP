@@ -82,9 +82,9 @@ export class AddFriendComponent implements OnInit {
 
     addAmigo(numero) {
         this.Contacts = this.Contacts.filter((user) => user.numeroSip !== numero);
-        this.agendaservice.addAmigo(this.usActual.usuarioId, numero).subscribe(
+        this.agendaservice.addAmigo(this.usActual.usuarioId, numero,null).subscribe(
             (response) => {
-                // console.log(response);
+                console.log(response);
             },
             (er) => console.log(er)
         );

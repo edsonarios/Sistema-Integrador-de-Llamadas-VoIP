@@ -3,15 +3,24 @@ import { Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { WebRTCService } from '@services/WebRTC/WebRTC.service';
+import { AgendaService } from '@services/agenda.service';
 
-import { SnotifyService } from 'ng-snotify';
+import { SnotifyService, SnotifyToast, SnotifyPosition, SnotifyStyle } from 'ng-snotify';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'dialpad',
 	templateUrl: './dialpad.component.html'
 })
 export class DialPadComponent implements OnInit {
-	constructor(private snotifyService: SnotifyService) {}
+
+	name = '';
+
+	public us = localStorage.getItem('Usuario');
+    public usActual = JSON.parse(this.us);
+	public nroActual = localStorage.getItem('NumberSelected');
+
+	constructor(private snotifyService: SnotifyService, private agendaservice: AgendaService) {}
 
 	public symbols: String[] = '123456789*0#'.split('');
 
@@ -74,5 +83,44 @@ export class DialPadComponent implements OnInit {
 	callUnmute() {
 		this.session.unmute();
 		this.mute = false;
+	}
+
+	addExterno(){
+	
+		const yesAction = (toast: SnotifyToast) => {
+			if (toast.value) {
+				this.agendaservice.addAmigo(this.usActual.usuarioId, this.dialNumber, toast.value).subscribe(
+					(response) => {
+						console.log(response);
+					},
+					(er) => console.log(er)
+				);
+				this.snotifyService.remove(toast.id)	
+				this.snotifyService.create({
+					title: 'Se añadio a tu agenda',
+					body: null,
+					config: {
+					  position: SnotifyPosition.rightTop,
+					  type: SnotifyStyle.success,
+					  showProgressBar: false
+					}
+				  })
+			} else {
+			  toast.valid = true; // default value
+			  this.snotifyService.remove(toast.id)
+			}
+		  }
+		  
+		  const noAction = (toast: SnotifyToast) => {
+			this.snotifyService.remove(toast.id) // default
+		  }
+	  
+		this.snotifyService.prompt('Añadir a Agenda', {
+			buttons: [
+			  {text: 'Yes', action: yesAction, bold: true },
+			  {text: 'No', action: noAction },
+			],
+			placeholder: 'Nombre'
+		  });
 	}
 }

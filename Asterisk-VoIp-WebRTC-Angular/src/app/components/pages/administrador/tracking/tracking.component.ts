@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { TrackingService } from '../../../../../services/Firebase/tracking.service';
-import { TrackingI } from './tracking.interface';
+import { TrackingI, GeoResultado, Geometry } from './tracking.interface';
 import { environment } from '../../../../../environments/environment';
 
 // mapbox
 import * as mapboxgl from 'mapbox-gl';
 import { TrackingData, TrackingGeometry } from '../../../../../models/tracking.interface';
-// const mapboxgl = require('mapbox-gl');
+
 @Component({
     selector: 'tracking',
     templateUrl: './tracking.component.html',
@@ -16,32 +16,17 @@ export class TrackingComponent implements OnInit {
     positions: TrackingI[];
     mapa: mapboxgl.Map;
     marker: any;
-    json: any;
     source: mapboxgl.GeoJSONSource;
     resultado: TrackingGeometry;
-    route: TrackingData;
-    ruta = [
-        [-122.48369693756104, 37.83381888486939],
-        [-122.48348236083984, 37.83317489144141],
-        [-122.48339653015138, 37.83270036637107],
-        [-122.48356819152832, 37.832056363179625],
-        [-122.48404026031496, 37.83114119107971],
-        [-122.48404026031496, 37.83049717427869],
-        [-122.48348236083984, 37.829920943955045],
-        [-122.48356819152832, 37.82954808664175],
-        [-122.48507022857666, 37.82944639795659],
-        [-122.48610019683838, 37.82880236636284],
-        [-122.48695850372314, 37.82931081282506],
-        [-122.48700141906738, 37.83080223556934],
-        [-122.48751640319824, 37.83168351665737],
-        [-122.48803138732912, 37.832158048267786],
-        [-122.48888969421387, 37.83297152392784],
-        [-122.48987674713133, 37.83263257682617],
-        [-122.49043464660643, 37.832937629287755],
-        [-122.49125003814696, 37.832429207817725],
-        [-122.49163627624512, 37.832564787218985],
-        [-122.49223709106445, 37.83337825839438],
-        [-122.49378204345702, 37.83368330777276]
+    ruta2 = [
+        [-68.13369, -16.495155],
+        [-68.134079, -16.495744],
+        [-68.133379, -16.496173],
+        [-68.133436, -16.496291],
+        [-68.133883, -16.496906],
+        [-68.133175, -16.497377],
+        [-68.132443, -16.497817],
+        [-68.133199, -16.498974]
     ];
     constructor(private trackingService: TrackingService) {
         console.log('El tracking se cargo correctamente');
@@ -54,6 +39,7 @@ export class TrackingComponent implements OnInit {
         });
         this.loginTracking();
         Object.getOwnPropertyDescriptor(mapboxgl, 'accessToken').set(environment.mapboxKey);
+        // console.log('NgOnInitRes: ', this.ruta);
     }
     loginTracking() {
         // mapboxgl.accessToken = environment.mapboxKey;
@@ -61,8 +47,8 @@ export class TrackingComponent implements OnInit {
             accessToken: environment.mapboxKey,
             container: 'mapa-mapbox', // container id
             style: 'mapbox://styles/mapbox/streets-v11',
-            // center: [-68.1823999, -16.4938747], // starting position
-            center: [-122.48695850372314, 37.82931081282506], // starting position
+            center: [-68.133875, -16.495881], // starting position
+            // center: [-122.48695850372314, 37.82931081282506], // starting position
             zoom: 15 // starting zoom
         });
         this.mapa.addControl(new mapboxgl.ScaleControl({ maxWidth: 100 }), 'bottom-left');
@@ -75,8 +61,7 @@ export class TrackingComponent implements OnInit {
     crearMarcador(lng: number, lat: number) {
         this.marker = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(this.mapa);
     }
-    recorrido() {
-        console.log('recorrido clicked');
+    recorrido(ruta) {
         this.mapa.addSource('route', {
             type: 'geojson',
             data: {
@@ -84,9 +69,16 @@ export class TrackingComponent implements OnInit {
                 properties: {},
                 geometry: {
                     type: 'LineString',
-                    coordinates: this.ruta
+                    coordinates: ruta
                 }
             }
+        });
+        const center: mapboxgl.LngLatLike = ruta[3];
+
+        this.mapa.flyTo({
+            // center: [-68.133436, -16.496291],
+            center,
+            zoom: 16
         });
         this.mapa.addLayer({
             id: 'route',
@@ -103,8 +95,6 @@ export class TrackingComponent implements OnInit {
         });
     }
     seguimiento() {
-        // this.loginTracking();
-        // this.mapa.on('load', () => {
         window.setInterval(async () => {
             this.source = this.mapa.getSource('drone') as mapboxgl.GeoJSONSource;
             await fetch(environment.flespiUrl)
@@ -117,7 +107,7 @@ export class TrackingComponent implements OnInit {
                     this.mapa.flyTo({
                         center: data.geometry.coordinates,
                         speed: 0.5,
-                        zoom: 6
+                        zoom: 7
                     });
                     this.resultado = data.geometry;
                     console.log('[Coordenadas: ]', this.resultado.coordinates);
@@ -132,72 +122,111 @@ export class TrackingComponent implements OnInit {
             type: 'symbol',
             source: 'drone',
             layout: {
-                'icon-image': 'airfield-15'
+                'icon-image': 'airport-15'
             }
         });
-        // });
     }
-    // {"geometry": {"type": "Point", "coordinates": [114.478476902479, -8.24587410627298]}, "type": "Feature", "properties": {}}
-    datosFalsos(long, lat) {
-        const cordenadasFake = [0, 0];
-        const coord: TrackingGeometry = {
-            type: '',
-            coordinates: []
-        };
-        this.route.type = 'Feature';
-        this.route.properties = {};
-        coord.type = 'Point';
-        cordenadasFake[0] = long;
-        cordenadasFake[1] = lat;
-        coord.coordinates = cordenadasFake;
-        this.route.geometry = coord;
-    }
-    generaFalso() {
-        let lat = -68.1823999;
-        let long = -16.4938747;
-        setTimeout(() => {
-            for (let i = 0; i < 20; i++) {
-                this.datosFalsos(lat, long);
-                long += 0.0000001;
-                lat += 0.0000001;
-            }
-        }, 3000);
-    }
-    seguimientoFake() {
+    seguimiento2(geodata: GeoResultado) {
         window.setInterval(async () => {
             this.source = this.mapa.getSource('drone') as mapboxgl.GeoJSONSource;
-            await fetch(environment.flespiUrl2, {
-                headers: {
-                    Accept: 'application/json',
-                    Authorization: 'FlespiToken TpNCwGPMMXiStVpRg7jDelJOjHP5aNsR16jnCWYdH4TYQ8GW3Pp5YWH6ukZsYi9P'
-                }
-            })
-                .then((response) => {
-                    return response.json();
-                })
-                .then((data) => {
-                    this.source.type = 'geojson';
-                    this.source.setData(data);
+            this.trackingService.geoNumber().subscribe(
+                (res: number[][]) => {
+                    console.log(res);
+                    const ultimo = res.length - 1;
+                    console.log(ultimo);
                     this.mapa.flyTo({
-                        center: data.geometry.coordinates,
+                        center: geodata.geometry.coordinates[ultimo],
                         speed: 0.5,
-                        zoom: 6
+                        zoom: 16
                     });
-                    this.resultado = data.geometry;
-                    console.log('[Coordenadas: ]', this.resultado.coordinates);
-                })
-                .catch((err) => {
+                },
+                (err) => {
                     console.log(err);
+                }
+            );
+        }, 30000);
+        this.trackingService.geoNumber().subscribe(
+            (res: number[][]) => {
+                console.log(res);
+                const ultimo = res.length - 1;
+                this.mapa.addSource('drone', {
+                    type: 'geojson',
+                    data: {
+                        type: 'Feature',
+                        geometry: {
+                            type: 'Point',
+                            coordinates: geodata.geometry.coordinates[ultimo]
+                        },
+                        properties: {}
+                    }
                 });
-        }, 3000);
-        this.mapa.addSource('drone', { type: 'geojson', data: environment.flespiUrl2 });
-        this.mapa.addLayer({
-            id: 'drone',
-            type: 'symbol',
-            source: 'drone',
-            layout: {
-                'icon-image': 'airfield-15'
+                this.mapa.addLayer({
+                    id: 'drone',
+                    type: 'symbol',
+                    source: 'drone',
+                    layout: {
+                        'icon-image': 'pitch-11'
+                    },
+                    paint: {
+                        'icon-color': '#223b53'
+                    }
+                });
+            },
+            (err) => {
+                console.log(err);
             }
-        });
+        );
+    }
+    detenerSeguimiento() {
+        this.mapa.stop();
+        this.mapa.removeLayer('drone');
+        this.mapa.removeSource('drone');
+    }
+    borrarRecorrido() {
+        this.mapa.removeSource('route');
+        this.mapa.removeLayer('route');
+    }
+
+    construir() {
+        // lat lng
+        this.trackingService.geoTracking().subscribe(
+            (res: mapboxgl.LngLatLike) => {
+                const geometryRes: Geometry = {
+                    type: 'Point',
+                    coordinates: res
+                };
+                const geojson: GeoResultado = {
+                    geometry: geometryRes,
+                    type: 'Feature'
+                };
+                // console.log('geometryTrackingAPI: ', geometryRes);
+                console.log('geoJSON: ', geojson);
+                this.seguimiento2(geojson);
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
+    }
+    getRuta() {
+        this.trackingService.geoTracking().subscribe(
+            (res) => {
+                console.log(res);
+                return res;
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
+    }
+    getRecorrido() {
+        this.trackingService.geoNumber().subscribe(
+            (res: number[][]) => {
+                this.recorrido(res);
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
     }
 }

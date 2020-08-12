@@ -32,7 +32,7 @@
                             "src/assets/fonts/fonts.css",
                             "src/assets/icons/icons.css"
                         ],
-                        "scripts": []
+                        "scripts": ["./node_modules/geojson/geojson.js"]
                     },
                     "configurations": {
                         "production": {

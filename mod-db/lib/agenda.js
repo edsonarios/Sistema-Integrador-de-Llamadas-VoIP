@@ -14,6 +14,7 @@ module.exports = function setupAgenda(AgendaModel, UsuarioModel) {
       return result.toJSON();
     }
   }
+
   async function update(id, obj) {
     const cond = {
       where: {
@@ -34,6 +35,12 @@ module.exports = function setupAgenda(AgendaModel, UsuarioModel) {
   }
   async function findAll() {
     return AgendaModel.findAll();
+  }
+
+  async function findAllOrder() {
+    return AgendaModel.findAll({
+      order: [["id", "ASC"]],
+    });
   }
 
   async function findAllQuery(query) {
@@ -58,6 +65,7 @@ module.exports = function setupAgenda(AgendaModel, UsuarioModel) {
   return {
     create,
     update,
+    findAllOrder,
     findById,
     findAll,
     destroyAll,
