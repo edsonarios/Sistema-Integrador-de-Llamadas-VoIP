@@ -59,16 +59,18 @@ client
     port: 5055,
   })
   .then((amiConnection) => {
-    if (client.isConnected) {
-      conexion = true;
-      astEst = 0;
-      var evento = {
-        evento: true,
-        descripcion: `asterisk conectado`,
-      };
-      console.log(evento);
-      io.emit(`${emit2}`, evento);
-    }
+    setTimeout(function () {
+      if (client.isConnected) {
+        conexion = true;
+        astEst = 0;
+        var evento = {
+          evento: true,
+          descripcion: `asterisk conectado`,
+        };
+        console.log(evento);
+        io.emit(`${emit2}`, evento);
+      }
+    }, 1000);
     client.on("event", (event) => {
       var dat = new Date();
 
