@@ -1,0 +1,38 @@
+.participantes {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    .headerP {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        height: 30px;
+        background: #343838;
+        font-weight: bold;
+        font-size: 15px;
+        div {
+            display: grid;
+            justify-self: center;
+            align-self: center;
+        }
+    }
+    .bodyP {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        height: 28px;
+        div {
+            padding-left: 17px;
+            display: grid;
+            justify-self: start;
+            align-self: center;
+        }
+        button {
+            height: 23px;
+            width: 23px;
+            padding: 1px;
+            margin: 3px;
+        }
+        .botonesP {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+}

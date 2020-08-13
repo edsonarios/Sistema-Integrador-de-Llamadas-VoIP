@@ -3,10 +3,8 @@ import { HistorialService } from '../../../../../services/historial.service';
 import { LlamadasSalientes } from '@models/llamadasSalientes.interface';
 import { LlamadasEntrantes } from '@models/llamadasEntrantes.interface';
 import * as moment from 'moment';
-import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
-import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
-import { faPhoneSlash } from '@fortawesome/free-solid-svg-icons';
-import { faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faLongArrowAltRight, faLongArrowAltLeft, faPhoneSlash, faPhone } from '@fortawesome/free-solid-svg-icons';
+
 import { AsteriskConnectionService } from '../../../../../services/asterisk-connection.service';
 import { Llamadas } from '../../../../../models/llamada.interface';
 

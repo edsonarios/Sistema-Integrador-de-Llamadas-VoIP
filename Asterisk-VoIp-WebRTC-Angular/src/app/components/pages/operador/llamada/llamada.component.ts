@@ -14,7 +14,8 @@ import {
     faPhone,
     faVolumeMute,
     faPause,
-    faPhoneSlash
+    faPhoneSlash,
+    faTshirt
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -49,14 +50,25 @@ export class LlamadaComponent implements OnInit {
     public ColgarIcon = faPhoneSlash;
     // webrtc
     public session: WebRTCService;
+    public estadoAgente = true;
     constructor(private router: Router, private salaService: SalaService) {}
 
     ngOnInit() {
         this.session = new WebRTCService();
         this.session.sessionEvents();
     }
-    sipCall() {
-        this.session.sipCall('*201');
+
+    serAgente() {
+        if (this.estadoAgente) {
+            this.session.sipCall('*201');
+            this.estadoAgente = false;
+        } else {
+            this.session.sipCall('*202');
+            this.estadoAgente = true;
+        }
+    }
+    conferencia() {
+        this.session.sipCall('3');
     }
     CerrarLlamada(nombre: string, numero: string, id_llamada: string, descripcion: string, tipo: string, estado: string) {
         if (tipo == 'Sala') {

@@ -150,8 +150,10 @@
                     <panel></panel>
                 </div>
                 <div class="CenterContent_InfInfo">
-                    <header>Info</header>
-                    <app-info></app-info>
+                    <header *ngIf="!mostrarParticipantes">Info</header>
+                    <app-info *ngIf="!mostrarParticipantes"></app-info>
+                    <header *ngIf="mostrarParticipantes">Participantes</header>
+                    <app-participantes [Participantes]="ParticipantesSala2" *ngIf="mostrarParticipantes"></app-participantes>
                 </div>
             </div>
         </div>

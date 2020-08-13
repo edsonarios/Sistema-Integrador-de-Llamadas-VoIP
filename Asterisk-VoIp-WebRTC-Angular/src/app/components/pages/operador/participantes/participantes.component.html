@@ -1,0 +1,24 @@
+<!-- <div>funciona</div> -->
+<section class="participantes">
+    <div class="headerP text-light">
+        <div>Nombre</div>
+        <div>Paterno</div>
+        <div>Materno</div>
+        <div>Opciones</div>
+    </div>
+    <div class="containerP">
+        <div class="bodyP" *ngFor="let participante of Participantes">
+            <div>{{ participante.nombre }}</div>
+            <div>{{ participante.apPaterno }}</div>
+            <div>{{ participante.apMaterno }}</div>
+            <div class="botonesP">
+                <button class="btn btn-success" (click)="Conferencia(participante.numeroSip)">
+                    <fa-icon class="text-dark" [icon]="phoneIcon"></fa-icon>
+                </button>
+                <button class="btn btn-warning">
+                    <fa-icon class="text-dark" [icon]="AddUserIcon"></fa-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

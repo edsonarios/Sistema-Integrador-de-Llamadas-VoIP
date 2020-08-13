@@ -38,7 +38,7 @@
             <a class="btn btn-danger" tooltip="Colgar">
                 <fa-icon class="text-dark" [icon]="ColgarIcon"> </fa-icon>
             </a>
-            <a class="btn btn-info" (click)="sipCall()" tooltip="Intervenir" placement="bottom">
+            <a class="btn btn-info" tooltip="Transferencia" placement="left">
                 <fa-icon class="text-dark" [icon]="IntervenirIcon"> </fa-icon>
             </a>
         </div>
@@ -85,7 +85,7 @@
     </div>
     <div class="EscritorioOptions">
         <div class="OptionSala">
-            <a class="btn btn-warning" tooltip="Conferencia">
+            <a class="btn btn-warning" (click)="conferencia()" tooltip="Conferencia">
                 <fa-icon class="text-dark" [icon]="SalaIcon"> </fa-icon>
             </a>
             <a class="btn btn-success" tooltip="Añadir Participante">
@@ -94,8 +94,8 @@
             <a class="btn btn-primary" (click)="VerParticipantes('1')" tooltip="Ver Participantes">
                 <fa-icon class="text-dark" [icon]="VerIcon"> </fa-icon>
             </a>
-            <a class="btn btn-info" (click)="sipCall()" placement="bottom" tooltip="Ser Agente de Llamadas">
-                <fa-icon class="text-dark" [icon]="AgenteIcon"> </fa-icon>
+            <a class="btn btn-info" (click)="serAgente()" placement="left" tooltip="Ser Agente de Llamadas">
+                <fa-icon [icon]="AgenteIcon" [ngClass]="{ 'text-light': estadoAgente === false, 'text-dark': estadoAgente === true }"> </fa-icon>
             </a>
         </div>
     </div>

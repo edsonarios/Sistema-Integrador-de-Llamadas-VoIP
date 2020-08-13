@@ -28,6 +28,7 @@ import { RTCSession } from 'jssip/lib/RTCSession';
 import { WebsocketService } from '../../../../services/websocket.service';
 import { Socket } from 'ngx-socket-io';
 import { EstadoAsterisk } from '../../../../models/estadoAsterisk';
+import { ParticipanteSala } from '../../../../models/participantesSala';
 
 @Component({
     selector: 'operador-template',
@@ -45,6 +46,7 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     public rtc: WebRTCService;
     public ua: UA;
     public remote: RTCSession;
+    public mostrarParticipantes = false;
     // variables para guardar los iconos
     faSenal = faSignal;
     faMicro = faMicrophone;
@@ -81,6 +83,7 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     public Notificaciones = [];
     public Panel = [];
     public ParticipantesSala = [];
+    public ParticipantesSala2: ParticipanteSala[] = [];
 
     public Hide = true;
     public HideLateral = true;
@@ -316,7 +319,7 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
             descripcion: Sala['descripcion'],
             id: Sala['id'],
             Tipo: 'Sala',
-            Estado: 'Inactiva'
+            Estado: 'Activa'
         });
         this.EliminaItemSalas(Sala['id']);
     }
@@ -339,12 +342,16 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
             console.log(this.Salas);
         }
     }
-    VerParticipantes(event) {
+    VerParticipantes(event: ParticipanteSala[]) {
         //console.log('Llega el evento y debe de cambiar los componentes')
         this.CambiaHideLateral();
+        this.mostrarParticipantes = true;
         // console.log('participantes', this.ParticipantesSala);
-        console.log('participantes', event);
+        this.ParticipantesSala2 = event;
+        // console.log('participantes', event);
+        console.log('participantes', this.ParticipantesSala2);
     }
+
     AgendaLlamada(ContactoAgenda) {
         // metodo donde se llama a un contacto mediante la agenda
 
@@ -353,7 +360,7 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
             id: ContactoAgenda['Id'],
             numero: ContactoAgenda['Numero'],
             Tipo: 'Llamada',
-            Estado: 'Inactiva'
+            Estado: 'Activa'
         });
         this.AgregarEventoPanel(ContactoAgenda['Numero'], '15/11/2019', 'false', 'entrante');
     }
@@ -363,7 +370,7 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
             id: Notificacion['Id'],
             numero: Notificacion['Numero'],
             Tipo: 'Llamada',
-            Estado: 'Inactiva'
+            Estado: 'Activa'
         });
         this.rtc.setSession(this.remote);
         this.rtc.remoteCall();
