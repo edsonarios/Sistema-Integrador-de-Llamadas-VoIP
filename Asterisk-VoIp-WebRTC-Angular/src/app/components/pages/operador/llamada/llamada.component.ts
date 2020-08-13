@@ -1,7 +1,21 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { WebRTCService } from '@services/WebRTC/WebRTC.service';
-import { faUsers, faEye, faUserPlus, faHeadset, faSignOutAlt, faUserSecret, faAssistiveListeningSystems, faCircle } from '@fortawesome/free-solid-svg-icons';
+import { SalaService } from '../../../../../services/sala.service';
+import {
+    faUsers,
+    faEye,
+    faUserPlus,
+    faHeadset,
+    faSignOutAlt,
+    faUserSecret,
+    faAssistiveListeningSystems,
+    faCircle,
+    faPhone,
+    faVolumeMute,
+    faPause,
+    faPhoneSlash
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'llamada',
@@ -29,9 +43,13 @@ export class LlamadaComponent implements OnInit {
     public AgenteIcon = faUserSecret;
     public IntervenirIcon = faAssistiveListeningSystems;
     public estadoIcon = faCircle;
+    public LlamadaIcon = faPhone;
+    public VolumenIcon = faVolumeMute;
+    public PausaIcon = faPause;
+    public ColgarIcon = faPhoneSlash;
     // webrtc
     public session: WebRTCService;
-    constructor(private router: Router) {}
+    constructor(private router: Router, private salaService: SalaService) {}
 
     ngOnInit() {
         this.session = new WebRTCService();
@@ -51,9 +69,17 @@ export class LlamadaComponent implements OnInit {
         }
     }
 
-    VerParticipantes() {
-        window.alert('Pendiente');
+    VerParticipantes(idSala) {
+        // window.alert('Pendiente');
         //
         //this.Participantes.emit('Ver Participantes');
+        this.salaService.GetParticipantesById(idSala).subscribe(
+            (res) => {
+                this.Participantes.emit(res);
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
     }
 }

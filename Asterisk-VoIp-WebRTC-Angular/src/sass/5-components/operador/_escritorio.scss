@@ -51,14 +51,12 @@
 .Escritorio {
     margin: 8px;
     display: grid;
-    grid-template-rows: 4vh 8vh 7vh;
+    grid-template-rows: 4vh 8vh 5.5vh;
     background: #eee;
     grid-template-areas:
         'EscritorioHeader'
         'EscritorioContent'
         'EscritorioOptions';
-    // height: auto;
-    // box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
     animation: swing-in-bottom-fwd 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
 .EscritorioHeader {
@@ -78,28 +76,12 @@
 .EscritorioContentLlamada {
     grid-area: EscritorioContent;
     display: grid;
-    grid-template-columns: 40% 60%;
-    grid-template-areas: 'ContentIzp ContentDer';
-    background-image: url(assets/fondo-login.jpg);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    opacity: 0.7;
-    -moz-box-shadow: inset 10px 10px 50px #013162;
-    -webkit-box-shadow: inset 10px 10px 50px #013162;
-    box-shadow: inset 10px 10px 50px #013162;
+    grid-template-areas: 'ContentIzp' 'ContentDer';
 }
 .EscritorioContentSala {
     grid-area: EscritorioContent;
     display: grid;
-    //grid-template-columns: 60% 40%;
     grid-template-areas: 'ContentIzp' 'ContentDer';
-    //background-image: url(assets/sala.jpg);
-    // background-repeat: no-repeat;
-    // b<ackground-size: 100% 100%;
-    // opacity: 0.7;
-    // -moz-box-shadow: inset 10px 10px 50px #013162;
-    // -webkit-box-shadow: inset 10px 10px 50px #013162;
-    // box-shadow: inset 10px 10px 50px #000000;
 }
 .EscritorioContentRadio {
     grid-area: EscritorioContent;
@@ -116,7 +98,6 @@
 }
 .ContentIzp {
     grid-area: ContentIzp;
-
     .descripcion {
         display: grid;
         grid-template-rows: 1fr 1fr;
