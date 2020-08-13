@@ -1681,6 +1681,8 @@ api.post("/findSipByNumber", async (req, res, next) => {
         apPaterno: `${obj.apPaterno}`,
         apMaterno: `${obj.apMaterno}`,
         correo: `${obj.correo}`,
+        direccion: `${obj.direccion}`,
+        telefono: `${obj.telefono}`,
       });
     }
   });
@@ -1813,7 +1815,6 @@ api.post("/findAllExtensionByContext", async (req, res, next) => {
 api.post("/findAllExtensionByFunctions", async (req, res, next) => {
   const params = req.body;
   let sw = "0";
-  //Creamos las entradas para la funcion LlamadasDemo
   if (params.funcion == "llamadasDemo") {
     sw = "1";
     const obj = await Extension.create(1, {
@@ -1937,7 +1938,7 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
     res.send({ message: "La funcion se creo correctamente" });
   }
   //Creamos las entradas para la funcion Llamada Funciones del Ivr
-  if (params.funcion == "llamadaFuncionesIvr") {
+  if (params.funcion == "llamadaFuncionesIvr" && params.numero == "s") {
     sw = "1";
     const obj = await Extension.create(1, {
       context: `${params.sala}`,
@@ -1958,29 +1959,41 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       exten: `${params.numero}`,
       priority: "3",
       app: "WaitExten",
-      appdata: `${params.audio}`,
+      appdata: "5",
     });
+    res.send({ message: "La funcion se creo correctamente" });
+  }
+  if (params.funcion == "llamadaFuncionesIvr" && params.numero == "1") {
     const obj4 = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
       priority: "1",
-      app: "Playback",
+      app: `${params.app}`,
       appdata: `${params.audio}`,
     });
+    res.send({ message: "La funcion se creo correctamente" });
+  }
+  if (params.funcion == "llamadaFuncionesIvr" && params.numero == "2") {
     const obj5 = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
       priority: "1",
-      app: "Playback",
+      app: `${params.app}`,
       appdata: `${params.audio}`,
     });
+    res.send({ message: "La funcion se creo correctamente" });
+  }
+  if (params.funcion == "llamadaFuncionesIvr" && params.numero == "3") {
     const obj6 = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
       priority: "1",
-      app: "Playback",
+      app: `${params.app}`,
       appdata: `${params.audio}`,
     });
+    res.send({ message: "La funcion se creo correctamente" });
+  }
+  if (params.funcion == "llamadaFuncionesIvr" && params.numero == "t") {
     const obj7 = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
@@ -2090,14 +2103,15 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       exten: `${params.numero}`,
       priority: "2",
       app: "GotoIf",
-      appdata: `${params.audio}`,
+      appdata:
+        "$[ $[ '${CHANNEL(peername)}' = `${params.audio}`, ] | $[ '${CHANNEL(peername)}' = `${params.audio}`, ] ]?3:4",
     });
     const obj3 = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
       priority: "3",
       app: "Set",
-      appdata: `${params.audio}`,
+      appdata: "",
     });
     const obj4 = await Extension.create(1, {
       context: `${params.sala}`,
@@ -2130,7 +2144,7 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       exten: `${params.numero}`,
       priority: "2",
       app: "confbridge",
-      appdata: `${params.audio}`,
+      appdata: "3",
     });
     res.send({ message: "La funcion se creo correctamente" });
   }
@@ -2142,7 +2156,7 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       exten: `${params.numero}`,
       priority: "1",
       app: "ChanSpy",
-      appdata: `${params.audio}`,
+      appdata: "SIP/${EXTEN:3},qb",
     });
     const obj2 = await Extension.create(1, {
       context: `${params.sala}`,
@@ -2161,7 +2175,7 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       exten: `${params.numero}`,
       priority: "1",
       app: "ChanSpy",
-      appdata: `${params.audio}`,
+      appdata: "SIP/${EXTEN:3},qw",
     });
     const obj2 = await Extension.create(1, {
       context: `${params.sala}`,
@@ -2180,7 +2194,7 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       exten: `${params.numero}`,
       priority: "1",
       app: "ChanSpy",
-      appdata: `${params.audio}`,
+      appdata: "SIP/${EXTEN:3},qB",
     });
     const obj2 = await Extension.create(1, {
       context: `${params.sala}`,
@@ -2199,7 +2213,7 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       exten: `${params.numero}`,
       priority: "1",
       app: "Monitor",
-      appdata: `${params.audio}`,
+      appdata: "wav,,b",
     });
     const obj2 = await Extension.create(1, {
       context: `${params.sala}`,
@@ -2518,6 +2532,7 @@ api.post("/ListarContactos", async (req, res, next) => {
   let getiaxs = [];
   let getsips = [];
   let getidagenda = [];
+  let getidagendaN = [];
   let todos = [];
 
   //obtengo los contactos de la tabla Agenda
@@ -2527,19 +2542,12 @@ api.post("/ListarContactos", async (req, res, next) => {
       getnombre.push(obj.nombre);
       getidagenda.push(obj.id);
     }
-    if (obj.nombre != null) {
+    if (obj.nombre != null && params.usuarioId == obj.usuarioId) {
       getusuarios.push(obj.nombre);
       getsips.push(obj.numero);
+      getidagendaN.push(obj.id);
     }
   });
-
-  /*AgendaAll.forEach((obj) => {
-    if (obj.nombre != null) {
-      //getidagenda.push(obj.id);
-      getusuarios.push(obj.nombre);
-      getsips.push(obj.numero);
-    }
-  });*/
 
   getnumero.forEach((algo) => {
     sipsAll.forEach((obj) => {
@@ -2559,19 +2567,13 @@ api.post("/ListarContactos", async (req, res, next) => {
     });
   });
 
-  /*AgendaAll.forEach((obj) => {
-    if (obj.nombre != null) {
-      getusuarios.push(obj.nombre);
-      getsips.push(obj.numero);
-    }
-  });*/
-
   getidusu.forEach((algo2) => {
     usuarioAll.forEach((obj) => {
       if (obj.id == algo2) {
         getusuarios.push(obj.nombre);
       }
     });
+    //getusuarios = [];
   });
 
   todos.push(getidagenda);
