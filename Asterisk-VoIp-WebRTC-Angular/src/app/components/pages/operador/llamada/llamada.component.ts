@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { WebRTCService } from '@services/WebRTC/WebRTC.service';
-import { faUsers, faEye, faUserPlus, faHeadset, faSignOutAlt, faUserSecret, faAssistiveListeningSystems } from '@fortawesome/free-solid-svg-icons';
+import { faUsers, faEye, faUserPlus, faHeadset, faSignOutAlt, faUserSecret, faAssistiveListeningSystems, faCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'llamada',
@@ -20,6 +20,7 @@ export class LlamadaComponent implements OnInit {
     @Output() Participantes = new EventEmitter<string>();
 
     public llamada;
+    // iconos
     public SalaIcon = faUsers;
     public VerIcon = faEye;
     public AddUserIcon = faUserPlus;
@@ -27,11 +28,18 @@ export class LlamadaComponent implements OnInit {
     public SalirIcon = faSignOutAlt;
     public AgenteIcon = faUserSecret;
     public IntervenirIcon = faAssistiveListeningSystems;
-
+    public estadoIcon = faCircle;
+    // webrtc
+    public session: WebRTCService;
     constructor(private router: Router) {}
 
-    ngOnInit() {}
-
+    ngOnInit() {
+        this.session = new WebRTCService();
+        this.session.sessionEvents();
+    }
+    sipCall() {
+        this.session.sipCall('*201');
+    }
     CerrarLlamada(nombre: string, numero: string, id_llamada: string, descripcion: string, tipo: string, estado: string) {
         if (tipo == 'Sala') {
             this.llamada = { Nombre: nombre, Descripcion: descripcion, Id: id_llamada, Tipo: tipo };
