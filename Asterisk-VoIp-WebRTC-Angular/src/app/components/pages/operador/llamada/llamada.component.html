@@ -32,33 +32,54 @@
         </div>
     </div>
 </div>
+
 <!-- Sala Inactiva -->
 <div class="Escritorio" *ngIf="Tipo == 'Sala'">
     <div class="EscritorioHeader">
         {{ Tipo }} {{ Estado }}
         <span (click)="CerrarLlamada(Nombre, Numero, Id, Descripcion, Tipo, Estado)" style="cursor: pointer;">
-            <i class="v-icon-cancel" tooltip="Cerrar" style="color: #f04747;"></i>
+            <!-- <i class="v-icon-cancel" tooltip="Cerrar" style="color: #f04747;"></i> -->
+            <fa-icon class="text-danger" [icon]="SalirIcon" tooltip="Cerrar"> </fa-icon>
         </span>
     </div>
     <div class="EscritorioContentSala">
         <div class="ContentIzp">
-            <div class="titulo">{{ Nombre }}</div>
-            <div class="detalle">{{ Descripcion }}</div>
+            <div class="descripcion">
+                <div class="titulo">{{ Nombre }}</div>
+                <div class="detalle">{{ Descripcion }}</div>
+            </div>
+            <div class="icono">
+                <fa-icon [icon]="HeadsetIcon"> </fa-icon>
+            </div>
         </div>
-        <div class="ContentDer">
-            <!--<div class="icon">
-				
-					0/10
-				</div>
-				<div class="timer">
-					--:--:--
-				</div>-->
-        </div>
+        <!-- <div class="ContentDer">
+            Contenido
+            <div class="icon">
+                0/10
+            </div>
+            <div class="timer">
+                --:--:--
+            </div>
+        </div> -->
     </div>
-
     <div class="EscritorioOptions">
         <div class="OptionSala">
-            <nav>
+            <a class="btn btn-warning">
+                <fa-icon [icon]="SalaIcon" tooltip="Conferencia"> </fa-icon>
+            </a>
+            <a class="btn btn-success">
+                <fa-icon [icon]="AddUserIcon" tooltip="Añadir Participante"> </fa-icon>
+            </a>
+            <a class="btn btn-primary" (click)="VerParticipantes()">
+                <fa-icon [icon]="VerIcon" tooltip="Ver Participantes"> </fa-icon>
+            </a>
+            <a class="btn btn-info">
+                <fa-icon [icon]="AgenteIcon" tooltip="Ser Agente de Llamadas"> </fa-icon>
+            </a>
+            <a class="btn btn-info">
+                <fa-icon [icon]="IntervenirIcon" tooltip="Intervenir Llamada"> </fa-icon>
+            </a>
+            <!-- <nav>
                 <a href="">Conferencia</a>
                 <a href="">Unir participante</a>
             </nav>
@@ -71,10 +92,11 @@
                     <i class="v-icon-enter"></i>
                     Salir
                 </a>
-            </nav>
+            </nav> -->
         </div>
     </div>
 </div>
+
 <!-- Radio  Inactiva -->
 <div class="Escritorio" *ngIf="Tipo == 'Radio'">
     <div class="EscritorioHeader">

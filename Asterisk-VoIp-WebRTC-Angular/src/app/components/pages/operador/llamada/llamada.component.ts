@@ -1,10 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { WebRTCService } from '@services/WebRTC/WebRTC.service';
+import { faUsers, faEye, faUserPlus, faHeadset, faSignOutAlt, faUserSecret, faAssistiveListeningSystems } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'llamada',
-    templateUrl: './llamada.component.html'
+    templateUrl: './llamada.component.html',
+    styleUrls: ['./llamada.component.scss']
 })
 export class LlamadaComponent implements OnInit {
     @Input() Nombre: string;
@@ -18,6 +20,13 @@ export class LlamadaComponent implements OnInit {
     @Output() Participantes = new EventEmitter<string>();
 
     public llamada;
+    public SalaIcon = faUsers;
+    public VerIcon = faEye;
+    public AddUserIcon = faUserPlus;
+    public HeadsetIcon = faHeadset;
+    public SalirIcon = faSignOutAlt;
+    public AgenteIcon = faUserSecret;
+    public IntervenirIcon = faAssistiveListeningSystems;
 
     constructor(private router: Router) {}
 
