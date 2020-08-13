@@ -1024,14 +1024,33 @@ api.post("/getUsuariosPorSala", async (req, res, next) => {
   var params = req.body;
   //obtenemos todos los usuarios
   const usuariosTodos = await Usuario.findAll();
+  const sipTodos = await Sip.findAll();
   var usuariosSala = [];
+
   //iteramos a todos los usuario y preguntamos si la sala de un usuario es igual a la q le mandamos por postman
   //si es asi guardamos al usuario y lo devolvemos
   usuariosTodos.forEach((usuario) => {
-    if (usuario.salaId == params.salaId) {
-      usuariosSala.push(usuario);
-    }
+    sipTodos.forEach((obj) => {
+      if (
+        usuario.salaId == params.salaId &&
+        usuario.id == obj.usuarioId &&
+        obj.allow != null
+      ) {
+        usuariosSala.push({
+          id: `${usuario.id}`,
+          nombre: `${usuario.nombre}`,
+          apPaterno: `${usuario.apPaterno}`,
+          apMaterno: `${usuario.apMaterno}`,
+          conectado: `${usuario.conectado}`,
+          telefono: `${usuario.telefono}`,
+          correo: `${usuario.correo}`,
+          salaId: `${usuario.salaId}`,
+          numeroSip: `${obj.name}`,
+        });
+      }
+    });
   });
+
   res.send(usuariosSala);
 });
 
