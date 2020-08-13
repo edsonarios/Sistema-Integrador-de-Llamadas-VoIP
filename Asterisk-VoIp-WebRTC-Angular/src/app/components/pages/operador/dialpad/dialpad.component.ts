@@ -95,7 +95,7 @@ export class DialPadComponent implements OnInit {
                 );
                 this.snotifyService.remove(toast.id);
                 this.snotifyService.create({
-                    title: 'Se añadio a tu agenda',
+                    title: ' Añadido ',
                     body: null,
                     config: {
                         position: SnotifyPosition.rightTop,
