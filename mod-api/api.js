@@ -2276,7 +2276,8 @@ api.get("/downloadCalls/:uniqueid/:SIP/:channel", async (req, res, next) => {
       a[i].name.substring(11, 14) == chanel.substring(0, 3) &&
       parseInt(id) <= parseInt(a[i].name.substring(0, 10)) &&
       parseInt(id) + 20 >= parseInt(a[i].name.substring(0, 10)) &&
-      a[i].name.substring(15, 28) == chanel.substring(4, 18)
+      a[i].name.substring(15, a[i].name.lastIndexOf("-")) ==
+        chanel.substring(4, chanel.lenght)
     ) {
       sw = 1;
       download.push(`/var/spool/asterisk/monitor/${a[i].name}`);
@@ -2315,11 +2316,28 @@ api.post("/listenCalls", function (req, res, next) {
   //itera sobre todos los elementos de la carpeta
   for (let i = 0; i < a.length; i++) {
     //compara: sip, channel, uniqueid
+    /*console.log(
+      a[i].name.substring(11, 14),
+      ";",
+      parseInt(id),
+      ";",
+      a[i].name.substring(15, a[i].name.lastIndexOf("-"))
+    );
+    console.log("--------");
+    console.log(
+      chanel.substring(0, 3),
+      ";",
+      parseInt(a[i].name.substring(0, 10)),
+      ";",
+      chanel.substring(4, chanel.lenght)
+    );
+    console.log("--------------------------");*/
     if (
       a[i].name.substring(11, 14) == chanel.substring(0, 3) &&
       parseInt(id) <= parseInt(a[i].name.substring(0, 10)) &&
       parseInt(id) + 20 >= parseInt(a[i].name.substring(0, 10)) &&
-      a[i].name.substring(15, 28) == chanel.substring(4, 18)
+      a[i].name.substring(15, a[i].name.lastIndexOf("-")) ==
+        chanel.substring(4, chanel.lenght)
     ) {
       sw = 1;
       download.push(`/monitor/${a[i].name}`);

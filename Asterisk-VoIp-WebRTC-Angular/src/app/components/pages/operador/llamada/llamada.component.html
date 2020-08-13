@@ -1,75 +1,106 @@
 <!-- Llamada SIP Inactiva -->
 <div class="Escritorio" *ngIf="Tipo == 'Llamada'">
-    <div class="EscritorioHeader">
+    <div class="EscritorioHeader" [ngClass]="{ 'text-danger': Estado === 'Inactiva', 'text-success': Estado === 'Activa' }">
+        <fa-icon class="text-danger" *ngIf="Estado === 'Inactiva'" [icon]="estadoIcon"> </fa-icon>
+        <fa-icon class="text-success" *ngIf="Estado === 'Activa'" [icon]="estadoIcon"> </fa-icon>
         {{ Tipo }} {{ Estado }}
         <span (click)="CerrarLlamada(Nombre, Numero, Id, Tipo)" style="cursor: pointer;">
-            <i class="v-icon-cancel" tooltip="Cerrar" style="color: #f04747;"></i>
+            <fa-icon class="text-danger" [icon]="SalirIcon" tooltip="Cerrar"> </fa-icon>
         </span>
     </div>
     <div class="EscritorioContentLlamada">
         <div class="ContentIzp">
-            <div class="titulo">Alias</div>
-            <div class="detalle">7001</div>
+            <div class="descripcion">
+                <div class="titulo">Alias</div>
+                <div class="detalle">7001</div>
+            </div>
+            <div class="icono">
+                <fa-icon class="text-secondary" [icon]="LlamadaIcon"> </fa-icon>
+            </div>
         </div>
-        <div class="ContentDer">
+        <!-- <div class="ContentDer">
             <div class="icon">
                 <i class="v-icon-telephone-receiver-with-up-arrow"></i>
             </div>
             <div class="timer">
                 --:--:--
             </div>
-        </div>
+        </div> -->
     </div>
-
     <div class="EscritorioOptions">
-        <div class="OptionsLlamada">
+        <div class="OptionSala">
+            <a class="btn btn-primary" tooltip="Silenciar">
+                <fa-icon class="text-dark" [icon]="VolumenIcon"> </fa-icon>
+            </a>
+            <a class="btn btn-warning" tooltip="Pausa">
+                <fa-icon class="text-dark" [icon]="PausaIcon"> </fa-icon>
+            </a>
+            <a class="btn btn-danger" tooltip="Colgar">
+                <fa-icon class="text-dark" [icon]="ColgarIcon"> </fa-icon>
+            </a>
+            <a class="btn btn-info" (click)="sipCall()" tooltip="Intervenir" placement="bottom">
+                <fa-icon class="text-dark" [icon]="IntervenirIcon"> </fa-icon>
+            </a>
+        </div>
+        <!-- <div class="OptionsLlamada">
+            <nav><a href="">aparcar</a></nav>
             <nav>
-                <a href=""> <i class="v-icon-volume-mute2"></i> Mute</a>
+                <a> <i class="v-icon-volume-mute2"></i> Mute</a>
                 <a href=""><i class="v-icon-pause2"></i>Pausar</a>
                 <a href=""><i class="v-icon-phone-hang-up"></i>Colgar</a>
             </nav>
-        </div>
+        </div> -->
     </div>
 </div>
+
 <!-- Sala Inactiva -->
 <div class="Escritorio" *ngIf="Tipo == 'Sala'">
-    <div class="EscritorioHeader">
+    <div class="EscritorioHeader" [ngClass]="{ 'text-danger': Estado === 'Inactiva', 'text-success': Estado === 'Activa' }">
+        <fa-icon class="text-danger" *ngIf="Estado === 'Inactiva'" [icon]="estadoIcon"> </fa-icon>
+        <fa-icon class="text-success" *ngIf="Estado === 'Activa'" [icon]="estadoIcon"> </fa-icon>
         {{ Tipo }} {{ Estado }}
         <span (click)="CerrarLlamada(Nombre, Numero, Id, Descripcion, Tipo, Estado)" style="cursor: pointer;">
-            <i class="v-icon-cancel" tooltip="Cerrar" style="color: #f04747;"></i>
+            <fa-icon class="text-danger" [icon]="SalirIcon" tooltip="Cerrar"> </fa-icon>
         </span>
     </div>
     <div class="EscritorioContentSala">
         <div class="ContentIzp">
-            <div class="titulo">{{ Nombre }}</div>
-            <div class="detalle">{{ Descripcion }}</div>
+            <div class="descripcion">
+                <div class="titulo">{{ Nombre }}</div>
+                <div class="detalle">{{ Descripcion }}</div>
+            </div>
+            <div class="icono">
+                <fa-icon class="text-secondary" [icon]="HeadsetIcon"> </fa-icon>
+            </div>
         </div>
-        <div class="ContentDer">
-            <!--<div class="icon">
-				
-					0/10
-				</div>
-				<div class="timer">
-					--:--:--
-				</div>-->
-        </div>
+        <!-- <div class="ContentDer">
+            Contenido
+            <div class="icon">
+                0/10
+            </div>
+            <div class="timer">
+                --:--:--
+            </div>
+        </div> -->
     </div>
-
     <div class="EscritorioOptions">
         <div class="OptionSala">
-            <nav>
-                <a style="cursor: pointer;" (click)="VerParticipantes()">
-                    <i class="v-icon-group"></i>
-                    Participantes
-                </a>
-                <a style="cursor: pointer;" (click)="CerrarLlamada(Nombre, Numero, Id, Descripcion, Tipo, Estado)">
-                    <i class="v-icon-enter"></i>
-                    Salir
-                </a>
-            </nav>
+            <a class="btn btn-warning" tooltip="Conferencia">
+                <fa-icon class="text-dark" [icon]="SalaIcon"> </fa-icon>
+            </a>
+            <a class="btn btn-success" tooltip="Añadir Participante">
+                <fa-icon class="text-dark" [icon]="AddUserIcon"> </fa-icon>
+            </a>
+            <a class="btn btn-primary" (click)="VerParticipantes('1')" tooltip="Ver Participantes">
+                <fa-icon class="text-dark" [icon]="VerIcon"> </fa-icon>
+            </a>
+            <a class="btn btn-info" (click)="sipCall()" placement="bottom" tooltip="Ser Agente de Llamadas">
+                <fa-icon class="text-dark" [icon]="AgenteIcon"> </fa-icon>
+            </a>
         </div>
     </div>
 </div>
+
 <!-- Radio  Inactiva -->
 <div class="Escritorio" *ngIf="Tipo == 'Radio'">
     <div class="EscritorioHeader">

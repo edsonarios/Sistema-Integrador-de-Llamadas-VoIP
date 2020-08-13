@@ -1,0 +1,40 @@
+.EscritorioHeader {
+    display: gird;
+    grid-template-columns: 90% 10%;
+    align-self: center;
+    font-weight: bold;
+    border: none;
+}
+.EscritorioContentSala {
+    // display: grid;
+    grid-template-rows: 1fr;
+    border: none;
+    .ContentIzp {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        justify-self: center;
+        align-self: center;
+        width: 100%;
+        height: 100%;
+        background: white;
+    }
+    .ContentDer {
+        background: white;
+    }
+}
+.EscritorioContentLlamada {
+    grid-template-rows: 1fr;
+    border: none;
+    .ContentIzp {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        justify-self: center;
+        align-self: center;
+        width: 100%;
+        height: 100%;
+        background: white;
+    }
+    .ContentDer {
+        background: white;
+    }
+}

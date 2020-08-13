@@ -9,118 +9,116 @@ import { SnotifyService, SnotifyToast, SnotifyPosition, SnotifyStyle } from 'ng-
 import { Observable } from 'rxjs';
 
 @Component({
-	selector: 'dialpad',
-	templateUrl: './dialpad.component.html'
+    selector: 'dialpad',
+    templateUrl: './dialpad.component.html'
 })
 export class DialPadComponent implements OnInit {
+    name = '';
 
-	name = '';
-
-	public us = localStorage.getItem('Usuario');
+    public us = localStorage.getItem('Usuario');
     public usActual = JSON.parse(this.us);
-	public nroActual = localStorage.getItem('NumberSelected');
+    public nroActual = localStorage.getItem('NumberSelected');
 
-	constructor(private snotifyService: SnotifyService, private agendaservice: AgendaService) {}
+    constructor(private snotifyService: SnotifyService, private agendaservice: AgendaService) {}
 
-	public symbols: String[] = '123456789*0#'.split('');
+    public symbols: String[] = '123456789*0#'.split('');
 
-	public dialNumber: String = '';
+    public dialNumber: String = '';
 
-	public phone: boolean = false;
+    public phone: boolean = false;
 
-	mute: boolean = false;
-	hold: boolean = false;
-	ptt: boolean = false;
+    mute: boolean = false;
+    hold: boolean = false;
+    ptt: boolean = false;
 
-	setValue(num) {
-		this.dialNumber += num;
-	}
+    setValue(num) {
+        this.dialNumber += num;
+    }
 
-	Llamada() {
-		this.sipCall(this.dialNumber);
-	}
-	Limpiar() {
-		this.dialNumber = '';
-	}
+    Llamada() {
+        this.sipCall(this.dialNumber);
+    }
+    Limpiar() {
+        this.dialNumber = '';
+    }
 
-	alert: any;
-	session: WebRTCService;
-	event: any;
-	call: any;
-	arr: Array<any> = [];
+    alert: any;
+    session: WebRTCService;
+    event: any;
+    call: any;
+    arr: Array<any> = [];
 
-	ngOnInit() {
-		this.session = new WebRTCService();
-		this.session.sessionEvents();
-		this.event = this.session.newRTCSession();
-		this.alert = this.session.getMessage();
-		this.arr.push(this.event);
-	}
-	conectar() {
-		this.session.connect();
-		this.alert = this.session.getMessage();
-	}
-	desconectar() {
-		this.session.disconnect();
-		this.alert = this.session.getMessage();
-	}
+    ngOnInit() {
+        this.session = new WebRTCService();
+        this.session.sessionEvents();
+        this.event = this.session.newRTCSession();
+        this.alert = this.session.getMessage();
+        this.arr.push(this.event);
+    }
+    conectar() {
+        this.session.connect();
+        this.alert = this.session.getMessage();
+    }
+    desconectar() {
+        this.session.disconnect();
+        this.alert = this.session.getMessage();
+    }
 
-	sipCall(sip) {
-		this.phone = true;
-		this.session.sipCall(sip);
-		this.snotifyService.success('LLAMADA INICIADA', { showProgressBar: false });
-	}
-	endCall() {
-		this.phone = false;
-		this.session.terminate();
-		this.snotifyService.error('LLAMADA TERMINADA', { showProgressBar: false });
-	}
+    sipCall(sip) {
+        this.phone = true;
+        this.session.sipCall(sip);
+        this.snotifyService.success('LLAMADA INICIADA', { showProgressBar: false });
+    }
+    endCall() {
+        this.phone = false;
+        this.session.terminate();
+        this.snotifyService.error('LLAMADA TERMINADA', { showProgressBar: false });
+    }
 
-	callMute() {
-		this.session.mute();
-		this.mute = true;
-	}
-	callUnmute() {
-		this.session.unmute();
-		this.mute = false;
-	}
+    callMute() {
+        this.session.mute();
+        this.mute = true;
+    }
+    callUnmute() {
+        this.session.unmute();
+        this.mute = false;
+    }
 
-	addExterno(){
-	
-		const yesAction = (toast: SnotifyToast) => {
-			if (toast.value) {
-				this.agendaservice.addAmigo(this.usActual.usuarioId, this.dialNumber, toast.value).subscribe(
-					(response) => {
-						console.log(response);
-					},
-					(er) => console.log(er)
-				);
-				this.snotifyService.remove(toast.id)	
-				this.snotifyService.create({
-					title: 'Se añadio a tu agenda',
-					body: null,
-					config: {
-					  position: SnotifyPosition.rightTop,
-					  type: SnotifyStyle.success,
-					  showProgressBar: false
-					}
-				  })
-			} else {
-			  toast.valid = true; // default value
-			  this.snotifyService.remove(toast.id)
-			}
-		  }
-		  
-		  const noAction = (toast: SnotifyToast) => {
-			this.snotifyService.remove(toast.id) // default
-		  }
-	  
-		this.snotifyService.prompt('Añadir a Agenda', {
-			buttons: [
-			  {text: 'Yes', action: yesAction, bold: true },
-			  {text: 'No', action: noAction },
-			],
-			placeholder: 'Nombre'
-		  });
-	}
+    addExterno() {
+        const yesAction = (toast: SnotifyToast) => {
+            if (toast.value) {
+                this.agendaservice.addAmigo(this.usActual.usuarioId, this.dialNumber, toast.value).subscribe(
+                    (response) => {
+                        console.log(response);
+                    },
+                    (er) => console.log(er)
+                );
+                this.snotifyService.remove(toast.id);
+                this.snotifyService.create({
+                    title: ' Añadido ',
+                    body: null,
+                    config: {
+                        position: SnotifyPosition.rightTop,
+                        type: SnotifyStyle.success,
+                        showProgressBar: false
+                    }
+                });
+            } else {
+                toast.valid = true; // default value
+                this.snotifyService.remove(toast.id);
+            }
+        };
+
+        const noAction = (toast: SnotifyToast) => {
+            this.snotifyService.remove(toast.id); // default
+        };
+
+        this.snotifyService.prompt('Añadir a Agenda', {
+            buttons: [
+                { text: 'Yes', action: yesAction, bold: true },
+                { text: 'No', action: noAction }
+            ],
+            placeholder: 'Nombre'
+        });
+    }
 }
