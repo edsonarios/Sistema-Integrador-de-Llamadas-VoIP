@@ -4,8 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
-import { User } from '../models/user';
-import { Iax } from '../models/iax';
 import { GLOBAL } from './global';
 
 @Injectable({

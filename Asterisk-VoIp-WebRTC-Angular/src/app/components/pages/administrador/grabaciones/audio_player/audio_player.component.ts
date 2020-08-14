@@ -23,8 +23,14 @@ export class AudioPlayerComponent implements OnInit  {
   uri1;
   uri2;
 
-  first= false;
 
+  hh = 0;
+  first= false;
+  public azul = 0.0;
+  colorazul= "";
+  tope = "";
+
+  nume: number = 1000;
   // track: Track;
   // player: HTMLAudioElement;
   // shuffle: boolean;
@@ -97,18 +103,42 @@ export class AudioPlayerComponent implements OnInit  {
         this.player2.src = this.uri2;
         this.player1.play();
         this.player2.play();
+        // setInterval(this.mostrarbarra,this.nume);
+        // setInterval(this.mostrarbarra,1000,this.player1);
+        
+
     });
-
+    
   }
+  
+  mostrarbarra(player){
+    console.log(player.currentTime);
+    this.azul = player.currentTime;
+    this.colorazul = "width: "+ this.azul +"%";
+    console.log(this.azul, this.colorazul);
+  }
+  
+ 
 
+  
   playPause() {
     if(!this.first){
       this.play();
+      this.tope = this.player1.duration+"";
+      //
+      
       this.first = true;
     }else{  
     if (this.player1.paused) {
       this.player1.play();
+      //color
+      this.azul = this.player1.currentTime;
+      console.log(this.azul);
+      this.colorazul ="width: "+ this.azul +"%";
+      console.log(this.colorazul);
       this.player2.play();
+      ///
+      
     } else {
       this.player1.pause();
       this.player2.pause();

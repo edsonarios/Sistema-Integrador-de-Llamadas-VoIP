@@ -4,19 +4,9 @@
 
         <div class="dialpad__clear">
             <i-feather name="arrow-left" class="icon-left bg-dark rounded" (click)="Limpiar()"></i-feather>
-            <!-- <i-feather  (click)="addExterno()" class="icon-left bg-success rounded" name="plus-circle" tooltip="agregar a agenda">
-            </i-feather> -->
         </div>
         <button *ngFor="let item of symbols" (click)="setValue(item)">{{ item }}</button>
     </div>
-    <!-- <div class="dialpad__events">
-        <button (click)="Llamada()">
-            <i-feather name="phone-call"></i-feather>
-        </button>
-        <button (click)="endCall()">
-            <i-feather name="phone-off"></i-feather>
-        </button>
-    </div> -->
     <div class="dialpad__row">
         <div >
             <button type="button" (click)="Llamada()" class="btn btn-outline-success redondocall "><i-feather name="phone-call"></i-feather></button>

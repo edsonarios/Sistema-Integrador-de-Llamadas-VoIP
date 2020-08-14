@@ -11,8 +11,8 @@
     <div class="EscritorioContentLlamada">
         <div class="ContentIzp">
             <div class="descripcion">
-                <div class="titulo">Alias</div>
-                <div class="detalle">7001</div>
+                <div  (click)="detalleUsuario($event,Nombre)" class="titulo">{{Nombre}}</div>
+                <div class="detalle">{{Numero}}</div>
             </div>
             <div class="icono">
                 <fa-icon class="text-secondary" [icon]="LlamadaIcon"> </fa-icon>

@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { WebRTCService } from '@services/WebRTC/WebRTC.service';
 import { SalaService } from '../../../../../services/sala.service';
+import { SnotifyService, SnotifyToast, SnotifyPosition, SnotifyStyle } from 'ng-snotify';
+
 import {
     faUsers,
     faEye,
@@ -17,6 +19,7 @@ import {
     faPhoneSlash,
     faTshirt
 } from '@fortawesome/free-solid-svg-icons';
+import { UserService } from '../../../../../services/user.service';
 
 @Component({
     selector: 'llamada',
@@ -48,27 +51,48 @@ export class LlamadaComponent implements OnInit {
     public VolumenIcon = faVolumeMute;
     public PausaIcon = faPause;
     public ColgarIcon = faPhoneSlash;
+
+    //
+    infoUsuario: any;
+    compe ="";
     // webrtc
     public session: WebRTCService;
-    public estadoAgente = true;
-    constructor(private router: Router, private salaService: SalaService) {}
+    constructor(private router: Router, private salaService: SalaService, private userService: UserService, private snotifyService: SnotifyService) {}
 
     ngOnInit() {
+        this.compe = this.Numero;
+        console.log(this.Nombre, this.Numero, this.Id, this.Descripcion, this.Tipo, this.Estado );
         this.session = new WebRTCService();
         this.session.sessionEvents();
     }
 
-    serAgente() {
-        if (this.estadoAgente) {
-            this.session.sipCall('*201');
-            this.estadoAgente = false;
-        } else {
-            this.session.sipCall('*202');
-            this.estadoAgente = true;
-        }
+
+    detalleUsuario(e, numero){
+        console.log(this.Numero);
+       //
+       this.userService.detalleUsuario(this.Numero).subscribe( response =>{
+        console.log(response[0]);
+        this.infoUsuario = response[0];
+        this.mostrar(this.infoUsuario);
+        this.snotifyService.html(`<center><b>Información de usuario</b></center>
+        <div class="snotifyToast__body"><b>nombre: <small>.....</small>   </b>${this.infoUsuario.nombre} ${this.infoUsuario.apPaterno} ${this.infoUsuario.apMaterno}<br>
+        <b>correo:  <small>.....</small>  </b>${this.infoUsuario.correo}<br><b>dirección: <small>.....</small>  </b>${this.infoUsuario.direccion}<br><b>teléfono:   <small>.....</small>  </b>${this.infoUsuario.telefono}</div> `, {
+        timeout: 2000,
+        type: "info",
+        showProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        });
+    });   
     }
-    conferencia() {
-        this.session.sipCall('3');
+
+    mostrar(info){
+        console.log(info);
+    }
+
+
+    sipCall() {
+        this.session.sipCall('*201');
     }
     CerrarLlamada(nombre: string, numero: string, id_llamada: string, descripcion: string, tipo: string, estado: string) {
         if (tipo == 'Sala') {

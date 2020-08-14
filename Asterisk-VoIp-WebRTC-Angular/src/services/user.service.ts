@@ -27,6 +27,15 @@ export class UserService {
     })
   };
 
+  // findSipByNumber
+  detalleUsuario(n): Observable<any> {
+    console.log(n);
+    return this.http.post<any>(this.url + 'findSipByNumber', {numero: n }, this.httpOptions).pipe(
+      retry(1),
+      catchError(this.errorHandl)
+    );
+  }
+  
   datosPrueba(): Observable<any> {
     return this.http.get<any>(this.url + 'datosPrueba').pipe(
       retry(1),

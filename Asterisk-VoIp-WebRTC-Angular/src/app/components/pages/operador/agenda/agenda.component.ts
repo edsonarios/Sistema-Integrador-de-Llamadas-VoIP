@@ -62,8 +62,8 @@ export class AgendaComponent implements OnInit {
     }  
 
     deletearAmigo(idamigo, numero) {
-        
         this.agendaservice.deleteAmigo(idamigo);
         this.Amigos = this.Amigos.filter((user) => user.numero != numero);
+        console.log('el usuario con id y numero  '+ idamigo+ '  '+ numero+ '  fue eliminado');
     }
 }
