@@ -1,8 +1,7 @@
 /* Aqui van los @mixin que se nos acurran en sass */
-@mixin colorChange($color : red) {
-	color : $color;
+@mixin colorChange($color: red) {
+    color: $color;
 }
-
 
 //responsive
 /*
@@ -13,8 +12,8 @@
 1800px			Big Desktop
 */
 
-html{
-	@media (max-width: 600px){
-		font-size: 50%;
-	}
-}
+// html{
+// 	@media (max-width: 600px){
+// 		font-size: 50%;
+// 	}
+// }

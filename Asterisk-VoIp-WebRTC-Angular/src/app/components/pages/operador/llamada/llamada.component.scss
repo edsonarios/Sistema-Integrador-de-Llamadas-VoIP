@@ -11,15 +11,18 @@
     border: none;
     .ContentIzp {
         display: grid;
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 70% 30%;
         justify-self: center;
         align-self: center;
         width: 100%;
         height: 100%;
-        background: white;
+        //background: white;
     }
     .ContentDer {
         background: white;
+    }
+    .ContentSala {
+        background: #254551;
     }
 }
 .EscritorioContentLlamada {
@@ -27,14 +30,28 @@
     border: none;
     .ContentIzp {
         display: grid;
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 70% 30%;
         justify-self: center;
         align-self: center;
         width: 100%;
         height: 100%;
-        background: white;
     }
     .ContentDer {
         background: white;
+    }
+    .ContentLlamada {
+        background-color: #f5f1da;
+    }
+}
+.EscritorioOptions {
+    .SalaL {
+        background: #1f4068;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .LlamadaL {
+        background: #96bb7c;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
     }
 }

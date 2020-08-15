@@ -54,46 +54,61 @@ export class LlamadaComponent implements OnInit {
 
     //
     infoUsuario: any;
-    compe ="";
+    compe = '';
     // webrtc
+    public estadoAgente = true;
     public session: WebRTCService;
     constructor(private router: Router, private salaService: SalaService, private userService: UserService, private snotifyService: SnotifyService) {}
 
     ngOnInit() {
         this.compe = this.Numero;
-        console.log(this.Nombre, this.Numero, this.Id, this.Descripcion, this.Tipo, this.Estado );
+        console.log(this.Nombre, this.Numero, this.Id, this.Descripcion, this.Tipo, this.Estado);
         this.session = new WebRTCService();
         this.session.sessionEvents();
     }
 
-
-    detalleUsuario(e, numero){
+    detalleUsuario(e, numero) {
         console.log(this.Numero);
-       //
-       this.userService.detalleUsuario(this.Numero).subscribe( response =>{
-        console.log(response[0]);
-        this.infoUsuario = response[0];
-        this.mostrar(this.infoUsuario);
-        this.snotifyService.html(`<center><b>Información de usuario</b></center>
+        //
+        this.userService.detalleUsuario(this.Numero).subscribe((response) => {
+            console.log(response[0]);
+            this.infoUsuario = response[0];
+            this.mostrar(this.infoUsuario);
+            this.snotifyService.html(
+                `<center><b>Información de usuario</b></center>
         <div class="snotifyToast__body"><b>nombre: <small>.....</small>   </b>${this.infoUsuario.nombre} ${this.infoUsuario.apPaterno} ${this.infoUsuario.apMaterno}<br>
-        <b>correo:  <small>.....</small>  </b>${this.infoUsuario.correo}<br><b>dirección: <small>.....</small>  </b>${this.infoUsuario.direccion}<br><b>teléfono:   <small>.....</small>  </b>${this.infoUsuario.telefono}</div> `, {
-        timeout: 2000,
-        type: "info",
-        showProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
+        <b>correo:  <small>.....</small>  </b>${this.infoUsuario.correo}<br><b>dirección: <small>.....</small>  </b>${this.infoUsuario.direccion}<br><b>teléfono:   <small>.....</small>  </b>${this.infoUsuario.telefono}</div> `,
+                {
+                    timeout: 2000,
+                    type: 'info',
+                    showProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true
+                }
+            );
         });
-    });   
     }
 
-    mostrar(info){
+    mostrar(info) {
         console.log(info);
     }
 
-
+    serAgente() {
+        if (this.estadoAgente) {
+            this.session.sipCall('*201');
+            this.estadoAgente = false;
+        } else {
+            this.session.sipCall('*202');
+            this.estadoAgente = true;
+        }
+    }
     sipCall() {
         this.session.sipCall('*201');
     }
+    conferencia() {
+        this.session.sipCall('3');
+    }
+
     CerrarLlamada(nombre: string, numero: string, id_llamada: string, descripcion: string, tipo: string, estado: string) {
         if (tipo == 'Sala') {
             this.llamada = { Nombre: nombre, Descripcion: descripcion, Id: id_llamada, Tipo: tipo };

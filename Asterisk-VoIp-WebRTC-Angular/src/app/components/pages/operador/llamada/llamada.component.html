@@ -9,10 +9,10 @@
         </span>
     </div>
     <div class="EscritorioContentLlamada">
-        <div class="ContentIzp">
+        <div class="ContentIzp ContentLlamada">
             <div class="descripcion">
-                <div  (click)="detalleUsuario($event,Nombre)" class="titulo">{{Nombre}}</div>
-                <div class="detalle">{{Numero}}</div>
+                <div (click)="detalleUsuario($event, Nombre)" class="titulo">{{ Nombre }}</div>
+                <div class="detalle">{{ Numero }}</div>
             </div>
             <div class="icono">
                 <fa-icon class="text-secondary" [icon]="LlamadaIcon"> </fa-icon>
@@ -28,7 +28,7 @@
         </div> -->
     </div>
     <div class="EscritorioOptions">
-        <div class="OptionSala">
+        <div class="OptionLlamada LlamadaL">
             <a class="btn btn-primary" tooltip="Silenciar">
                 <fa-icon class="text-dark" [icon]="VolumenIcon"> </fa-icon>
             </a>
@@ -64,7 +64,7 @@
         </span>
     </div>
     <div class="EscritorioContentSala">
-        <div class="ContentIzp">
+        <div class="ContentIzp ContentSala">
             <div class="descripcion">
                 <div class="titulo">{{ Nombre }}</div>
                 <div class="detalle">{{ Descripcion }}</div>
@@ -84,14 +84,14 @@
         </div> -->
     </div>
     <div class="EscritorioOptions">
-        <div class="OptionSala">
-            <a class="btn btn-warning" (click)="conferencia()" tooltip="Conferencia">
+        <div class="OptionSala SalaL">
+            <a class="btn btn-info" (click)="conferencia()" tooltip="Conferencia">
                 <fa-icon class="text-dark" [icon]="SalaIcon"> </fa-icon>
             </a>
-            <a class="btn btn-success" tooltip="Añadir Participante">
+            <a class="btn btn-info" tooltip="Añadir Participante">
                 <fa-icon class="text-dark" [icon]="AddUserIcon"> </fa-icon>
             </a>
-            <a class="btn btn-primary" (click)="VerParticipantes('1')" tooltip="Ver Participantes">
+            <a class="btn btn-info" (click)="VerParticipantes('1')" tooltip="Ver Participantes">
                 <fa-icon class="text-dark" [icon]="VerIcon"> </fa-icon>
             </a>
             <a class="btn btn-info" (click)="serAgente()" placement="left" tooltip="Ser Agente de Llamadas">

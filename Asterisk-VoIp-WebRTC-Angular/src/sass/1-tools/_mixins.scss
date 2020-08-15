@@ -1,51 +1,56 @@
-.radio-responsive{
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+.radio-responsive {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
-.sala-responsive{
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+.sala-responsive {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 .e-responsive {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  //grid-gap: .2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    .SalaLlamadaRadio {
+        display: flex;
+        justify-self: center;
+        max-width: 275px;
+    }
+    //grid-gap: .2rem;
 }
-.sip_iax-responsive{
-	 display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+.sip_iax-responsive {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 @media screen and (max-width: 2500px) {
-	.e-responsive {
-		grid-template-columns: 1fr 1fr 1fr 1fr;
-	}
+    .e-responsive {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
 }
 
 @media screen and (max-width: 1700px) {
-	.e-responsive {
-		grid-template-columns: 1fr 1fr 1fr;
-	}
+    .e-responsive {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }
 
-@media screen and (max-width: 1280px) {
-	.e-responsive {
-		grid-template-columns: 1fr 1fr;
-	}
+@media screen and (max-width: 1500px) {
+    .e-responsive {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
-@media screen and (max-width: 1000px) {
-	.e-responsive {
-		grid-template-columns: 1fr 1fr;
-		padding: 0% 15%;
-	}
+@media screen and (max-width: 1100px) {
+    .e-responsive {
+        grid-template-columns: 1fr;
+        //padding: 0% 15%;
+    }
 }
 
 .item {
-  background-color: #1EAAFC;
-  background-image: linear-gradient(130deg, #6C52D9 0%, #1EAAFC 85%, #3EDFD7 100%);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  color: #fff;
-  border-radius: 4px;
-  border: 6px solid #171717;
-  height: 120px;
+    background-color: #1eaafc;
+    background-image: linear-gradient(130deg, #6c52d9 0%, #1eaafc 85%, #3edfd7 100%);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    color: #fff;
+    border-radius: 4px;
+    border: 6px solid #171717;
+    height: 120px;
 }
