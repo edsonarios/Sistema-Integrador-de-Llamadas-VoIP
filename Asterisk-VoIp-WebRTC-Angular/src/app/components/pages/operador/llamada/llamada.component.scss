@@ -17,12 +17,15 @@
         width: 100%;
         height: 100%;
         //background: white;
+        .iconoL {
+            color: #4b5d67;
+        }
     }
     .ContentDer {
         background: white;
     }
     .ContentSala {
-        background: #254551;
+        background: #322f3d;
     }
 }
 .EscritorioContentLlamada {
@@ -35,23 +38,70 @@
         align-self: center;
         width: 100%;
         height: 100%;
+        .iconoS {
+            color: #84a9ac;
+        }
     }
     .ContentDer {
         background: white;
     }
     .ContentLlamada {
-        background-color: #f5f1da;
+        background-color: #3b6978;
     }
 }
 .EscritorioOptions {
     .SalaL {
-        background: #1f4068;
+        background: #4b5d67;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
+        .btn-sala {
+            background-color: #87556f;
+            color: #17a2b8;
+        }
+        .btn-sala:hover {
+            color: #322f3d;
+            background-color: #814263;
+            border-color: #7e3259;
+        }
+        .btn-dark {
+            color: #17a2b8;
+        }
+        .btn-dark:hover {
+            color: #e4e3e3;
+            background-color: #814263;
+            border-color: #7e3259;
+        }
     }
     .LlamadaL {
-        background: #96bb7c;
+        background: #84a9ac;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
+        .btn-llamada {
+            background-color: #e4e3e3;
+            color: #204051;
+        }
+        .btn-info {
+            color: #204051;
+        }
+        .btn-llamada:hover {
+            // background-color: #ccc2c2;
+            background-color: #17a2b8;
+            color: #204051;
+            border-color: #02a5be;
+        }
+    }
+    .RadioL {
+        background: #84a9ac;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        .btn-radio {
+            background-color: #e4e3e3;
+            color: #204051;
+        }
+        .btn-radio:hover {
+            background-color: #ccc2c2;
+            color: #204051;
+            border-color: #cfbaba;
+        }
     }
 }

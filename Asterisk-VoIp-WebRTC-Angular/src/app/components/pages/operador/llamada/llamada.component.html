@@ -1,6 +1,6 @@
 <!-- Llamada SIP Inactiva -->
 <div class="Escritorio" *ngIf="Tipo == 'Llamada'">
-    <div class="EscritorioHeader" [ngClass]="{ 'text-danger': Estado === 'Inactiva', 'text-success': Estado === 'Activa' }">
+    <div class="EscritorioHeader HeadLlamada" [ngClass]="{ 'text-danger': Estado === 'Inactiva', 'text-success': Estado === 'Activa' }">
         <fa-icon class="text-danger" *ngIf="Estado === 'Inactiva'" [icon]="estadoIcon"> </fa-icon>
         <fa-icon class="text-success" *ngIf="Estado === 'Activa'" [icon]="estadoIcon"> </fa-icon>
         {{ Tipo }} {{ Estado }}
@@ -14,8 +14,8 @@
                 <div (click)="detalleUsuario($event, Nombre)" class="titulo">{{ Nombre }}</div>
                 <div class="detalle">{{ Numero }}</div>
             </div>
-            <div class="icono">
-                <fa-icon class="text-secondary" [icon]="LlamadaIcon"> </fa-icon>
+            <div class="iconoS">
+                <fa-icon [icon]="LlamadaIcon"> </fa-icon>
             </div>
         </div>
         <!-- <div class="ContentDer">
@@ -29,17 +29,23 @@
     </div>
     <div class="EscritorioOptions">
         <div class="OptionLlamada LlamadaL">
-            <a class="btn btn-primary" tooltip="Silenciar">
-                <fa-icon class="text-dark" [icon]="VolumenIcon"> </fa-icon>
+            <a *ngIf="estadoAudioLlamada" class="btn btn-llamada" tooltip="Silenciar Audio" (click)="silenciarLlamada()">
+                <fa-icon [icon]="Volumen"> </fa-icon>
             </a>
-            <a class="btn btn-warning" tooltip="Pausa">
-                <fa-icon class="text-dark" [icon]="PausaIcon"> </fa-icon>
+            <a *ngIf="!estadoAudioLlamada" class="btn btn-info" tooltip="Activar Audio" (click)="silenciarLlamada()">
+                <fa-icon [icon]="VolumenIcon"> </fa-icon>
             </a>
-            <a class="btn btn-danger" tooltip="Colgar">
-                <fa-icon class="text-dark" [icon]="ColgarIcon"> </fa-icon>
+            <a *ngIf="estadoLlamada" class="btn btn-llamada" tooltip="Pausar Llamada" (click)="pausarLlamada()">
+                <fa-icon [icon]="PausaIcon"> </fa-icon>
             </a>
-            <a class="btn btn-info" tooltip="Transferencia" placement="left">
-                <fa-icon class="text-dark" [icon]="IntervenirIcon"> </fa-icon>
+            <a *ngIf="!estadoLlamada" class="btn btn-info" tooltip="Reconectar Llamada" (click)="pausarLlamada()">
+                <fa-icon [icon]="PlayIcon"> </fa-icon>
+            </a>
+            <a class="btn btn-llamada" tooltip="Colgar">
+                <fa-icon [icon]="ColgarIcon"> </fa-icon>
+            </a>
+            <a class="btn btn-llamada" tooltip="Transferencia" placement="left">
+                <fa-icon [icon]="IntervenirIcon"> </fa-icon>
             </a>
         </div>
         <!-- <div class="OptionsLlamada">
@@ -55,7 +61,7 @@
 
 <!-- Sala Inactiva -->
 <div class="Escritorio" *ngIf="Tipo == 'Sala'">
-    <div class="EscritorioHeader" [ngClass]="{ 'text-danger': Estado === 'Inactiva', 'text-success': Estado === 'Activa' }">
+    <div class="EscritorioHeader HeadSala" [ngClass]="{ 'text-danger': Estado === 'Inactiva', 'text-success': Estado === 'Activa' }">
         <fa-icon class="text-danger" *ngIf="Estado === 'Inactiva'" [icon]="estadoIcon"> </fa-icon>
         <fa-icon class="text-success" *ngIf="Estado === 'Activa'" [icon]="estadoIcon"> </fa-icon>
         {{ Tipo }} {{ Estado }}
@@ -69,8 +75,11 @@
                 <div class="titulo">{{ Nombre }}</div>
                 <div class="detalle">{{ Descripcion }}</div>
             </div>
-            <div class="icono">
-                <fa-icon class="text-secondary" [icon]="HeadsetIcon"> </fa-icon>
+            <div *ngIf="esRadio" class="iconoL">
+                <fa-icon [icon]="RadioIcon"> </fa-icon>
+            </div>
+            <div *ngIf="!esRadio" class="iconoL">
+                <fa-icon [icon]="HeadsetIcon"> </fa-icon>
             </div>
         </div>
         <!-- <div class="ContentDer">
@@ -85,17 +94,26 @@
     </div>
     <div class="EscritorioOptions">
         <div class="OptionSala SalaL">
-            <a class="btn btn-info" (click)="conferencia()" tooltip="Conferencia">
-                <fa-icon class="text-dark" [icon]="SalaIcon"> </fa-icon>
+            <a *ngIf="!estadoConferencia" class="btn btn-dark" (click)="conferencia()" tooltip="Entrar a conferencia">
+                <fa-icon [icon]="SalaIcon"> </fa-icon>
             </a>
-            <a class="btn btn-info" tooltip="Añadir Participante">
-                <fa-icon class="text-dark" [icon]="AddUserIcon"> </fa-icon>
+            <a *ngIf="estadoConferencia" class="btn btn-sala" (click)="conferencia()" tooltip="Salir de conferencia">
+                <fa-icon class="text-light" [icon]="SalaIcon"> </fa-icon>
             </a>
-            <a class="btn btn-info" (click)="VerParticipantes('1')" tooltip="Ver Participantes">
-                <fa-icon class="text-dark" [icon]="VerIcon"> </fa-icon>
+            <a class="btn btn-dark" tooltip="Añadir Participante">
+                <fa-icon [icon]="AddUserIcon"> </fa-icon>
             </a>
-            <a class="btn btn-info" (click)="serAgente()" placement="left" tooltip="Ser Agente de Llamadas">
-                <fa-icon [icon]="AgenteIcon" [ngClass]="{ 'text-light': estadoAgente === false, 'text-dark': estadoAgente === true }"> </fa-icon>
+            <a *ngIf="!estadoParticipantes" class="btn btn-dark" (click)="VerParticipantes('1')" tooltip="Ver Participantes">
+                <fa-icon [icon]="VerIcon"> </fa-icon>
+            </a>
+            <a *ngIf="estadoParticipantes" class="btn btn-sala" (click)="VerParticipantes('1')" tooltip="Ver Participantes">
+                <fa-icon class="text-light" [icon]="VerIcon"> </fa-icon>
+            </a>
+            <a *ngIf="estadoAgente" class="btn btn-dark" (click)="serAgente()" placement="left" tooltip="Ser Agente de Llamadas">
+                <fa-icon [icon]="AgenteIcon"> </fa-icon>
+            </a>
+            <a *ngIf="!estadoAgente" class="btn btn-sala" (click)="serAgente()" placement="left" tooltip="Desactivar Agente de Llamadas">
+                <fa-icon class="text-light" [icon]="AgenteIcon"> </fa-icon>
             </a>
         </div>
     </div>

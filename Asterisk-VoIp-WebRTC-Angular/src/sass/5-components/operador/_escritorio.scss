@@ -58,12 +58,19 @@
         'EscritorioContent'
         'EscritorioOptions';
     animation: swing-in-bottom-fwd 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    .HeadSala {
+        background-color: #59405c;
+    }
+    .HeadLlamada {
+        background-color: #204051;
+        // background-color: #e4e3e3;
+    }
 }
 .EscritorioHeader {
     grid-area: EscritorioHeader;
     border-radius: 4px 4px 0px 0px;
     padding-left: 10px;
-    background: #373b44;
+
     margin-bottom: -5px;
     color: white;
     span {
@@ -120,12 +127,17 @@
             height: 100%;
         }
     }
-    .icono {
+    .iconoS {
         display: flex;
         align-items: center;
         justify-content: center;
-        color: white;
-        // text-align: center;
+        font-size: 35px;
+        height: 100%;
+    }
+    .iconoL {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-size: 35px;
         height: 100%;
     }

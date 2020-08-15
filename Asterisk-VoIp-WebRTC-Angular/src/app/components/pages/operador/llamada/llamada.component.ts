@@ -17,7 +17,9 @@ import {
     faVolumeMute,
     faPause,
     faPhoneSlash,
-    faTshirt
+    faVolumeUp,
+    faPlay,
+    faBroadcastTower
 } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from '../../../../../services/user.service';
 
@@ -48,15 +50,23 @@ export class LlamadaComponent implements OnInit {
     public IntervenirIcon = faAssistiveListeningSystems;
     public estadoIcon = faCircle;
     public LlamadaIcon = faPhone;
+    public Volumen = faVolumeUp;
     public VolumenIcon = faVolumeMute;
     public PausaIcon = faPause;
+    public PlayIcon = faPlay;
     public ColgarIcon = faPhoneSlash;
-
+    public RadioIcon = faBroadcastTower;
     //
     infoUsuario: any;
     compe = '';
     // webrtc
     public estadoAgente = true;
+    public estadoAudioLlamada = true;
+    public estadoLlamada = true;
+    public estadoConferencia = false;
+    public estadoParticipantes = false;
+    public esRadio = false;
+
     public session: WebRTCService;
     constructor(private router: Router, private salaService: SalaService, private userService: UserService, private snotifyService: SnotifyService) {}
 
@@ -65,6 +75,7 @@ export class LlamadaComponent implements OnInit {
         console.log(this.Nombre, this.Numero, this.Id, this.Descripcion, this.Tipo, this.Estado);
         this.session = new WebRTCService();
         this.session.sessionEvents();
+        this.verificaRadio();
     }
 
     detalleUsuario(e, numero) {
@@ -107,6 +118,7 @@ export class LlamadaComponent implements OnInit {
     }
     conferencia() {
         this.session.sipCall('3');
+        this.estadoConferencia = !this.estadoConferencia;
     }
 
     CerrarLlamada(nombre: string, numero: string, id_llamada: string, descripcion: string, tipo: string, estado: string) {
@@ -123,7 +135,8 @@ export class LlamadaComponent implements OnInit {
     VerParticipantes(idSala) {
         // window.alert('Pendiente');
         //
-        //this.Participantes.emit('Ver Participantes');
+        // this.Participantes.emit('Ver Participantes');
+        this.estadoParticipantes = !this.estadoParticipantes;
         this.salaService.GetParticipantesById(idSala).subscribe(
             (res) => {
                 this.Participantes.emit(res);
@@ -132,5 +145,19 @@ export class LlamadaComponent implements OnInit {
                 console.log(err);
             }
         );
+    }
+    silenciarLlamada() {
+        this.estadoAudioLlamada = !this.estadoAudioLlamada;
+    }
+    pausarLlamada() {
+        this.estadoLlamada = !this.estadoLlamada;
+    }
+    verificaRadio() {
+        const palabra = this.Nombre.substr(0, 5).toLowerCase();
+        if (palabra === 'radio') {
+            this.esRadio = true;
+        } else {
+            this.esRadio = false;
+        }
     }
 }
