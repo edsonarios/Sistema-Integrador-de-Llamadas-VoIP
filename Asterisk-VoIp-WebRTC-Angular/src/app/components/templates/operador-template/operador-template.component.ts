@@ -345,11 +345,10 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     VerParticipantes(event: ParticipanteSala[]) {
         //console.log('Llega el evento y debe de cambiar los componentes')
         this.CambiaHideLateral();
-        this.mostrarParticipantes = true;
+        this.mostrarParticipantes = !this.mostrarParticipantes;
         // console.log('participantes', this.ParticipantesSala);
         this.ParticipantesSala2 = event;
-        // console.log('participantes', event);
-        console.log('participantes', this.ParticipantesSala2);
+        // console.log('participantes', this.ParticipantesSala2);
     }
 
     AgendaLlamada(ContactoAgenda) {

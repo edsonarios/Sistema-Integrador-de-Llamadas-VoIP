@@ -130,7 +130,7 @@
             <div class="CenterContent_Sup">
                 <header>Escritorio</header>
                 <section class="e-responsive">
-                    <div *ngFor="let n of Llamada; let i = index">
+                    <div *ngFor="let n of Llamada; let i = index" class="SalaLlamadaRadio">
                         <llamada
                             (llamadaClose)="CerrarLlamada($event)"
                             (Participantes)="VerParticipantes($event)"

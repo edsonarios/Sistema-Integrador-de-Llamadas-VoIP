@@ -19,7 +19,7 @@ export class ParticipantesComponent implements OnInit {
     ngOnInit(): void {
         this.session = new WebRTCService();
         this.session.sessionEvents();
-        console.log('desde el componente', this.Participantes);
+        // console.log('desde el componente', this.Participantes);
     }
     Conferencia(numero) {
         this.session.sipCall(numero);
