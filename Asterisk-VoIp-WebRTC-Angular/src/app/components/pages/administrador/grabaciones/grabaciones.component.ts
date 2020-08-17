@@ -49,11 +49,6 @@ export class GrabacionesComponent implements OnInit {
   });
   }
   DescargarAudio(uni, cha) {
-    //Metodo de descarga
-    console.log('Descargando...');
-    console.log(uni);
-    console.log(cha);
-    
     this.grabaservice.downloadFile(uni, cha).subscribe(data => {
       const blob = new Blob([data], {
         type: 'application/zip'
@@ -91,9 +86,8 @@ export class GrabacionesComponent implements OnInit {
         this.HistAdmin = response;
         
         this.HistAdmin.forEach((element) => {
-          element.calldate = moment(element.calldate)
-            .subtract(10, 'days')
-            .calendar();
+          element.calldate = this.convert(element.calldate);
+          element.segundos = this.convertseconds(element.segundos);
           console.log(element.calldate);
           //salientes
           if (
@@ -125,8 +119,9 @@ export class GrabacionesComponent implements OnInit {
     this.historialService.HistorialxSipoIax(this.numero).subscribe(
       (response) => {
         response.forEach(it => {
-          var fec = moment(it.fechayhora).subtract(10, 'days').calendar();
+          var fec = this.convert(it.fechayhora);
           it.fechayhora = fec;
+          it.segundos = this.convertseconds(it.segundos);
           if(it.tipo == 'entrante'){
             this.HistEntrante.push(it);
           }
@@ -178,5 +173,21 @@ export class GrabacionesComponent implements OnInit {
       console.log('todas las llamadas ');
       this.Historia = this.HistAdmin;
     }
+  }
+
+  convertseconds(segundos){
+    let minutos = Math.floor(segundos/60);
+    let seconds = Math.floor(segundos%60);
+    let m, s;
+    m = minutos<10? '0'+minutos : minutos;
+    s = seconds<10? '0'+seconds : seconds;
+    return m+':'+s;
+  }
+
+  convert(str) {
+    var date = new Date(str),
+      mnth = ('0' + (date.getMonth() + 1)).slice(-2),
+      day = ('0' + date.getDate()).slice(-2);
+    return [mnth, day, date.getFullYear()].join('/');
   }
 }

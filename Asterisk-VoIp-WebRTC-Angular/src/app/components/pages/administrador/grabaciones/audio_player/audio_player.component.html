@@ -1,16 +1,10 @@
 <div class="mediaPlayer">
 	<div class="icon" style="cursor: pointer;" (click)="playPause()">
-		 <i class=" v-icon-play3"></i>
+		<i *ngIf="audio.paused" class="v-icon-play3"></i>
+		<i *ngIf="!audio.paused" class="v-icon-pause2"></i>
 	</div>
-	<div class="progress">
-		<!-- <div class="progress-bar" role="progressbar" [style]="colorazul" [aria-valuenow]="azul"
-		 aria-valuemin="0" [aria-valuemax]="tope"></div> -->
+	<div>
+		{{convertseconds(audio.currentTime)}}
 	</div>
-	<!-- <button  (click)="play()">
-        play
-      </button>
-      <button  (click)="playPause()">
-        pause
-      </button> -->
-		
+	<progress [max]="max" [value]="value"></progress>
 </div>

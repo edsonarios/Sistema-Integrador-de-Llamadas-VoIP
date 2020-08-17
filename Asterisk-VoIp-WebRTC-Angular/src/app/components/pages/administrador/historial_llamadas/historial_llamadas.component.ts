@@ -49,6 +49,15 @@ export class HistorialLlamadasComponent implements OnInit {
       console.log(value);
     });
   }
+
+  convertseconds(segundos){
+    let minutos = Math.floor(segundos/60);
+    let seconds = Math.floor(segundos%60);
+    let m, s;
+    m = minutos<10? '0'+minutos : minutos;
+    s = seconds<10? '0'+seconds : seconds;
+    return m+':'+s;
+  }
   //  DD // MM // YYYY
   convert(str) {
     var date = new Date(str),
@@ -94,19 +103,12 @@ export class HistorialLlamadasComponent implements OnInit {
   llenarCDRxAdmin() {
     this.historialService.HistorialLlamadasAdministrador().subscribe(
       (response) => {
-        // response.forEach((element) => {
-        //   var fecha = moment(element.calldate).subtract(10, 'days').calendar();
-        //   element.calldate = fecha;
-        //   console.log(element.calldate);
-        // });
         this.HistAdmin = response;
         this.Historia = response;
 
         this.HistAdmin.forEach((element) => {
-          element.calldate = moment(element.calldate)
-            .subtract(10, 'days')
-            .calendar();
-          console.log(element.calldate);
+          element.calldate = this.convert(element.calldate);
+          element.segundos = this.convertseconds(element.segundos);
           //salientes
           if (
             element.disposition == 'ANSWERED' &&
@@ -136,8 +138,10 @@ export class HistorialLlamadasComponent implements OnInit {
     this.historialService.HistorialxSipoIax(this.numberSelected).subscribe(
       (response) => {
         response.forEach((element) => {
-            var fecha = moment(element.fechayhora).subtract(10, 'days').calendar();
-            element.fechayhora = fecha;
+          console.log(element)
+          element.fechayhora = this.convert(element.fechayhora);
+          element.segundos = this.convertseconds(element.segundos);
+            
             if(element.tipo == 'entrante'){
               this.HistEntrante.push(element);
             }
