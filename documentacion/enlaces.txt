@@ -1,0 +1,9 @@
+Carpeta drive con toda la documentacion - DB, ER, Scrum, etc
+https://drive.google.com/drive/folders/1xQp0POR1MSOe7nAHK0VDoSkmB2BKWBw6?usp=sharing
+
+Scrum
+https://docs.google.com/spreadsheets/d/1pu4BP56UXe7a97h2qtV1-aDBOBtF0yikJteisviw-3o/edit?usp=sharing
+
+Documentacion Api-Rest
+https://documenter.getpostman.com/view/9086204/T1LSAjoB?version=latest
+
