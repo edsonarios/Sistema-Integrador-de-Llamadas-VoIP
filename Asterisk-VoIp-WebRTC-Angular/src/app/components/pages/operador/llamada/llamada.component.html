@@ -4,7 +4,7 @@
         <fa-icon class="text-danger" *ngIf="Estado === 'Inactiva'" [icon]="estadoIcon"> </fa-icon>
         <fa-icon class="text-success" *ngIf="Estado === 'Activa'" [icon]="estadoIcon"> </fa-icon>
         {{ Tipo }} {{ Estado }}
-        <span (click)="CerrarLlamada(Nombre, Numero, Id, Tipo)" style="cursor: pointer;">
+        <span (click)="CerrarLlamada(Nombre, Numero, Id, Descripcion, Tipo, Estado)" style="cursor: pointer;">
             <fa-icon class="text-danger" [icon]="SalirIcon" tooltip="Cerrar"> </fa-icon>
         </span>
     </div>
@@ -41,7 +41,7 @@
             <a *ngIf="!estadoLlamada" class="btn btn-info" tooltip="Reconectar Llamada" (click)="pausarLlamada()">
                 <fa-icon [icon]="PlayIcon"> </fa-icon>
             </a>
-            <a class="btn btn-llamada" tooltip="Colgar">
+            <a class="btn btn-llamada" tooltip="Colgar" (click)="ColgarLlamada(Nombre, Numero, Id, Descripcion, Tipo, Estado)">
                 <fa-icon [icon]="ColgarIcon"> </fa-icon>
             </a>
             <a class="btn btn-llamada" tooltip="Transferencia" placement="left">
@@ -121,30 +121,60 @@
 
 <!-- Radio  Inactiva -->
 <div class="Escritorio" *ngIf="Tipo == 'Radio'">
-    <div class="EscritorioHeader">
+    <div class="EscritorioHeader HeadSala" [ngClass]="{ 'text-danger': Estado === 'Inactiva', 'text-success': Estado === 'Activa' }">
+        <fa-icon class="text-danger" *ngIf="Estado === 'Inactiva'" [icon]="estadoIcon"> </fa-icon>
+        <fa-icon class="text-success" *ngIf="Estado === 'Activa'" [icon]="estadoIcon"> </fa-icon>
         {{ Tipo }} {{ Estado }}
-        <span (click)="CerrarLlamada(Nombre, Numero, Id, Tipo)" style="cursor: pointer;">
-            <i class="v-icon-cancel" tooltip="Cerrar" style="color: #f04747;"></i>
+        <span (click)="CerrarLlamada(Nombre, Numero, Id, Descripcion, Tipo, Estado)" style="cursor: pointer;">
+            <fa-icon class="text-danger" [icon]="SalirIcon" tooltip="Cerrar"> </fa-icon>
         </span>
     </div>
-    <div class="EscritorioContentRadio">
-        <div class="ContentIzp">
-            <div class="titulo">Radio 1</div>
-            <div class="detalle">Radio de Prueba</div>
-        </div>
-        <div class="ContentDer">
-            <div class="PTT">
-                <button tooltip="pulse para hablar"><i class="v-icon-microphone"></i></button>
+    <div class="EscritorioContentSala">
+        <div class="ContentIzp ContentSala">
+            <div class="descripcion">
+                <div class="titulo">{{ Nombre }}</div>
+                <div class="detalle">{{ Descripcion }}</div>
+            </div>
+            <div *ngIf="esRadio" class="iconoL">
+                <fa-icon [icon]="RadioIcon"> </fa-icon>
+            </div>
+            <div *ngIf="!esRadio" class="iconoL">
+                <fa-icon [icon]="HeadsetIcon"> </fa-icon>
             </div>
         </div>
+        <!-- <div class="ContentDer">
+            Contenido
+            <div class="icon">
+                0/10
+            </div>
+            <div class="timer">
+                --:--:--
+            </div>
+        </div> -->
     </div>
 
     <div class="EscritorioOptions">
-        <div class="OptionSala">
-            <nav>
-                <a href=""> <i class="v-icon-volume-mute2"></i> mute </a>
-                <a href=""><i class="v-icon-enter"></i> Salir </a>
-            </nav>
+        <div class="OptionLlamada LlamadaL">
+            <a class="btn btn-llamada" tooltip="Option ">
+                <fa-icon [icon]="ColgarIcon"> </fa-icon>
+            </a>
+            <a class="btn btn-llamada" tooltip="Option" placement="left">
+                <fa-icon [icon]="ColgarIcon"> </fa-icon>
+            </a>
+            <a class="btn btn-llamada" tooltip="Option" placement="left">
+                <fa-icon [icon]="ColgarIcon"> </fa-icon>
+            </a>
+            <a class="btn btn-llamada" tooltip="Option" placement="left">
+                <fa-icon [icon]="ColgarIcon"> </fa-icon>
+            </a>
         </div>
+        <!-- <div class="OptionsLlamada">
+            <nav><a href="">aparcar</a></nav>
+            <nav>
+                <a> <i class="v-icon-volume-mute2"></i> Mute</a>
+                <a href=""><i class="v-icon-pause2"></i>Pausar</a>
+                <a href=""><i class="v-icon-phone-hang-up"></i>Colgar</a>
+            </nav>
+        </div> -->
     </div>
 </div>

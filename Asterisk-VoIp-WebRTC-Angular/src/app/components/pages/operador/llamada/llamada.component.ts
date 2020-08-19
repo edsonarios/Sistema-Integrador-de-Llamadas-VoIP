@@ -122,14 +122,8 @@ export class LlamadaComponent implements OnInit {
     }
 
     CerrarLlamada(nombre: string, numero: string, id_llamada: string, descripcion: string, tipo: string, estado: string) {
-        if (tipo == 'Sala') {
-            this.llamada = { Nombre: nombre, Descripcion: descripcion, Id: id_llamada, Tipo: tipo };
-            this.llamadaClose.emit(this.llamada);
-        }
-        if (tipo == 'Radio') {
-        }
-        if (tipo == 'Llamada') {
-        }
+        this.llamada = { Nombre: nombre, Descripcion: descripcion, Id: id_llamada, Tipo: tipo };
+        this.llamadaClose.emit(this.llamada);
     }
 
     VerParticipantes(idSala) {
@@ -151,6 +145,10 @@ export class LlamadaComponent implements OnInit {
     }
     pausarLlamada() {
         this.estadoLlamada = !this.estadoLlamada;
+    }
+    ColgarLlamada(nombre: string, numero: string, id_llamada: string, descripcion: string, tipo: string, estado: string) {
+        //codigo pendiente para colgar la llamada
+        this.CerrarLlamada(nombre, numero, id_llamada, descripcion, tipo, estado);
     }
     verificaRadio() {
         const palabra = this.Nombre.substr(0, 5).toLowerCase();

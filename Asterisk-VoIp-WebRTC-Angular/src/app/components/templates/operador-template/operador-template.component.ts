@@ -314,13 +314,24 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     RegistraSala(Sala) {
         // Metodo del escritorio donde se crea una ventana y se elimina de la salas
 
-        this.Llamada.push({
-            nombre: Sala['nombre'],
-            descripcion: Sala['descripcion'],
-            id: Sala['id'],
-            Tipo: 'Sala',
-            Estado: 'Activa'
-        });
+        if (Sala['nombre'].toLowerCase().includes('radio')) {
+            this.Llamada.push({
+                nombre: Sala['nombre'],
+                descripcion: Sala['descripcion'],
+                id: Sala['id'],
+                Tipo: 'Radio',
+                Estado: 'Activa'
+            });
+        } else {
+            this.Llamada.push({
+                nombre: Sala['nombre'],
+                descripcion: Sala['descripcion'],
+                id: Sala['id'],
+                Tipo: 'Sala',
+                Estado: 'Activa'
+            });
+        }
+
         this.EliminaItemSalas(Sala['id']);
     }
     CerrarLlamada(CallInfo) {
@@ -332,7 +343,7 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
 
         //Termina la sesion !
         // this.rtc.terminate();
-        if (CallInfo['Tipo'] == 'Sala') {
+        if (CallInfo['Tipo'] == 'Sala' || CallInfo['Tipo'] == 'Radio') {
             this.Salas.push({
                 nombreSala: CallInfo['Nombre'],
                 id: CallInfo['Id'],
@@ -340,6 +351,8 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
             });
             console.log('Las salas:');
             console.log(this.Salas);
+        } else {
+            //Codigo referido para llamadas
         }
     }
     VerParticipantes(event: ParticipanteSala[]) {
@@ -371,10 +384,10 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
             Tipo: 'Llamada',
             Estado: 'Activa'
         });
-        this.rtc.setSession(this.remote);
-        this.rtc.remoteCall();
         this.AgregarEventoPanel(Notificacion['Numero'], '15/11/2019', 'false', 'entrante');
         this.EliminaItemNotificacion(Notificacion['Id']);
+        this.rtc.setSession(this.remote);
+        this.rtc.remoteCall();
     }
     ColgarLlamada(Notificacion) {
         this.AgregarEventoPanel(Notificacion['Numero'], '15/11/2019', 'false', 'perdida');

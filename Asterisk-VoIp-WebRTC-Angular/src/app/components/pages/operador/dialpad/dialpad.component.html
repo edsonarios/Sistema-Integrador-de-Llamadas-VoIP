@@ -8,21 +8,12 @@
         <button *ngFor="let item of symbols" (click)="setValue(item)">{{ item }}</button>
     </div>
     <div class="dialpad__row">
-        <div >
-            <button type="button" (click)="Llamada()" class="btn btn-outline-success redondocall "><i-feather name="phone-call"></i-feather></button>
-            <button type="button" (click)="endCall()" class="btn btn-outline-danger redondooff "><i-feather name="phone-off"></i-feather></button>
-            <button type="button" *ngIf="dialNumber" (click)="addExterno()" class="btn btn-outline-info redondoplus "><i-feather class="plus" name="user-plus" tooltip="añadir a agenda"></i-feather></button>
-        </div>
-      
-    </div>
-
-    <div class="col-md-12">
-        <div class="col-8 offset-2">
-            <nav>
-                <a class="btn btn-info btn-block" style="padding-bottom: 0px; margin-bottom: 5px;">Ser Agente</a>
-                <a class="btn btn btn-primary btn-block" style="padding-top: 0px; margin-top: 5px;">Quitar Agente</a>
-                
-            </nav>
+        <div>
+            <button type="button" (click)="Llamada()" class="btn btn-outline-success redondocall"><i-feather name="phone-call"></i-feather></button>
+            <button type="button" (click)="endCall()" class="btn btn-outline-danger redondooff"><i-feather name="phone-off"></i-feather></button>
+            <button type="button" *ngIf="dialNumber" (click)="addExterno()" class="btn btn-outline-info redondoplus">
+                <i-feather class="plus" name="user-plus" tooltip="añadir a agenda"></i-feather>
+            </button>
         </div>
     </div>
 </section>
