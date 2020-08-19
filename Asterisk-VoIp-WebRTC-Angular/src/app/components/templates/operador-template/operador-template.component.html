@@ -208,7 +208,9 @@
                     </div>
                 </section>
                 <Agenda *ngIf="Agenda"></Agenda>
-                <dialpad *ngIf="Dialpad"></dialpad>
+                <dialpad *ngIf="Dialpad" (llamadaDialpad)="DialpadCall($event)">
+
+                </dialpad>
                 <Addfriend *ngIf="AddFriend"></Addfriend>
             </div>
             <div class="LateralDer_Inf">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -30,13 +30,18 @@ export class DialPadComponent implements OnInit {
     mute: boolean = false;
     hold: boolean = false;
     ptt: boolean = false;
+    public LlamadaSaliente;
 
+    @Output() llamadaDialpad = new EventEmitter<string>();
     setValue(num) {
         this.dialNumber += num;
     }
 
     Llamada() {
         this.sipCall(this.dialNumber);
+        //codigo faltante para el nombre
+        this.LlamadaSaliente = { nombre: 'Saliente', SIP: this.dialNumber };
+        this.llamadaDialpad.emit(this.LlamadaSaliente);
     }
     Limpiar() {
         this.dialNumber = '';

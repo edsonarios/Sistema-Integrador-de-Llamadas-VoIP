@@ -397,6 +397,15 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     DialPadComponent() {
         this.modalRef = this.modalService.show(DialPadComponent);
     }
+    DialpadCall(event) {
+        this.Llamada.push({
+            nombre: event['nombre'],
+            id: '0',
+            numero: event['SIP'],
+            Tipo: 'Llamada',
+            Estado: 'Activa'
+        });
+    }
     EliminaItemLlamadas(id_llamada) {
         let aux = [];
         for (var i = 0; i < this.Llamada.length; i++) {
