@@ -58,6 +58,11 @@ export class SalaService {
         return this.http.post<any>(this.url + 'getUsuariosPorSala', { salaId }, this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
     }
 
+    CambioDeSala(parti) {
+        console.log(parti);
+        return this.http.post<any>(this.url + 'getUsuByContextOfSip',  parti , this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
+    }
+
     // Error handling
     errorHandl(error) {
         let errorMessage = '';
