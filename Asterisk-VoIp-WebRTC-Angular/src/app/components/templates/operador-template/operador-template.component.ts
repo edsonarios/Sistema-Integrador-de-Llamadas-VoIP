@@ -13,10 +13,7 @@ import { SalaService } from '@services/sala.service';
 import { interval, timer } from 'rxjs';
 
 // Fontawesome
-import { faMicrophone } from '@fortawesome/free-solid-svg-icons';
-import { faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons';
-import { faSignal } from '@fortawesome/free-solid-svg-icons';
-import { faPlug } from '@fortawesome/free-solid-svg-icons';
+import { faMicrophone, faMicrophoneSlash, faSignal, faPlug } from '@fortawesome/free-solid-svg-icons';
 
 // Sockets
 import { AsteriskConnectionService } from '../../../../services/asterisk-connection.service';
@@ -52,6 +49,7 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     faMicro = faMicrophone;
     faMicroActive = faMicrophoneSlash;
     faSenalAsterisk = faPlug;
+    // asteriskIcon= ang;
     // colores en variables
     Connection = '#22bb33';
     connectionAsterisk = 'black';
