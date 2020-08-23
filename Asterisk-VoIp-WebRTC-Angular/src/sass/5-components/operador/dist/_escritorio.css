@@ -1,0 +1,215 @@
+/*.escritorio {
+	animation: swing-in-bottom-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+	border-radius: 10px;
+	 box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+	background:  linear-gradient(45deg, #F4EBE5, #E3D4CA);
+	margin: 10px;
+	button {
+		font-size: 15px;
+		width: 100%;
+		height: 30px;
+		color: #223a59;
+		background: #6bee17;
+	}
+	button:active {
+		background: #efffc0;
+	}
+	&__header {
+		border-radius: 10px 10px 0px 0px;
+		background: #eeeeee;
+		span{
+			float:right;
+			padding-right: 10px;
+			font-size: 18px;
+		}
+		&--ocupado {
+			background: #81dbe0;
+			span{
+			float:right;
+			padding-right: 10px;
+			font-size: 18px;
+		}
+		}
+	}
+
+	&__body {
+		color: black;
+		background: #ffffff;
+	}
+	&__footer-normal {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		background: #e3e5e8;
+		color: #223a59;
+	}
+	&__footer-ptt {
+		background: #e3e5e8;
+		color: #223a59;
+	}
+}
+*/
+.Escritorio {
+  margin: 8px;
+  display: grid;
+  grid-template-rows: 4vh 8vh auto;
+  grid-template-areas: "EscritorioHeader" "EscritorioContent" "EscritorioOptions";
+  animation: swing-in-bottom-fwd 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+.Escritorio .HeadSala {
+  background-color: #59405c;
+}
+.Escritorio .HeadLlamada {
+  background-color: #41444b;
+}
+
+.EscritorioHeader {
+  grid-area: EscritorioHeader;
+  border-radius: 4px 4px 0px 0px;
+  padding-left: 10px;
+  margin-bottom: -5px;
+  color: white;
+}
+.EscritorioHeader span {
+  float: right;
+  padding-right: 5px;
+  font-size: 18px;
+}
+
+.EscritorioContentLlamada {
+  grid-area: EscritorioContent;
+  display: grid;
+  grid-template-areas: "ContentIzp" "ContentDer";
+}
+
+.EscritorioContentSala {
+  grid-area: EscritorioContent;
+  display: grid;
+  grid-template-areas: "ContentIzp" "ContentDer";
+}
+
+.EscritorioContentRadio {
+  grid-area: EscritorioContent;
+  display: grid;
+  grid-template-columns: 40% 60%;
+  grid-template-areas: "ContentIzp ContentDer";
+  background-image: url(assets/radio.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  opacity: 0.7;
+  -moz-box-shadow: inset 10px 10px 50px #013162;
+  -webkit-box-shadow: inset 10px 10px 50px #013162;
+  box-shadow: inset 10px 10px 50px #013162;
+}
+
+.ContentIzp {
+  grid-area: ContentIzp;
+  background: #254551;
+}
+.ContentIzp .descripcion {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+.ContentIzp .descripcion .titulo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.ContentIzp .descripcion .detalle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 100%;
+}
+.ContentIzp .iconoS {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+  height: 100%;
+}
+.ContentIzp .iconoL {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+  height: 100%;
+}
+
+.ContentDer {
+  grid-area: ContentDer;
+  display: grid;
+}
+.ContentDer .icon {
+  color: #1aff28;
+  line-height: 50px;
+  text-align: center;
+  font-size: 35px;
+  text-shadow: 0px 0px 15px #ffffff;
+}
+.ContentDer .timer {
+  text-align: center;
+  color: #1aff28;
+  text-shadow: 2px 4px 3px #000000;
+}
+.ContentDer .PTT button {
+  opacity: 0.8;
+  background: #1d976c;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #93f9b9, #1d976c);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #93f9b9, #1d976c);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  height: 80%;
+  width: 70%;
+  margin-top: 5%;
+  margin-left: 5%;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 40px;
+  text-align: center;
+}
+.ContentDer .PTT button:hover {
+  background: #000;
+  color: var(--color-uno);
+  animation-name: initial;
+}
+
+.EscritorioOptions {
+  grid-area: EscritorioOptions;
+}
+.EscritorioOptions .OptionLlamada {
+  border-radius: 0px 0px 5px 5px;
+}
+.EscritorioOptions .OptionLlamada a {
+  padding: 3px;
+  width: 35px;
+  font-size: 15px;
+  margin: 5px 15px;
+}
+.EscritorioOptions .OptionSala {
+  border-radius: 0px 0px 5px 5px;
+}
+.EscritorioOptions .OptionSala a {
+  padding: 3px;
+  width: 35px;
+  font-size: 15px;
+  margin: 5px 8px;
+}
+
+@keyframes swing-in-bottom-fwd {
+  0% {
+    transform: rotateX(100deg);
+    transform-origin: bottom;
+    opacity: 0;
+  }
+  100% {
+    transform: rotateX(0);
+    transform-origin: bottom;
+    opacity: 1;
+  }
+}
