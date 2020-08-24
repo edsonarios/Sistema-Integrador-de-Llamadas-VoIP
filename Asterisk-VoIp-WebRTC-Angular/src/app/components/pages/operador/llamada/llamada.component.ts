@@ -21,7 +21,8 @@ import {
     faPhoneSlash,
     faVolumeUp,
     faPlay,
-    faBroadcastTower
+    faBroadcastTower,
+    faSignInAlt
 } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from '../../../../../services/user.service';
 
@@ -59,6 +60,7 @@ export class LlamadaComponent implements OnInit {
     public PlayIcon = faPlay;
     public ColgarIcon = faPhoneSlash;
     public RadioIcon = faBroadcastTower;
+    public EntrarIcon = faSignInAlt;
     //
     infoUsuario: any;
     compe = '';

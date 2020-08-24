@@ -103,11 +103,10 @@
             <a class="btn btn-dark" (click)="AddParticipante()" tooltip="Añadir Participante">
                 <fa-icon [icon]="AddUserIcon"> </fa-icon>
             </a>
-            
-            <a *ngIf="!estadoParticipantes" class="btn btn-dark" (click)="VerParticipantes('1')" tooltip="Ver Participantes">
+            <a *ngIf="!estadoParticipantes" class="btn btn-dark" (click)="VerParticipantes(Id)" tooltip="Ver Participantes">
                 <fa-icon [icon]="VerIcon"> </fa-icon>
             </a>
-            <a *ngIf="estadoParticipantes" class="btn btn-sala" (click)="VerParticipantes('1')" tooltip="Ver Participantes">
+            <a *ngIf="estadoParticipantes" class="btn btn-sala" (click)="VerParticipantes(Id)" tooltip="Ver Participantes">
                 <fa-icon class="text-light" [icon]="VerIcon"> </fa-icon>
             </a>
             <a *ngIf="estadoAgente" class="btn btn-dark" (click)="serAgente()" placement="left" tooltip="Ser Agente de Llamadas">
@@ -115,6 +114,9 @@
             </a>
             <a *ngIf="!estadoAgente" class="btn btn-sala" (click)="serAgente()" placement="left" tooltip="Desactivar Agente de Llamadas">
                 <fa-icon class="text-light" [icon]="AgenteIcon"> </fa-icon>
+            </a>
+            <a class="btn btn-sala" placement="left" tooltip="Entrar a la Sala">
+                <fa-icon class="text-light" [icon]="EntrarIcon"> </fa-icon>
             </a>
         </div>
     </div>

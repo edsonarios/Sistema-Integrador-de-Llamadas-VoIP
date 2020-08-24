@@ -1,7 +1,8 @@
 <section class="operador-dashboard">
     <div class="Navegador">
         <div class="Logo">
-            <h3 style="color: cyan; padding-left: 10px;">Asterisk</h3>
+            <small> </small>
+            <!-- <h3 style="color: cyan; padding-left: 10px;">Asterisk</h3> -->
             <app-asterisk></app-asterisk>
         </div>
         <div class="Options">
@@ -208,9 +209,7 @@
                     </div>
                 </section>
                 <Agenda *ngIf="Agenda"></Agenda>
-                <dialpad *ngIf="Dialpad" (llamadaDialpad)="DialpadCall($event)">
-
-                </dialpad>
+                <dialpad *ngIf="Dialpad" (llamadaDialpad)="DialpadCall($event)"> </dialpad>
                 <Addfriend *ngIf="AddFriend"></Addfriend>
             </div>
             <div class="LateralDer_Inf">

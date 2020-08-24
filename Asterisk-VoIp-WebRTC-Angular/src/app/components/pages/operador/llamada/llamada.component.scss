@@ -39,21 +39,22 @@
         width: 100%;
         height: 100%;
         .iconoS {
-            color: #84a9ac;
+            color: #f6f4e6;
         }
     }
     .ContentDer {
         background: white;
     }
     .ContentLlamada {
-        background-color: #3b6978;
+        // background-color: #3b6978;
+        background-color: #52575d;
     }
 }
 .EscritorioOptions {
     .SalaL {
         background: #4b5d67;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         .btn-sala {
             background-color: #87556f;
             color: #17a2b8;
@@ -73,21 +74,21 @@
         }
     }
     .LlamadaL {
-        background: #84a9ac;
+        background: #f6f4e6;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         .btn-llamada {
-            background-color: #e4e3e3;
-            color: #204051;
+            background-color: #f7e7bd;
+            color: #52575d;
         }
         .btn-info {
-            color: #204051;
+            color: #52575d;
         }
         .btn-llamada:hover {
             // background-color: #ccc2c2;
-            background-color: #17a2b8;
-            color: #204051;
-            border-color: #02a5be;
+            background-color: #e9d39b;
+            color: #52575d;
+            border-color: #e4ca8a;
         }
     }
     .RadioL {
