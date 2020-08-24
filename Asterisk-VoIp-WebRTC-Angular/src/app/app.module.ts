@@ -24,6 +24,7 @@ import { PanelComponent } from '@operador/panel/panel.component';
 import { ParticipanteComponent } from '@operador/participante/participante.component';
 
 import { LlamadaComponent } from '@operador/llamada/llamada.component';
+import { AddParticipanteComponent } from '@operador/add-participante/add-participante.component';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -31,6 +32,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+
 
 // Prueba tracking con Firebase
 import { AngularFireModule } from 'angularfire2';
@@ -80,7 +82,8 @@ const config: SocketIoConfig = {
         MapaComponent,
         MapaRutasComponent,
         MapaTiempoRealComponent,
-        ParticipantesComponent
+        ParticipantesComponent,
+        AddParticipanteComponent
     ],
     imports: [
         BrowserModule,
@@ -103,6 +106,7 @@ const config: SocketIoConfig = {
         IconsModule,
         SnotifyModule,
         SocketIoModule.forRoot(config)
+        
     ],
     providers: [{ provide: 'SnotifyToastConfig', useValue: ToastDefaults }, SnotifyService],
     bootstrap: [AppComponent],

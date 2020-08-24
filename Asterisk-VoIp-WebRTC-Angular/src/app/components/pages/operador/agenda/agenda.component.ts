@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { AgendaService } from '@services/agenda.service';
+import { WebRTCService } from '@services/WebRTC/WebRTC.service';
 
 @Component({
     selector: 'Agenda',
@@ -12,6 +13,7 @@ export class AgendaComponent implements OnInit {
     public Contactos;
     public Amigos = [];
     public llamada;
+    public session: WebRTCService;
     public us = localStorage.getItem('Usuario');
     public usActual = JSON.parse(this.us);
 
@@ -33,12 +35,13 @@ export class AgendaComponent implements OnInit {
 
     ngOnInit() {
         // console.log(this.usActual);
+        this.session = new WebRTCService();
+        this.session.sessionEvents();
         this.listarAmigos();
     }
-    LlamadaComponent(id, Nombre, numero) {
-        this.llamada = { Nombre: Nombre, Numero: numero, Id: id };
-        this.AgendaLlamada.emit(this.llamada);
-    }
+    LlamadaComponent(numero) {
+        this.session.sipCall(numero);
+    }   
 
     vacio() {
         var cantidad = this.Amigos[0];

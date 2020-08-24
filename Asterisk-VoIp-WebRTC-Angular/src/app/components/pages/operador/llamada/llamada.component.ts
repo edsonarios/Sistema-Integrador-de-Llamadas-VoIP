@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { WebRTCService } from '@services/WebRTC/WebRTC.service';
 import { SalaService } from '../../../../../services/sala.service';
 import { SnotifyService, SnotifyToast, SnotifyPosition, SnotifyStyle } from 'ng-snotify';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { AddParticipanteComponent } from '@operador/add-participante/add-participante.component';
 
 import {
     faUsers,
@@ -39,6 +41,7 @@ export class LlamadaComponent implements OnInit {
     @Output() llamadaClose = new EventEmitter<string>();
     @Output() Participantes = new EventEmitter<string>();
 
+    modalRef: BsModalRef;
     public llamada;
     // iconos
     public SalaIcon = faUsers;
@@ -68,7 +71,7 @@ export class LlamadaComponent implements OnInit {
     public esRadio = false;
 
     public session: WebRTCService;
-    constructor(private router: Router, private salaService: SalaService, private userService: UserService, private snotifyService: SnotifyService) {}
+    constructor(private router: Router, private salaService: SalaService, private userService: UserService, private snotifyService: SnotifyService, private modalService: BsModalService,) {}
 
     ngOnInit() {
         this.compe = this.Numero;
@@ -157,5 +160,21 @@ export class LlamadaComponent implements OnInit {
         } else {
             this.esRadio = false;
         }
+    }
+
+    AddParticipante() {
+        console.log(this.Id);
+        this.salaService.GetParticipantesById('1').subscribe(
+            (res) => {
+                let miembros = res;
+                let nomSala = this.Nombre;
+                let initialState = { miembros, nomSala };
+                this.modalRef = this.modalService.show(AddParticipanteComponent, Object.assign({}, { class: 'modal-lg', initialState })
+		);
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
     }
 }
