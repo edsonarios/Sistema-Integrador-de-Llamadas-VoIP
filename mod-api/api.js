@@ -1303,6 +1303,30 @@ api.post("/getUsuByContextOfSip", async (req, res, next) => {
   res.send(todos);
 });
 
+api.put("/updateContextAndIdSala", async (req, res, next) => {
+  const params = req.body;
+  //creamos la variable obj
+  let obj;
+  //editamos la salaId del usuario atravez del id del usuario
+  try {
+    obj = await Usuario.update(params.id, {
+      salaId: params.cambioSalaId,
+    });
+  } catch (e) {
+    return next(e);
+  }
+  //editamos el contexto de un sip por su numero de sip
+  try {
+    obj = await Sip.updateForNumber(params.numero, {
+      context: params.cambioSala,
+    });
+  } catch (e) {
+    return next(e);
+  }
+  //devolvemos el obj con un mensaje con el numero "1" que dice que se edito correctamente
+  res.send(obj);
+});
+
 api.post("/getUsuariosWithSipsAndIaxs", async (req, res, next) => {
   const params = req.body;
   //Obtengo todos los sips e iaxs
@@ -2137,7 +2161,7 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       exten: `${params.numero}`,
       priority: "4",
       app: "Queue",
-      appdata: `${params.audio}`,
+      appdata: `${params.audio + ",,,,60"}`,
     });
     const obj5 = await Extension.create(1, {
       context: `${params.sala}`,
@@ -2252,6 +2276,38 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
   }
   if (sw == "0") {
     res.send({ message: "Funcion no encontrada" });
+  }
+});
+
+api.post("/pruebaQueue", async (req, res, next) => {
+  const params = req.body;
+  let sw = "0";
+  if (params.funcion == "llamadaColaDeLlamadas") {
+    sw = "1";
+    if (params.audio != params.audio2) {
+      const obj2 = await Extension.create(1, {
+        context: `${params.sala}`,
+        exten: `${params.numero}`,
+        priority: "2",
+        app: "GotoIf",
+        appdata: `${
+          "$[ $[ '${CHANNEL(peername)}' = '" +
+          params.audio +
+          "' | $[ '${CHANNEL(peername)}' = '" +
+          params.audio2 +
+          "' ] ]?3:4"
+        }`,
+      });
+    }
+
+    /*const obj4 = await Extension.create(1, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "4",
+      app: "Queue",
+      appdata: `${params.audio + ",,,,60"}`,
+    });*/
+    res.send({ message: "La funcion se creo correctamente" });
   }
 });
 
@@ -2533,7 +2589,7 @@ api.put("/updateAgenda", async (req, res, next) => {
   let obj;
   try {
     obj = await Agenda.update(params.id, {
-      contactos: params.contactos,
+      numero: params.numero,
       nombre: params.nombre,
     });
   } catch (e) {
