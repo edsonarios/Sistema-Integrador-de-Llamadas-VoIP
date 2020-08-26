@@ -60,7 +60,7 @@ export class SalaService {
 
     CambioDeSala(parti) {
         console.log(parti);
-        return this.http.post<any>(this.url + 'getUsuByContextOfSip',  parti , this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
+        return this.http.put<any>(this.url + 'updateContextAndIdSala',  parti , this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
     }
 
     // Error handling

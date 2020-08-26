@@ -100,7 +100,7 @@
             <a *ngIf="estadoConferencia" class="btn btn-sala" (click)="conferencia()" tooltip="Salir de conferencia">
                 <fa-icon class="text-light" [icon]="SalaIcon"> </fa-icon>
             </a>
-            <a class="btn btn-dark" (click)="AddParticipante()" tooltip="Añadir Participante">
+            <a class="btn btn-dark" (click)="ModalAddParticipante(addParti)" tooltip="Añadir Participante">
                 <fa-icon [icon]="AddUserIcon"> </fa-icon>
             </a>
             <a *ngIf="!estadoParticipantes" class="btn btn-dark" (click)="VerParticipantes(Id)" tooltip="Ver Participantes">
@@ -183,3 +183,27 @@
 </div>
 
 
+
+<ng-template #addParti>
+    <div class="modal-header">
+        <h4>Añadir participantes a <strong>{{ Nombre }}</strong></h4>
+    </div>
+    <div class="modal-body">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Número</th>
+                <th>Opción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let par of partis">
+                <td>{{par.nombre}}</td>
+                <td>{{par.numeroSip}}</td>
+                <td><i-feather name="plus" style="color: green;" (click)="cambioDeSala(partis.id, partis.numeroSip)" tooltip="Añadir"> </i-feather></td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</ng-template>

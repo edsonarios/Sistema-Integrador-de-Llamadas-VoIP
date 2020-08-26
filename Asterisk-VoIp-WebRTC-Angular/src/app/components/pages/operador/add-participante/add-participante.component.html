@@ -11,9 +11,10 @@
         <div class="row filas" *ngFor="let participante of miembros">
           <div class="col-md-4">{{ participante.nombre }}</div>
             <div class="col-md-4">{{ participante.numeroSip }}</div>
-            <i-feather name="plus" style="color: green;"  tooltip="Añadir"> </i-feather>
+            <i-feather name="plus" (click)="cambiarSala(participante.id,participante.numeroSip)" style="color: green;"  tooltip="Añadir"> </i-feather>
         </div>
     </table>
   </div>
 </div>
 <!-- </ng-template> -->
+

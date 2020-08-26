@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { title } from 'process';
 import { AgendaService } from '@services/agenda.service';
+import { SalaService } from '@services/sala.service';
 
 
 @Component({
@@ -14,12 +15,13 @@ export class AddParticipanteComponent implements OnInit {
     
     @Input() miembros: any[];
     @Input() nomSala: any;
+    @Input() idSala: any;
     
     modalRef: BsModalRef;
     partisExternos = [];
 
 
-    constructor(private modalService: BsModalService, private agendaservice: AgendaService) {
+    constructor(private modalService: BsModalService, private agendaservice: AgendaService, private salaservice: SalaService) {
         
             
         
@@ -48,8 +50,10 @@ export class AddParticipanteComponent implements OnInit {
     }
 
 
-    cambiarSala(){
-        
+    cambiarSala(usid, numero){
+        let objeto = { id: usid, cambioSalaId: this.idSala, numero: numero, cambioSala: this.nomSala };
+        console.log(objeto);
+        // this.salaservice.CambioDeSala()
     }
 
 }

@@ -31,19 +31,14 @@
 
 .modal-body{
     table{
-        .filas {
-            background-color: red ;
-            // & :hover{
-            //     background-color: yellow !important;
-            // }
-        }
+        
         .row {
             background-color: yellow;
             &:hover {
                 color: purple;   
               }
         }
-        .row:visited{
+        .row:hover{
             background-color: aqua;
         }
     }

@@ -5,6 +5,8 @@ import { SalaService } from '../../../../../services/sala.service';
 import { SnotifyService, SnotifyToast, SnotifyPosition, SnotifyStyle } from 'ng-snotify';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AddParticipanteComponent } from '@operador/add-participante/add-participante.component';
+import { AgendaService } from '@services/agenda.service';
+
 
 import {
     faUsers,
@@ -22,9 +24,12 @@ import {
     faVolumeUp,
     faPlay,
     faBroadcastTower,
-    faSignInAlt
+    faSignInAlt,
+    faExternalLinkSquareAlt,
+    faLessThanEqual
 } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from '../../../../../services/user.service';
+import { getLocaleId } from '@angular/common';
 
 @Component({
     selector: 'llamada',
@@ -43,6 +48,10 @@ export class LlamadaComponent implements OnInit {
     @Output() Participantes = new EventEmitter<string>();
 
     modalRef: BsModalRef;
+    partisActual = [];
+    partisExterno = [];
+    partis = [];
+    numeroActual = localStorage.getItem('NumberSelected');
     public llamada;
     // iconos
     public SalaIcon = faUsers;
@@ -73,14 +82,14 @@ export class LlamadaComponent implements OnInit {
     public esRadio = false;
 
     public session: WebRTCService;
-    constructor(private router: Router, private salaService: SalaService, private userService: UserService, private snotifyService: SnotifyService, private modalService: BsModalService,) {}
+    constructor(private router: Router, private salaService: SalaService, private userService: UserService, private snotifyService: SnotifyService, private modalService: BsModalService, private agendaservice: AgendaService) {}
 
     ngOnInit() {
         this.compe = this.Numero;
-        console.log(this.Nombre, this.Numero, this.Id, this.Descripcion, this.Tipo, this.Estado);
         this.session = new WebRTCService();
         this.session.sessionEvents();
         this.verificaRadio();
+        this.ObtenerDatos();
     }
 
     detalleUsuario(e, numero) {
@@ -164,19 +173,54 @@ export class LlamadaComponent implements OnInit {
         }
     }
 
-    AddParticipante() {
+    ObtenerDatos() {
         console.log(this.Id);
-        this.salaService.GetParticipantesById('1').subscribe(
+        this.salaService.GetParticipantesById(this.Id).subscribe(
             (res) => {
-                let miembros = res;
-                let nomSala = this.Nombre;
-                let initialState = { miembros, nomSala };
-                this.modalRef = this.modalService.show(AddParticipanteComponent, Object.assign({}, { class: 'modal-lg', initialState })
-		);
+                res = res.filter(ope => ope.numeroSip != this.numeroActual);
+                this.partisActual = res;
             },
             (err) => {
                 console.log(err);
             }
         );
+        this.agendaservice.listarOperadores().subscribe(
+            (res) => { 
+                res = res.filter(ope => ope.numeroSip != this.numeroActual);
+                this.partisExterno = res;
+            },
+            (er) => console.log(er)
+        );
+    }
+    ModalAddParticipante(modal){ 
+        this.partis = [];
+        this.modalService.show(modal);
+        this.partisExterno.forEach(it => {
+            if(this.existe(it.numeroSip)){
+                // console.log('No lo añadas');
+            }else{
+                this.partis.push(it);
+            }
+        });
+        
+    }
+
+    existe(numero){
+        var sw = false
+        console.log(numero)
+        this.partisActual.forEach(it => {
+             if(numero==it.numeroSip){
+                 sw = true;
+             }
+        });
+        return sw;
+    }
+
+    cambioDeSala(usid, numero){
+        let objeto = { id: usid, cambioSalaId: this.Id, numero: numero, cambioSala: this.Nombre };
+        console.log(objeto);
+        this.salaService.CambioDeSala(objeto).subscribe(response =>{
+            console.log(response);
+        });
     }
 }
