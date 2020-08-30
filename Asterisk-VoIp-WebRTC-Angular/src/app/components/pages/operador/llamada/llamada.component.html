@@ -201,7 +201,7 @@
               <tr *ngFor="let par of partis">
                 <td>{{par.nombre}}</td>
                 <td>{{par.numeroSip}}</td>
-                <td><i-feather name="plus" style="color: green;" (click)="cambioDeSala(partis.id, partis.numeroSip)" tooltip="Añadir"> </i-feather></td>
+                <td><i-feather name="plus" style="color: green;" (click)="cambioDeSala(par)" tooltip="Añadir"> </i-feather></td>
               </tr>
             </tbody>
           </table>

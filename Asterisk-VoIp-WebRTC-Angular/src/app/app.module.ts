@@ -24,7 +24,6 @@ import { PanelComponent } from '@operador/panel/panel.component';
 import { ParticipanteComponent } from '@operador/participante/participante.component';
 
 import { LlamadaComponent } from '@operador/llamada/llamada.component';
-import { AddParticipanteComponent } from '@operador/add-participante/add-participante.component';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -82,8 +81,7 @@ const config: SocketIoConfig = {
         MapaComponent,
         MapaRutasComponent,
         MapaTiempoRealComponent,
-        ParticipantesComponent,
-        AddParticipanteComponent
+        ParticipantesComponent
     ],
     imports: [
         BrowserModule,

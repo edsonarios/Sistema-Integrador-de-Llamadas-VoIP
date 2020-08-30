@@ -207,7 +207,6 @@ export class LlamadaComponent implements OnInit {
 
     existe(numero){
         var sw = false
-        console.log(numero)
         this.partisActual.forEach(it => {
              if(numero==it.numeroSip){
                  sw = true;
@@ -216,11 +215,14 @@ export class LlamadaComponent implements OnInit {
         return sw;
     }
 
-    cambioDeSala(usid, numero){
-        let objeto = { id: usid, cambioSalaId: this.Id, numero: numero, cambioSala: this.Nombre };
+    cambioDeSala(obj){
+        let objeto = { id: obj.usuarioId, cambioSalaId: this.Id, numero: obj.numeroSip, cambioSala: this.Nombre };
         console.log(objeto);
         this.salaService.CambioDeSala(objeto).subscribe(response =>{
             console.log(response);
+            this.partisActual.push(obj);
+            this.partisExterno = this.partisExterno.filter(it => it.numeroSip != obj.numeroSip);
+            this.partis = this.partis.filter(element => element.numeroSip != obj.numeroSip);
         });
     }
 }
