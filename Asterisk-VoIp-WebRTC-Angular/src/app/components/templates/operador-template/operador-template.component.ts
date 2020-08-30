@@ -213,6 +213,10 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
             this.cambioAsterisk();
         });
         this.verificar();
+        setInterval(() => {
+            this.cambioSenal();
+            console.log('señal de internet: ', navigator.onLine);
+        }, 6000);
     }
     ngOnDestroy() {
         this.estadoSubscription.unsubscribe();
@@ -512,12 +516,10 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
         }
     }
     cambioSenal() {
-        if (this.Connection === 'black') {
-            this.Connection = this.lowConnection;
-        } else if (this.Connection === '#f0ad4e') {
+        if (!navigator.onLine) {
             this.Connection = this.noConnection;
         } else {
-            this.Connection = 'black';
+            this.Connection = '#22bb33';
         }
     }
     cambioAsterisk() {
