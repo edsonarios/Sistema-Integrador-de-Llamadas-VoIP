@@ -75,7 +75,7 @@
                 </ul>
             </div>
         </div>
-        <div class="UserBar" style="color: white; padding-left: 20px;">
+        <div class="UserBar" style="color: white; padding-left: 20px">
             <div class="UserBar_logo"></div>
 
             <div class="UserBar_Option">
@@ -85,7 +85,7 @@
                     </button>
                     <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
                         <li role="menuitem">
-                            <a class="dropdown-item" style="cursor: pointer;" (click)="AgregarEventoNotificacion()"
+                            <a class="dropdown-item" style="cursor: pointer" (click)="AgregarEventoNotificacion()"
                                 ><i class="v-icon-wifi-low"></i><span>Evento Notificacion</span></a
                             >
                         </li>
@@ -123,7 +123,7 @@
             </div>
             <div class="LateralIzq_Inf">
                 <fa-icon [icon]="faMicro" (click)="muteMicrophone()" [ngStyle]="{ color: Microphone }"></fa-icon>
-                <fa-icon [icon]="faSenal" (click)="cambioSenal()" [ngStyle]="{ color: Connection }"></fa-icon>
+                <fa-icon [icon]="faSenal" [ngStyle]="{ color: Connection }"></fa-icon>
                 <fa-icon [icon]="faSenalAsterisk" (click)="verificar()" [ngStyle]="{ color: connectionAsterisk }"> </fa-icon>
             </div>
         </div>
@@ -172,15 +172,11 @@
             <div class="LateralDer_Sup">
                 <div class="LDSup-header">
                     <header class="animated fadeIn">
-                        <button [ngStyle]="Sala && { 'font-weight': 'bold' }" (click)="salaActive()">
-                            Salas
-                        </button>
+                        <button [ngStyle]="Sala && { 'font-weight': 'bold' }" (click)="salaActive()">Salas</button>
                     </header>
 
                     <header class="animated fadeIn">
-                        <button [ngStyle]="!Sala && { 'font-weight': 'bold' }" (click)="agendaActive()">
-                            Agenda
-                        </button>
+                        <button [ngStyle]="!Sala && { 'font-weight': 'bold' }" (click)="agendaActive()">Agenda</button>
                     </header>
                     <header class="animated fadeIn">
                         <button [ngStyle]="!Sala && { 'font-weight': 'bold' }" (click)="addFriendActive()">
@@ -189,9 +185,7 @@
                     </header>
 
                     <header class="animated fadeIn">
-                        <button [ngStyle]="!Sala && { 'font-weight': 'bold' }" (click)="dialpadActive()">
-                            Dialpad
-                        </button>
+                        <button [ngStyle]="!Sala && { 'font-weight': 'bold' }" (click)="dialpadActive()">Dialpad</button>
                     </header>
                 </div>
                 <section *ngIf="Sala">
@@ -218,7 +212,7 @@
         </div>
     </div>
     <ng-template #elseBlock>
-        <div class="pages" [@SladeIn] style="border-bottom: 5px solid black;">
+        <div class="pages" [@SladeIn] style="border-bottom: 5px solid black">
             <router-outlet></router-outlet>
         </div>
     </ng-template>
