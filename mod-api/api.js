@@ -2087,7 +2087,7 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       exten: `${params.numero}`,
       priority: "1",
       app: "AddQueueMember",
-      appdata: `${params.audio}`,
+      appdata: `${params.audio + ",SIP/${CHANNEL(peername)}"}`,
     });
     const obj2 = await Extension.create(1, {
       context: `${params.sala}`,
@@ -2113,7 +2113,7 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       exten: `${params.numero}`,
       priority: "1",
       app: "RemoveQueueMember",
-      appdata: `${params.audio}`,
+      appdata: `${params.audio + ",SIP/${CHANNEL(peername)}"}`,
     });
     const obj2 = await Extension.create(1, {
       context: `${params.sala}`,
@@ -2141,14 +2141,21 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
       app: "Answer",
       appdata: "",
     });
-    const obj2 = await Extension.create(1, {
-      context: `${params.sala}`,
-      exten: `${params.numero}`,
-      priority: "2",
-      app: "GotoIf",
-      appdata:
-        "$[ $[ '${CHANNEL(peername)}' = `${params.audio}`, ] | $[ '${CHANNEL(peername)}' = `${params.audio}`, ] ]?3:4",
-    });
+    if (params.audio != params.audio2) {
+      const obj2 = await Extension.create(1, {
+        context: `${params.sala}`,
+        exten: `${params.numero}`,
+        priority: "2",
+        app: "GotoIf",
+        appdata: `${
+          "$[ $[ '${CHANNEL(peername)}' = '" +
+          params.audio +
+          "' | $[ '${CHANNEL(peername)}' = '" +
+          params.audio2 +
+          "' ] ]?3:4"
+        }`,
+      });
+    }
     const obj3 = await Extension.create(1, {
       context: `${params.sala}`,
       exten: `${params.numero}`,
@@ -2276,38 +2283,6 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
   }
   if (sw == "0") {
     res.send({ message: "Funcion no encontrada" });
-  }
-});
-
-api.post("/pruebaQueue", async (req, res, next) => {
-  const params = req.body;
-  let sw = "0";
-  if (params.funcion == "llamadaColaDeLlamadas") {
-    sw = "1";
-    if (params.audio != params.audio2) {
-      const obj2 = await Extension.create(1, {
-        context: `${params.sala}`,
-        exten: `${params.numero}`,
-        priority: "2",
-        app: "GotoIf",
-        appdata: `${
-          "$[ $[ '${CHANNEL(peername)}' = '" +
-          params.audio +
-          "' | $[ '${CHANNEL(peername)}' = '" +
-          params.audio2 +
-          "' ] ]?3:4"
-        }`,
-      });
-    }
-
-    /*const obj4 = await Extension.create(1, {
-      context: `${params.sala}`,
-      exten: `${params.numero}`,
-      priority: "4",
-      app: "Queue",
-      appdata: `${params.audio + ",,,,60"}`,
-    });*/
-    res.send({ message: "La funcion se creo correctamente" });
   }
 });
 
