@@ -1,6 +1,6 @@
 //var(--color-dos), var(--color-tres), var(--color-cuatro), var(--color-cinco), var(--color-seis)
 .notificacionEffect {
-    animation: slide-in-blurred-left 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+    animation: slide-in-blurred-left 0.4s cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 .notificaciones {
     margin: 7px;
@@ -21,13 +21,14 @@
     width: 100%;
     background-size: cover;
     border-radius: 4px 0 0 4px;
-    background-color: #f6f4e6;
+    // background-color: #f6f4e6;
+    background-color: #52575d;
 }
 .Info_Notif {
     grid-area: Info_Notif;
     display: grid;
     background-color: #52575d;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     .titulo {
         padding-left: 10px;
         color: #ffffff;

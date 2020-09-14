@@ -4,7 +4,7 @@
         <fa-icon class="text-danger" *ngIf="Estado === 'Inactiva'" [icon]="estadoIcon"> </fa-icon>
         <fa-icon class="text-success" *ngIf="Estado === 'Activa'" [icon]="estadoIcon"> </fa-icon>
         {{ Tipo }} {{ Estado }}
-        <span (click)="CerrarLlamada(Nombre, Numero, Id, Descripcion, Tipo, Estado)" style="cursor: pointer;">
+        <span (click)="CerrarLlamada(Nombre, Numero, Id, Descripcion, Tipo, Estado)" style="cursor: pointer">
             <fa-icon class="text-danger" [icon]="SalirIcon" tooltip="Cerrar"> </fa-icon>
         </span>
     </div>
@@ -12,8 +12,6 @@
         <div class="ContentIzp ContentLlamada">
             <div class="descripcion">
                 <div (click)="detalleUsuario($event, Numero)" class="titulo">{{ Nombre }}</div>
-                <button type="button" class="btn btn-primary" (click)="modalinter(modalintervencion)">Intervención</button>
-                
                 <div class="detalle">{{ Numero }}</div>
             </div>
             <div class="iconoS">
@@ -49,6 +47,9 @@
             <a class="btn btn-llamada" tooltip="Transferencia" placement="left">
                 <fa-icon [icon]="IntervenirIcon"> </fa-icon>
             </a>
+            <a class="btn btn-llamada" tooltip="intervencion" (click)="modalinter(modalintervencion)">
+                <fa-icon [icon]="InterventIcon"> </fa-icon>
+            </a>
         </div>
         <!-- <div class="OptionsLlamada">
             <nav><a href="">aparcar</a></nav>
@@ -67,7 +68,7 @@
         <fa-icon class="text-danger" *ngIf="Estado === 'Inactiva'" [icon]="estadoIcon"> </fa-icon>
         <fa-icon class="text-success" *ngIf="Estado === 'Activa'" [icon]="estadoIcon"> </fa-icon>
         {{ Tipo }} {{ Estado }}
-        <span (click)="CerrarLlamada(Nombre, Numero, Id, Descripcion, Tipo, Estado)" style="cursor: pointer;">
+        <span (click)="CerrarLlamada(Nombre, Numero, Id, Descripcion, Tipo, Estado)" style="cursor: pointer">
             <fa-icon class="text-danger" [icon]="SalirIcon" tooltip="Cerrar"> </fa-icon>
         </span>
     </div>
@@ -130,7 +131,7 @@
         <fa-icon class="text-danger" *ngIf="Estado === 'Inactiva'" [icon]="estadoIcon"> </fa-icon>
         <fa-icon class="text-success" *ngIf="Estado === 'Activa'" [icon]="estadoIcon"> </fa-icon>
         {{ Tipo }} {{ Estado }}
-        <span (click)="CerrarLlamada(Nombre, Numero, Id, Descripcion, Tipo, Estado)" style="cursor: pointer;">
+        <span (click)="CerrarLlamada(Nombre, Numero, Id, Descripcion, Tipo, Estado)" style="cursor: pointer">
             <fa-icon class="text-danger" [icon]="SalirIcon" tooltip="Cerrar"> </fa-icon>
         </span>
     </div>
@@ -184,67 +185,66 @@
     </div>
 </div>
 
-
-
 <ng-template #addParti>
     <div class="modal-header">
-        <h4>Añadir participantes a <strong>{{ Nombre }}</strong></h4>
+        <h4>
+            Añadir participantes a <strong>{{ Nombre }}</strong>
+        </h4>
     </div>
     <div class="modal-body">
         <table class="table table-hover">
             <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Número</th>
-                <th>Opción</th>
-              </tr>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Número</th>
+                    <th>Opción</th>
+                </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let par of partis">
-                <td>{{par.nombre}}</td>
-                <td>{{par.numeroSip}}</td>
-                <td><i-feather name="plus" style="color: green;" (click)="cambioDeSala(par)" tooltip="Añadir"> </i-feather></td>
-              </tr>
+                <tr *ngFor="let par of partis">
+                    <td>{{ par.nombre }}</td>
+                    <td>{{ par.numeroSip }}</td>
+                    <td><i-feather name="plus" style="color: green" (click)="cambioDeSala(par)" tooltip="Añadir"> </i-feather></td>
+                </tr>
             </tbody>
-          </table>
+        </table>
     </div>
 </ng-template>
-
 
 <!-- Modal Intervencion de llamadas -->
 
 <ng-template #modalintervencion>
-  <div class="modal-body text-center">
-    <h3>
-        <p>Modo de intervención</p>
-    </h3>
-    <tabset [justified]="true">
-        <tab heading="Silenciosa">
-            <div class="row">
-                <ul class="p-4">
-                    <li>Solo podras escuchar la llamada</li>
-                    <li>Ellos no sabran que los estas escuchando</li>
-                    <li>No podras conversar con ningun participante</li>
-                </ul>
-            </div>
+    <div class="modal-body text-center">
+        <h3>
+            <p>Modo de intervención</p>
+        </h3>
+        <tabset [justified]="true">
+            <tab heading="Silenciosa">
+                <div class="row">
+                    <ul class="p-4">
+                        <li>Solo podras escuchar la llamada</li>
+                        <li>Ellos no sabran que los estas escuchando</li>
+                        <li>No podras conversar con ningun participante</li>
+                    </ul>
+                </div>
                 <div class="row">
                     <div class="col">
                         <h4>Origen</h4>
-                        <div class="card" style="width:100%">
+                        <div class="card" style="width: 100%">
                             <div class="card-body">
                                 <h5 class="card-title">{{ opesrc.nombre }} {{ opesrc.apPaterno }}</h5>
                                 <p class="card-text">
                                     {{ Src }}
-                                </p> 
+                                </p>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card" style="width:100%">
+                        <div class="card" style="width: 100%">
                             <div class="card-body">
                                 <h5 class="card-title">{{ opedest.nombre }} {{ opedest.apPaterno }}</h5>
                                 <p class="card-text">
-                                    {{ Dts }} 
+                                    {{ Dts }}
                                 </p>
                             </div>
                         </div>
@@ -254,33 +254,38 @@
                 <div class="row">
                     <button (click)="intervencion('silen')" class="btn btn-success btn-block">INTERVENIR</button>
                 </div>
-
-        </tab>        
-        <tab heading="O/D">
-            <div class="row">
-                <ul>
-                    <li>Podras intervenir a uno de los participantes</li>
-                    <li>Solo el participante que intervengas podrá conversar contigo</li>
-                </ul>
-            </div>
-                <div class="row" >
+            </tab>
+            <tab heading="O/D">
+                <div class="row">
+                    <ul>
+                        <li>Podras intervenir a uno de los participantes</li>
+                        <li>Solo el participante que intervengas podrá conversar contigo</li>
+                    </ul>
+                </div>
+                <div class="row">
                     <div class="col">
                         <h4>Origen</h4>
-                        <div class="card" style="width:auto" (click)="cambioIntervencion('Src', Src)" >
-                            <div class="card-body" [ngStyle]="{'background-color': over === 'src' ? 'rgb(3, 187, 27)' : 'white', 'color': over === 'src' ? 'white' : 'black' }">
-                            <h5 class="card-title">{{ opesrc.nombre }} {{ opesrc.apPaterno }}</h5>
+                        <div class="card" style="width: auto" (click)="cambioIntervencion('Src', Src)">
+                            <div
+                                class="card-body"
+                                [ngStyle]="{ 'background-color': over === 'src' ? 'rgb(3, 187, 27)' : 'white', color: over === 'src' ? 'white' : 'black' }"
+                            >
+                                <h5 class="card-title">{{ opesrc.nombre }} {{ opesrc.apPaterno }}</h5>
                                 <p class="card-text">
-                                    {{ Src }} 
+                                    {{ Src }}
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card" style="width:auto" (click)="cambioIntervencion('Dts', Dts)" >
-                            <div class="card-body" [ngStyle]="{'background-color': over === 'dts' ? 'rgb(3, 187, 27)' : 'white', 'color': over === 'dts' ? 'white' : 'black' }">
+                        <div class="card" style="width: auto" (click)="cambioIntervencion('Dts', Dts)">
+                            <div
+                                class="card-body"
+                                [ngStyle]="{ 'background-color': over === 'dts' ? 'rgb(3, 187, 27)' : 'white', color: over === 'dts' ? 'white' : 'black' }"
+                            >
                                 <h5 class="card-title">{{ opedest.nombre }} {{ opedest.apPaterno }}</h5>
                                 <p class="card-text">
-                                    {{ Dts }} 
+                                    {{ Dts }}
                                 </p>
                             </div>
                         </div>
@@ -290,29 +295,29 @@
                 <div class="row">
                     <button (click)="intervencion('od')" class="btn btn-success btn-block">INTERVENIR</button>
                 </div>
-        </tab>    
-        <tab heading="Ambos">
-            <div class="row">
-                <ul>
-                    <li>Ambos participantes podran oirte </li>
-                    <li>Podras conversar con ambos participantes</li>
-                    <li>Ellos no sabran que los estas escuchando</li>
-                </ul>
-            </div>
+            </tab>
+            <tab heading="Ambos">
+                <div class="row">
+                    <ul>
+                        <li>Ambos participantes podran oirte</li>
+                        <li>Podras conversar con ambos participantes</li>
+                        <li>Ellos no sabran que los estas escuchando</li>
+                    </ul>
+                </div>
                 <div class="row">
                     <div class="col">
                         <h4>Origen</h4>
-                        <div class="card" style="width:auto">
+                        <div class="card" style="width: auto">
                             <div class="card-body">
                                 <h5 class="card-title">{{ opesrc.nombre }} {{ opesrc.apPaterno }}</h5>
                                 <p class="card-text">
-                                    {{ Src }} 
+                                    {{ Src }}
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card" style="width:auto">
+                        <div class="card" style="width: auto">
                             <div class="card-body">
                                 <h5 class="card-title">{{ opedest.nombre }} {{ opedest.apPaterno }}</h5>
                                 <p class="card-text">
@@ -326,7 +331,7 @@
                 <div class="row">
                     <button (click)="intervencion('ambos')" class="btn btn-success btn-block">INTERVENIR</button>
                 </div>
-        </tab>
-    </tabset>
+            </tab>
+        </tabset>
     </div>
 </ng-template>

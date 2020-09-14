@@ -215,7 +215,7 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
         this.verificar();
         setInterval(() => {
             this.cambioSenal();
-            console.log('señal de internet: ', navigator.onLine);
+            // console.log('señal de internet: ', navigator.onLine);
         }, 6000);
     }
     ngOnDestroy() {

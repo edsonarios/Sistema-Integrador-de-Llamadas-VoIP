@@ -7,7 +7,6 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { AgendaService } from '@services/agenda.service';
 
-
 import {
     faUsers,
     faEye,
@@ -26,7 +25,8 @@ import {
     faBroadcastTower,
     faSignInAlt,
     faExternalLinkSquareAlt,
-    faLessThanEqual
+    faLessThanEqual,
+    faExchangeAlt
 } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from '../../../../../services/user.service';
 import { getLocaleId } from '@angular/common';
@@ -72,14 +72,15 @@ export class LlamadaComponent implements OnInit {
     public ColgarIcon = faPhoneSlash;
     public RadioIcon = faBroadcastTower;
     public EntrarIcon = faSignInAlt;
+    public InterventIcon = faExchangeAlt;
     //
     infoUsuario: any;
     html = `<span class="btn-block btn-danger well-sm">Never trust not sanitized HTML!!!</span>`;
     compe = '';
     opesrc;
     opedest;
-    over ='';
-    ni='';
+    over = '';
+    ni = '';
     // webrtc
     public estadoAgente = true;
     public estadoAudioLlamada = true;
@@ -89,17 +90,24 @@ export class LlamadaComponent implements OnInit {
     public esRadio = false;
 
     public session: WebRTCService;
-    constructor(private router: Router, private salaService: SalaService, private userService: UserService, private snotifyService: SnotifyService, private modalService: BsModalService, private agendaservice: AgendaService) {}
+    constructor(
+        private router: Router,
+        private salaService: SalaService,
+        private userService: UserService,
+        private snotifyService: SnotifyService,
+        private modalService: BsModalService,
+        private agendaservice: AgendaService
+    ) {}
 
     ngOnInit() {
         this.userService.detalleUsuario(this.Src).subscribe((response) => {
-           this.opesrc = response[0]; 
+            this.opesrc = response[0];
         });
         this.userService.detalleUsuario(this.Dts).subscribe((response) => {
-            this.opedest = response[0]; 
-         });
+            this.opedest = response[0];
+        });
 
-        console.log(this.Src, this.Dts );
+        console.log(this.Src, this.Dts);
         this.compe = this.Numero;
         this.session = new WebRTCService();
         this.session.sessionEvents();
@@ -150,8 +158,8 @@ export class LlamadaComponent implements OnInit {
         this.estadoConferencia = !this.estadoConferencia;
     }
 
-    CerrarLlamada(nombre: string, numero: string, id_llamada: string, descripcion: string, tipo: string, estado: string) {
-        this.llamada = { Nombre: nombre, Descripcion: descripcion, Id: id_llamada, Tipo: tipo };
+    CerrarLlamada(nombre: string, numero: string, idLlamada: string, descripcion: string, tipo: string, estado: string) {
+        this.llamada = { Nombre: nombre, Descripcion: descripcion, Id: idLlamada, Tipo: tipo };
         this.llamadaClose.emit(this.llamada);
     }
 
@@ -175,9 +183,9 @@ export class LlamadaComponent implements OnInit {
     pausarLlamada() {
         this.estadoLlamada = !this.estadoLlamada;
     }
-    ColgarLlamada(nombre: string, numero: string, id_llamada: string, descripcion: string, tipo: string, estado: string) {
-        //codigo pendiente para colgar la llamada
-        this.CerrarLlamada(nombre, numero, id_llamada, descripcion, tipo, estado);
+    ColgarLlamada(nombre: string, numero: string, idLlamada: string, descripcion: string, tipo: string, estado: string) {
+        // codigo pendiente para colgar la llamada
+        this.CerrarLlamada(nombre, numero, idLlamada, descripcion, tipo, estado);
     }
     verificaRadio() {
         const palabra = this.Nombre.substr(0, 5).toLowerCase();
@@ -192,7 +200,7 @@ export class LlamadaComponent implements OnInit {
         console.log(this.Id);
         this.salaService.GetParticipantesById(this.Id).subscribe(
             (res) => {
-                res = res.filter(ope => ope.numeroSip != this.numeroActual);
+                res = res.filter((ope) => ope.numeroSip !== this.numeroActual);
                 this.partisActual = res;
             },
             (err) => {
@@ -200,77 +208,75 @@ export class LlamadaComponent implements OnInit {
             }
         );
         this.agendaservice.listarOperadores().subscribe(
-            (res) => { 
-                res = res.filter(ope => ope.numeroSip != this.numeroActual);
+            (res) => {
+                res = res.filter((ope) => ope.numeroSip !== this.numeroActual);
                 this.partisExterno = res;
             },
             (er) => console.log(er)
         );
     }
-    ModalAddParticipante(modal){ 
+    ModalAddParticipante(modal) {
         this.partis = [];
         this.modalService.show(modal);
-        this.partisExterno.forEach(it => {
-            if(this.existe(it.numeroSip)){
+        this.partisExterno.forEach((it) => {
+            if (this.existe(it.numeroSip)) {
                 // console.log('No lo añadas');
-            }else{
+            } else {
                 this.partis.push(it);
             }
         });
-        
     }
 
-    existe(numero){
-        var sw = false
-        this.partisActual.forEach(it => {
-             if(numero==it.numeroSip){
-                 sw = true;
-             }
+    existe(numero) {
+        let sw = false;
+        this.partisActual.forEach((it) => {
+            if (numero === it.numeroSip) {
+                sw = true;
+            }
         });
         return sw;
     }
 
-    cambioDeSala(obj){
-        let objeto = { id: obj.usuarioId, cambioSalaId: this.Id, numero: obj.numeroSip, cambioSala: this.Nombre };
+    cambioDeSala(obj) {
+        const objeto = { id: obj.usuarioId, cambioSalaId: this.Id, numero: obj.numeroSip, cambioSala: this.Nombre };
         console.log(objeto);
-        this.salaService.CambioDeSala(objeto).subscribe(response =>{
+        this.salaService.CambioDeSala(objeto).subscribe((response) => {
             console.log(response);
             this.partisActual.push(obj);
-            this.partisExterno = this.partisExterno.filter(it => it.numeroSip != obj.numeroSip);
-            this.partis = this.partis.filter(element => element.numeroSip != obj.numeroSip);
+            this.partisExterno = this.partisExterno.filter((it) => it.numeroSip !== obj.numeroSip);
+            this.partis = this.partis.filter((element) => element.numeroSip !== obj.numeroSip);
         });
     }
 
-    modalinter(modal){
+    modalinter(modal) {
         this.modalService.show(modal);
     }
 
-    intervencion(option){
+    intervencion(option) {
         console.log(option, this.ni);
         switch (option) {
             case 'silen':
                 //  555
                 // this.session.sipCall('555'+this.opesrc);
-                console.log('555'+this.Src);
+                console.log('555' + this.Src);
                 break;
             case 'od':
                 //  556
                 // this.session.sipCall('556'+this.ni);
-                console.log('556'+this.ni);
+                console.log('556' + this.ni);
                 break;
             case 'ambos':
                 // 557
                 // this.session.sipCall('557'+this.opesrc);
-                console.log('557'+this.Src);
-                    break;    
+                console.log('557' + this.Src);
+                break;
             default:
                 break;
         }
     }
 
-    cambioIntervencion(esto, numero){
+    cambioIntervencion(esto, numero) {
         this.over = esto.toLowerCase();
         this.ni = numero;
     }
-
 }
