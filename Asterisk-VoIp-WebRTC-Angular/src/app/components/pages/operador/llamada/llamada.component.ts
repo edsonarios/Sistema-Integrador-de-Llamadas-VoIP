@@ -4,7 +4,7 @@ import { WebRTCService } from '@services/WebRTC/WebRTC.service';
 import { SalaService } from '../../../../../services/sala.service';
 import { SnotifyService, SnotifyToast, SnotifyPosition, SnotifyStyle } from 'ng-snotify';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { AddParticipanteComponent } from '@operador/add-participante/add-participante.component';
+
 import { AgendaService } from '@services/agenda.service';
 
 
@@ -43,6 +43,8 @@ export class LlamadaComponent implements OnInit {
     @Input() Descripcion: string;
     @Input() Tipo: string;
     @Input() Estado: string;
+    @Input() Src: string;
+    @Input() Dts: string;
 
     @Output() llamadaClose = new EventEmitter<string>();
     @Output() Participantes = new EventEmitter<string>();
@@ -72,7 +74,12 @@ export class LlamadaComponent implements OnInit {
     public EntrarIcon = faSignInAlt;
     //
     infoUsuario: any;
+    html = `<span class="btn-block btn-danger well-sm">Never trust not sanitized HTML!!!</span>`;
     compe = '';
+    opesrc;
+    opedest;
+    over ='';
+    ni='';
     // webrtc
     public estadoAgente = true;
     public estadoAudioLlamada = true;
@@ -85,6 +92,14 @@ export class LlamadaComponent implements OnInit {
     constructor(private router: Router, private salaService: SalaService, private userService: UserService, private snotifyService: SnotifyService, private modalService: BsModalService, private agendaservice: AgendaService) {}
 
     ngOnInit() {
+        this.userService.detalleUsuario(this.Src).subscribe((response) => {
+           this.opesrc = response[0]; 
+        });
+        this.userService.detalleUsuario(this.Dts).subscribe((response) => {
+            this.opedest = response[0]; 
+         });
+
+        console.log(this.Src, this.Dts );
         this.compe = this.Numero;
         this.session = new WebRTCService();
         this.session.sessionEvents();
@@ -93,9 +108,9 @@ export class LlamadaComponent implements OnInit {
     }
 
     detalleUsuario(e, numero) {
-        console.log(this.Numero);
+        console.log(numero);
         //
-        this.userService.detalleUsuario(this.Numero).subscribe((response) => {
+        this.userService.detalleUsuario(numero).subscribe((response) => {
             console.log(response[0]);
             this.infoUsuario = response[0];
             this.mostrar(this.infoUsuario);
@@ -225,4 +240,37 @@ export class LlamadaComponent implements OnInit {
             this.partis = this.partis.filter(element => element.numeroSip != obj.numeroSip);
         });
     }
+
+    modalinter(modal){
+        this.modalService.show(modal);
+    }
+
+    intervencion(option){
+        console.log(option, this.ni);
+        switch (option) {
+            case 'silen':
+                //  555
+                // this.session.sipCall('555'+this.opesrc);
+                console.log('555'+this.Src);
+                break;
+            case 'od':
+                //  556
+                // this.session.sipCall('556'+this.ni);
+                console.log('556'+this.ni);
+                break;
+            case 'ambos':
+                // 557
+                // this.session.sipCall('557'+this.opesrc);
+                console.log('557'+this.Src);
+                    break;    
+            default:
+                break;
+        }
+    }
+
+    cambioIntervencion(esto, numero){
+        this.over = esto.toLowerCase();
+        this.ni = numero;
+    }
+
 }
