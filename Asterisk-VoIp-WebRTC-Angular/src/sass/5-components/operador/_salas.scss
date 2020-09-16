@@ -29,18 +29,18 @@ $max-width: 460px;
         // background: #16213e;
         // background: -webkit-linear-gradient(to left, #93291e, #ed213a);
         // background: -webkit-linear-gradient(to left, #101522, #16213e);
-        background: #056676;
         border: none;
         height: 100%;
         width: 100%;
         border-radius: 2px;
-        color: #393e46;
         font-size: 40px;
         text-align: center;
-    }
-    button:hover {
         background: #393e46;
         color: #e4e3e3;
+    }
+    button:hover {
+        background: #056676;
+        color: #393e46;
         // background: #ed213a;
         // color: var(--color-uno);
         animation-name: initial;

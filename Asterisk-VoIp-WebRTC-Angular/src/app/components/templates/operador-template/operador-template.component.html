@@ -150,20 +150,20 @@
             <div class="LateralDer_Sup">
                 <div class="LDSup-header">
                     <header class="animated fadeIn">
-                        <button [ngStyle]="Sala && { 'font-weight': 'bold' }" (click)="salaActive()">Salas</button>
+                        <button [ngStyle]="Sala && { 'font-weight': 'bold', color: 'rgb(177, 220, 241)' }" (click)="salaActive()">Salas</button>
                     </header>
 
                     <header class="animated fadeIn">
-                        <button [ngStyle]="!Sala && { 'font-weight': 'bold' }" (click)="agendaActive()">Agenda</button>
+                        <button [ngStyle]="Agenda && { 'font-weight': 'bold', color: 'rgb(177, 220, 241)' }" (click)="agendaActive()">Agenda</button>
                     </header>
                     <header class="animated fadeIn">
-                        <button [ngStyle]="!Sala && { 'font-weight': 'bold' }" (click)="addFriendActive()">
+                        <button [ngStyle]="AddFriend && { 'font-weight': 'bold', color: 'rgb(177, 220, 241)' }" (click)="addFriendActive()">
                             <i-feather name="plus-square"></i-feather>
                         </button>
                     </header>
 
                     <header class="animated fadeIn">
-                        <button [ngStyle]="!Sala && { 'font-weight': 'bold' }" (click)="dialpadActive()">Dialpad</button>
+                        <button [ngStyle]="Dialpad && { 'font-weight': 'bold', color: 'rgb(177, 220, 241)' }" (click)="dialpadActive()">Dialpad</button>
                     </header>
                 </div>
                 <section *ngIf="Sala">

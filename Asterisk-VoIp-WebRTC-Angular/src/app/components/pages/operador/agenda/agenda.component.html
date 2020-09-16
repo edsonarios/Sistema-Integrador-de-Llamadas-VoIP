@@ -6,28 +6,20 @@
                 <h6>Numero</h6>
                 <h6>Opciones</h6>
             </div>
-            <div *ngIf="Amigos.length != 0">
-                <ul class="list-group">
-                    <li *ngFor="let friend of Amigos" class="list-group-item list-group-item-action">
-                        <div class="row">
-                            <div class="col-md-5">
-                                {{ friend.nombre }}
-                            </div>
-                            <div class="col-md-4">
-                                {{ friend.numero }}
-                            </div>
-                            <div class="col-md-1">
-                                <i class="v-icon-dialer_sip"
-                                    (click)="LlamadaComponent(friend.numero)"
-                                    style="color: green;" tooltip="Llamar"></i>
-                            </div>
-                            <div class="col-md-1" style="color: green;">
-                                <i-feather name="minus" style="color: red;"
-                                    (click)="deletearAmigo(friend.id, friend.numero)" tooltip="Eliminar"></i-feather>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+            <div class="agenda-body" *ngFor="let friend of Amigos">
+                <div class="ag-col">
+                    <fa-icon class="recibida {{ color }}" [icon]="estado"> </fa-icon>
+                    {{ friend.nombre }}
+                </div>
+                <div class="ag-col">{{ friend.numero }}</div>
+                <div class="ag-col agenda-options">
+                    <div>
+                        <em class="v-icon-dialer_sip text-success" (click)="LlamadaComponent(friend.numero)" tooltip="Llamar"></em>
+                    </div>
+                    <div>
+                        <i-feather class="text-danger" name="minus" (click)="deletearAmigo(friend.id, friend.numero)" tooltip="Eliminar"></i-feather>
+                    </div>
+                </div>
             </div>
             <div *ngIf="Amigos.length == 0">
                 <p>No Tienes Contactos en tu agenda</p>

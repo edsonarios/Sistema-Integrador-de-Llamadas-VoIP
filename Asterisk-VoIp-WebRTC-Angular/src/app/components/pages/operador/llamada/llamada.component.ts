@@ -257,17 +257,17 @@ export class LlamadaComponent implements OnInit {
         switch (option) {
             case 'silen':
                 //  555
-                // this.session.sipCall('555'+this.opesrc);
+                this.session.sipCall('555' + this.opesrc);
                 console.log('555' + this.Src);
                 break;
             case 'od':
                 //  556
-                // this.session.sipCall('556'+this.ni);
+                this.session.sipCall('556' + this.ni);
                 console.log('556' + this.ni);
                 break;
             case 'ambos':
                 // 557
-                // this.session.sipCall('557'+this.opesrc);
+                this.session.sipCall('557' + this.opesrc);
                 console.log('557' + this.Src);
                 break;
             default:
