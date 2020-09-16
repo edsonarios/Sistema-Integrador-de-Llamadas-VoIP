@@ -325,6 +325,9 @@
     border-radius: 4px;
     border: 1px solid grey;
     margin: 1px;
+    .item{
+        cursor: pointer;
+    }
 }
 .usuario {
     grid-area: usuario;

@@ -2,6 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import * as io from 'socket.io-client';
 import { GLOBAL } from '@services/global';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { UserService } from '../../../../../services/user.service';
+import { WebRTCService } from '@services/WebRTC/WebRTC.service';
 
 @Component({
     selector: 'panel',
@@ -24,13 +27,28 @@ export class PanelComponent implements OnInit {
     @Output() Metodo2 = new EventEmitter<string>();
     @Output() Metodo3 = new EventEmitter<string>();
 
+    //variables para intervencion de llamadas
+    numSrc;
+    numDts;
+    opeSrc = { nombre: 'Numero', apPaterno: 'Externo' };
+    opeDts = { nombre: 'Numero', apPaterno: 'Externo' };
+    over = '';
+    ni = '';
+    swInter = false;
+    numeroActual = localStorage.getItem('NumberSelected');
+
+    //variables para llamadas     
+    public session: WebRTCService;
+
     public VectorPaneles = [];
-    constructor(private router: Router) {
+    constructor(private router: Router, private modalService: BsModalService, private userService: UserService) {
         this.socket = io(GLOBAL.urlSocket);
         console.log(this.socket);
     }
 
     ngOnInit() {
+        this.session = new WebRTCService();
+        this.session.sessionEvents();
         //  this.Panel = this.Objeto;
     }
     ngAfterViewInit(): void {
@@ -93,5 +111,82 @@ export class PanelComponent implements OnInit {
     }
     Opcion3() {
         this.Metodo3.emit('dato Emitido opcion 3');
+    }
+
+    // intervencion(n){
+    //     console.log(n);
+    //     console.log('origen', this.opeSrc);
+    //     console.log('destino', this.opeDts);
+    // }
+
+
+    intervencion(option) {
+        console.log(option, this.ni);
+        switch (option) {
+            case 'silen':
+                //  555
+                // this.session.sipCall('555'+this.opesrc);
+                console.log('555' + this.numSrc);
+                break;
+            case 'od':
+                //  556
+                // this.session.sipCall('556'+this.ni);
+                console.log('556' + this.ni);
+                break;
+            case 'ambos':
+                // 557
+                // this.session.sipCall('557'+this.opesrc);
+                console.log('557' + this.numSrc);
+                break;
+            default:
+                break;
+        }
+    }
+
+    cambioIntervencion(esto, numero) {
+        this.over = esto.toLowerCase();
+        this.ni = numero;
+    }
+
+    validacionOperadores(n): boolean{
+        if(this.numeroActual == n.extension || this.numeroActual == n.numero){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    modalinter(modal, n) {
+        if(this.numeroActual == n.extension || this.numeroActual == n.numero ){
+            console.log('NO PUEDES INTERVENIR ESTA LLAMADA');
+        }
+        else{
+        this.numSrc = n.extension;
+        this.numDts = n.numero; 
+        console.log(this.numSrc);
+        console.log(this.numDts);
+        this.userService.detalleUsuario(this.numSrc).subscribe((response) => {
+            if(response[0] == undefined){
+                console.log(' EL NUMERO ES EXTERNO');
+            }else{
+                console.log(response[0]);
+                this.opeSrc = response[0];
+            }
+        });
+        this.userService.detalleUsuario(this.numDts).subscribe((response) => {
+            if(response[0] == undefined){
+                console.log(' EL NUMERO ES EXTERNO');
+            }else{
+                console.log(response);
+                this.opeDts = response[0];
+            }
+
+            
+        });
+        this.modalService.show(modal);
+        console.log('origen', this.numSrc);
+        console.log('destino', this.numDts);
+        }
     }
 }
