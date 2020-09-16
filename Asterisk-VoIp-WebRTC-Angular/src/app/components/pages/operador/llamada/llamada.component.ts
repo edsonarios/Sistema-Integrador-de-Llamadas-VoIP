@@ -236,39 +236,4 @@ export class LlamadaComponent implements OnInit {
             this.partis = this.partis.filter((element) => element.numeroSip !== obj.numeroSip);
         });
     }
-<<<<<<< HEAD
-=======
-
-    modalinter(modal) {
-        this.modalService.show(modal);
-    }
-
-    intervencion(option) {
-        console.log(option, this.ni);
-        switch (option) {
-            case 'silen':
-                //  555
-                this.session.sipCall('555' + this.opesrc);
-                console.log('555' + this.Src);
-                break;
-            case 'od':
-                //  556
-                this.session.sipCall('556' + this.ni);
-                console.log('556' + this.ni);
-                break;
-            case 'ambos':
-                // 557
-                this.session.sipCall('557' + this.opesrc);
-                console.log('557' + this.Src);
-                break;
-            default:
-                break;
-        }
-    }
-
-    cambioIntervencion(esto, numero) {
-        this.over = esto.toLowerCase();
-        this.ni = numero;
-    }
->>>>>>> 220b252a13aa4492bab8768b3e391c8cac69db3c
 }
