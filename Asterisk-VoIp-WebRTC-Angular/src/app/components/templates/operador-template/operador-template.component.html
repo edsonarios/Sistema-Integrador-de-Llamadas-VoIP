@@ -8,39 +8,15 @@
         <div class="Options">
             <div class="navbar">
                 <ul>
-                    <li (click)="LoaderPanel()" *ngIf="pages == false">
+                    <li (click)="ChangeWindow('Dashboard')">
                         <a>
                             <div class="icon">
-                                <i class="asteriskIcon v-icon-check-symbol"></i>
+                                <i class="asteriskIcon v-icon-bubbles4" placement="right"></i>
                             </div>
-                            <div class="name"><span data-text="Salas">Panel</span></div>
+                            <div class="name"><span data-text="Salas">Dashboard</span></div>
                         </a>
                     </li>
-                    <li *ngIf="pages == false">
-                        <a href="#">
-                            <div class="icon">
-                                <i class="asteriskIcon v-icon-bubbles4"></i>
-                            </div>
-                            <div class="name"><span data-text="Salas">Salas</span></div>
-                        </a>
-                    </li>
-                    <li (click)="DialPadComponent()" *ngIf="pages == false">
-                        <a>
-                            <div class="icon">
-                                <i class="asteriskIcon v-icon-dial"></i>
-                            </div>
-                            <div class="name"><span data-text="DialPad">DialPad</span></div>
-                        </a>
-                    </li>
-                    <li *ngIf="pages == false">
-                        <a href="#">
-                            <div class="icon">
-                                <i class="asteriskIcon v-icon-address-book"></i>
-                            </div>
-                            <div class="name"><span data-text="Mi_Agenda">Mi Agenda</span></div>
-                        </a>
-                    </li>
-                    <li *ngIf="pages == true">
+                    <li (click)="ChangeWindow('Historial')">
                         <a [routerLink]="['/Operador/Historial']">
                             <div class="icon">
                                 <i class="asteriskIcon v-icon-phone1" placement="right"></i>
@@ -48,7 +24,7 @@
                             <div class="name"><span data-text="DialPad">Historial de Llamadas</span></div>
                         </a>
                     </li>
-                    <li *ngIf="pages == true">
+                    <li (click)="ChangeWindow('Grabaciones')">
                         <a [routerLink]="['/Operador/Grabaciones']">
                             <div class="icon">
                                 <i class="asteriskIcon v-icon-cassette" placement="right"></i>
@@ -56,7 +32,7 @@
                             <div class="name"><span data-text="DialPad">Grabaciones</span></div>
                         </a>
                     </li>
-                    <li *ngIf="pages == true">
+                    <li (click)="ChangeWindow('Tracking')">
                         <a [routerLink]="['/Operador/Tracking']">
                             <div class="icon">
                                 <i class="asteriskIcon v-icon-location"></i>
@@ -64,14 +40,14 @@
                             <div class="name"><span data-text="DialPad">Tracking</span></div>
                         </a>
                     </li>
-                    <li (click)="ChangeWindow()">
+                    <!--<li (click)="ChangeWindow()">
                         <a>
                             <div class="icon">
                                 <i class="asteriskIcon v-icon-add"></i>
                             </div>
                             <div class="name"><span data-text="DialPad">Otros</span></div>
                         </a>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
         </div>
@@ -149,7 +125,7 @@
             </div>
             <div class="CenterContent_Inf">
                 <div class="CenterContent_InfPanel">
-                    <header>Panel de Estados</header>
+                    <header (click)="LoaderPanel()" style="cursor: pointer">Panel de Estados</header>
                     <panel></panel>
                 </div>
                 <div class="CenterContent_InfInfo">
@@ -162,7 +138,7 @@
         </div>
         <ng-template #elseBlockPanel>
             <div class="CenterPanel" [@FadeIn]>
-                <header>Panel en tiempo real</header>
+                <header (click)="LoaderPanel()" style="cursor: pointer">Panel en tiempo real</header>
                 <!--<div *ngFor="let n of object; let i = index">
                     ABCDFE
                     <br />

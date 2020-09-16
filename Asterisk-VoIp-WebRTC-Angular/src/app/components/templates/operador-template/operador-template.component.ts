@@ -265,13 +265,26 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
         this.rtc = new WebRTCService();
         console.log(this.rtc);
     }
-    ChangeWindow() {
-        if (this.pages == true) {
-            this.pages = false;
-        } else {
-            this.pages = true;
+    ChangeWindow(page) {
+        switch (page) {
+            case 'Dashboard':
+                this.pages = false;
+                break;
+            case 'Historial':
+                this.pages = true;
+                break;
+            case 'Grabaciones':
+                this.pages = true;
+                break;
+            case 'Tracking':
+                this.pages = true;
+                break;
+
+            default:
+                break;
         }
     }
+
     LateralOpcion(page) {
         // 0 = Notificaciones
         // 1 = Mi Agenda
