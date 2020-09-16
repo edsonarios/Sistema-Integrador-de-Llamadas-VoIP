@@ -14,7 +14,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let n of VectorPaneles; let i = index">
+
+                <tr *ngFor="let n of VectorPaneles; let i = index" class="item" (click)="modalinter(modalintervencion, n)">
                     <td data-title="Link" *ngIf="hide == 'true'">
                         {{ VectorPaneles[i]['extension'] }}
                     </td>
@@ -50,3 +51,152 @@
         </table>
     </div>
 </section>
+
+
+<!-- Modal Intervencion de llamadas -->
+
+<ng-template #modalintervencion>
+    <div class="modal-body text-center">
+        <h3>
+            Modo de intervención
+        </h3>
+        <tabset [justified]="true">
+            <tab heading="Silenciosa">
+                <div class="row">
+                    <ul class="listaAcce">
+                        <li>Solo podras escuchar la llamada</li>
+                        <li>Ellos no sabran que los estas escuchando</li>
+                        <li>No podras conversar con ningun participante</li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="origen">
+                            <h4>Origen</h4>
+                            <i-feather name="phone-outgoing"></i-feather>
+                        </div>
+                        <div class="card" style="width: 100%">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ opeSrc.nombre }} {{ opeSrc.apPaterno }}</h5>
+                                <p class="card-text">
+                                    {{ numSrc }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card" style="width: 100%">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ opeDts.nombre }} {{ opeDts.apPaterno }}</h5>
+                                <p class="card-text">
+                                    {{ numDts }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="destino">
+                            <i-feather name="phone-incoming"></i-feather>
+                            <h4>Destino</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <button (click)="intervencion('silen')" class="btn btn-success btn-block">INTERVENIR</button>
+                </div>
+            </tab>
+            <tab heading="O/D">
+                <div class="row">
+                    <ul class="listaAcce">
+                        <li>Podras intervenir a uno de los participantes</li>
+                        <li>Solo el participante que intervengas podrá conversar contigo</li>
+                    </ul>
+                </div>
+                <hr>
+                <p>
+                    <strong> Seleccione alguno para intervenir  </strong>
+                </p>
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <div class="origen">
+                            <h4>Origen</h4>
+                            <i-feather name="phone-outgoing"></i-feather>
+                        </div>
+                        <div class="card" style="width: auto" (click)="cambioIntervencion('Src', numSrc)">
+                            <div
+                                class="card-body"
+                                [ngStyle]="{ 'background-color': over === 'src' ? 'rgb(3, 187, 27)' : 'white', color: over === 'src' ? 'white' : 'black' }"
+                            >
+                                <h5 class="card-title">{{ opeSrc.nombre }} {{ opeSrc.apPaterno }}</h5>
+                                <p class="card-text">
+                                    {{ numSrc }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card" style="width: auto" (click)="cambioIntervencion('Dts', numDts)">
+                            <div
+                                class="card-body"
+                                [ngStyle]="{ 'background-color': over === 'dts' ? ' rgb(255, 85, 73)' : 'white', color: over === 'dts' ? 'white' : 'black' }"
+                            >
+                                <h5 class="card-title">{{ opeDts.nombre }} {{ opeDts.apPaterno }}</h5>
+                                <p class="card-text">
+                                    {{ numDts }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="destino">
+                            <i-feather name="phone-incoming"></i-feather>
+                            <h4>Destino</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <button (click)="intervencion('od')" class="btn btn-success btn-block" [disabled]="over==''">INTERVENIR</button>
+                </div>
+            </tab>
+            <tab heading="Ambos">
+                <div class="row">
+                    <ul class="listaAcce">
+                        <li>Ambos participantes podran oirte</li>
+                        <li>Podras conversar con ambos participantes</li>
+                        <li>Ellos no sabran que los estas escuchando</li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="origen">
+                            <h4>Origen</h4> 
+                            <i-feather name="phone-outgoing"></i-feather>
+                        </div>
+                        <div class="card" style="width: auto">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ opeSrc.nombre }} {{ opeSrc.apPaterno }}</h5>
+                                <p class="card-text">
+                                    {{ numSrc }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card" style="width: auto">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ opeDts.nombre }} {{ opeDts.apPaterno }}</h5>
+                                <p class="card-text">
+                                    {{ numDts }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="destino">
+                            <i-feather name="phone-incoming"></i-feather>
+                            <h4>Destino</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <button (click)="intervencion('ambos')" class="btn btn-success btn-block">INTERVENIR</button>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+</ng-template>

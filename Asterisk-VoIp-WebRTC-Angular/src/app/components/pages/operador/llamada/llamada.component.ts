@@ -77,10 +77,6 @@ export class LlamadaComponent implements OnInit {
     infoUsuario: any;
     html = `<span class="btn-block btn-danger well-sm">Never trust not sanitized HTML!!!</span>`;
     compe = '';
-    opesrc;
-    opedest;
-    over = '';
-    ni = '';
     // webrtc
     public estadoAgente = true;
     public estadoAudioLlamada = true;
@@ -100,14 +96,7 @@ export class LlamadaComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.userService.detalleUsuario(this.Src).subscribe((response) => {
-            this.opesrc = response[0];
-        });
-        this.userService.detalleUsuario(this.Dts).subscribe((response) => {
-            this.opedest = response[0];
-        });
 
-        console.log(this.Src, this.Dts);
         this.compe = this.Numero;
         this.session = new WebRTCService();
         this.session.sessionEvents();
@@ -246,37 +235,5 @@ export class LlamadaComponent implements OnInit {
             this.partisExterno = this.partisExterno.filter((it) => it.numeroSip !== obj.numeroSip);
             this.partis = this.partis.filter((element) => element.numeroSip !== obj.numeroSip);
         });
-    }
-
-    modalinter(modal) {
-        this.modalService.show(modal);
-    }
-
-    intervencion(option) {
-        console.log(option, this.ni);
-        switch (option) {
-            case 'silen':
-                //  555
-                // this.session.sipCall('555'+this.opesrc);
-                console.log('555' + this.Src);
-                break;
-            case 'od':
-                //  556
-                // this.session.sipCall('556'+this.ni);
-                console.log('556' + this.ni);
-                break;
-            case 'ambos':
-                // 557
-                // this.session.sipCall('557'+this.opesrc);
-                console.log('557' + this.Src);
-                break;
-            default:
-                break;
-        }
-    }
-
-    cambioIntervencion(esto, numero) {
-        this.over = esto.toLowerCase();
-        this.ni = numero;
     }
 }
