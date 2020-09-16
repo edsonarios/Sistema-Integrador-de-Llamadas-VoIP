@@ -119,3 +119,13 @@
     Alias para copiar front en produccion de git a servidor "frontA"
         echo "alias frontA='pushd /var/www/html/asterisk/ && rm * -rf && cd /$USER/Sistema-Integrador-de-Llamadas-VoIP/Asterisk-VoIp-WebRTC-Angular/dist/Asterisk-VoIp-WebRTC && cp * /var/www/html/asterisk/ -rf && popd'" >> ~/.bash_aliases
     Se debe mejorar las contraseñas de la db asterisk, realtime asterisk 
+
+
+[Radio]
+Conexion cable URI
+http://dmkeng.com/index.htm
+
+Grupo de radio aficionados que conectaron radios a asterisk
+https://www.facebook.com/groups/w6dxw/
+
+usar senddtmf para enviar ptt

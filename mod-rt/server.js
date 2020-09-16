@@ -16,6 +16,7 @@ const io = socketio(server);
 //Variable para diferenciar el nombre de los sockets enviados
 const emit1 = "Llamadas";
 const emit2 = "asterisk";
+const emit3 = "usuarioEstado";
 var astEst = 0;
 var conexion = null;
 
@@ -55,7 +56,7 @@ server.listen(port, () => {
 
 client
   .connect("realTime", "1234", {
-    host: "167.86.119.191",
+    host: "localhost",
     port: 5055,
   })
   .then((amiConnection) => {
@@ -85,6 +86,7 @@ client
             console.log(event)
         }*/
 
+      // If dedicado para eventos de llamadas, llamadas a playback, cola de llamadas
       if (
         event.Event == "Newchannel" ||
         event.Event == "Newexten" ||
@@ -273,6 +275,66 @@ client
         }
         //console para ver todos los eventos y verificar si no se escapa alguno
         //console.log(event)
+      }
+      //If para estados de conexion de los numeros
+      if (event.Event == "PeerStatus") {
+        if (
+          event.PeerStatus == "Registered" ||
+          event.PeerStatus == "Reachable"
+        ) {
+          var evento = {
+            evento: `${event.Event}`,
+            numero: `${event.Peer}`,
+            estado: `conectado`,
+          };
+
+          console.log(
+            dat.getHours(),
+            ":",
+            dat.getMinutes(),
+            ":",
+            dat.getSeconds()
+          );
+          console.log(evento);
+          io.emit(`${emit3}`, evento);
+        }
+
+        if (event.PeerStatus == "Lagged" || event.PeerStatus == "Unreachable") {
+          var evento = {
+            evento: `${event.Event}`,
+            numero: `${event.Peer}`,
+            estado: `ausente`,
+          };
+
+          console.log(
+            dat.getHours(),
+            ":",
+            dat.getMinutes(),
+            ":",
+            dat.getSeconds()
+          );
+          console.log(evento);
+          io.emit(`${emit3}`, evento);
+        }
+
+        if (event.PeerStatus == "Unregistered") {
+          var evento = {
+            evento: `${event.Event}`,
+            numero: `${event.Peer}`,
+            estado: `desconectado`,
+          };
+
+          console.log(
+            dat.getHours(),
+            ":",
+            dat.getMinutes(),
+            ":",
+            dat.getSeconds()
+          );
+          console.log(evento);
+          io.emit(`${emit3}`, evento);
+        }
+        //console.log("-------", event);
       }
       //Indica si asterisk se detuvo, aveces falla asterisk en mostrar este evento
       if (event.Event == "Shutdown") {
