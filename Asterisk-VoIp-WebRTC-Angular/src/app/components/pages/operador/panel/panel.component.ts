@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import * as io from 'socket.io-client';
 import { GLOBAL } from '@services/global';
@@ -27,7 +27,7 @@ export class PanelComponent implements OnInit {
     @Output() Metodo2 = new EventEmitter<string>();
     @Output() Metodo3 = new EventEmitter<string>();
 
-    //variables para intervencion de llamadas
+    // variables para intervencion de llamadas
     numSrc;
     numDts;
     opeSrc = { nombre: 'Numero', apPaterno: 'Externo' };
@@ -37,7 +37,7 @@ export class PanelComponent implements OnInit {
     swInter = false;
     numeroActual = localStorage.getItem('NumberSelected');
 
-    //variables para llamadas     
+    // variables para llamadas
     public session: WebRTCService;
 
     public VectorPaneles = [];
@@ -51,8 +51,8 @@ export class PanelComponent implements OnInit {
         this.session.sessionEvents();
         //  this.Panel = this.Objeto;
     }
-    ngAfterViewInit(): void {
-        //estado de los botones en tiempo real
+    ngAfterViewInit() {
+        // estado de los botones en tiempo real
         this.startRealtime();
     }
     async startRealtime() {
@@ -63,7 +63,7 @@ export class PanelComponent implements OnInit {
     }
     BusquedaExistente(Vector) {
         if (this.BusquedaExistentenEventoPanel(Vector)) {
-            //si existe actualiza el dato
+            // si existe actualiza el dato
             this.ActualizarEventoPanel(Vector);
         } else {
             // si no existe solo lo adiciona en su ultimo estado
@@ -119,23 +119,22 @@ export class PanelComponent implements OnInit {
     //     console.log('destino', this.opeDts);
     // }
 
-
     intervencion(option) {
         console.log(option, this.ni);
         switch (option) {
             case 'silen':
                 //  555
-                // this.session.sipCall('555'+this.opesrc);
+                this.session.sipCall('555' + this.numSrc);
                 console.log('555' + this.numSrc);
                 break;
             case 'od':
                 //  556
-                // this.session.sipCall('556'+this.ni);
+                this.session.sipCall('556' + this.ni);
                 console.log('556' + this.ni);
                 break;
             case 'ambos':
                 // 557
-                // this.session.sipCall('557'+this.opesrc);
+                this.session.sipCall('557' + this.numSrc);
                 console.log('557' + this.numSrc);
                 break;
             default:
@@ -148,45 +147,41 @@ export class PanelComponent implements OnInit {
         this.ni = numero;
     }
 
-    validacionOperadores(n): boolean{
-        if(this.numeroActual == n.extension || this.numeroActual == n.numero){
+    validacionOperadores(n): boolean {
+        if (this.numeroActual === n.extension || this.numeroActual === n.numero) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
 
     modalinter(modal, n) {
-        if(this.numeroActual == n.extension || this.numeroActual == n.numero ){
+        if (this.numeroActual === n.extension || this.numeroActual === n.numero) {
             console.log('NO PUEDES INTERVENIR ESTA LLAMADA');
-        }
-        else{
-        this.numSrc = n.extension;
-        this.numDts = n.numero; 
-        console.log(this.numSrc);
-        console.log(this.numDts);
-        this.userService.detalleUsuario(this.numSrc).subscribe((response) => {
-            if(response[0] == undefined){
-                console.log(' EL NUMERO ES EXTERNO');
-            }else{
-                console.log(response[0]);
-                this.opeSrc = response[0];
-            }
-        });
-        this.userService.detalleUsuario(this.numDts).subscribe((response) => {
-            if(response[0] == undefined){
-                console.log(' EL NUMERO ES EXTERNO');
-            }else{
-                console.log(response);
-                this.opeDts = response[0];
-            }
-
-            
-        });
-        this.modalService.show(modal);
-        console.log('origen', this.numSrc);
-        console.log('destino', this.numDts);
+        } else {
+            this.numSrc = n.extension;
+            this.numDts = n.numero;
+            console.log(this.numSrc);
+            console.log(this.numDts);
+            this.userService.detalleUsuario(this.numSrc).subscribe((response) => {
+                if (response[0] === undefined) {
+                    console.log(' EL NUMERO ES EXTERNO');
+                } else {
+                    console.log(response[0]);
+                    this.opeSrc = response[0];
+                }
+            });
+            this.userService.detalleUsuario(this.numDts).subscribe((response) => {
+                if (response[0] === undefined) {
+                    console.log(' EL NUMERO ES EXTERNO');
+                } else {
+                    console.log(response);
+                    this.opeDts = response[0];
+                }
+            });
+            this.modalService.show(modal);
+            console.log('origen', this.numSrc);
+            console.log('destino', this.numDts);
         }
     }
 }

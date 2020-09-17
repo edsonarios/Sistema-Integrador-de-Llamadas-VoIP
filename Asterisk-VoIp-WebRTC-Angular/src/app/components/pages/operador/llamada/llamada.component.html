@@ -47,9 +47,9 @@
             <a class="btn btn-llamada" tooltip="Transferencia" placement="left">
                 <fa-icon [icon]="IntervenirIcon"> </fa-icon>
             </a>
-            <a class="btn btn-llamada" tooltip="intervencion">
+            <!-- <a class="btn btn-llamada" tooltip="intervencion">
                 <fa-icon [icon]="InterventIcon"> </fa-icon>
-            </a>
+            </a> -->
         </div>
         <!-- <div class="OptionsLlamada">
             <nav><a href="">aparcar</a></nav>
@@ -203,11 +203,12 @@
             <tbody>
                 <tr *ngFor="let par of partis">
                     <td>{{ par.nombre }}</td>
-                    <strong><td>{{ par.numeroSip }}</td></strong>
+                    <strong
+                        ><td>{{ par.numeroSip }}</td></strong
+                    >
                     <td><i-feather name="plus" style="color: green" (click)="cambioDeSala(par)" tooltip="Añadir"> </i-feather></td>
                 </tr>
             </tbody>
         </table>
     </div>
 </ng-template>
-

@@ -76,7 +76,7 @@
     .LlamadaL {
         background: #f6f4e6;
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         .btn-llamada {
             background-color: #f7e7bd;
             color: #52575d;
@@ -106,23 +106,22 @@
     }
 }
 
-.listaAcce{
+.listaAcce {
     padding: 30px 30px 0 30px;
     text-align: justify;
-    li{
+    li {
         list-style: none;
     }
 }
 
-h4{
+h4 {
     display: inline-block;
     margin: 20px 30px;
-     
 }
 
-.origen{
+.origen {
     color: rgb(3, 187, 27);
 }
-.destino{
+.destino {
     color: rgb(255, 85, 73);
 }

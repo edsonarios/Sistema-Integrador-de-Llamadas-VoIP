@@ -4,6 +4,7 @@ import { AgendaService } from '@services/agenda.service';
 import { WebRTCService } from '@services/WebRTC/WebRTC.service';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { AsteriskConnectionService } from '../../../../../services/asterisk-connection.service';
+import { UsuarioEstado } from '../../../../../models/estadoAsterisk';
 @Component({
     selector: 'Agenda',
     templateUrl: './agenda.component.html',
@@ -11,7 +12,7 @@ import { AsteriskConnectionService } from '../../../../../services/asterisk-conn
     styleUrls: ['./agenda.component.scss']
 })
 export class AgendaComponent implements OnInit {
-    public Contactos;
+    // public Contactos;
     public Amigos = [];
     public llamada;
     public session: WebRTCService;
@@ -19,28 +20,18 @@ export class AgendaComponent implements OnInit {
     public usActual = JSON.parse(this.us);
     public estado = faCircle;
     public color = 'text-danger';
+    public arrayNumeros: string[] = [];
+    public arrayEstados: string[];
 
     @Output() AgendaLlamada = new EventEmitter<string>();
-    constructor(private router: Router, private agendaservice: AgendaService, public estadoService: AsteriskConnectionService) {
-        this.Contactos = [
-            { Nombre: 'Daniel', Estado: 'Conectado', Numero: '3001', id: '21' },
-            { Nombre: 'Juan', Estado: 'Desconectado', Numero: '3002', id: '22' },
-            { Nombre: 'Marco', Estado: 'Conectado', Numero: '3003', id: '23' },
-            { Nombre: 'Mario', Estado: 'Desconectado', Numero: '3004', id: '24' },
-            { Nombre: 'Alonso', Estado: 'Conectado', Numero: '3005', id: '25' },
-            { Nombre: 'Edgar', Estado: 'Desconectado', Numero: '3006', id: '26' },
-            { Nombre: 'Daniel', Estado: 'Conectado', Numero: '3007', id: '27' },
-            { Nombre: 'Ramiro', Estado: 'Desconectado', Numero: '3008', id: '28' },
-            { Nombre: 'Daniel', Estado: 'Conectado', Numero: '3009', id: '29' },
-            { Nombre: 'Manuel', Estado: 'Desconectado', Numero: '3010', id: '30' }
-        ];
-    }
+    constructor(private router: Router, private agendaservice: AgendaService, public estadoService: AsteriskConnectionService) {}
 
     ngOnInit() {
-        // console.log(this.usActual);
         this.session = new WebRTCService();
         this.session.sessionEvents();
         this.listarAmigos();
+        this.arrayEstados = ['desconectado', 'desconectado', 'desconectado', 'desconectado', 'desconectado'];
+        this.estadoSocket();
     }
     LlamadaComponent(numero) {
         this.session.sipCall(numero);
@@ -57,10 +48,11 @@ export class AgendaComponent implements OnInit {
     listarAmigos() {
         this.agendaservice.listarAmigos(this.usActual.usuarioId).subscribe(
             (response) => {
-                console.log(response);
+                // console.log(response);
                 for (let i = 0; i < response[0].length; i++) {
                     this.Amigos.push({ id: response[0][i], nombre: response[1][i], numero: response[2][i] });
                 }
+                this.prepararArray();
             },
             (er) => console.log(er)
         );
@@ -72,17 +64,23 @@ export class AgendaComponent implements OnInit {
         console.log('el usuario con id y numero  ' + idamigo + '  ' + numero + '  fue eliminado');
     }
     estadoSocket() {
-        this.estadoService.getResponse('asterisk').subscribe((msg: string) => {
-            this.verificaEstado(msg);
+        this.estadoService.getResponse('usuarioEstado').subscribe((msg: UsuarioEstado) => {
+            console.log('mensaje del socket', msg);
+            this.verificaNumero(msg);
         });
     }
-    verificaEstado(estado) {
-        if (estado === 'conectado') {
-            this.color = 'text-success';
-        } else if (estado === 'ausente') {
-            this.color = 'text-warning';
-        } else {
-            this.color = 'text-danger';
+
+    verificaNumero(msg: UsuarioEstado) {
+        const numero = msg.numero.split('/');
+        const res = this.arrayNumeros.indexOf(numero[1]);
+        if (res >= 0) {
+            this.arrayEstados[res] = msg.estado;
+        }
+    }
+    prepararArray() {
+        this.arrayNumeros = [];
+        for (const user of this.Amigos) {
+            this.arrayNumeros.push(user.numero);
         }
     }
 }

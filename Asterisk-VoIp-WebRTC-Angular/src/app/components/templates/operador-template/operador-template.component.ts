@@ -94,7 +94,7 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     public HidePanel = false;
 
     public Sip_Iax = [[], []];
-
+    public arrayAgendaEstados = ['desconectado', 'desconectado', 'desconectado'];
     // Socket
     estadoSubscription: Subscription;
     estado: any = [];
@@ -172,6 +172,7 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     }
     ngOnInit() {
         localStorage.setItem('PanelHide', 'false');
+        localStorage.setItem('estadoUsers', JSON.stringify(this.arrayAgendaEstados));
         this.user = JSON.parse(localStorage.getItem('Usuario'));
         this.NumeroActual = localStorage.getItem('NumberSelected');
         this.rtc = new WebRTCService();
