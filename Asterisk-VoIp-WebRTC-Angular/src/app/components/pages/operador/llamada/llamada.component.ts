@@ -54,6 +54,7 @@ export class LlamadaComponent implements OnInit {
     partisExterno = [];
     partis = [];
     numeroActual = localStorage.getItem('NumberSelected');
+    public usActual = JSON.parse(localStorage.getItem('Usuario'));
     public llamada;
     // iconos
     public SalaIcon = faUsers;
@@ -150,6 +151,14 @@ export class LlamadaComponent implements OnInit {
     CerrarLlamada(nombre: string, numero: string, idLlamada: string, descripcion: string, tipo: string, estado: string) {
         this.llamada = { Nombre: nombre, Descripcion: descripcion, Id: idLlamada, Tipo: tipo };
         this.llamadaClose.emit(this.llamada);
+        // devolver a la sala default
+        console.log(this.usActual);
+        console.log(this.numeroActual);
+        let objeto = { id: this.usActual.usuarioId, cambioSalaId: 1, numero: this.numeroActual, cambioSala: "default" };
+        this.salaService.CambioDeSala(objeto).subscribe((response) => {
+            console.log(response);
+
+        });
     }
 
     VerParticipantes(idSala) {
