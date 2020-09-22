@@ -50,7 +50,7 @@ export class SalaService {
 
     ParticipantesSala(context) {
         return this.http
-            .post<any>(this.url + 'findUsuByNomSalaAndContext', { context: context, nombreSala: context }, this.httpOptions)
+            .post<any>(this.url + 'findUsuByNomSalaAndContext', { context, nombreSala: context }, this.httpOptions)
             .pipe(retry(1), catchError(this.errorHandl));
     }
 
@@ -60,7 +60,7 @@ export class SalaService {
 
     CambioDeSala(parti) {
         console.log(parti);
-        return this.http.put<any>(this.url + 'updateContextAndIdSala',  parti , this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
+        return this.http.put<any>(this.url + 'updateContextAndIdSala', parti, this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
     }
 
     // Error handling

@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
 import { AgendaService } from '@services/agenda.service';
 import { WebRTCService } from '@services/WebRTC/WebRTC.service';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
@@ -22,9 +21,10 @@ export class AgendaComponent implements OnInit {
     public color = 'text-danger';
     public arrayNumeros: string[] = [];
     public arrayEstados: string[];
+    public respSocketUser;
 
     @Output() AgendaLlamada = new EventEmitter<string>();
-    constructor(private router: Router, private agendaservice: AgendaService, public estadoService: AsteriskConnectionService) {}
+    constructor(private agendaservice: AgendaService, public socketService: AsteriskConnectionService) {}
 
     ngOnInit() {
         this.session = new WebRTCService();
@@ -32,6 +32,10 @@ export class AgendaComponent implements OnInit {
         this.listarAmigos();
         this.arrayEstados = ['desconectado', 'desconectado', 'desconectado', 'desconectado', 'desconectado'];
         this.estadoSocket();
+        this.socketService.getResponse('estadoUsuarioLlamadas').subscribe((msg) => {
+            this.respSocketUser = msg;
+            console.log('[AGENDA]SocketUsuarios: ', msg);
+        });
     }
     LlamadaComponent(numero) {
         this.session.sipCall(numero);
@@ -64,7 +68,7 @@ export class AgendaComponent implements OnInit {
         console.log('el usuario con id y numero  ' + idamigo + '  ' + numero + '  fue eliminado');
     }
     estadoSocket() {
-        this.estadoService.getResponse('usuarioEstado').subscribe((msg: UsuarioEstado) => {
+        this.socketService.getResponse('usuarioEstado').subscribe((msg: UsuarioEstado) => {
             console.log('mensaje del socket', msg);
             this.verificaNumero(msg);
         });

@@ -1,14 +1,22 @@
 <div class="info-content" *ngFor="let item of arrayLlamadas">
-    <div>
+    <div class="info-align">
+        <fa-icon class="text-info" [icon]="iconUser"> </fa-icon>
+        &nbsp;
+        {{ item.numero }}
+    </div>
+    <div class="info-align">
         <fa-icon class="recibida" [icon]="iconEntrante" *ngIf="item.tipo === 'entrante' && item.estado !== 'NO ANSWER'"> </fa-icon>
         <fa-icon class="recibida" [icon]="iconPhone" *ngIf="item.tipo === 'entrante' && item.estado !== 'NO ANSWER'"> </fa-icon>
         <fa-icon class="perdida" [icon]="iconPerdida" *ngIf="item.tipo === 'entrante' && item.estado === 'NO ANSWER'"> </fa-icon>
         <fa-icon class="realizada" [icon]="iconPhone" *ngIf="item.tipo === 'saliente'"> </fa-icon>
         <fa-icon class="realizada" [icon]="iconSaliente" *ngIf="item.tipo === 'saliente'"> </fa-icon>
-
-        {{ item.numero }}
     </div>
-    <div>
+    <div class="info-align">
+        <p class="text-success" *ngIf="item.tipo === 'entrante' && item.estado !== 'NO ANSWER'">Llamada Recibida</p>
+        <p class="text-danger" *ngIf="item.tipo === 'entrante' && item.estado === 'NO ANSWER'">Llamada Perdida</p>
+        <p class="text-primary" *ngIf="item.tipo === 'saliente'">Llamada Realizada</p>
+    </div>
+    <div class="info-detalle info-align">
         {{ item.fechayhora | date: 'shortTime' }}
     </div>
 </div>

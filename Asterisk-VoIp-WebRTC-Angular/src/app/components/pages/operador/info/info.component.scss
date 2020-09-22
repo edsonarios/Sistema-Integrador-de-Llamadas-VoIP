@@ -2,14 +2,36 @@ $color-danger: #d9534f;
 $color-success: #5cb85c;
 $color-primary: #0275d8;
 $color2: #eeeeee;
-
 .info-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    text-align: center;
+    grid-template-columns: 29% 10% 40% 21%;
+    // text-align: center;
     background-color: $color2;
-    border: 1px solid white;
+    border: 2px solid white;
     border-radius: 2px;
+    font-size: smaller;
+    .info-align {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 2px dashed #f6f7fb;
+        background: white;
+        p {
+            margin: 0;
+            padding: 4px 2px;
+            font-weight: bold;
+        }
+    }
+    .info-align:nth-child(1) {
+        justify-content: start;
+        padding-left: 10px;
+    }
+}
+.info-content:hover {
+    .info-align {
+        background-color: $color2;
+        font-weight: bold;
+    }
 }
 .realizada {
     color: $color-primary;

@@ -213,6 +213,7 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
             console.log('ASTERISK', msg.evento);
             this.cambioAsterisk();
         });
+
         this.verificar();
         setInterval(() => {
             this.cambioSenal();

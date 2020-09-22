@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { HistorialService } from '../../../../../services/historial.service';
-import { LlamadasSalientes } from '@models/llamadasSalientes.interface';
-import { LlamadasEntrantes } from '@models/llamadasEntrantes.interface';
+
 import * as moment from 'moment';
-import { faLongArrowAltRight, faLongArrowAltLeft, faPhoneSlash, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faLongArrowAltRight, faLongArrowAltLeft, faPhoneSlash, faPhone, faUser } from '@fortawesome/free-solid-svg-icons';
 
 import { AsteriskConnectionService } from '../../../../../services/asterisk-connection.service';
 import { Llamadas } from '../../../../../models/llamada.interface';
+
+import { faMobileAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-info',
@@ -19,6 +20,8 @@ export class InfoComponent implements OnInit {
     public iconSaliente = faLongArrowAltRight;
     public iconPerdida = faPhoneSlash;
     public iconPhone = faPhone;
+    public iconCellPhone = faMobileAlt;
+    public iconUser = faUser;
 
     public arrayLlamadas: any[];
     // numero  y fecha de eventos recibidos
