@@ -17,6 +17,7 @@ const io = socketio(server);
 const emit1 = "Llamadas";
 const emit2 = "asterisk";
 const emit3 = "usuarioEstado";
+const emit4 = "usuarioEstado2";
 var astEst = 0;
 var conexion = null;
 
@@ -329,6 +330,7 @@ client
         }
         //console.log("-------", event);
       }
+      // Se envia accion hacia asterisk, y se recibe por aqui el evento de todos los estados de conexion de los usuarios, en este caso solo nos interesa los conectados
       if (event.Event == "PeerEntry") {
         if (event.Status.indexOf("OK") >= 0) {
           var evento = {
@@ -345,7 +347,7 @@ client
             dat.getSeconds()
           );
           console.log(evento);
-          io.emit(`${emit3}`, evento);
+          io.emit(`${emit4}`, evento);
         }
       }
       //Indica si asterisk se detuvo, aveces falla asterisk en mostrar este evento
@@ -436,8 +438,8 @@ client
       /*client.action(action2, function (err, res) {
         console.log(err, res);
       });*/
-      client.action(action2);
-      console.log("algo2");
+      //client.action(action2);
+      //console.log("algo2");
     }, 2000);
     /*var aux=""
     //Realizar llamada
@@ -462,7 +464,7 @@ client
   })
   .catch((error) => console.log(error, (conexion = false)));
 
-console.log("aqui", conexion);
+//console.log("aqui", conexion);
 
 // socket
 io.on("connect", (socket) => {
@@ -487,6 +489,7 @@ io.on("connect", (socket) => {
       shell.exec("pm2 restart socketA");
       console.log("socket asterisk reiniciado");
     }
+    //Recibe por socket del front peticion para enviar el estado conectado de todos los usuarios
     if (payload.accion == "estadoUsuarioLlamadas") {
       var action2 = {
         Action: "SIPpeers",
