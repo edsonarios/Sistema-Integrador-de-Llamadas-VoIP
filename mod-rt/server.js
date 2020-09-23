@@ -17,6 +17,7 @@ const io = socketio(server);
 const emit1 = "Llamadas";
 const emit2 = "asterisk";
 const emit3 = "usuarioEstado";
+const emit4 = "usuarioEstado2";
 var astEst = 0;
 var conexion = null;
 
@@ -25,8 +26,12 @@ const AmiClient = require("asterisk-ami-client");
 let client = new AmiClient({
   reconnect: true,
   keepAlive: true,
+  emitEventsByTypes: true,
+  emitResponsesById: true,
 });
 const { parsePayload } = require("./utils");
+const { promises } = require("fs");
+const { resolve } = require("path");
 
 // Express Error Handler
 app.use((err, req, res, next) => {
@@ -60,18 +65,7 @@ client
     port: 5055,
   })
   .then((amiConnection) => {
-    setTimeout(function () {
-      if (client.isConnected) {
-        conexion = true;
-        astEst = 0;
-        var evento = {
-          evento: true,
-          descripcion: `asterisk conectado`,
-        };
-        console.log(evento);
-        io.emit(`${emit2}`, evento);
-      }
-    }, 1000);
+    setTimeout(function () {}, 1000);
     client.on("event", (event) => {
       var dat = new Date();
 
@@ -336,6 +330,26 @@ client
         }
         //console.log("-------", event);
       }
+      // Se envia accion hacia asterisk, y se recibe por aqui el evento de todos los estados de conexion de los usuarios, en este caso solo nos interesa los conectados
+      if (event.Event == "PeerEntry") {
+        if (event.Status.indexOf("OK") >= 0) {
+          var evento = {
+            evento: `${event.Event}`,
+            numero: `${event.ObjectName}`,
+            estado: `conectado`,
+          };
+
+          console.log(
+            dat.getHours(),
+            ":",
+            dat.getMinutes(),
+            ":",
+            dat.getSeconds()
+          );
+          console.log(evento);
+          io.emit(`${emit4}`, evento);
+        }
+      }
       //Indica si asterisk se detuvo, aveces falla asterisk en mostrar este evento
       if (event.Event == "Shutdown") {
         conexion = false;
@@ -411,7 +425,22 @@ client
     //client.on('disconnect', () => console.log('disconnect'))
     //client.on('reconnection', () => console.log('reconnection'))
     //client.on('Dial', error => console.log(error))
+    //Reload
+    var action2 = {
+      Action: "SIPpeers",
+    };
+    var action3 = {
+      Action: "Reload",
+      ActionID: 123,
+    };
 
+    setTimeout(() => {
+      /*client.action(action2, function (err, res) {
+        console.log(err, res);
+      });*/
+      //client.action(action2);
+      //console.log("algo2");
+    }, 2000);
     /*var aux=""
     //Realizar llamada
     var action1= {
@@ -421,10 +450,7 @@ client
       Exten: '3',
       Priority: '1'
     }
-    //Reload
-    var action2= {
-      Action: 'Reload',
-    }
+    
     //Añadir nuevo dial plan, pero solo es temporal y no persistente
     var action3= {
       Action: 'DialplanExtensionAdd',
@@ -434,14 +460,11 @@ client
       Application: 'Dial(SIP/${EXTEN})'
     }
     
-    setTimeout(() => {
-      client.action(action1);
-      console.log("algo2")
-  }, 5000);*/
+    */
   })
   .catch((error) => console.log(error, (conexion = false)));
 
-console.log("aqui", conexion);
+//console.log("aqui", conexion);
 
 // socket
 io.on("connect", (socket) => {
@@ -465,6 +488,13 @@ io.on("connect", (socket) => {
     if (payload.accion == "reiniciar") {
       shell.exec("pm2 restart socketA");
       console.log("socket asterisk reiniciado");
+    }
+    //Recibe por socket del front peticion para enviar el estado conectado de todos los usuarios
+    if (payload.accion == "estadoUsuarioLlamadas") {
+      var action2 = {
+        Action: "SIPpeers",
+      };
+      client.action(action2);
     }
     //socket que por peticion del front, envia el estado de ami hacia asterisk, si esta conectado o no, y si no estuviera conectado, entonces entra en un bucle de 60 segundos, preguntando constantemente si esta conectado, hasta que vuelva a conectarse
     if (payload.accion == "estado") {
