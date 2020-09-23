@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AgendaService } from '@services/agenda.service';
 import { WebRTCService } from '@services/WebRTC/WebRTC.service';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +13,7 @@ import { UsuarioEstado } from '../../../../../models/estadoAsterisk';
 export class AgendaComponent implements OnInit {
     // public Contactos;
     public Amigos = [];
+    public Conectados = [];
     public llamada;
     public session: WebRTCService;
     public us = localStorage.getItem('Usuario');
@@ -21,8 +22,9 @@ export class AgendaComponent implements OnInit {
     public color = 'text-danger';
     public arrayNumeros: string[] = [];
     public arrayEstados: string[];
-    public respSocketUser;
-
+    public datoPrueba: any;
+    public datoPrueba2: any;
+    @Input() socketUser: UsuarioEstado;
     @Output() AgendaLlamada = new EventEmitter<string>();
     constructor(private agendaservice: AgendaService, public socketService: AsteriskConnectionService) {}
 
@@ -31,11 +33,15 @@ export class AgendaComponent implements OnInit {
         this.session.sessionEvents();
         this.listarAmigos();
         this.arrayEstados = ['desconectado', 'desconectado', 'desconectado', 'desconectado', 'desconectado'];
-        this.estadoSocket();
-        this.socketService.getResponse('estadoUsuarioLlamadas').subscribe((msg) => {
-            this.respSocketUser = msg;
-            console.log('[AGENDA]SocketUsuarios: ', msg);
-        });
+        //this.estadoSocket();
+
+        this.Conectados = JSON.parse(localStorage.getItem('socketAgenda'));
+        this.datoPrueba = localStorage.getItem('socketAgenda');
+        if (this.socketUser.numero != null) {
+            console.log('no esta vacio');
+            this.datoPrueba2 = 'llegoSocket';
+        }
+        // console.log('usuarios del Socket', this.socketUser);
     }
     LlamadaComponent(numero) {
         this.session.sipCall(numero);
@@ -86,5 +92,8 @@ export class AgendaComponent implements OnInit {
         for (const user of this.Amigos) {
             this.arrayNumeros.push(user.numero);
         }
+    }
+    estaConectado(numero: string) {
+        return this.Conectados.includes(numero);
     }
 }

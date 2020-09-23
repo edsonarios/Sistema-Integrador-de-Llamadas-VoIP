@@ -8,10 +8,13 @@
             </div>
             <div class="agenda-body" *ngFor="let friend of Amigos; let i = index">
                 <div class="ag-col">
-                    <fa-icon class="recibida text-danger" [icon]="estado" *ngIf="arrayEstados[i] === 'desconectado'"> </fa-icon>
+                    <!-- <fa-icon class="recibida text-danger" [icon]="estado" *ngIf="friend.numero  === 'desconectado'"> </fa-icon>
                     <fa-icon class="recibida text-warning" [icon]="estado" *ngIf="arrayEstados[i] === 'ausente'"> </fa-icon>
-                    <fa-icon class="recibida text-success" [icon]="estado" *ngIf="arrayEstados[i] === 'conectado'"> </fa-icon>
-                    {{ friend.nombre }}
+                    <fa-icon class="recibida text-success" [icon]="estado" *ngIf="arrayEstados[i] === 'conectado'"> </fa-icon> -->
+                    <fa-icon class="recibida text-danger" [icon]="estado" *ngIf="!estaConectado(friend.numero)"> </fa-icon>
+                    <!-- <fa-icon class="recibida text-warning" [icon]="estado" *ngIf="arrayEstados[i] === 'ausente'"> </fa-icon> -->
+                    <fa-icon class="recibida text-success" [icon]="estado" *ngIf="estaConectado(friend.numero)"> </fa-icon>
+                    {{ friend.nombre }} --{{ socketUser.numero }}
                 </div>
                 <div class="ag-col">{{ friend.numero }}</div>
                 <div class="ag-col agenda-options">

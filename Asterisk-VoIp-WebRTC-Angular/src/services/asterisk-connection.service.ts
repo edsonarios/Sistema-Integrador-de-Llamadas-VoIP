@@ -15,7 +15,8 @@ export class AsteriskConnectionService {
         const payload = { accion };
         this.wsService.emit2('controlAsterisk', payload);
     }
-    estadoUsuarioLlamadas(accion: string) {
+
+    estadoUsuariosAgenda(accion: string) {
         const payload = { accion };
         this.wsService.emit2('controlAsterisk', payload);
     }

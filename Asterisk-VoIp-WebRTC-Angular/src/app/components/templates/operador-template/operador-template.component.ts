@@ -24,7 +24,7 @@ import { UA } from 'jssip';
 import { RTCSession } from 'jssip/lib/RTCSession';
 import { WebsocketService } from '../../../../services/websocket.service';
 import { Socket } from 'ngx-socket-io';
-import { EstadoAsterisk } from '../../../../models/estadoAsterisk';
+import { EstadoAsterisk, UsuarioEstado } from '../../../../models/estadoAsterisk';
 import { ParticipanteSala } from '../../../../models/participantesSala';
 
 @Component({
@@ -98,7 +98,8 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     // Socket
     estadoSubscription: Subscription;
     estado: any = [];
-
+    public Conectados = [];
+    public socketAgenda2: UsuarioEstado;
     ASTERISK;
 
     modalRef: BsModalRef;
@@ -213,12 +214,23 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
             console.log('ASTERISK', msg.evento);
             this.cambioAsterisk();
         });
-
+        // usuarioEstado2
         this.verificar();
         setInterval(() => {
             this.cambioSenal();
             // console.log('señal de internet: ', navigator.onLine);
         }, 6000);
+        // ***************************Socket para ver el estado de los usuarios de la Agenda*********************************
+        this.estadoService.estadoUsuariosAgenda('estadoUsuarioLlamadas');
+        this.estadoService.getResponse('usuarioEstado2').subscribe((msg: UsuarioEstado) => {
+            this.Conectados.push(msg.numero);
+            localStorage.setItem('socketAgenda', JSON.stringify(this.Conectados));
+        });
+        this.estadoService.getResponse('usuarioEstado').subscribe((msg: UsuarioEstado) => {
+            this.socketAgenda2 = msg;
+            console.log('Socket Activo!!!!', msg);
+        });
+        // console.log('[CONECTADOS]', JSON.stringify(this.Conectados));
     }
     ngOnDestroy() {
         this.estadoSubscription.unsubscribe();
