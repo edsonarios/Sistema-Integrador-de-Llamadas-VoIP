@@ -2286,6 +2286,90 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
   }
 });
 
+api.post("/pruebaIntervencion", async (req, res, next) => {
+  const params = req.body;
+  let sw = "0";
+
+  if (params.funcion == "llamadaEspiarLlamadaSilenciosamente") {
+    sw = "1";
+    const obj = await Extension.create(params.salaId, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "ChanSpy",
+      appdata: "SIP/${EXTEN:3},qb",
+    });
+    const obj2 = await Extension.create(params.salaId, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "hangup",
+      appdata: "",
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  }
+  //Creamos las entradas para la funcion Espiar llamada solo a la persona que llamo
+  if (params.funcion == "llamadaEspiarLlamadaSoloConAgente") {
+    sw = "1";
+    const obj = await Extension.create(params.salaId, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "ChanSpy",
+      appdata: "SIP/${EXTEN:3},qw",
+    });
+    const obj2 = await Extension.create(params.salaId, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "hangup",
+      appdata: "",
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  }
+  if (params.funcion == "llamadaEspiarLlamadaConAmbos") {
+    sw = "1";
+    const obj = await Extension.create(params.salaId, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "ChanSpy",
+      appdata: "SIP/${EXTEN:3},qB",
+    });
+    const obj2 = await Extension.create(params.salaId, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "hangup",
+      appdata: "",
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  }
+
+  if (sw == "0") {
+    res.send({ message: "Funcion no encontrada" });
+  }
+});
+
+api.post("/pruebas", async (req, res, next) => {
+  //busco y devuelvo todos los atributos de la tabla cdrs
+  const params = req.body;
+  //obtengo todos los atributos de la tabla cdrs
+  const extensionsAll = await Extension.findAll();
+  const usuariosAll = await Usuario.findAll();
+  let getusuariosPrueba = [];
+
+  usuariosAll.forEach((obj) => {
+    extensionsAll.forEach((obj1) => {
+      if (obj.salaId == params.idsala && obj1.id == params.idsala) {
+        getusuariosPrueba.push(obj);
+      }
+    });
+  });
+
+  res.send(getusuariosPrueba);
+});
+
 /// CDR /////////////////////////////////////////////////////////////////////
 
 api.get("/findAllCdr", async (req, res, next) => {

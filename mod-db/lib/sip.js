@@ -51,16 +51,6 @@ module.exports = function setupSip(SipModel, UsuarioModel) {
     return updated;
   }
 
-  async function updatesipCont1(context) {
-    const cond = {
-      where: {
-        context,
-      },
-    };
-    const updated = await SipModel.update(cond);
-    return updated;
-  }
-
   async function findById(id) {
     return await SipModel.findOne({
       where: {
@@ -104,7 +94,6 @@ module.exports = function setupSip(SipModel, UsuarioModel) {
     createRadio,
     update,
     updatesipCont,
-    updatesipCont1,
     updateForNumber,
     findById,
     findLastSip,
