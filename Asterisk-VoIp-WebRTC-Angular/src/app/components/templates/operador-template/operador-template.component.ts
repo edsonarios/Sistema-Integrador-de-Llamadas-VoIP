@@ -101,6 +101,13 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     public Conectados = [];
     public socketAgenda2: UsuarioEstado;
     ASTERISK;
+    public dataNull: UsuarioEstado = {
+        estado: 'none',
+        evento: 'none',
+        numero: '0'
+    };
+    public socketAgendaNumero = '';
+    public socketAgendaEstado = '';
 
     modalRef: BsModalRef;
     constructor(
@@ -201,14 +208,7 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
             }
         });
         this.ObtenerSalas();
-        //console.log(this.user);
 
-        // sockets
-        // this.estadoSubscription = this.estadoService.getResponse('asterisk').subscribe((data) => {
-        //     this.estado.push(data);
-        //     console.log('[data del socket]', this.estado);
-        //     //this.cambioAsterisk(this.estado.);
-        // });
         this.estadoService.getResponse('asterisk').subscribe((msg: EstadoAsterisk) => {
             this.ASTERISK = msg.evento;
             console.log('ASTERISK', msg.evento);
@@ -227,10 +227,15 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
             localStorage.setItem('socketAgenda', JSON.stringify(this.Conectados));
         });
         this.estadoService.getResponse('usuarioEstado').subscribe((msg: UsuarioEstado) => {
-            this.socketAgenda2 = msg;
-            console.log('Socket Activo!!!!', msg);
+            this.dataNull = new UsuarioEstado(msg);
+            // console.log('Socket Activo!!!!', this.dataNull);
+            this.socketAgendaNumero = this.dataNull.numero;
+            this.socketAgendaEstado = this.dataNull.estado;
+            this.actualizarStorage(this.socketAgendaNumero, this.socketAgendaEstado);
         });
         // console.log('[CONECTADOS]', JSON.stringify(this.Conectados));
+        // console.log('[OPERADOR] lista de conectados', this.Conectados);
+        // console.log('[OPERADOR] datos en el storage', localStorage.getItem('socketAgenda'));
     }
     ngOnDestroy() {
         this.estadoSubscription.unsubscribe();
@@ -558,5 +563,21 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     }
     verificar() {
         this.estadoService.accionAsterisk('estado');
+    }
+
+    // ********AGENDA**********
+    actualizarStorage(num: string, estado: string) {
+        const numero = num.split('/')[1];
+        if (!this.Conectados.includes(numero)) {
+            if (estado === 'conectado') {
+                this.Conectados.push(numero);
+                localStorage.setItem('socketAgenda', JSON.stringify(this.Conectados));
+            }
+        } else {
+            if (estado !== 'conectado') {
+                this.Conectados.splice(this.Conectados.indexOf(numero));
+                localStorage.setItem('socketAgenda', JSON.stringify(this.Conectados));
+            }
+        }
     }
 }

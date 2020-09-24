@@ -20,11 +20,10 @@ export class AgendaComponent implements OnInit {
     public usActual = JSON.parse(this.us);
     public estado = faCircle;
     public color = 'text-danger';
-    public arrayNumeros: string[] = [];
-    public arrayEstados: string[];
-    public datoPrueba: any;
     public datoPrueba2: any;
-    @Input() socketUser: UsuarioEstado;
+    public datoInput: UsuarioEstado;
+    @Input() socketUserEstado;
+    @Input() socketUserNumero;
     @Output() AgendaLlamada = new EventEmitter<string>();
     constructor(private agendaservice: AgendaService, public socketService: AsteriskConnectionService) {}
 
@@ -32,17 +31,11 @@ export class AgendaComponent implements OnInit {
         this.session = new WebRTCService();
         this.session.sessionEvents();
         this.listarAmigos();
-        this.arrayEstados = ['desconectado', 'desconectado', 'desconectado', 'desconectado', 'desconectado'];
-        //this.estadoSocket();
 
         this.Conectados = JSON.parse(localStorage.getItem('socketAgenda'));
-        this.datoPrueba = localStorage.getItem('socketAgenda');
-        if (this.socketUser.numero != null) {
-            console.log('no esta vacio');
-            this.datoPrueba2 = 'llegoSocket';
-        }
-        // console.log('usuarios del Socket', this.socketUser);
+        console.log('[AGENDA] datos en el storage', localStorage.getItem('socketAgenda'));
     }
+
     LlamadaComponent(numero) {
         this.session.sipCall(numero);
     }
@@ -62,7 +55,7 @@ export class AgendaComponent implements OnInit {
                 for (let i = 0; i < response[0].length; i++) {
                     this.Amigos.push({ id: response[0][i], nombre: response[1][i], numero: response[2][i] });
                 }
-                this.prepararArray();
+                // this.prepararArray();
             },
             (er) => console.log(er)
         );
@@ -73,27 +66,40 @@ export class AgendaComponent implements OnInit {
         this.Amigos = this.Amigos.filter((user) => user.numero !== numero);
         console.log('el usuario con id y numero  ' + idamigo + '  ' + numero + '  fue eliminado');
     }
-    estadoSocket() {
-        this.socketService.getResponse('usuarioEstado').subscribe((msg: UsuarioEstado) => {
-            console.log('mensaje del socket', msg);
-            this.verificaNumero(msg);
-        });
+    // estadoSocket() {
+    //     this.socketService.getResponse('usuarioEstado').subscribe((msg: UsuarioEstado) => {
+    //         console.log('mensaje del socket', msg);
+    //         // this.verificaNumero(msg);
+    //     });
+    // }
+
+    // verificaNumero(msg: UsuarioEstado) {
+    //     const numero = msg.numero.split('/');
+    //     const res = this.arrayNumeros.indexOf(numero[1]);
+    //     if (res >= 0) {
+    //         this.arrayEstados[res] = msg.estado;
+    //     }
+    // }
+    // prepararArray() {
+    //     this.arrayNumeros = [];
+    //     for (const user of this.Amigos) {
+    //         this.arrayNumeros.push(user.numero);
+    //     }
+    // }
+    estaConectado(numero: string) {
+        if (this.Conectados.includes(numero)) {
+            return true;
+        } else {
+            return this.seConecto(numero);
+        }
     }
 
-    verificaNumero(msg: UsuarioEstado) {
-        const numero = msg.numero.split('/');
-        const res = this.arrayNumeros.indexOf(numero[1]);
-        if (res >= 0) {
-            this.arrayEstados[res] = msg.estado;
+    seConecto(num) {
+        if (num === this.socketUserNumero.split('/')[1] && this.socketUserEstado === 'conectado') {
+            return true;
         }
-    }
-    prepararArray() {
-        this.arrayNumeros = [];
-        for (const user of this.Amigos) {
-            this.arrayNumeros.push(user.numero);
+        if (num === this.socketUserNumero.split('/')[1] && this.socketUserEstado !== 'conectado') {
+            return false;
         }
-    }
-    estaConectado(numero: string) {
-        return this.Conectados.includes(numero);
     }
 }

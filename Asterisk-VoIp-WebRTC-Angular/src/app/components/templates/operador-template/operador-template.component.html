@@ -180,7 +180,7 @@
                         <p>No hay Salas</p>
                     </div>
                 </section>
-                <Agenda socketUser="{{ socketAgenda2 }}" *ngIf="Agenda"></Agenda>
+                <Agenda socketUserEstado="{{ socketAgendaEstado }}" socketUserNumero="{{ socketAgendaNumero }}" *ngIf="Agenda"></Agenda>
                 <dialpad *ngIf="Dialpad" (llamadaDialpad)="DialpadCall($event)"> </dialpad>
                 <Addfriend *ngIf="AddFriend"></Addfriend>
             </div>
