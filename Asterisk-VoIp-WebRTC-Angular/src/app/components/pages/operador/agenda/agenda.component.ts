@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
 import { AgendaService } from '@services/agenda.service';
 import { WebRTCService } from '@services/WebRTC/WebRTC.service';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
@@ -10,7 +10,7 @@ import { UsuarioEstado } from '../../../../../models/estadoAsterisk';
     providers: [AgendaService],
     styleUrls: ['./agenda.component.scss']
 })
-export class AgendaComponent implements OnInit {
+export class AgendaComponent implements OnInit, OnChanges {
     // public Contactos;
     public Amigos = [];
     public Conectados = [];
@@ -34,6 +34,9 @@ export class AgendaComponent implements OnInit {
 
         this.Conectados = JSON.parse(localStorage.getItem('socketAgenda'));
         console.log('[AGENDA] datos en el storage', localStorage.getItem('socketAgenda'));
+    }
+    ngOnChanges() {
+        this.Conectados = JSON.parse(localStorage.getItem('socketAgenda'));
     }
 
     LlamadaComponent(numero) {
