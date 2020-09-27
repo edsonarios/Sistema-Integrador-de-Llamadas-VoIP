@@ -292,7 +292,7 @@
     grid-area: content;
     // display: grid;
     background: #ffffff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     border-radius: 4px;
 }
 
@@ -325,7 +325,7 @@
     border-radius: 4px;
     border: 1px solid grey;
     margin: 1px;
-    .item{
+    .item {
         cursor: pointer;
     }
 }

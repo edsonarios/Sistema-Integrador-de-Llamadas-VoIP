@@ -1,26 +1,74 @@
-<h2> Agregar Una sala</h2>
-<hr>
-<div class="col-md-8 offset-2">
-	<div class="container ">
-		<form class="añadir_contact" [formGroup]="addForm">
-			<div class="row">
-				<div class="col-md-8 offset-md-2 ">
-					<label for="nombreSala">Nombre de la sala:</label>
-					<input formControlName="nombreSala" type="text"  class="form-control"/>
-				</div>
-				<div class="col-md-8 offset-md-2 ">
-					<label for="descripcion">Descripcion de la sala:</label>
-					<input formControlName="descripcion" type="text"  class="form-control"/>
-				</div>
-			</div>
+<h2>Agregar Una sala</h2>
 
-		</form>
+<div class="col-md-6 offset-3" style="background-color: white; border-radius: 10px">
+    <br />
+    <label for="tipo"><h3>Sleccione un Tipo</h3> </label>
+    <form [formGroup]="tipeForm">
+        <select formControlName="Tipo" class="form-control" (click)="OptionSelected()">
+            <option value="Sala">Sala</option>
+            <option value="Radio">Radio</option>
+        </select>
+    </form>
 
-		
-	</div>
-	<hr>
-	<button type="button" class="btn btn-success btn-block" [disabled]="addForm.invalid" (click)="addSala()">
-		Crear Sala
-	</button>
+    <br />
 </div>
-
+<br />
+<br />
+<div class="col-md-8 offset-2" style="background-color: white; border-radius: 10px" *ngIf="SelectedOption == 'Sala'">
+    <div class="container">
+        <form class="añadir_contact" [formGroup]="addForm">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <label for="nombreSala">Nombre de la sala:</label>
+                    <input formControlName="nombreSala" type="text" class="form-control" />
+                </div>
+                <div class="col-md-8 offset-md-2">
+                    <label for="descripcion">Descripcion de la sala:</label>
+                    <input formControlName="descripcion" type="text" class="form-control" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr />
+    <div class="col-md-4 offset-4">
+        <button type="button" class="btn btn-success btn-block" [disabled]="addForm.invalid" (click)="addSala()">Crear Sala</button>
+    </div>
+</div>
+<br />
+<br />
+<div class="col-md-8 offset-2" style="background-color: white; border-radius: 10px" *ngIf="SelectedOption == 'Radio'">
+    <div class="container">
+        <form class="añadir_contact" [formGroup]="addRadioForm">
+            <div class="col-md-6 offset-3">
+                <label for="NombreRadio">Nombre de la Radio :</label>
+                <input type="text" formControlName="NombreRadio" class="form-control" />
+            </div>
+            <div class="col-md-6 offset-3">
+                <label for="DescripcionRadio">Descripcion de la Radio :</label>
+                <input type="text" formControlName="DescripcionRadio" class="form-control" />
+            </div>
+            <br />
+            <p style="font-size: 12px; color: red">*Los siguientes datos son para la comunicacion de la Radio</p>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="NumeroSip">Numero Sip</label>
+                        <input type="text" class="form-control" formControlName="NumeroSip" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="CallerId">CallerId del Sip</label>
+                        <input type="text" class="form-control" formControlName="CallerId" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="Secret">Secret del Sip</label>
+                        <input type="text" class="form-control" formControlName="Secret" />
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr />
+        <div class="col-md-4 offset-4">
+            <button type="button" class="btn btn-success btn-block" [disabled]="addRadioForm.invalid" (click)="addradio()">Crear Radio</button>
+        </div>
+    </div>
+</div>
