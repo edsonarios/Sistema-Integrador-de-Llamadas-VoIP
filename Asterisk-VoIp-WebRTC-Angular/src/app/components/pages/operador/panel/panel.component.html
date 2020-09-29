@@ -16,16 +16,8 @@
                 </tr>
             </thead>
             <tbody>
-<<<<<<< HEAD
-
                 <tr *ngFor="let n of VectorPaneles; let i = index" class="item" (click)="enviarIntervencion(n)">
-=======
-                <tr *ngFor="let n of VectorPaneles; let i = index" class="item" (click)="modalinter(modalintervencion, n)">
->>>>>>> 6d708afbcfbcc9aa5a8cf499f0a0075eefd49459
                     <td data-title="Link" *ngIf="hide == 'true'">
-                        {{ VectorPaneles[i]['extension'] }}
-                    </td>
-                    <td data-title="Link">
                         {{ VectorPaneles[i]['numero'] }}
                     </td>
                     <td data-title="Link">
