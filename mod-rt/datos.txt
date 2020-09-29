@@ -1,9 +1,0 @@
-aqui null
-[mod-socket] server listening on port 8085
-algo2
-16 ':' 8 ':' 30
-{ evento: 'PeerEntry', numero: '6001', estado: 'conectado' }
-16 ':' 9 ':' 19
-{ evento: 'PeerStatus', numero: 'SIP/6001', estado: 'conectado' }
-16 ':' 10 ':' 13
-{ evento: 'PeerStatus', numero: 'SIP/6001', estado: 'conectado' }

@@ -9,6 +9,9 @@ const chalk = require("chalk");
 var shell = require("shelljs");
 const { pipe } = require("./utils");
 
+//funcion status de ami asterisk
+let status = require("./status");
+
 const port = process.env.PORT || 8085;
 const app = asyncify(express());
 const server = http.createServer(app);
@@ -66,7 +69,7 @@ client
   })
   .then((amiConnection) => {
     setTimeout(function () {}, 1000);
-    client.on("event", (event) => {
+    client.on("event", async (event) => {
       var dat = new Date();
 
       /*if(event.Event != 'PeerStatus' && event.Event != 'VarSet' && event.Event != 'TestEvent' && event.Event != 'RTCPReceived' && event.Event != 'RTCPSent'){
@@ -350,6 +353,65 @@ client
           io.emit(`${emit4}`, evento);
         }
       }
+      //lista todas llamadas que estan ocurriendo en el sistema, peticion por parte del front, que si pierden un evento de llamada, solo podran ver si alguien esta en llamada con esta condicional
+      if (event.Event == "Status") {
+        let evento1, evento2, evento3, evento4;
+        // 1 evento de status para obtener las 4 funciones de llamadas
+        evento1 = await status.Newchannel(event);
+        evento2 = await status.Newexten(event);
+        evento3 = await status.NewConnectedLine(event);
+        evento4 = await status.BridgeEnter(event);
+
+        //Una vez que se tiene los posibles 4 estados de una llamada, se envia por socket en el orden que deberia estar
+
+        if (evento1 != undefined) {
+          console.log(
+            dat.getHours(),
+            ":",
+            dat.getMinutes(),
+            ":",
+            dat.getSeconds()
+          );
+          console.log(evento1);
+          io.emit(`${emit1}`, evento1);
+        }
+
+        if (evento2 != undefined) {
+          console.log(
+            dat.getHours(),
+            ":",
+            dat.getMinutes(),
+            ":",
+            dat.getSeconds()
+          );
+          console.log(evento2);
+          io.emit(`${emit1}`, evento2);
+        }
+
+        if (evento3 != undefined) {
+          console.log(
+            dat.getHours(),
+            ":",
+            dat.getMinutes(),
+            ":",
+            dat.getSeconds()
+          );
+          console.log(evento3);
+          io.emit(`${emit1}`, evento3);
+        }
+
+        if (evento4 != undefined) {
+          console.log(
+            dat.getHours(),
+            ":",
+            dat.getMinutes(),
+            ":",
+            dat.getSeconds()
+          );
+          console.log(evento4);
+          io.emit(`${emit1}`, evento4);
+        }
+      }
       //Indica si asterisk se detuvo, aveces falla asterisk en mostrar este evento
       if (event.Event == "Shutdown") {
         conexion = false;
@@ -427,7 +489,7 @@ client
     //client.on('Dial', error => console.log(error))
     //Reload
     var action2 = {
-      Action: "SIPpeers",
+      Action: "Status",
     };
     var action3 = {
       Action: "Reload",
@@ -439,7 +501,7 @@ client
         console.log(err, res);
       });*/
       //client.action(action2);
-      //console.log("algo2");
+      //console.log("--------------------------------------------------------------------");
     }, 2000);
     /*var aux=""
     //Realizar llamada
@@ -489,12 +551,27 @@ io.on("connect", (socket) => {
       shell.exec("pm2 restart socketA");
       console.log("socket asterisk reiniciado");
     }
-    //Recibe por socket del front peticion para enviar el estado conectado de todos los usuarios
+    //Recibe por socket del front peticion para enviar el estado conectado de todos los usuarios, y estado de las llamadas
     if (payload.accion == "estadoUsuarioLlamadas") {
-      var action2 = {
+      var action = {
         Action: "SIPpeers",
       };
+      var action2 = {
+        Action: "Status",
+      };
+      // Envia estado de los usuarios
+      client.action(action);
+      // Envia estado de las llamadas, si es que hubiera alguna en trascurso
       client.action(action2);
+      console.log("Peticion por parte del front, estado usuarios");
+    }
+    if (payload.accion == "reloadAsterisk") {
+      var action = {
+        Action: "Reload",
+      };
+      // Realiza un reload de asterisk
+      client.action(action);
+      console.log("Reload por peticion del front");
     }
     //socket que por peticion del front, envia el estado de ami hacia asterisk, si esta conectado o no, y si no estuviera conectado, entonces entra en un bucle de 60 segundos, preguntando constantemente si esta conectado, hasta que vuelva a conectarse
     if (payload.accion == "estado") {
