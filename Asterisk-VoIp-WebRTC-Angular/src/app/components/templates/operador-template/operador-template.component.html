@@ -121,12 +121,20 @@
                             Dts="{{ n.numero }}"
                         ></llamada>
                     </div>
+                    
+                        <intervencion 
+                            numDts = "{{ numDts }}"
+                            numSrc = "{{ numSrc }}"
+                            nomDts = "{{ nomDts }}"
+                            nomSrc = "{{ nomSrc }}">
+                        </intervencion>
+                    
                 </section>
             </div>
             <div class="CenterContent_Inf">
                 <div class="CenterContent_InfPanel">
-                    <header (click)="LoaderPanel()" style="cursor: pointer">Panel de Estados</header>
-                    <panel></panel>
+                    <header (click)="LoaderPanel()" style="cursor: pointer">Panel de Estados </header>
+                    <panel (IntervencionLlamada)="mostrarData($event)"></panel>
                 </div>
                 <div class="CenterContent_InfInfo">
                     <header *ngIf="!mostrarParticipantes">Info</header>

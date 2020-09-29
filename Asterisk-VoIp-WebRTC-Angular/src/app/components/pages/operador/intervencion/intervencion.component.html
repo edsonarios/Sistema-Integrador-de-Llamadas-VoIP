@@ -1,59 +1,76 @@
-<section class="panel">
-    <div>
-        <!-- Table starts here -->
-        <!-- (click)="enviarIntervencion()" -->
-        <!-- <button class="btn btn-success" >Enviar</button> -->
-        <table id="table" class="table table-hover table-mc-light-blue">
-            <thead>
-                <tr>
-                    <th *ngIf="hide == 'true'">Extension</th>
-                    <th>Numero</th>
-                    <th>Icon</th>
-                    <th>Duracion</th>
-                    <th>Evento</th>
-                    <th *ngIf="hide == 'true'">Contexto</th>
-                    <th *ngIf="hide == 'true'">Opciones</th>
-                </tr>
-            </thead>
-            <tbody>
+<!-- 
+<div class="card border-success mb-3" style="max-width: 18rem;" *ngIf="textoHijo2">
+   <div class="card-header bg-transparent border-success">Header</div>
+   <div class="card-body text-success">
+     <h5 class="card-title">Success card title</h5>
+     Esta es la respuesta : {{ numSrc }}
+   </div>
+   <div class="card-footer bg-transparent border-success">Footer</div>
+ </div> -->
 
-                <tr *ngFor="let n of VectorPaneles; let i = index" class="item" (click)="enviarIntervencion(n)">
-                    <td data-title="Link" *ngIf="hide == 'true'">
-                        {{ VectorPaneles[i]['extension'] }}
-                    </td>
-                    <td data-title="Link">
-                        {{ VectorPaneles[i]['numero'] }}
-                    </td>
-                    <td data-title="Link">
-                        <i class="v-icon-incoming-call" tooltip="Entrante" style="color: green;"></i>
-                    </td>
-                    <td data-title="Link">
-                        -- : -- : --
-                    </td>
-                    <td data-title="Link">
-                        <span style="color: aqua;" *ngIf="VectorPaneles[i]['evento'] == 'Newchannel'">Conectando</span>
-                        <span style="color: blue;" *ngIf="VectorPaneles[i]['evento'] == 'Newexten'">Llamando</span>
-                        <span style="color: blue;" *ngIf="VectorPaneles[i]['evento'] == 'NewConnectedLine'">Llamando</span>
-                        <span style="color: chartreuse;" *ngIf="VectorPaneles[i]['evento'] == 'BridgeEnter'">En curso</span>
-                        <span style="color: chartreuse;" *ngIf="VectorPaneles[i]['evento'] == 'Bridge'">En curso</span>
-                        <span style="color: red;" *ngIf="VectorPaneles[i]['evento'] == 'Hangup'">Finalizado</span>
-                    </td>
-                    <td data-title="Link" *ngIf="hide == 'true'">
-                        {{ VectorPaneles[i]['contexto'] }}
-                    </td>
-                    <td data-title="Link" *ngIf="hide == 'true'">
-                        <div *ngIf="VectorPaneles[i]['evento'] == 'BridgeEnter' || VectorPaneles[i]['evento'] == 'Bridge'">
-                            <button style="border-radius: 50%; padding: 4px; height: 34px;" (click)="Opcion1()">1</button>
-                            <button style="border-radius: 50%; padding: 4px; height: 34px;" (click)="Opcion2()">2</button>
-                            <button style="border-radius: 50%; padding: 4px; height: 34px;" (click)="Opcion3()">3</button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+<div class="card" *ngIf="numDts">
+    <div class="header">
+        <b>Intervención {{ numDts }} _ {{ numSrc }}</b>
+        <i-feather name="x-circle" (click)="cerrarIntervenion()"></i-feather>
     </div>
-</section>
-
+    <div class="body">
+        <div class="origen">
+            <div class="nombre">
+                {{ nomSrc}} 
+            </div>
+            <div class="numeroorigen">
+                {{numSrc}}<i-feather class="verde" name="phone-outgoing"></i-feather>
+            </div>
+        </div>
+        <div class="destino">
+            <div class="numerodestino">
+                <i-feather class="rojo" name="phone-incoming"></i-feather>{{numDts}}
+            </div>
+            <div class="nombredestino">
+                 {{ nomDts }}
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <button class="btn btn-success btn-block" (click)="intervenir(modalintervencion)" [disabled] = "llamando!=false">Intervenir</button>
+        <button (click)="endCall()" class="colgar" tooltip="colgar" *ngIf="llamando" ><i-feather name="phone-off"></i-feather></button>
+        <!-- <button class="btn btn-success">Silenciosa</button>
+        <button class="btn btn-dark">O / D</button>
+        <button class="btn btn-danger">Ambos</button> -->
+    </div>
+</div>
+<!-- <div class="card" style="width: 100%">
+<div class="row">
+    <div class="col">
+        <div class="origen">
+            <h5>Origen</h5>
+            <i-feather name="phone-outgoing"></i-feather>
+        </div>
+        <div class="card" style="width: auto">
+            <div class="card-body">
+                <h5 class="card-title"> {{ nomSrc }}</h5>
+                <p class="card-text">
+                    {{ numSrc }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card" style="width: auto">
+            <div class="card-body">
+                <h5 class="card-title">{{ nomDts }}</h5>
+                <p class="card-text">
+                    {{ numDts }}
+                </p>
+            </div>
+        </div>
+        <div class="destino">
+            <i-feather name="phone-incoming"></i-feather>
+            <h5>Destino</h5>
+        </div>
+    </div>
+</div>
+</div> -->
 
 <!-- Modal Intervencion de llamadas -->
 
@@ -79,7 +96,7 @@
                         </div>
                         <div class="card" style="width: 100%">
                             <div class="card-body">
-                                <h5 class="card-title">{{ opeSrc.nombre }} {{ opeSrc.apPaterno }}</h5>
+                                <h5 class="card-title">{{ nomSrc }}</h5>
                                 <p class="card-text">
                                     {{ numSrc }}
                                 </p>
@@ -89,7 +106,7 @@
                     <div class="col">
                         <div class="card" style="width: 100%">
                             <div class="card-body">
-                                <h5 class="card-title">{{ opeDts.nombre }} {{ opeDts.apPaterno }}</h5>
+                                <h5 class="card-title">{{ nomDts }}</h5>
                                 <p class="card-text">
                                     {{ numDts }}
                                 </p>
@@ -128,7 +145,7 @@
                                 class="card-body"
                                 [ngStyle]="{ 'background-color': over === 'src' ? 'rgb(3, 187, 27)' : 'white', color: over === 'src' ? 'white' : 'black' }"
                             >
-                                <h5 class="card-title">{{ opeSrc.nombre }} {{ opeSrc.apPaterno }}</h5>
+                                <h5 class="card-title">{{ nomSrc }}</h5>
                                 <p class="card-text">
                                     {{ numSrc }}
                                 </p>
@@ -141,7 +158,7 @@
                                 class="card-body"
                                 [ngStyle]="{ 'background-color': over === 'dts' ? ' rgb(255, 85, 73)' : 'white', color: over === 'dts' ? 'white' : 'black' }"
                             >
-                                <h5 class="card-title">{{ opeDts.nombre }} {{ opeDts.apPaterno }}</h5>
+                                <h5 class="card-title">{{ nomDts }}</h5>
                                 <p class="card-text">
                                     {{ numDts }}
                                 </p>
@@ -173,7 +190,7 @@
                         </div>
                         <div class="card" style="width: auto">
                             <div class="card-body">
-                                <h5 class="card-title">{{ opeSrc.nombre }} {{ opeSrc.apPaterno }}</h5>
+                                <h5 class="card-title">{{ nomSrc }}</h5>
                                 <p class="card-text">
                                     {{ numSrc }}
                                 </p>
@@ -183,7 +200,7 @@
                     <div class="col">
                         <div class="card" style="width: auto">
                             <div class="card-body">
-                                <h5 class="card-title">{{ opeDts.nombre }} {{ opeDts.apPaterno }}</h5>
+                                <h5 class="card-title">{{ nomDts }}</h5>
                                 <p class="card-text">
                                     {{ numDts }}
                                 </p>

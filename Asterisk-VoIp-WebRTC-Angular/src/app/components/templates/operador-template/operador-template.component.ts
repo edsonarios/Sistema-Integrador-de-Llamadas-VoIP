@@ -40,6 +40,12 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     public Dialpad = false;
     public panel = false;
     public Llamada = [];
+    PaEnviar: any;
+    public numSrc;
+    public nomSrc;
+    public numDts;
+    public nomDts;
+    public textoPadre;
     public rtc: WebRTCService;
     public ua: UA;
     public remote: RTCSession;
@@ -179,6 +185,10 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
         this.AsignarSipsIax();
     }
     ngOnInit() {
+        this.numSrc = "";
+        this.nomSrc = "";
+        this.numDts = "";
+        this.nomDts = "";
         localStorage.setItem('PanelHide', 'false');
         localStorage.setItem('estadoUsers', JSON.stringify(this.arrayAgendaEstados));
         this.user = JSON.parse(localStorage.getItem('Usuario'));
@@ -579,5 +589,17 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
                 localStorage.setItem('socketAgenda', JSON.stringify(this.Conectados));
             }
         }
+    }
+
+
+    mostrarData(mensaje){
+        this.PaEnviar = mensaje;
+        this.nomSrc = mensaje.nomSrc.nombre + mensaje.nomSrc.apPaterno;
+        this.nomDts = mensaje.nomDts.nombre + mensaje.nomDts.apPaterno;
+        this.numDts = mensaje.numDts;
+        this.numSrc = mensaje.numSrc;
+        console.log(mensaje);   
+        console.log(mensaje.nomSrc.nombre, mensaje.nomSrc.apPaterno)
+        console.log(mensaje.nomDts.nombre, mensaje.nomDts.apPaterno)
     }
 }

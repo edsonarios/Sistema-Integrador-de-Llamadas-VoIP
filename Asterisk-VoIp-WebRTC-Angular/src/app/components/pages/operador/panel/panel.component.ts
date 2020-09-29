@@ -36,6 +36,9 @@ export class PanelComponent implements OnInit {
     ni = '';
     swInter = false;
     numeroActual = localStorage.getItem('NumberSelected');
+    @Output()    
+    IntervencionLlamada: EventEmitter<Object> = new EventEmitter<Object>();
+    detalle;
 
     // variables para llamadas
     public session: WebRTCService;
@@ -155,12 +158,18 @@ export class PanelComponent implements OnInit {
         }
     }
 
-    modalinter(modal, n) {
-        if (this.numeroActual === n.extension || this.numeroActual === n.numero) {
+    enviarIntervencion(n){
+        console.log();
+        var detallesllamada = {extension: n.extension, numero: n.numero };
+        console.log('interviniendo...');
+        this.numSrc = detallesllamada.extension;
+        this.numDts = detallesllamada.numero;
+
+        if (this.numeroActual === detallesllamada.extension || this.numeroActual === detallesllamada.numero) {
             console.log('NO PUEDES INTERVENIR ESTA LLAMADA');
         } else {
-            this.numSrc = n.extension;
-            this.numDts = n.numero;
+            this.numSrc = detallesllamada.extension;
+            this.numDts = detallesllamada.numero;
             console.log(this.numSrc);
             console.log(this.numDts);
             this.userService.detalleUsuario(this.numSrc).subscribe((response) => {
@@ -179,9 +188,43 @@ export class PanelComponent implements OnInit {
                     this.opeDts = response[0];
                 }
             });
-            this.modalService.show(modal);
             console.log('origen', this.numSrc);
             console.log('destino', this.numDts);
         }
+        
+        this.detalle = { nomSrc: this.opeSrc, numSrc: this.numSrc, nomDts: this.opeDts, numDts: this.numDts };
+        console.log(this.detalle);
+        this.IntervencionLlamada.emit(this.detalle); 
+    }
+
+    modalinter(modal, n) {
+        // this.IntervencionLlamada.emit("Mensaje desde el componente hijo");
+        // if (this.numeroActual === n.extension || this.numeroActual === n.numero) {
+        //     console.log('NO PUEDES INTERVENIR ESTA LLAMADA');
+        // } else {
+        //     this.numSrc = n.extension;
+        //     this.numDts = n.numero;
+        //     console.log(this.numSrc);
+        //     console.log(this.numDts);
+        //     this.userService.detalleUsuario(this.numSrc).subscribe((response) => {
+        //         if (response[0] === undefined) {
+        //             console.log(' EL NUMERO ES EXTERNO');
+        //         } else {
+        //             console.log(response[0]);
+        //             this.opeSrc = response[0];
+        //         }
+        //     });
+        //     this.userService.detalleUsuario(this.numDts).subscribe((response) => {
+        //         if (response[0] === undefined) {
+        //             console.log(' EL NUMERO ES EXTERNO');
+        //         } else {
+        //             console.log(response);
+        //             this.opeDts = response[0];
+        //         }
+        //     });
+        //     this.modalService.show(modal);
+        //     console.log('origen', this.numSrc);
+        //     console.log('destino', this.numDts);
+        // }
     }
 }
