@@ -37,6 +37,7 @@ import { getLocaleId } from '@angular/common';
     styleUrls: ['./llamada.component.scss']
 })
 export class LlamadaComponent implements OnInit {
+    @Input() numDts: string;
     @Input() Nombre: string;
     @Input() Numero: string;
     @Input() Id: string;

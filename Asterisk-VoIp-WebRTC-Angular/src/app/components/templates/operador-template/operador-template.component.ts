@@ -24,7 +24,7 @@ import { UA } from 'jssip';
 import { RTCSession } from 'jssip/lib/RTCSession';
 import { WebsocketService } from '../../../../services/websocket.service';
 import { Socket } from 'ngx-socket-io';
-import { EstadoAsterisk } from '../../../../models/estadoAsterisk';
+import { EstadoAsterisk, UsuarioEstado } from '../../../../models/estadoAsterisk';
 import { ParticipanteSala } from '../../../../models/participantesSala';
 
 @Component({
@@ -40,6 +40,12 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     public Dialpad = false;
     public panel = false;
     public Llamada = [];
+    PaEnviar: any;
+    public numSrc;
+    public nomSrc;
+    public numDts;
+    public nomDts;
+    public textoPadre;
     public rtc: WebRTCService;
     public ua: UA;
     public remote: RTCSession;
@@ -98,8 +104,16 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     // Socket
     estadoSubscription: Subscription;
     estado: any = [];
-
+    public Conectados = [];
+    public socketAgenda2: UsuarioEstado;
     ASTERISK;
+    public dataNull: UsuarioEstado = {
+        estado: 'none',
+        evento: 'none',
+        numero: '0'
+    };
+    public socketAgendaNumero = '';
+    public socketAgendaEstado = '';
 
     modalRef: BsModalRef;
     constructor(
@@ -171,6 +185,10 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
         this.AsignarSipsIax();
     }
     ngOnInit() {
+        this.numSrc = "";
+        this.nomSrc = "";
+        this.numDts = "";
+        this.nomDts = "";
         localStorage.setItem('PanelHide', 'false');
         localStorage.setItem('estadoUsers', JSON.stringify(this.arrayAgendaEstados));
         this.user = JSON.parse(localStorage.getItem('Usuario'));
@@ -200,25 +218,34 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
             }
         });
         this.ObtenerSalas();
-        //console.log(this.user);
 
-        // sockets
-        // this.estadoSubscription = this.estadoService.getResponse('asterisk').subscribe((data) => {
-        //     this.estado.push(data);
-        //     console.log('[data del socket]', this.estado);
-        //     //this.cambioAsterisk(this.estado.);
-        // });
         this.estadoService.getResponse('asterisk').subscribe((msg: EstadoAsterisk) => {
             this.ASTERISK = msg.evento;
             console.log('ASTERISK', msg.evento);
             this.cambioAsterisk();
         });
-
+        // usuarioEstado2
         this.verificar();
         setInterval(() => {
             this.cambioSenal();
             // console.log('señal de internet: ', navigator.onLine);
         }, 6000);
+        // ***************************Socket para ver el estado de los usuarios de la Agenda*********************************
+        this.estadoService.estadoUsuariosAgenda('estadoUsuarioLlamadas');
+        this.estadoService.getResponse('usuarioEstado2').subscribe((msg: UsuarioEstado) => {
+            this.Conectados.push(msg.numero);
+            localStorage.setItem('socketAgenda', JSON.stringify(this.Conectados));
+        });
+        this.estadoService.getResponse('usuarioEstado').subscribe((msg: UsuarioEstado) => {
+            this.dataNull = new UsuarioEstado(msg);
+            // console.log('Socket Activo!!!!', this.dataNull);
+            this.socketAgendaNumero = this.dataNull.numero;
+            this.socketAgendaEstado = this.dataNull.estado;
+            this.actualizarStorage(this.socketAgendaNumero, this.socketAgendaEstado);
+        });
+        // console.log('[CONECTADOS]', JSON.stringify(this.Conectados));
+        // console.log('[OPERADOR] lista de conectados', this.Conectados);
+        // console.log('[OPERADOR] datos en el storage', localStorage.getItem('socketAgenda'));
     }
     ngOnDestroy() {
         this.estadoSubscription.unsubscribe();
@@ -546,5 +573,33 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     }
     verificar() {
         this.estadoService.accionAsterisk('estado');
+    }
+
+    // ********AGENDA**********
+    actualizarStorage(num: string, estado: string) {
+        const numero = num.split('/')[1];
+        if (!this.Conectados.includes(numero)) {
+            if (estado === 'conectado') {
+                this.Conectados.push(numero);
+                localStorage.setItem('socketAgenda', JSON.stringify(this.Conectados));
+            }
+        } else {
+            if (estado !== 'conectado') {
+                this.Conectados.splice(this.Conectados.indexOf(numero));
+                localStorage.setItem('socketAgenda', JSON.stringify(this.Conectados));
+            }
+        }
+    }
+
+
+    mostrarData(mensaje){
+        this.PaEnviar = mensaje;
+        this.nomSrc = mensaje.nomSrc.nombre + mensaje.nomSrc.apPaterno;
+        this.nomDts = mensaje.nomDts.nombre + mensaje.nomDts.apPaterno;
+        this.numDts = mensaje.numDts;
+        this.numSrc = mensaje.numSrc;
+        console.log(mensaje);   
+        console.log(mensaje.nomSrc.nombre, mensaje.nomSrc.apPaterno)
+        console.log(mensaje.nomDts.nombre, mensaje.nomDts.apPaterno)
     }
 }

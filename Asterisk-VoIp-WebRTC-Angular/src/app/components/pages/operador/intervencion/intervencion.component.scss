@@ -1,0 +1,85 @@
+.card{
+    margin: 8px;
+    display: block;
+    width: 100%;
+}
+
+.header{
+    border-radius: 10px 10px 0 0;
+    padding: 3px 10px 3px 10px;
+    color: #fff;
+    justify-self: center;
+    align-self: center;
+    background-color: #ff7d00;
+    width: 100%;
+}
+
+.body{
+    background-color: #001524;
+    padding: 3px 10px 3px 10px;
+    color: #fff;
+    width: 100%;
+    
+    display: flex;
+    
+    align-content: space-evenly;
+    
+}
+
+.footer{
+    position: relative;
+    background-color: #fff;
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    align-content: space-between;
+    
+}
+
+.btn{
+    margin: 0;
+
+}
+
+.origen{
+    text-align: center;
+    flex-direction: column;
+}
+
+.destino{
+    text-align: center;
+    flex-direction: column;
+}
+
+.verde{
+    color: rgb(3, 187, 27);
+}
+
+.rojo{
+    color: rgb(255, 85, 73);
+}
+
+.colgar{
+    position: absolute;
+    left: 235px;
+    
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgb(255, 85, 73);
+    color: white;
+}
+
+.colgar:hover{
+    width: 53px;
+    height: 53px;
+    transition-duration: 0.5s;
+    background-color: rgb(226, 66, 55);
+}
+
+.boton{
+    position: absolute;
+    display: block;
+    
+}
