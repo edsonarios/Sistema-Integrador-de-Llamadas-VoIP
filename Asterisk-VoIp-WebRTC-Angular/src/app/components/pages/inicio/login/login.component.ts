@@ -102,6 +102,12 @@ export class LoginComponent implements OnInit {
                 if (response[0].length == 0 && response[1].length == 0) {
                     this.conected = true;
                     console.log('Entra y cambia el valor a TRUE');
+                    if (this.user.tipo == 'admin') {
+                        this.router.navigate(['/Administrador/Cuentas']);
+                        console.log('Entro como Administrador');
+                    } else {
+                        this.router.navigate(['/Login']);
+                    }
                 } else {
                     localStorage.setItem('NumberSelected', response[0][0]['callerid']);
                     if (this.user.tipo == 'root') {

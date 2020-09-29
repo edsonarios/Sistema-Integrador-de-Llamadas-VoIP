@@ -16,8 +16,12 @@
                 </tr>
             </thead>
             <tbody>
+<<<<<<< HEAD
 
                 <tr *ngFor="let n of VectorPaneles; let i = index" class="item" (click)="enviarIntervencion(n)">
+=======
+                <tr *ngFor="let n of VectorPaneles; let i = index" class="item" (click)="modalinter(modalintervencion, n)">
+>>>>>>> 6d708afbcfbcc9aa5a8cf499f0a0075eefd49459
                     <td data-title="Link" *ngIf="hide == 'true'">
                         {{ VectorPaneles[i]['extension'] }}
                     </td>
@@ -25,27 +29,25 @@
                         {{ VectorPaneles[i]['numero'] }}
                     </td>
                     <td data-title="Link">
-                        <i class="v-icon-incoming-call" tooltip="Entrante" style="color: green;"></i>
+                        <i class="v-icon-incoming-call" tooltip="Entrante" style="color: green"></i>
                     </td>
+                    <td data-title="Link">-- : -- : --</td>
                     <td data-title="Link">
-                        -- : -- : --
-                    </td>
-                    <td data-title="Link">
-                        <span style="color: aqua;" *ngIf="VectorPaneles[i]['evento'] == 'Newchannel'">Conectando</span>
-                        <span style="color: blue;" *ngIf="VectorPaneles[i]['evento'] == 'Newexten'">Llamando</span>
-                        <span style="color: blue;" *ngIf="VectorPaneles[i]['evento'] == 'NewConnectedLine'">Llamando</span>
-                        <span style="color: chartreuse;" *ngIf="VectorPaneles[i]['evento'] == 'BridgeEnter'">En curso</span>
-                        <span style="color: chartreuse;" *ngIf="VectorPaneles[i]['evento'] == 'Bridge'">En curso</span>
-                        <span style="color: red;" *ngIf="VectorPaneles[i]['evento'] == 'Hangup'">Finalizado</span>
+                        <span style="color: aqua" *ngIf="VectorPaneles[i]['evento'] == 'Newchannel'">Conectando</span>
+                        <span style="color: blue" *ngIf="VectorPaneles[i]['evento'] == 'Newexten'">Llamando</span>
+                        <span style="color: blue" *ngIf="VectorPaneles[i]['evento'] == 'NewConnectedLine'">Llamando</span>
+                        <span style="color: chartreuse" *ngIf="VectorPaneles[i]['evento'] == 'BridgeEnter'">En curso</span>
+                        <span style="color: chartreuse" *ngIf="VectorPaneles[i]['evento'] == 'Bridge'">En curso</span>
+                        <span style="color: red" *ngIf="VectorPaneles[i]['evento'] == 'Hangup'">Finalizado</span>
                     </td>
                     <td data-title="Link" *ngIf="hide == 'true'">
                         {{ VectorPaneles[i]['contexto'] }}
                     </td>
                     <td data-title="Link" *ngIf="hide == 'true'">
                         <div *ngIf="VectorPaneles[i]['evento'] == 'BridgeEnter' || VectorPaneles[i]['evento'] == 'Bridge'">
-                            <button style="border-radius: 50%; padding: 4px; height: 34px;" (click)="Opcion1()">1</button>
-                            <button style="border-radius: 50%; padding: 4px; height: 34px;" (click)="Opcion2()">2</button>
-                            <button style="border-radius: 50%; padding: 4px; height: 34px;" (click)="Opcion3()">3</button>
+                            <button style="border-radius: 50%; padding: 4px; height: 34px" (click)="Opcion1()">1</button>
+                            <button style="border-radius: 50%; padding: 4px; height: 34px" (click)="Opcion2()">2</button>
+                            <button style="border-radius: 50%; padding: 4px; height: 34px" (click)="Opcion3()">3</button>
                         </div>
                     </td>
                 </tr>
@@ -54,14 +56,11 @@
     </div>
 </section>
 
-
 <!-- Modal Intervencion de llamadas -->
 
 <ng-template #modalintervencion>
     <div class="modal-body text-center">
-        <h3>
-            Modo de intervención
-        </h3>
+        <h3>Modo de intervención</h3>
         <tabset [justified]="true">
             <tab heading="Silenciosa">
                 <div class="row">
@@ -112,11 +111,11 @@
                         <li>Solo el participante que intervengas podrá conversar contigo</li>
                     </ul>
                 </div>
-                <hr>
+                <hr />
                 <p>
-                    <strong> Seleccione alguno para intervenir  </strong>
+                    <strong> Seleccione alguno para intervenir </strong>
                 </p>
-                <hr>
+                <hr />
                 <div class="row">
                     <div class="col">
                         <div class="origen">
@@ -154,7 +153,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <button (click)="intervencion('od')" class="btn btn-success btn-block" [disabled]="over==''">INTERVENIR</button>
+                    <button (click)="intervencion('od')" class="btn btn-success btn-block" [disabled]="over == ''">INTERVENIR</button>
                 </div>
             </tab>
             <tab heading="Ambos">
@@ -168,7 +167,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="origen">
-                            <h4>Origen</h4> 
+                            <h4>Origen</h4>
                             <i-feather name="phone-outgoing"></i-feather>
                         </div>
                         <div class="card" style="width: auto">

@@ -1,109 +1,100 @@
 <section class="administrador-dashboard">
-	<div class="navigation" >
-		<div class="navigation-user">
-			<div class="navigation-user-img">
-			</div>
-			<div class="navigation-user-details">
-				<p>Administrador@Administrador</p>
-			</div>
-		</div>
-		<div class="navigation-menu">
-			<ul>
-						<li>
-							<a class="Item"><i class="v-icon-group"></i>Cuentas</a>
-						</li>
-						<li>
-								<a [routerLink]="['/Administrador/Cuentas']" class="subItem">Lista de Cuentas</a>
-						</li>
-						<li>
-							  <a [routerLink]="['/Administrador/AgregarCuenta']" class="subItem">Agregar cuenta</a>
-						</li>
-						<li>
-							<hr>
-							<a class="Item"><i class="v-icon-group"></i>SIP&IAX</a>
-						</li>
-						<li>
-							<a [routerLink]="['/Administrador/SIP_IAX']" class="subItem">Listar Sip & Iax</a>
-						</li>
-						
-						<li>
-							<a [routerLink]="['/Administrador/AgregarSipIax']" class="subItem">Agregar Sip - Iax</a>
-						</li>
-						<hr>
-						<li>
-							<a class="Item"><i class="v-icon-bubbles4"></i>Salas</a>
-						</li>
-						<li>
-							<a [routerLink]="['/Administrador/Salas']" class="subItem">Lista de Salas</a>
-						</li>
-						<li>
-							<a [routerLink]="['/Administrador/AgregarSala']" class="subItem">Agregar Sala</a>
-						</li>
-						<hr>
-						<li>
-							<a class="Item"><i class="v-icon-radio"></i>Radios</a>
-						</li>
-						<li>
-							<a [routerLink]="['/Administrador/Radios']" class="subItem">Listar Radios</a>
-						</li>
-						<li>
-							<a [routerLink]="['/Administrador/AgregarRadio']" class="subItem">Crear Radio</a>
-						</li>
-						<hr>
-						<li>
-							<a class="Item"><i class="v-icon-radio"></i>Extensions / IVR</a>
-						</li>
-						<li>
-							<a [routerLink]="['/Administrador/ExtensionIvr']" class="subItem">ver Extensiones o IVR's</a>
-						</li>
-						<li>
-							<a [routerLink]="['/Administrador/AgregarExtensionIvr']" class="subItem">Crear Extension / IVR</a>
-						</li>
-						
-					</ul>
-		</div>
-	</div>
-	<div class="content">
-		<div class="content-menu">
-			<div class="navbar">
-			    <ul>
-			    	<li >
-			    	<a [routerLink]="['/Administrador/Historial']" >
-			    			<div class="icon">
-			    				<i class="asteriskIcon v-icon-phone1" placement="right"></i>
-			    			</div>
-			    			<div class="name"><span data-text="DialPad">Historial de Llamadas</span></div>
-			    		</a>
-			    	</li>
-			    	<li >
-			    		<a [routerLink]="['/Administrador/Grabaciones']">
-			    			<div class="icon">
-			    				<i class="asteriskIcon v-icon-cassette" placement="right"></i>
-			    			</div>
-			    			<div class="name"><span data-text="DialPad">Grabaciones</span></div>
-			    		</a>
-			    	</li>
-			    	<li>
-			    		<a [routerLink]="['/Administrador/Tracking']">
-			    			<div class="icon">
-			    				<i class="asteriskIcon v-icon-location"></i>
-			    			</div>
-			    			<div class="name"><span data-text="DialPad">Tracking</span></div>
-			    		</a>
-			    	</li>
-			    	<li>
-			    		<a [routerLink]="['/Login']">
-			    			<div class="icon">
-			    				<i class="asteriskIcon v-icon-enter"></i>
-			    			</div>
-			    			<div class="name"><span data-text="DialPad">Salir</span></div>
-			    		</a>
-			    	</li>
-			    </ul>
-			</div>
-		</div>
-		<div class="content-pages">
-			<router-outlet></router-outlet>
-		</div>
-	</div>
+    <div class="navigation">
+        <div class="navigation-user">
+            <div class="navigation-user-img"></div>
+            <div class="navigation-user-details">
+                <p>Administrador@Administrador</p>
+            </div>
+        </div>
+        <div class="navigation-menu">
+            <ul>
+                <li>
+                    <a class="Item"><i class="v-icon-group"></i>Cuentas</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/Administrador/Cuentas']" class="subItem">Lista de Cuentas</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/Administrador/AgregarCuenta']" class="subItem">Agregar cuenta</a>
+                </li>
+                <li>
+                    <hr />
+                    <a class="Item"><i class="v-icon-group"></i>SIP&IAX</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/Administrador/SIP_IAX']" class="subItem">Listar Sip & Iax</a>
+                </li>
+
+                <li>
+                    <a [routerLink]="['/Administrador/AgregarSipIax']" class="subItem">Agregar Sip - Iax</a>
+                </li>
+                <hr />
+                <li>
+                    <a class="Item"><i class="v-icon-bubbles4"></i>Salas & Radios</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/Administrador/AgregarSala']" class="subItem">Agregar Sala / Radio</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/Administrador/Salas']" class="subItem">Lista de Salas</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/Administrador/Radios']" class="subItem">Listar Radios</a>
+                </li>
+                <hr />
+                <li>
+                    <a class="Item"><i class="v-icon-radio"></i>Extensions / IVR</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/Administrador/ExtensionIvr']" class="subItem">ver Extensiones o IVR's</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/Administrador/AgregarExtensionIvr']" class="subItem">Crear Extension / IVR</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-menu">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a [routerLink]="['/Administrador/Historial']">
+                            <div class="icon">
+                                <i class="asteriskIcon v-icon-phone1" placement="right"></i>
+                            </div>
+                            <div class="name"><span data-text="DialPad">Historial de Llamadas</span></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/Administrador/Grabaciones']">
+                            <div class="icon">
+                                <i class="asteriskIcon v-icon-cassette" placement="right"></i>
+                            </div>
+                            <div class="name"><span data-text="DialPad">Grabaciones</span></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/Administrador/Tracking']">
+                            <div class="icon">
+                                <i class="asteriskIcon v-icon-location"></i>
+                            </div>
+                            <div class="name"><span data-text="DialPad">Tracking</span></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/Login']">
+                            <div class="icon">
+                                <i class="asteriskIcon v-icon-enter"></i>
+                            </div>
+                            <div class="name"><span data-text="DialPad">Salir</span></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="content-pages">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 </section>
