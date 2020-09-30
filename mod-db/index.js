@@ -24,7 +24,7 @@ const setupIaxModel = require("./models/iax");
 const setupQueueModel = require("./models/queue");
 const setupSalaModel = require("./models/sala");
 const setupVoicemailModel = require("./models/voicemail");
-const setupPrivilegios = require("./models/privilegios");
+const setupPrivilegiosModel = require("./models/privilegios");
 
 module.exports = async function (config) {
   config = defaults(config, {
@@ -94,7 +94,7 @@ module.exports = async function (config) {
   const Queue = setupQueue(QueueModel, SalaModel);
   const Voicemail = setupVoicemail(VoicemailModel, UsuarioModel);
   const Sala = setupSala(SalaModel);
-  const Privilegios = setupSala(PrivilegiosModel);
+  const Privilegios = setupPrivilegios(PrivilegiosModel);
 
   return {
     Extension,

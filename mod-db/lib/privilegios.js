@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = function setupSala(PrivilegiosModel, UsuarioModel) {
+module.exports = function setupPrivilegios(PrivilegiosModel, UsuarioModel) {
   async function create(id, obj) {
     const res = await UsuarioModel.findOne({
       where: {

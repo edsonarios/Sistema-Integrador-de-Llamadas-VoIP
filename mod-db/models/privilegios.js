@@ -7,7 +7,11 @@ module.exports = function setupPrivilegiosModel(config) {
   const sequelize = setupDatabase(config);
 
   return sequelize.define("privilegios", {
-    privilegio: {
+    context: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+    numerofun: {
       type: Sequelize.STRING,
       allowNull: true,
     },
