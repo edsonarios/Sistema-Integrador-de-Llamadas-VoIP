@@ -36,7 +36,17 @@ const geojson = require("geojson");
 api.use(bodyParser.urlencoded({ extended: false }));
 api.use(bodyParser.json());
 
-let services, Cdr, Extension, Iax, Queue, Sala, Sip, Usuario, Voicemail, Agenda;
+let services,
+  Cdr,
+  Extension,
+  Iax,
+  Queue,
+  Sala,
+  Sip,
+  Usuario,
+  Voicemail,
+  Agenda,
+  Privilegios;
 
 api.use("*", async (req, res, next) => {
   if (!services) {
@@ -56,6 +66,7 @@ api.use("*", async (req, res, next) => {
     Sip = services.Sip;
     Usuario = services.Usuario;
     Voicemail = services.Voicemail;
+    Privilegios = services.Privilegios;
   }
 
   res.header("Access-Control-Allow-Origin", "*");
@@ -2368,6 +2379,69 @@ api.post("/pruebas", async (req, res, next) => {
   });
 
   res.send(getusuariosPrueba);
+});
+
+/// PRIVILEGIOS /////////////////////////////////////////////////////////////////////
+
+api.post("/addPrivilegios", async (req, res, next) => {
+  const params = req.body;
+  let obj;
+
+  try {
+    obj = await Privilegios.create(params.usuarioId, {
+      context: params.context,
+      numerofun: params.numerofun,
+      switch: params.switch,
+    });
+  } catch (e) {
+    return next(e);
+  }
+  res.send(obj);
+});
+
+api.put("/updatePrivilegios", async (req, res, next) => {
+  const params = req.body;
+  //edito cualquier atributo de de la tabla Agenda buscando por el id de la Agenda
+  let obj;
+  try {
+    obj = await Privilegios.update(params.id, {
+      context: params.context,
+      numerofun: params.numerofun,
+      switch: params.switch,
+    });
+  } catch (e) {
+    return next(e);
+  }
+
+  res.send(obj);
+});
+
+api.post("/findByIdCdr", async (req, res, next) => {
+  const params = req.body;
+  //busco los cdrs apartir de su id de cdr
+  let obj;
+  try {
+    obj = await Privilegios.findById(params.id);
+  } catch (e) {
+    return next(e);
+  }
+  if (!obj || obj.lenght == 0) {
+    return next(new Error(`Sala not found with id ${params.id}`));
+  }
+
+  res.send(obj);
+});
+
+api.get("/findAllPrivilegios", async (req, res, next) => {
+  let obj;
+  //busco y devuelvo todos los atributos de la tabla Agenda
+  try {
+    obj = await Privilegios.findAll();
+  } catch (e) {
+    return next(e);
+  }
+
+  res.send(obj);
 });
 
 /// CDR /////////////////////////////////////////////////////////////////////

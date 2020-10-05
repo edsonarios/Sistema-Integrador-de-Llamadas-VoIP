@@ -94,7 +94,7 @@ module.exports = async function (config) {
   const Queue = setupQueue(QueueModel, SalaModel);
   const Voicemail = setupVoicemail(VoicemailModel, UsuarioModel);
   const Sala = setupSala(SalaModel);
-  const Privilegios = setupPrivilegios(PrivilegiosModel);
+  const Privilegios = setupPrivilegios(PrivilegiosModel, UsuarioModel);
 
   return {
     Extension,
