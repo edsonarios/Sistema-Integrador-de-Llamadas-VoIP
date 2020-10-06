@@ -1379,6 +1379,30 @@ api.get("/getUsuariosTodos", async (req, res, next) => {
   res.send(getusuarios);
 });
 
+api.post("/getSalaPorUsuarioId", async (req, res, next) => {
+  const params = req.body;
+  //Obtengo todos los usuarios y salas
+  const usuariosAll = await Usuario.findAll();
+  const salasAll = await Sala.findAll();
+
+  let getsala = [];
+  //itero sobre los usuarios
+  usuariosAll.forEach((obj) => {
+    //itero sobre las salas
+    salasAll.forEach((obj1) => {
+      //preguntamos si el id del usuario es igual al id que le mandamos por postman
+      if (obj.id == params.idUsuario && obj.salaId == obj1.id) {
+        //guardamos en un vector el nombre de la sala
+        getsala.push({
+          nombreSala: `${obj1.nombreSala}`,
+        });
+      }
+    });
+  });
+  //mostramos el nombre de la sala
+  res.send(getsala);
+});
+
 api.delete("/deleteUsuarioWithAll", async (req, res, next) => {
   const params = req.body;
   //Obtengo todos los usuario de la tabla usuarios. A todos sips e iaxs
