@@ -36,7 +36,17 @@ const geojson = require("geojson");
 api.use(bodyParser.urlencoded({ extended: false }));
 api.use(bodyParser.json());
 
-let services, Cdr, Extension, Iax, Queue, Sala, Sip, Usuario, Voicemail, Agenda;
+let services,
+  Cdr,
+  Extension,
+  Iax,
+  Queue,
+  Sala,
+  Sip,
+  Usuario,
+  Voicemail,
+  Agenda,
+  Privilegios;
 
 api.use("*", async (req, res, next) => {
   if (!services) {
@@ -56,6 +66,7 @@ api.use("*", async (req, res, next) => {
     Sip = services.Sip;
     Usuario = services.Usuario;
     Voicemail = services.Voicemail;
+    Privilegios = services.Privilegios;
   }
 
   res.header("Access-Control-Allow-Origin", "*");
@@ -2308,6 +2319,186 @@ api.post("/findAllExtensionByFunctions", async (req, res, next) => {
   if (sw == "0") {
     res.send({ message: "Funcion no encontrada" });
   }
+});
+
+api.post("/pruebaIntervencion", async (req, res, next) => {
+  const params = req.body;
+  let sw = "0";
+
+  if (params.funcion == "llamadaEspiarLlamadaSilenciosamente") {
+    sw = "1";
+    const obj = await Extension.create(params.salaId, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "ChanSpy",
+      appdata: "SIP/${EXTEN:3},qb",
+    });
+    const obj2 = await Extension.create(params.salaId, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "hangup",
+      appdata: "",
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  }
+  //Creamos las entradas para la funcion Espiar llamada solo a la persona que llamo
+  if (params.funcion == "llamadaEspiarLlamadaSoloConAgente") {
+    sw = "1";
+    const obj = await Extension.create(params.salaId, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "ChanSpy",
+      appdata: "SIP/${EXTEN:3},qw",
+    });
+    const obj2 = await Extension.create(params.salaId, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "hangup",
+      appdata: "",
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  }
+  if (params.funcion == "llamadaEspiarLlamadaConAmbos") {
+    sw = "1";
+    const obj = await Extension.create(params.salaId, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "1",
+      app: "ChanSpy",
+      appdata: "SIP/${EXTEN:3},qB",
+    });
+    const obj2 = await Extension.create(params.salaId, {
+      context: `${params.sala}`,
+      exten: `${params.numero}`,
+      priority: "2",
+      app: "hangup",
+      appdata: "",
+    });
+    res.send({ message: "La funcion se creo correctamente" });
+  }
+
+  if (sw == "0") {
+    res.send({ message: "Funcion no encontrada" });
+  }
+});
+
+api.post("/pruebas", async (req, res, next) => {
+  //busco y devuelvo todos los atributos de la tabla cdrs
+  const params = req.body;
+  //obtengo todos los atributos de la tabla cdrs
+  const extensionsAll = await Extension.findAll();
+  const usuariosAll = await Usuario.findAll();
+  let getusuariosPrueba = [];
+
+  usuariosAll.forEach((obj) => {
+    extensionsAll.forEach((obj1) => {
+      if (obj.salaId == params.idsala && obj1.id == params.idsala) {
+        getusuariosPrueba.push(obj);
+      }
+    });
+  });
+
+  res.send(getusuariosPrueba);
+});
+
+/// PRIVILEGIOS /////////////////////////////////////////////////////////////////////
+
+api.post("/addPrivilegios", async (req, res, next) => {
+  const params = req.body;
+  let obj;
+  //Creo un privilegio asignado a un usuario
+  try {
+    obj = await Privilegios.create(params.usuarioId, {
+      context: params.context,
+      numerofun: params.numerofun,
+      switch: params.switch,
+    });
+  } catch (e) {
+    return next(e);
+  }
+  res.send(obj);
+});
+
+api.put("/updatePrivilegios", async (req, res, next) => {
+  const params = req.body;
+  //edito cualquier atributo de de la tabla Privilegios buscando por el id de los Privilegios
+  let obj;
+  try {
+    obj = await Privilegios.update(params.id, {
+      context: params.context,
+      numerofun: params.numerofun,
+      switch: params.switch,
+    });
+  } catch (e) {
+    return next(e);
+  }
+
+  res.send(obj);
+});
+
+api.put("/updatePrivilegiosSwitch", async (req, res, next) => {
+  const params = req.body;
+  //edito el atributo switch de de la tabla Privilegios buscando por el id de los Privilegios
+  let obj;
+  try {
+    obj = await Privilegios.update(params.id, {
+      switch: params.switch,
+    });
+  } catch (e) {
+    return next(e);
+  }
+
+  res.send(obj);
+});
+
+api.post("/findByIdPrivilegios", async (req, res, next) => {
+  const params = req.body;
+  //busco los cdrs apartir de su id de cdr
+  let obj;
+  try {
+    obj = await Privilegios.findById(params.id);
+  } catch (e) {
+    return next(e);
+  }
+  if (!obj || obj.lenght == 0) {
+    return next(new Error(`Sala not found with id ${params.id}`));
+  }
+
+  res.send(obj);
+});
+
+api.get("/findAllPrivilegios", async (req, res, next) => {
+  let obj;
+  //busco y devuelvo todos los atributos de la tabla Agenda
+  try {
+    obj = await Privilegios.findAll();
+  } catch (e) {
+    return next(e);
+  }
+
+  res.send(obj);
+});
+
+api.post("/findPrivilegiosByUsuario", async (req, res, next) => {
+  const params = req.body;
+  const privilegiosAll = await Privilegios.findAll();
+  let getfuncion = [];
+
+  privilegiosAll.forEach((obj) => {
+    if (obj.usuarioId == params.usuarioId) {
+      getfuncion.push({
+        nombreSala: `${obj.context}`,
+        funcion: `${obj.numerofun}`,
+        switch: `${obj.switch}`,
+      });
+    }
+  });
+
+  res.send(getfuncion);
 });
 
 /// CDR /////////////////////////////////////////////////////////////////////
