@@ -2386,7 +2386,7 @@ api.post("/pruebas", async (req, res, next) => {
 api.post("/addPrivilegios", async (req, res, next) => {
   const params = req.body;
   let obj;
-
+  //Creo un privilegio asignado a un usuario
   try {
     obj = await Privilegios.create(params.usuarioId, {
       context: params.context,
@@ -2401,12 +2401,27 @@ api.post("/addPrivilegios", async (req, res, next) => {
 
 api.put("/updatePrivilegios", async (req, res, next) => {
   const params = req.body;
-  //edito cualquier atributo de de la tabla Agenda buscando por el id de la Agenda
+  //edito cualquier atributo de de la tabla Privilegios buscando por el id de los Privilegios
   let obj;
   try {
     obj = await Privilegios.update(params.id, {
       context: params.context,
       numerofun: params.numerofun,
+      switch: params.switch,
+    });
+  } catch (e) {
+    return next(e);
+  }
+
+  res.send(obj);
+});
+
+api.put("/updatePrivilegiosSwitch", async (req, res, next) => {
+  const params = req.body;
+  //edito el atributo switch de de la tabla Privilegios buscando por el id de los Privilegios
+  let obj;
+  try {
+    obj = await Privilegios.update(params.id, {
       switch: params.switch,
     });
   } catch (e) {
@@ -2444,63 +2459,22 @@ api.get("/findAllPrivilegios", async (req, res, next) => {
   res.send(obj);
 });
 
-api.post("/ListarContactos", async (req, res, next) => {
+api.post("/findPrivilegiosByUsuario", async (req, res, next) => {
   const params = req.body;
-  //Obtengo todos los contactos de agenda. A todos los usuarios, sips e iaxs
-  const privilegiosAll = await Privilegios.findAllOrder();
-  const usuarioAll = await Usuario.findAll();
-  const extensionsAll = await Extension.findAll();
-
-  let getidusuario = [];
-  let getidsala = [];
-  let getcontext = [];
-
-  extensionsAll.forEach((obj) => {
-    privilegiosAll.forEach((obj1) => {
-      if (obj.context == obj1.context && obj.exten == obj1.numerofun) {
-        res.send("si tiene la funcion.. :v");
-      }
-    });
-  });
+  const privilegiosAll = await Privilegios.findAll();
+  let getfuncion = [];
 
   privilegiosAll.forEach((obj) => {
     if (obj.usuarioId == params.usuarioId) {
-      getidusuario.push(obj.usuarioId);
+      getfuncion.push({
+        nombreSala: `${obj.context}`,
+        funcion: `${obj.numerofun}`,
+        switch: `${obj.switch}`,
+      });
     }
   });
 
-  getnumero.forEach((algo) => {
-    sipsAll.forEach((obj) => {
-      if (algo == obj.name) {
-        getidusu.push(obj.usuarioId);
-        getsips.push(obj.name);
-      }
-    });
-  });
-
-  getnumero.forEach((algo) => {
-    iaxsAll.forEach((obj) => {
-      if (algo == obj.name) {
-        getidusu.push(obj.usuarioId);
-        getiaxs.push(obj.name);
-      }
-    });
-  });
-
-  getidusu.forEach((algo2) => {
-    usuarioAll.forEach((obj) => {
-      if (obj.id == algo2) {
-        getusuarios.push(obj.nombre);
-      }
-    });
-    //getusuarios = [];
-  });
-
-  todos.push(getidagenda);
-  todos.push(getusuarios);
-  todos.push(getsips);
-  //todos.sort();
-  res.send(todos);
+  res.send(getfuncion);
 });
 
 /// CDR /////////////////////////////////////////////////////////////////////
