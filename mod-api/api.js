@@ -2416,7 +2416,7 @@ api.put("/updatePrivilegios", async (req, res, next) => {
   res.send(obj);
 });
 
-api.post("/findByIdCdr", async (req, res, next) => {
+api.post("/findByIdPrivilegios", async (req, res, next) => {
   const params = req.body;
   //busco los cdrs apartir de su id de cdr
   let obj;
@@ -2442,6 +2442,65 @@ api.get("/findAllPrivilegios", async (req, res, next) => {
   }
 
   res.send(obj);
+});
+
+api.post("/ListarContactos", async (req, res, next) => {
+  const params = req.body;
+  //Obtengo todos los contactos de agenda. A todos los usuarios, sips e iaxs
+  const privilegiosAll = await Privilegios.findAllOrder();
+  const usuarioAll = await Usuario.findAll();
+  const extensionsAll = await Extension.findAll();
+
+  let getidusuario = [];
+  let getidsala = [];
+  let getcontext = [];
+
+  extensionsAll.forEach((obj) => {
+    privilegiosAll.forEach((obj1) => {
+      if (obj.context == obj1.context && obj.exten == obj1.numerofun) {
+        res.send("si tiene la funcion.. :v");
+      }
+    });
+  });
+
+  privilegiosAll.forEach((obj) => {
+    if (obj.usuarioId == params.usuarioId) {
+      getidusuario.push(obj.usuarioId);
+    }
+  });
+
+  getnumero.forEach((algo) => {
+    sipsAll.forEach((obj) => {
+      if (algo == obj.name) {
+        getidusu.push(obj.usuarioId);
+        getsips.push(obj.name);
+      }
+    });
+  });
+
+  getnumero.forEach((algo) => {
+    iaxsAll.forEach((obj) => {
+      if (algo == obj.name) {
+        getidusu.push(obj.usuarioId);
+        getiaxs.push(obj.name);
+      }
+    });
+  });
+
+  getidusu.forEach((algo2) => {
+    usuarioAll.forEach((obj) => {
+      if (obj.id == algo2) {
+        getusuarios.push(obj.nombre);
+      }
+    });
+    //getusuarios = [];
+  });
+
+  todos.push(getidagenda);
+  todos.push(getusuarios);
+  todos.push(getsips);
+  //todos.sort();
+  res.send(todos);
 });
 
 /// CDR /////////////////////////////////////////////////////////////////////
