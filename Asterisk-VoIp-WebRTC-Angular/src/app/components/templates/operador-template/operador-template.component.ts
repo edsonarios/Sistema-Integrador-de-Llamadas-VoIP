@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef, OnDestroy } from '@angular/core';
 import { User } from 'models/user';
-// import { Sala } from '../../../../models/sala';
+// import { Sala, SalaUser } from '../../../../models/sala';
 import { Entrance, Quit, DesktopAnimation, EnterLeave } from 'services/animations';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -13,7 +13,7 @@ import { SalaService } from '@services/sala.service';
 import { interval, timer } from 'rxjs';
 
 // Fontawesome
-import { faMicrophone, faMicrophoneSlash, faSignal, faPlug } from '@fortawesome/free-solid-svg-icons';
+import { faMicrophone, faMicrophoneSlash, faSignal, faPlug, faMobileAlt } from '@fortawesome/free-solid-svg-icons';
 
 // Sockets
 import { AsteriskConnectionService } from '../../../../services/asterisk-connection.service';
@@ -26,6 +26,8 @@ import { WebsocketService } from '../../../../services/websocket.service';
 import { Socket } from 'ngx-socket-io';
 import { EstadoAsterisk, UsuarioEstado } from '../../../../models/estadoAsterisk';
 import { ParticipanteSala } from '../../../../models/participantesSala';
+import { SalaUser } from '@models/apisInterface';
+// import { SalaUser } from '@models/sala';
 
 @Component({
     selector: 'operador-template',
@@ -50,11 +52,13 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     public ua: UA;
     public remote: RTCSession;
     public mostrarParticipantes = false;
+    public nombreSala = 'DEFAULT';
     // variables para guardar los iconos
     faSenal = faSignal;
     faMicro = faMicrophone;
     faMicroActive = faMicrophoneSlash;
     faSenalAsterisk = faPlug;
+    numeroIcon = faMobileAlt;
     // asteriskIcon= ang;
     // colores en variables
     Connection = '#22bb33';
@@ -96,6 +100,8 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     public pages = false;
 
     user: User;
+    public userId;
+    public salaId: SalaUser;
     public NumeroActual;
     public HidePanel = false;
 
@@ -185,13 +191,14 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
         this.AsignarSipsIax();
     }
     ngOnInit() {
-        this.numSrc = "";
-        this.nomSrc = "";
-        this.numDts = "";
-        this.nomDts = "";
+        this.numSrc = '';
+        this.nomSrc = '';
+        this.numDts = '';
+        this.nomDts = '';
         localStorage.setItem('PanelHide', 'false');
         localStorage.setItem('estadoUsers', JSON.stringify(this.arrayAgendaEstados));
         this.user = JSON.parse(localStorage.getItem('Usuario'));
+        this.userId = this.user.usuarioId;
         this.NumeroActual = localStorage.getItem('NumberSelected');
         this.rtc = new WebRTCService();
         console.log(this.rtc);
@@ -246,6 +253,15 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
         // console.log('[CONECTADOS]', JSON.stringify(this.Conectados));
         // console.log('[OPERADOR] lista de conectados', this.Conectados);
         // console.log('[OPERADOR] datos en el storage', localStorage.getItem('socketAgenda'));
+        this.salaService.getSalaporUsuario(this.userId).subscribe(
+            (response) => {
+                console.log('[OPERADOR] respuesta', response);
+                this.salaId = response[0];
+                console.log('[OPERADOR] salaid: ', this.salaId.nombreSala);
+                this.nombreSala = this.salaId.nombreSala;
+            },
+            (er) => console.log(er)
+        );
     }
     ngOnDestroy() {
         this.estadoSubscription.unsubscribe();
@@ -591,15 +607,14 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
         }
     }
 
-
-    mostrarData(mensaje){
+    mostrarData(mensaje) {
         this.PaEnviar = mensaje;
         this.nomSrc = mensaje.nomSrc.nombre + mensaje.nomSrc.apPaterno;
         this.nomDts = mensaje.nomDts.nombre + mensaje.nomDts.apPaterno;
         this.numDts = mensaje.numDts;
         this.numSrc = mensaje.numSrc;
-        console.log(mensaje);   
-        console.log(mensaje.nomSrc.nombre, mensaje.nomSrc.apPaterno)
-        console.log(mensaje.nomDts.nombre, mensaje.nomDts.apPaterno)
+        console.log(mensaje);
+        console.log(mensaje.nomSrc.nombre, mensaje.nomSrc.apPaterno);
+        console.log(mensaje.nomDts.nombre, mensaje.nomDts.apPaterno);
     }
 }

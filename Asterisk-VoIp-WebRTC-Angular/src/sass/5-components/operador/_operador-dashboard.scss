@@ -40,17 +40,17 @@
 .UserBar {
     grid-area: UserBar;
     display: grid;
-    grid-template-columns: 15px 55px auto;
+    grid-template-columns: 25px 70px auto;
     grid-template-areas: 'UserBar_Option UserBar_logo UserBar_info';
 }
 .UserBar_logo {
     grid-area: UserBar_logo;
     display: grid;
-    background: green;
-    vertical-align: middle;
-    height: auto;
-    width: auto;
-    margin: 5px;
+    align-self: center;
+    align-content: center;
+    height: 60px;
+    width: 60px;
+    // margin: 5px;
     background-image: url(assets/avatar.png);
     background-size: cover;
     border-radius: 50%;
@@ -61,13 +61,15 @@
     display: grid;
 }
 .btn_dropdown {
-    display: inline-block;
+    // display: inline-block;
+    display: grid;
+    align-self: center;
     background: none;
-    color: #fff;
+    color: #4583a1;
     cursor: pointer;
     border: none;
-    padding: 10px 5px 10px 5px;
-    font-size: 13px;
+    // padding: 10px 5px 10px 5px;
+    font-size: 20px;
 }
 .Item_Dropdown {
     text-align: center;
@@ -79,11 +81,14 @@
 .UserBar_info {
     grid-area: UserBar_info;
     display: grid;
-    vertical-align: middle;
     text-align: center;
     font-size: 15px;
-    padding-top: 10px;
-    line-height: 1.2;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    .numSala {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+    }
 }
 .dropdown-menu {
     margin-right: 1000px;

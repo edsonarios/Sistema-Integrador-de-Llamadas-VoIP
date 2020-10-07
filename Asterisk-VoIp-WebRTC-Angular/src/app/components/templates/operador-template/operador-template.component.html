@@ -72,10 +72,13 @@
                 </div>
             </div>
             <div class="UserBar_info">
-                <span>
-                    {{ user['correo'] }}<br />
-                    {{ NumeroActual }} - Default<br />
-                </span>
+                <div>
+                    {{ user['correo'] }}
+                </div>
+                <div class="numSala">
+                    <div>{{ NumeroActual }} <fa-icon [icon]="numeroIcon"></fa-icon></div>
+                    <div class="text-success">{{ nombreSala }}</div>
+                </div>
             </div>
         </div>
     </div>
@@ -121,19 +124,13 @@
                             Dts="{{ n.numero }}"
                         ></llamada>
                     </div>
-                    
-                        <intervencion 
-                            numDts = "{{ numDts }}"
-                            numSrc = "{{ numSrc }}"
-                            nomDts = "{{ nomDts }}"
-                            nomSrc = "{{ nomSrc }}">
-                        </intervencion>
-                    
+
+                    <intervencion numDts="{{ numDts }}" numSrc="{{ numSrc }}" nomDts="{{ nomDts }}" nomSrc="{{ nomSrc }}"> </intervencion>
                 </section>
             </div>
             <div class="CenterContent_Inf">
                 <div class="CenterContent_InfPanel">
-                    <header (click)="LoaderPanel()" style="cursor: pointer">Panel de Estados </header>
+                    <header (click)="LoaderPanel()" style="cursor: pointer">Panel de Estados</header>
                     <panel (IntervencionLlamada)="mostrarData($event)"></panel>
                 </div>
                 <div class="CenterContent_InfInfo">

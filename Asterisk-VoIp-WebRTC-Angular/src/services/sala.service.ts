@@ -6,6 +6,7 @@ import { retry, catchError } from 'rxjs/operators';
 
 import { User } from '../models/user';
 import { GLOBAL } from './global';
+// import { SalaUser } from '../models/sala';
 
 @Injectable({
     providedIn: 'root'
@@ -62,6 +63,14 @@ export class SalaService {
         console.log(parti);
         return this.http.put<any>(this.url + 'updateContextAndIdSala', parti, this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
     }
+
+    // getSalaPorUsuarioId
+    getSalaporUsuario(idUsuario): Observable<any> {
+        return this.http.post<any>(this.url + 'getSalaPorUsuarioId', { idUsuario }, this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
+    }
+    // addSala(sala): Observable<any> {
+    //     return this.http.post<any>(this.url + 'addSala', sala, this.httpOptions).pipe(retry(1), catchError(this.errorHandl));
+    // }
 
     // Error handling
     errorHandl(error) {
