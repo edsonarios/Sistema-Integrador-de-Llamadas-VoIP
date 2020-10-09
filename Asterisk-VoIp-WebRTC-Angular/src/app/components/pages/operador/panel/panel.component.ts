@@ -20,6 +20,7 @@ export class PanelComponent implements OnInit {
 	[
 		["7005"],["7003"],["ANSWERED"]]*/
     // public Panel = [];
+
     public urlSocket: string;
     public socket;
     public hide = localStorage.getItem('PanelHide');
@@ -36,7 +37,7 @@ export class PanelComponent implements OnInit {
     ni = '';
     swInter = false;
     numeroActual = localStorage.getItem('NumberSelected');
-    @Output()    
+    @Output()
     IntervencionLlamada: EventEmitter<Object> = new EventEmitter<Object>();
     detalle;
 
@@ -158,9 +159,9 @@ export class PanelComponent implements OnInit {
         }
     }
 
-    enviarIntervencion(n){
+    enviarIntervencion(n) {
         console.log();
-        var detallesllamada = {extension: n.extension, numero: n.numero };
+        var detallesllamada = { extension: n.extension, numero: n.numero };
         console.log('interviniendo...');
         this.numSrc = detallesllamada.extension;
         this.numDts = detallesllamada.numero;
@@ -191,10 +192,10 @@ export class PanelComponent implements OnInit {
             console.log('origen', this.numSrc);
             console.log('destino', this.numDts);
         }
-        
+
         this.detalle = { nomSrc: this.opeSrc, numSrc: this.numSrc, nomDts: this.opeDts, numDts: this.numDts };
         console.log(this.detalle);
-        this.IntervencionLlamada.emit(this.detalle); 
+        this.IntervencionLlamada.emit(this.detalle);
     }
 
     modalinter(modal, n) {

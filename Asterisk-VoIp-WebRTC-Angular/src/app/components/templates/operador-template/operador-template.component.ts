@@ -24,9 +24,12 @@ import { UA } from 'jssip';
 import { RTCSession } from 'jssip/lib/RTCSession';
 import { WebsocketService } from '../../../../services/websocket.service';
 import { Socket } from 'ngx-socket-io';
+import * as io from 'socket.io-client';
+import { GLOBAL } from '@services/global';
 import { EstadoAsterisk, UsuarioEstado } from '../../../../models/estadoAsterisk';
 import { ParticipanteSala } from '../../../../models/participantesSala';
 import { SalaUser } from '@models/apisInterface';
+import { UserService } from '../../../../services/user.service';
 // import { SalaUser } from '@models/sala';
 
 @Component({
@@ -67,26 +70,6 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     noConnection = '#d9534f';
     lowConnection = '#f0ad4e';
 
-    /* public Llamada=[
-				{'nombre':'Prueba Llamada',
-				 'numero': '3002',
-				 'Tipo': 'Llamada',
-				 'id':'1',
-				 'Estado':'inactiva',
-				},
-				{'nombre':'Prueba Sala',
-				 'numero': '3002',
-				 'Tipo': 'Sala',
-				 'id':'1',
-				 'Estado':'inactiva',
-				},
-				{'nombre':'Prueba Radio',
-				 'numero': '3002',
-				 'Tipo': 'Radio',
-				 'id':'1',
-				 'Estado':'inactiva',
-				},
-				];*/
     public Salas = [];
     public Notificaciones = [];
     public Panel = [];
@@ -121,15 +104,35 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     public socketAgendaNumero = '';
     public socketAgendaEstado = '';
 
+    public urlSocket: string;
+    public sockets;
+    public hide = 'false';
+    public VectorPaneles = [];
+    public panelEstado = false;
     modalRef: BsModalRef;
+    // variables para llamadas
+    public session: WebRTCService;
+
+    opeSrc = { nombre: 'Numero', apPaterno: 'Externo' };
+    opeDts = { nombre: 'Numero', apPaterno: 'Externo' };
+    over = '';
+    ni = '';
+    swInter = false;
+    numeroActual = localStorage.getItem('NumberSelected');
+
+    detalle;
     constructor(
         private modalService: BsModalService,
         private formBuilder: FormBuilder,
         public salaService: SalaService,
         public estadoService: AsteriskConnectionService,
         public wsService: WebsocketService,
-        private socket: Socket
+        private socket: Socket,
+        private userService: UserService
     ) {
+        this.sockets = io(GLOBAL.urlSocket);
+        console.log(this.sockets);
+
         this.ParticipantesSala = [
             {
                 Id: '1',
@@ -191,6 +194,8 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
         this.AsignarSipsIax();
     }
     ngOnInit() {
+        this.session = new WebRTCService();
+        this.session.sessionEvents();
         this.numSrc = '';
         this.nomSrc = '';
         this.numDts = '';
@@ -267,12 +272,177 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
         this.estadoSubscription.unsubscribe();
     }
 
+    ngAfterViewInit() {
+        // estado de los botones en tiempo real
+        this.startRealtime();
+    }
+    async startRealtime() {
+        this.socket.on('Llamadas', (payload) => {
+            console.log(payload);
+            this.BusquedaExistente(payload);
+        });
+    }
+    //panel begin
+    BusquedaExistente(Vector) {
+        if (this.BusquedaExistentenEventoPanel(Vector)) {
+            // si existe actualiza el dato
+            this.ActualizarEventoPanel(Vector);
+        } else {
+            // si no existe solo lo adiciona en su ultimo estado
+            this.AgregarEventoPanelEstado(Vector);
+        }
+        this.EliminaHangups(this.VectorPaneles);
+    }
+    EliminaHangups(VectorPaneles) {
+        let aux = [];
+        let long = 0;
+        for (let i = 0; i < VectorPaneles.length; i++) {
+            if (VectorPaneles[i]['evento'] != 'Hangup') {
+                aux[long] = VectorPaneles[i];
+                long = long + 1;
+            }
+        }
+        this.VectorPaneles = aux;
+    }
+    BusquedaExistentenEventoPanel(Vector) {
+        // recorre todo el vecto en busqueda de los datos repetidos
+        for (let j = 0; j < this.VectorPaneles.length; j++) {
+            if (
+                (this.VectorPaneles[j]['numero'] == Vector['numero'] && this.VectorPaneles[j]['extension'] == Vector['extension']) ||
+                (this.VectorPaneles[j]['extension'] == Vector['numero'] && this.VectorPaneles[j]['numero'] == Vector['extension'])
+            ) {
+                return true;
+            } else {
+            }
+        }
+        return false;
+    }
+    AgregarEventoPanelEstado(Payload) {
+        this.VectorPaneles.push(Payload);
+    }
+    ActualizarEventoPanel(Vector) {
+        const Long = this.VectorPaneles.length;
+        this.VectorPaneles[Long - 1] = Vector;
+    }
+    Opcion1() {
+        console.log(this.VectorPaneles);
+    }
+    Opcion2() {}
+    Opcion3() {}
+    intervencion(option) {
+        console.log(option, this.ni);
+        switch (option) {
+            case 'silen':
+                //  555
+                this.session.sipCall('555' + this.numSrc);
+                console.log('555' + this.numSrc);
+                break;
+            case 'od':
+                //  556
+                this.session.sipCall('556' + this.ni);
+                console.log('556' + this.ni);
+                break;
+            case 'ambos':
+                // 557
+                this.session.sipCall('557' + this.numSrc);
+                console.log('557' + this.numSrc);
+                break;
+            default:
+                break;
+        }
+    }
+
+    cambioIntervencion(esto, numero) {
+        this.over = esto.toLowerCase();
+        this.ni = numero;
+    }
+
+    validacionOperadores(n): boolean {
+        if (this.numeroActual === n.extension || this.numeroActual === n.numero) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    enviarIntervencion(n) {
+        console.log();
+        var detallesllamada = { extension: n.extension, numero: n.numero };
+        console.log('interviniendo...');
+        this.numSrc = detallesllamada.extension;
+        this.numDts = detallesllamada.numero;
+
+        if (this.numeroActual === detallesllamada.extension || this.numeroActual === detallesllamada.numero) {
+            console.log('NO PUEDES INTERVENIR ESTA LLAMADA');
+        } else {
+            this.numSrc = detallesllamada.extension;
+            this.numDts = detallesllamada.numero;
+            console.log(this.numSrc);
+            console.log(this.numDts);
+            this.userService.detalleUsuario(this.numSrc).subscribe((response) => {
+                if (response[0] === undefined) {
+                    console.log(' EL NUMERO ES EXTERNO');
+                } else {
+                    console.log(response[0]);
+                    this.opeSrc = response[0];
+                }
+            });
+            this.userService.detalleUsuario(this.numDts).subscribe((response) => {
+                if (response[0] === undefined) {
+                    console.log(' EL NUMERO ES EXTERNO');
+                } else {
+                    console.log(response);
+                    this.opeDts = response[0];
+                }
+            });
+            console.log('origen', this.numSrc);
+            console.log('destino', this.numDts);
+        }
+
+        this.detalle = { nomSrc: this.opeSrc, numSrc: this.numSrc, nomDts: this.opeDts, numDts: this.numDts };
+        console.log(this.detalle);
+        //  this.IntervencionLlamada.emit(this.detalle);
+    }
+
+    modalinter(modal, n) {
+        // this.IntervencionLlamada.emit("Mensaje desde el componente hijo");
+        // if (this.numeroActual === n.extension || this.numeroActual === n.numero) {
+        //     console.log('NO PUEDES INTERVENIR ESTA LLAMADA');
+        // } else {
+        //     this.numSrc = n.extension;
+        //     this.numDts = n.numero;
+        //     console.log(this.numSrc);
+        //     console.log(this.numDts);
+        //     this.userService.detalleUsuario(this.numSrc).subscribe((response) => {
+        //         if (response[0] === undefined) {
+        //             console.log(' EL NUMERO ES EXTERNO');
+        //         } else {
+        //             console.log(response[0]);
+        //             this.opeSrc = response[0];
+        //         }
+        //     });
+        //     this.userService.detalleUsuario(this.numDts).subscribe((response) => {
+        //         if (response[0] === undefined) {
+        //             console.log(' EL NUMERO ES EXTERNO');
+        //         } else {
+        //             console.log(response);
+        //             this.opeDts = response[0];
+        //         }
+        //     });
+        //     this.modalService.show(modal);
+        //     console.log('origen', this.numSrc);
+        //     console.log('destino', this.numDts);
+        // }
+    }
+    //panel ends
     LoaderPage(funtion) {
         if (funtion == 'page') {
             this.Hide = false;
+            this.hide = 'true';
         } else {
             if (funtion == 'operational') {
                 this.Hide = true;
+                this.hide = 'false';
             }
         }
     }
@@ -280,9 +450,11 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
         if (this.panel == false) {
             localStorage.setItem('PanelHide', 'true');
             this.panel = true;
+            this.hide = localStorage.getItem('PanelHide');
         } else {
             this.panel = false;
             localStorage.setItem('PanelHide', 'false');
+            this.hide = localStorage.getItem('PanelHide');
         }
     }
     ObtenerSalas() {
