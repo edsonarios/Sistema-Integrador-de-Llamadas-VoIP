@@ -1,10 +1,17 @@
 <div class="mediaPlayer">
 	<div class="icon" style="cursor: pointer;" (click)="playPause()">
-		<i *ngIf="audio.paused" class="v-icon-play3"></i>
-		<i *ngIf="!audio.paused" class="v-icon-pause2"></i>
-	</div>
-	<div>
-		{{convertseconds(audio.currentTime)}}
+		<div class="bolita">
+			<i *ngIf="!audio.paused" class="v-icon-pause2"></i>
+			<i *ngIf="audio.paused" class="v-icon-play3"></i>
+		</div>
 	</div>
 	<progress [max]="max" [value]="value"></progress>
+	<div >
+		<div class="def" *ngIf="!audio.duration">
+			{{this.data.segundos}}
+		</div>
+		<div class="condi" *ngIf="audio.duration">
+			{{convertseconds(audio.currentTime)}}
+		</div>
+	</div>
 </div>

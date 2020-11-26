@@ -166,9 +166,9 @@ export class PanelComponent implements OnInit {
         this.numSrc = detallesllamada.extension;
         this.numDts = detallesllamada.numero;
 
-        if (this.numeroActual === detallesllamada.extension || this.numeroActual === detallesllamada.numero) {
-            console.log('NO PUEDES INTERVENIR ESTA LLAMADA');
-        } else {
+        // if (this.numeroActual === detallesllamada.extension || this.numeroActual === detallesllamada.numero) {
+        //     console.log('NO PUEDES INTERVENIR ESTA LLAMADA');
+        // } else {
             this.numSrc = detallesllamada.extension;
             this.numDts = detallesllamada.numero;
             console.log(this.numSrc);
@@ -191,9 +191,9 @@ export class PanelComponent implements OnInit {
             });
             console.log('origen', this.numSrc);
             console.log('destino', this.numDts);
-        }
-
-        this.detalle = { nomSrc: this.opeSrc, numSrc: this.numSrc, nomDts: this.opeDts, numDts: this.numDts };
+        // }
+        this.swInter = !this.swInter;    
+        this.detalle = { show: this.swInter, nomSrc: this.opeSrc, numSrc: this.numSrc, nomDts: this.opeDts, numDts: this.numDts };
         console.log(this.detalle);
         this.IntervencionLlamada.emit(this.detalle);
     }

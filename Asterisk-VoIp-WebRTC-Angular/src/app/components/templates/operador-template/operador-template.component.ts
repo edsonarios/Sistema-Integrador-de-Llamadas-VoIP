@@ -366,8 +366,9 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
     }
 
     enviarIntervencion(n) {
-        console.log();
+        console.log(n);
         var detallesllamada = { extension: n.extension, numero: n.numero };
+        // var detallesllamada = { extension: '333', numero: '444' };
         console.log('interviniendo...');
         this.numSrc = detallesllamada.extension;
         this.numDts = detallesllamada.numero;
@@ -398,8 +399,8 @@ export class OperadorTemplateComponent implements OnInit, OnDestroy {
             console.log('origen', this.numSrc);
             console.log('destino', this.numDts);
         }
-
-        this.detalle = { nomSrc: this.opeSrc, numSrc: this.numSrc, nomDts: this.opeDts, numDts: this.numDts };
+        this.swInter = !this.swInter;
+        this.detalle = { show: this.swInter, nomSrc: this.opeSrc, numSrc: this.numSrc, nomDts: this.opeDts, numDts: this.numDts };
         console.log(this.detalle);
         //  this.IntervencionLlamada.emit(this.detalle);
     }

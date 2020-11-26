@@ -102,8 +102,9 @@ export class AudioPlayerComponent implements OnInit  {
   }
 
   convertseconds(segundos){
-    let minutos = Math.floor(segundos/60);
-    let seconds = Math.floor(segundos%60);
+    var calc = Math.abs(Math.floor(segundos - this.audio.duration));
+    let minutos = Math.floor(calc/60);
+    let seconds = Math.floor(calc%60);
     let m, s;
     m = minutos<10? '0'+minutos : minutos;
     s = seconds<10? '0'+seconds : seconds;

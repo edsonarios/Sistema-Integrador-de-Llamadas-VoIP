@@ -73,7 +73,7 @@
             </div>
             <div class="UserBar_info">
                 <div>
-                    {{ user['correo'] }}
+                    <!-- {{ user['correo'] }} -->
                 </div>
                 <div class="numSala">
                     <div>{{ NumeroActual }} <fa-icon [icon]="numeroIcon"></fa-icon></div>
@@ -125,7 +125,7 @@
                         ></llamada>
                     </div>
 
-                    <intervencion numDts="{{ numDts }}" numSrc="{{ numSrc }}" nomDts="{{ nomDts }}" nomSrc="{{ nomSrc }}"> </intervencion>
+                    <intervencion show="{{ swInter }}" numDts="{{ numDts }}" numSrc="{{ numSrc }}" nomDts="{{ nomDts }}" nomSrc="{{ nomSrc }}"> </intervencion>
                 </section>
             </div>
             <div class="CenterContent_Inf">
@@ -205,6 +205,7 @@
 
 <ng-template #PanelBlock>
     <table class="table table-hover table-mc-light-blue">
+        <!-- <button class="btn btn-success" (click)="enviarIntervencion(n)">Enviar</button> -->
         <thead>
             <tr>
                 <th *ngIf="hide == 'true'">Extension</th>
