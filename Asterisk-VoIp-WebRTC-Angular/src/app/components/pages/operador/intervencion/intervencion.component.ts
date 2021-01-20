@@ -15,8 +15,10 @@ export class IntervencionComponent implements OnInit {
     @Input() numSrc: any;
     @Input() nomDts: any;
     @Input() nomSrc: any;
+    @Input() show: any;
 
     modal: any;
+    sw = false;
 
 
     over = '';
@@ -29,7 +31,8 @@ export class IntervencionComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        
+        this.show= false;
+        console.log(this.numDts, this.numSrc);
         this.session = new WebRTCService();
         this.session.sessionEvents();
     }    
@@ -80,6 +83,6 @@ export class IntervencionComponent implements OnInit {
     }
 
     cerrarIntervenion(){
-        this.numDts = false;
+        this.show = !this.show;
     }
 }

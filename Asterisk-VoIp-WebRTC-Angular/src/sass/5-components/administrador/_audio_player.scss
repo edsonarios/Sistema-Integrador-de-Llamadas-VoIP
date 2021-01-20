@@ -1,15 +1,41 @@
-.mediaPlayer{
-	display: grid;
-	grid-template-columns: 20% 80%;
-	grid-template-areas:'icon progressbar';
-}
-.icon{
-	grid-area: icon;
+// .mediaPlayer{
+// 	display: grid;
+// 	grid-template-columns: 20% 80%;
+// 	grid-template-areas:'icon progressbar';
+// }
+// .icon{
+// 	grid-area: icon;
 	
-	margin: 2px;
-}
-.progressbar{
-	grid-area: progressbar;
+// 	margin: 2px;
+// }
+// .progressbar{
+// 	grid-area: progressbar;
 
-	margin: 2px;
+// 	margin: 2px;
+// }
+
+.mediaPlayer{
+	display: flex;
+	justify-content: space-around;
+}
+
+progress{
+	margin-top: 5px;
+}
+
+.bolita{
+	height: 25px;
+	width: 25px;
+	background-color: darkslategrey;
+	color: white;
+	
+	border-radius: 50%;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+}
+
+.bolita:hover{
+	background-color: white;
+	color: darkslategrey;
 }

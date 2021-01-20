@@ -8,7 +8,35 @@
    <div class="card-footer bg-transparent border-success">Footer</div>
  </div> -->
 
-<div class="card" *ngIf="numDts">
+<div class="container" *ngIf="show">
+    <div class="card">
+        <div class="titulo">
+            <b>Intervención</b>
+            <i-feather name="x-circle" class="exis" (click)="cerrarIntervenion()"></i-feather>
+        </div>
+        <div class="cuerpo">
+            <div class="origen">
+                <h5>Origen </h5>
+                <i-feather class="verde" name="phone-outgoing"></i-feather>{{ numSrc}}
+            </div>
+            <div class="destino">
+                <div class="justi">
+                    {{ numDts}}<i-feather class="rojo" name="phone-incoming"></i-feather>
+                </div>
+                <h5>Destino </h5>
+            </div>
+        </div>
+        <div class="pie">
+            <!-- <button class="btn btn-success btn-block" (click)="intervenir(modalintervencion)" [disabled] = "llamando!=false">Intervenir</button>     -->
+            <div class="boton amarillo" (click)="intervenir(modalintervencion)">Tipo</div>
+            <div class="boton llama"><i-feather name="phone-off" class="colg"></i-feather></div>
+            <!-- <div class="boton"></div> -->
+        </div>
+    </div>
+</div>  
+
+
+<!-- <div class="card" *ngIf="numDts">
     <div class="header">
         <b>Intervención {{ numDts }} _ {{ numSrc }}</b>
         <i-feather name="x-circle" (click)="cerrarIntervenion()"></i-feather>
@@ -34,11 +62,14 @@
     <div class="footer">
         <button class="btn btn-success btn-block" (click)="intervenir(modalintervencion)" [disabled] = "llamando!=false">Intervenir</button>
         <button (click)="endCall()" class="colgar" tooltip="colgar" *ngIf="llamando" ><i-feather name="phone-off"></i-feather></button>
-        <!-- <button class="btn btn-success">Silenciosa</button>
+         <button class="btn btn-success">Silenciosa</button>
         <button class="btn btn-dark">O / D</button>
-        <button class="btn btn-danger">Ambos</button> -->
+        <button class="btn btn-danger">Ambos</button> 
     </div>
-</div>
+</div> -->
+
+
+
 <!-- <div class="card" style="width: 100%">
 <div class="row">
     <div class="col">
@@ -90,32 +121,24 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="origen">
-                            <h4>Origen</h4>
-                            <i-feather name="phone-outgoing"></i-feather>
-                        </div>
-                        <div class="card" style="width: 100%">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ nomSrc }}</h5>
-                                <p class="card-text">
-                                    {{ numSrc }}
-                                </p>
+                        <h5><b>Origen</b></h5>
+                        <div class="card carta">
+                            <div class="origen">
+                                <i-feather class="verde" name="phone-outgoing"></i-feather>
+                                <div>{{ nomSrc }} Numero origen</div>
+                                <div>{{ numSrc }} </div>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card" style="width: 100%">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ nomDts }}</h5>
-                                <p class="card-text">
-                                    {{ numDts }}
-                                </p>
+                        <div class="card carta">
+                            <div class="destino">
+                                <i-feather class="rojo" name="phone-outgoing"></i-feather>
+                                <div>{{ nomDts }} numero destino</div>
+                                <div>{{ numDts }}</div>
                             </div>
                         </div>
-                        <div class="destino">
-                            <i-feather name="phone-incoming"></i-feather>
-                            <h4>Destino</h4>
-                        </div>
+                        <h5><b>Destino</b></h5>
                     </div>
                 </div>
                 <div class="row">
@@ -136,22 +159,44 @@
                 <hr>
                 <div class="row">
                     <div class="col">
-                        <div class="origen">
-                            <h4>Origen</h4>
-                            <i-feather name="phone-outgoing"></i-feather>
-                        </div>
-                        <div class="card" style="width: auto" (click)="cambioIntervencion('Src', numSrc)">
-                            <div
-                                class="card-body"
-                                [ngStyle]="{ 'background-color': over === 'src' ? 'rgb(3, 187, 27)' : 'white', color: over === 'src' ? 'white' : 'black' }"
-                            >
-                                <h5 class="card-title">{{ nomSrc }}</h5>
-                                <p class="card-text">
-                                    {{ numSrc }}
-                                </p>
+                        <h5><b>Origen</b></h5>
+                        <div class="card carta" (click)="cambioIntervencion('Src', numSrc)" [ngStyle]="{ 'background-color': over === 'src' ? 'rgb(3, 187, 27)' : 'white', color: over === 'src' ? 'white' : 'black' }">
+                            <div class="origen" (click)="cambioIntervencion('Src', numSrc)">
+                                <i-feather class="verde" name="phone-outgoing"></i-feather>
+                                <div>{{ nomSrc }} Numero origen</div>
+                                <div>{{ numSrc }} </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col">
+                        <div class="card carta" (click)="cambioIntervencion('Dts', numDts)" [ngStyle]="{ 'background-color': over === 'dts' ? ' rgb(255, 85, 73)' : 'white', color: over === 'dts' ? 'white' : 'black' }"> 
+                            <div class="destino" >
+                                <i-feather class="rojo" name="phone-outgoing"></i-feather>
+                                <div>{{ nomDts }} numero destino</div>
+                                <div>{{ numDts }}</div>
+                            </div>
+                        </div>
+                        <h5><b>Destino</b></h5>
+                    </div>
+                    <!-- <div class="col">
+                        <div class="card">
+                            <div class="origen">
+                                <h4>Origen</h4>
+                            </div>
+                            <div class="card" style="width: auto" (click)="cambioIntervencion('Src', numSrc)">
+                                <div
+                                    class="card-body"
+                                    [ngStyle]="{ 'background-color': over === 'src' ? 'rgb(3, 187, 27)' : 'white', color: over === 'src' ? 'white' : 'black' }"
+                                >
+                                    <h5 class="card-title">{{ nomSrc }}</h5>
+                                    <p class="card-text">
+                                        {{ numSrc }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="col">
                         <div class="card" style="width: auto" (click)="cambioIntervencion('Dts', numDts)">
                             <div
@@ -168,7 +213,7 @@
                             <i-feather name="phone-incoming"></i-feather>
                             <h4>Destino</h4>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row">
                     <button (click)="intervencion('od')" class="btn btn-success btn-block" [disabled]="over==''">INTERVENIR</button>
@@ -184,32 +229,24 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="origen">
-                            <h4>Origen</h4> 
-                            <i-feather name="phone-outgoing"></i-feather>
-                        </div>
-                        <div class="card" style="width: auto">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ nomSrc }}</h5>
-                                <p class="card-text">
-                                    {{ numSrc }}
-                                </p>
+                        <h5><b>Origen</b></h5>
+                        <div class="card carta">
+                            <div class="origen">
+                                <i-feather class="verde" name="phone-outgoing"></i-feather>
+                                <div>{{ nomSrc }} Numero origen</div>
+                                <div>{{ numSrc }} </div>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card" style="width: auto">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ nomDts }}</h5>
-                                <p class="card-text">
-                                    {{ numDts }}
-                                </p>
+                        <div class="card carta">
+                            <div class="destino">
+                                <i-feather class="rojo" name="phone-outgoing"></i-feather>
+                                <div>{{ nomDts }} numero destino</div>
+                                <div>{{ numDts }}</div>
                             </div>
                         </div>
-                        <div class="destino">
-                            <i-feather name="phone-incoming"></i-feather>
-                            <h4>Destino</h4>
-                        </div>
+                        <h5><b>Destino</b></h5>
                     </div>
                 </div>
                 <div class="row">

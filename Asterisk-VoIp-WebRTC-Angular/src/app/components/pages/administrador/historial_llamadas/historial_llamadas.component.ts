@@ -135,9 +135,44 @@ export class HistorialLlamadasComponent implements OnInit {
 
   llenarHistorialOperador() {
     console.log(this.numberSelected);
-    this.historialService.HistorialxSipoIax(this.numberSelected).subscribe(
-      (response) => {
-        response.forEach((element) => {
+    // this.historialService.HistorialxSipoIax(this.numberSelected).subscribe(
+    //   (response) => {
+    //     response.forEach((element) => {
+    //       console.log(element)
+    //       element.fechayhora = this.convert(element.fechayhora);
+    //       element.segundos = this.convertseconds(element.segundos);
+            
+    //         if(element.tipo == 'entrante'){
+    //           this.HistEntrante.push(element);
+    //         }
+    //         if(element.tipo == 'saliente'){
+    //           this.HistSaliente.push(element);
+    //         }
+    //         if(element.tipo == 'perdida'){
+    //           this.HistPerdida.push(element);
+    //         }
+    //       });
+    //     this.HistOper = response;
+    //     console.log(response);
+    //     this.Historia = this.HistOper;
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
+    
+    var fecha1, fecha2;
+    fecha1 = new Date();
+    fecha1 = new Date(fecha1.setDate(fecha1.getDate() + 1));
+    fecha1 = this.cambioFecha(fecha1);
+    console.log(fecha1);
+    
+    fecha2 = new Date(new Date().setDate(new Date().getDate() - 3));
+    fecha2 = this.cambioFecha(fecha2);
+    console.log(fecha2);
+    this.historialService.HistorialxSipoIaxEntreFecha(this.numberSelected, fecha2, fecha1).subscribe((response)=>{
+      console.log(response);
+      response.forEach((element) => {
           console.log(element)
           element.fechayhora = this.convert(element.fechayhora);
           element.segundos = this.convertseconds(element.segundos);
@@ -155,12 +190,13 @@ export class HistorialLlamadasComponent implements OnInit {
         this.HistOper = response;
         console.log(response);
         this.Historia = this.HistOper;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    
+    });
+  }
+
+  cambioFecha(fecha){
+    var fech = fecha.toISOString().slice(0,10);
+    var info = fech.split('-'); 
+    return info[0] + '/' + info[1] + '/' + info[2];
   }
 
   salientes() {

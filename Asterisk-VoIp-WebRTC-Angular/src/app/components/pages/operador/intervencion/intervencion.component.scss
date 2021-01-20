@@ -1,63 +1,22 @@
-.card{
-    margin: 8px;
-    display: block;
-    width: 100%;
-}
 
-.header{
-    border-radius: 10px 10px 0 0;
-    padding: 3px 10px 3px 10px;
-    color: #fff;
-    justify-self: center;
-    align-self: center;
-    background-color: #ff7d00;
-    width: 100%;
-}
 
-.body{
-    background-color: #001524;
-    padding: 3px 10px 3px 10px;
-    color: #fff;
-    width: 100%;
-    
-    display: flex;
-    
-    align-content: space-evenly;
-    
-}
 
-.footer{
-    position: relative;
-    background-color: #fff;
-    width: 100%;
-    border-radius: 0 0 10px 10px;
-    display: flex;
-    align-content: space-between;
-    
-}
-
-.btn{
-    margin: 0;
-
-}
-
-.origen{
-    text-align: center;
-    flex-direction: column;
-}
-
-.destino{
-    text-align: center;
-    flex-direction: column;
-}
 
 .verde{
-    color: rgb(3, 187, 27);
+    color: rgb(77, 245, 10);
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
 }
 
 .rojo{
-    color: rgb(255, 85, 73);
+    color: rgb(223, 18, 3);
+    height: 20px;
+    width: 20px;
+    margin-left: 10px;
 }
+
+
 
 .colgar{
     position: absolute;
@@ -78,8 +37,113 @@
     background-color: rgb(226, 66, 55);
 }
 
+
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    grid-row: 5px;
+    padding: 10px;
+    font-weight: 600;
+}
+
+
+.card{
+    height: 117px;
+    background-color: rgb(243, 243, 243);
+    border-radius: 5px;  
+}
+
+.carta{
+    height: 110px;
+}
+
+.titulo{
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 3px;    
+}
+
+.exis{
+    width: 20px;
+    height: 20px;
+}
+
+.cuerpo{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: #41444b;
+    color: whitesmoke;
+    text-align: center;
+    padding-bottom: 5px;
+    padding-top: 2px;
+}
+
+.pie{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: rgb(243, 243, 243);
+}
+
 .boton{
-    position: absolute;
-    display: block;
+    text-align: center;
+    height: 100%;
+    padding: 3px;
+}
+
+.boton:hover{
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.amarillo{
+    // background-color: rgb(255, 238, 0);
+    color: #575757;
+    border-radius: 0 0 0 5px;
+
+}
+
+.llama{
+    // background-color: rgb(255, 85, 73);
+    color: #575757;
+    border-radius: 0 0 5px 0;
+    
+    
+    
+}
+
+.colg{
+    
+    width: 18px;
+    height: 18px;
+}
+
+.amarillo:hover{
+    background-color: rgb(255, 238, 0);
+    color: #ffffff;
+}
+
+.llama:hover{
+    background-color: rgb(255, 85, 73);
+    color: #f0f0f0;
+}
+
+
+
+.listaAcce{
+    list-style: none;
+    // padding-left: 20%;
+    text-align: justify;
+    padding: 20px 40px 20px 40px;
+}
+
+.carta .origen{
+    padding: 10px;
+    
+}
+
+.carta .destino{
+    padding: 10px 10px;
     
 }
