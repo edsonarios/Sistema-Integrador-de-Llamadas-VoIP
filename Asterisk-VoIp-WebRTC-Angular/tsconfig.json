@@ -8,7 +8,7 @@
       "@administrador/*": ["app/components/pages/administrador/*"],
       "@services/*": ["services/*"]
     },
-    "module": "esnext",
+    "module": "es2020",
     "preserveConstEnums": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": false,

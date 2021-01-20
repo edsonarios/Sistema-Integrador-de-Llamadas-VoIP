@@ -92,8 +92,9 @@ const config: SocketIoConfig = {
         ReactiveFormsModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(AppRoutes, {
-            useHash: false
-        }),
+    useHash: false,
+    relativeLinkResolution: 'legacy'
+}),
         AccordionModule,
         TooltipModule.forRoot(),
         BsDropdownModule.forRoot(),
